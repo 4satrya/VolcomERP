@@ -50,4 +50,11 @@ INNER JOIN tb_lookup_report_status sts ON sts.id_report_status=pps.id_report_sta
             button_main(bnew_active, bedit_active, bdel_active)
         End If
     End Sub
+
+    Private Sub GVAdditionalCost_DoubleClick(sender As Object, e As EventArgs) Handles GVAdditionalCost.DoubleClick
+        If GVAdditionalCost.RowCount > 0 Then
+            FormAdditionalCostDet.id_pps = GVAdditionalCost.GetFocusedRowCellValue("id_additional_cost_pps").ToString
+            FormAdditionalCostDet.ShowDialog()
+        End If
+    End Sub
 End Class

@@ -46,7 +46,6 @@ Partial Class FormAdditionalCostDet
         Me.BAdd = New DevExpress.XtraEditors.SimpleButton()
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
         Me.BAttachment = New DevExpress.XtraEditors.SimpleButton()
-        Me.BtnViewJournal = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnPrint = New DevExpress.XtraEditors.SimpleButton()
         Me.LargeImageCollection = New DevExpress.Utils.ImageCollection(Me.components)
         Me.BMark = New DevExpress.XtraEditors.SimpleButton()
@@ -379,7 +378,6 @@ Partial Class FormAdditionalCostDet
         'PanelControl1
         '
         Me.PanelControl1.Controls.Add(Me.BAttachment)
-        Me.PanelControl1.Controls.Add(Me.BtnViewJournal)
         Me.PanelControl1.Controls.Add(Me.BtnPrint)
         Me.PanelControl1.Controls.Add(Me.BMark)
         Me.PanelControl1.Controls.Add(Me.BtnCancel)
@@ -394,23 +392,12 @@ Partial Class FormAdditionalCostDet
         '
         Me.BAttachment.Dock = System.Windows.Forms.DockStyle.Right
         Me.BAttachment.Image = CType(resources.GetObject("BAttachment.Image"), System.Drawing.Image)
-        Me.BAttachment.Location = New System.Drawing.Point(558, 2)
+        Me.BAttachment.Location = New System.Drawing.Point(663, 2)
         Me.BAttachment.Name = "BAttachment"
         Me.BAttachment.Size = New System.Drawing.Size(105, 42)
         Me.BAttachment.TabIndex = 27
         Me.BAttachment.Text = "Attachment"
         Me.BAttachment.Visible = False
-        '
-        'BtnViewJournal
-        '
-        Me.BtnViewJournal.Dock = System.Windows.Forms.DockStyle.Right
-        Me.BtnViewJournal.Image = CType(resources.GetObject("BtnViewJournal.Image"), System.Drawing.Image)
-        Me.BtnViewJournal.Location = New System.Drawing.Point(663, 2)
-        Me.BtnViewJournal.Name = "BtnViewJournal"
-        Me.BtnViewJournal.Size = New System.Drawing.Size(105, 42)
-        Me.BtnViewJournal.TabIndex = 26
-        Me.BtnViewJournal.Text = "View Journal"
-        Me.BtnViewJournal.Visible = False
         '
         'BtnPrint
         '
@@ -756,7 +743,6 @@ Partial Class FormAdditionalCostDet
     Friend WithEvents GVCostList As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents PanelControl2 As DevExpress.XtraEditors.PanelControl
     Friend WithEvents BAttachment As DevExpress.XtraEditors.SimpleButton
-    Friend WithEvents BtnViewJournal As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents BtnPrint As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents BMark As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents BtnCancel As DevExpress.XtraEditors.SimpleButton

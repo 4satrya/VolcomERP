@@ -21,6 +21,7 @@ Partial Class FormAdditionalCost
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormAdditionalCost))
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
+        Me.BRefresh = New DevExpress.XtraEditors.SimpleButton()
         Me.GCAdditionalCost = New DevExpress.XtraGrid.GridControl()
         Me.GVAdditionalCost = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -30,7 +31,6 @@ Partial Class FormAdditionalCost
         Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.BRefresh = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.GCAdditionalCost, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -45,6 +45,16 @@ Partial Class FormAdditionalCost
         Me.PanelControl1.Name = "PanelControl1"
         Me.PanelControl1.Size = New System.Drawing.Size(1067, 46)
         Me.PanelControl1.TabIndex = 0
+        '
+        'BRefresh
+        '
+        Me.BRefresh.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BRefresh.Image = CType(resources.GetObject("BRefresh.Image"), System.Drawing.Image)
+        Me.BRefresh.Location = New System.Drawing.Point(946, 2)
+        Me.BRefresh.Name = "BRefresh"
+        Me.BRefresh.Size = New System.Drawing.Size(119, 42)
+        Me.BRefresh.TabIndex = 0
+        Me.BRefresh.Text = "Refresh"
         '
         'GCAdditionalCost
         '
@@ -61,6 +71,8 @@ Partial Class FormAdditionalCost
         Me.GVAdditionalCost.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn2, Me.GridColumn3, Me.GridColumn4, Me.GridColumn5, Me.GridColumn6, Me.GridColumn7})
         Me.GVAdditionalCost.GridControl = Me.GCAdditionalCost
         Me.GVAdditionalCost.Name = "GVAdditionalCost"
+        Me.GVAdditionalCost.OptionsBehavior.Editable = False
+        Me.GVAdditionalCost.OptionsBehavior.ReadOnly = True
         Me.GVAdditionalCost.OptionsView.ShowGroupPanel = False
         '
         'GridColumn1
@@ -120,16 +132,6 @@ Partial Class FormAdditionalCost
         Me.GridColumn7.Name = "GridColumn7"
         Me.GridColumn7.Visible = True
         Me.GridColumn7.VisibleIndex = 5
-        '
-        'BRefresh
-        '
-        Me.BRefresh.Dock = System.Windows.Forms.DockStyle.Right
-        Me.BRefresh.Image = CType(resources.GetObject("BRefresh.Image"), System.Drawing.Image)
-        Me.BRefresh.Location = New System.Drawing.Point(946, 2)
-        Me.BRefresh.Name = "BRefresh"
-        Me.BRefresh.Size = New System.Drawing.Size(119, 42)
-        Me.BRefresh.TabIndex = 0
-        Me.BRefresh.Text = "Refresh"
         '
         'FormAdditionalCost
         '

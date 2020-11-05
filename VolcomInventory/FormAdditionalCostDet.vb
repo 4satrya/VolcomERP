@@ -2,6 +2,8 @@
     Public id_pps As String = "-1"
     Public id_type As String = "1" '1 = est , 2 = realization
     Public id_report_status As String = "1"
+    Public is_view As String = "-1"
+
     Private Sub FormAdditionalCostDet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         TEVatPercent.EditValue = 0.00
 
@@ -14,6 +16,7 @@ INNER JOIN tb_m_employee emp ON emp.id_employee=usr.id_employee
 WHERE id_additional_cost_pps='" & id_pps & "'"
             Dim dt As DataTable = execute_query(q, -1, True, "", "", "", "")
             If dt.Rows.Count > 0 Then
+                id_type = dt.Rows(0)("id_type").ToString
                 TENumber.Text = dt.Rows(0)("number").ToString
                 TECreatedBy.Text = dt.Rows(0)("employee_name").ToString
                 MENote.Text = dt.Rows(0)("note").ToString
@@ -205,6 +208,8 @@ GROUP BY pdd.`id_prod_demand_design`"
 VALUES('1','" & id_user & "',NOW(),'" & id_user & "',NOW(),'" & addSlashes(MENote.Text) & "','" & decimalSQL(Decimal.Parse(TEVatPercent.EditValue.ToString)) & "','1'); SELECT LAST_INSERT_ID(); "
 
                     id_pps = execute_query(q, 0, True, "", "", "", "")
+                    '
+                    q = "CALL gen_number('" & id_pps & "','274');"
                     'design
                     q = "INSERT INTO `tb_additional_cost_pps_design`(`id_additional_cost_pps`,`id_design`,`qty_order`,`qty_sample`,`ecop`) VALUES"
                     For i = 0 To GVDesignList.RowCount - 1
@@ -220,7 +225,7 @@ VALUES('1','" & id_user & "',NOW(),'" & id_user & "',NOW(),'" & addSlashes(MENot
                         If Not i = 0 Then
                             q += ","
                         End If
-                        q += "('" & id_pps & "','" & addSlashes(GVDesignList.GetRowCellValue(i, "description").ToString) & "','" & decimalSQL(Decimal.Parse(GVDesignList.GetRowCellValue(i, "qty").ToString).ToString) & "','" & decimalSQL(Decimal.Parse(GVDesignList.GetRowCellValue(i, "value").ToString).ToString) & "')"
+                        q += "('" & id_pps & "','" & addSlashes(GVCostList.GetRowCellValue(i, "description").ToString) & "','" & decimalSQL(Decimal.Parse(GVCostList.GetRowCellValue(i, "qty").ToString).ToString) & "','" & decimalSQL(Decimal.Parse(GVCostList.GetRowCellValue(i, "value").ToString).ToString) & "')"
                     Next
                     execute_non_query(q, True, "", "", "", "")
                 Else 'edit
@@ -255,6 +260,8 @@ VALUES('1','" & id_user & "',NOW(),'" & id_user & "',NOW(),'" & addSlashes(MENot
 VALUES('2','" & id_user & "',NOW(),'" & id_user & "',NOW(),'" & addSlashes(MENote.Text) & "','" & decimalSQL(Decimal.Parse(TEVatPercent.EditValue.ToString)) & "','1'); SELECT LAST_INSERT_ID(); "
 
                     id_pps = execute_query(q, 0, True, "", "", "", "")
+                    '
+                    q = "CALL gen_number('" & id_pps & "','274');"
                     'design
                     q = "INSERT INTO `tb_additional_cost_pps_design`(`id_additional_cost_pps`,`id_design`,`qty_order`,`qty_sample`,`ecop`) VALUES"
                     For i = 0 To GVDesignList.RowCount - 1
@@ -295,11 +302,27 @@ VALUES('2','" & id_user & "',NOW(),'" & id_user & "',NOW(),'" & addSlashes(MENot
                         If Not i = 0 Then
                             q += ","
                         End If
-                        q += "('" & id_pps & "','" & addSlashes(GVDesignList.GetRowCellValue(i, "description").ToString) & "','" & decimalSQL(Decimal.Parse(GVDesignList.GetRowCellValue(i, "qty").ToString).ToString) & "','" & decimalSQL(Decimal.Parse(GVDesignList.GetRowCellValue(i, "value").ToString).ToString) & "')"
+                        q += "('" & id_pps & "','" & addSlashes(GVCostList.GetRowCellValue(i, "description").ToString) & "','" & decimalSQL(Decimal.Parse(GVCostList.GetRowCellValue(i, "qty").ToString).ToString) & "','" & decimalSQL(Decimal.Parse(GVCostList.GetRowCellValue(i, "value").ToString).ToString) & "')"
                     Next
                     execute_non_query(q, True, "", "", "", "")
                 End If
             End If
         End If
+    End Sub
+
+    Private Sub BMark_Click(sender As Object, e As EventArgs) Handles BMark.Click
+        FormReportMark.report_mark_type = "274"
+        FormReportMark.is_view = is_view
+        FormReportMark.id_report = id_pps
+        FormReportMark.ShowDialog()
+    End Sub
+
+    Private Sub BAttachment_Click(sender As Object, e As EventArgs) Handles BAttachment.Click
+        Cursor = Cursors.WaitCursor
+        FormDocumentUpload.is_view = is_view
+        FormDocumentUpload.id_report = id_pps
+        FormDocumentUpload.report_mark_type = "274"
+        FormDocumentUpload.ShowDialog()
+        Cursor = Cursors.Default
     End Sub
 End Class

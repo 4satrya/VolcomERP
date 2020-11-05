@@ -167,6 +167,10 @@
       <HintPath>..\packages\Pechkin.Synchronized.0.5.8.1\lib\net40\Pechkin.Synchronized.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Renci.SshNet, Version=2016.1.0.0, Culture=neutral, PublicKeyToken=1cee9f8bde3db106, processorArchitecture=MSIL">
+      <HintPath>..\packages\SSH.NET.2016.1.0\lib\net40\Renci.SshNet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
@@ -1140,6 +1144,12 @@
       <DependentUpon>FormDesignImages.vb</DependentUpon>
     </Compile>
     <Compile Include="FormDesignImages.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDesignImagesDet.Designer.vb">
+      <DependentUpon>FormDesignImagesDet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormDesignImagesDet.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormDocTracking.Designer.vb">
@@ -9232,6 +9242,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormDesignImages.resx">
       <DependentUpon>FormDesignImages.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormDesignImagesDet.resx">
+      <DependentUpon>FormDesignImagesDet.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormDocTracking.resx">
       <DependentUpon>FormDocTracking.vb</DependentUpon>

@@ -386,6 +386,9 @@
         ElseIf report_mark_type = "273" Then
             'Propose raw material
             FormMasterRawMatPps.Close()
+        ElseIf report_mark_type = "274" Then
+            'Propose additional cost
+            FormAdditionalCostDet.Close()
         End If
     End Sub
     Sub show()
@@ -1313,6 +1316,10 @@ GROUP BY rec.`id_prod_order`"
             'raw material propose
             FormMasterRawMatPps.id_pps = id_report
             FormMasterRawMatPps.ShowDialog()
+        ElseIf report_mark_type = "274" Then
+            'Propose additional cost
+            FormAdditionalCostDet.id_pps = id_report
+            FormAdditionalCostDet.ShowDialog()
         Else
             'MsgBox(id_report)
             stopCustom("Document Not Found")
@@ -2351,6 +2358,12 @@ GROUP BY rec.`id_prod_order`"
             field_id = "id_mat_det_pps"
             field_number = "mat_det_code"
             field_date = "mat_det_date"
+        ElseIf report_mark_type = "274" Then
+            'Propose additional cost
+            table_name = "tb_additional_cost_pps"
+            field_id = "id_additional_cost_pps"
+            field_number = "number"
+            field_date = "created_date"
         Else
             query = "Select '-' AS report_number, NOW() as report_date"
         End If

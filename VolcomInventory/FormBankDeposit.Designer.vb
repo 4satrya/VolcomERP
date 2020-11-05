@@ -124,6 +124,8 @@ Partial Class FormBankDeposit
         Me.GridColumnbank = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumngenerate_date = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnamountva = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumntransaction_fee = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnnettva = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.BtnBBMVA = New DevExpress.XtraEditors.SimpleButton()
         Me.PanelControl4 = New DevExpress.XtraEditors.PanelControl()
         Me.SLEBank = New DevExpress.XtraEditors.SearchLookUpEdit()
@@ -1151,7 +1153,7 @@ Partial Class FormBankDeposit
         '
         'GVVA
         '
-        Me.GVVA.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnid_virtual_acc_trans, Me.GridColumntransaction_date, Me.GridColumnbank, Me.GridColumngenerate_date, Me.GridColumnamountva})
+        Me.GVVA.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnid_virtual_acc_trans, Me.GridColumntransaction_date, Me.GridColumnbank, Me.GridColumngenerate_date, Me.GridColumnamountva, Me.GridColumntransaction_fee, Me.GridColumnnettva})
         Me.GVVA.GridControl = Me.GCVA
         Me.GVVA.Name = "GVVA"
         Me.GVVA.OptionsBehavior.ReadOnly = True
@@ -1201,6 +1203,28 @@ Partial Class FormBankDeposit
         Me.GridColumnamountva.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount", "{0:N2}")})
         Me.GridColumnamountva.Visible = True
         Me.GridColumnamountva.VisibleIndex = 2
+        '
+        'GridColumntransaction_fee
+        '
+        Me.GridColumntransaction_fee.Caption = "Fee"
+        Me.GridColumntransaction_fee.DisplayFormat.FormatString = "N2"
+        Me.GridColumntransaction_fee.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumntransaction_fee.FieldName = "transaction_fee"
+        Me.GridColumntransaction_fee.Name = "GridColumntransaction_fee"
+        Me.GridColumntransaction_fee.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "transaction_fee", "{0:N2}")})
+        Me.GridColumntransaction_fee.Visible = True
+        Me.GridColumntransaction_fee.VisibleIndex = 3
+        '
+        'GridColumnnettva
+        '
+        Me.GridColumnnettva.Caption = "Nett"
+        Me.GridColumnnettva.DisplayFormat.FormatString = "N2"
+        Me.GridColumnnettva.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnnettva.FieldName = "nett"
+        Me.GridColumnnettva.Name = "GridColumnnettva"
+        Me.GridColumnnettva.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "nett", "{0:N2}")})
+        Me.GridColumnnettva.Visible = True
+        Me.GridColumnnettva.VisibleIndex = 4
         '
         'BtnBBMVA
         '
@@ -1877,4 +1901,6 @@ Partial Class FormBankDeposit
     Friend WithEvents GridColumnunit As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnacc_name_vs As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnnote_vs As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumntransaction_fee As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnnettva As DevExpress.XtraGrid.Columns.GridColumn
 End Class

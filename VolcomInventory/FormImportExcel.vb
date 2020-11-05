@@ -127,8 +127,10 @@ Public Class FormImportExcel
         ElseIf id_pop_up = "52" Then
             MyCommand = New OleDbDataAdapter("select city,`sub district`,`minimum weight`,`lead time`,`rate` from [" & CBWorksheetName.SelectedItem.ToString & "] GROUP BY `city`,`sub district` ", oledbconn)
         ElseIf id_pop_up = "53" Then
-            Dim col_name As String = execute_query("SELECT column_name FROM tb_virtual_acc WHERE id_virtual_acc='" + FormBankDeposit.SLEBank.EditValue.ToString + "' ", 0, True, "", "", "", "")
-            MyCommand = New OleDbDataAdapter("select * from [" & CBWorksheetName.SelectedItem.ToString & "] WHERE not ([" + col_name + "]='') AND [Payment Type]='Bank Transfer' AND [Transaction status]='settlement' ", oledbconn)
+            Dim dtb As DataTable = execute_query("SELECT column_name,payment_type FROM tb_virtual_acc WHERE id_virtual_acc='" + FormBankDeposit.SLEBank.EditValue.ToString + "' ", -1, True, "", "", "", "")
+            Dim col_name As String = dtb.Rows(0)("column_name").ToString
+            Dim payment_type As String = dtb.Rows(0)("payment_type").ToString
+            MyCommand = New OleDbDataAdapter("select * from [" & CBWorksheetName.SelectedItem.ToString & "] WHERE not ([" + col_name + "]='') AND [Payment Type]='" + payment_type + "' AND [Transaction status]='settlement' ", oledbconn)
         ElseIf id_pop_up = "54" Then
             If FormOLStore.SLEOLStore.EditValue = "77" Then
                 'shopee
@@ -3463,7 +3465,14 @@ INNER JOIN tb_m_city ct ON ct.`id_city`=sd.`id_city`"
             Dim dt As DataTable = execute_query(queryx, -1, True, "", "", "", "")
             Dim tb1 = data_temp.AsEnumerable() 'ini tabel excel table1
             Dim tb2 = dt.AsEnumerable()
-            Dim col_name As String = execute_query("SELECT column_name FROM tb_virtual_acc WHERE id_virtual_acc='" + FormBankDeposit.SLEBank.EditValue.ToString + "' ", 0, True, "", "", "", "")
+
+            'data virtual
+            Dim dv As DataTable = execute_query("SELECT column_name,payout_multiply,payout_add, minimum FROM tb_virtual_acc WHERE id_virtual_acc='" + FormBankDeposit.SLEBank.EditValue.ToString + "' ", -1, True, "", "", "", "")
+            Dim col_name As String = dv.Rows(0)("column_name").ToString
+            Dim payout_multiply As Decimal = dv.Rows(0)("payout_multiply")
+            Dim payout_add As Decimal = dv.Rows(0)("payout_add")
+            Dim minimum As Decimal = dv.Rows(0)("minimum")
+
             Dim query = From table1 In tb1
                         Group Join table_tmp In tb2 On table1("Order ID").ToString.Replace("'", "") Equals table_tmp("checkout_id").ToString
                         Into ord = Group
@@ -3484,6 +3493,7 @@ INNER JOIN tb_m_city ct ON ct.`id_city`=sd.`id_city`"
                             .transaction_time = table1("Transaction time").ToString,
                             .amount = table1("Amount"),
                             .amount_inv = If(y1 Is Nothing, 0, y1("amount")),
+                            .transaction_fee = table1("Amount") * payout_multiply + payout_add,
                             .other_price = If(y1 Is Nothing, 0, y1("other_price")),
                             .Status = If(y1 Is Nothing Or If(y1 Is Nothing, "0", y1("id_virtual_acc_trans").ToString) <> "0" Or table1("Amount") <> If(y1 Is Nothing, 0, y1("amount")), If(y1 Is Nothing, "Checkout id not found;", "") + If(If(y1 Is Nothing, "0", y1("id_virtual_acc_trans").ToString) <> "0", "Already imported;", "") + If(table1("Amount") <> If(y1 Is Nothing, 0, y1("amount")), "Amount not match;", ""), "OK")
                         }
@@ -3507,6 +3517,7 @@ INNER JOIN tb_m_city ct ON ct.`id_city`=sd.`id_city`"
             GVData.Columns("other_price").Caption = "Other Price"
             GVData.Columns("amount_inv").Caption = "Amount Invoice (Include Other Price)"
             GVData.Columns("amount").Caption = "Amount Payment Gateway"
+            GVData.Columns("transaction_fee").Caption = "Fee"
             GVData.Columns("payment_type").Caption = "Payment Type"
 
             'display form
@@ -3516,6 +3527,8 @@ INNER JOIN tb_m_city ct ON ct.`id_city`=sd.`id_city`"
             GVData.Columns("amount").DisplayFormat.FormatString = "N2"
             GVData.Columns("amount_inv").DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
             GVData.Columns("amount_inv").DisplayFormat.FormatString = "N2"
+            GVData.Columns("transaction_fee").DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+            GVData.Columns("transaction_fee").DisplayFormat.FormatString = "N2"
 
             'summary
             GVData.OptionsView.ShowFooter = True
@@ -3525,6 +3538,8 @@ INNER JOIN tb_m_city ct ON ct.`id_city`=sd.`id_city`"
             GVData.Columns("amount").SummaryItem.DisplayFormat = "{0:n2}"
             GVData.Columns("amount_inv").SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum
             GVData.Columns("amount_inv").SummaryItem.DisplayFormat = "{0:n2}"
+            GVData.Columns("transaction_fee").SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum
+            GVData.Columns("transaction_fee").SummaryItem.DisplayFormat = "{0:n2}"
         ElseIf id_pop_up = "54" Then
             If FormOLStore.SLEOLStore.EditValue = "77" Then
                 'SHOPEE
@@ -6007,7 +6022,7 @@ INNER JOIN tb_m_city ct ON ct.`id_city`=sd.`id_city`"
                             execute_non_query("CALL gen_number(" + id_virtual_acc_trans + ", 265)", True, "", "", "", "")
 
                             'detail data
-                            Dim q As String = "INSERT INTO tb_virtual_acc_trans_det(id_virtual_acc_trans, id, sales_order_ol_shop_number, checkout_id, payment_type, amount, amount_inv, transaction_status, transaction_time, virtual_acc_no, other_price) VALUES "
+                            Dim q As String = "INSERT INTO tb_virtual_acc_trans_det(id_virtual_acc_trans, id, sales_order_ol_shop_number, checkout_id, payment_type, amount, amount_inv, transaction_fee, transaction_status, transaction_time, virtual_acc_no, other_price) VALUES "
                             Dim id_sales_pos As String = ""
                             Dim id_invoice_ship As String = ""
                             Dim id_list_payout_ver As String = ""
@@ -6019,7 +6034,7 @@ INNER JOIN tb_m_city ct ON ct.`id_city`=sd.`id_city`"
                                     id_list_payout_ver += ","
                                 End If
                                 '
-                                q += "('" + id_virtual_acc_trans + "', '" + GVData.GetRowCellValue(i, "id_order").ToString + "', '" + GVData.GetRowCellValue(i, "order_ol_shop_number").ToString + "', '" + GVData.GetRowCellValue(i, "checkout_id").ToString + "', '" + GVData.GetRowCellValue(i, "payment_type").ToString + "', '" + decimalSQL(GVData.GetRowCellValue(i, "amount").ToString) + "', '" + decimalSQL(GVData.GetRowCellValue(i, "amount_inv").ToString) + "', '" + GVData.GetRowCellValue(i, "transaction_status").ToString + "', '" + DateTime.Parse(GVData.GetRowCellValue(i, "transaction_time").ToString).ToString("yyyy-MM-dd HH:mm:ss") + "', '" + GVData.GetRowCellValue(i, "virtual_acc_no").ToString + "', '" + decimalSQL(GVData.GetRowCellValue(i, "other_price").ToString) + "') "
+                                q += "('" + id_virtual_acc_trans + "', '" + GVData.GetRowCellValue(i, "id_order").ToString + "', '" + GVData.GetRowCellValue(i, "order_ol_shop_number").ToString + "', '" + GVData.GetRowCellValue(i, "checkout_id").ToString + "', '" + GVData.GetRowCellValue(i, "payment_type").ToString + "', '" + decimalSQL(GVData.GetRowCellValue(i, "amount").ToString) + "', '" + decimalSQL(GVData.GetRowCellValue(i, "amount_inv").ToString) + "','" + decimalSQL(GVData.GetRowCellValue(i, "transaction_fee").ToString) + "', '" + GVData.GetRowCellValue(i, "transaction_status").ToString + "', '" + DateTime.Parse(GVData.GetRowCellValue(i, "transaction_time").ToString).ToString("yyyy-MM-dd HH:mm:ss") + "', '" + GVData.GetRowCellValue(i, "virtual_acc_no").ToString + "', '" + decimalSQL(GVData.GetRowCellValue(i, "other_price").ToString) + "') "
                                 id_sales_pos += GVData.GetRowCellValue(i, "id_sales_pos").ToString
                                 id_invoice_ship += GVData.GetRowCellValue(i, "id_invoice_ship").ToString
                                 id_list_payout_ver += GVData.GetRowCellValue(i, "id_list_payout_ver").ToString

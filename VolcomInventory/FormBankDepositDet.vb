@@ -237,6 +237,25 @@ Public Class FormBankDepositDet
                     INNER JOIN tb_m_comp cf ON cf.id_comp=1
                     WHERE d.id_virtual_acc_trans=" + id_virtual_acc_trans + " 
                     UNION
+                    /*trans fee*/
+                    SELECT '0' AS `id_report`,0 AS `id_report_det`,
+                    '0' AS report_mark_type,'' AS report_mark_type_name,
+                    '' AS `number`, 
+                    cf.id_comp AS `id_comp`, 
+                    coa.id_acc AS `id_acc`, coa.acc_name, coa.acc_description,
+                    cf.comp_number AS `comp_number`,'' AS `vendor`
+                    ,0 AS total_rec,
+                    SUM(p.transaction_fee)*-1 AS `value`,
+                    SUM(p.transaction_fee)*-1 AS `balance_due`,
+                    a.note_payout_fee AS `note`,'1' AS `id_dc`, 'D' AS `dc_code`,
+                    SUM(p.transaction_fee) AS `value_view`
+                    FROM tb_virtual_acc_trans_det p 
+                    INNER JOIN tb_m_comp cf ON cf.id_comp=1
+                    JOIN tb_opt_accounting a 
+                    INNER JOIN tb_a_acc coa ON coa.id_acc = a.id_acc_payout_fee
+                    WHERE p.id_virtual_acc_trans='" + id_virtual_acc_trans + "' AND p.transaction_fee>0
+                    GROUP BY p.id_virtual_acc_trans 
+                    UNION
                     /*other income & expense*/
                     (SELECT 
                     v.id_list_payout_ver AS `id_report`,0 AS `id_report_det`,

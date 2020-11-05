@@ -5459,12 +5459,12 @@ WHERE a.id_adj_in_fg = '" & id_report & "'"
                 increase_inc_acc("1")
 
                 'det journal
-                qjd = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, id_comp, qty, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number, report_mark_type_ref, id_report_ref, report_number_ref)
+                qjd = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, id_vendor, id_comp, qty, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number, report_mark_type_ref, id_report_ref, report_number_ref)
 SELECT id_acc_trans,id_acc,id_comp,qty,IF(SUM(debit)>SUM(credit),SUM(debit)-SUM(credit),0) AS debit,IF(SUM(credit)>SUM(debit),SUM(credit)-SUM(debit),0) AS credit,note,report_mark_type,id_report,report_number,rmt_reff,id_report_reff,report_number_reff
 FROM
 (
                 /* total biaya jasa atau non inventory tanpa diskon */
-                SELECT " + id_acc_trans + " AS id_acc_trans,o.id_coa_out AS `id_acc`, IF(reqd.ship_to=0,1,reqd.ship_to) AS id_comp,  SUM(rd.qty) AS `qty`,
+                SELECT " + id_acc_trans + " AS id_acc_trans,o.id_coa_out AS `id_acc`,cont.id_comp, IF(reqd.ship_to=0,1,reqd.ship_to) AS id_comp,  SUM(rd.qty) AS `qty`,
                 SUM(rd.qty * pod.`value`) AS `debit`,
                 0 AS `credit`,i.item_desc AS `note`,148 AS report_mark_type,rd.id_purc_rec AS id_report, r.purc_rec_number AS report_number, IF(po.id_expense_type=1,139,202) AS rmt_reff,  po.id_purc_order AS id_report_reff, po.purc_order_number AS report_number_reff
                 FROM tb_purc_rec_det rd
@@ -5490,7 +5490,7 @@ FROM
                 HAVING debit>0 OR credit>0
                 UNION ALL
                 /*total value item inventory tanpa diskon*/
-                SELECT " + id_acc_trans + " AS id_acc_trans,o.acc_coa_receive AS `id_acc`, dep.id_main_comp,  SUM(rd.qty) AS `qty`,
+                SELECT " + id_acc_trans + " AS id_acc_trans,o.acc_coa_receive AS `id_acc`,cont.id_comp, dep.id_main_comp,  SUM(rd.qty) AS `qty`,
                 SUM(rd.qty * (pod.`value`)) AS `debit`,
                 0 AS `credit`,i.item_desc AS `note`,148,rd.id_purc_rec, r.purc_rec_number, IF(po.id_expense_type=1,139,202) AS rmt_reff,  po.id_purc_order, po.purc_order_number
                 FROM tb_purc_rec_det rd
@@ -5516,7 +5516,7 @@ FROM
                 HAVING debit>0 OR credit>0
                 UNION ALL
                 /*total value item asset tanpa diskon*/
-                SELECT " + id_acc_trans + " AS id_acc_trans,coa.id_coa_out AS `id_acc`, dep.id_main_comp,  
+                SELECT " + id_acc_trans + " AS id_acc_trans,coa.id_coa_out AS `id_acc`,cont.id_comp, dep.id_main_comp,  
                 SUM(rd.qty) AS `qty`, SUM(rd.qty * (pod.`value`)) AS `debit`,
                 0 AS `credit`,i.item_desc AS `note`,148,rd.id_purc_rec, r.purc_rec_number, IF(po.id_expense_type=1,139,202) AS rmt_reff,  po.id_purc_order, po.purc_order_number
                 FROM tb_purc_rec_det rd
@@ -5541,7 +5541,7 @@ FROM
                 GROUP BY rd.id_purc_rec_det, rq.id_departement,rd.id_item,rqd.item_detail
                 UNION ALL
                 /*Discount ke pendapatan lain-lain*/
-                SELECT " + id_acc_trans + " AS id_acc_trans,(SELECT id_acc_pendapatan_lain FROM tb_opt_accounting) AS `id_acc`, dep.id_main_comp,  
+                SELECT " + id_acc_trans + " AS id_acc_trans,(SELECT id_acc_pendapatan_lain FROM tb_opt_accounting) AS `id_acc`,cont.id_comp, dep.id_main_comp,  
                 SUM(rd.qty) AS `qty`,
                 0 AS `debit`,
                 SUM(rd.qty * pod.discount)+((SUM(rd.qty * (pod.`value`-pod.discount))/(poall.`value`))*poall.disc_value) AS `credit`,i.item_desc AS `note`,148,rd.id_purc_rec, r.purc_rec_number, IF(po.id_expense_type=1,139,202) AS rmt_reff,  po.id_purc_order, po.purc_order_number
@@ -5568,7 +5568,7 @@ FROM
                 HAVING debit!=0 OR credit!=0
                 UNION ALL
                 /*total vat in*/
-                SELECT " + id_acc_trans + " AS id_acc_trans,o.acc_coa_vat_in AS `id_acc`, dep.id_main_comp,  SUM(rd.qty) AS `qty`,
+                SELECT " + id_acc_trans + " AS id_acc_trans,o.acc_coa_vat_in AS `id_acc`,cont.id_comp, dep.id_main_comp,  SUM(rd.qty) AS `qty`,
                 (po.vat_percent/100)*(po.dpp_percent/100)*(SUM(rd.qty * (pod.`value`-pod.discount))-((SUM(rd.qty * (pod.`value`-pod.discount))/(poall.`value`))*poall.disc_value)) AS `debit`,
                 0 AS `credit`,i.item_desc AS `note`,148,rd.id_purc_rec, r.purc_rec_number, IF(po.id_expense_type=1,139,202) AS rmt_reff,  po.id_purc_order, po.purc_order_number
                 FROM tb_purc_rec_det rd
@@ -5592,7 +5592,7 @@ FROM
                 GROUP BY rd.id_purc_rec,dep.id_main_comp
                 UNION ALL
                 /* Total value item inventory + total value item asset + vat in ke AP */
-                SELECT " + id_acc_trans + " AS id_acc_trans, comp.id_acc_ap AS `id_acc`, dep.id_main_comp, SUM(rd.qty) AS `qty`, 0 AS `debit`,
+                SELECT " + id_acc_trans + " AS id_acc_trans, comp.id_acc_ap AS `id_acc`,cont.id_comp, dep.id_main_comp, SUM(rd.qty) AS `qty`, 0 AS `debit`,
                 SUM(rd.qty * (pod.`value`-pod.discount))-((SUM(rd.qty * (pod.`value`-pod.discount))/(poall.`value`))*poall.disc_value) + ((po.vat_percent/100)*(po.dpp_percent/100)*(SUM(rd.qty * (pod.`value`-pod.discount))-((SUM(rd.qty * (pod.`value`-pod.discount))/(poall.`value`))*poall.disc_value))) AS `credit`,
                 i.item_desc AS `note`, 148, rd.id_purc_rec, r.purc_rec_number, IF(po.id_expense_type=1,139,202) AS rmt_reff,  po.id_purc_order, po.purc_order_number
                 FROM tb_purc_rec_det rd
@@ -5616,7 +5616,7 @@ FROM
                 GROUP BY rd.id_purc_rec,dep.id_main_comp
                 UNION ALL
                 /* Total DP balik */
-                SELECT " + id_acc_trans + " AS id_acc_trans, comp.id_acc_dp AS `id_acc`, 1, 0 AS `qty`,0 AS `debit`
+                SELECT " + id_acc_trans + " AS id_acc_trans, comp.id_acc_dp AS `id_acc`,cont.id_comp, 1, 0 AS `qty`,0 AS `debit`
                 ,IF(now_rec.rec_val<=IF((SUM(pnd.`value`)-IFNULL(already_rec.rec_val,0))<0,0,(SUM(pnd.`value`)-IFNULL(already_rec.rec_val,0))),now_rec.rec_val,IF((SUM(pnd.`value`)-IFNULL(already_rec.rec_val,0))<0,0,(SUM(pnd.`value`)-IFNULL(already_rec.rec_val,0)))) AS `credit`, 
                 'Receiving with DP' AS note, '159', pn.id_pn, pn.number, po.report_mark_type, po.id_purc_order, po.purc_order_number
                 FROM tb_pn_det pnd
@@ -5646,7 +5646,7 @@ FROM
                 GROUP BY pnd.id_report
                 UNION ALL
                 /* Hutang karena DP dibalik */
-                SELECT " + id_acc_trans + " AS id_acc_trans, comp.id_acc_ap AS `id_acc`, 1, 0 AS `qty`
+                SELECT " + id_acc_trans + " AS id_acc_trans, comp.id_acc_ap AS `id_acc`,cont.id_comp, 1, 0 AS `qty`
                 ,IF(now_rec.rec_val<=IF((SUM(pnd.`value`)-IFNULL(already_rec.rec_val,0))<0,0,(SUM(pnd.`value`)-IFNULL(already_rec.rec_val,0))),now_rec.rec_val,IF((SUM(pnd.`value`)-IFNULL(already_rec.rec_val,0))<0,0,(SUM(pnd.`value`)-IFNULL(already_rec.rec_val,0)))) AS `debit`
                 ,0 AS `credit`, 
                 'Receiving with DP' AS note, '159', pn.id_pn, pn.number, po.report_mark_type, po.id_purc_order, po.purc_order_number
@@ -6048,38 +6048,38 @@ WHERE copd.id_design_cop_propose='" & id_report & "';"
 
                 If FormItemExpenseDet.CEPayLater.EditValue = True Then
                     'utang
-                    Dim qjd As String = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number, id_comp, report_number_ref)
-                    SELECT " + id_acc_trans + ", ed.id_acc_pph,IF(ed.amount<0,-ed.pph,0) AS `debit`, IF(ed.amount<0,0,ed.pph) AS `credit`, ed.description, 157, e.id_item_expense, e.`number`,ed.cc
+                    Dim qjd As String = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, id_vendor, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number, id_comp, report_number_ref)
+                    SELECT " + id_acc_trans + ", ed.id_acc_pph, e.id_comp,IF(ed.amount<0,-ed.pph,0) AS `debit`, IF(ed.amount<0,0,ed.pph) AS `credit`, ed.description, 157, e.id_item_expense, e.`number`,ed.cc
                     ,e.inv_number
                     FROM tb_item_expense e
                     INNER JOIN  tb_item_expense_det ed ON ed.id_item_expense = e.id_item_expense
                     WHERE e.id_item_expense=" + id_report + " AND pph_percent>0 AND ed.`id_acc_pph` != (SELECT id_acc_skbp FROM tb_opt_accounting)
                     UNION ALL
-                    SELECT " + id_acc_trans + ", ed.id_acc_pph,IF(ed.amount<0,-ed.pph,0) AS `debit`, IF(ed.amount<0,0,ed.pph) AS `credit`, ed.description, 157, e.id_item_expense, e.`number`,ed.cc
+                    SELECT " + id_acc_trans + ", ed.id_acc_pph, e.id_comp,IF(ed.amount<0,-ed.pph,0) AS `debit`, IF(ed.amount<0,0,ed.pph) AS `credit`, ed.description, 157, e.id_item_expense, e.`number`,ed.cc
                     ,e.inv_number
                     FROM tb_item_expense e
                     INNER JOIN  tb_item_expense_det ed ON ed.id_item_expense = e.id_item_expense
                     WHERE e.id_item_expense=" + id_report + " AND pph_percent>0 AND ed.`id_acc_pph` = (SELECT id_acc_skbp FROM tb_opt_accounting)
                     UNION ALL
-                    SELECT " + id_acc_trans + ", ed.id_acc_pph,IF(ed.amount<0,0,ed.pph) AS `debit`, IF(ed.amount<0,-ed.pph,0) AS `credit`, ed.description, 157, e.id_item_expense, e.`number`,ed.cc
+                    SELECT " + id_acc_trans + ", ed.id_acc_pph, e.id_comp,IF(ed.amount<0,0,ed.pph) AS `debit`, IF(ed.amount<0,-ed.pph,0) AS `credit`, ed.description, 157, e.id_item_expense, e.`number`,ed.cc
                     ,e.inv_number
                     FROM tb_item_expense e
                     INNER JOIN  tb_item_expense_det ed ON ed.id_item_expense = e.id_item_expense
                     WHERE e.id_item_expense=" + id_report + " AND pph_percent>0 AND ed.`id_acc_pph` = (SELECT id_acc_skbp FROM tb_opt_accounting)
                     UNION ALL
-                    SELECT " + id_acc_trans + ", ed.id_acc, IF(ed.amount<0,0,ed.amount) AS `debit`, IF(ed.amount<0,-ed.amount,0) AS `credit`, ed.description, 157, e.id_item_expense, e.`number`,ed.cc
+                    SELECT " + id_acc_trans + ", ed.id_acc, e.id_comp, IF(ed.amount<0,0,ed.amount) AS `debit`, IF(ed.amount<0,-ed.amount,0) AS `credit`, ed.description, 157, e.id_item_expense, e.`number`,ed.cc
                     ,e.inv_number
                     FROM tb_item_expense e
                     INNER JOIN  tb_item_expense_det ed ON ed.id_item_expense = e.id_item_expense
                     WHERE e.id_item_expense=" + id_report + "
                     UNION ALL
-                    SELECT " + id_acc_trans + ", o.acc_coa_vat_in, e.vat_total AS `debit`, 0 AS `credit`, e.note AS description, 157, e.id_item_expense, e.`number`,1
+                    SELECT " + id_acc_trans + ", o.acc_coa_vat_in, e.id_comp, e.vat_total AS `debit`, 0 AS `credit`, e.note AS description, 157, e.id_item_expense, e.`number`,1
                     ,e.inv_number
                     FROM tb_item_expense e
                     JOIN tb_opt_purchasing o
                     WHERE e.id_item_expense=" + id_report + " AND e.vat_total>0
                     UNION ALL
-                    SELECT " + id_acc_trans + ", c.id_acc_ap, 0 AS `debit`, e.`total` AS `credit`, e.note AS description, 157, e.id_item_expense, e.`number`,1
+                    SELECT " + id_acc_trans + ", c.id_acc_ap, e.id_comp, 0 AS `debit`, e.`total` AS `credit`, e.note AS description, 157, e.id_item_expense, e.`number`,1
                     ,e.inv_number
                     FROM tb_item_expense e
                     INNER JOIN tb_m_comp c ON c.id_comp = e.id_comp
@@ -6164,23 +6164,26 @@ WHERE copd.id_design_cop_propose='" & id_report & "';"
                 increase_inc_acc("1")
 
                 'det journal
-                Dim qjd As String = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, id_comp, qty, debit, credit, id_currency, kurs, debit_valas, credit_valas, acc_trans_det_note, report_mark_type, id_report, report_number,report_mark_type_ref, id_report_ref, report_number_ref, vendor)
+                Dim qjd As String = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, id_vendor, id_comp, qty, debit, credit, id_currency, kurs, debit_valas, credit_valas, acc_trans_det_note, report_mark_type, id_report, report_number,report_mark_type_ref, id_report_ref, report_number_ref, vendor)
                                     SELECT * FROM
                                     (
 	                                    /* Pay from */
-	                                    SELECT '" & id_acc_trans & "' AS id_acc_trans,py.id_acc_payfrom AS `id_acc`,1 AS id_comp,  0 AS `qty`,0 AS `debit`, py.value+py.trf_fee AS `credit`, 1 AS id_currency, 0 AS kurs,0  AS debit_valas, 0 AS credit_valas,py.note AS `note`,159 AS report_mark_type,py.id_pn AS id_report, py.number AS report_number,NULL AS report_mark_type_ref,NULL AS id_report_ref,NULL AS report_number_ref,NULL AS vendor
+	                                    SELECT '" & id_acc_trans & "' AS id_acc_trans,py.id_acc_payfrom AS `id_acc`,ccvendor.id_comp,1 AS id_comp,  0 AS `qty`,0 AS `debit`, py.value+py.trf_fee AS `credit`, 1 AS id_currency, 0 AS kurs,0  AS debit_valas, 0 AS credit_valas,py.note AS `note`,159 AS report_mark_type,py.id_pn AS id_report, py.number AS report_number,NULL AS report_mark_type_ref,NULL AS id_report_ref,NULL AS report_number_ref,NULL AS vendor
 	                                    FROM tb_pn py
+                                        INNER JOIN tb_m_comp_contact ccvendor ON ccvendor.id_comp_contact=py.id_comp_contact
 	                                    WHERE py.id_pn=" & id_report & "
 	                                    UNION ALL
                                         /* Transfer Fee */
-	                                    SELECT '" & id_acc_trans & "' AS id_acc_trans,py.id_acc_trf_fee AS `id_acc`,1 AS id_comp,  0 AS `qty`,py.trf_fee AS `debit`, 0 AS `credit`, 1 AS id_currency, 0 AS kurs,0  AS debit_valas, 0 AS credit_valas,py.note AS `note`,159 AS report_mark_type,py.id_pn AS id_report, py.number AS report_number,NULL AS report_mark_type_ref,NULL AS id_report_ref,NULL AS report_number_ref,NULL AS vendor
+	                                    SELECT '" & id_acc_trans & "' AS id_acc_trans,py.id_acc_trf_fee AS `id_acc`,ccvendor.id_comp,1 AS id_comp,  0 AS `qty`,py.trf_fee AS `debit`, 0 AS `credit`, 1 AS id_currency, 0 AS kurs,0  AS debit_valas, 0 AS credit_valas,py.note AS `note`,159 AS report_mark_type,py.id_pn AS id_report, py.number AS report_number,NULL AS report_mark_type_ref,NULL AS id_report_ref,NULL AS report_number_ref,NULL AS vendor
 	                                    FROM tb_pn py
+                                        INNER JOIN tb_m_comp_contact ccvendor ON ccvendor.id_comp_contact=py.id_comp_contact
 	                                    WHERE py.id_pn=" & id_report & "
                                         UNION ALL
 	                                    /* Hutang dagang */
-	                                    SELECT '" & id_acc_trans & "' AS id_acc_trans,pnd.id_acc AS `id_acc`, pnd.id_comp,  0 AS `qty`,IF(pnd.id_dc=2,0,ABS(pnd.value)) AS `debit`, IF(pnd.id_dc=2,ABS(pnd.value),0) AS `credit`, pnd.id_currency, pnd.kurs, IF(pnd.id_dc=2,0,ABS(pnd.val_bef_kurs)) AS debit_valas, IF(pnd.id_dc=2,ABS(pnd.val_bef_kurs),0) AS credit_valas,pnd.note AS `note`,159 AS report_mark_type,pn.id_pn AS id_report, pn.number AS report_number,pnd.report_mark_type,pnd.id_report,pnd.number,pnd.vendor
+	                                    SELECT '" & id_acc_trans & "' AS id_acc_trans,pnd.id_acc AS `id_acc`,ccvendor.id_comp, pnd.id_comp,  0 AS `qty`,IF(pnd.id_dc=2,0,ABS(pnd.value)) AS `debit`, IF(pnd.id_dc=2,ABS(pnd.value),0) AS `credit`, pnd.id_currency, pnd.kurs, IF(pnd.id_dc=2,0,ABS(pnd.val_bef_kurs)) AS debit_valas, IF(pnd.id_dc=2,ABS(pnd.val_bef_kurs),0) AS credit_valas,pnd.note AS `note`,159 AS report_mark_type,pn.id_pn AS id_report, pn.number AS report_number,pnd.report_mark_type,pnd.id_report,pnd.number,pnd.vendor
 	                                    FROM tb_pn_det pnd
 	                                    INNER JOIN tb_pn pn ON pnd.id_pn=pn.id_pn
+                                        INNER JOIN tb_m_comp_contact ccvendor ON ccvendor.id_comp_contact=py.id_comp_contact
 	                                    WHERE pn.id_pn=" & id_report & "                 
                                     )trx WHERE trx.debit != 0 OR trx.credit != 0"
                 execute_non_query(qjd, True, "", "", "", "")
@@ -7363,11 +7366,11 @@ SELECT '" & data_det.Rows(i)("id_sample_purc_budget").ToString & "' AS id_det,id
 
                 'det journal
                 Dim qjd As String = ""
-                qjd = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, id_comp, qty, debit, credit, id_currency,kurs,debit_valas,credit_valas, acc_trans_det_note, report_mark_type, id_report, report_number, report_mark_type_ref, id_report_ref, report_number_ref, vendor)
+                qjd = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, id_vendor, id_comp, qty, debit, credit, id_currency,kurs,debit_valas,credit_valas, acc_trans_det_note, report_mark_type, id_report, report_number, report_mark_type_ref, id_report_ref, report_number_ref, vendor)
                 SELECT * FROM
                 (
 	                /* Per row */
-	                SELECT '" & id_acc_trans & "' AS id_acc_trans,pnd.id_acc AS `id_acc`, cf.id_comp,SUM(pnd.`qty`) AS `qty`,IF(SUM(pnd.value)<0,0,SUM(pnd.value)) AS `debit`,IF(SUM(pnd.value)>0,0,-SUM(pnd.value)) AS `credit`,pnd.id_currency,pnd.kurs,IF(pnd.id_currency=1,0,IF(SUM(pnd.value_bef_kurs)<0,0,SUM(pnd.value_bef_kurs))) AS `debit_valas`,IF(pnd.id_currency=1,0,IF(SUM(pnd.value_bef_kurs)>0,0,-SUM(pnd.value_bef_kurs))) AS `credit_valas`,pnd.`info_design` AS `note`,189,pn.id_pn_fgpo, pn.number, pnd.report_mark_type, pnd.id_report, pnd.report_number, comp.comp_number
+	                SELECT '" & id_acc_trans & "' AS id_acc_trans,pnd.id_acc AS `id_acc`,pn.id_comp, cf.id_comp,SUM(pnd.`qty`) AS `qty`,IF(SUM(pnd.value)<0,0,SUM(pnd.value)) AS `debit`,IF(SUM(pnd.value)>0,0,-SUM(pnd.value)) AS `credit`,pnd.id_currency,pnd.kurs,IF(pnd.id_currency=1,0,IF(SUM(pnd.value_bef_kurs)<0,0,SUM(pnd.value_bef_kurs))) AS `debit_valas`,IF(pnd.id_currency=1,0,IF(SUM(pnd.value_bef_kurs)>0,0,-SUM(pnd.value_bef_kurs))) AS `credit_valas`,pnd.`info_design` AS `note`,189,pn.id_pn_fgpo, pn.number, pnd.report_mark_type, pnd.id_report, pnd.report_number, comp.comp_number
 	                FROM tb_pn_fgpo_det pnd
                     INNER JOIN tb_m_comp cf ON cf.id_comp=1
 	                INNER JOIN tb_pn_fgpo pn ON pnd.id_pn_fgpo=pn.id_pn_fgpo
@@ -7376,7 +7379,7 @@ SELECT '" & data_det.Rows(i)("id_sample_purc_budget").ToString & "' AS id_det,id
 	                GROUP BY pnd.id_pn_fgpo_det
 	                UNION ALL
                     /* Per row PPH */
-	                SELECT '" & id_acc_trans & "' AS id_acc_trans,pnd.id_acc_pph AS `id_acc`, cf.id_comp,SUM(pnd.`qty`) AS `qty`,IF(SUM(pnd.pph)>0,0,-SUM(pnd.pph)) AS `debit`,IF(SUM(pnd.pph)<0,0,SUM(pnd.pph)) AS `credit`,pnd.id_currency,pnd.kurs,IF(pnd.id_currency=1,0,IF(SUM(pnd.value_bef_kurs)<0,0,SUM(pnd.value_bef_kurs))) AS `debit_valas`,IF(pnd.id_currency=1,0,IF(SUM(pnd.value_bef_kurs)>0,0,-SUM(pnd.value_bef_kurs))) AS `credit_valas`,CONCAT(pnd.`info_design`,' (Invoice no : ',pnd.inv_number,')') AS `note`,189,pn.id_pn_fgpo, pn.number, pnd.report_mark_type, pnd.id_report, pnd.report_number, comp.comp_number
+	                SELECT '" & id_acc_trans & "' AS id_acc_trans,pnd.id_acc_pph AS `id_acc`,pn.id_comp, cf.id_comp,SUM(pnd.`qty`) AS `qty`,IF(SUM(pnd.pph)>0,0,-SUM(pnd.pph)) AS `debit`,IF(SUM(pnd.pph)<0,0,SUM(pnd.pph)) AS `credit`,pnd.id_currency,pnd.kurs,IF(pnd.id_currency=1,0,IF(SUM(pnd.value_bef_kurs)<0,0,SUM(pnd.value_bef_kurs))) AS `debit_valas`,IF(pnd.id_currency=1,0,IF(SUM(pnd.value_bef_kurs)>0,0,-SUM(pnd.value_bef_kurs))) AS `credit_valas`,CONCAT(pnd.`info_design`,' (Invoice no : ',pnd.inv_number,')') AS `note`,189,pn.id_pn_fgpo, pn.number, pnd.report_mark_type, pnd.id_report, pnd.report_number, comp.comp_number
 	                FROM tb_pn_fgpo_det pnd
                     INNER JOIN tb_m_comp cf ON cf.id_comp=1
 	                INNER JOIN tb_pn_fgpo pn ON pnd.id_pn_fgpo=pn.id_pn_fgpo
@@ -7385,7 +7388,7 @@ SELECT '" & data_det.Rows(i)("id_sample_purc_budget").ToString & "' AS id_det,id
 	                GROUP BY pnd.id_pn_fgpo_det
 	                UNION ALL
 	                /* PPN */
-	                SELECT '" & id_acc_trans & "' AS id_acc_trans,pn.id_acc_vat AS `id_acc`, cf.id_comp,0 AS `qty`,IF(SUM(pnd.vat)<0,0,SUM(pnd.vat)) AS `debit`,IF(SUM(pnd.vat)>0,0,-SUM(pnd.vat)) AS `credit`,1 AS id_currency,1 as kurs,0 as debit_valas,0 as credit_valas,CONCAT(pnd.`info_design`,' (Invoice no : ',pnd.inv_number,')') AS `note`,189,pn.id_pn_fgpo, pn.number, pnd.report_mark_type, pnd.id_report, pnd.report_number, comp.comp_number
+	                SELECT '" & id_acc_trans & "' AS id_acc_trans,pn.id_acc_vat AS `id_acc`,pn.id_comp, cf.id_comp,0 AS `qty`,IF(SUM(pnd.vat)<0,0,SUM(pnd.vat)) AS `debit`,IF(SUM(pnd.vat)>0,0,-SUM(pnd.vat)) AS `credit`,1 AS id_currency,1 as kurs,0 as debit_valas,0 as credit_valas,CONCAT(pnd.`info_design`,' (Invoice no : ',pnd.inv_number,')') AS `note`,189,pn.id_pn_fgpo, pn.number, pnd.report_mark_type, pnd.id_report, pnd.report_number, comp.comp_number
 	                FROM tb_pn_fgpo_det pnd
                     INNER JOIN tb_m_comp cf ON cf.id_comp=1
 	                INNER JOIN tb_pn_fgpo pn ON pnd.id_pn_fgpo=pn.id_pn_fgpo
@@ -7394,7 +7397,7 @@ SELECT '" & data_det.Rows(i)("id_sample_purc_budget").ToString & "' AS id_det,id
 	                GROUP BY pn.id_pn_fgpo
 	                UNION ALL
 	                /* hutang dagang total */
-	                SELECT '" & id_acc_trans & "' AS id_acc_trans,comp.id_acc_ap AS `id_acc`, cf.id_comp,0 AS `qty`,IF(SUM(pnd.value + pnd.vat - pnd.pph)>0,0,-SUM(pnd.value + pnd.vat - pnd.pph)) AS `debit`,IF(SUM(pnd.value + pnd.vat)<0,0,SUM(pnd.value + pnd.vat - pnd.pph)) AS `credit`,pnd.id_currency,pnd.kurs,IF(pnd.id_currency=1,0,IF(SUM(pnd.value_bef_kurs + pnd.vat)>0,0,-SUM(pnd.value_bef_kurs + pnd.vat - pnd.pph))) AS `debit_valas`,IF(pnd.id_currency=1,0,IF(SUM(pnd.value_bef_kurs + pnd.vat - pnd.pph)<0,0,SUM(pnd.value_bef_kurs + pnd.vat - pnd.pph))) AS `credit_valas`,CONCAT(pnd.`info_design`,' (Invoice no : ',pnd.inv_number,')') AS `note`,189,pn.id_pn_fgpo, pn.number, pnd.report_mark_type, pnd.id_report, pnd.report_number, comp.comp_number
+	                SELECT '" & id_acc_trans & "' AS id_acc_trans,comp.id_acc_ap AS `id_acc`,pn.id_comp, cf.id_comp,0 AS `qty`,IF(SUM(pnd.value + pnd.vat - pnd.pph)>0,0,-SUM(pnd.value + pnd.vat - pnd.pph)) AS `debit`,IF(SUM(pnd.value + pnd.vat)<0,0,SUM(pnd.value + pnd.vat - pnd.pph)) AS `credit`,pnd.id_currency,pnd.kurs,IF(pnd.id_currency=1,0,IF(SUM(pnd.value_bef_kurs + pnd.vat)>0,0,-SUM(pnd.value_bef_kurs + pnd.vat - pnd.pph))) AS `debit_valas`,IF(pnd.id_currency=1,0,IF(SUM(pnd.value_bef_kurs + pnd.vat - pnd.pph)<0,0,SUM(pnd.value_bef_kurs + pnd.vat - pnd.pph))) AS `credit_valas`,CONCAT(pnd.`info_design`,' (Invoice no : ',pnd.inv_number,')') AS `note`,189,pn.id_pn_fgpo, pn.number, pnd.report_mark_type, pnd.id_report, pnd.report_number, comp.comp_number
 	                FROM tb_pn_fgpo_det pnd
                     INNER JOIN tb_m_comp cf ON cf.id_comp=1
 	                INNER JOIN tb_pn_fgpo pn ON pnd.id_pn_fgpo=pn.id_pn_fgpo
@@ -7789,16 +7792,16 @@ WHERE pocd.id_prod_order_close = '" & id_report & "'"
 
                 'det journal
                 If FormDebitNoteDet.id_dn_type = "1" Then 'claim reject
-                    Dim qjd As String = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, qty, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number, id_comp, report_mark_type_ref,id_report_ref,report_number_ref)
+                    Dim qjd As String = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, id_vendor, qty, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number, id_comp, report_mark_type_ref,id_report_ref,report_number_ref)
                     -- klaim reject nya dulu
-                    SELECT " + id_acc_trans + " AS `id_trans`, (SELECT acc_coa_claim FROM tb_opt_purchasing) AS `id_acc`, dnd.qty, 0 AS `debit`, CAST(((dnd.claim_percent/100)*dnd.unit_price)*dnd.qty AS DECIMAL(13,2)) AS `credit`
+                    SELECT " + id_acc_trans + " AS `id_trans`, (SELECT acc_coa_claim FROM tb_opt_purchasing) AS `id_acc`, dn.id_comp, dnd.qty, 0 AS `debit`, CAST(((dnd.claim_percent/100)*dnd.unit_price)*dnd.qty AS DECIMAL(13,2)) AS `credit`
                     ,CONCAT('KLAIM ',dnd.description,' - ',dnd.info_design) AS `note`, " + report_mark_type + " AS `rmt`, dnd.id_debit_note, dn.`number`, 1 AS id_comp, dnd.report_mark_type AS rmt_ref, dnd.id_report AS id_ref, dnd.report_number AS number_ref
                     FROM tb_debit_note_det dnd
                     INNER JOIN tb_debit_note dn ON dn.id_debit_note=dnd.id_debit_note
                     WHERE dnd.id_debit_note='" & id_report & "' AND dnd.unit_price>0 AND dnd.claim_percent>0
                     UNION ALL
                     -- lawannya DP
-                    SELECT " + id_acc_trans + " AS `id_trans`, c.id_acc_dp AS `id_acc`, dnd.qty, SUM(CAST((dnd.claim_percent/100)*dnd.unit_price*dnd.qty AS DECIMAL(13,2))) AS `debit`, 0 AS `credit`
+                    SELECT " + id_acc_trans + " AS `id_trans`, c.id_acc_dp AS `id_acc`, dn.id_comp, dnd.qty, SUM(CAST((dnd.claim_percent/100)*dnd.unit_price*dnd.qty AS DECIMAL(13,2))) AS `debit`, 0 AS `credit`
                     ,CONCAT('KLAIM REJECT') AS `note`, " + report_mark_type + " AS `rmt`, dnd.id_debit_note, dn.`number`, 1 AS id_comp, dnd.report_mark_type AS rmt_ref, dnd.id_report AS id_ref, dnd.report_number AS number_ref
                     FROM tb_debit_note_det dnd
                     INNER JOIN tb_debit_note dn ON dn.id_debit_note=dnd.id_debit_note
@@ -7807,16 +7810,16 @@ WHERE pocd.id_prod_order_close = '" & id_report & "'"
                     GROUP BY dnd.id_debit_note "
                     execute_non_query(qjd, True, "", "", "", "")
                 ElseIf FormDebitNoteDet.id_dn_type = "2" Then 'claim terlambat
-                    Dim qjd As String = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, qty, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number, id_comp, report_mark_type_ref,id_report_ref,report_number_ref)
+                    Dim qjd As String = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, id_vendor, qty, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number, id_comp, report_mark_type_ref,id_report_ref,report_number_ref)
                     -- klaim late nya dulu
-                    SELECT " + id_acc_trans + " AS `id_trans`, (SELECT acc_coa_claim FROM tb_opt_purchasing) AS `id_acc`, dnd.qty, 0 AS `debit`, CAST(((dnd.claim_percent/100)*dnd.unit_price)*dnd.qty AS DECIMAL(13,2)) AS `credit`
+                    SELECT " + id_acc_trans + " AS `id_trans`, (SELECT acc_coa_claim FROM tb_opt_purchasing) AS `id_acc`, dn.id_comp, dnd.qty, 0 AS `debit`, CAST(((dnd.claim_percent/100)*dnd.unit_price)*dnd.qty AS DECIMAL(13,2)) AS `credit`
                     ,CONCAT('KLAIM TERLAMBAT - ',dnd.info_design) AS `note`, " + report_mark_type + " AS `rmt`, dnd.id_debit_note, dn.`number`, 1 AS id_comp, dnd.report_mark_type AS rmt_ref, dnd.id_report AS id_ref, dnd.report_number AS number_ref
                     FROM tb_debit_note_det dnd
                     INNER JOIN tb_debit_note dn ON dn.id_debit_note=dnd.id_debit_note
                     WHERE dnd.id_debit_note='" & id_report & "' AND dnd.unit_price>0 AND dnd.claim_percent>0
                     UNION ALL
                     -- lawannya DP
-                    SELECT " + id_acc_trans + " AS `id_trans`, c.id_acc_dp AS `id_acc`, dnd.qty, SUM(CAST((dnd.claim_percent/100)*dnd.unit_price*dnd.qty AS DECIMAL(13,2))) AS `debit`, 0 AS `credit`
+                    SELECT " + id_acc_trans + " AS `id_trans`, c.id_acc_dp AS `id_acc`, dn.id_comp, dnd.qty, SUM(CAST((dnd.claim_percent/100)*dnd.unit_price*dnd.qty AS DECIMAL(13,2))) AS `debit`, 0 AS `credit`
                     ,CONCAT('KLAIM TERLAMBAT') AS `note`, " + report_mark_type + " AS `rmt`, dnd.id_debit_note, dn.`number`, 1 AS id_comp, dnd.report_mark_type AS rmt_ref, dnd.id_report AS id_ref, dnd.report_number AS number_ref
                     FROM tb_debit_note_det dnd
                     INNER JOIN tb_debit_note dn ON dn.id_debit_note=dnd.id_debit_note
@@ -7912,31 +7915,31 @@ WHERE pocd.id_prod_order_close = '" & id_report & "'"
 
                 'det journal
                 If is_deposit = "1" Then
-                    Dim qjd As String = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, qty, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number, id_comp, report_mark_type_ref,id_report_ref,report_number_ref)
+                    Dim qjd As String = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, id_vendor, qty, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number, id_comp, report_mark_type_ref,id_report_ref,report_number_ref)
 SELECT * FROM (
 -- pend lain tanpa ppn
-SELECT " + id_acc_trans + " AS `id_trans`, (SELECT id_acc_pend_lain FROM tb_opt_accounting) AS `id_acc`, 0 AS qty, 0 AS `debit`, CAST(SUM(invd.`value`) AS DECIMAL(13,2)) AS `credit`
+SELECT " + id_acc_trans + " AS `id_trans`, (SELECT id_acc_pend_lain FROM tb_opt_accounting) AS `id_acc`, inv.id_comp, 0 AS qty, 0 AS `debit`, CAST(SUM(invd.`value`) AS DECIMAL(13,2)) AS `credit`
 ,CONCAT('PENJUALAN MATERIAL') AS `note`, " + report_mark_type + " AS `rmt`, inv.id_inv_mat, inv.`number`, 1 AS id_comp, invd.report_mark_type AS rmt_ref, invd.id_report AS id_ref, invd.report_number AS number_ref
 FROM `tb_inv_mat_det` invd
 INNER JOIN `tb_inv_mat` inv ON inv.`id_inv_mat`=invd.`id_inv_mat`
 WHERE invd.`id_inv_mat`='" & id_report & "' AND inv.vat_percent = 0   
 UNION ALL                 
 -- pend lain dengan ppn
-SELECT " + id_acc_trans + " AS `id_trans`, (SELECT id_acc_pend_lain_dgn_ppn FROM tb_opt_accounting) AS `id_acc`, 0 AS qty, 0 AS `debit`, CAST(SUM(invd.`value`) AS DECIMAL(13,2)) AS `credit`
+SELECT " + id_acc_trans + " AS `id_trans`, (SELECT id_acc_pend_lain_dgn_ppn FROM tb_opt_accounting) AS `id_acc`,inv.id_comp, 0 AS qty, 0 AS `debit`, CAST(SUM(invd.`value`) AS DECIMAL(13,2)) AS `credit`
 ,CONCAT('PENJUALAN MATERIAL') AS `note`, " + report_mark_type + " AS `rmt`, inv.id_inv_mat, inv.`number`, 1 AS id_comp, invd.report_mark_type AS rmt_ref, invd.id_report AS id_ref, invd.report_number AS number_ref
 FROM `tb_inv_mat_det` invd
 INNER JOIN `tb_inv_mat` inv ON inv.`id_inv_mat`=invd.`id_inv_mat`
 WHERE invd.`id_inv_mat`='" & id_report & "' AND inv.vat_percent > 0
 UNION ALL
 -- hutang PPN
-SELECT " + id_acc_trans + " AS `id_trans`, (SELECT id_acc_ppn_lain FROM tb_opt_accounting) AS `id_acc`, 0 AS qty, 0 AS `debit`, CAST(SUM(invd.`value`)*((inv.`vat_percent`)/(100)) AS DECIMAL(13,2)) AS `credit`
+SELECT " + id_acc_trans + " AS `id_trans`, (SELECT id_acc_ppn_lain FROM tb_opt_accounting) AS `id_acc`,inv.id_comp, 0 AS qty, 0 AS `debit`, CAST(SUM(invd.`value`)*((inv.`vat_percent`)/(100)) AS DECIMAL(13,2)) AS `credit`
 ,CONCAT('PENJUALAN MATERIAL') AS `note`, " + report_mark_type + " AS `rmt`, inv.id_inv_mat, inv.`number`, 1 AS id_comp, invd.report_mark_type AS rmt_ref, invd.id_report AS id_ref, invd.report_number AS number_ref
 FROM `tb_inv_mat_det` invd
 INNER JOIN `tb_inv_mat` inv ON inv.`id_inv_mat`=invd.`id_inv_mat`
 WHERE invd.`id_inv_mat`='" & id_report & "' AND inv.vat_percent > 0
 UNION ALL
 -- KAS
-SELECT " + id_acc_trans + " AS `id_trans`, (SELECT id_acc_kas FROM tb_opt_accounting) AS `id_acc`, 0 AS qty, CAST(SUM(invd.`value`)*((100+inv.`vat_percent`)/(100)) AS DECIMAL(13,2)) AS `debit`, 0 AS `credit`
+SELECT " + id_acc_trans + " AS `id_trans`, (SELECT id_acc_kas FROM tb_opt_accounting) AS `id_acc`,inv.id_comp, 0 AS qty, CAST(SUM(invd.`value`)*((100+inv.`vat_percent`)/(100)) AS DECIMAL(13,2)) AS `debit`, 0 AS `credit`
 ,CONCAT('PENJUALAN MATERIAL') AS `note`, " + report_mark_type + " AS `rmt`, inv.id_inv_mat, inv.`number`, 1 AS id_comp, invd.report_mark_type AS rmt_ref, invd.id_report AS id_ref, invd.report_number AS number_ref
 FROM `tb_inv_mat_det` invd
 INNER JOIN `tb_inv_mat` inv ON inv.`id_inv_mat`=invd.`id_inv_mat`
@@ -7945,23 +7948,23 @@ WHERE invd.`id_inv_mat`='" & id_report & "'
                     execute_non_query(qjd, True, "", "", "", "")
                 Else
                     If id_type = "1" Then 'pl
-                        Dim qjd As String = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, qty, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number, id_comp, report_mark_type_ref,id_report_ref,report_number_ref)
+                        Dim qjd As String = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc,id_vendor, qty, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number, id_comp, report_mark_type_ref,id_report_ref,report_number_ref)
                     -- penjualan
-SELECT " + id_acc_trans + " AS `id_trans`, (SELECT id_acc_jual_mat FROM tb_opt_accounting) AS `id_acc`, 0 AS qty, 0 AS `debit`, CAST(SUM(invd.`value`) AS DECIMAL(13,2)) AS `credit`
+SELECT " + id_acc_trans + " AS `id_trans`, (SELECT id_acc_jual_mat FROM tb_opt_accounting) AS `id_acc`,inv.id_comp, 0 AS qty, 0 AS `debit`, CAST(SUM(invd.`value`) AS DECIMAL(13,2)) AS `credit`
 ,CONCAT('PENJUALAN MATERIAL') AS `note`, " + report_mark_type + " AS `rmt`, inv.id_inv_mat, inv.`number`, 1 AS id_comp, invd.report_mark_type AS rmt_ref, invd.id_report AS id_ref, invd.report_number AS number_ref
 FROM `tb_inv_mat_det` invd
 INNER JOIN `tb_inv_mat` inv ON inv.`id_inv_mat`=invd.`id_inv_mat`
 WHERE invd.`id_inv_mat`='" & id_report & "'
 UNION ALL
 -- hutang PPN
-SELECT " + id_acc_trans + " AS `id_trans`, (SELECT id_acc_hutang_ppn_bahan FROM tb_opt_accounting) AS `id_acc`, 0 AS qty, 0 AS `debit`, CAST(SUM(invd.`value`)*((inv.`vat_percent`)/(100)) AS DECIMAL(13,2)) AS `credit`
+SELECT " + id_acc_trans + " AS `id_trans`, (SELECT id_acc_hutang_ppn_bahan FROM tb_opt_accounting) AS `id_acc`,inv.id_comp, 0 AS qty, 0 AS `debit`, CAST(SUM(invd.`value`)*((inv.`vat_percent`)/(100)) AS DECIMAL(13,2)) AS `credit`
 ,CONCAT('PENJUALAN MATERIAL') AS `note`, " + report_mark_type + " AS `rmt`, inv.id_inv_mat, inv.`number`, 1 AS id_comp, invd.report_mark_type AS rmt_ref, invd.id_report AS id_ref, invd.report_number AS number_ref
 FROM `tb_inv_mat_det` invd
 INNER JOIN `tb_inv_mat` inv ON inv.`id_inv_mat`=invd.`id_inv_mat`
 WHERE invd.`id_inv_mat`='" & id_report & "'
 UNION ALL
 -- AR
-SELECT " + id_acc_trans + " AS `id_trans`, c.id_acc_ar AS `id_acc`, 0 AS qty, CAST(SUM(invd.`value`)*((100+inv.`vat_percent`)/(100)) AS DECIMAL(13,2)) AS `debit`, 0 AS `credit`
+SELECT " + id_acc_trans + " AS `id_trans`, c.id_acc_ar AS `id_acc`,inv.id_comp, 0 AS qty, CAST(SUM(invd.`value`)*((100+inv.`vat_percent`)/(100)) AS DECIMAL(13,2)) AS `debit`, 0 AS `credit`
 ,CONCAT('PENJUALAN MATERIAL') AS `note`, " + report_mark_type + " AS `rmt`, inv.id_inv_mat, inv.`number`, 1 AS id_comp, invd.report_mark_type AS rmt_ref, invd.id_report AS id_ref, invd.report_number AS number_ref
 FROM `tb_inv_mat_det` invd
 INNER JOIN `tb_inv_mat` inv ON inv.`id_inv_mat`=invd.`id_inv_mat`
@@ -7969,23 +7972,23 @@ INNER JOIN tb_m_comp c ON c.id_comp=inv.`id_comp`
 WHERE invd.`id_inv_mat`='" & id_report & "' "
                         execute_non_query(qjd, True, "", "", "", "")
                     ElseIf id_type = "2" Then 'ret
-                        Dim qjd As String = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, qty, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number, id_comp, report_mark_type_ref,id_report_ref,report_number_ref)
+                        Dim qjd As String = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc,id_vendor, qty, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number, id_comp, report_mark_type_ref,id_report_ref,report_number_ref)
                     -- retur
-SELECT " + id_acc_trans + " AS `id_trans`, (SELECT id_acc_retur_jual_mat FROM tb_opt_accounting) AS `id_acc`, 0 AS qty,  CAST(SUM(invd.`value`) AS DECIMAL(13,2)) AS `debit`,0 AS `credit`
+SELECT " + id_acc_trans + " AS `id_trans`, (SELECT id_acc_retur_jual_mat FROM tb_opt_accounting) AS `id_acc`,inv.id_comp, 0 AS qty,  CAST(SUM(invd.`value`) AS DECIMAL(13,2)) AS `debit`,0 AS `credit`
 ,CONCAT('RETUR PENJUALAN MATERIAL') AS `note`, " + report_mark_type + " AS `rmt`, inv.id_inv_mat, inv.`number`, 1 AS id_comp, invd.report_mark_type AS rmt_ref, invd.id_report AS id_ref, invd.report_number AS number_ref
 FROM `tb_inv_mat_det` invd
 INNER JOIN `tb_inv_mat` inv ON inv.`id_inv_mat`=invd.`id_inv_mat`
 WHERE invd.`id_inv_mat`='" & id_report & "'
 UNION ALL
 -- hutang PPN
-SELECT " + id_acc_trans + " AS `id_trans`, (SELECT id_acc_hutang_ppn_bahan FROM tb_opt_accounting) AS `id_acc`, 0 AS qty, CAST(SUM(invd.`value`)*((inv.`vat_percent`)/(100)) AS DECIMAL(13,2)) AS `debit`,0 AS `credit`
+SELECT " + id_acc_trans + " AS `id_trans`, (SELECT id_acc_hutang_ppn_bahan FROM tb_opt_accounting) AS `id_acc`,inv.id_comp, 0 AS qty, CAST(SUM(invd.`value`)*((inv.`vat_percent`)/(100)) AS DECIMAL(13,2)) AS `debit`,0 AS `credit`
 ,CONCAT('RETUR PENJUALAN MATERIAL') AS `note`, " + report_mark_type + " AS `rmt`, inv.id_inv_mat, inv.`number`, 1 AS id_comp, invd.report_mark_type AS rmt_ref, invd.id_report AS id_ref, invd.report_number AS number_ref
 FROM `tb_inv_mat_det` invd
 INNER JOIN `tb_inv_mat` inv ON inv.`id_inv_mat`=invd.`id_inv_mat`
 WHERE invd.`id_inv_mat`='" & id_report & "'
 UNION ALL
 -- AR
-SELECT " + id_acc_trans + " AS `id_trans`, c.id_acc_ar AS `id_acc`, 0 AS qty,0 AS `debit`, CAST(SUM(invd.`value`)*((100+inv.`vat_percent`)/(100)) AS DECIMAL(13,2)) AS `credit`
+SELECT " + id_acc_trans + " AS `id_trans`, c.id_acc_ar AS `id_acc`,inv.id_comp, 0 AS qty,0 AS `debit`, CAST(SUM(invd.`value`)*((100+inv.`vat_percent`)/(100)) AS DECIMAL(13,2)) AS `credit`
 ,CONCAT('RETUR PENJUALAN MATERIAL') AS `note`, " + report_mark_type + " AS `rmt`, inv.id_inv_mat, inv.`number`, 1 AS id_comp, invd.report_mark_type AS rmt_ref, invd.id_report AS id_ref, invd.report_number AS number_ref
 FROM `tb_inv_mat_det` invd
 INNER JOIN `tb_inv_mat` inv ON inv.`id_inv_mat`=invd.`id_inv_mat`

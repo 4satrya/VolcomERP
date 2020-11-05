@@ -22,7 +22,7 @@
         Cursor = Cursors.WaitCursor
         Dim query As String = "SELECT t.transaction_time AS `transaction_date`, t.payment_type AS `pay_type`, t.id AS `id_order`, t.sales_order_ol_shop_number, sp.customer_name, t.checkout_id, 
         t.amount AS `payment`, sp.sales_pos_number AS `invoice_number`, sh.number AS `ship_invoice_number`, t.other_price,t.amount_inv AS invoice_amount,
-        IFNULL(v.id_list_payout_ver,0) AS `id_list_payout_ver`, v.number AS `reconcile_number`
+        IFNULL(v.id_list_payout_ver,0) AS `id_list_payout_ver`, v.number AS `reconcile_number`, t.transaction_fee
         FROM tb_virtual_acc_trans_det t 
         LEFT JOIN (
           SELECT so.id_sales_order_ol_shop, GROUP_CONCAT(DISTINCT sp.sales_pos_number) AS `sales_pos_number`, so.customer_name

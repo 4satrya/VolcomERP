@@ -22,6 +22,8 @@
             UNION ALL
             SELECT 'Spesifikasi' AS column_name
             UNION ALL
+            SELECT 'Body (HTML)' AS column_name
+            UNION ALL
             SELECT column_name FROM tb_design_column WHERE id_design_column_category = 1
         ", -1, True, "", "", "", "")
 

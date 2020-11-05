@@ -21,6 +21,8 @@ Partial Class FormVAHistory
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormVAHistory))
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
+        Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
+        Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
         Me.BtnPrint = New DevExpress.XtraEditors.SimpleButton()
         Me.GCVA = New DevExpress.XtraGrid.GridControl()
         Me.GVVA = New DevExpress.XtraGrid.Views.Grid.GridView()
@@ -30,13 +32,13 @@ Partial Class FormVAHistory
         Me.GridColumngenerate_date = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnamountva = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnnumber = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
-        Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
+        Me.GridColumntransaction_fee = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnnett = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
+        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GCVA, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVVA, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControl1
@@ -49,6 +51,30 @@ Partial Class FormVAHistory
         Me.PanelControl1.Name = "PanelControl1"
         Me.PanelControl1.Size = New System.Drawing.Size(546, 53)
         Me.PanelControl1.TabIndex = 1
+        '
+        'LabelControl4
+        '
+        Me.LabelControl4.Appearance.Font = New System.Drawing.Font("Segoe UI", 6.75!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl4.Appearance.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.LabelControl4.Location = New System.Drawing.Point(40, 21)
+        Me.LabelControl4.Name = "LabelControl4"
+        Me.LabelControl4.Size = New System.Drawing.Size(18, 12)
+        Me.LabelControl4.TabIndex = 148
+        Me.LabelControl4.Text = "BAP"
+        '
+        'PanelControl2
+        '
+        Me.PanelControl2.Appearance.BackColor = System.Drawing.Color.Yellow
+        Me.PanelControl2.Appearance.BorderColor = System.Drawing.Color.White
+        Me.PanelControl2.Appearance.Options.UseBackColor = True
+        Me.PanelControl2.Appearance.Options.UseBorderColor = True
+        Me.PanelControl2.Location = New System.Drawing.Point(14, 21)
+        Me.PanelControl2.LookAndFeel.SkinMaskColor = System.Drawing.Color.Yellow
+        Me.PanelControl2.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.UltraFlat
+        Me.PanelControl2.LookAndFeel.UseDefaultLookAndFeel = False
+        Me.PanelControl2.Name = "PanelControl2"
+        Me.PanelControl2.Size = New System.Drawing.Size(24, 13)
+        Me.PanelControl2.TabIndex = 147
         '
         'BtnPrint
         '
@@ -72,7 +98,7 @@ Partial Class FormVAHistory
         '
         'GVVA
         '
-        Me.GVVA.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnid_virtual_acc_trans, Me.GridColumntransaction_date, Me.GridColumnbank, Me.GridColumngenerate_date, Me.GridColumnamountva, Me.GridColumnnumber})
+        Me.GVVA.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnid_virtual_acc_trans, Me.GridColumntransaction_date, Me.GridColumnbank, Me.GridColumngenerate_date, Me.GridColumnamountva, Me.GridColumnnumber, Me.GridColumntransaction_fee, Me.GridColumnnett})
         Me.GVVA.GridControl = Me.GCVA
         Me.GVVA.Name = "GVVA"
         Me.GVVA.OptionsBehavior.ReadOnly = True
@@ -131,29 +157,26 @@ Partial Class FormVAHistory
         Me.GridColumnnumber.Visible = True
         Me.GridColumnnumber.VisibleIndex = 0
         '
-        'LabelControl4
+        'GridColumntransaction_fee
         '
-        Me.LabelControl4.Appearance.Font = New System.Drawing.Font("Segoe UI", 6.75!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl4.Appearance.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.LabelControl4.Location = New System.Drawing.Point(40, 21)
-        Me.LabelControl4.Name = "LabelControl4"
-        Me.LabelControl4.Size = New System.Drawing.Size(18, 12)
-        Me.LabelControl4.TabIndex = 148
-        Me.LabelControl4.Text = "BAP"
+        Me.GridColumntransaction_fee.Caption = "Transaction Fee"
+        Me.GridColumntransaction_fee.DisplayFormat.FormatString = "N2"
+        Me.GridColumntransaction_fee.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumntransaction_fee.FieldName = "transaction_fee"
+        Me.GridColumntransaction_fee.Name = "GridColumntransaction_fee"
+        Me.GridColumntransaction_fee.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "transaction_fee", "{0:N2}")})
+        Me.GridColumntransaction_fee.Visible = True
+        Me.GridColumntransaction_fee.VisibleIndex = 4
         '
-        'PanelControl2
+        'GridColumnnett
         '
-        Me.PanelControl2.Appearance.BackColor = System.Drawing.Color.Yellow
-        Me.PanelControl2.Appearance.BorderColor = System.Drawing.Color.White
-        Me.PanelControl2.Appearance.Options.UseBackColor = True
-        Me.PanelControl2.Appearance.Options.UseBorderColor = True
-        Me.PanelControl2.Location = New System.Drawing.Point(14, 21)
-        Me.PanelControl2.LookAndFeel.SkinMaskColor = System.Drawing.Color.Yellow
-        Me.PanelControl2.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.UltraFlat
-        Me.PanelControl2.LookAndFeel.UseDefaultLookAndFeel = False
-        Me.PanelControl2.Name = "PanelControl2"
-        Me.PanelControl2.Size = New System.Drawing.Size(24, 13)
-        Me.PanelControl2.TabIndex = 147
+        Me.GridColumnnett.Caption = "Nett"
+        Me.GridColumnnett.DisplayFormat.FormatString = "N2"
+        Me.GridColumnnett.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnnett.FieldName = "nett"
+        Me.GridColumnnett.Name = "GridColumnnett"
+        Me.GridColumnnett.Visible = True
+        Me.GridColumnnett.VisibleIndex = 5
         '
         'FormVAHistory
         '
@@ -169,9 +192,9 @@ Partial Class FormVAHistory
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl1.ResumeLayout(False)
         Me.PanelControl1.PerformLayout()
+        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GCVA, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVVA, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -188,4 +211,6 @@ Partial Class FormVAHistory
     Friend WithEvents GridColumnnumber As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents LabelControl4 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents PanelControl2 As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents GridColumntransaction_fee As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnnett As DevExpress.XtraGrid.Columns.GridColumn
 End Class

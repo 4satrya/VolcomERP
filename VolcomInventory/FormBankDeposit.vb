@@ -446,7 +446,8 @@ WHERE 1=1 " & where_string & " ORDER BY rec_py.id_rec_payment DESC"
 
     Sub load_vacc()
         Cursor = Cursors.WaitCursor
-        Dim query As String = "SELECT a.id_virtual_acc_trans,a.id_virtual_acc, va.bank, a.transaction_date, a.generate_date, SUM(d.amount) AS `amount`
+        Dim query As String = "SELECT a.id_virtual_acc_trans,a.id_virtual_acc, va.bank, a.transaction_date, a.generate_date, SUM(d.amount) AS `amount`, SUM(d.transaction_fee) AS `transaction_fee`,
+        (SUM(d.amount)-SUM(d.transaction_fee)) AS `nett`
         FROM tb_virtual_acc_trans a 
         INNER JOIN tb_virtual_acc va ON va.id_virtual_acc = a.id_virtual_acc
         INNER JOIN tb_virtual_acc_trans_det d ON d.id_virtual_acc_trans = a.id_virtual_acc_trans

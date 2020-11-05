@@ -1,11 +1,49 @@
 ﻿Public Class FormAdditionalCostDet
     Public id_pps As String = "-1"
     Public id_type As String = "1" '1 = est , 2 = realization
-
+    Public id_report_status As String = "1"
     Private Sub FormAdditionalCostDet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         TEVatPercent.EditValue = 0.00
 
+        If Not id_pps = "-1" Then
+            'edit
+            Dim q As String = "SELECT pps.id_type,pps.number,pps.created_by,emp.employee_name,pps.created_date,pps.update_by,pps.update_date,pps.note,pps.vat_percent,pps.id_report_status 
+FROM tb_additional_cost_pps pps 
+INNER JOIN tb_m_user usr ON usr.id_user=pps.created_by
+INNER JOIN tb_m_employee emp ON emp.id_employee=usr.id_employee
+WHERE id_additional_cost_pps='" & id_pps & "'"
+            Dim dt As DataTable = execute_query(q, -1, True, "", "", "", "")
+            If dt.Rows.Count > 0 Then
+                TENumber.Text = dt.Rows(0)("number").ToString
+                TECreatedBy.Text = dt.Rows(0)("employee_name").ToString
+                MENote.Text = dt.Rows(0)("note").ToString
+                TEVatPercent.Text = dt.Rows(0)("vat_percent").ToString
+                id_report_status = dt.Rows(0)("id_report_status").ToString
+            End If
+            '
+            load_design()
+            '
+            BMark.Visible = True
+            BtnPrint.Visible = True
+        Else
+            'new
+            BMark.Visible = False
+            BtnPrint.Visible = False
+        End If
+
         load_det_cost()
+        calculate()
+    End Sub
+
+    Sub load_design()
+        Dim q As String = "SELECT dsg.id_design,dsg.`design_code`,dsg.`design_display_name`,ppsd.ecop AS prod_order_cop_pd,ppsd.`qty_order` AS qty
+,ppsd.qty_sample AS qty_sampling
+FROM tb_additional_cost_pps_design ppsd 
+INNER JOIN tb_m_design dsg ON dsg.id_design=ppsd.id_design
+WHERE id_additional_cost_pps='" & id_pps & "'"
+        Dim dt As DataTable = execute_query(q, -1, True, "", "", "", "")
+        GCDesignList.DataSource = dt
+        GVDesignList.BestFitColumns()
     End Sub
 
     Sub load_det_cost()

@@ -417,8 +417,8 @@ SELECT COUNT(id_mat_det_pps) AS jml FROM tb_m_mat_det_pps WHERE mat_det_code='{0
             If action = "ins" Then
                 Try
                     'insert db
-                    query = "INSERT INTO tb_m_mat_det_pps(id_mat, mat_det_display_name, mat_det_name, mat_det_code, id_method, lifetime, mat_det_date, allow_design, id_fab_type, gramasi,id_range,id_comp_contact,id_currency,fob_price,created_by,id_mat_det_revise,is_revise) "
-                    query += "VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', DATE(NOW()),'{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}',{14},'{15}');SELECT LAST_INSERT_ID() "
+                    query = "INSERT INTO tb_m_mat_det_pps(id_mat, mat_det_display_name, mat_det_name, mat_det_code, id_method, lifetime, mat_det_date, allow_design, id_fab_type, gramasi,id_range,id_comp_contact,id_currency,fob_price,created_by,last_update_by,last_update_date,id_mat_det_revise,is_revise) "
+                    query += "VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', DATE(NOW()),'{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}','{13}',NOW(),{14},'{15}');SELECT LAST_INSERT_ID() "
                     query = String.Format(query, SLEMaterialCategory.EditValue.ToString, mat_det_display_name, mat_det_name, mat_det_code, id_method, lifetime, is_allow, id_fab_type, gramasi, SLERange.EditValue.ToString, SLEVendor.EditValue.ToString, SLECurrency.EditValue.ToString, decimalSQL(TEFOBPrice.EditValue.ToString), id_user, id_mat_rev, is_rev)
 
                     id_pps = execute_query(query, 0, True, "", "", "", "")

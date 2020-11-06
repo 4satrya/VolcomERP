@@ -8918,20 +8918,38 @@ WHERE pps.`id_mat_det_pps`='" & id_report & "';SELECT LAST_INSERT_ID() "
                         execute_non_query(qi, True, "", "", "", "")
                     End If
                 End If
-            ElseIf report_mark_type = "274" Then
-                If id_status_reportx = "3" Then
-                    id_status_reportx = "6"
-                End If
-
-                If id_status_reportx = "6" Then
-                    Dim q As String = "SELECT * FROM tb_"
-                    Dim dt As DataTable = execute_query(q, -1, True, "", "", "", "")
-                End If
             End If
 
             'update status
             query = String.Format("UPDATE tb_m_mat_det_pps SET id_report_status='{0}' WHERE id_mat_det_pps ='{1}'", id_status_reportx, id_report)
             execute_non_query(query, True, "", "", "", "")
+        ElseIf report_mark_type = "274" Then
+            If id_status_reportx = "3" Then
+                id_status_reportx = "6"
+            End If
+
+            If id_status_reportx = "6" Then
+                Dim q As String = "SELECT pps.`id_type`,SUM(ppsd.`qty`*ppsd.`value`) AS amount,SUM(ppsd.`qty_est`*ppsd.`value_est`) AS amount_est,ppsdsg.qty_order,SUM(ppsd.`qty`*ppsd.`value`)/ppsdsg.qty_order AS cost,SUM(ppsd.`qty_est`*ppsd.`value_est`)/ppsdsg.qty_order AS cost_est
+FROM `tb_additional_cost_pps_det` ppsd
+INNER JOIN `tb_additional_cost_pps` pps ON pps.`id_additional_cost_pps`=ppsd.`id_additional_cost_pps`
+LEFT JOIN 
+(
+	SELECT SUM(qty_order) AS qty_order ,id_additional_cost_pps
+	FROM `tb_additional_cost_pps_design`
+	GROUP BY id_additional_cost_pps
+)ppsdsg ON ppsdsg.id_additional_cost_pps=pps.id_additional_cost_pps
+WHERE pps.id_additional_cost_pps='" & id_report & "'"
+                Dim dt As DataTable = execute_query(q, -1, True, "", "", "", "")
+                If dt.Rows.Count > 0 Then
+                    If dt.Rows(0)("id_type").ToString = "1" Then
+                        'ecop
+
+                    ElseIf dt.Rows(0)("id_type").ToString = "2" Then
+                        'realization
+
+                    End If
+                End If
+            End If
         End If
 
         'adding lead time

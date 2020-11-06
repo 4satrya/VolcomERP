@@ -8942,10 +8942,30 @@ WHERE pps.id_additional_cost_pps='" & id_report & "'"
                 Dim dt As DataTable = execute_query(q, -1, True, "", "", "", "")
                 If dt.Rows.Count > 0 Then
                     If dt.Rows(0)("id_type").ToString = "1" Then
-                        'ecop
+                        'ecop update ke propose cop pd
+                        'nonactive additional cost
+                        Dim qu As String = "UPDATE `tb_m_design_cop` SET is_active='2' WHERE id_design IN (SELECT id_design FROM `tb_additional_cost_pps_design` WHERE id_additional_cost_pps='" & id_report & "') AND is_active'1' AND additional>0"
+                        execute_non_query(qu, True, "", "", "", "")
+                        'insert baru
+                        qu = "INSERT INTO `tb_m_design_cop`(description,id_design,date_created,id_currency,kurs,before_kurs,additional)
+SELECT 'SNI',id_design,NOW(), 1,1,0," & decimalSQL(Decimal.Parse(dt.Rows(0)("cost_est").ToString)) & "
+FROM `tb_additional_cost_pps_design`
+WHERE id_additional_cost_pps='" & id_report & "'"
+                        execute_non_query(qu, True, "", "", "", "")
+                        'update ke tb_m_design
 
                     ElseIf dt.Rows(0)("id_type").ToString = "2" Then
                         'realization
+                        'nonactive additional cost
+                        Dim qu As String = "UPDATE `tb_m_design_cop` SET is_active='2' WHERE id_design IN (SELECT id_design FROM `tb_additional_cost_pps_design` WHERE id_additional_cost_pps='" & id_report & "') AND is_active'1' AND additional>0"
+                        execute_non_query(qu, True, "", "", "", "")
+                        'insert baru
+                        qu = "INSERT INTO `tb_m_design_cop`(description,id_design,date_created,id_currency,kurs,before_kurs,additional)
+SELECT 'SNI',id_design,NOW(), 1,1,0," & decimalSQL(Decimal.Parse(dt.Rows(0)("cost").ToString)) & "
+FROM `tb_additional_cost_pps_design`
+WHERE id_additional_cost_pps='" & id_report & "'"
+                        execute_non_query(qu, True, "", "", "", "")
+                        'update ke tb_m_design
 
                     End If
                 End If

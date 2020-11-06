@@ -489,7 +489,7 @@ Partial Class FormOLStore
         Me.GCDetail.MainView = Me.GVDetail
         Me.GCDetail.Name = "GCDetail"
         Me.GCDetail.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemTextEdit2, Me.RepositoryItemImageEdit2, Me.RepositoryItemHyperLinkEdit2, Me.RepositoryItemCheckEdit2, Me.RepositoryItemSearchLookUpEdit1, Me.RepoAttachDetail, Me.RepositoryItemTextEdit1, Me.RepositoryItemCheckEdit3})
-        Me.GCDetail.Size = New System.Drawing.Size(994, 396)
+        Me.GCDetail.Size = New System.Drawing.Size(994, 402)
         Me.GCDetail.TabIndex = 3
         Me.GCDetail.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVDetail})
         '
@@ -1226,7 +1226,7 @@ Partial Class FormOLStore
         Me.XTPAllOrder.Appearance.Header.Options.UseForeColor = True
         Me.XTPAllOrder.Controls.Add(Me.GCDetail)
         Me.XTPAllOrder.Name = "XTPAllOrder"
-        Me.XTPAllOrder.Size = New System.Drawing.Size(994, 396)
+        Me.XTPAllOrder.Size = New System.Drawing.Size(994, 402)
         Me.XTPAllOrder.Text = "Active Order Details"
         '
         'XTPCancelled
@@ -1237,7 +1237,7 @@ Partial Class FormOLStore
         Me.XTPCancelled.Appearance.Header.Options.UseForeColor = True
         Me.XTPCancelled.Controls.Add(Me.GCCancellOrder)
         Me.XTPCancelled.Name = "XTPCancelled"
-        Me.XTPCancelled.Size = New System.Drawing.Size(994, 396)
+        Me.XTPCancelled.Size = New System.Drawing.Size(994, 402)
         Me.XTPCancelled.Text = "Cancelled Order Detail"
         '
         'GCCancellOrder
@@ -1247,7 +1247,7 @@ Partial Class FormOLStore
         Me.GCCancellOrder.MainView = Me.GVCancellOrder
         Me.GCCancellOrder.Name = "GCCancellOrder"
         Me.GCCancellOrder.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemTextEdit3, Me.RepositoryItemImageEdit1, Me.RepositoryItemHyperLinkEdit1, Me.RepositoryItemCheckEdit1, Me.RepositoryItemSearchLookUpEdit2, Me.RepositoryItemLookUpEdit1, Me.RepositoryItemTextEdit4})
-        Me.GCCancellOrder.Size = New System.Drawing.Size(994, 396)
+        Me.GCCancellOrder.Size = New System.Drawing.Size(994, 402)
         Me.GCCancellOrder.TabIndex = 4
         Me.GCCancellOrder.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVCancellOrder})
         '
@@ -2012,6 +2012,7 @@ Partial Class FormOLStore
         Me.SBCloseOrder.Size = New System.Drawing.Size(110, 44)
         Me.SBCloseOrder.TabIndex = 5
         Me.SBCloseOrder.Text = "Close Order"
+        Me.SBCloseOrder.Visible = False
         '
         'PanelControl3
         '

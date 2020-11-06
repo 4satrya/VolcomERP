@@ -8918,6 +8918,15 @@ WHERE pps.`id_mat_det_pps`='" & id_report & "';SELECT LAST_INSERT_ID() "
                         execute_non_query(qi, True, "", "", "", "")
                     End If
                 End If
+            ElseIf report_mark_type = "274" Then
+                If id_status_reportx = "3" Then
+                    id_status_reportx = "6"
+                End If
+
+                If id_status_reportx = "6" Then
+                    Dim q As String = "SELECT * FROM tb_"
+                    Dim dt As DataTable = execute_query(q, -1, True, "", "", "", "")
+                End If
             End If
 
             'update status

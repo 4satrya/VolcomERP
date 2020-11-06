@@ -1,6 +1,7 @@
 ﻿Public Class FormAdditionalCostDet
     Public id_pps As String = "-1"
     Public id_type As String = "1" '1 = est , 2 = realization
+    Public realization_from As String = "-1"
     Public id_report_status As String = "1"
     Public is_view As String = "-1"
 
@@ -9,6 +10,9 @@
 
         If Not id_pps = "-1" Then
             'edit
+            BMark.Visible = True
+            BtnPrint.Visible = True
+
             Dim q As String = "SELECT pps.id_type,pps.number,pps.created_by,emp.employee_name,pps.created_date,pps.update_by,pps.update_date,pps.note,pps.vat_percent,pps.id_report_status 
 FROM tb_additional_cost_pps pps 
 INNER JOIN tb_m_user usr ON usr.id_user=pps.created_by
@@ -26,15 +30,20 @@ WHERE id_additional_cost_pps='" & id_pps & "'"
             '
             load_design()
             '
-            BMark.Visible = True
-            BtnPrint.Visible = True
+            load_det_cost()
         Else
             'new
             BMark.Visible = False
             BtnPrint.Visible = False
+            '
+            If id_type = "2" Then
+                load_design_est()
+                load_det_cost_est()
+            Else
+                load_det_cost()
+            End If
         End If
 
-        load_det_cost()
         calculate()
     End Sub
 
@@ -44,6 +53,17 @@ WHERE id_additional_cost_pps='" & id_pps & "'"
 FROM tb_additional_cost_pps_design ppsd 
 INNER JOIN tb_m_design dsg ON dsg.id_design=ppsd.id_design
 WHERE id_additional_cost_pps='" & id_pps & "'"
+        Dim dt As DataTable = execute_query(q, -1, True, "", "", "", "")
+        GCDesignList.DataSource = dt
+        GVDesignList.BestFitColumns()
+    End Sub
+
+    Sub load_design_est()
+        Dim q As String = "SELECT dsg.id_design,dsg.`design_code`,dsg.`design_display_name`,ppsd.ecop AS prod_order_cop_pd,ppsd.`qty_order` AS qty
+,ppsd.qty_sample AS qty_sampling
+FROM tb_additional_cost_pps_design ppsd 
+INNER JOIN tb_m_design dsg ON dsg.id_design=ppsd.id_design
+WHERE id_additional_cost_pps='" & realization_from & "'"
         Dim dt As DataTable = execute_query(q, -1, True, "", "", "", "")
         GCDesignList.DataSource = dt
         GVDesignList.BestFitColumns()
@@ -67,11 +87,28 @@ WHERE id_additional_cost_pps='" & id_pps & "'"
         check_button()
     End Sub
 
+    Sub load_det_cost_est()
+        Dim q As String = ""
+
+        q = "SELECT description,qty_est AS qty,value_est AS `value`
+FROM `tb_additional_cost_pps_det` 
+WHERE id_additional_cost_pps='" & realization_from & "'"
+
+        Dim dt As DataTable = execute_query(q, -1, True, "", "", "", "")
+        GCCostList.DataSource = dt
+        check_button()
+    End Sub
+
     Sub check_button()
         If GVCostList.RowCount > 0 Then
             BDel.Visible = True
         Else
             BDel.Visible = False
+        End If
+        If id_type = "2" Then
+            BPickArticle.Visible = False
+        Else
+            BPickArticle.Visible = True
         End If
     End Sub
 

@@ -19,6 +19,7 @@ Partial Class FormAdditionalCost
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormAdditionalCost))
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
         Me.BRefresh = New DevExpress.XtraEditors.SimpleButton()
@@ -31,10 +32,15 @@ Partial Class FormAdditionalCost
         Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn9 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.CMRealization = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.CreateRealizationToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.GCAdditionalCost, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVAdditionalCost, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.CMRealization.SuspendLayout()
         Me.SuspendLayout()
         '
         'PanelControl1
@@ -58,6 +64,7 @@ Partial Class FormAdditionalCost
         '
         'GCAdditionalCost
         '
+        Me.GCAdditionalCost.ContextMenuStrip = Me.CMRealization
         Me.GCAdditionalCost.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GCAdditionalCost.Location = New System.Drawing.Point(0, 46)
         Me.GCAdditionalCost.MainView = Me.GVAdditionalCost
@@ -68,7 +75,7 @@ Partial Class FormAdditionalCost
         '
         'GVAdditionalCost
         '
-        Me.GVAdditionalCost.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn2, Me.GridColumn3, Me.GridColumn4, Me.GridColumn5, Me.GridColumn6, Me.GridColumn7})
+        Me.GVAdditionalCost.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn9, Me.GridColumn8, Me.GridColumn2, Me.GridColumn3, Me.GridColumn4, Me.GridColumn5, Me.GridColumn6, Me.GridColumn7})
         Me.GVAdditionalCost.GridControl = Me.GCAdditionalCost
         Me.GVAdditionalCost.Name = "GVAdditionalCost"
         Me.GVAdditionalCost.OptionsBehavior.Editable = False
@@ -95,7 +102,7 @@ Partial Class FormAdditionalCost
         Me.GridColumn3.FieldName = "created_by"
         Me.GridColumn3.Name = "GridColumn3"
         Me.GridColumn3.Visible = True
-        Me.GridColumn3.VisibleIndex = 1
+        Me.GridColumn3.VisibleIndex = 2
         '
         'GridColumn4
         '
@@ -105,7 +112,7 @@ Partial Class FormAdditionalCost
         Me.GridColumn4.FieldName = "created_date"
         Me.GridColumn4.Name = "GridColumn4"
         Me.GridColumn4.Visible = True
-        Me.GridColumn4.VisibleIndex = 2
+        Me.GridColumn4.VisibleIndex = 3
         '
         'GridColumn5
         '
@@ -113,7 +120,7 @@ Partial Class FormAdditionalCost
         Me.GridColumn5.FieldName = "update_by"
         Me.GridColumn5.Name = "GridColumn5"
         Me.GridColumn5.Visible = True
-        Me.GridColumn5.VisibleIndex = 3
+        Me.GridColumn5.VisibleIndex = 4
         '
         'GridColumn6
         '
@@ -123,7 +130,7 @@ Partial Class FormAdditionalCost
         Me.GridColumn6.FieldName = "update_date"
         Me.GridColumn6.Name = "GridColumn6"
         Me.GridColumn6.Visible = True
-        Me.GridColumn6.VisibleIndex = 4
+        Me.GridColumn6.VisibleIndex = 5
         '
         'GridColumn7
         '
@@ -131,7 +138,33 @@ Partial Class FormAdditionalCost
         Me.GridColumn7.FieldName = "report_status"
         Me.GridColumn7.Name = "GridColumn7"
         Me.GridColumn7.Visible = True
-        Me.GridColumn7.VisibleIndex = 5
+        Me.GridColumn7.VisibleIndex = 6
+        '
+        'GridColumn8
+        '
+        Me.GridColumn8.Caption = "Type"
+        Me.GridColumn8.FieldName = "type"
+        Me.GridColumn8.Name = "GridColumn8"
+        Me.GridColumn8.Visible = True
+        Me.GridColumn8.VisibleIndex = 1
+        '
+        'GridColumn9
+        '
+        Me.GridColumn9.Caption = "ID Type"
+        Me.GridColumn9.FieldName = "id_type"
+        Me.GridColumn9.Name = "GridColumn9"
+        '
+        'CMRealization
+        '
+        Me.CMRealization.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CreateRealizationToolStripMenuItem})
+        Me.CMRealization.Name = "CMRealization"
+        Me.CMRealization.Size = New System.Drawing.Size(169, 26)
+        '
+        'CreateRealizationToolStripMenuItem
+        '
+        Me.CreateRealizationToolStripMenuItem.Name = "CreateRealizationToolStripMenuItem"
+        Me.CreateRealizationToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
+        Me.CreateRealizationToolStripMenuItem.Text = "Create Realization"
         '
         'FormAdditionalCost
         '
@@ -150,6 +183,7 @@ Partial Class FormAdditionalCost
         Me.PanelControl1.ResumeLayout(False)
         CType(Me.GCAdditionalCost, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVAdditionalCost, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.CMRealization.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -165,4 +199,8 @@ Partial Class FormAdditionalCost
     Friend WithEvents GridColumn6 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn7 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents BRefresh As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents GridColumn9 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn8 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents CMRealization As ContextMenuStrip
+    Friend WithEvents CreateRealizationToolStripMenuItem As ToolStripMenuItem
 End Class

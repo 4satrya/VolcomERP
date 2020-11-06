@@ -8,7 +8,7 @@
     End Sub
 
     Sub load_view()
-        Dim q As String = "SELECT pps.id_additional_cost_pps,pps.number,pps.created_date,pps.update_date,emp_created.employee_name AS created_by,emp_upd.employee_name AS update_by,sts.id_report_status,sts.report_status
+        Dim q As String = "SELECT pps.id_additional_cost_pps,pps.`id_type`,IF(pps.`id_type`=1,'Estimate','Realization') AS `type`,pps.number,pps.created_date,pps.update_date,emp_created.employee_name AS created_by,emp_upd.employee_name AS update_by,sts.id_report_status,sts.report_status
 FROM `tb_additional_cost_pps` pps
 INNER JOIN tb_m_user usr_created ON usr_created.id_user=pps.created_by
 INNER JOIN tb_m_employee emp_created ON usr_created.id_employee=emp_created.id_employee
@@ -55,6 +55,29 @@ INNER JOIN tb_lookup_report_status sts ON sts.id_report_status=pps.id_report_sta
         If GVAdditionalCost.RowCount > 0 Then
             FormAdditionalCostDet.id_pps = GVAdditionalCost.GetFocusedRowCellValue("id_additional_cost_pps").ToString
             FormAdditionalCostDet.ShowDialog()
+        End If
+    End Sub
+
+    Private Sub CreateRealizationToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CreateRealizationToolStripMenuItem.Click
+        If GVAdditionalCost.RowCount > 0 Then
+            If Not GVAdditionalCost.GetFocusedRowCellValue("id_report_status").ToString = "6" Then
+                warningCustom("Estimate cost not approved yet")
+            Else
+                If GVAdditionalCost.GetFocusedRowCellValue("id_type").ToString = "1" Then
+                    'prepare
+                    Dim q As String = "SELECT * FROM tb_additional_cost_pps WHERE id_report_status!=5 AND realization_from='" & GVAdditionalCost.GetFocusedRowCellValue("id_additional_cost_pps").ToString & "'"
+                    Dim dt As DataTable = execute_query(q, -1, True, "", "", "", "")
+                    If dt.Rows.Count > 0 Then
+                        warningCustom("Realization on process")
+                    Else
+                        FormAdditionalCostDet.id_pps = "-1"
+                        FormAdditionalCostDet.id_type = "2"
+                        FormAdditionalCostDet.realization_from = GVAdditionalCost.GetFocusedRowCellValue("id_additional_cost_pps").ToString
+                        FormAdditionalCostDet.ShowDialog()
+                    End If
+                    '
+                End If
+            End If
         End If
     End Sub
 End Class

@@ -20,7 +20,7 @@
     End Sub
 
     Private Sub FormMasterRawMatPps_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        TEFOBPrice.EditValue = 0.00
+        TEFOBPrice.EditValue = 0.0000
 
         load_form()
     End Sub
@@ -168,7 +168,7 @@ INNER JOIN tb_m_uom uom ON uom.`id_uom`=mat.`id_uom` "
     End Sub
 
     Sub load_contact()
-        Dim q As String = "SELECT cc.`id_comp_contact`,cc.`id_comp`,c.`comp_number`,c.`comp_display_name` ,c.`address_primary`,cat.`comp_cat_name`,cc.`contact_person`
+        Dim q As String = "SELECT cc.`id_comp_contact`,cc.`id_comp`,c.`comp_number`,c.comp_name,c.`comp_display_name` ,c.`address_primary`,cat.`comp_cat_name`,cc.`contact_person`
 FROM tb_m_comp_contact cc
 INNER JOIN tb_m_comp c ON c.`id_comp`=cc.`id_comp`
 INNER JOIN tb_m_comp_cat cat ON cat.`id_comp_cat`=c.`id_comp_cat`

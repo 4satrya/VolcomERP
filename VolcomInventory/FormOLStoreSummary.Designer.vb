@@ -386,6 +386,26 @@ Partial Class FormOLStoreSummary
         Me.GridColumn30 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn31 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.LabelControl12 = New DevExpress.XtraEditors.LabelControl()
+        Me.XtraTabPage1 = New DevExpress.XtraTab.XtraTabPage()
+        Me.GCExpiredOrder = New DevExpress.XtraGrid.GridControl()
+        Me.GVExpiredOrder = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumnidex = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumncheckout_id = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnorder_date = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnorder_number = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumncustomer_nameex = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumntotal_qty_order = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumninput_date = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnprocess_date = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnerror_process = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.PanelControl6 = New DevExpress.XtraEditors.PanelControl()
+        Me.BtnViewExpiredOrderBySyncDate = New DevExpress.XtraEditors.SimpleButton()
+        Me.BtnExpiredExportToXLS = New DevExpress.XtraEditors.SimpleButton()
+        Me.BtnViewExpiredOrder = New DevExpress.XtraEditors.SimpleButton()
+        Me.LabelControl13 = New DevExpress.XtraEditors.LabelControl()
+        Me.DEExUntil = New DevExpress.XtraEditors.DateEdit()
+        Me.LabelControl14 = New DevExpress.XtraEditors.LabelControl()
+        Me.DEExFrom = New DevExpress.XtraEditors.DateEdit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.DEUntil.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -472,6 +492,15 @@ Partial Class FormOLStoreSummary
         Me.PanelControl5.SuspendLayout()
         CType(Me.SLEPromoDetail.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView5, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.XtraTabPage1.SuspendLayout()
+        CType(Me.GCExpiredOrder, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GVExpiredOrder, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PanelControl6, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelControl6.SuspendLayout()
+        CType(Me.DEExUntil.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEExUntil.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEExFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEExFrom.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControl1
@@ -901,7 +930,7 @@ Partial Class FormOLStoreSummary
         Me.XTCOLStore.SelectedTabPage = Me.XTPDetail
         Me.XTCOLStore.Size = New System.Drawing.Size(1227, 495)
         Me.XTCOLStore.TabIndex = 2
-        Me.XTCOLStore.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPSummary, Me.XTPDetail, Me.XTPPromoItem})
+        Me.XTCOLStore.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPSummary, Me.XTPDetail, Me.XTPPromoItem, Me.XtraTabPage1})
         '
         'XTPDetail
         '
@@ -3812,6 +3841,201 @@ Partial Class FormOLStoreSummary
         Me.LabelControl12.TabIndex = 0
         Me.LabelControl12.Text = "Promo"
         '
+        'XtraTabPage1
+        '
+        Me.XtraTabPage1.Controls.Add(Me.GCExpiredOrder)
+        Me.XtraTabPage1.Controls.Add(Me.PanelControl6)
+        Me.XtraTabPage1.Name = "XtraTabPage1"
+        Me.XtraTabPage1.Size = New System.Drawing.Size(1225, 469)
+        Me.XtraTabPage1.Text = "Cancelation Expired VIOS Order"
+        '
+        'GCExpiredOrder
+        '
+        Me.GCExpiredOrder.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GCExpiredOrder.Location = New System.Drawing.Point(0, 53)
+        Me.GCExpiredOrder.MainView = Me.GVExpiredOrder
+        Me.GCExpiredOrder.Name = "GCExpiredOrder"
+        Me.GCExpiredOrder.Size = New System.Drawing.Size(1225, 416)
+        Me.GCExpiredOrder.TabIndex = 1
+        Me.GCExpiredOrder.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVExpiredOrder})
+        '
+        'GVExpiredOrder
+        '
+        Me.GVExpiredOrder.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnidex, Me.GridColumncheckout_id, Me.GridColumnorder_date, Me.GridColumnorder_number, Me.GridColumncustomer_nameex, Me.GridColumntotal_qty_order, Me.GridColumninput_date, Me.GridColumnprocess_date, Me.GridColumnerror_process})
+        Me.GVExpiredOrder.GridControl = Me.GCExpiredOrder
+        Me.GVExpiredOrder.Name = "GVExpiredOrder"
+        Me.GVExpiredOrder.OptionsBehavior.ReadOnly = True
+        Me.GVExpiredOrder.OptionsFind.AlwaysVisible = True
+        Me.GVExpiredOrder.OptionsView.ColumnAutoWidth = False
+        Me.GVExpiredOrder.OptionsView.ShowFooter = True
+        Me.GVExpiredOrder.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumnidex
+        '
+        Me.GridColumnidex.Caption = "id"
+        Me.GridColumnidex.FieldName = "id"
+        Me.GridColumnidex.Name = "GridColumnidex"
+        '
+        'GridColumncheckout_id
+        '
+        Me.GridColumncheckout_id.Caption = "Checkout ID"
+        Me.GridColumncheckout_id.FieldName = "checkout_id"
+        Me.GridColumncheckout_id.Name = "GridColumncheckout_id"
+        Me.GridColumncheckout_id.Visible = True
+        Me.GridColumncheckout_id.VisibleIndex = 0
+        '
+        'GridColumnorder_date
+        '
+        Me.GridColumnorder_date.Caption = "Order Date"
+        Me.GridColumnorder_date.DisplayFormat.FormatString = "dd MMMM yyyy HH:mm:ss"
+        Me.GridColumnorder_date.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumnorder_date.FieldName = "order_date"
+        Me.GridColumnorder_date.Name = "GridColumnorder_date"
+        Me.GridColumnorder_date.Visible = True
+        Me.GridColumnorder_date.VisibleIndex = 2
+        '
+        'GridColumnorder_number
+        '
+        Me.GridColumnorder_number.Caption = "Order No."
+        Me.GridColumnorder_number.FieldName = "order_number"
+        Me.GridColumnorder_number.Name = "GridColumnorder_number"
+        Me.GridColumnorder_number.Visible = True
+        Me.GridColumnorder_number.VisibleIndex = 1
+        '
+        'GridColumncustomer_nameex
+        '
+        Me.GridColumncustomer_nameex.Caption = "Customer"
+        Me.GridColumncustomer_nameex.FieldName = "customer_name"
+        Me.GridColumncustomer_nameex.Name = "GridColumncustomer_nameex"
+        Me.GridColumncustomer_nameex.Visible = True
+        Me.GridColumncustomer_nameex.VisibleIndex = 3
+        '
+        'GridColumntotal_qty_order
+        '
+        Me.GridColumntotal_qty_order.Caption = "Total Qty"
+        Me.GridColumntotal_qty_order.DisplayFormat.FormatString = "N0"
+        Me.GridColumntotal_qty_order.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumntotal_qty_order.FieldName = "total_qty_order"
+        Me.GridColumntotal_qty_order.Name = "GridColumntotal_qty_order"
+        Me.GridColumntotal_qty_order.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_qty_order", "{0:N0}")})
+        Me.GridColumntotal_qty_order.Visible = True
+        Me.GridColumntotal_qty_order.VisibleIndex = 4
+        '
+        'GridColumninput_date
+        '
+        Me.GridColumninput_date.Caption = "Sync Date"
+        Me.GridColumninput_date.DisplayFormat.FormatString = "dd MMMM yyyy HH:mm:ss"
+        Me.GridColumninput_date.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumninput_date.FieldName = "input_date"
+        Me.GridColumninput_date.Name = "GridColumninput_date"
+        Me.GridColumninput_date.Visible = True
+        Me.GridColumninput_date.VisibleIndex = 5
+        '
+        'GridColumnprocess_date
+        '
+        Me.GridColumnprocess_date.Caption = "Cancel Date"
+        Me.GridColumnprocess_date.DisplayFormat.FormatString = "dd MMMM yyyy HH:mm:ss"
+        Me.GridColumnprocess_date.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumnprocess_date.FieldName = "process_date"
+        Me.GridColumnprocess_date.Name = "GridColumnprocess_date"
+        Me.GridColumnprocess_date.Visible = True
+        Me.GridColumnprocess_date.VisibleIndex = 6
+        '
+        'GridColumnerror_process
+        '
+        Me.GridColumnerror_process.Caption = "Error Log"
+        Me.GridColumnerror_process.FieldName = "error_process"
+        Me.GridColumnerror_process.Name = "GridColumnerror_process"
+        Me.GridColumnerror_process.Visible = True
+        Me.GridColumnerror_process.VisibleIndex = 7
+        '
+        'PanelControl6
+        '
+        Me.PanelControl6.Controls.Add(Me.BtnViewExpiredOrderBySyncDate)
+        Me.PanelControl6.Controls.Add(Me.BtnExpiredExportToXLS)
+        Me.PanelControl6.Controls.Add(Me.BtnViewExpiredOrder)
+        Me.PanelControl6.Controls.Add(Me.LabelControl13)
+        Me.PanelControl6.Controls.Add(Me.DEExUntil)
+        Me.PanelControl6.Controls.Add(Me.LabelControl14)
+        Me.PanelControl6.Controls.Add(Me.DEExFrom)
+        Me.PanelControl6.Dock = System.Windows.Forms.DockStyle.Top
+        Me.PanelControl6.Location = New System.Drawing.Point(0, 0)
+        Me.PanelControl6.Name = "PanelControl6"
+        Me.PanelControl6.Size = New System.Drawing.Size(1225, 53)
+        Me.PanelControl6.TabIndex = 0
+        '
+        'BtnViewExpiredOrderBySyncDate
+        '
+        Me.BtnViewExpiredOrderBySyncDate.Image = CType(resources.GetObject("BtnViewExpiredOrderBySyncDate.Image"), System.Drawing.Image)
+        Me.BtnViewExpiredOrderBySyncDate.Location = New System.Drawing.Point(368, 17)
+        Me.BtnViewExpiredOrderBySyncDate.LookAndFeel.SkinName = "Blue"
+        Me.BtnViewExpiredOrderBySyncDate.Name = "BtnViewExpiredOrderBySyncDate"
+        Me.BtnViewExpiredOrderBySyncDate.Size = New System.Drawing.Size(136, 20)
+        Me.BtnViewExpiredOrderBySyncDate.TabIndex = 17
+        Me.BtnViewExpiredOrderBySyncDate.Text = "View by Sync Date"
+        '
+        'BtnExpiredExportToXLS
+        '
+        Me.BtnExpiredExportToXLS.Image = CType(resources.GetObject("BtnExpiredExportToXLS.Image"), System.Drawing.Image)
+        Me.BtnExpiredExportToXLS.Location = New System.Drawing.Point(652, 17)
+        Me.BtnExpiredExportToXLS.LookAndFeel.SkinName = "Blue"
+        Me.BtnExpiredExportToXLS.Name = "BtnExpiredExportToXLS"
+        Me.BtnExpiredExportToXLS.Size = New System.Drawing.Size(108, 20)
+        Me.BtnExpiredExportToXLS.TabIndex = 16
+        Me.BtnExpiredExportToXLS.Text = "Export to XLS"
+        '
+        'BtnViewExpiredOrder
+        '
+        Me.BtnViewExpiredOrder.Image = CType(resources.GetObject("BtnViewExpiredOrder.Image"), System.Drawing.Image)
+        Me.BtnViewExpiredOrder.Location = New System.Drawing.Point(510, 17)
+        Me.BtnViewExpiredOrder.LookAndFeel.SkinName = "Blue"
+        Me.BtnViewExpiredOrder.Name = "BtnViewExpiredOrder"
+        Me.BtnViewExpiredOrder.Size = New System.Drawing.Size(136, 20)
+        Me.BtnViewExpiredOrder.TabIndex = 7
+        Me.BtnViewExpiredOrder.Text = "View by Order Date"
+        '
+        'LabelControl13
+        '
+        Me.LabelControl13.Location = New System.Drawing.Point(17, 20)
+        Me.LabelControl13.Name = "LabelControl13"
+        Me.LabelControl13.Size = New System.Drawing.Size(24, 13)
+        Me.LabelControl13.TabIndex = 4
+        Me.LabelControl13.Text = "From"
+        '
+        'DEExUntil
+        '
+        Me.DEExUntil.EditValue = Nothing
+        Me.DEExUntil.Location = New System.Drawing.Point(221, 17)
+        Me.DEExUntil.Name = "DEExUntil"
+        Me.DEExUntil.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEExUntil.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
+        Me.DEExUntil.Properties.DisplayFormat.FormatString = "dd MMM yyyy"
+        Me.DEExUntil.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DEExUntil.Properties.Mask.EditMask = "dd\/MM\/yyyy"
+        Me.DEExUntil.Size = New System.Drawing.Size(141, 20)
+        Me.DEExUntil.TabIndex = 5
+        '
+        'LabelControl14
+        '
+        Me.LabelControl14.Location = New System.Drawing.Point(194, 20)
+        Me.LabelControl14.Name = "LabelControl14"
+        Me.LabelControl14.Size = New System.Drawing.Size(21, 13)
+        Me.LabelControl14.TabIndex = 6
+        Me.LabelControl14.Text = "Until"
+        '
+        'DEExFrom
+        '
+        Me.DEExFrom.EditValue = Nothing
+        Me.DEExFrom.Location = New System.Drawing.Point(47, 17)
+        Me.DEExFrom.Name = "DEExFrom"
+        Me.DEExFrom.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEExFrom.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
+        Me.DEExFrom.Properties.DisplayFormat.FormatString = "dd MMM yyyy"
+        Me.DEExFrom.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DEExFrom.Properties.Mask.EditMask = "dd\/MM\/yyyy"
+        Me.DEExFrom.Size = New System.Drawing.Size(141, 20)
+        Me.DEExFrom.TabIndex = 3
+        '
         'FormOLStoreSummary
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -3913,6 +4137,16 @@ Partial Class FormOLStoreSummary
         Me.PanelControl5.PerformLayout()
         CType(Me.SLEPromoDetail.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView5, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.XtraTabPage1.ResumeLayout(False)
+        CType(Me.GCExpiredOrder, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GVExpiredOrder, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PanelControl6, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelControl6.ResumeLayout(False)
+        Me.PanelControl6.PerformLayout()
+        CType(Me.DEExUntil.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEExUntil.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEExFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEExFrom.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -4265,4 +4499,24 @@ Partial Class FormOLStoreSummary
     Friend WithEvents gridBandRefund As DevExpress.XtraGrid.Views.BandedGrid.GridBand
     Friend WithEvents BandedGridColumnShippingLabel As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
     Friend WithEvents RepoBtnViewShippingLabel As DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit
+    Friend WithEvents XtraTabPage1 As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents PanelControl6 As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents BtnViewExpiredOrder As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents LabelControl13 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents DEExUntil As DevExpress.XtraEditors.DateEdit
+    Friend WithEvents LabelControl14 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents DEExFrom As DevExpress.XtraEditors.DateEdit
+    Friend WithEvents BtnExpiredExportToXLS As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents GCExpiredOrder As DevExpress.XtraGrid.GridControl
+    Friend WithEvents GVExpiredOrder As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumnidex As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumncheckout_id As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnorder_date As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnorder_number As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumncustomer_nameex As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumntotal_qty_order As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumninput_date As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnprocess_date As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnerror_process As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents BtnViewExpiredOrderBySyncDate As DevExpress.XtraEditors.SimpleButton
 End Class

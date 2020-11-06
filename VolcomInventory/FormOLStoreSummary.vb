@@ -20,6 +20,8 @@
         DEUntilDetail.EditValue = data_dt.Rows(0)("dt")
         DEUpdatedFrom.EditValue = data_dt.Rows(0)("dt")
         DEUpdatedUntil.EditValue = data_dt.Rows(0)("dt")
+        DEExFrom.EditValue = data_dt.Rows(0)("dt")
+        DEExUntil.EditValue = data_dt.Rows(0)("dt")
         viewComp()
         viewCompGroup()
         viewCompDetail()
@@ -1164,5 +1166,59 @@
         End If
 
         Cursor = Cursors.Default
+    End Sub
+
+    Private Sub BtnViewExpiredOrder_Click(sender As Object, e As EventArgs) Handles BtnViewExpiredOrder.Click
+        viewExpiredOrder(1)
+    End Sub
+
+    Sub viewExpiredOrder(ByVal id_type As String)
+        Cursor = Cursors.WaitCursor
+        'Prepare paramater date
+        Dim cond_date As String = ""
+        Dim date_from_selected As String = "0000-01-01"
+        Dim date_until_selected As String = "9999-01-01"
+        Try
+            date_from_selected = DateTime.Parse(DEExFrom.EditValue.ToString).ToString("yyyy-MM-dd")
+        Catch ex As Exception
+        End Try
+        Try
+            date_until_selected = DateTime.Parse(DEExUntil.EditValue.ToString).ToString("yyyy-MM-dd")
+        Catch ex As Exception
+        End Try
+        Dim par_date As String = ""
+        If id_type = "1" Then
+            par_date = "f.order_date>='" + date_from_selected + "' AND f.order_date<='" + date_until_selected + "'"
+        Else
+            par_date = "DATE(f.input_date)>='" + date_from_selected + "' AND DATE(f.input_date)<='" + date_until_selected + "'"
+        End If
+        Dim query As String = "SELECT f.id, f.checkout_id, f.order_date, f.order_number, f.customer_name, SUM(f.quantity) AS `total_qty_order`,
+        f.input_date, f.process_date, f.error_process
+        FROM tb_ol_store_order_fail f 
+        WHERE (" + par_date + ")
+        GROUP BY f.id
+        ORDER BY f.id ASC "
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        GCExpiredOrder.DataSource = data
+        GVExpiredOrder.BestFitColumns()
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub BtnExpiredExportToXLS_Click(sender As Object, e As EventArgs) Handles BtnExpiredExportToXLS.Click
+        If GVExpiredOrder.RowCount > 0 Then
+            Cursor = Cursors.WaitCursor
+            Dim path As String = Application.StartupPath & "\download\"
+            'create directory if not exist
+            If Not IO.Directory.Exists(path) Then
+                System.IO.Directory.CreateDirectory(path)
+            End If
+            path = path + "expired_vios_order.xlsx"
+            exportToXLS(path, "expired order", GCExpiredOrder)
+            Cursor = Cursors.Default
+        End If
+    End Sub
+
+    Private Sub BtnViewExpiredOrderBySyncDate_Click(sender As Object, e As EventArgs) Handles BtnViewExpiredOrderBySyncDate.Click
+        viewExpiredOrder(2)
     End Sub
 End Class

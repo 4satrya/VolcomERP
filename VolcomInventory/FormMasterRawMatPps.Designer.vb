@@ -22,6 +22,7 @@ Partial Class FormMasterRawMatPps
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormMasterRawMatPps))
         Me.PCLotTitle = New DevExpress.XtraEditors.PanelControl()
+        Me.LREvise = New DevExpress.XtraEditors.LabelControl()
         Me.LabelPrintedName = New DevExpress.XtraEditors.LabelControl()
         Me.LabelDetailMaterial = New DevExpress.XtraEditors.LabelControl()
         Me.PCSave = New DevExpress.XtraEditors.PanelControl()
@@ -86,7 +87,6 @@ Partial Class FormMasterRawMatPps
         Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.TxtMaterialTypeCode = New DevExpress.XtraEditors.TextEdit()
         Me.EPMaterial = New System.Windows.Forms.ErrorProvider(Me.components)
-        Me.LREvise = New DevExpress.XtraEditors.LabelControl()
         CType(Me.PCLotTitle, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PCLotTitle.SuspendLayout()
         CType(Me.PCSave, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -136,6 +136,15 @@ Partial Class FormMasterRawMatPps
         Me.PCLotTitle.Name = "PCLotTitle"
         Me.PCLotTitle.Size = New System.Drawing.Size(892, 46)
         Me.PCLotTitle.TabIndex = 13
+        '
+        'LREvise
+        '
+        Me.LREvise.Appearance.Font = New System.Drawing.Font("Calibri", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LREvise.Location = New System.Drawing.Point(832, 10)
+        Me.LREvise.Name = "LREvise"
+        Me.LREvise.Size = New System.Drawing.Size(48, 26)
+        Me.LREvise.TabIndex = 5
+        Me.LREvise.Text = "Revisi"
         '
         'LabelPrintedName
         '
@@ -299,7 +308,7 @@ Partial Class FormMasterRawMatPps
         'ColCompName
         '
         Me.ColCompName.Caption = "Company"
-        Me.ColCompName.FieldName = "comp_name"
+        Me.ColCompName.FieldName = "comp_display_name"
         Me.ColCompName.Name = "ColCompName"
         Me.ColCompName.Visible = True
         Me.ColCompName.VisibleIndex = 1
@@ -348,9 +357,9 @@ Partial Class FormMasterRawMatPps
         Me.TEFOBPrice.Name = "TEFOBPrice"
         Me.TEFOBPrice.Properties.Appearance.Options.UseTextOptions = True
         Me.TEFOBPrice.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.TEFOBPrice.Properties.DisplayFormat.FormatString = "n2"
+        Me.TEFOBPrice.Properties.DisplayFormat.FormatString = "N4"
         Me.TEFOBPrice.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.TEFOBPrice.Properties.Mask.EditMask = "n2"
+        Me.TEFOBPrice.Properties.Mask.EditMask = "N4"
         Me.TEFOBPrice.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
         Me.TEFOBPrice.Size = New System.Drawing.Size(142, 20)
         Me.TEFOBPrice.TabIndex = 104
@@ -750,15 +759,6 @@ Partial Class FormMasterRawMatPps
         '
         Me.EPMaterial.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink
         Me.EPMaterial.ContainerControl = Me
-        '
-        'LREvise
-        '
-        Me.LREvise.Appearance.Font = New System.Drawing.Font("Calibri", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LREvise.Location = New System.Drawing.Point(832, 10)
-        Me.LREvise.Name = "LREvise"
-        Me.LREvise.Size = New System.Drawing.Size(48, 26)
-        Me.LREvise.TabIndex = 5
-        Me.LREvise.Text = "Revisi"
         '
         'FormMasterRawMatPps
         '

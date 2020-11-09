@@ -130,4 +130,8 @@
     Private Sub RepositoryItemCheckEdit_MouseLeave(sender As Object, e As EventArgs) Handles RepositoryItemCheckEdit.MouseLeave
         Cursor = Cursors.Default
     End Sub
+
+    Private Sub SBCancel_Click(sender As Object, e As EventArgs) Handles SBCancel.Click
+        Close()
+    End Sub
 End Class

@@ -1410,6 +1410,24 @@
     <Compile Include="FormEmpLeaveStock.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormEmployeeContract.Designer.vb">
+      <DependentUpon>FormEmployeeContract.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormEmployeeContract.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEmployeeContractDet.Designer.vb">
+      <DependentUpon>FormEmployeeContractDet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormEmployeeContractDet.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEmployeeContractEmp.Designer.vb">
+      <DependentUpon>FormEmployeeContractEmp.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormEmployeeContractEmp.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormEmployeePpsAtt.Designer.vb">
       <DependentUpon>FormEmployeePpsAtt.vb</DependentUpon>
     </Compile>
@@ -9377,6 +9395,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormEmpLeaveStock.resx">
       <DependentUpon>FormEmpLeaveStock.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEmployeeContract.resx">
+      <DependentUpon>FormEmployeeContract.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEmployeeContractDet.resx">
+      <DependentUpon>FormEmployeeContractDet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEmployeeContractEmp.resx">
+      <DependentUpon>FormEmployeeContractEmp.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormEmployeePpsAtt.resx">
       <DependentUpon>FormEmployeePpsAtt.vb</DependentUpon>

@@ -1839,6 +1839,8 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
             FormAdditionalCostDet.ShowDialog()
         ElseIf formName = "FormDesignImages" Then
             FormDesignImages.browse_images()
+        ElseIf formName = "FormEmployeeContract" Then
+            FormEmployeeContractDet.ShowDialog()
         Else
             RPSubMenu.Visible = False
         End If
@@ -6447,6 +6449,25 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
             End If
         ElseIf formName = "FormDesignImages" Then
             FormDesignImages.delete_images()
+        ElseIf formName = "FormEmployeeContract" Then
+            Dim id_emp_contract As String = "0"
+
+            Try
+                id_emp_contract = FormEmployeeContract.GVEmployeeContract.GetFocusedRowCellValue("id_emp_contract").ToString
+            Catch ex As Exception
+            End Try
+
+            If Not id_emp_contract = "0" Then
+                Dim confirm_cnt As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure want to delete this contract ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+
+                If confirm_cnt = DialogResult.Yes Then
+                    execute_non_query("DELETE FROM tb_emp_contract WHERE id_emp_contract = " + id_emp_contract, True, "", "", "", "")
+
+                    FormEmployeeContract.form_load()
+                End If
+            Else
+                stopCustom("No contract selected.")
+            End If
         Else
             RPSubMenu.Visible = False
         End If
@@ -8403,6 +8424,8 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
             print(FormAdditionalCost.GCAdditionalCost, "Additional Cost Propose List")
         ElseIf formName = "FormDesignImages" Then
             FormDesignImages.print_images()
+        ElseIf formName = "FormEmployeeContract" Then
+            print(FormEmployeeContract.GCEmployeeContract, "Employee Contract")
         Else
             RPSubMenu.Visible = False
         End If
@@ -9340,6 +9363,9 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
         ElseIf formName = "FormDesignImages" Then
             FormDesignImages.Close()
             FormDesignImages.Dispose()
+        ElseIf formName = "FormEmployeeContract" Then
+            FormEmployeeContract.Close()
+            FormEmployeeContract.Dispose()
         Else
             RPSubMenu.Visible = False
         End If
@@ -10307,6 +10333,8 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
             FormAdditionalCost.load_view()
         ElseIf formName = "FormDesignImages" Then
             FormDesignImages.view_images()
+        ElseIf formName = "FormEmployeeContract" Then
+            FormEmployeeContract.form_load()
         End If
     End Sub
     'Switch
@@ -15447,6 +15475,19 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
             FormDesignImages.Show()
             FormDesignImages.WindowState = FormWindowState.Maximized
             FormDesignImages.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub NBEmployeeContract_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBEmployeeContract.LinkClicked
+        Cursor = Cursors.WaitCursor
+        Try
+            FormEmployeeContract.MdiParent = Me
+            FormEmployeeContract.Show()
+            FormEmployeeContract.WindowState = FormWindowState.Maximized
+            FormEmployeeContract.Focus()
         Catch ex As Exception
             errorProcess()
         End Try

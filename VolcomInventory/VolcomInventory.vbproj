@@ -7331,6 +7331,12 @@
     <Compile Include="ReportAccountingWorksheet.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ReportAdditionalCost.Designer.vb">
+      <DependentUpon>ReportAdditionalCost.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReportAdditionalCost.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ReportAttnSum.Designer.vb">
       <DependentUpon>ReportAttnSum.vb</DependentUpon>
     </Compile>
@@ -12793,6 +12799,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ReportAccountingWorksheet.resx">
       <DependentUpon>ReportAccountingWorksheet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportAdditionalCost.resx">
+      <DependentUpon>ReportAdditionalCost.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportAttnSum.resx">
       <DependentUpon>ReportAttnSum.vb</DependentUpon>

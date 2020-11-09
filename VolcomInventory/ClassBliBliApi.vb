@@ -149,7 +149,7 @@
                 ol_store_id = json("value")("orderItemNo").ToString
                 checkout_id = ""
                 sku = json("value")("merchantSku").ToString
-                design_price = decimalSQL(json("value")("productPrice").ToString)
+                design_price = decimalSQL(json("value")("finalPrice").ToString)
                 sales_order_det_qty = decimalSQL(json("value")("qty").ToString)
                 shipping_price = "0"
                 other_price = "0"

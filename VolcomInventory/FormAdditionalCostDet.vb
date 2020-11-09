@@ -362,4 +362,8 @@ VALUES('2','" & id_user & "',NOW(),'" & id_user & "',NOW(),'" & addSlashes(MENot
         FormDocumentUpload.ShowDialog()
         Cursor = Cursors.Default
     End Sub
+
+    Private Sub BtnPrint_Click(sender As Object, e As EventArgs) Handles BtnPrint.Click
+
+    End Sub
 End Class

@@ -8953,7 +8953,8 @@ FROM `tb_additional_cost_pps_design`
 WHERE id_additional_cost_pps='" & id_report & "'"
                         execute_non_query(qu, True, "", "", "", "")
                         'update ke tb_m_design
-
+                        qu = "UPDATE tb_m_design SET prod_order_cop_mng_addcost=" & decimalSQL(Decimal.Parse(dt.Rows(0)("cost_est").ToString)) & " WHERE id_design IN (SELECT id_design FROM tb_additional_cost_pps_design WHERE id_additional_cost_pps='" & id_report & "')"
+                        execute_non_query(qu, True, "", "", "", "")
                     ElseIf dt.Rows(0)("id_type").ToString = "2" Then
                         'realization
                         'nonactive additional cost
@@ -8966,7 +8967,8 @@ FROM `tb_additional_cost_pps_design`
 WHERE id_additional_cost_pps='" & id_report & "'"
                         execute_non_query(qu, True, "", "", "", "")
                         'update ke tb_m_design
-
+                        qu = "UPDATE tb_m_design SET prod_order_cop_mng_addcost=" & decimalSQL(Decimal.Parse(dt.Rows(0)("cost").ToString)) & " WHERE id_design IN (SELECT id_design FROM tb_additional_cost_pps_design WHERE id_additional_cost_pps='" & id_report & "')"
+                        execute_non_query(qu, True, "", "", "", "")
                     End If
                 End If
             End If

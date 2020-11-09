@@ -6,6 +6,16 @@
     Public is_view As String = "-1"
 
     Private Sub FormAdditionalCostDet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        form_load()
+    End Sub
+
+    Sub view_vendor()
+        Dim q As String = "SELECT id_comp,comp_name,comp_number FROM tb_m_comp WHERE is_active=1"
+        viewSearchLookupQuery(SLEVendor, q, "id_comp", "comp_name", "id_comp")
+    End Sub
+
+    Sub form_load()
+        view_vendor()
         TEVatPercent.EditValue = 0.00
 
         If Not id_pps = "-1" Then
@@ -13,7 +23,7 @@
             BMark.Visible = True
             BtnPrint.Visible = True
 
-            Dim q As String = "SELECT pps.id_type,pps.number,pps.created_by,emp.employee_name,pps.created_date,pps.update_by,pps.update_date,pps.note,pps.vat_percent,pps.id_report_status 
+            Dim q As String = "SELECT pps.id_type,pps.id_comp,pps.number,pps.created_by,emp.employee_name,pps.created_date,pps.update_by,pps.update_date,pps.note,pps.vat_percent,pps.id_report_status 
 FROM tb_additional_cost_pps pps 
 INNER JOIN tb_m_user usr ON usr.id_user=pps.created_by
 INNER JOIN tb_m_employee emp ON emp.id_employee=usr.id_employee
@@ -26,6 +36,8 @@ WHERE id_additional_cost_pps='" & id_pps & "'"
                 MENote.Text = dt.Rows(0)("note").ToString
                 TEVatPercent.Text = dt.Rows(0)("vat_percent").ToString
                 id_report_status = dt.Rows(0)("id_report_status").ToString
+                '
+                SLEVendor.EditValue = dt.Rows(0)("id_comp").ToString
             End If
             '
             load_design()
@@ -241,12 +253,13 @@ GROUP BY pdd.`id_prod_demand_design`"
         If is_ok Then
             If id_type = "1" Then 'propose
                 If id_pps = "1" Then 'new
-                    Dim q As String = "INSERT INTO `tb_additional_cost_pps`(id_type,created_by,created_date,update_by,update_date,note,vat_percent,id_report_status)
-VALUES('1','" & id_user & "',NOW(),'" & id_user & "',NOW(),'" & addSlashes(MENote.Text) & "','" & decimalSQL(Decimal.Parse(TEVatPercent.EditValue.ToString)) & "','1'); SELECT LAST_INSERT_ID(); "
+                    Dim q As String = "INSERT INTO `tb_additional_cost_pps`(id_type,id_comp,created_by,created_date,update_by,update_date,note,vat_percent,id_report_status)
+VALUES('1','" & SLEVendor.EditValue.ToString & "','" & id_user & "',NOW(),'" & id_user & "',NOW(),'" & addSlashes(MENote.Text) & "','" & decimalSQL(Decimal.Parse(TEVatPercent.EditValue.ToString)) & "','1'); SELECT LAST_INSERT_ID(); "
 
                     id_pps = execute_query(q, 0, True, "", "", "", "")
                     '
                     q = "CALL gen_number('" & id_pps & "','274');"
+                    execute_non_query(q, True, "", "", "", "")
                     'design
                     q = "INSERT INTO `tb_additional_cost_pps_design`(`id_additional_cost_pps`,`id_design`,`qty_order`,`qty_sample`,`ecop`) VALUES"
                     For i = 0 To GVDesignList.RowCount - 1
@@ -258,16 +271,17 @@ VALUES('1','" & id_user & "',NOW(),'" & id_user & "',NOW(),'" & addSlashes(MENot
                     execute_non_query(q, True, "", "", "", "")
                     'detail
                     q = "INSERT INTO `tb_additional_cost_pps_det`(`id_additional_cost_pps`,`description`,`qty_est`,`value_est`) VALUES"
-                    For i = 0 To GVDesignList.RowCount - 1
+                    For i = 0 To GVCostList.RowCount - 1
                         If Not i = 0 Then
                             q += ","
                         End If
                         q += "('" & id_pps & "','" & addSlashes(GVCostList.GetRowCellValue(i, "description").ToString) & "','" & decimalSQL(Decimal.Parse(GVCostList.GetRowCellValue(i, "qty").ToString).ToString) & "','" & decimalSQL(Decimal.Parse(GVCostList.GetRowCellValue(i, "value").ToString).ToString) & "')"
                     Next
                     execute_non_query(q, True, "", "", "", "")
+                    warningCustom("Propose created")
                 Else 'edit
-                    Dim q As String = "UPDATE `tb_additional_cost_pps` SET update_by='" & id_user & "',update_date=NOW(),note='" & addSlashes(MENote.Text) & "',vat_percent='" & decimalSQL(Decimal.Parse(TEVatPercent.EditValue.ToString)) & "' WHERE id_additional_cost_pps='" & id_pps & "'"
-                    id_pps = execute_query(q, 0, True, "", "", "", "")
+                    Dim q As String = "UPDATE `tb_additional_cost_pps` SET id_comp='" & SLEVendor.EditValue.ToString & "',update_by='" & id_user & "',update_date=NOW(),note='" & addSlashes(MENote.Text) & "',vat_percent='" & decimalSQL(Decimal.Parse(TEVatPercent.EditValue.ToString)) & "' WHERE id_additional_cost_pps='" & id_pps & "'"
+                    execute_non_query(q, True, "", "", "", "")
                     'design
                     q = "DELETE FROM tb_additional_cost_pps_design WHERE id_additional_cost_pps='" & id_pps & "'"
                     execute_non_query(q, True, "", "", "", "")
@@ -283,22 +297,25 @@ VALUES('1','" & id_user & "',NOW(),'" & id_user & "',NOW(),'" & addSlashes(MENot
                     q = "DELETE FROM tb_additional_cost_pps_det WHERE id_additional_cost_pps='" & id_pps & "'"
                     execute_non_query(q, True, "", "", "", "")
                     q = "INSERT INTO `tb_additional_cost_pps_det`(`id_additional_cost_pps`,`description`,`qty_est`,`value_est`) VALUES"
-                    For i = 0 To GVDesignList.RowCount - 1
+                    For i = 0 To GVCostList.RowCount - 1
                         If Not i = 0 Then
                             q += ","
                         End If
-                        q += "('" & id_pps & "','" & addSlashes(GVDesignList.GetRowCellValue(i, "description").ToString) & "','" & decimalSQL(Decimal.Parse(GVDesignList.GetRowCellValue(i, "qty").ToString).ToString) & "','" & decimalSQL(Decimal.Parse(GVDesignList.GetRowCellValue(i, "value").ToString).ToString) & "')"
+                        q += "('" & id_pps & "','" & addSlashes(GVCostList.GetRowCellValue(i, "description").ToString) & "','" & decimalSQL(Decimal.Parse(GVCostList.GetRowCellValue(i, "qty").ToString).ToString) & "','" & decimalSQL(Decimal.Parse(GVCostList.GetRowCellValue(i, "value").ToString).ToString) & "')"
                     Next
                     execute_non_query(q, True, "", "", "", "")
+                    warningCustom("Propose updated")
                 End If
+                form_load()
             ElseIf id_type = "2" Then 'realization
                 If id_pps = "1" Then 'new
-                    Dim q As String = "INSERT INTO `tb_additional_cost_pps`(id_type,created_by,created_date,update_by,update_date,note,vat_percent,id_report_status)
-VALUES('2','" & id_user & "',NOW(),'" & id_user & "',NOW(),'" & addSlashes(MENote.Text) & "','" & decimalSQL(Decimal.Parse(TEVatPercent.EditValue.ToString)) & "','1'); SELECT LAST_INSERT_ID(); "
+                    Dim q As String = "INSERT INTO `tb_additional_cost_pps`(id_type,id_comp,created_by,created_date,update_by,update_date,note,vat_percent,id_report_status)
+VALUES('2','" & SLEVendor.EditValue.ToString & "','" & id_user & "',NOW(),'" & id_user & "',NOW(),'" & addSlashes(MENote.Text) & "','" & decimalSQL(Decimal.Parse(TEVatPercent.EditValue.ToString)) & "','1'); SELECT LAST_INSERT_ID(); "
 
                     id_pps = execute_query(q, 0, True, "", "", "", "")
                     '
                     q = "CALL gen_number('" & id_pps & "','274');"
+                    execute_non_query(q, True, "", "", "", "")
                     'design
                     q = "INSERT INTO `tb_additional_cost_pps_design`(`id_additional_cost_pps`,`id_design`,`qty_order`,`qty_sample`,`ecop`) VALUES"
                     For i = 0 To GVDesignList.RowCount - 1
@@ -310,16 +327,17 @@ VALUES('2','" & id_user & "',NOW(),'" & id_user & "',NOW(),'" & addSlashes(MENot
                     execute_non_query(q, True, "", "", "", "")
                     'detail
                     q = "INSERT INTO `tb_additional_cost_pps_det`(`id_additional_cost_pps`,`description`,`qty`,`value`) VALUES"
-                    For i = 0 To GVDesignList.RowCount - 1
+                    For i = 0 To GVCostList.RowCount - 1
                         If Not i = 0 Then
                             q += ","
                         End If
-                        q += "('" & id_pps & "','" & addSlashes(GVDesignList.GetRowCellValue(i, "description").ToString) & "','" & decimalSQL(Decimal.Parse(GVDesignList.GetRowCellValue(i, "qty").ToString).ToString) & "','" & decimalSQL(Decimal.Parse(GVDesignList.GetRowCellValue(i, "value").ToString).ToString) & "')"
+                        q += "('" & id_pps & "','" & addSlashes(GVCostList.GetRowCellValue(i, "description").ToString) & "','" & decimalSQL(Decimal.Parse(GVCostList.GetRowCellValue(i, "qty").ToString).ToString) & "','" & decimalSQL(Decimal.Parse(GVCostList.GetRowCellValue(i, "value").ToString).ToString) & "')"
                     Next
                     execute_non_query(q, True, "", "", "", "")
+                    warningCustom("Propose created")
                 Else 'edit
-                    Dim q As String = "UPDATE `tb_additional_cost_pps` SET update_by='" & id_user & "',update_date=NOW(),note='" & addSlashes(MENote.Text) & "',vat_percent='" & decimalSQL(Decimal.Parse(TEVatPercent.EditValue.ToString)) & "' WHERE id_additional_cost_pps='" & id_pps & "'"
-                    id_pps = execute_query(q, 0, True, "", "", "", "")
+                    Dim q As String = "UPDATE `tb_additional_cost_pps` SET id_comp='" & SLEVendor.EditValue.ToString & "',update_by='" & id_user & "',update_date=NOW(),note='" & addSlashes(MENote.Text) & "',vat_percent='" & decimalSQL(Decimal.Parse(TEVatPercent.EditValue.ToString)) & "' WHERE id_additional_cost_pps='" & id_pps & "'"
+                    execute_non_query(q, True, "", "", "", "")
                     'design
                     q = "DELETE FROM tb_additional_cost_pps_design WHERE id_additional_cost_pps='" & id_pps & "'"
                     execute_non_query(q, True, "", "", "", "")
@@ -335,14 +353,16 @@ VALUES('2','" & id_user & "',NOW(),'" & id_user & "',NOW(),'" & addSlashes(MENot
                     q = "DELETE FROM tb_additional_cost_pps_det WHERE id_additional_cost_pps='" & id_pps & "'"
                     execute_non_query(q, True, "", "", "", "")
                     q = "INSERT INTO `tb_additional_cost_pps_det`(`id_additional_cost_pps`,`description`,`qty`,`value`) VALUES"
-                    For i = 0 To GVDesignList.RowCount - 1
+                    For i = 0 To GVCostList.RowCount - 1
                         If Not i = 0 Then
                             q += ","
                         End If
                         q += "('" & id_pps & "','" & addSlashes(GVCostList.GetRowCellValue(i, "description").ToString) & "','" & decimalSQL(Decimal.Parse(GVCostList.GetRowCellValue(i, "qty").ToString).ToString) & "','" & decimalSQL(Decimal.Parse(GVCostList.GetRowCellValue(i, "value").ToString).ToString) & "')"
                     Next
                     execute_non_query(q, True, "", "", "", "")
+                    warningCustom("Propose updated")
                 End If
+                form_load()
             End If
         End If
     End Sub
@@ -365,6 +385,8 @@ VALUES('2','" & id_user & "',NOW(),'" & id_user & "',NOW(),'" & addSlashes(MENot
 
     Private Sub BtnPrint_Click(sender As Object, e As EventArgs) Handles BtnPrint.Click
         Dim report As ReportAdditionalCost = New ReportAdditionalCost
+        '
+        Dim q As String = "SELECT '" & SLEVendor.Text.ToString & "' AS comp_name,'','',''"
         '
         report.data_design = GCDesignList.DataSource
         report.data_cost = GCCostList.DataSource

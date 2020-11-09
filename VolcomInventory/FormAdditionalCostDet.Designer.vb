@@ -52,6 +52,9 @@ Partial Class FormAdditionalCostDet
         Me.BtnCancel = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnSave = New DevExpress.XtraEditors.SimpleButton()
         Me.PanelControl3 = New DevExpress.XtraEditors.PanelControl()
+        Me.SLEVendor = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.SearchLookUpEdit1View = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.LabelControl10 = New DevExpress.XtraEditors.LabelControl()
         Me.TECreatedBy = New DevExpress.XtraEditors.TextEdit()
         Me.TENumber = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
@@ -74,6 +77,9 @@ Partial Class FormAdditionalCostDet
         Me.XtraTabControl1 = New DevExpress.XtraTab.XtraTabControl()
         Me.XTPDesignList = New DevExpress.XtraTab.XtraTabPage()
         Me.XTPCostList = New DevExpress.XtraTab.XtraTabPage()
+        Me.GridColumn13 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn14 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn15 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GroupControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl1.SuspendLayout()
         CType(Me.GCDesignList, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -89,6 +95,8 @@ Partial Class FormAdditionalCostDet
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl3.SuspendLayout()
+        CType(Me.SLEVendor.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TECreatedBy.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TENumber.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl4, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -113,7 +121,7 @@ Partial Class FormAdditionalCostDet
         Me.GroupControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupControl1.Location = New System.Drawing.Point(0, 0)
         Me.GroupControl1.Name = "GroupControl1"
-        Me.GroupControl1.Size = New System.Drawing.Size(989, 338)
+        Me.GroupControl1.Size = New System.Drawing.Size(989, 362)
         Me.GroupControl1.TabIndex = 0
         Me.GroupControl1.Text = "Design List"
         '
@@ -123,7 +131,7 @@ Partial Class FormAdditionalCostDet
         Me.GCDesignList.Location = New System.Drawing.Point(2, 20)
         Me.GCDesignList.MainView = Me.GVDesignList
         Me.GCDesignList.Name = "GCDesignList"
-        Me.GCDesignList.Size = New System.Drawing.Size(985, 290)
+        Me.GCDesignList.Size = New System.Drawing.Size(985, 314)
         Me.GCDesignList.TabIndex = 1
         Me.GCDesignList.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVDesignList})
         '
@@ -245,7 +253,7 @@ Partial Class FormAdditionalCostDet
         'BPickArticle
         '
         Me.BPickArticle.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.BPickArticle.Location = New System.Drawing.Point(2, 310)
+        Me.BPickArticle.Location = New System.Drawing.Point(2, 334)
         Me.BPickArticle.Name = "BPickArticle"
         Me.BPickArticle.Size = New System.Drawing.Size(985, 26)
         Me.BPickArticle.TabIndex = 0
@@ -258,7 +266,7 @@ Partial Class FormAdditionalCostDet
         Me.GroupControl2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupControl2.Location = New System.Drawing.Point(0, 0)
         Me.GroupControl2.Name = "GroupControl2"
-        Me.GroupControl2.Size = New System.Drawing.Size(989, 338)
+        Me.GroupControl2.Size = New System.Drawing.Size(989, 362)
         Me.GroupControl2.TabIndex = 1
         Me.GroupControl2.Text = "Cost List"
         '
@@ -268,7 +276,7 @@ Partial Class FormAdditionalCostDet
         Me.GCCostList.Location = New System.Drawing.Point(2, 61)
         Me.GCCostList.MainView = Me.GVCostList
         Me.GCCostList.Name = "GCCostList"
-        Me.GCCostList.Size = New System.Drawing.Size(985, 275)
+        Me.GCCostList.Size = New System.Drawing.Size(985, 299)
         Me.GCCostList.TabIndex = 1
         Me.GCCostList.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVCostList})
         '
@@ -470,6 +478,8 @@ Partial Class FormAdditionalCostDet
         '
         'PanelControl3
         '
+        Me.PanelControl3.Controls.Add(Me.SLEVendor)
+        Me.PanelControl3.Controls.Add(Me.LabelControl10)
         Me.PanelControl3.Controls.Add(Me.TECreatedBy)
         Me.PanelControl3.Controls.Add(Me.TENumber)
         Me.PanelControl3.Controls.Add(Me.LabelControl2)
@@ -477,13 +487,38 @@ Partial Class FormAdditionalCostDet
         Me.PanelControl3.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelControl3.Location = New System.Drawing.Point(0, 0)
         Me.PanelControl3.Name = "PanelControl3"
-        Me.PanelControl3.Size = New System.Drawing.Size(995, 67)
+        Me.PanelControl3.Size = New System.Drawing.Size(995, 43)
         Me.PanelControl3.TabIndex = 3
+        '
+        'SLEVendor
+        '
+        Me.SLEVendor.Location = New System.Drawing.Point(290, 11)
+        Me.SLEVendor.Name = "SLEVendor"
+        Me.SLEVendor.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLEVendor.Properties.View = Me.SearchLookUpEdit1View
+        Me.SLEVendor.Size = New System.Drawing.Size(313, 20)
+        Me.SLEVendor.TabIndex = 5
+        '
+        'SearchLookUpEdit1View
+        '
+        Me.SearchLookUpEdit1View.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn13, Me.GridColumn14, Me.GridColumn15})
+        Me.SearchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.SearchLookUpEdit1View.Name = "SearchLookUpEdit1View"
+        Me.SearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.SearchLookUpEdit1View.OptionsView.ShowGroupPanel = False
+        '
+        'LabelControl10
+        '
+        Me.LabelControl10.Location = New System.Drawing.Point(250, 14)
+        Me.LabelControl10.Name = "LabelControl10"
+        Me.LabelControl10.Size = New System.Drawing.Size(34, 13)
+        Me.LabelControl10.TabIndex = 4
+        Me.LabelControl10.Text = "Vendor"
         '
         'TECreatedBy
         '
         Me.TECreatedBy.Enabled = False
-        Me.TECreatedBy.Location = New System.Drawing.Point(72, 37)
+        Me.TECreatedBy.Location = New System.Drawing.Point(669, 11)
         Me.TECreatedBy.Name = "TECreatedBy"
         Me.TECreatedBy.Size = New System.Drawing.Size(256, 20)
         Me.TECreatedBy.TabIndex = 3
@@ -498,7 +533,7 @@ Partial Class FormAdditionalCostDet
         '
         'LabelControl2
         '
-        Me.LabelControl2.Location = New System.Drawing.Point(12, 40)
+        Me.LabelControl2.Location = New System.Drawing.Point(609, 14)
         Me.LabelControl2.Name = "LabelControl2"
         Me.LabelControl2.Size = New System.Drawing.Size(54, 13)
         Me.LabelControl2.TabIndex = 1
@@ -660,10 +695,10 @@ Partial Class FormAdditionalCostDet
         '
         Me.XtraTabControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.XtraTabControl1.HeaderLocation = DevExpress.XtraTab.TabHeaderLocation.Bottom
-        Me.XtraTabControl1.Location = New System.Drawing.Point(0, 67)
+        Me.XtraTabControl1.Location = New System.Drawing.Point(0, 43)
         Me.XtraTabControl1.Name = "XtraTabControl1"
         Me.XtraTabControl1.SelectedTabPage = Me.XTPDesignList
-        Me.XtraTabControl1.Size = New System.Drawing.Size(995, 366)
+        Me.XtraTabControl1.Size = New System.Drawing.Size(995, 390)
         Me.XtraTabControl1.TabIndex = 5
         Me.XtraTabControl1.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPDesignList, Me.XTPCostList})
         '
@@ -671,15 +706,39 @@ Partial Class FormAdditionalCostDet
         '
         Me.XTPDesignList.Controls.Add(Me.GroupControl1)
         Me.XTPDesignList.Name = "XTPDesignList"
-        Me.XTPDesignList.Size = New System.Drawing.Size(989, 338)
+        Me.XTPDesignList.Size = New System.Drawing.Size(989, 362)
         Me.XTPDesignList.Text = "Design List"
         '
         'XTPCostList
         '
         Me.XTPCostList.Controls.Add(Me.GroupControl2)
         Me.XTPCostList.Name = "XTPCostList"
-        Me.XTPCostList.Size = New System.Drawing.Size(989, 338)
+        Me.XTPCostList.Size = New System.Drawing.Size(989, 362)
         Me.XTPCostList.Text = "Breakdown Cost"
+        '
+        'GridColumn13
+        '
+        Me.GridColumn13.Caption = "ID Comp"
+        Me.GridColumn13.FieldName = "id_comp"
+        Me.GridColumn13.Name = "GridColumn13"
+        '
+        'GridColumn14
+        '
+        Me.GridColumn14.Caption = "Number"
+        Me.GridColumn14.FieldName = "comp_number"
+        Me.GridColumn14.Name = "GridColumn14"
+        Me.GridColumn14.Visible = True
+        Me.GridColumn14.VisibleIndex = 0
+        Me.GridColumn14.Width = 233
+        '
+        'GridColumn15
+        '
+        Me.GridColumn15.Caption = "Name"
+        Me.GridColumn15.FieldName = "comp_name"
+        Me.GridColumn15.Name = "GridColumn15"
+        Me.GridColumn15.Visible = True
+        Me.GridColumn15.VisibleIndex = 1
+        Me.GridColumn15.Width = 1399
         '
         'FormAdditionalCostDet
         '
@@ -712,6 +771,8 @@ Partial Class FormAdditionalCostDet
         CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl3.ResumeLayout(False)
         Me.PanelControl3.PerformLayout()
+        CType(Me.SLEVendor.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TECreatedBy.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TENumber.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl4, System.ComponentModel.ISupportInitialize).EndInit()
@@ -785,4 +846,10 @@ Partial Class FormAdditionalCostDet
     Friend WithEvents XTPCostList As DevExpress.XtraTab.XtraTabPage
     Friend WithEvents TETotQty As DevExpress.XtraEditors.TextEdit
     Friend WithEvents LabelControl9 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents LabelControl10 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents SLEVendor As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents SearchLookUpEdit1View As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn13 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn14 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn15 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

@@ -364,6 +364,13 @@ VALUES('2','" & id_user & "',NOW(),'" & id_user & "',NOW(),'" & addSlashes(MENot
     End Sub
 
     Private Sub BtnPrint_Click(sender As Object, e As EventArgs) Handles BtnPrint.Click
+        Dim report As ReportAdditionalCost = New ReportAdditionalCost
+        '
+        report.data_design = GCDesignList.DataSource
+        report.data_cost = GCCostList.DataSource
+        '
+        Dim tool_detail As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(report)
 
+        tool_detail.ShowPreview()
     End Sub
 End Class

@@ -185,7 +185,7 @@ ORDER BY po.`id_prod_order` ASC"
     End Sub
 
     Private Sub BPrintKO_Click(sender As Object, e As EventArgs) Handles BPrintKO.Click
-        Dim query As String = "SELECT kot.upper_part,kot.bottom_part,c.phone,c.fax,ko.number,ko.vat,ko.id_ko_template,too.term_production,cc.`contact_person`,c.`comp_number`,c.`comp_name`,c.`address_primary`,DATE_FORMAT(ko.`date_created`,'%d %M %Y') AS date_created,LPAD(ko.`revision`,2,'0') AS revision
+        Dim query As String = "SELECT ko.is_purc_mat,kot.upper_part,kot.bottom_part,c.phone,c.fax,ko.number,ko.vat,ko.id_ko_template,too.term_production,cc.`contact_person`,c.`comp_number`,c.`comp_name`,c.`address_primary`,DATE_FORMAT(ko.`date_created`,'%d %M %Y') AS date_created,LPAD(ko.`revision`,2,'0') AS revision
 ,emp_created.employee_name AS emp_name_created,emp_created.`employee_position` AS created_pos
 ,emp_purc_mngr.employee_name AS emp_name_purc_mngr,emp_purc_mngr.`employee_position` AS purc_mngr_pos
 ,emp_fc.employee_name AS emp_name_fc,emp_fc.`employee_position` AS fc_pos
@@ -205,6 +205,7 @@ INNER JOIN tb_m_employee emp_vice ON emp_vice.`id_employee`=ko.`id_emp_vice_dire
 WHERE id_prod_order_ko='" & SLERevision.EditValue.ToString & "'"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         ReportProductionKO.dt_head = data
+        ReportProductionKO.is_po_mat = data.Rows(0)("is_purc_mat").ToString
         '
         ReportProductionKO.dt_det = GCProd.DataSource
 

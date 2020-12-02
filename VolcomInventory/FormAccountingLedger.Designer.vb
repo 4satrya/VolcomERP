@@ -69,8 +69,9 @@ Partial Class FormAccountingLedger
         Me.GridColumn9 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn21 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumncomp_group = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.XtraScrollableControl1 = New DevExpress.XtraEditors.XtraScrollableControl()
         Me.GridColumn29 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.XtraScrollableControl1 = New DevExpress.XtraEditors.XtraScrollableControl()
+        Me.BExportRaw = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.SLEUnit.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SLUETo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -295,7 +296,7 @@ Partial Class FormAccountingLedger
         Me.GCAccountingLedger.Location = New System.Drawing.Point(0, 69)
         Me.GCAccountingLedger.MainView = Me.GVAccountingLedger
         Me.GCAccountingLedger.Name = "GCAccountingLedger"
-        Me.GCAccountingLedger.Size = New System.Drawing.Size(1128, 660)
+        Me.GCAccountingLedger.Size = New System.Drawing.Size(1259, 660)
         Me.GCAccountingLedger.TabIndex = 1
         Me.GCAccountingLedger.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVAccountingLedger})
         '
@@ -529,8 +530,17 @@ Partial Class FormAccountingLedger
         Me.GridColumncomp_group.Visible = True
         Me.GridColumncomp_group.VisibleIndex = 3
         '
+        'GridColumn29
+        '
+        Me.GridColumn29.Caption = "Vendor"
+        Me.GridColumn29.FieldName = "vendor_name"
+        Me.GridColumn29.Name = "GridColumn29"
+        Me.GridColumn29.Visible = True
+        Me.GridColumn29.VisibleIndex = 4
+        '
         'XtraScrollableControl1
         '
+        Me.XtraScrollableControl1.Controls.Add(Me.BExportRaw)
         Me.XtraScrollableControl1.Controls.Add(Me.SLEUnit)
         Me.XtraScrollableControl1.Controls.Add(Me.LabelControl5)
         Me.XtraScrollableControl1.Controls.Add(Me.SLUEFrom)
@@ -546,22 +556,22 @@ Partial Class FormAccountingLedger
         Me.XtraScrollableControl1.Location = New System.Drawing.Point(0, 0)
         Me.XtraScrollableControl1.Name = "XtraScrollableControl1"
         Me.XtraScrollableControl1.Padding = New System.Windows.Forms.Padding(5)
-        Me.XtraScrollableControl1.Size = New System.Drawing.Size(1128, 69)
+        Me.XtraScrollableControl1.Size = New System.Drawing.Size(1259, 69)
         Me.XtraScrollableControl1.TabIndex = 4
         '
-        'GridColumn29
+        'BExportRaw
         '
-        Me.GridColumn29.Caption = "Vendor"
-        Me.GridColumn29.FieldName = "vendor_name"
-        Me.GridColumn29.Name = "GridColumn29"
-        Me.GridColumn29.Visible = True
-        Me.GridColumn29.VisibleIndex = 4
+        Me.BExportRaw.Location = New System.Drawing.Point(1106, 11)
+        Me.BExportRaw.Name = "BExportRaw"
+        Me.BExportRaw.Size = New System.Drawing.Size(103, 23)
+        Me.BExportRaw.TabIndex = 11
+        Me.BExportRaw.Text = "Export to Excel"
         '
         'FormAccountingLedger
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1128, 729)
+        Me.ClientSize = New System.Drawing.Size(1259, 729)
         Me.Controls.Add(Me.GCAccountingLedger)
         Me.Controls.Add(Me.XtraScrollableControl1)
         Me.MaximizeBox = False
@@ -638,4 +648,5 @@ Partial Class FormAccountingLedger
     Friend WithEvents XtraScrollableControl1 As DevExpress.XtraEditors.XtraScrollableControl
     Friend WithEvents GridColumn28 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn29 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents BExportRaw As DevExpress.XtraEditors.SimpleButton
 End Class

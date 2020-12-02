@@ -115,7 +115,7 @@
             WHERE t.id_sales_return_qc=" + id_report_par + "
             AND d.is_old_design=2 
             AND t.is_use_unique_code=1 "
-            execute_non_query(quniq, True, "", "", "", "")
+            execute_non_query_long(quniq, True, "", "", "", "")
         ElseIf id_status_reportx_par = "5" Then
             Dim quniq As String = "DELETE FROM tb_m_unique_code WHERE id_report=" + id_report_par + " AND report_mark_type=49 AND id_report_status=5;
             INSERT INTO tb_m_unique_code(`id_comp`,`id_wh_drawer`,`id_product`, `id_pl_prod_order_rec_det_unique`, `id_sales_return_qc_det_counting`,`id_type`,`unique_code`,
@@ -135,7 +135,7 @@
             WHERE t.id_sales_return_qc=" + id_report_par + "
             AND d.is_old_design=2 
             AND t.is_use_unique_code=1 "
-            execute_non_query(quniq, True, "", "", "", "")
+            execute_non_query_long(quniq, True, "", "", "", "")
         End If
 
         Dim query As String = String.Format("UPDATE tb_sales_return_qc SET id_report_status='{0}', last_update = NOW(), last_update_by=" + id_user + " WHERE id_sales_return_qc ='{1}'", id_status_reportx_par, id_report_par)

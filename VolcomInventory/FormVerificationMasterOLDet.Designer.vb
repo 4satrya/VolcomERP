@@ -21,6 +21,13 @@ Partial Class FormVerificationMasterOLDet
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormVerificationMasterOLDet))
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
+        Me.LabelControl5 = New DevExpress.XtraEditors.LabelControl()
+        Me.TEFileName = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
+        Me.SLUEDivision = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.SLUEOnlineStore = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.SearchLookUpEdit1View = New DevExpress.XtraGrid.Views.Grid.GridView()
@@ -36,15 +43,15 @@ Partial Class FormVerificationMasterOLDet
         Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
         Me.PanelControl3 = New DevExpress.XtraEditors.PanelControl()
         Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
-        Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
-        Me.SLUEDivision = New DevExpress.XtraEditors.SearchLookUpEdit()
-        Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.TEFileName = New DevExpress.XtraEditors.TextEdit()
-        Me.LabelControl5 = New DevExpress.XtraEditors.LabelControl()
+        Me.SLUETemplate = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GridView2 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
+        CType(Me.TEFileName.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SLUEDivision.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SLUEOnlineStore.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GCVerification, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -57,13 +64,13 @@ Partial Class FormVerificationMasterOLDet
         Me.PanelControl2.SuspendLayout()
         CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl3.SuspendLayout()
-        CType(Me.SLUEDivision.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TEFileName.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SLUETemplate.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControl1
         '
+        Me.PanelControl1.Controls.Add(Me.SLUETemplate)
         Me.PanelControl1.Controls.Add(Me.LabelControl5)
         Me.PanelControl1.Controls.Add(Me.TEFileName)
         Me.PanelControl1.Controls.Add(Me.LabelControl4)
@@ -76,6 +83,60 @@ Partial Class FormVerificationMasterOLDet
         Me.PanelControl1.Name = "PanelControl1"
         Me.PanelControl1.Size = New System.Drawing.Size(784, 101)
         Me.PanelControl1.TabIndex = 0
+        '
+        'LabelControl5
+        '
+        Me.LabelControl5.Location = New System.Drawing.Point(17, 70)
+        Me.LabelControl5.Name = "LabelControl5"
+        Me.LabelControl5.Size = New System.Drawing.Size(46, 13)
+        Me.LabelControl5.TabIndex = 5
+        Me.LabelControl5.Text = "File Name"
+        '
+        'TEFileName
+        '
+        Me.TEFileName.Location = New System.Drawing.Point(87, 67)
+        Me.TEFileName.Name = "TEFileName"
+        Me.TEFileName.Size = New System.Drawing.Size(276, 20)
+        Me.TEFileName.TabIndex = 4
+        '
+        'LabelControl4
+        '
+        Me.LabelControl4.Location = New System.Drawing.Point(17, 44)
+        Me.LabelControl4.Name = "LabelControl4"
+        Me.LabelControl4.Size = New System.Drawing.Size(36, 13)
+        Me.LabelControl4.TabIndex = 2
+        Me.LabelControl4.Text = "Division"
+        '
+        'SLUEDivision
+        '
+        Me.SLUEDivision.Location = New System.Drawing.Point(87, 41)
+        Me.SLUEDivision.Name = "SLUEDivision"
+        Me.SLUEDivision.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLUEDivision.Properties.View = Me.GridView1
+        Me.SLUEDivision.Size = New System.Drawing.Size(276, 20)
+        Me.SLUEDivision.TabIndex = 3
+        '
+        'GridView1
+        '
+        Me.GridView1.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn3, Me.GridColumn4})
+        Me.GridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView1.Name = "GridView1"
+        Me.GridView1.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView1.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn3
+        '
+        Me.GridColumn3.Caption = "GridColumn1"
+        Me.GridColumn3.FieldName = "id_code_detail"
+        Me.GridColumn3.Name = "GridColumn3"
+        '
+        'GridColumn4
+        '
+        Me.GridColumn4.Caption = "Division"
+        Me.GridColumn4.FieldName = "display_name"
+        Me.GridColumn4.Name = "GridColumn4"
+        Me.GridColumn4.Visible = True
+        Me.GridColumn4.VisibleIndex = 0
         '
         'LabelControl1
         '
@@ -212,59 +273,37 @@ Partial Class FormVerificationMasterOLDet
         Me.LabelControl3.TabIndex = 1
         Me.LabelControl3.Text = "Data ERP"
         '
-        'LabelControl4
+        'SLUETemplate
         '
-        Me.LabelControl4.Location = New System.Drawing.Point(17, 44)
-        Me.LabelControl4.Name = "LabelControl4"
-        Me.LabelControl4.Size = New System.Drawing.Size(36, 13)
-        Me.LabelControl4.TabIndex = 2
-        Me.LabelControl4.Text = "Division"
+        Me.SLUETemplate.Location = New System.Drawing.Point(369, 15)
+        Me.SLUETemplate.Name = "SLUETemplate"
+        Me.SLUETemplate.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLUETemplate.Properties.View = Me.GridView2
+        Me.SLUETemplate.Size = New System.Drawing.Size(150, 20)
+        Me.SLUETemplate.TabIndex = 6
+        Me.SLUETemplate.Visible = False
         '
-        'SLUEDivision
+        'GridView2
         '
-        Me.SLUEDivision.Location = New System.Drawing.Point(87, 41)
-        Me.SLUEDivision.Name = "SLUEDivision"
-        Me.SLUEDivision.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.SLUEDivision.Properties.View = Me.GridView1
-        Me.SLUEDivision.Size = New System.Drawing.Size(276, 20)
-        Me.SLUEDivision.TabIndex = 3
+        Me.GridView2.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn5, Me.GridColumn6})
+        Me.GridView2.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView2.Name = "GridView2"
+        Me.GridView2.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView2.OptionsView.ShowGroupPanel = False
         '
-        'GridView1
+        'GridColumn5
         '
-        Me.GridView1.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn3, Me.GridColumn4})
-        Me.GridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
-        Me.GridView1.Name = "GridView1"
-        Me.GridView1.OptionsSelection.EnableAppearanceFocusedCell = False
-        Me.GridView1.OptionsView.ShowGroupPanel = False
+        Me.GridColumn5.Caption = "GridColumn1"
+        Me.GridColumn5.FieldName = "id_template"
+        Me.GridColumn5.Name = "GridColumn5"
         '
-        'GridColumn3
+        'GridColumn6
         '
-        Me.GridColumn3.Caption = "GridColumn1"
-        Me.GridColumn3.FieldName = "id_code_detail"
-        Me.GridColumn3.Name = "GridColumn3"
-        '
-        'GridColumn4
-        '
-        Me.GridColumn4.Caption = "Division"
-        Me.GridColumn4.FieldName = "display_name"
-        Me.GridColumn4.Name = "GridColumn4"
-        Me.GridColumn4.Visible = True
-        Me.GridColumn4.VisibleIndex = 0
-        '
-        'TEFileName
-        '
-        Me.TEFileName.Location = New System.Drawing.Point(87, 67)
-        Me.TEFileName.Name = "TEFileName"
-        Me.TEFileName.Size = New System.Drawing.Size(276, 20)
-        Me.TEFileName.TabIndex = 4
-        '
-        'LabelControl5
-        '
-        Me.LabelControl5.Location = New System.Drawing.Point(17, 70)
-        Me.LabelControl5.Name = "LabelControl5"
-        Me.LabelControl5.Size = New System.Drawing.Size(46, 13)
-        Me.LabelControl5.TabIndex = 5
-        Me.LabelControl5.Text = "File Name"
+        Me.GridColumn6.Caption = "Template"
+        Me.GridColumn6.FieldName = "template_name"
+        Me.GridColumn6.Name = "GridColumn6"
+        Me.GridColumn6.Visible = True
+        Me.GridColumn6.VisibleIndex = 0
         '
         'FormVerificationMasterOLDet
         '
@@ -281,6 +320,9 @@ Partial Class FormVerificationMasterOLDet
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl1.ResumeLayout(False)
         Me.PanelControl1.PerformLayout()
+        CType(Me.TEFileName.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SLUEDivision.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SLUEOnlineStore.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GCVerification, System.ComponentModel.ISupportInitialize).EndInit()
@@ -295,9 +337,8 @@ Partial Class FormVerificationMasterOLDet
         CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl3.ResumeLayout(False)
         Me.PanelControl3.PerformLayout()
-        CType(Me.SLUEDivision.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TEFileName.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SLUETemplate.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -325,4 +366,8 @@ Partial Class FormVerificationMasterOLDet
     Friend WithEvents GridView1 As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents GridColumn3 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn4 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents SLUETemplate As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents GridView2 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn5 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn6 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

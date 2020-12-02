@@ -151,7 +151,7 @@
                             GROUP BY rod.id_ol_store_ret_list
                         ) src ON src.id_ol_store_ret_list = main.id_ol_store_ret_list
                         SET main.id_ol_store_ret_stt=9;
-                        INSERT INTO tb_sales_order_det_status(id_sales_order_det, `status`, `status_date`, `input_status_date`, is_internal)
+                        INSERT IGNORE INTO tb_sales_order_det_status(id_sales_order_det, `status`, `status_date`, `input_status_date`, is_internal)
                         SELECT rd.id_sales_order_det, stt.ol_store_ret_stt, NOW(), NOW(),1
                         FROM tb_sales_return_det retdet  
                         INNER JOIN tb_sales_return_order_det d ON d.id_sales_return_order_det = retdet.id_sales_return_order_det
@@ -326,7 +326,7 @@
         INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact = ret.id_store_contact_from
         INNER JOIN tb_m_product prod ON prod.id_product = retd.id_product
         WHERE retd.id_sales_return=" + id_report_par + " "
-        execute_non_query(query, True, "", "", "", "")
+        execute_non_query_long(query, True, "", "", "", "")
     End Sub
 
     Public Sub cancellUnique(ByVal id_report_par As String)
@@ -346,7 +346,7 @@
         WHERE t.id_sales_return=" + id_report_par + "
         AND d.is_old_design=2 
         AND t.is_use_unique_code=1 "
-        execute_non_query(query, True, "", "", "", "")
+        execute_non_query_long(query, True, "", "", "", "")
     End Sub
 
     Public Sub completeUnique(ByVal id_report_par As String)
@@ -366,6 +366,6 @@
         WHERE t.id_sales_return=" + id_report_par + "
         AND d.is_old_design=2 
         AND t.is_use_unique_code=1 "
-        execute_non_query(query, True, "", "", "", "")
+        execute_non_query_long(query, True, "", "", "", "")
     End Sub
 End Class

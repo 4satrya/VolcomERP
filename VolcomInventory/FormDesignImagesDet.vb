@@ -22,7 +22,7 @@
         Dim is_valid As Boolean = True
 
         For i = 0 To data.Rows.Count - 1
-            If Not data.Rows(i)("status").ToString = "OK" Then
+            If Not data.Rows(i)("status").ToString = "OK" And Not data.Rows(i)("status").ToString.Contains("Warning") Then
                 is_valid = False
             End If
         Next
@@ -43,6 +43,8 @@
     Private Sub GVList_RowCellStyle(sender As Object, e As DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs) Handles GVList.RowCellStyle
         If GVList.GetRowCellValue(e.RowHandle, "status").ToString = "OK" Then
             e.Appearance.BackColor = Color.White
+        ElseIf GVList.GetRowCellValue(e.RowHandle, "status").ToString.Contains("Warning") Then
+            e.Appearance.BackColor = Color.LightYellow
         Else
             e.Appearance.BackColor = Color.LightPink
         End If
@@ -69,7 +71,26 @@
 
                     Dim file_stream As IO.FileStream = New IO.FileStream(GVList.GetRowCellValue(i, "file_name").ToString, IO.FileMode.Open)
 
-                    sftp.UploadFile(file_stream, cloud_image_path + "/" + IO.Path.GetFileName(GVList.GetRowCellValue(i, "file_name").ToString))
+                    Dim file_name As String = cloud_image_path + "/" + IO.Path.GetFileName(GVList.GetRowCellValue(i, "file_name").ToString)
+
+                    'history
+                    If GVList.GetRowCellValue(i, "status").ToString.Contains("Warning") Then
+                        Dim log_number As String = execute_query("SELECT (COUNT(*) + 1) AS log_number FROM tb_design_images_log WHERE id_design_images = " + GVList.GetRowCellValue(i, "id_design_images").ToString, 0, True, "", "", "", "")
+
+                        Dim log_file As String = IO.Path.GetFileName(GVList.GetRowCellValue(i, "file_name").ToString).Replace(".", "(" + log_number + ").")
+
+                        Dim log_name As String = cloud_image_path + "/" + log_file
+
+                        sftp.RenameFile(file_name, log_name)
+
+                        execute_non_query("
+                            INSERT INTO tb_design_images_log (id_design_images, file_name, created_at, created_by) 
+                            SELECT " + GVList.GetRowCellValue(i, "id_design_images").ToString + " AS id_design_images, '" + log_file + "' AS file_name, created_at, created_by
+                            FROM tb_design_images WHERE id_design_images = " + GVList.GetRowCellValue(i, "id_design_images").ToString + "
+                        ", True, "", "", "", "")
+                    End If
+
+                    sftp.UploadFile(file_stream, file_name)
 
                     file_stream.Close()
                     file_stream.Dispose()
@@ -82,7 +103,11 @@
                     dv_design.RowFilter = "design_code = '" + array_name(1) + "'"
 
                     'store database
-                    execute_non_query("INSERT INTO tb_design_images (id_design, store, file_name, sort, created_at, created_by) VALUES (" + dv_design(0)("id_design").ToString + ", '" + array_name(0) + "', '" + IO.Path.GetFileName(GVList.GetRowCellValue(i, "file_name").ToString) + "', " + array_name(2) + ", NOW(), " + id_user + ")", True, "", "", "", "")
+                    If GVList.GetRowCellValue(i, "status").ToString.Contains("Warning") Then
+                        execute_non_query("UPDATE tb_design_images SET created_at = NOW(), created_by = " + id_user + " WHERE id_design_images = " + GVList.GetRowCellValue(i, "id_design_images").ToString, True, "", "", "", "")
+                    Else
+                        execute_non_query("INSERT INTO tb_design_images (id_design, store, file_name, sort, created_at, created_by) VALUES (" + dv_design(0)("id_design").ToString + ", '" + array_name(0) + "', '" + IO.Path.GetFileName(GVList.GetRowCellValue(i, "file_name").ToString) + "', " + array_name(2) + ", NOW(), " + id_user + ")", True, "", "", "", "")
+                    End If
 
                     last_id_design = dv_design(0)("id_design").ToString
                 Next
@@ -102,14 +127,14 @@
     End Sub
 
     Private Sub SBBrowseFolder_Click(sender As Object, e As EventArgs) Handles SBBrowseFolder.Click
-        Dim browse As FolderBrowserDialog = New FolderBrowserDialog
+        Dim browse As Microsoft.WindowsAPICodePack.Dialogs.CommonOpenFileDialog = New Microsoft.WindowsAPICodePack.Dialogs.CommonOpenFileDialog
 
-        browse.ShowDialog()
+        browse.IsFolderPicker = True
 
-        If Not browse.SelectedPath = "" Then
+        If browse.ShowDialog() = Microsoft.WindowsAPICodePack.Dialogs.CommonFileDialogResult.Ok Then
             FormMain.SplashScreenManager1.ShowWaitForm()
 
-            Dim data_validation As DataTable = FormDesignImages.get_validation(browse.SelectedPath)
+            Dim data_validation As DataTable = FormDesignImages.get_validation(browse.FileName)
 
             FormMain.SplashScreenManager1.CloseWaitForm()
 

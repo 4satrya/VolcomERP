@@ -108,7 +108,7 @@ rate_management,prod_order_cop_kurs_mng,prod_order_cop_mng,prod_order_cop_mng_ad
                 'final
                 BPrintCOPMan.Visible = True
                 '
-                TEUnitPrice.EditValue = data.Rows(0)("design_cop") - data.Rows(0)("design_cop_addcost")
+                TEUnitPrice.EditValue = data.Rows(0)("final_cop_value") - data.Rows(0)("design_cop_addcost")
 
                 If data.Rows(0)("id_cop_status").ToString = "1" And data.Rows(0)("design_cop_addcost") <= 0 And data.Rows(0)("prod_order_cop_mng_addcost") > 0 Then
                     TEAddCost.EditValue = data.Rows(0)("prod_order_cop_mng_addcost")
@@ -344,7 +344,7 @@ rate_management,prod_order_cop_kurs_mng,prod_order_cop_mng,prod_order_cop_mng_ad
                     confirm = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure want to finalize this COP ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
                     If confirm = Windows.Forms.DialogResult.Yes Then
                         'final COP
-                        Dim query As String = String.Format("UPDATE tb_m_design SET prod_order_cop_qty='{0}',prod_order_cop_last_upd=NOW(), design_cop='{1}',design_cop_addcost='{3}',`final_cop_rate_cat`='{4}',`final_cop_kurs`='{5}',`final_cop_value`='{6}',`final_cop_mng_kurs`='{7}',`final_cop_mng_value`='{8}',final_is_approve=2 WHERE id_design='{2}'", decimalSQL(TEQty.EditValue.ToString), decimalSQL((TEUnitPrice.EditValue + TEAddCost.EditValue).ToString), id_design, decimalSQL(TEAddCost.EditValue.ToString), SLECurrentBOM.EditValue.ToString, decimalSQL(TEKursCurrent.EditValue.ToString), decimalSQL((TECOPCurrent.EditValue + TEAddCost.EditValue).ToString), decimalSQL(TEKursMan.EditValue.ToString), decimalSQL((TECOPMan.EditValue + TEAddCost.EditValue).ToString))
+                        Dim query As String = String.Format("UPDATE tb_m_design SET prod_order_cop_qty='{0}',prod_order_cop_last_upd=NOW(),`design_cop_addcost`='{3}',`final_cop_rate_cat`='{4}',`final_cop_kurs`='{5}',`final_cop_value`='{6}',`final_cop_mng_kurs`='{7}',`final_cop_mng_value`='{8}',final_is_approve=2 WHERE id_design='{2}'", decimalSQL(TEQty.EditValue.ToString), decimalSQL((TEUnitPrice.EditValue + TEAddCost.EditValue).ToString), id_design, decimalSQL(TEAddCost.EditValue.ToString), SLECurrentBOM.EditValue.ToString, decimalSQL(TEKursCurrent.EditValue.ToString), decimalSQL((TECOPCurrent.EditValue + TEAddCost.EditValue).ToString), decimalSQL(TEKursMan.EditValue.ToString), decimalSQL((TECOPMan.EditValue + TEAddCost.EditValue).ToString))
                         execute_non_query(query, True, "", "", "", "")
                         'add pre final juga jika kosong
                         query = String.Format("UPDATE tb_m_design SET prod_order_cop_total_man='{0}',prod_order_cop_kurs_mng='{1}',prod_order_cop_mng='{2}',prod_order_cop_mng_addcost='{4}',`pp_cop_rate_cat`='{5}',`pp_cop_kurs`='{6}',`pp_cop_value`='{7}',`pp_cop_mng_kurs`='{8}',`pp_cop_mng_value`='{9}',pp_is_approve=2 WHERE id_design='{3}' AND (ISNULL(prod_order_cop_mng) OR prod_order_cop_mng=0 OR pp_cop_value=0)", decimalSQL(TETotal.EditValue.ToString), decimalSQL(TEKursMan.EditValue.ToString), decimalSQL((TEUnitPrice.EditValue + TEAddCost.EditValue).ToString), id_design, decimalSQL(TEAddCost.EditValue.ToString), SLECurrentBOM.EditValue.ToString, decimalSQL(TEKursCurrent.EditValue.ToString), decimalSQL((TECOPCurrent.EditValue + TEAddCost.EditValue).ToString), decimalSQL(TEKursMan.EditValue.ToString), decimalSQL((TECOPMan.EditValue + TEAddCost.EditValue).ToString))
@@ -666,7 +666,7 @@ WHERE `id_design`='" & id_design & "' "
                 End Try
             Else
                 'final
-                Dim query As String = "UPDATE tb_m_design SET id_cop_status=2,pp_is_approve='1',pp_is_approve_date=NOW(),pp_approve_by='" & id_user & "',final_is_approve='1',final_is_approve_date=NOW(),final_approve_by='" & id_user & "' WHERE id_design='" & id_design & "'"
+                Dim query As String = "UPDATE tb_m_design SET id_cop_status=2,pp_is_approve='1',pp_is_approve_date=NOW(),pp_approve_by='" & id_user & "',final_is_approve='1',final_is_approve_date=NOW(),final_approve_by='" & id_user & "',design_cop='" & decimalSQL((TEUnitPrice.EditValue + TEAddCost.EditValue).ToString) & "' WHERE id_design='" & id_design & "'"
                 execute_non_query(query, True, "", "", "", "")
                 '
                 Try

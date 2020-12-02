@@ -140,6 +140,8 @@
 
         Dim employee_name As String = "'" + addSlashes(TEEmployee.EditValue.ToString) + "'"
         Dim employee_position As String = "'" + addSlashes(TEPosition.EditValue.ToString) + "'"
+        Dim employee_code As String = "'" + addSlashes(TEEmployeeCode.EditValue.ToString) + "'"
+        Dim employee_ktp As String = "'" + addSlashes(TEKTP.EditValue.ToString) + "'"
         Dim address_primary As String = "'" + addSlashes(TEAddress.EditValue.ToString) + "'"
         Dim number As String = "'" + TENumberFront.Text + TENumberBack.EditValue.ToString + "'"
 
@@ -194,7 +196,7 @@
         Dim created_at As String = "NOW()"
         Dim created_by As String = id_employee_user
 
-        Dim query As String = "INSERT INTO tb_emp_contract (id_contract_type, id_departement, id_departement_sub, employee_name, employee_position, address_primary, number, start_period, end_period, basic_salary, allow_job, allow_meal, allow_trans, allow_house, allow_car, created_at, created_by) VALUES (" + id_contract_type + ", " + id_departement + ", " + id_departement_sub + ", " + employee_name + ", " + employee_position + ", " + address_primary + ", " + number + ", " + start_period + ", " + end_period + ", " + basic_salary + ", " + allow_job + ", " + allow_meal + ", " + allow_trans + ", " + allow_house + ", " + allow_car + ", " + created_at + ", " + created_by + "); SELECT LAST_INSERT_ID();"
+        Dim query As String = "INSERT INTO tb_emp_contract (id_contract_type, id_departement, id_departement_sub, employee_name, employee_position, employee_code, employee_ktp, address_primary, number, start_period, end_period, basic_salary, allow_job, allow_meal, allow_trans, allow_house, allow_car, created_at, created_by) VALUES (" + id_contract_type + ", " + id_departement + ", " + id_departement_sub + ", " + employee_name + ", " + employee_position + ", " + employee_code + ", " + employee_ktp + ", " + address_primary + ", " + number + ", " + start_period + ", " + end_period + ", " + basic_salary + ", " + allow_job + ", " + allow_meal + ", " + allow_trans + ", " + allow_house + ", " + allow_car + ", " + created_at + ", " + created_by + "); SELECT LAST_INSERT_ID();"
 
         Dim id_emp_contract As String = execute_query(query, 0, True, "", "", "", "")
 
@@ -219,8 +221,8 @@
         Next
 
         If is_dw Then
-            PCContract.Height = 175
-            Height = 380
+            PCContract.Height = 215
+            Height = 425
 
             LabelControl9.Text = "Gaji Harian"
 
@@ -237,8 +239,8 @@
             LabelControl14.Visible = False
             LabelControl15.Visible = False
         Else
-            PCContract.Height = 330
-            Height = 535
+            PCContract.Height = 380
+            Height = 585
 
             LabelControl9.Text = "Gaji Pokok"
 

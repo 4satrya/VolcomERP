@@ -126,7 +126,8 @@
             SBPrint.Visible = True
 
             SBClose.Location = New Point(686, 15)
-            SBPrint.Location = New Point(594, 15)
+            SBAttachment.Location = New Point(594, 15)
+            SBPrint.Location = New Point(502, 15)
         End If
     End Sub
 
@@ -263,5 +264,17 @@
 
         Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
         Tool.ShowPreviewDialog()
+    End Sub
+
+    Private Sub SBAttachment_Click(sender As Object, e As EventArgs) Handles SBAttachment.Click
+        Cursor = Cursors.WaitCursor
+
+        FormDocumentUpload.is_no_delete = "1"
+        FormDocumentUpload.id_report = If(change_type = "close", id_close_receiving, id_receive_date)
+        FormDocumentUpload.report_mark_type = If(change_type = "close", "259", "260")
+
+        FormDocumentUpload.ShowDialog()
+
+        Cursor = Cursors.Default
     End Sub
 End Class

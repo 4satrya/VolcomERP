@@ -413,6 +413,8 @@
         '
         load_comment()
 
+        TEPrimaryName.EditValue = ""
+
         'permission condition
         If id_pop_up = "-1" Or id_pop_up = "2" Or id_pop_up = "5" Or id_pop_up = "4" Then
             XTPDesign.PageVisible = True
@@ -1588,6 +1590,7 @@
 
         'validate
         EP_TE_cant_blank(EPMasterDesign, TEName)
+        EP_TE_cant_blank(EPMasterDesign, TEPrimaryName)
         EP_TE_cant_blank(EPMasterDesign, TxtFabrication)
         EP_ME_cant_blank(EPMasterDesign, MEDetail)
         If id_pop_up = "-1" Then
@@ -3303,5 +3306,9 @@
 
     Private Sub SBFabricationBrowse_Click(sender As Object, e As EventArgs) Handles SBFabricationBrowse.Click
         FormMasterDesignFabricationLookup.ShowDialog()
+    End Sub
+
+    Private Sub TEPrimaryName_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles TEPrimaryName.Validating
+        EP_TE_cant_blank(EPMasterDesign, TEPrimaryName)
     End Sub
 End Class

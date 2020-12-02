@@ -25,6 +25,11 @@ Partial Class FormEmployeeContractDet
         Me.Label3 = New System.Windows.Forms.Label()
         Me.SLUEContractType = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.TEName = New DevExpress.XtraEditors.TextEdit()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.TENumberBack = New DevExpress.XtraEditors.TextEdit()
@@ -33,6 +38,8 @@ Partial Class FormEmployeeContractDet
         Me.Label1 = New System.Windows.Forms.Label()
         Me.LabelDate = New System.Windows.Forms.Label()
         Me.PCContract = New DevExpress.XtraEditors.PanelControl()
+        Me.TEEmployeeCode = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.TETotalSalary = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl15 = New DevExpress.XtraEditors.LabelControl()
         Me.TEAllowCar = New DevExpress.XtraEditors.TextEdit()
@@ -53,6 +60,9 @@ Partial Class FormEmployeeContractDet
         Me.DEStartDate = New DevExpress.XtraEditors.DateEdit()
         Me.SLUEDepartement = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.GridView2 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn11 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn10 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn12 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.LabelControl6 = New DevExpress.XtraEditors.LabelControl()
         Me.TEAddress = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl5 = New DevExpress.XtraEditors.LabelControl()
@@ -64,14 +74,8 @@ Partial Class FormEmployeeContractDet
         Me.PanelControl5 = New DevExpress.XtraEditors.PanelControl()
         Me.SBSavePrint = New DevExpress.XtraEditors.SimpleButton()
         Me.ErrorProvider = New System.Windows.Forms.ErrorProvider(Me.components)
-        Me.GridColumn11 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn10 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn12 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.TEKTP = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
         CType(Me.PanelControl4, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl4.SuspendLayout()
         CType(Me.SLUEContractType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -83,6 +87,7 @@ Partial Class FormEmployeeContractDet
         CType(Me.DEDate.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PCContract, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PCContract.SuspendLayout()
+        CType(Me.TEEmployeeCode.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TETotalSalary.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEAllowCar.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEAllowHouse.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -102,6 +107,7 @@ Partial Class FormEmployeeContractDet
         CType(Me.PanelControl5, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl5.SuspendLayout()
         CType(Me.ErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TEKTP.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControl4
@@ -146,6 +152,34 @@ Partial Class FormEmployeeContractDet
         Me.GridView1.Name = "GridView1"
         Me.GridView1.OptionsSelection.EnableAppearanceFocusedCell = False
         Me.GridView1.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn1
+        '
+        Me.GridColumn1.FieldName = "id_contract_type"
+        Me.GridColumn1.Name = "GridColumn1"
+        '
+        'GridColumn2
+        '
+        Me.GridColumn2.Caption = "Contract Type"
+        Me.GridColumn2.FieldName = "contract_type"
+        Me.GridColumn2.Name = "GridColumn2"
+        Me.GridColumn2.Visible = True
+        Me.GridColumn2.VisibleIndex = 0
+        '
+        'GridColumn3
+        '
+        Me.GridColumn3.FieldName = "is_use_start_date"
+        Me.GridColumn3.Name = "GridColumn3"
+        '
+        'GridColumn4
+        '
+        Me.GridColumn4.FieldName = "is_use_end_date"
+        Me.GridColumn4.Name = "GridColumn4"
+        '
+        'GridColumn5
+        '
+        Me.GridColumn5.FieldName = "is_dw"
+        Me.GridColumn5.Name = "GridColumn5"
         '
         'TEName
         '
@@ -220,6 +254,10 @@ Partial Class FormEmployeeContractDet
         '
         'PCContract
         '
+        Me.PCContract.Controls.Add(Me.TEKTP)
+        Me.PCContract.Controls.Add(Me.LabelControl2)
+        Me.PCContract.Controls.Add(Me.TEEmployeeCode)
+        Me.PCContract.Controls.Add(Me.LabelControl1)
         Me.PCContract.Controls.Add(Me.TETotalSalary)
         Me.PCContract.Controls.Add(Me.LabelControl15)
         Me.PCContract.Controls.Add(Me.TEAllowCar)
@@ -250,13 +288,28 @@ Partial Class FormEmployeeContractDet
         Me.PCContract.Dock = System.Windows.Forms.DockStyle.Top
         Me.PCContract.Location = New System.Drawing.Point(0, 123)
         Me.PCContract.Name = "PCContract"
-        Me.PCContract.Size = New System.Drawing.Size(599, 330)
+        Me.PCContract.Size = New System.Drawing.Size(599, 380)
         Me.PCContract.TabIndex = 16
+        '
+        'TEEmployeeCode
+        '
+        Me.TEEmployeeCode.Location = New System.Drawing.Point(112, 64)
+        Me.TEEmployeeCode.Name = "TEEmployeeCode"
+        Me.TEEmployeeCode.Size = New System.Drawing.Size(460, 20)
+        Me.TEEmployeeCode.TabIndex = 45
+        '
+        'LabelControl1
+        '
+        Me.LabelControl1.Location = New System.Drawing.Point(12, 67)
+        Me.LabelControl1.Name = "LabelControl1"
+        Me.LabelControl1.Size = New System.Drawing.Size(17, 13)
+        Me.LabelControl1.TabIndex = 44
+        Me.LabelControl1.Text = "NIK"
         '
         'TETotalSalary
         '
         Me.TETotalSalary.EditValue = "0"
-        Me.TETotalSalary.Location = New System.Drawing.Point(112, 298)
+        Me.TETotalSalary.Location = New System.Drawing.Point(112, 350)
         Me.TETotalSalary.Name = "TETotalSalary"
         Me.TETotalSalary.Properties.DisplayFormat.FormatString = "N0"
         Me.TETotalSalary.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
@@ -271,7 +324,7 @@ Partial Class FormEmployeeContractDet
         '
         'LabelControl15
         '
-        Me.LabelControl15.Location = New System.Drawing.Point(12, 301)
+        Me.LabelControl15.Location = New System.Drawing.Point(12, 353)
         Me.LabelControl15.Name = "LabelControl15"
         Me.LabelControl15.Size = New System.Drawing.Size(45, 13)
         Me.LabelControl15.TabIndex = 42
@@ -280,7 +333,7 @@ Partial Class FormEmployeeContractDet
         'TEAllowCar
         '
         Me.TEAllowCar.EditValue = "0"
-        Me.TEAllowCar.Location = New System.Drawing.Point(112, 272)
+        Me.TEAllowCar.Location = New System.Drawing.Point(112, 324)
         Me.TEAllowCar.Name = "TEAllowCar"
         Me.TEAllowCar.Properties.DisplayFormat.FormatString = "N0"
         Me.TEAllowCar.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
@@ -295,7 +348,7 @@ Partial Class FormEmployeeContractDet
         'TEAllowHouse
         '
         Me.TEAllowHouse.EditValue = "0"
-        Me.TEAllowHouse.Location = New System.Drawing.Point(112, 246)
+        Me.TEAllowHouse.Location = New System.Drawing.Point(112, 298)
         Me.TEAllowHouse.Name = "TEAllowHouse"
         Me.TEAllowHouse.Properties.DisplayFormat.FormatString = "N0"
         Me.TEAllowHouse.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
@@ -310,7 +363,7 @@ Partial Class FormEmployeeContractDet
         'TEAllowTrans
         '
         Me.TEAllowTrans.EditValue = "0"
-        Me.TEAllowTrans.Location = New System.Drawing.Point(112, 220)
+        Me.TEAllowTrans.Location = New System.Drawing.Point(112, 272)
         Me.TEAllowTrans.Name = "TEAllowTrans"
         Me.TEAllowTrans.Properties.DisplayFormat.FormatString = "N0"
         Me.TEAllowTrans.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
@@ -325,7 +378,7 @@ Partial Class FormEmployeeContractDet
         'TEAllowMeal
         '
         Me.TEAllowMeal.EditValue = "0"
-        Me.TEAllowMeal.Location = New System.Drawing.Point(112, 194)
+        Me.TEAllowMeal.Location = New System.Drawing.Point(112, 246)
         Me.TEAllowMeal.Name = "TEAllowMeal"
         Me.TEAllowMeal.Properties.DisplayFormat.FormatString = "N0"
         Me.TEAllowMeal.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
@@ -340,7 +393,7 @@ Partial Class FormEmployeeContractDet
         'TEAllowJob
         '
         Me.TEAllowJob.EditValue = "0"
-        Me.TEAllowJob.Location = New System.Drawing.Point(112, 168)
+        Me.TEAllowJob.Location = New System.Drawing.Point(112, 220)
         Me.TEAllowJob.Name = "TEAllowJob"
         Me.TEAllowJob.Properties.DisplayFormat.FormatString = "N0"
         Me.TEAllowJob.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
@@ -354,7 +407,7 @@ Partial Class FormEmployeeContractDet
         '
         'LabelControl14
         '
-        Me.LabelControl14.Location = New System.Drawing.Point(12, 275)
+        Me.LabelControl14.Location = New System.Drawing.Point(12, 327)
         Me.LabelControl14.Name = "LabelControl14"
         Me.LabelControl14.Size = New System.Drawing.Size(76, 13)
         Me.LabelControl14.TabIndex = 36
@@ -362,7 +415,7 @@ Partial Class FormEmployeeContractDet
         '
         'LabelControl13
         '
-        Me.LabelControl13.Location = New System.Drawing.Point(12, 249)
+        Me.LabelControl13.Location = New System.Drawing.Point(12, 301)
         Me.LabelControl13.Name = "LabelControl13"
         Me.LabelControl13.Size = New System.Drawing.Size(82, 13)
         Me.LabelControl13.TabIndex = 34
@@ -370,7 +423,7 @@ Partial Class FormEmployeeContractDet
         '
         'LabelControl12
         '
-        Me.LabelControl12.Location = New System.Drawing.Point(12, 223)
+        Me.LabelControl12.Location = New System.Drawing.Point(12, 275)
         Me.LabelControl12.Name = "LabelControl12"
         Me.LabelControl12.Size = New System.Drawing.Size(75, 13)
         Me.LabelControl12.TabIndex = 32
@@ -378,7 +431,7 @@ Partial Class FormEmployeeContractDet
         '
         'LabelControl11
         '
-        Me.LabelControl11.Location = New System.Drawing.Point(12, 197)
+        Me.LabelControl11.Location = New System.Drawing.Point(12, 249)
         Me.LabelControl11.Name = "LabelControl11"
         Me.LabelControl11.Size = New System.Drawing.Size(59, 13)
         Me.LabelControl11.TabIndex = 30
@@ -386,7 +439,7 @@ Partial Class FormEmployeeContractDet
         '
         'LabelControl10
         '
-        Me.LabelControl10.Location = New System.Drawing.Point(12, 171)
+        Me.LabelControl10.Location = New System.Drawing.Point(12, 223)
         Me.LabelControl10.Name = "LabelControl10"
         Me.LabelControl10.Size = New System.Drawing.Size(93, 13)
         Me.LabelControl10.TabIndex = 28
@@ -395,7 +448,7 @@ Partial Class FormEmployeeContractDet
         'TEBasicSalary
         '
         Me.TEBasicSalary.EditValue = "0"
-        Me.TEBasicSalary.Location = New System.Drawing.Point(112, 142)
+        Me.TEBasicSalary.Location = New System.Drawing.Point(112, 194)
         Me.TEBasicSalary.Name = "TEBasicSalary"
         Me.TEBasicSalary.Properties.DisplayFormat.FormatString = "N0"
         Me.TEBasicSalary.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
@@ -409,7 +462,7 @@ Partial Class FormEmployeeContractDet
         '
         'LabelControl9
         '
-        Me.LabelControl9.Location = New System.Drawing.Point(12, 145)
+        Me.LabelControl9.Location = New System.Drawing.Point(12, 197)
         Me.LabelControl9.Name = "LabelControl9"
         Me.LabelControl9.Size = New System.Drawing.Size(49, 13)
         Me.LabelControl9.TabIndex = 26
@@ -417,7 +470,7 @@ Partial Class FormEmployeeContractDet
         '
         'LabelControl8
         '
-        Me.LabelControl8.Location = New System.Drawing.Point(339, 119)
+        Me.LabelControl8.Location = New System.Drawing.Point(339, 171)
         Me.LabelControl8.Name = "LabelControl8"
         Me.LabelControl8.Size = New System.Drawing.Size(4, 13)
         Me.LabelControl8.TabIndex = 25
@@ -426,7 +479,7 @@ Partial Class FormEmployeeContractDet
         'DEEndDate
         '
         Me.DEEndDate.EditValue = Nothing
-        Me.DEEndDate.Location = New System.Drawing.Point(372, 116)
+        Me.DEEndDate.Location = New System.Drawing.Point(372, 168)
         Me.DEEndDate.Name = "DEEndDate"
         Me.DEEndDate.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.DEEndDate.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
@@ -441,7 +494,7 @@ Partial Class FormEmployeeContractDet
         '
         'LabelControl7
         '
-        Me.LabelControl7.Location = New System.Drawing.Point(12, 119)
+        Me.LabelControl7.Location = New System.Drawing.Point(12, 171)
         Me.LabelControl7.Name = "LabelControl7"
         Me.LabelControl7.Size = New System.Drawing.Size(68, 13)
         Me.LabelControl7.TabIndex = 23
@@ -450,7 +503,7 @@ Partial Class FormEmployeeContractDet
         'DEStartDate
         '
         Me.DEStartDate.EditValue = Nothing
-        Me.DEStartDate.Location = New System.Drawing.Point(112, 116)
+        Me.DEStartDate.Location = New System.Drawing.Point(112, 168)
         Me.DEStartDate.Name = "DEStartDate"
         Me.DEStartDate.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.DEStartDate.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
@@ -465,7 +518,7 @@ Partial Class FormEmployeeContractDet
         '
         'SLUEDepartement
         '
-        Me.SLUEDepartement.Location = New System.Drawing.Point(112, 64)
+        Me.SLUEDepartement.Location = New System.Drawing.Point(112, 116)
         Me.SLUEDepartement.Name = "SLUEDepartement"
         Me.SLUEDepartement.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.SLUEDepartement.Properties.View = Me.GridView2
@@ -480,9 +533,29 @@ Partial Class FormEmployeeContractDet
         Me.GridView2.OptionsSelection.EnableAppearanceFocusedCell = False
         Me.GridView2.OptionsView.ShowGroupPanel = False
         '
+        'GridColumn11
+        '
+        Me.GridColumn11.Caption = "GridColumn11"
+        Me.GridColumn11.FieldName = "id_departement"
+        Me.GridColumn11.Name = "GridColumn11"
+        '
+        'GridColumn10
+        '
+        Me.GridColumn10.Caption = "Departement"
+        Me.GridColumn10.FieldName = "departement"
+        Me.GridColumn10.Name = "GridColumn10"
+        Me.GridColumn10.Visible = True
+        Me.GridColumn10.VisibleIndex = 0
+        '
+        'GridColumn12
+        '
+        Me.GridColumn12.Caption = "GridColumn12"
+        Me.GridColumn12.FieldName = "is_store"
+        Me.GridColumn12.Name = "GridColumn12"
+        '
         'LabelControl6
         '
-        Me.LabelControl6.Location = New System.Drawing.Point(12, 67)
+        Me.LabelControl6.Location = New System.Drawing.Point(12, 119)
         Me.LabelControl6.Name = "LabelControl6"
         Me.LabelControl6.Size = New System.Drawing.Size(63, 13)
         Me.LabelControl6.TabIndex = 21
@@ -490,14 +563,14 @@ Partial Class FormEmployeeContractDet
         '
         'TEAddress
         '
-        Me.TEAddress.Location = New System.Drawing.Point(112, 90)
+        Me.TEAddress.Location = New System.Drawing.Point(112, 142)
         Me.TEAddress.Name = "TEAddress"
         Me.TEAddress.Size = New System.Drawing.Size(460, 20)
         Me.TEAddress.TabIndex = 19
         '
         'LabelControl5
         '
-        Me.LabelControl5.Location = New System.Drawing.Point(12, 93)
+        Me.LabelControl5.Location = New System.Drawing.Point(12, 145)
         Me.LabelControl5.Name = "LabelControl5"
         Me.LabelControl5.Size = New System.Drawing.Size(39, 13)
         Me.LabelControl5.TabIndex = 18
@@ -546,7 +619,7 @@ Partial Class FormEmployeeContractDet
         '
         Me.PanelControl5.Controls.Add(Me.SBSavePrint)
         Me.PanelControl5.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PanelControl5.Location = New System.Drawing.Point(0, 453)
+        Me.PanelControl5.Location = New System.Drawing.Point(0, 503)
         Me.PanelControl5.Name = "PanelControl5"
         Me.PanelControl5.Size = New System.Drawing.Size(599, 43)
         Me.PanelControl5.TabIndex = 17
@@ -564,59 +637,26 @@ Partial Class FormEmployeeContractDet
         Me.ErrorProvider.ContainerControl = Me
         Me.ErrorProvider.Icon = CType(resources.GetObject("ErrorProvider.Icon"), System.Drawing.Icon)
         '
-        'GridColumn11
+        'TEKTP
         '
-        Me.GridColumn11.Caption = "GridColumn11"
-        Me.GridColumn11.FieldName = "id_departement"
-        Me.GridColumn11.Name = "GridColumn11"
+        Me.TEKTP.Location = New System.Drawing.Point(112, 90)
+        Me.TEKTP.Name = "TEKTP"
+        Me.TEKTP.Size = New System.Drawing.Size(460, 20)
+        Me.TEKTP.TabIndex = 47
         '
-        'GridColumn10
+        'LabelControl2
         '
-        Me.GridColumn10.Caption = "Departement"
-        Me.GridColumn10.FieldName = "departement"
-        Me.GridColumn10.Name = "GridColumn10"
-        Me.GridColumn10.Visible = True
-        Me.GridColumn10.VisibleIndex = 0
-        '
-        'GridColumn12
-        '
-        Me.GridColumn12.Caption = "GridColumn12"
-        Me.GridColumn12.FieldName = "is_store"
-        Me.GridColumn12.Name = "GridColumn12"
-        '
-        'GridColumn1
-        '
-        Me.GridColumn1.FieldName = "id_contract_type"
-        Me.GridColumn1.Name = "GridColumn1"
-        '
-        'GridColumn2
-        '
-        Me.GridColumn2.Caption = "Contract Type"
-        Me.GridColumn2.FieldName = "contract_type"
-        Me.GridColumn2.Name = "GridColumn2"
-        Me.GridColumn2.Visible = True
-        Me.GridColumn2.VisibleIndex = 0
-        '
-        'GridColumn3
-        '
-        Me.GridColumn3.FieldName = "is_use_start_date"
-        Me.GridColumn3.Name = "GridColumn3"
-        '
-        'GridColumn4
-        '
-        Me.GridColumn4.FieldName = "is_use_end_date"
-        Me.GridColumn4.Name = "GridColumn4"
-        '
-        'GridColumn5
-        '
-        Me.GridColumn5.FieldName = "is_dw"
-        Me.GridColumn5.Name = "GridColumn5"
+        Me.LabelControl2.Location = New System.Drawing.Point(12, 93)
+        Me.LabelControl2.Name = "LabelControl2"
+        Me.LabelControl2.Size = New System.Drawing.Size(38, 13)
+        Me.LabelControl2.TabIndex = 46
+        Me.LabelControl2.Text = "No. KTP"
         '
         'FormEmployeeContractDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(599, 496)
+        Me.ClientSize = New System.Drawing.Size(599, 546)
         Me.Controls.Add(Me.PanelControl5)
         Me.Controls.Add(Me.PCContract)
         Me.Controls.Add(Me.PanelControl4)
@@ -636,6 +676,7 @@ Partial Class FormEmployeeContractDet
         CType(Me.PCContract, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PCContract.ResumeLayout(False)
         Me.PCContract.PerformLayout()
+        CType(Me.TEEmployeeCode.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TETotalSalary.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TEAllowCar.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TEAllowHouse.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -655,6 +696,7 @@ Partial Class FormEmployeeContractDet
         CType(Me.PanelControl5, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl5.ResumeLayout(False)
         CType(Me.ErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TEKTP.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -710,4 +752,8 @@ Partial Class FormEmployeeContractDet
     Friend WithEvents GridColumn4 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn5 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents ErrorProvider As ErrorProvider
+    Friend WithEvents TEEmployeeCode As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents LabelControl1 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents TEKTP As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents LabelControl2 As DevExpress.XtraEditors.LabelControl
 End Class

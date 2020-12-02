@@ -1218,7 +1218,7 @@
                 If already_pickup_date Then
                     If empty_3pl Then
                         FormSalesReturnOrderMailDet.id_mail_3pl = "-1"
-                        FormSalesReturnOrderMailDet.id_store = SLUEStore.EditValue.ToString
+                        'FormSalesReturnOrderMailDet.id_store = SLUEStore.EditValue.ToString
                         FormSalesReturnOrderMailDet.ShowDialog()
                     Else
                         stopCustom("Some order already have 3pl or still waiting.")

@@ -47,7 +47,6 @@ WHERE p.id_mat_purc_list='" & id_list & "'"
                     BCancel.Enabled = False
                     BSetConsumption.Enabled = False
                     BCalculate.Enabled = False
-                    TEToleransi.Enabled = False
                     '
                     BSave.Visible = False
                 Else
@@ -59,7 +58,6 @@ WHERE p.id_mat_purc_list='" & id_list & "'"
         Else
             LNumber.Text = "Number : -"
             BSetConsumption.Enabled = True
-            TEToleransi.Enabled = True
             BCalculate.Enabled = True
             BSave.Visible = True
             BCancel.Visible = False
@@ -69,8 +67,8 @@ WHERE p.id_mat_purc_list='" & id_list & "'"
 
     Sub load_head()
         TEConsumption.EditValue = 0.00
-        TEToleransi.EditValue = 0.00
         TEToleransiAmount.EditValue = 0.00
+        TEToleransi.EditValue = 2.5
         TETotal.EditValue = 0.00
         TETotalAmount.EditValue = 0.00
     End Sub
@@ -310,7 +308,6 @@ ORDER BY is_check DESC,id_prod_demand_design DESC"
             SLEMaterial.Enabled = False
             TEConsumption.Enabled = False
             BSetConsumption.Enabled = False
-            TEToleransi.Enabled = False
             '
             SLEBreakDown.Enabled = False
             '
@@ -324,7 +321,6 @@ ORDER BY is_check DESC,id_prod_demand_design DESC"
             SLEMaterial.Enabled = True
             TEConsumption.Enabled = True
             BSetConsumption.Enabled = True
-            TEToleransi.Enabled = True
             '
             SLEBreakDown.Enabled = True
             '

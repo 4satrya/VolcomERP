@@ -167,7 +167,7 @@
 
         If Not q_select = "" Then
             'query
-            Dim query As String = "CALL view_all_design_mapping(" + SLUEStore.EditValue.ToString + ", """ + q_select.Substring(0, q_select.Length - 2) + """, " + SLUESeason.EditValue.ToString + ", " + SLUEDivision.EditValue.ToString + ")"
+            Dim query As String = "CALL view_all_design_mapping(" + SLUEStore.EditValue.ToString + ", """ + q_select.Substring(0, q_select.Length - 2) + """, " + SLUESeason.EditValue.ToString + ", " + SLUEDivision.EditValue.ToString + ", '')"
 
             data = execute_query(query, -1, True, "", "", "", "")
 

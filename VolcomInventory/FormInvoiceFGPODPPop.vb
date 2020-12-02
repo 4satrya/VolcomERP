@@ -76,12 +76,10 @@
                         warningCustom(ex.ToString)
                     End Try
                 Next
-
                 'kurs fixing
                 For j As Integer = 0 To FormInvoiceFGPODP.GVList.RowCount - 1
                     FormInvoiceFGPODP.GVList.SetRowCellValue(j, "kurs", GVList.GetRowCellValue(0, "kurs"))
                 Next
-
                 FormInvoiceFGPODP.calculate()
                 Close()
             End If
@@ -177,7 +175,7 @@ INNER JOIN tb_m_design dsg ON dsg.`id_design`=pdd.`id_design`
 WHERE pn.`id_report_status`= '6' AND pnd.`id_report`='" & id_po & "' AND pnd.report_mark_type='22' AND pn.`type`='1'  AND pn.doc_type='2' 
 AND (pnd.`value_bef_kurs`+IFNULL(used.val_bef_kurs,0)) > 0"
         Else
-            query = "SELECT 'no' AS is_check, pnd.id_pn_fgpo_det,pnd.qty, pn.`id_pn_fgpo`,pn.`number`,pnd.id_currency,cur.currency,pnd.kurs,pnd.`value_bef_kurs`,pnd.`vat`,pnd.`inv_number`,pnd.`note` 
+            query = "SELECT 'no' AS is_check, pnd.id_pn_fgpo_det,pnd.qty, pn.`id_pn_fgpo`,pn.`number`,pnd.id_currency,cur.currency,pnd.kurs,pnd.`vat`,pnd.`inv_number`,pnd.`note`,(pnd.`value_bef_kurs`+IFNULL(used.val_bef_kurs,0)) AS value_bef_kurs_rem,(pnd.`value_bef_kurs`+IFNULL(used.val_bef_kurs,0)) AS value_bef_kurs 
 , pn.id_comp,com.comp_name, com.id_acc_dp AS id_acc
 FROM `tb_pn_fgpo_det` pnd
 INNER JOIN tb_pn_fgpo pn ON pnd.id_pn_fgpo=pn.id_pn_fgpo
@@ -185,11 +183,11 @@ INNER JOIN tb_m_comp com ON com.`id_comp`=pn.`id_comp`
 INNER JOIN tb_lookup_currency cur ON cur.id_currency=pnd.id_currency
 LEFT JOIN
 (
-    SELECT id_report FROM `tb_pn_fgpo_det` pnd
+    SELECT id_report,SUM(pnd.`value_bef_kurs`) AS val_bef_kurs FROM `tb_pn_fgpo_det` pnd
     INNER JOIN tb_pn_fgpo pn ON pn.`id_pn_fgpo`=pnd.`id_pn_fgpo`
     WHERE pnd.`report_mark_type`='199' AND pn.id_report_status!=5 AND pn.id_comp='" & FormInvoiceFGPODP.SLEVendor.EditValue.ToString & "'
 )used ON used.id_report=pnd.id_pn_fgpo
-WHERE pn.`id_report_status`= '6' AND pn.id_comp='" & FormInvoiceFGPODP.SLEVendor.EditValue.ToString & "' AND pnd.report_mark_type!='199' AND pn.`type`='1' AND ISNULL(used.id_report) AND pn.doc_type!='2'"
+WHERE pn.`id_report_status`= '6' AND pn.id_comp='" & FormInvoiceFGPODP.SLEVendor.EditValue.ToString & "' AND pnd.report_mark_type!='199' AND pn.`type`='1' AND (pnd.`value_bef_kurs`+IFNULL(used.val_bef_kurs,0)) > 0 AND pn.doc_type!='2'"
         End If
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCList.DataSource = data

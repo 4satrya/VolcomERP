@@ -27,8 +27,6 @@ Partial Class FormSalesReturnOrderMail
         Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GCDetail, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVDetail, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -45,7 +43,7 @@ Partial Class FormSalesReturnOrderMail
         '
         'GVDetail
         '
-        Me.GVDetail.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn8, Me.GridColumn7, Me.GridColumn2, Me.GridColumn3, Me.GridColumn4, Me.GridColumn5, Me.GridColumn6})
+        Me.GVDetail.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn7, Me.GridColumn2, Me.GridColumn3, Me.GridColumn4, Me.GridColumn5})
         Me.GVDetail.GridControl = Me.GCDetail
         Me.GVDetail.Name = "GVDetail"
         Me.GVDetail.OptionsBehavior.AutoExpandAllGroups = True
@@ -62,9 +60,12 @@ Partial Class FormSalesReturnOrderMail
         '
         Me.GridColumn7.Caption = "Store"
         Me.GridColumn7.FieldName = "store_name"
+        Me.GridColumn7.MaxWidth = 300
+        Me.GridColumn7.MinWidth = 300
         Me.GridColumn7.Name = "GridColumn7"
         Me.GridColumn7.Visible = True
         Me.GridColumn7.VisibleIndex = 0
+        Me.GridColumn7.Width = 300
         '
         'GridColumn2
         '
@@ -100,19 +101,6 @@ Partial Class FormSalesReturnOrderMail
         Me.GridColumn5.Visible = True
         Me.GridColumn5.VisibleIndex = 4
         '
-        'GridColumn6
-        '
-        Me.GridColumn6.Caption = "Sent Status"
-        Me.GridColumn6.FieldName = "sent_status"
-        Me.GridColumn6.Name = "GridColumn6"
-        Me.GridColumn6.Visible = True
-        Me.GridColumn6.VisibleIndex = 5
-        '
-        'GridColumn8
-        '
-        Me.GridColumn8.FieldName = "id_store"
-        Me.GridColumn8.Name = "GridColumn8"
-        '
         'FormSalesReturnOrderMail
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -121,7 +109,7 @@ Partial Class FormSalesReturnOrderMail
         Me.Controls.Add(Me.GCDetail)
         Me.Name = "FormSalesReturnOrderMail"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Propose Return Mail"
+        Me.Text = "Pickup Order"
         CType(Me.GCDetail, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVDetail, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
@@ -135,7 +123,5 @@ Partial Class FormSalesReturnOrderMail
     Friend WithEvents GridColumn3 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn4 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn5 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn6 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn7 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn8 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

@@ -385,6 +385,7 @@ Partial Class FormMasterRawMaterialDetSingle
         Me.BGenerate.Size = New System.Drawing.Size(86, 23)
         Me.BGenerate.TabIndex = 8
         Me.BGenerate.Text = "Generate Code"
+        Me.BGenerate.Visible = False
         '
         'BSave
         '

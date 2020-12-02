@@ -173,4 +173,12 @@ LEFT JOIN tb_m_employee emp ON emp.`id_employee`=usr.`id_employee` " & q_where
         FormOlStoreDetailRefund.ShowDialog()
         Cursor = Cursors.Default
     End Sub
+
+    Private Sub AddAttachmentToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AddAttachmentToolStripMenuItem.Click
+        FormDocumentUpload.is_no_delete = "1"
+        FormDocumentUpload.id_report = GVList.GetFocusedRowCellValue("id_ol_store_ret_req").ToString
+        FormDocumentUpload.report_mark_type = "277"
+
+        FormDocumentUpload.ShowDialog()
+    End Sub
 End Class

@@ -85,6 +85,7 @@ Partial Class FormRequestRetOLStore
         Me.PanelControlNav = New DevExpress.XtraEditors.PanelControl()
         Me.BtnDel = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnAdd = New DevExpress.XtraEditors.SimpleButton()
+        Me.BtnAttachmentFollowUp = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.GroupControlHead, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControlHead.SuspendLayout()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -558,6 +559,7 @@ Partial Class FormRequestRetOLStore
         'PanelControlBottom
         '
         Me.PanelControlBottom.Controls.Add(Me.BtnPrint)
+        Me.PanelControlBottom.Controls.Add(Me.BtnAttachmentFollowUp)
         Me.PanelControlBottom.Controls.Add(Me.BtnAttachment)
         Me.PanelControlBottom.Controls.Add(Me.BtnMark)
         Me.PanelControlBottom.Controls.Add(Me.BtnCancell)
@@ -574,7 +576,7 @@ Partial Class FormRequestRetOLStore
         '
         Me.BtnPrint.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnPrint.Image = CType(resources.GetObject("BtnPrint.Image"), System.Drawing.Image)
-        Me.BtnPrint.Location = New System.Drawing.Point(441, 2)
+        Me.BtnPrint.Location = New System.Drawing.Point(279, 2)
         Me.BtnPrint.Name = "BtnPrint"
         Me.BtnPrint.Size = New System.Drawing.Size(87, 40)
         Me.BtnPrint.TabIndex = 3
@@ -801,6 +803,16 @@ Partial Class FormRequestRetOLStore
         Me.BtnAdd.TabIndex = 158
         Me.BtnAdd.Text = "Add"
         '
+        'BtnAttachmentFollowUp
+        '
+        Me.BtnAttachmentFollowUp.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnAttachmentFollowUp.Image = CType(resources.GetObject("BtnAttachmentFollowUp.Image"), System.Drawing.Image)
+        Me.BtnAttachmentFollowUp.Location = New System.Drawing.Point(366, 2)
+        Me.BtnAttachmentFollowUp.Name = "BtnAttachmentFollowUp"
+        Me.BtnAttachmentFollowUp.Size = New System.Drawing.Size(162, 40)
+        Me.BtnAttachmentFollowUp.TabIndex = 11
+        Me.BtnAttachmentFollowUp.Text = "Follow Up Attachment"
+        '
         'FormRequestRetOLStore
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -922,4 +934,5 @@ Partial Class FormRequestRetOLStore
     Friend WithEvents BtnResetPropose As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents GridColumndesign_price As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumndesign_cat As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents BtnAttachmentFollowUp As DevExpress.XtraEditors.SimpleButton
 End Class

@@ -398,6 +398,8 @@ Partial Class FormOLStoreSummary
         Me.GridColumninput_date = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnprocess_date = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnerror_process = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnschedule_time = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnno = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PanelControl6 = New DevExpress.XtraEditors.PanelControl()
         Me.BtnViewExpiredOrderBySyncDate = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnExpiredExportToXLS = New DevExpress.XtraEditors.SimpleButton()
@@ -406,6 +408,7 @@ Partial Class FormOLStoreSummary
         Me.DEExUntil = New DevExpress.XtraEditors.DateEdit()
         Me.LabelControl14 = New DevExpress.XtraEditors.LabelControl()
         Me.DEExFrom = New DevExpress.XtraEditors.DateEdit()
+        Me.GridColumndiff = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.DEUntil.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -3861,7 +3864,7 @@ Partial Class FormOLStoreSummary
         '
         'GVExpiredOrder
         '
-        Me.GVExpiredOrder.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnidex, Me.GridColumncheckout_id, Me.GridColumnorder_date, Me.GridColumnorder_number, Me.GridColumncustomer_nameex, Me.GridColumntotal_qty_order, Me.GridColumninput_date, Me.GridColumnprocess_date, Me.GridColumnerror_process})
+        Me.GVExpiredOrder.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnidex, Me.GridColumncheckout_id, Me.GridColumnorder_date, Me.GridColumnorder_number, Me.GridColumncustomer_nameex, Me.GridColumntotal_qty_order, Me.GridColumninput_date, Me.GridColumnprocess_date, Me.GridColumnerror_process, Me.GridColumnschedule_time, Me.GridColumnno, Me.GridColumndiff})
         Me.GVExpiredOrder.GridControl = Me.GCExpiredOrder
         Me.GVExpiredOrder.Name = "GVExpiredOrder"
         Me.GVExpiredOrder.OptionsBehavior.ReadOnly = True
@@ -3882,7 +3885,7 @@ Partial Class FormOLStoreSummary
         Me.GridColumncheckout_id.FieldName = "checkout_id"
         Me.GridColumncheckout_id.Name = "GridColumncheckout_id"
         Me.GridColumncheckout_id.Visible = True
-        Me.GridColumncheckout_id.VisibleIndex = 0
+        Me.GridColumncheckout_id.VisibleIndex = 1
         '
         'GridColumnorder_date
         '
@@ -3892,7 +3895,7 @@ Partial Class FormOLStoreSummary
         Me.GridColumnorder_date.FieldName = "order_date"
         Me.GridColumnorder_date.Name = "GridColumnorder_date"
         Me.GridColumnorder_date.Visible = True
-        Me.GridColumnorder_date.VisibleIndex = 2
+        Me.GridColumnorder_date.VisibleIndex = 5
         '
         'GridColumnorder_number
         '
@@ -3900,7 +3903,7 @@ Partial Class FormOLStoreSummary
         Me.GridColumnorder_number.FieldName = "order_number"
         Me.GridColumnorder_number.Name = "GridColumnorder_number"
         Me.GridColumnorder_number.Visible = True
-        Me.GridColumnorder_number.VisibleIndex = 1
+        Me.GridColumnorder_number.VisibleIndex = 2
         '
         'GridColumncustomer_nameex
         '
@@ -3929,7 +3932,7 @@ Partial Class FormOLStoreSummary
         Me.GridColumninput_date.FieldName = "input_date"
         Me.GridColumninput_date.Name = "GridColumninput_date"
         Me.GridColumninput_date.Visible = True
-        Me.GridColumninput_date.VisibleIndex = 5
+        Me.GridColumninput_date.VisibleIndex = 8
         '
         'GridColumnprocess_date
         '
@@ -3939,7 +3942,7 @@ Partial Class FormOLStoreSummary
         Me.GridColumnprocess_date.FieldName = "process_date"
         Me.GridColumnprocess_date.Name = "GridColumnprocess_date"
         Me.GridColumnprocess_date.Visible = True
-        Me.GridColumnprocess_date.VisibleIndex = 6
+        Me.GridColumnprocess_date.VisibleIndex = 9
         '
         'GridColumnerror_process
         '
@@ -3947,7 +3950,27 @@ Partial Class FormOLStoreSummary
         Me.GridColumnerror_process.FieldName = "error_process"
         Me.GridColumnerror_process.Name = "GridColumnerror_process"
         Me.GridColumnerror_process.Visible = True
-        Me.GridColumnerror_process.VisibleIndex = 7
+        Me.GridColumnerror_process.VisibleIndex = 10
+        '
+        'GridColumnschedule_time
+        '
+        Me.GridColumnschedule_time.Caption = "Schedule"
+        Me.GridColumnschedule_time.DisplayFormat.FormatString = "dd MMMM yyyy HH:mm:ss"
+        Me.GridColumnschedule_time.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumnschedule_time.FieldName = "schedule_time"
+        Me.GridColumnschedule_time.Name = "GridColumnschedule_time"
+        Me.GridColumnschedule_time.Visible = True
+        Me.GridColumnschedule_time.VisibleIndex = 6
+        '
+        'GridColumnno
+        '
+        Me.GridColumnno.Caption = "No"
+        Me.GridColumnno.FieldName = "no"
+        Me.GridColumnno.Name = "GridColumnno"
+        Me.GridColumnno.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.[False]
+        Me.GridColumnno.Visible = True
+        Me.GridColumnno.VisibleIndex = 0
+        Me.GridColumnno.Width = 54
         '
         'PanelControl6
         '
@@ -4035,6 +4058,16 @@ Partial Class FormOLStoreSummary
         Me.DEExFrom.Properties.Mask.EditMask = "dd\/MM\/yyyy"
         Me.DEExFrom.Size = New System.Drawing.Size(141, 20)
         Me.DEExFrom.TabIndex = 3
+        '
+        'GridColumndiff
+        '
+        Me.GridColumndiff.Caption = "Diff (Minute)"
+        Me.GridColumndiff.DisplayFormat.FormatString = "N0"
+        Me.GridColumndiff.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumndiff.FieldName = "diff"
+        Me.GridColumndiff.Name = "GridColumndiff"
+        Me.GridColumndiff.Visible = True
+        Me.GridColumndiff.VisibleIndex = 7
         '
         'FormOLStoreSummary
         '
@@ -4519,4 +4552,7 @@ Partial Class FormOLStoreSummary
     Friend WithEvents GridColumnprocess_date As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnerror_process As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents BtnViewExpiredOrderBySyncDate As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents GridColumnschedule_time As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnno As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumndiff As DevExpress.XtraGrid.Columns.GridColumn
 End Class

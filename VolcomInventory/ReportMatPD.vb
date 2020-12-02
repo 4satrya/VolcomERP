@@ -9,6 +9,24 @@
         DataSource = dt_head
         '
         If is_use_bulk Then
+            If dt_head.Rows(0)("moq") = 1 Then
+                LNOMOQ.Visible = False
+                LClassMOQ.Visible = False
+                LDesignMOQ.Visible = False
+                LColorMOQ.Visible = False
+                LQtyMOQ.Visible = False
+                LConsMOQ.Visible = False
+                LTotalMOQ.Visible = False
+            Else
+                LNOMOQ.Visible = True
+                LClassMOQ.Visible = True
+                LDesignMOQ.Visible = True
+                LColorMOQ.Visible = True
+                LQtyMOQ.Visible = True
+                LConsMOQ.Visible = True
+                LTotalMOQ.Visible = True
+            End If
+
             LNO1.Visible = True
             LNO2.Visible = True
             LNO3.Visible = True
@@ -43,7 +61,51 @@
             LTotal2.Visible = True
             LTotal3.Visible = True
             LTotal4.Visible = True
+
+            If dt_head.Rows(0)("moq") > dt_head.Rows(0)("total") Then
+                LNOMOQ.BackColor = Color.LightBlue
+                LClassMOQ.BackColor = Color.LightBlue
+                LDesignMOQ.BackColor = Color.LightBlue
+                LColorMOQ.BackColor = Color.LightBlue
+                LQtyMOQ.BackColor = Color.LightBlue
+                LConsMOQ.BackColor = Color.LightBlue
+                LTotalMOQ.BackColor = Color.LightBlue
+            Else
+                LNoTot.BackColor = Color.LightBlue
+                LClassTot.BackColor = Color.LightBlue
+                LDesignTot.BackColor = Color.LightBlue
+                LColorTot.BackColor = Color.LightBlue
+                LQtyTot.BackColor = Color.LightBlue
+                LConsTot.BackColor = Color.LightBlue
+                LTotTot.BackColor = Color.LightBlue
+            End If
         Else
+            If dt_head.Rows(0)("moq") = 1 Then
+                LNOMOQ.Visible = False
+                LClassMOQ.Visible = False
+                LDesignMOQ.Visible = False
+                LColorMOQ.Visible = False
+                LQtyMOQ.Visible = False
+                LConsMOQ.Visible = False
+                LTotalMOQ.Visible = False
+            Else
+                LNOMOQ.Visible = True
+                LClassMOQ.Visible = True
+                LDesignMOQ.Visible = True
+                LColorMOQ.Visible = True
+                LQtyMOQ.Visible = True
+                LConsMOQ.Visible = True
+                LTotalMOQ.Visible = True
+
+                LNOMOQ.LocationF = LNO1.LocationF
+                LClassMOQ.LocationF = LClass1.LocationF
+                LDesignMOQ.LocationF = LDesign1.LocationF
+                LColorMOQ.LocationF = LColor1.LocationF
+                LQtyMOQ.LocationF = LQty1.LocationF
+                LConsMOQ.LocationF = LCons1.LocationF
+                LTotalMOQ.LocationF = LTotal1.LocationF
+            End If
+            '
             LNO1.Visible = False
             LNO2.Visible = False
             LNO3.Visible = False
@@ -78,6 +140,24 @@
             LTotal2.Visible = False
             LTotal3.Visible = False
             LTotal4.Visible = False
+            '
+            If dt_head.Rows(0)("moq") > dt_head.Rows(0)("total") Then
+                LNOMOQ.BackColor = Color.LightBlue
+                LClassMOQ.BackColor = Color.LightBlue
+                LDesignMOQ.BackColor = Color.LightBlue
+                LColorMOQ.BackColor = Color.LightBlue
+                LQtyMOQ.BackColor = Color.LightBlue
+                LConsMOQ.BackColor = Color.LightBlue
+                LTotalMOQ.BackColor = Color.LightBlue
+            Else
+                LNoTot.BackColor = Color.LightBlue
+                LClassTot.BackColor = Color.LightBlue
+                LDesignTot.BackColor = Color.LightBlue
+                LColorTot.BackColor = Color.LightBlue
+                LQtyTot.BackColor = Color.LightBlue
+                LConsTot.BackColor = Color.LightBlue
+                LTotTot.BackColor = Color.LightBlue
+            End If
         End If
         '
         Dim po_height As Integer = 0
@@ -171,5 +251,7 @@
         Next
 
         pre_load_mark_horz("13", id_purc, "2", "2", XrTable1)
+        '
+
     End Sub
 End Class

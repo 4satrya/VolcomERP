@@ -37,17 +37,21 @@ Partial Class FormPurcOrderCloseReceiving
         Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn35 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnTotPO = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnRecAmo = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn53 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RPBRec = New DevExpress.XtraEditors.Repository.RepositoryItemProgressBar()
         Me.GridColumn54 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn58 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RepositoryItemMemoEdit = New DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit()
         Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemDateEdit = New DevExpress.XtraEditors.Repository.RepositoryItemDateEdit()
         Me.RepositoryItemTextEdit = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
         Me.PanelControl3 = New DevExpress.XtraEditors.PanelControl()
+        Me.SBAttachment = New DevExpress.XtraEditors.SimpleButton()
         Me.SBPrint = New DevExpress.XtraEditors.SimpleButton()
         Me.SBMark = New DevExpress.XtraEditors.SimpleButton()
         Me.SBClose = New DevExpress.XtraEditors.SimpleButton()
@@ -55,8 +59,6 @@ Partial Class FormPurcOrderCloseReceiving
         Me.PanelControl4 = New DevExpress.XtraEditors.PanelControl()
         Me.SBAdd = New DevExpress.XtraEditors.SimpleButton()
         Me.SBRemove = New DevExpress.XtraEditors.SimpleButton()
-        Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.TEReportStatus.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -70,6 +72,7 @@ Partial Class FormPurcOrderCloseReceiving
         CType(Me.GCPO, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVPO, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RPBRec, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemMemoEdit, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemDateEdit, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemDateEdit.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemTextEdit, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -193,19 +196,24 @@ Partial Class FormPurcOrderCloseReceiving
         Me.GCPO.Location = New System.Drawing.Point(2, 2)
         Me.GCPO.MainView = Me.GVPO
         Me.GCPO.Name = "GCPO"
-        Me.GCPO.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RPBRec, Me.RepositoryItemTextEdit, Me.RepositoryItemDateEdit})
+        Me.GCPO.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RPBRec, Me.RepositoryItemTextEdit, Me.RepositoryItemDateEdit, Me.RepositoryItemMemoEdit})
         Me.GCPO.Size = New System.Drawing.Size(776, 333)
         Me.GCPO.TabIndex = 3
         Me.GCPO.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVPO})
         '
         'GVPO
         '
+        Me.GVPO.Appearance.Row.Options.UseTextOptions = True
+        Me.GVPO.Appearance.Row.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
+        Me.GVPO.AppearancePrint.Row.Options.UseTextOptions = True
+        Me.GVPO.AppearancePrint.Row.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
         Me.GVPO.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn7, Me.GridColumn1, Me.GridColumn35, Me.GridColumn3, Me.GridColumn4, Me.GridColumnTotPO, Me.GridColumn6, Me.GridColumnRecAmo, Me.GridColumn53, Me.GridColumn54, Me.GridColumn58, Me.GridColumn5, Me.GridColumn2})
         Me.GVPO.GridControl = Me.GCPO
         Me.GVPO.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_po", Me.GridColumnTotPO, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_rec", Me.GridColumnRecAmo, "{0:N2}")})
         Me.GVPO.Name = "GVPO"
         Me.GVPO.OptionsView.ColumnAutoWidth = False
         Me.GVPO.OptionsView.GroupFooterShowMode = DevExpress.XtraGrid.Views.Grid.GroupFooterShowMode.VisibleAlways
+        Me.GVPO.OptionsView.RowAutoHeight = True
         Me.GVPO.OptionsView.ShowFooter = True
         Me.GVPO.OptionsView.ShowGroupPanel = False
         '
@@ -232,7 +240,7 @@ Partial Class FormPurcOrderCloseReceiving
         Me.GridColumn35.Name = "GridColumn35"
         Me.GridColumn35.OptionsColumn.AllowEdit = False
         Me.GridColumn35.Visible = True
-        Me.GridColumn35.VisibleIndex = 2
+        Me.GridColumn35.VisibleIndex = 1
         '
         'GridColumn3
         '
@@ -241,7 +249,19 @@ Partial Class FormPurcOrderCloseReceiving
         Me.GridColumn3.Name = "GridColumn3"
         Me.GridColumn3.OptionsColumn.AllowEdit = False
         Me.GridColumn3.Visible = True
-        Me.GridColumn3.VisibleIndex = 1
+        Me.GridColumn3.VisibleIndex = 2
+        '
+        'GridColumn4
+        '
+        Me.GridColumn4.Caption = "PO Qty"
+        Me.GridColumn4.DisplayFormat.FormatString = "N0"
+        Me.GridColumn4.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn4.FieldName = "po_qty"
+        Me.GridColumn4.Name = "GridColumn4"
+        Me.GridColumn4.OptionsColumn.AllowEdit = False
+        Me.GridColumn4.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "po_qty", "{0:N0}")})
+        Me.GridColumn4.Visible = True
+        Me.GridColumn4.VisibleIndex = 3
         '
         'GridColumnTotPO
         '
@@ -258,6 +278,18 @@ Partial Class FormPurcOrderCloseReceiving
         Me.GridColumnTotPO.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_po", "{0:N2}")})
         Me.GridColumnTotPO.Visible = True
         Me.GridColumnTotPO.VisibleIndex = 4
+        '
+        'GridColumn6
+        '
+        Me.GridColumn6.Caption = "Receive Qty"
+        Me.GridColumn6.DisplayFormat.FormatString = "N0"
+        Me.GridColumn6.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn6.FieldName = "rec_qty"
+        Me.GridColumn6.Name = "GridColumn6"
+        Me.GridColumn6.OptionsColumn.AllowEdit = False
+        Me.GridColumn6.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "rec_qty", "{0:N0}")})
+        Me.GridColumn6.Visible = True
+        Me.GridColumn6.VisibleIndex = 5
         '
         'GridColumnRecAmo
         '
@@ -322,11 +354,16 @@ Partial Class FormPurcOrderCloseReceiving
         'GridColumn5
         '
         Me.GridColumn5.Caption = "Close Receiving Reason"
+        Me.GridColumn5.ColumnEdit = Me.RepositoryItemMemoEdit
         Me.GridColumn5.FieldName = "close_rec_reason"
         Me.GridColumn5.Name = "GridColumn5"
         Me.GridColumn5.Visible = True
         Me.GridColumn5.VisibleIndex = 10
         Me.GridColumn5.Width = 124
+        '
+        'RepositoryItemMemoEdit
+        '
+        Me.RepositoryItemMemoEdit.Name = "RepositoryItemMemoEdit"
         '
         'GridColumn2
         '
@@ -357,6 +394,7 @@ Partial Class FormPurcOrderCloseReceiving
         '
         'PanelControl3
         '
+        Me.PanelControl3.Controls.Add(Me.SBAttachment)
         Me.PanelControl3.Controls.Add(Me.SBPrint)
         Me.PanelControl3.Controls.Add(Me.SBMark)
         Me.PanelControl3.Controls.Add(Me.SBClose)
@@ -367,11 +405,21 @@ Partial Class FormPurcOrderCloseReceiving
         Me.PanelControl3.Size = New System.Drawing.Size(784, 70)
         Me.PanelControl3.TabIndex = 1
         '
+        'SBAttachment
+        '
+        Me.SBAttachment.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.SBAttachment.Image = CType(resources.GetObject("SBAttachment.Image"), System.Drawing.Image)
+        Me.SBAttachment.Location = New System.Drawing.Point(502, 15)
+        Me.SBAttachment.Name = "SBAttachment"
+        Me.SBAttachment.Size = New System.Drawing.Size(86, 40)
+        Me.SBAttachment.TabIndex = 4
+        Me.SBAttachment.Text = "Attachment"
+        '
         'SBPrint
         '
         Me.SBPrint.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.SBPrint.Image = CType(resources.GetObject("SBPrint.Image"), System.Drawing.Image)
-        Me.SBPrint.Location = New System.Drawing.Point(502, 15)
+        Me.SBPrint.Location = New System.Drawing.Point(410, 15)
         Me.SBPrint.Name = "SBPrint"
         Me.SBPrint.Size = New System.Drawing.Size(86, 40)
         Me.SBPrint.TabIndex = 3
@@ -436,30 +484,6 @@ Partial Class FormPurcOrderCloseReceiving
         Me.SBRemove.Size = New System.Drawing.Size(40, 40)
         Me.SBRemove.TabIndex = 0
         '
-        'GridColumn4
-        '
-        Me.GridColumn4.Caption = "PO Qty"
-        Me.GridColumn4.DisplayFormat.FormatString = "N0"
-        Me.GridColumn4.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.GridColumn4.FieldName = "po_qty"
-        Me.GridColumn4.Name = "GridColumn4"
-        Me.GridColumn4.OptionsColumn.AllowEdit = False
-        Me.GridColumn4.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "po_qty", "{0:N0}")})
-        Me.GridColumn4.Visible = True
-        Me.GridColumn4.VisibleIndex = 3
-        '
-        'GridColumn6
-        '
-        Me.GridColumn6.Caption = "Receive Qty"
-        Me.GridColumn6.DisplayFormat.FormatString = "N0"
-        Me.GridColumn6.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.GridColumn6.FieldName = "rec_qty"
-        Me.GridColumn6.Name = "GridColumn6"
-        Me.GridColumn6.OptionsColumn.AllowEdit = False
-        Me.GridColumn6.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "rec_qty", "{0:N0}")})
-        Me.GridColumn6.Visible = True
-        Me.GridColumn6.VisibleIndex = 5
-        '
         'FormPurcOrderCloseReceiving
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -486,6 +510,7 @@ Partial Class FormPurcOrderCloseReceiving
         CType(Me.GCPO, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVPO, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RPBRec, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemMemoEdit, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemDateEdit.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemDateEdit, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemTextEdit, System.ComponentModel.ISupportInitialize).EndInit()
@@ -534,4 +559,6 @@ Partial Class FormPurcOrderCloseReceiving
     Friend WithEvents SBPrint As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents GridColumn4 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn6 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents RepositoryItemMemoEdit As DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit
+    Friend WithEvents SBAttachment As DevExpress.XtraEditors.SimpleButton
 End Class

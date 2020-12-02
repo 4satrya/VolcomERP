@@ -477,7 +477,7 @@ WHERE c.id_comp='" & SLEVendorExpense.EditValue & "'"
         Dim e As New ClassItemExpense()
         e.q_acc = q_acc
         e.q_join = q_join_acc
-        Dim query As String = e.queryMain(where_string, "1", True)
+        Dim query As String = e.queryMain(where_string & " AND e.id_report_status=6 ", "1", True)
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCExpense.DataSource = data
         GVExpense.BestFitColumns()

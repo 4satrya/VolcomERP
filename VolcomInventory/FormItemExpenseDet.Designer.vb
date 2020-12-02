@@ -86,6 +86,7 @@ Partial Class FormItemExpenseDet
         Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnDescription = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RepositoryItemMemoEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit()
         Me.GCCC = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RISLECC = New DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit()
         Me.GridView3 = New DevExpress.XtraGrid.Views.Grid.GridView()
@@ -103,14 +104,14 @@ Partial Class FormItemExpenseDet
         Me.GridColumn11 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn13 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn12 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn22 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnBefKurs = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemTextEdit3 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
         Me.GridColumnCurr = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RISLECurrency = New DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit()
         Me.GridView5 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn23 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn24 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn17 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnKurs = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnTaxPercent = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemTextEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
         Me.GridColumnTaxValue = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -121,13 +122,15 @@ Partial Class FormItemExpenseDet
         Me.GridColumn18 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn19 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn20 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn16 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnPPHPercent = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemTextEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
         Me.GridColumnPPH = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnPPHDesc = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RepositoryItemMemoEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit()
         Me.GridColumnAccountDescription = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnBudgetTypeDesc = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnBudgetDesc = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RepositoryItemMemoEdit3 = New DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit()
         Me.GCCCDesc = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnCurrView = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemSpinEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit()
@@ -182,6 +185,7 @@ Partial Class FormItemExpenseDet
         CType(Me.GVData, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemSearchLookUpEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemSearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemMemoEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RISLECC, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RISLEType, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -195,6 +199,8 @@ Partial Class FormItemExpenseDet
         CType(Me.RISLECOAPPH, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemTextEdit2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemMemoEdit2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemMemoEdit3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemSpinEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XTPDraftJournal, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTPDraftJournal.SuspendLayout()
@@ -464,9 +470,9 @@ Partial Class FormItemExpenseDet
         Me.LabelControl11.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelControl11.Location = New System.Drawing.Point(10, 56)
         Me.LabelControl11.Name = "LabelControl11"
-        Me.LabelControl11.Size = New System.Drawing.Size(37, 13)
+        Me.LabelControl11.Size = New System.Drawing.Size(21, 13)
         Me.LabelControl11.TabIndex = 148
-        Me.LabelControl11.Text = "VAT IN"
+        Me.LabelControl11.Text = "PPN"
         '
         'TxtSubTotal
         '
@@ -764,7 +770,7 @@ Partial Class FormItemExpenseDet
         Me.GCData.Location = New System.Drawing.Point(0, 38)
         Me.GCData.MainView = Me.GVData
         Me.GCData.Name = "GCData"
-        Me.GCData.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemSearchLookUpEdit1, Me.RepositoryItemTextEdit1, Me.RepositoryItemSpinEdit1, Me.RISLEType, Me.RISLECatExpense, Me.RISLECC, Me.RISLECOAPPH, Me.RepositoryItemTextEdit2, Me.RepositoryItemTextEdit3, Me.RISLECurrency})
+        Me.GCData.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemSearchLookUpEdit1, Me.RepositoryItemTextEdit1, Me.RepositoryItemSpinEdit1, Me.RISLEType, Me.RISLECatExpense, Me.RISLECC, Me.RISLECOAPPH, Me.RepositoryItemTextEdit2, Me.RepositoryItemTextEdit3, Me.RISLECurrency, Me.RepositoryItemMemoEdit1, Me.RepositoryItemMemoEdit2, Me.RepositoryItemMemoEdit3})
         Me.GCData.Size = New System.Drawing.Size(1046, 209)
         Me.GCData.TabIndex = 18
         Me.GCData.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVData})
@@ -789,9 +795,15 @@ Partial Class FormItemExpenseDet
         '
         'GVData
         '
-        Me.GVData.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIdAcc, Me.GridColumnNo, Me.GridColumnaccount, Me.GridColumnDescription, Me.GCCC, Me.GridColumnBudgetType, Me.GridColumnBudget, Me.GridColumn22, Me.GridColumnCurr, Me.GridColumn17, Me.GridColumnTaxPercent, Me.GridColumnTaxValue, Me.GridColumnAmount, Me.GridColumnPPHCOA, Me.GridColumn16, Me.GridColumnPPH, Me.GridColumnPPHDesc, Me.GridColumnAccountDescription, Me.GridColumnBudgetTypeDesc, Me.GridColumnBudgetDesc, Me.GCCCDesc, Me.GridColumnCurrView})
+        Me.GVData.AppearancePrint.HeaderPanel.Options.UseTextOptions = True
+        Me.GVData.AppearancePrint.HeaderPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
+        Me.GVData.ColumnPanelRowHeight = 40
+        Me.GVData.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnIdAcc, Me.GridColumnNo, Me.GridColumnaccount, Me.GridColumnDescription, Me.GCCC, Me.GridColumnBudgetType, Me.GridColumnBudget, Me.GridColumnBefKurs, Me.GridColumnCurr, Me.GridColumnKurs, Me.GridColumnTaxPercent, Me.GridColumnTaxValue, Me.GridColumnAmount, Me.GridColumnPPHCOA, Me.GridColumnPPHPercent, Me.GridColumnPPH, Me.GridColumnPPHDesc, Me.GridColumnAccountDescription, Me.GridColumnBudgetTypeDesc, Me.GridColumnBudgetDesc, Me.GCCCDesc, Me.GridColumnCurrView})
         Me.GVData.GridControl = Me.GCData
         Me.GVData.Name = "GVData"
+        Me.GVData.OptionsPrint.AllowMultilineHeaders = True
+        Me.GVData.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.[True]
+        Me.GVData.OptionsView.RowAutoHeight = True
         Me.GVData.OptionsView.ShowFooter = True
         Me.GVData.OptionsView.ShowGroupPanel = False
         '
@@ -805,14 +817,18 @@ Partial Class FormItemExpenseDet
         '
         Me.GridColumnNo.AppearanceCell.Options.UseTextOptions = True
         Me.GridColumnNo.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumnNo.AppearanceHeader.Font = New System.Drawing.Font("Tahoma", 7.0!)
+        Me.GridColumnNo.AppearanceHeader.Options.UseFont = True
         Me.GridColumnNo.AppearanceHeader.Options.UseTextOptions = True
         Me.GridColumnNo.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
         Me.GridColumnNo.Caption = "No"
         Me.GridColumnNo.FieldName = "no"
+        Me.GridColumnNo.MaxWidth = 30
+        Me.GridColumnNo.MinWidth = 30
         Me.GridColumnNo.Name = "GridColumnNo"
         Me.GridColumnNo.Visible = True
         Me.GridColumnNo.VisibleIndex = 0
-        Me.GridColumnNo.Width = 50
+        Me.GridColumnNo.Width = 30
         '
         'GridColumnaccount
         '
@@ -822,7 +838,7 @@ Partial Class FormItemExpenseDet
         Me.GridColumnaccount.Name = "GridColumnaccount"
         Me.GridColumnaccount.Visible = True
         Me.GridColumnaccount.VisibleIndex = 1
-        Me.GridColumnaccount.Width = 123
+        Me.GridColumnaccount.Width = 55
         '
         'RepositoryItemSearchLookUpEdit1
         '
@@ -865,12 +881,22 @@ Partial Class FormItemExpenseDet
         '
         'GridColumnDescription
         '
+        Me.GridColumnDescription.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumnDescription.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center
         Me.GridColumnDescription.Caption = "Description"
+        Me.GridColumnDescription.ColumnEdit = Me.RepositoryItemMemoEdit1
         Me.GridColumnDescription.FieldName = "description"
+        Me.GridColumnDescription.MinWidth = 100
         Me.GridColumnDescription.Name = "GridColumnDescription"
         Me.GridColumnDescription.Visible = True
         Me.GridColumnDescription.VisibleIndex = 5
-        Me.GridColumnDescription.Width = 123
+        Me.GridColumnDescription.Width = 116
+        '
+        'RepositoryItemMemoEdit1
+        '
+        Me.RepositoryItemMemoEdit1.Appearance.Options.UseTextOptions = True
+        Me.RepositoryItemMemoEdit1.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center
+        Me.RepositoryItemMemoEdit1.Name = "RepositoryItemMemoEdit1"
         '
         'GCCC
         '
@@ -880,6 +906,7 @@ Partial Class FormItemExpenseDet
         Me.GCCC.Name = "GCCC"
         Me.GCCC.Visible = True
         Me.GCCC.VisibleIndex = 2
+        Me.GCCC.Width = 29
         '
         'RISLECC
         '
@@ -932,7 +959,7 @@ Partial Class FormItemExpenseDet
         Me.GridColumnBudgetType.Name = "GridColumnBudgetType"
         Me.GridColumnBudgetType.Visible = True
         Me.GridColumnBudgetType.VisibleIndex = 3
-        Me.GridColumnBudgetType.Width = 123
+        Me.GridColumnBudgetType.Width = 55
         '
         'RISLEType
         '
@@ -971,7 +998,7 @@ Partial Class FormItemExpenseDet
         Me.GridColumnBudget.Name = "GridColumnBudget"
         Me.GridColumnBudget.Visible = True
         Me.GridColumnBudget.VisibleIndex = 4
-        Me.GridColumnBudget.Width = 123
+        Me.GridColumnBudget.Width = 55
         '
         'RISLECatExpense
         '
@@ -1008,17 +1035,20 @@ Partial Class FormItemExpenseDet
         Me.GridColumn12.Visible = True
         Me.GridColumn12.VisibleIndex = 0
         '
-        'GridColumn22
+        'GridColumnBefKurs
         '
-        Me.GridColumn22.Caption = "Before Kurs"
-        Me.GridColumn22.ColumnEdit = Me.RepositoryItemTextEdit3
-        Me.GridColumn22.DisplayFormat.FormatString = "N2"
-        Me.GridColumn22.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.GridColumn22.FieldName = "amount_before"
-        Me.GridColumn22.Name = "GridColumn22"
-        Me.GridColumn22.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount_before", "{0:N2}")})
-        Me.GridColumn22.Visible = True
-        Me.GridColumn22.VisibleIndex = 7
+        Me.GridColumnBefKurs.Caption = "Before Kurs"
+        Me.GridColumnBefKurs.ColumnEdit = Me.RepositoryItemTextEdit3
+        Me.GridColumnBefKurs.DisplayFormat.FormatString = "N2"
+        Me.GridColumnBefKurs.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnBefKurs.FieldName = "amount_before"
+        Me.GridColumnBefKurs.MaxWidth = 65
+        Me.GridColumnBefKurs.MinWidth = 65
+        Me.GridColumnBefKurs.Name = "GridColumnBefKurs"
+        Me.GridColumnBefKurs.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount_before", "{0:N2}")})
+        Me.GridColumnBefKurs.Visible = True
+        Me.GridColumnBefKurs.VisibleIndex = 7
+        Me.GridColumnBefKurs.Width = 65
         '
         'RepositoryItemTextEdit3
         '
@@ -1030,12 +1060,16 @@ Partial Class FormItemExpenseDet
         '
         'GridColumnCurr
         '
-        Me.GridColumnCurr.Caption = "Currency"
+        Me.GridColumnCurr.AppearanceHeader.Font = New System.Drawing.Font("Tahoma", 7.0!)
+        Me.GridColumnCurr.AppearanceHeader.Options.UseFont = True
+        Me.GridColumnCurr.Caption = "Curr"
         Me.GridColumnCurr.ColumnEdit = Me.RISLECurrency
         Me.GridColumnCurr.FieldName = "id_currency"
+        Me.GridColumnCurr.MinWidth = 30
         Me.GridColumnCurr.Name = "GridColumnCurr"
         Me.GridColumnCurr.Visible = True
         Me.GridColumnCurr.VisibleIndex = 6
+        Me.GridColumnCurr.Width = 30
         '
         'RISLECurrency
         '
@@ -1066,28 +1100,37 @@ Partial Class FormItemExpenseDet
         Me.GridColumn24.Visible = True
         Me.GridColumn24.VisibleIndex = 0
         '
-        'GridColumn17
+        'GridColumnKurs
         '
-        Me.GridColumn17.Caption = "Kurs"
-        Me.GridColumn17.ColumnEdit = Me.RepositoryItemTextEdit3
-        Me.GridColumn17.DisplayFormat.FormatString = "N2"
-        Me.GridColumn17.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.GridColumn17.FieldName = "kurs"
-        Me.GridColumn17.Name = "GridColumn17"
-        Me.GridColumn17.Visible = True
-        Me.GridColumn17.VisibleIndex = 8
+        Me.GridColumnKurs.Caption = "Kurs"
+        Me.GridColumnKurs.ColumnEdit = Me.RepositoryItemTextEdit3
+        Me.GridColumnKurs.DisplayFormat.FormatString = "N2"
+        Me.GridColumnKurs.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnKurs.FieldName = "kurs"
+        Me.GridColumnKurs.MaxWidth = 50
+        Me.GridColumnKurs.MinWidth = 50
+        Me.GridColumnKurs.Name = "GridColumnKurs"
+        Me.GridColumnKurs.Visible = True
+        Me.GridColumnKurs.VisibleIndex = 8
+        Me.GridColumnKurs.Width = 50
         '
         'GridColumnTaxPercent
         '
-        Me.GridColumnTaxPercent.Caption = "Tax (%)"
+        Me.GridColumnTaxPercent.AppearanceHeader.Font = New System.Drawing.Font("Tahoma", 7.0!)
+        Me.GridColumnTaxPercent.AppearanceHeader.Options.UseFont = True
+        Me.GridColumnTaxPercent.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumnTaxPercent.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumnTaxPercent.Caption = "PPN (%)"
         Me.GridColumnTaxPercent.ColumnEdit = Me.RepositoryItemTextEdit1
         Me.GridColumnTaxPercent.DisplayFormat.FormatString = "N2"
         Me.GridColumnTaxPercent.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumnTaxPercent.FieldName = "tax_percent"
+        Me.GridColumnTaxPercent.MaxWidth = 30
+        Me.GridColumnTaxPercent.MinWidth = 30
         Me.GridColumnTaxPercent.Name = "GridColumnTaxPercent"
         Me.GridColumnTaxPercent.Visible = True
         Me.GridColumnTaxPercent.VisibleIndex = 10
-        Me.GridColumnTaxPercent.Width = 123
+        Me.GridColumnTaxPercent.Width = 30
         '
         'RepositoryItemTextEdit1
         '
@@ -1100,10 +1143,12 @@ Partial Class FormItemExpenseDet
         '
         'GridColumnTaxValue
         '
-        Me.GridColumnTaxValue.Caption = "Tax"
+        Me.GridColumnTaxValue.Caption = "PPN"
         Me.GridColumnTaxValue.DisplayFormat.FormatString = "N2"
         Me.GridColumnTaxValue.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumnTaxValue.FieldName = "tax_value"
+        Me.GridColumnTaxValue.MaxWidth = 60
+        Me.GridColumnTaxValue.MinWidth = 60
         Me.GridColumnTaxValue.Name = "GridColumnTaxValue"
         Me.GridColumnTaxValue.OptionsColumn.AllowEdit = False
         Me.GridColumnTaxValue.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "tax_value", "{0:N2}")})
@@ -1111,7 +1156,7 @@ Partial Class FormItemExpenseDet
         Me.GridColumnTaxValue.UnboundType = DevExpress.Data.UnboundColumnType.[Decimal]
         Me.GridColumnTaxValue.Visible = True
         Me.GridColumnTaxValue.VisibleIndex = 11
-        Me.GridColumnTaxValue.Width = 128
+        Me.GridColumnTaxValue.Width = 60
         '
         'GridColumnAmount
         '
@@ -1120,13 +1165,15 @@ Partial Class FormItemExpenseDet
         Me.GridColumnAmount.DisplayFormat.FormatString = "N2"
         Me.GridColumnAmount.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumnAmount.FieldName = "amount"
+        Me.GridColumnAmount.MaxWidth = 80
+        Me.GridColumnAmount.MinWidth = 80
         Me.GridColumnAmount.Name = "GridColumnAmount"
         Me.GridColumnAmount.OptionsColumn.AllowEdit = False
         Me.GridColumnAmount.OptionsColumn.ReadOnly = True
         Me.GridColumnAmount.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount", "{0:N2}")})
         Me.GridColumnAmount.Visible = True
         Me.GridColumnAmount.VisibleIndex = 9
-        Me.GridColumnAmount.Width = 123
+        Me.GridColumnAmount.Width = 80
         '
         'GridColumnPPHCOA
         '
@@ -1136,6 +1183,7 @@ Partial Class FormItemExpenseDet
         Me.GridColumnPPHCOA.Name = "GridColumnPPHCOA"
         Me.GridColumnPPHCOA.Visible = True
         Me.GridColumnPPHCOA.VisibleIndex = 12
+        Me.GridColumnPPHCOA.Width = 278
         '
         'RISLECOAPPH
         '
@@ -1176,14 +1224,21 @@ Partial Class FormItemExpenseDet
         Me.GridColumn20.Visible = True
         Me.GridColumn20.VisibleIndex = 1
         '
-        'GridColumn16
+        'GridColumnPPHPercent
         '
-        Me.GridColumn16.Caption = "PPH (%)"
-        Me.GridColumn16.ColumnEdit = Me.RepositoryItemTextEdit2
-        Me.GridColumn16.FieldName = "pph_percent"
-        Me.GridColumn16.Name = "GridColumn16"
-        Me.GridColumn16.Visible = True
-        Me.GridColumn16.VisibleIndex = 13
+        Me.GridColumnPPHPercent.AppearanceHeader.Font = New System.Drawing.Font("Tahoma", 7.0!)
+        Me.GridColumnPPHPercent.AppearanceHeader.Options.UseFont = True
+        Me.GridColumnPPHPercent.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumnPPHPercent.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumnPPHPercent.Caption = "PPH (%)"
+        Me.GridColumnPPHPercent.ColumnEdit = Me.RepositoryItemTextEdit2
+        Me.GridColumnPPHPercent.FieldName = "pph_percent"
+        Me.GridColumnPPHPercent.MaxWidth = 30
+        Me.GridColumnPPHPercent.MinWidth = 30
+        Me.GridColumnPPHPercent.Name = "GridColumnPPHPercent"
+        Me.GridColumnPPHPercent.Visible = True
+        Me.GridColumnPPHPercent.VisibleIndex = 13
+        Me.GridColumnPPHPercent.Width = 30
         '
         'RepositoryItemTextEdit2
         '
@@ -1200,6 +1255,8 @@ Partial Class FormItemExpenseDet
         Me.GridColumnPPH.DisplayFormat.FormatString = "N2"
         Me.GridColumnPPH.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumnPPH.FieldName = "pph_value"
+        Me.GridColumnPPH.MaxWidth = 60
+        Me.GridColumnPPH.MinWidth = 60
         Me.GridColumnPPH.Name = "GridColumnPPH"
         Me.GridColumnPPH.OptionsColumn.AllowEdit = False
         Me.GridColumnPPH.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "pph_value", "{0:N2}")})
@@ -1207,12 +1264,24 @@ Partial Class FormItemExpenseDet
         Me.GridColumnPPH.UnboundType = DevExpress.Data.UnboundColumnType.[Decimal]
         Me.GridColumnPPH.Visible = True
         Me.GridColumnPPH.VisibleIndex = 14
+        Me.GridColumnPPH.Width = 60
         '
         'GridColumnPPHDesc
         '
+        Me.GridColumnPPHDesc.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumnPPHDesc.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center
         Me.GridColumnPPHDesc.Caption = "PPH COA"
+        Me.GridColumnPPHDesc.ColumnEdit = Me.RepositoryItemMemoEdit2
         Me.GridColumnPPHDesc.FieldName = "coa_desc_pph"
+        Me.GridColumnPPHDesc.MinWidth = 80
         Me.GridColumnPPHDesc.Name = "GridColumnPPHDesc"
+        Me.GridColumnPPHDesc.Width = 60
+        '
+        'RepositoryItemMemoEdit2
+        '
+        Me.RepositoryItemMemoEdit2.Appearance.Options.UseTextOptions = True
+        Me.RepositoryItemMemoEdit2.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center
+        Me.RepositoryItemMemoEdit2.Name = "RepositoryItemMemoEdit2"
         '
         'GridColumnAccountDescription
         '
@@ -1228,9 +1297,19 @@ Partial Class FormItemExpenseDet
         '
         'GridColumnBudgetDesc
         '
+        Me.GridColumnBudgetDesc.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumnBudgetDesc.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center
         Me.GridColumnBudgetDesc.Caption = "Budget"
+        Me.GridColumnBudgetDesc.ColumnEdit = Me.RepositoryItemMemoEdit3
         Me.GridColumnBudgetDesc.FieldName = "item_cat_main"
         Me.GridColumnBudgetDesc.Name = "GridColumnBudgetDesc"
+        Me.GridColumnBudgetDesc.Width = 50
+        '
+        'RepositoryItemMemoEdit3
+        '
+        Me.RepositoryItemMemoEdit3.Appearance.Options.UseTextOptions = True
+        Me.RepositoryItemMemoEdit3.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center
+        Me.RepositoryItemMemoEdit3.Name = "RepositoryItemMemoEdit3"
         '
         'GCCCDesc
         '
@@ -1244,9 +1323,16 @@ Partial Class FormItemExpenseDet
         '
         'GridColumnCurrView
         '
-        Me.GridColumnCurrView.Caption = "Currency"
+        Me.GridColumnCurrView.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumnCurrView.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumnCurrView.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumnCurrView.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumnCurrView.Caption = "Curr"
         Me.GridColumnCurrView.FieldName = "currency"
+        Me.GridColumnCurrView.MaxWidth = 30
+        Me.GridColumnCurrView.MinWidth = 30
         Me.GridColumnCurrView.Name = "GridColumnCurrView"
+        Me.GridColumnCurrView.Width = 30
         '
         'RepositoryItemSpinEdit1
         '
@@ -1439,6 +1525,7 @@ Partial Class FormItemExpenseDet
         CType(Me.GVData, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemSearchLookUpEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemSearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemMemoEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RISLECC, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RISLEType, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1452,6 +1539,8 @@ Partial Class FormItemExpenseDet
         CType(Me.RISLECOAPPH, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemTextEdit2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemMemoEdit2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemMemoEdit3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemSpinEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.XTPDraftJournal, System.ComponentModel.ISupportInitialize).EndInit()
         Me.XTPDraftJournal.ResumeLayout(False)
@@ -1562,7 +1651,7 @@ Partial Class FormItemExpenseDet
     Friend WithEvents GridColumncredit_draft As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumncc As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnPPHCOA As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn16 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnPPHPercent As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnPPH As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents RISLECOAPPH As DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit
     Friend WithEvents GridView4 As DevExpress.XtraGrid.Views.Grid.GridView
@@ -1575,14 +1664,17 @@ Partial Class FormItemExpenseDet
     Friend WithEvents LabelControl14 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents GrossUpPPHToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents GridColumnPPHDesc As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn22 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnBefKurs As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnCurr As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents RISLECurrency As DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit
     Friend WithEvents GridView5 As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents GridColumn23 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn24 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn17 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnKurs As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnCurrView As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents LabelControl15 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents DEDateReff As DevExpress.XtraEditors.DateEdit
+    Friend WithEvents RepositoryItemMemoEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit
+    Friend WithEvents RepositoryItemMemoEdit2 As DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit
+    Friend WithEvents RepositoryItemMemoEdit3 As DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit
 End Class

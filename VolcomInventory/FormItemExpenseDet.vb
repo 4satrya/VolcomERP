@@ -237,7 +237,19 @@ WHERE bo.`year`=YEAR(NOW()) AND bo.is_active='1'"
         WHERE ed.id_item_expense=" + id + " "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCData.DataSource = data
+
+        GridColumnNo.MaxWidth = 0
+        GridColumnCurrView.MaxWidth = 0
+        GridColumnBefKurs.MaxWidth = 0
+        GridColumnKurs.MaxWidth = 0
+        GridColumnAmount.MaxWidth = 0
+        GridColumnTaxPercent.MaxWidth = 0
+        GridColumnTaxValue.MaxWidth = 0
+        GridColumnPPHPercent.MaxWidth = 0
+        GridColumnPPH.MaxWidth = 0
+
         GVData.BestFitColumns()
+
         Cursor = Cursors.Default
     End Sub
 
@@ -342,28 +354,38 @@ WHERE bo.`year`=YEAR(NOW()) AND bo.is_active='1'"
         ReportItemExpense.id = id
         ReportItemExpense.dt = GCData.DataSource
         Dim Report As New ReportItemExpense()
-
-        GridColumnPPHDesc.VisibleIndex = -1
         '
         GridColumnaccount.Visible = False
-        GridColumnAccountDescription.VisibleIndex = 1
-        '
-        GridColumnPPHCOA.Visible = False
-        GridColumnPPHDesc.VisibleIndex = 12
+        GridColumnAccountDescription.VisibleIndex = -1
         '
         GridColumnCurr.Visible = False
         GridColumnCurrView.VisibleIndex = 6
         '
         GridColumnBudgetType.Visible = False
-        GridColumnBudgetTypeDesc.VisibleIndex = 2
+        GridColumnBudgetTypeDesc.VisibleIndex = -1
         '
         GCCC.Visible = False
-        GCCCDesc.VisibleIndex = 2
+        GCCCDesc.VisibleIndex = -1
         '
         GridColumnBudget.Visible = False
-        GridColumnBudgetDesc.VisibleIndex = 3
+        GridColumnBudgetDesc.VisibleIndex = 2
+        '
+        GridColumnPPHCOA.Visible = False
+        GridColumnPPHDesc.VisibleIndex = 12
+        GridColumnPPHPercent.VisibleIndex = 13
+        GridColumnPPH.VisibleIndex = 14
         '
         GVData.BestFitColumns()
+        '
+        GridColumnNo.MaxWidth = 30
+        GridColumnCurrView.MaxWidth = 30
+        GridColumnBefKurs.MaxWidth = 65
+        GridColumnKurs.MaxWidth = 50
+        GridColumnAmount.MaxWidth = 80
+        GridColumnTaxPercent.MaxWidth = 30
+        GridColumnTaxValue.MaxWidth = 70
+        GridColumnPPHPercent.MaxWidth = 30
+        GridColumnPPH.MaxWidth = 60
 
         'creating and saving the view's layout to a new memory stream 
         Dim str As System.IO.Stream
@@ -372,11 +394,61 @@ WHERE bo.`year`=YEAR(NOW()) AND bo.is_active='1'"
         str.Seek(0, System.IO.SeekOrigin.Begin)
         Report.GVData.RestoreLayoutFromStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
         str.Seek(0, System.IO.SeekOrigin.Begin)
-
         'Grid Detail
         ReportStyleGridview(Report.GVData)
+        Report.GVData.OptionsPrint.AllowMultilineHeaders = True
+        ''============== END OF first table
+        'GridColumnCurrView.VisibleIndex = -1
+        'GridColumnBudgetDesc.VisibleIndex = -1
+        'GridColumnBefKurs.VisibleIndex = -1
+        'GridColumnKurs.VisibleIndex = -1
+        'GridColumnAmount.VisibleIndex = -1
+        'GridColumnTaxPercent.VisibleIndex = -1
+        'GridColumnTaxValue.VisibleIndex = -1
+        'GridColumnPPHDesc.VisibleIndex = 2
+        'GridColumnPPHPercent.VisibleIndex = 3
+        'GridColumnPPH.VisibleIndex = 4
 
-        GridColumnPPHDesc.VisibleIndex = 9
+        'GVData.BestFitColumns()
+
+        ''creating and saving the view's layout to a new memory stream 
+        'Dim str2 As System.IO.Stream
+        'str2 = New System.IO.MemoryStream()
+        'GVData.SaveLayoutToStream(str2, DevExpress.Utils.OptionsLayoutBase.FullLayout)
+        'str2.Seek(0, System.IO.SeekOrigin.Begin)
+        'Report.GVPPH.RestoreLayoutFromStream(str2, DevExpress.Utils.OptionsLayoutBase.FullLayout)
+        'str2.Seek(0, System.IO.SeekOrigin.Begin)
+        ''Grid Detail
+        'ReportStyleGridview(Report.GVPPH)
+
+        ''============== END OF second table
+
+        GridColumnAccountDescription.VisibleIndex = 1
+        GCCCDesc.VisibleIndex = 2
+        GridColumnBudgetTypeDesc.VisibleIndex = 3
+        GridColumnBudgetDesc.VisibleIndex = 4
+        GridColumnDescription.VisibleIndex = 5
+        GridColumnCurrView.VisibleIndex = 6
+        GridColumnBefKurs.VisibleIndex = 7
+        GridColumnKurs.VisibleIndex = 8
+        GridColumnAmount.VisibleIndex = 9
+        GridColumnTaxPercent.VisibleIndex = 10
+        GridColumnTaxValue.VisibleIndex = 11
+        GridColumnPPHDesc.VisibleIndex = 12
+        GridColumnPPHPercent.VisibleIndex = 13
+        GridColumnPPH.VisibleIndex = 14
+
+        GridColumnNo.MaxWidth = 0
+        GridColumnCurrView.MaxWidth = 0
+        GridColumnBefKurs.MaxWidth = 0
+        GridColumnKurs.MaxWidth = 0
+        GridColumnAmount.MaxWidth = 0
+        GridColumnTaxPercent.MaxWidth = 0
+        GridColumnTaxValue.MaxWidth = 0
+        GridColumnPPHPercent.MaxWidth = 0
+        GridColumnPPH.MaxWidth = 0
+
+        GVData.BestFitColumns()
 
         'Parse val
         Report.LabelNumber.Text = TxtNumber.Text.ToUpper

@@ -71,6 +71,15 @@
         Next
 
         GVPayroll.BestFitColumns()
+
+        'controls
+        Dim id_report_status As String = execute_query("SELECT id_report_status FROM tb_emp_payroll WHERE id_payroll = '" + id_payroll + "'", 0, True, "", "", "", "")
+
+        If id_report_status = "0" Then
+            SBPrint.Enabled = False
+        Else
+            SBPrint.Enabled = True
+        End If
     End Sub
 
     Private Sub FormEmpPayrollCompare_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed

@@ -1380,8 +1380,11 @@ WHERE pnd.id_pn='" & id_payment & "'"
         ' '... 
         ' ' creating and saving the view's layout to a new memory stream 
 
+        GridColumnCOA.VisibleIndex = -1
+        GridColumnCCDesc.VisibleIndex = -1
+        GridColumnVendor.VisibleIndex = -1
         GridColumnCurrency.VisibleIndex = -1
-        GridColumnCurrencyHide.VisibleIndex = 9
+        GridColumnCurrencyHide.VisibleIndex = 4
 
         Dim str As System.IO.Stream
         str = New System.IO.MemoryStream()
@@ -1389,11 +1392,14 @@ WHERE pnd.id_pn='" & id_payment & "'"
         str.Seek(0, System.IO.SeekOrigin.Begin)
         Report.GVList.RestoreLayoutFromStream(str, DevExpress.Utils.OptionsLayoutBase.FullLayout)
         str.Seek(0, System.IO.SeekOrigin.Begin)
-
         'Grid Detail
         ReportStyleGridview(Report.GVList)
         Report.GVList.AppearancePrint.Row.Font = New Font("Segoe UI", 6.5, FontStyle.Regular)
+        Report.GVList.BestFitColumns()
 
+        GridColumnCOA.VisibleIndex = 1
+        GridColumnCCDesc.VisibleIndex = 2
+        GridColumnVendor.VisibleIndex = 4
         GridColumnCurrency.VisibleIndex = 9
         GridColumnCurrencyHide.VisibleIndex = -1
 

@@ -22,14 +22,15 @@ Partial Class FormDesignImagesDet
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormDesignImagesDet))
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
         Me.SBCancel = New DevExpress.XtraEditors.SimpleButton()
+        Me.SBBrowseFolder = New DevExpress.XtraEditors.SimpleButton()
         Me.SBUpload = New DevExpress.XtraEditors.SimpleButton()
         Me.GCList = New DevExpress.XtraGrid.GridControl()
         Me.GVList = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.SBBrowseFolder = New DevExpress.XtraEditors.SimpleButton()
         Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemCheckEdit = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
+        Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.GCList, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -58,6 +59,16 @@ Partial Class FormDesignImagesDet
         Me.SBCancel.TabIndex = 1
         Me.SBCancel.Text = "Cancel"
         '
+        'SBBrowseFolder
+        '
+        Me.SBBrowseFolder.Dock = System.Windows.Forms.DockStyle.Right
+        Me.SBBrowseFolder.Image = CType(resources.GetObject("SBBrowseFolder.Image"), System.Drawing.Image)
+        Me.SBBrowseFolder.Location = New System.Drawing.Point(561, 2)
+        Me.SBBrowseFolder.Name = "SBBrowseFolder"
+        Me.SBBrowseFolder.Size = New System.Drawing.Size(121, 41)
+        Me.SBBrowseFolder.TabIndex = 2
+        Me.SBBrowseFolder.Text = "Browse Folder"
+        '
         'SBUpload
         '
         Me.SBUpload.Dock = System.Windows.Forms.DockStyle.Right
@@ -81,7 +92,7 @@ Partial Class FormDesignImagesDet
         '
         'GVList
         '
-        Me.GVList.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn2, Me.GridColumn3})
+        Me.GVList.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn2, Me.GridColumn4, Me.GridColumn3})
         Me.GVList.GridControl = Me.GCList
         Me.GVList.Name = "GVList"
         Me.GVList.OptionsBehavior.ReadOnly = True
@@ -103,16 +114,6 @@ Partial Class FormDesignImagesDet
         Me.GridColumn2.Visible = True
         Me.GridColumn2.VisibleIndex = 1
         '
-        'SBBrowseFolder
-        '
-        Me.SBBrowseFolder.Dock = System.Windows.Forms.DockStyle.Right
-        Me.SBBrowseFolder.Image = CType(resources.GetObject("SBBrowseFolder.Image"), System.Drawing.Image)
-        Me.SBBrowseFolder.Location = New System.Drawing.Point(561, 2)
-        Me.SBBrowseFolder.Name = "SBBrowseFolder"
-        Me.SBBrowseFolder.Size = New System.Drawing.Size(121, 41)
-        Me.SBBrowseFolder.TabIndex = 2
-        Me.SBBrowseFolder.Text = "Browse Folder"
-        '
         'GridColumn3
         '
         Me.GridColumn3.Caption = "Open File Location"
@@ -130,6 +131,11 @@ Partial Class FormDesignImagesDet
         Me.RepositoryItemCheckEdit.PictureChecked = CType(resources.GetObject("RepositoryItemCheckEdit.PictureChecked"), System.Drawing.Image)
         Me.RepositoryItemCheckEdit.PictureGrayed = CType(resources.GetObject("RepositoryItemCheckEdit.PictureGrayed"), System.Drawing.Image)
         Me.RepositoryItemCheckEdit.PictureUnchecked = CType(resources.GetObject("RepositoryItemCheckEdit.PictureUnchecked"), System.Drawing.Image)
+        '
+        'GridColumn4
+        '
+        Me.GridColumn4.FieldName = "id_design_images"
+        Me.GridColumn4.Name = "GridColumn4"
         '
         'FormDesignImagesDet
         '
@@ -160,4 +166,5 @@ Partial Class FormDesignImagesDet
     Friend WithEvents SBBrowseFolder As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents GridColumn3 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents RepositoryItemCheckEdit As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
+    Friend WithEvents GridColumn4 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

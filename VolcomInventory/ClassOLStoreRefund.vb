@@ -20,8 +20,8 @@
                 Dim id_so_type As String = "0"
                 Dim id_inv_type As String = "0"
                 Dim id_memo_type As String = "2"
-                Dim qm As String = "INSERT INTO tb_sales_pos(id_store_contact_from, sales_pos_date, sales_pos_note, id_report_status, id_so_type, sales_pos_total, sales_pos_due_date, sales_pos_start_period, sales_pos_end_period, sales_pos_discount, sales_pos_potongan, sales_pos_vat, id_memo_type, id_inv_type, id_sales_pos_ref, report_mark_type, id_acc_ar, id_acc_sales, id_acc_sales_return, sales_pos_potongan) 
-                VALUES('" + dcn.Rows(c)("id_store_contact_from").ToString + "', NOW(), '', 1, '" + id_so_type + "',0, NOW(), NOW(), NOW(), '" + decimalSQL(dcn.Rows(c)("sales_pos_discount").ToString) + "', 0, '" + dcn.Rows(c)("sales_pos_vat").ToString + "', '" + id_memo_type + "', '" + id_inv_type + "', '" + dcn.Rows(c)("id_sales_pos").ToString + "', '118', '" + dcn.Rows(c)("id_acc_ar").ToString + "', '" + dcn.Rows(c)("id_acc_sales").ToString + "', '" + dcn.Rows(c)("id_acc_sales_return").ToString + "','" + decimalSQL(dcn.Rows(c)("discount").ToString) + "'); SELECT LAST_INSERT_ID(); "
+                Dim qm As String = "INSERT INTO tb_sales_pos(id_store_contact_from, sales_pos_date, sales_pos_note, id_report_status, id_so_type, sales_pos_total, sales_pos_due_date, sales_pos_start_period, sales_pos_end_period, sales_pos_discount, sales_pos_vat, id_memo_type, id_inv_type, id_sales_pos_ref, report_mark_type, id_acc_ar, id_acc_sales, id_acc_sales_return, sales_pos_potongan) 
+                VALUES('" + dcn.Rows(c)("id_store_contact_from").ToString + "', NOW(), '', 1, '" + id_so_type + "',0, NOW(), NOW(), NOW(), '" + decimalSQL(dcn.Rows(c)("sales_pos_discount").ToString) + "', '" + dcn.Rows(c)("sales_pos_vat").ToString + "', '" + id_memo_type + "', '" + id_inv_type + "', '" + dcn.Rows(c)("id_sales_pos").ToString + "', '118', '" + dcn.Rows(c)("id_acc_ar").ToString + "', '" + dcn.Rows(c)("id_acc_sales").ToString + "', '" + dcn.Rows(c)("id_acc_sales_return").ToString + "','" + decimalSQL(dcn.Rows(c)("discount").ToString) + "'); SELECT LAST_INSERT_ID(); "
                 Dim id_cn As String = execute_query(qm, 0, True, "", "", "", "")
                 'gen number
                 execute_non_query("CALL gen_number(" + id_cn + ", " + report_mark_type + ");", True, "", "", "", "")
@@ -95,7 +95,7 @@
 	                    GROUP BY d.id_ol_store_ret_list
                     ) src ON src.id_ol_store_ret_list = main.id_ol_store_ret_list
                     SET main.id_ol_store_ret_stt=7;
-                    INSERT INTO tb_sales_order_det_status(id_sales_order_det, `status`, `status_date`, `input_status_date`, is_internal)
+                    INSERT IGNORE INTO tb_sales_order_det_status(id_sales_order_det, `status`, `status_date`, `input_status_date`, is_internal)
                     SELECT rd.id_sales_order_det, stt.ol_store_ret_stt, NOW(), NOW(),1
                     FROM tb_sales_pos_det d
                     INNER JOIN tb_ol_store_ret_list rl ON rl.id_ol_store_ret_list = d.id_ol_store_ret_list
@@ -209,7 +209,7 @@
                                GROUP BY d.id_ol_store_ret_list
                             ) src ON src.id_ol_store_ret_list = main.id_ol_store_ret_list
                             SET main.id_ol_store_ret_stt=8;
-                            INSERT INTO tb_sales_order_det_status(id_sales_order_det, `status`, `status_date`, `input_status_date`, is_internal)
+                            INSERT IGNORE INTO tb_sales_order_det_status(id_sales_order_det, `status`, `status_date`, `input_status_date`, is_internal)
                             SELECT rd.id_sales_order_det, stt.ol_store_ret_stt, NOW(), NOW(),1
                             FROM tb_sales_return_order_det d
                             INNER JOIN tb_ol_store_ret_list rl ON rl.id_ol_store_ret_list = d.id_ol_store_ret_list

@@ -21,6 +21,8 @@ Partial Class FormEmployeeContract
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.GCEmployeeContract = New DevExpress.XtraGrid.GridControl()
+        Me.ContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.PrintToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GVEmployeeContract = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -31,11 +33,10 @@ Partial Class FormEmployeeContract
         Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn9 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn10 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.ContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.PrintToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GCEmployeeContract, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GVEmployeeContract, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ContextMenuStrip.SuspendLayout()
+        CType(Me.GVEmployeeContract, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GCEmployeeContract
@@ -49,9 +50,21 @@ Partial Class FormEmployeeContract
         Me.GCEmployeeContract.TabIndex = 0
         Me.GCEmployeeContract.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVEmployeeContract})
         '
+        'ContextMenuStrip
+        '
+        Me.ContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PrintToolStripMenuItem})
+        Me.ContextMenuStrip.Name = "ContextMenuStrip"
+        Me.ContextMenuStrip.Size = New System.Drawing.Size(100, 26)
+        '
+        'PrintToolStripMenuItem
+        '
+        Me.PrintToolStripMenuItem.Name = "PrintToolStripMenuItem"
+        Me.PrintToolStripMenuItem.Size = New System.Drawing.Size(99, 22)
+        Me.PrintToolStripMenuItem.Text = "Print"
+        '
         'GVEmployeeContract
         '
-        Me.GVEmployeeContract.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn2, Me.GridColumn4, Me.GridColumn5, Me.GridColumn6, Me.GridColumn7, Me.GridColumn8, Me.GridColumn9, Me.GridColumn10})
+        Me.GVEmployeeContract.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn2, Me.GridColumn4, Me.GridColumn5, Me.GridColumn6, Me.GridColumn7, Me.GridColumn8, Me.GridColumn9, Me.GridColumn10, Me.GridColumn3})
         Me.GVEmployeeContract.GridControl = Me.GCEmployeeContract
         Me.GVEmployeeContract.Name = "GVEmployeeContract"
         Me.GVEmployeeContract.OptionsBehavior.Editable = False
@@ -74,7 +87,7 @@ Partial Class FormEmployeeContract
         Me.GridColumn4.FieldName = "employee_name"
         Me.GridColumn4.Name = "GridColumn4"
         Me.GridColumn4.Visible = True
-        Me.GridColumn4.VisibleIndex = 2
+        Me.GridColumn4.VisibleIndex = 3
         '
         'GridColumn5
         '
@@ -92,7 +105,7 @@ Partial Class FormEmployeeContract
         Me.GridColumn6.FieldName = "start_period"
         Me.GridColumn6.Name = "GridColumn6"
         Me.GridColumn6.Visible = True
-        Me.GridColumn6.VisibleIndex = 3
+        Me.GridColumn6.VisibleIndex = 4
         '
         'GridColumn7
         '
@@ -102,7 +115,7 @@ Partial Class FormEmployeeContract
         Me.GridColumn7.FieldName = "end_period"
         Me.GridColumn7.Name = "GridColumn7"
         Me.GridColumn7.Visible = True
-        Me.GridColumn7.VisibleIndex = 4
+        Me.GridColumn7.VisibleIndex = 5
         '
         'GridColumn8
         '
@@ -111,16 +124,12 @@ Partial Class FormEmployeeContract
         Me.GridColumn8.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
         Me.GridColumn8.FieldName = "created_at"
         Me.GridColumn8.Name = "GridColumn8"
-        Me.GridColumn8.Visible = True
-        Me.GridColumn8.VisibleIndex = 5
         '
         'GridColumn9
         '
         Me.GridColumn9.Caption = "Created By"
         Me.GridColumn9.FieldName = "created_by"
         Me.GridColumn9.Name = "GridColumn9"
-        Me.GridColumn9.Visible = True
-        Me.GridColumn9.VisibleIndex = 6
         '
         'GridColumn10
         '
@@ -130,17 +139,13 @@ Partial Class FormEmployeeContract
         Me.GridColumn10.Visible = True
         Me.GridColumn10.VisibleIndex = 1
         '
-        'ContextMenuStrip
+        'GridColumn3
         '
-        Me.ContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PrintToolStripMenuItem})
-        Me.ContextMenuStrip.Name = "ContextMenuStrip"
-        Me.ContextMenuStrip.Size = New System.Drawing.Size(153, 48)
-        '
-        'PrintToolStripMenuItem
-        '
-        Me.PrintToolStripMenuItem.Name = "PrintToolStripMenuItem"
-        Me.PrintToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.PrintToolStripMenuItem.Text = "Print"
+        Me.GridColumn3.Caption = "Departement"
+        Me.GridColumn3.FieldName = "departement"
+        Me.GridColumn3.Name = "GridColumn3"
+        Me.GridColumn3.Visible = True
+        Me.GridColumn3.VisibleIndex = 2
         '
         'FormEmployeeContract
         '
@@ -152,8 +157,8 @@ Partial Class FormEmployeeContract
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Employee Contract"
         CType(Me.GCEmployeeContract, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GVEmployeeContract, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ContextMenuStrip.ResumeLayout(False)
+        CType(Me.GVEmployeeContract, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -171,4 +176,5 @@ Partial Class FormEmployeeContract
     Friend WithEvents GridColumn10 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents ContextMenuStrip As ContextMenuStrip
     Friend WithEvents PrintToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents GridColumn3 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

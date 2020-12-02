@@ -227,11 +227,20 @@
                         'end insert who prepared
                         increase_inc_prod("6")
 
-                        FormMaterialRequisition.view_mrs()
+                        Try
+                            FormMaterialRequisition.view_mrs()
+                        Catch ex As Exception
 
-                        FormProductionDet.XTCPageProduction.SelectedTabPageIndex = 2
-                        FormProductionDet.view_mrs()
-                        FormProductionDet.GVMRS.FocusedRowHandle = find_row(FormProductionDet.GVMRS, "id_prod_order_mrs", last_id)
+                        End Try
+
+                        Try
+                            FormProductionDet.XTCPageProduction.SelectedTabPageIndex = 2
+                            FormProductionDet.view_mrs()
+                            FormProductionDet.GVMRS.FocusedRowHandle = find_row(FormProductionDet.GVMRS, "id_prod_order_mrs", last_id)
+                        Catch ex As Exception
+
+                        End Try
+
                         Close()
                     End If
                 End If
@@ -296,11 +305,20 @@
                             End If
                         Next
 
-                        FormMaterialRequisition.view_mrs()
+                        Try
+                            FormMaterialRequisition.view_mrs()
+                        Catch ex As Exception
 
-                        FormProductionDet.XTCPageProduction.SelectedTabPageIndex = 2
-                        FormProductionDet.view_mrs()
-                        FormProductionDet.GVMRS.FocusedRowHandle = find_row(FormProductionDet.GVMRS, "id_prod_order_mrs", id_mrs)
+                        End Try
+
+                        Try
+                            FormProductionDet.XTCPageProduction.SelectedTabPageIndex = 2
+                            FormProductionDet.view_mrs()
+                            FormProductionDet.GVMRS.FocusedRowHandle = find_row(FormProductionDet.GVMRS, "id_prod_order_mrs", id_mrs)
+                        Catch ex As Exception
+
+                        End Try
+
                         Close()
                     End If
                 End If
@@ -367,7 +385,7 @@
     End Sub
 
     Private Sub BShowBOM_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BShowBOM.Click
-        FormInfoBOMMat.id_pd_design = get_prod_order_x(id_prod_order, "1")
+        'FormInfoBOMMat.id_pd_design = get_prod_order_x(id_prod_order, "1")
         FormInfoBOMMat.ShowDialog()
     End Sub
 

@@ -7,7 +7,7 @@
 
 
     Private Sub ReportInvMat_BeforePrint(sender As Object, e As Printing.PrintEventArgs) Handles MyBase.BeforePrint
-        Dim query_head As String = "SELECT inv.`id_inv_mat`,SUM(invd.`value`) AS total,CAST(inv.vat_percent AS DECIMAL(5,0)) AS p,SUM(invd.`value`)*(inv.vat_percent/100) AS ppn,SUM(invd.`value`)*((100+inv.vat_percent)/100) AS total_amount
+        Dim query_head As String = "SELECT DATE_FORMAT(inv.ref_date,'%d %M %Y') AS ref_date,inv.`id_inv_mat`,SUM(invd.`value`) AS total,CAST(inv.vat_percent AS DECIMAL(5,0)) AS p,SUM(invd.`value`)*(inv.vat_percent/100) AS ppn,SUM(invd.`value`)*((100+inv.vat_percent)/100) AS total_amount
 ,inv.note,self.comp_name AS own_comp_name,self.address_primary AS own_comp_address, self.postal_code AS own_comp_postal_code, self.npwp AS own_comp_npwp
 ,c.comp_name AS vendor_name,c.address_primary AS vendor_address,inv.number AS report_number,DATE_FORMAT(inv.created_date,'%d %M %Y') AS created_date,DATE_FORMAT(inv.due_date,'%d %M %Y') AS due_date,emp.employee_name AS printed_by, DATE_FORMAT(NOW(),'%d %M %Y') AS printed_date
 FROM tb_inv_mat_det invd

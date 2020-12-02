@@ -422,7 +422,7 @@ Partial Public Class ReportPurcOrder
         '
         Me.LDateCreated.Borders = DevExpress.XtraPrinting.BorderSide.None
         Me.LDateCreated.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LDateCreated.LocationFloat = New DevExpress.Utils.PointFloat(618.0245!, 21.995!)
+        Me.LDateCreated.LocationFloat = New DevExpress.Utils.PointFloat(618.0247!, 21.995!)
         Me.LDateCreated.Name = "LDateCreated"
         Me.LDateCreated.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.LDateCreated.SizeF = New System.Drawing.SizeF(119.9755!, 22.13!)
@@ -435,7 +435,7 @@ Partial Public Class ReportPurcOrder
         '
         Me.LPONumber.Borders = DevExpress.XtraPrinting.BorderSide.None
         Me.LPONumber.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LPONumber.LocationFloat = New DevExpress.Utils.PointFloat(618.0245!, 0!)
+        Me.LPONumber.LocationFloat = New DevExpress.Utils.PointFloat(618.0247!, 0!)
         Me.LPONumber.Name = "LPONumber"
         Me.LPONumber.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.LPONumber.SizeF = New System.Drawing.SizeF(119.9754!, 21.99503!)

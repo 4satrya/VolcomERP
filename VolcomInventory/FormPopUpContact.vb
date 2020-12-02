@@ -617,6 +617,7 @@
             FormSalesReturnDet.TxtNameCompTo.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "1")
             FormSalesReturnDet.TxtCodeCompTo.Text = get_company_x(get_id_company(GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString), "2")
             FormSalesReturnDet.id_comp_user = GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString
+            FormSalesReturnDet.id_wh_type = GVCompany.GetFocusedRowCellValue("id_wh_type").ToString
             FormSalesReturnDet.setDefDrawer()
             'FormSalesReturnDet.id_drawer = ""
             'FormSalesReturnDet.TEDrawer.Text = ""

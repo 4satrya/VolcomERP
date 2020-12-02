@@ -3,6 +3,8 @@
     Public is_view As String = "1"
     Public lock As Boolean = False
 
+    Private allow_edit As Boolean = False
+
     Private Sub FormCashAdvanceReconcile_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
         Dispose()
 
@@ -47,6 +49,10 @@
         viewSearchLookupRepositoryQuery(RSLECOABD, query, 0, "acc_name_description", "id_acc")
         viewSearchLookupRepositoryQuery(RSLECOABCFROM, query, 0, "acc_name_description", "id_acc")
         viewSearchLookupRepositoryQuery(RSLECOABCTO, query, 0, "acc_name_description", "id_acc")
+        viewSearchLookupRepositoryQuery(RSLECOAPPH, query, 0, "acc_name_description", "id_acc")
+        viewSearchLookupQuery(SLUEPPNCOA, query, "id_acc", "acc_name_description", "id_acc")
+
+        SLUEPPNCOA.EditValue = Nothing
     End Sub
 
     Sub load_comp()
@@ -63,6 +69,10 @@
 
         GCJournalDet.DataSource = dataReport
         GVJournalDet.BestFitColumns()
+
+        Dim ppn_coa As String = execute_query("SELECT MAX(ppn_coa) FROM tb_cash_advance_report WHERE id_cash_advance='" & id_ca & "'", 0, True, "", "", "", "")
+
+        SLUEPPNCOA.EditValue = ppn_coa
 
         check_but()
 
@@ -133,6 +143,8 @@
             SBReset.Enabled = False
             SBCancel.Enabled = True
         End If
+
+        calculate_total()
     End Sub
 
     Sub load_cancel()
@@ -236,6 +248,8 @@
             BLock.Text = "Unlock"
 
             BSave.Enabled = True
+
+            SLUEPPNCOA.Enabled = False
         Else
             BDelete.Enabled = True
             BAdd.Enabled = True
@@ -249,6 +263,8 @@
             XTPDeposit.PageVisible = False
 
             BSave.Enabled = False
+
+            SLUEPPNCOA.Enabled = True
         End If
     End Sub
 
@@ -263,11 +279,15 @@
     End Sub
 
     Private Sub BAdd_Click(sender As Object, e As EventArgs) Handles BAdd.Click
+        allow_edit = False
+
         GVJournalDet.AddNewRow()
         GVJournalDet.FocusedRowHandle = GVJournalDet.RowCount - 1
         GVJournalDet.SetRowCellValue(GVJournalDet.RowCount - 1, "id_comp", "1")
         GVJournalDet.SetRowCellValue(GVJournalDet.RowCount - 1, "description", MENote.EditValue.ToString)
         check_but()
+
+        allow_edit = True
     End Sub
 
     Private Sub BSave_Click(sender As Object, e As EventArgs) Handles BSave.Click
@@ -283,7 +303,7 @@
                 End If
             Next
             '
-            If Not GVJournalDet.Columns("value").SummaryItem.SummaryValue - GVBankWithdrawal.Columns("value").SummaryItem.SummaryValue = TECashInAdvance.EditValue Then
+            If Not TETotal.EditValue - GVBankWithdrawal.Columns("value").SummaryItem.SummaryValue = TECashInAdvance.EditValue Then
                 val_ok = False
             End If
         ElseIf XTPDeposit.PageVisible Then
@@ -293,7 +313,7 @@
                 End If
             Next
             '
-            If Not GVBankDeposit.Columns("value").SummaryItem.SummaryValue + GVJournalDet.Columns("value").SummaryItem.SummaryValue = TECashInAdvance.EditValue Then
+            If Not GVBankDeposit.Columns("value").SummaryItem.SummaryValue + TETotal.EditValue = TECashInAdvance.EditValue Then
                 val_ok = False
             End If
         End If
@@ -325,11 +345,27 @@
 
             If GVJournalDet.RowCount > 0 Then
                 'report
-                query = "INSERT INTO tb_cash_advance_report(id_cash_advance,id_acc,id_comp,description,value,note) VALUES"
+                query = "INSERT INTO tb_cash_advance_report(id_cash_advance,id_acc,id_comp,description,value,note,ppn_coa,ppn_ptc,ppn_amount,pph_coa,pph_ptc,pph_amount) VALUES"
                 For i As Integer = 0 To GVJournalDet.RowCount - 1
+                    Dim ppn_coa As String = "NULL"
+                    Dim ppn_ptc As String = decimalSQL(GVJournalDet.GetRowCellValue(i, "ppn_ptc").ToString)
+                    Dim ppn_amount As String = decimalSQL(GVJournalDet.GetRowCellValue(i, "ppn_amount").ToString)
+                    Dim pph_coa As String = "NULL"
+                    Dim pph_ptc As String = decimalSQL(GVJournalDet.GetRowCellValue(i, "pph_ptc").ToString)
+                    Dim pph_amount As String = decimalSQL(GVJournalDet.GetRowCellValue(i, "pph_amount").ToString)
+
+                    Try
+                        ppn_coa = SLUEPPNCOA.EditValue.ToString
+                    Catch ex As Exception
+                    End Try
+
+                    If Not GVJournalDet.GetRowCellValue(i, "pph_coa").ToString = "" Then
+                        pph_coa = GVJournalDet.GetRowCellValue(i, "pph_coa").ToString
+                    End If
+
                     query += If(Not i = 0, ",", "")
 
-                    query += "('" & id_ca & "','" & GVJournalDet.GetRowCellValue(i, "id_acc").ToString & "','" & GVJournalDet.GetRowCellValue(i, "id_comp").ToString & "','" & addSlashes(GVJournalDet.GetRowCellValue(i, "description").ToString) & "','" & decimalSQL(GVJournalDet.GetRowCellValue(i, "value").ToString) & "','" & addSlashes(GVJournalDet.GetRowCellValue(i, "note").ToString) & "')"
+                    query += "('" & id_ca & "','" & GVJournalDet.GetRowCellValue(i, "id_acc").ToString & "','" & GVJournalDet.GetRowCellValue(i, "id_comp").ToString & "','" & addSlashes(GVJournalDet.GetRowCellValue(i, "description").ToString) & "','" & decimalSQL(GVJournalDet.GetRowCellValue(i, "value").ToString) & "','" & addSlashes(GVJournalDet.GetRowCellValue(i, "note").ToString) & "', " + ppn_coa + ", " + ppn_ptc + ", " + ppn_amount + ", " + pph_coa + ", " + pph_ptc + ", " + pph_amount + ")"
                 Next
 
                 execute_non_query(query, True, "", "", "", "")
@@ -379,6 +415,10 @@
     Private Sub GVJournalDet_InitNewRow(sender As Object, e As DevExpress.XtraGrid.Views.Grid.InitNewRowEventArgs) Handles GVJournalDet.InitNewRow
         Dim view As DevExpress.XtraGrid.Views.Grid.GridView = CType(sender, DevExpress.XtraGrid.Views.Grid.GridView)
         view.SetRowCellValue(e.RowHandle, view.Columns("value"), 0.00)
+        view.SetRowCellValue(e.RowHandle, view.Columns("ppn_ptc"), 0.00)
+        view.SetRowCellValue(e.RowHandle, view.Columns("ppn_amount"), 0.00)
+        view.SetRowCellValue(e.RowHandle, view.Columns("pph_ptc"), 0.00)
+        view.SetRowCellValue(e.RowHandle, view.Columns("pph_amount"), 0.00)
     End Sub
 
     Private Sub BLock_Click(sender As Object, e As EventArgs) Handles BLock.Click
@@ -402,53 +442,101 @@
 
                 XTCCA.SelectedTabPageIndex = 2
             Else
-                Dim acc_selected = True
-                Dim value_selected = True
+                calculate_total()
 
-                For i = 0 To GVJournalDet.RowCount - 1
-                    If GVJournalDet.GetRowCellValue(i, "id_acc").ToString = "" Then
-                        acc_selected = False
+                'check coa pph & ppn
+                Dim cnt As Boolean = True
+
+                If TEVATIN.EditValue > 0 Then
+                    Dim ppn_coa As String = "0"
+
+                    Try
+                        ppn_coa = SLUEPPNCOA.EditValue.ToString
+                    Catch ex As Exception
+                    End Try
+
+                    If ppn_coa = "0" Then
+                        cnt = False
+
+                        stopCustom("Please add VAT COA.")
+
+                        SLUEPPNCOA.Focus()
                     End If
-
-                    If GVJournalDet.GetRowCellValue(i, "value").ToString = "0" Then
-                        value_selected = False
-                    End If
-                Next
-
-                If acc_selected And value_selected Then
-                    Dim rest As Decimal = TECashInAdvance.EditValue - GVJournalDet.Columns("value").SummaryItem.SummaryValue
-
-                    GCBankWithdrawal.DataSource = Nothing
-                    GCBankDeposit.DataSource = Nothing
-
-                    If rest > 0 Then
-                        Dim data As DataTable = execute_query("SELECT 0 AS id_cash_advance_report, 0 AS is_val_ca, (SELECT id_acc_kas_kecil_accounting FROM tb_opt_accounting LIMIT 1) AS id_acc, '" + addSlashes(MENote.EditValue.ToString) + "' AS description, '' AS note, " + decimalSQL(rest) + " AS value", -1, True, "", "", "", "")
-                        GCBankDeposit.DataSource = data
-
-                        XTPWithdrawal.PageVisible = False
-                        XTPDeposit.PageVisible = True
-
-                        XTCCA.SelectedTabPageIndex = 2
-                    ElseIf rest < 0 Then
-                        rest = Math.Abs(rest)
-
-                        Dim data As DataTable = execute_query("SELECT 0 AS id_cash_advance_report, 0 AS is_val_ca, (SELECT id_acc_kas_kecil_accounting FROM tb_opt_accounting LIMIT 1) AS id_acc, '" + addSlashes(MENote.EditValue.ToString) + "' AS description, '' AS note, " + decimalSQL(rest) + " AS value", -1, True, "", "", "", "")
-                        GCBankWithdrawal.DataSource = data
-
-                        XTPWithdrawal.PageVisible = True
-                        XTPDeposit.PageVisible = False
-
-                        XTCCA.SelectedTabPageIndex = 1
-                    End If
-
-                    lock = True
-
-                    check_lock()
                 Else
-                    If Not acc_selected Then
-                        warningCustom("Please insert account")
-                    ElseIf Not value_selected Then
-                        warningCustom("Value cannot be 0")
+                    SLUEPPNCOA.EditValue = Nothing
+                End If
+
+                If cnt Then
+                    Dim add_pph_coa As Boolean = True
+
+                    For i = 0 To GVJournalDet.RowCount - 1
+                        If GVJournalDet.GetRowCellValue(i, "pph_amount") > 0 And GVJournalDet.GetRowCellValue(i, "pph_coa").ToString = "" Then
+                            add_pph_coa = False
+                        End If
+                    Next
+
+                    If Not add_pph_coa Then
+                        cnt = False
+
+                        stopCustom("Please add PPH COA.")
+                    End If
+
+                    For i = 0 To GVJournalDet.RowCount - 1
+                        If GVJournalDet.GetRowCellValue(i, "pph_amount") = 0 Then
+                            GVJournalDet.SetRowCellValue(i, "pph_coa", Nothing)
+                        End If
+                    Next
+                End If
+
+                If cnt Then
+                    Dim acc_selected = True
+                    Dim value_selected = True
+
+                    For i = 0 To GVJournalDet.RowCount - 1
+                        If GVJournalDet.GetRowCellValue(i, "id_acc").ToString = "" Then
+                            acc_selected = False
+                        End If
+
+                        If GVJournalDet.GetRowCellValue(i, "value").ToString = "0" Then
+                            value_selected = False
+                        End If
+                    Next
+
+                    If acc_selected And value_selected Then
+                        Dim rest As Decimal = TECashInAdvance.EditValue - TETotal.EditValue
+
+                        GCBankWithdrawal.DataSource = Nothing
+                        GCBankDeposit.DataSource = Nothing
+
+                        If rest > 0 Then
+                            Dim data As DataTable = execute_query("SELECT 0 AS id_cash_advance_report, 0 AS is_val_ca, (SELECT id_acc_kas_kecil_accounting FROM tb_opt_accounting LIMIT 1) AS id_acc, '" + addSlashes(MENote.EditValue.ToString) + "' AS description, '' AS note, " + decimalSQL(rest) + " AS value", -1, True, "", "", "", "")
+                            GCBankDeposit.DataSource = data
+
+                            XTPWithdrawal.PageVisible = False
+                            XTPDeposit.PageVisible = True
+
+                            XTCCA.SelectedTabPageIndex = 2
+                        ElseIf rest < 0 Then
+                            rest = Math.Abs(rest)
+
+                            Dim data As DataTable = execute_query("SELECT 0 AS id_cash_advance_report, 0 AS is_val_ca, (SELECT id_acc_kas_kecil_accounting FROM tb_opt_accounting LIMIT 1) AS id_acc, '" + addSlashes(MENote.EditValue.ToString) + "' AS description, '' AS note, " + decimalSQL(rest) + " AS value", -1, True, "", "", "", "")
+                            GCBankWithdrawal.DataSource = data
+
+                            XTPWithdrawal.PageVisible = True
+                            XTPDeposit.PageVisible = False
+
+                            XTCCA.SelectedTabPageIndex = 1
+                        End If
+
+                        lock = True
+
+                        check_lock()
+                    Else
+                        If Not acc_selected Then
+                            warningCustom("Please insert account")
+                        ElseIf Not value_selected Then
+                            warningCustom("Value cannot be 0")
+                        End If
                     End If
                 End If
             End If
@@ -710,5 +798,52 @@
             GVCancel.SetFocusedRowCellValue("acc_description_to", sle.Properties.View.GetFocusedRowCellValue("acc_description"))
         Catch ex As Exception
         End Try
+    End Sub
+
+    Sub calculate_total()
+        Dim ppn_amount As Decimal = 0.00
+        Dim pph_amount As Decimal = 0.00
+
+        Try
+            ppn_amount = GVJournalDet.GetFocusedRowCellValue("value") * (GVJournalDet.GetFocusedRowCellValue("ppn_ptc") / 100)
+            pph_amount = GVJournalDet.GetFocusedRowCellValue("value") * (GVJournalDet.GetFocusedRowCellValue("pph_ptc") / 100)
+        Catch ex As Exception
+        End Try
+
+        GVJournalDet.SetFocusedRowCellValue("ppn_amount", ppn_amount)
+        GVJournalDet.SetFocusedRowCellValue("pph_amount", Decimal.Round(pph_amount))
+
+        TESubTotal.EditValue = GVJournalDet.Columns("value").SummaryItem.SummaryValue
+        TEVATIN.EditValue = GVJournalDet.Columns("ppn_amount").SummaryItem.SummaryValue
+        TEPPH.EditValue = GVJournalDet.Columns("pph_amount").SummaryItem.SummaryValue
+        TETotal.EditValue = TESubTotal.EditValue + TEVATIN.EditValue - TEPPH.EditValue
+    End Sub
+
+    Private Sub GVJournalDet_CellValueChanged(sender As Object, e As DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs) Handles GVJournalDet.CellValueChanged
+        If allow_edit Then
+            GVJournalDet.RefreshData()
+
+            If e.Column.FieldName = "value" Or e.Column.FieldName = "ppn_ptc" Or e.Column.FieldName = "pph_ptc" Then
+                calculate_total()
+            End If
+        End If
+    End Sub
+
+    Private Sub ToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem1.Click
+        If GVJournalDet.RowCount > 0 Then
+            Try
+                Dim dpp As Decimal = Decimal.Parse(GVJournalDet.GetFocusedRowCellValue("value").ToString)
+                Dim pph As Decimal = Decimal.Parse(GVJournalDet.GetFocusedRowCellValue("pph_ptc").ToString)
+
+                Dim grossup_val As Decimal = 0.00
+
+                grossup_val = (100 / (100 - pph)) * dpp
+
+                GVJournalDet.SetFocusedRowCellValue("value", Decimal.Round(grossup_val, 0))
+
+                calculate_total()
+            Catch ex As Exception
+            End Try
+        End If
     End Sub
 End Class

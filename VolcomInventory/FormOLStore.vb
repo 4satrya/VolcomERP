@@ -617,7 +617,7 @@
                 INNER JOIN tb_ol_store_order od ON od.id = so.id_sales_order_ol_shop AND od.id_comp_group= s.id_comp_group
                 WHERE so.id_report_status=6 AND s.id_commerce_type=2 AND !ISNULL(od.item_id) AND od.tracking_code!=''
                 AND s.id_comp_group IN (SELECT o.zalora_comp_group FROM tb_opt o)
-                AND so.id_sales_order_ol_shop IN (" + id_order_in + ")
+                AND od.is_process=1 AND od.is_rts=2
                 GROUP BY od.sales_order_ol_shop_number "
                 Dim data_item As DataTable = execute_query(query_item, -1, True, "", "", "", "")
                 If data_item.Rows.Count > 0 Then
@@ -626,6 +626,7 @@
                             SplashScreenManager1.SetWaitFormDescription("Set status (rts) : #" + data_item.Rows(t)("order_number").ToString)
                             Dim zal_stt As New ClassZaloraApi()
                             zal_stt.setReadyToShip(data_item.Rows(t)("item_id").ToString, data_item.Rows(t)("shipment_provider").ToString, data_item.Rows(t)("tracking_code").ToString)
+                            execute_non_query("UPDATE tb_ol_store_order od SET od.is_rts=1 WHERE od.id_comp_group='" + id_comp_group + "' AND od.id='" + data_item.Rows(t)("id").ToString + "' ", True, "", "", "", "")
                         Catch ex As Exception
                             err_other_act = addSlashes(ex.ToString)
                             ord.insertLogWebOrder(data_item.Rows(t)("id").ToString, "Error set status rts : " + err_other_act, id_comp_group)

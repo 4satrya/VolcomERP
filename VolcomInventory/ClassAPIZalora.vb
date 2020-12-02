@@ -3,7 +3,7 @@
 Public Class ClassAPIZalora
     ' add your data here: 
     Dim userId As String = "system@volcom.co.id" 'login name / your email
-    Dim key As String = "6609e836bf62e016c6504c1ff616f6f0cc1ce149" 'your API key/password
+    Dim key As String = "" 'your API key/password
     Dim version As String = "1.0"
     Dim timeStamp As String = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss-0000") 'update every calling method
     Public order_number As String = ""

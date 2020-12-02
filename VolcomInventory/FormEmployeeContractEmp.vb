@@ -1,7 +1,7 @@
 ﻿Public Class FormEmployeeContractEmp
     Private Sub FormEmployeeContractEmp_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim query As String = "
-            SELECT e.id_employee, IF(e.id_departement = 17, CONCAT(e.id_departement, '-', e.id_departement_sub), e.id_departement) AS id_departement, IF(e.id_departement = 17, s.departement_sub, d.departement) AS departement, e.employee_code, e.employee_name, e.address_primary, e.start_period, e.end_period, e.employee_position, e.id_employee_status, st.employee_status, e.id_employee_active, la.employee_active, ROUND(e.basic_salary) AS basic_salary, ROUND(e.allow_job) AS allow_job, ROUND(e.allow_meal) AS allow_meal, ROUND(e.allow_trans) AS allow_trans, ROUND(e.allow_house) AS allow_house, ROUND(e.allow_car) AS allow_car
+            SELECT e.id_employee, IF(e.id_departement = 17, CONCAT(e.id_departement, '-', e.id_departement_sub), e.id_departement) AS id_departement, IF(e.id_departement = 17, s.departement_sub, d.departement) AS departement, e.employee_code, e.employee_name, e.address_primary, e.start_period, e.end_period, e.employee_position, e.id_employee_status, st.employee_status, e.id_employee_active, la.employee_active, e.employee_ktp, ROUND(e.basic_salary) AS basic_salary, ROUND(e.allow_job) AS allow_job, ROUND(e.allow_meal) AS allow_meal, ROUND(e.allow_trans) AS allow_trans, ROUND(e.allow_house) AS allow_house, ROUND(e.allow_car) AS allow_car
             FROM tb_m_employee AS e
             LEFT JOIN tb_m_departement AS d ON e.id_departement = d.id_departement 
             LEFT JOIN tb_m_departement_sub AS s ON e.id_departement_sub = s.id_departement_sub
@@ -22,6 +22,8 @@
     Private Sub GVList_DoubleClick(sender As Object, e As EventArgs) Handles GVList.DoubleClick
         FormEmployeeContractDet.TEEmployee.EditValue = GVList.GetFocusedRowCellValue("employee_name").ToString
         FormEmployeeContractDet.TEPosition.EditValue = GVList.GetFocusedRowCellValue("employee_position").ToString
+        FormEmployeeContractDet.TEEmployeeCode.EditValue = GVList.GetFocusedRowCellValue("employee_code").ToString
+        FormEmployeeContractDet.TEKTP.EditValue = GVList.GetFocusedRowCellValue("employee_ktp").ToString
         FormEmployeeContractDet.SLUEDepartement.EditValue = GVList.GetFocusedRowCellValue("id_departement").ToString
         FormEmployeeContractDet.TEAddress.EditValue = GVList.GetFocusedRowCellValue("address_primary").ToString
         FormEmployeeContractDet.DEStartDate.EditValue = GVList.GetFocusedRowCellValue("start_period").ToString

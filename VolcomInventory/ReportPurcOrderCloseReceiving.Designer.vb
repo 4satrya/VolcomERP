@@ -21,6 +21,26 @@ Partial Public Class ReportPurcOrderCloseReceiving
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ReportPurcOrderCloseReceiving))
         Me.Detail = New DevExpress.XtraReports.UI.DetailBand()
+        Me.WinControlContainer1 = New DevExpress.XtraReports.UI.WinControlContainer()
+        Me.GCPO = New DevExpress.XtraGrid.GridControl()
+        Me.GVPO = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn35 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RepositoryItemMemoEdit = New DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit()
+        Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnTotPO = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnRecAmo = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn53 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RPBRec = New DevExpress.XtraEditors.Repository.RepositoryItemProgressBar()
+        Me.GridColumn54 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn58 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RepositoryItemDateEdit = New DevExpress.XtraEditors.Repository.RepositoryItemDateEdit()
+        Me.RepositoryItemTextEdit = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
         Me.TopMargin = New DevExpress.XtraReports.UI.TopMarginBand()
         Me.BottomMargin = New DevExpress.XtraReports.UI.BottomMarginBand()
         Me.XrPageInfo1 = New DevExpress.XtraReports.UI.XRPageInfo()
@@ -39,32 +59,14 @@ Partial Public Class ReportPurcOrderCloseReceiving
         Me.XrTable1 = New DevExpress.XtraReports.UI.XRTable()
         Me.XrTableRow1 = New DevExpress.XtraReports.UI.XRTableRow()
         Me.XrTableCell1 = New DevExpress.XtraReports.UI.XRTableCell()
-        Me.GCPO = New DevExpress.XtraGrid.GridControl()
-        Me.GVPO = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn35 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumnTotPO = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumnRecAmo = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn53 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.RPBRec = New DevExpress.XtraEditors.Repository.RepositoryItemProgressBar()
-        Me.GridColumn54 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn58 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.RepositoryItemDateEdit = New DevExpress.XtraEditors.Repository.RepositoryItemDateEdit()
-        Me.RepositoryItemTextEdit = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
-        Me.WinControlContainer1 = New DevExpress.XtraReports.UI.WinControlContainer()
-        CType(Me.XrTable1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GCPO, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVPO, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemMemoEdit, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RPBRec, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemDateEdit, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemDateEdit.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemTextEdit, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.XrTable1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
         '
         'Detail
@@ -74,6 +76,246 @@ Partial Public Class ReportPurcOrderCloseReceiving
         Me.Detail.Name = "Detail"
         Me.Detail.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100.0!)
         Me.Detail.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
+        '
+        'WinControlContainer1
+        '
+        Me.WinControlContainer1.LocationFloat = New DevExpress.Utils.PointFloat(0!, 0!)
+        Me.WinControlContainer1.Name = "WinControlContainer1"
+        Me.WinControlContainer1.SizeF = New System.Drawing.SizeF(1074.0!, 104.0!)
+        Me.WinControlContainer1.WinControl = Me.GCPO
+        '
+        'GCPO
+        '
+        Me.GCPO.Location = New System.Drawing.Point(2, 2)
+        Me.GCPO.MainView = Me.GVPO
+        Me.GCPO.Name = "GCPO"
+        Me.GCPO.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RPBRec, Me.RepositoryItemTextEdit, Me.RepositoryItemDateEdit, Me.RepositoryItemMemoEdit})
+        Me.GCPO.Size = New System.Drawing.Size(1031, 100)
+        Me.GCPO.TabIndex = 3
+        Me.GCPO.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVPO})
+        '
+        'GVPO
+        '
+        Me.GVPO.Appearance.Row.Options.UseTextOptions = True
+        Me.GVPO.Appearance.Row.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
+        Me.GVPO.AppearancePrint.FooterPanel.BackColor = System.Drawing.Color.White
+        Me.GVPO.AppearancePrint.FooterPanel.BorderColor = System.Drawing.Color.Black
+        Me.GVPO.AppearancePrint.FooterPanel.Font = New System.Drawing.Font("Tahoma", 7.25!)
+        Me.GVPO.AppearancePrint.FooterPanel.Options.UseBackColor = True
+        Me.GVPO.AppearancePrint.FooterPanel.Options.UseBorderColor = True
+        Me.GVPO.AppearancePrint.FooterPanel.Options.UseFont = True
+        Me.GVPO.AppearancePrint.GroupFooter.BackColor = System.Drawing.Color.White
+        Me.GVPO.AppearancePrint.GroupFooter.BorderColor = System.Drawing.Color.Black
+        Me.GVPO.AppearancePrint.GroupFooter.Font = New System.Drawing.Font("Tahoma", 7.25!)
+        Me.GVPO.AppearancePrint.GroupFooter.Options.UseBackColor = True
+        Me.GVPO.AppearancePrint.GroupFooter.Options.UseBorderColor = True
+        Me.GVPO.AppearancePrint.GroupFooter.Options.UseFont = True
+        Me.GVPO.AppearancePrint.GroupRow.BackColor = System.Drawing.Color.White
+        Me.GVPO.AppearancePrint.GroupRow.BorderColor = System.Drawing.Color.Black
+        Me.GVPO.AppearancePrint.GroupRow.Font = New System.Drawing.Font("Tahoma", 7.25!, System.Drawing.FontStyle.Bold)
+        Me.GVPO.AppearancePrint.GroupRow.Options.UseBackColor = True
+        Me.GVPO.AppearancePrint.GroupRow.Options.UseBorderColor = True
+        Me.GVPO.AppearancePrint.GroupRow.Options.UseFont = True
+        Me.GVPO.AppearancePrint.HeaderPanel.BackColor = System.Drawing.Color.White
+        Me.GVPO.AppearancePrint.HeaderPanel.BorderColor = System.Drawing.Color.Black
+        Me.GVPO.AppearancePrint.HeaderPanel.Font = New System.Drawing.Font("Tahoma", 7.25!, System.Drawing.FontStyle.Bold)
+        Me.GVPO.AppearancePrint.HeaderPanel.Options.UseBackColor = True
+        Me.GVPO.AppearancePrint.HeaderPanel.Options.UseBorderColor = True
+        Me.GVPO.AppearancePrint.HeaderPanel.Options.UseFont = True
+        Me.GVPO.AppearancePrint.Lines.BackColor = System.Drawing.Color.Black
+        Me.GVPO.AppearancePrint.Lines.Font = New System.Drawing.Font("Tahoma", 7.25!)
+        Me.GVPO.AppearancePrint.Lines.Options.UseBackColor = True
+        Me.GVPO.AppearancePrint.Lines.Options.UseFont = True
+        Me.GVPO.AppearancePrint.Row.BackColor = System.Drawing.Color.White
+        Me.GVPO.AppearancePrint.Row.BorderColor = System.Drawing.Color.Black
+        Me.GVPO.AppearancePrint.Row.Font = New System.Drawing.Font("Tahoma", 7.25!)
+        Me.GVPO.AppearancePrint.Row.Options.UseBackColor = True
+        Me.GVPO.AppearancePrint.Row.Options.UseBorderColor = True
+        Me.GVPO.AppearancePrint.Row.Options.UseFont = True
+        Me.GVPO.AppearancePrint.Row.Options.UseTextOptions = True
+        Me.GVPO.AppearancePrint.Row.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap
+        Me.GVPO.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn7, Me.GridColumn1, Me.GridColumn35, Me.GridColumn3, Me.GridColumn4, Me.GridColumnTotPO, Me.GridColumn6, Me.GridColumnRecAmo, Me.GridColumn53, Me.GridColumn54, Me.GridColumn58, Me.GridColumn5, Me.GridColumn2})
+        Me.GVPO.GridControl = Me.GCPO
+        Me.GVPO.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_po", Me.GridColumnTotPO, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_rec", Me.GridColumnRecAmo, "{0:N2}")})
+        Me.GVPO.Name = "GVPO"
+        Me.GVPO.OptionsView.ColumnAutoWidth = False
+        Me.GVPO.OptionsView.GroupFooterShowMode = DevExpress.XtraGrid.Views.Grid.GroupFooterShowMode.VisibleAlways
+        Me.GVPO.OptionsView.RowAutoHeight = True
+        Me.GVPO.OptionsView.ShowFooter = True
+        Me.GVPO.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn7
+        '
+        Me.GridColumn7.Caption = "ID PO"
+        Me.GridColumn7.FieldName = "id_purc_order"
+        Me.GridColumn7.Name = "GridColumn7"
+        Me.GridColumn7.OptionsColumn.AllowEdit = False
+        '
+        'GridColumn1
+        '
+        Me.GridColumn1.Caption = "PO Number"
+        Me.GridColumn1.FieldName = "purc_order_number"
+        Me.GridColumn1.Name = "GridColumn1"
+        Me.GridColumn1.OptionsColumn.AllowEdit = False
+        Me.GridColumn1.Visible = True
+        Me.GridColumn1.VisibleIndex = 0
+        '
+        'GridColumn35
+        '
+        Me.GridColumn35.Caption = "Vendor Code"
+        Me.GridColumn35.FieldName = "comp_number"
+        Me.GridColumn35.Name = "GridColumn35"
+        Me.GridColumn35.OptionsColumn.AllowEdit = False
+        Me.GridColumn35.Visible = True
+        Me.GridColumn35.VisibleIndex = 1
+        '
+        'GridColumn3
+        '
+        Me.GridColumn3.Caption = "Vendor"
+        Me.GridColumn3.FieldName = "comp_name"
+        Me.GridColumn3.Name = "GridColumn3"
+        Me.GridColumn3.OptionsColumn.AllowEdit = False
+        Me.GridColumn3.Visible = True
+        Me.GridColumn3.VisibleIndex = 2
+        '
+        'RepositoryItemMemoEdit
+        '
+        Me.RepositoryItemMemoEdit.Name = "RepositoryItemMemoEdit"
+        '
+        'GridColumn4
+        '
+        Me.GridColumn4.Caption = "PO Qty"
+        Me.GridColumn4.DisplayFormat.FormatString = "N0"
+        Me.GridColumn4.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn4.FieldName = "po_qty"
+        Me.GridColumn4.Name = "GridColumn4"
+        Me.GridColumn4.OptionsColumn.AllowEdit = False
+        Me.GridColumn4.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "po_qty", "{0:N0}")})
+        Me.GridColumn4.Visible = True
+        Me.GridColumn4.VisibleIndex = 3
+        '
+        'GridColumnTotPO
+        '
+        Me.GridColumnTotPO.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumnTotPO.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumnTotPO.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumnTotPO.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumnTotPO.Caption = "PO Amount"
+        Me.GridColumnTotPO.DisplayFormat.FormatString = "N2"
+        Me.GridColumnTotPO.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnTotPO.FieldName = "total_po"
+        Me.GridColumnTotPO.Name = "GridColumnTotPO"
+        Me.GridColumnTotPO.OptionsColumn.AllowEdit = False
+        Me.GridColumnTotPO.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_po", "{0:N2}")})
+        Me.GridColumnTotPO.Visible = True
+        Me.GridColumnTotPO.VisibleIndex = 4
+        '
+        'GridColumn6
+        '
+        Me.GridColumn6.Caption = "Receive Qty"
+        Me.GridColumn6.DisplayFormat.FormatString = "N0"
+        Me.GridColumn6.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn6.FieldName = "rec_qty"
+        Me.GridColumn6.Name = "GridColumn6"
+        Me.GridColumn6.OptionsColumn.AllowEdit = False
+        Me.GridColumn6.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "rec_qty", "{0:N0}")})
+        Me.GridColumn6.Visible = True
+        Me.GridColumn6.VisibleIndex = 5
+        '
+        'GridColumnRecAmo
+        '
+        Me.GridColumnRecAmo.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumnRecAmo.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumnRecAmo.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumnRecAmo.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumnRecAmo.Caption = "Receive Amount"
+        Me.GridColumnRecAmo.DisplayFormat.FormatString = "N2"
+        Me.GridColumnRecAmo.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnRecAmo.FieldName = "total_rec"
+        Me.GridColumnRecAmo.Name = "GridColumnRecAmo"
+        Me.GridColumnRecAmo.OptionsColumn.AllowEdit = False
+        Me.GridColumnRecAmo.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_rec", "{0:N2}")})
+        Me.GridColumnRecAmo.Visible = True
+        Me.GridColumnRecAmo.VisibleIndex = 6
+        Me.GridColumnRecAmo.Width = 88
+        '
+        'GridColumn53
+        '
+        Me.GridColumn53.Caption = "Receive Progress"
+        Me.GridColumn53.ColumnEdit = Me.RPBRec
+        Me.GridColumn53.FieldName = "rec_progress"
+        Me.GridColumn53.Name = "GridColumn53"
+        Me.GridColumn53.OptionsColumn.AllowEdit = False
+        Me.GridColumn53.Width = 93
+        '
+        'RPBRec
+        '
+        Me.RPBRec.EndColor = System.Drawing.Color.LawnGreen
+        Me.RPBRec.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Flat
+        Me.RPBRec.LookAndFeel.UseDefaultLookAndFeel = False
+        Me.RPBRec.Name = "RPBRec"
+        Me.RPBRec.ProgressViewStyle = DevExpress.XtraEditors.Controls.ProgressViewStyle.Solid
+        Me.RPBRec.ShowTitle = True
+        Me.RPBRec.Step = 1
+        '
+        'GridColumn54
+        '
+        Me.GridColumn54.Caption = "Receive Status"
+        Me.GridColumn54.FieldName = "rec_status"
+        Me.GridColumn54.Name = "GridColumn54"
+        Me.GridColumn54.OptionsColumn.AllowEdit = False
+        Me.GridColumn54.Visible = True
+        Me.GridColumn54.VisibleIndex = 8
+        Me.GridColumn54.Width = 82
+        '
+        'GridColumn58
+        '
+        Me.GridColumn58.Caption = "Est. Receive Date"
+        Me.GridColumn58.DisplayFormat.FormatString = "dd MMMM yyyy"
+        Me.GridColumn58.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumn58.FieldName = "est_date_receive"
+        Me.GridColumn58.Name = "GridColumn58"
+        Me.GridColumn58.OptionsColumn.AllowEdit = False
+        Me.GridColumn58.Visible = True
+        Me.GridColumn58.VisibleIndex = 7
+        Me.GridColumn58.Width = 96
+        '
+        'GridColumn5
+        '
+        Me.GridColumn5.Caption = "Close Receiving Reason"
+        Me.GridColumn5.ColumnEdit = Me.RepositoryItemMemoEdit
+        Me.GridColumn5.FieldName = "close_rec_reason"
+        Me.GridColumn5.Name = "GridColumn5"
+        Me.GridColumn5.Visible = True
+        Me.GridColumn5.VisibleIndex = 9
+        Me.GridColumn5.Width = 100
+        '
+        'GridColumn2
+        '
+        Me.GridColumn2.Caption = "To Est. Receive Date"
+        Me.GridColumn2.ColumnEdit = Me.RepositoryItemDateEdit
+        Me.GridColumn2.FieldName = "to_est_date_receive"
+        Me.GridColumn2.Name = "GridColumn2"
+        Me.GridColumn2.Visible = True
+        Me.GridColumn2.VisibleIndex = 10
+        Me.GridColumn2.Width = 111
+        '
+        'RepositoryItemDateEdit
+        '
+        Me.RepositoryItemDateEdit.AutoHeight = False
+        Me.RepositoryItemDateEdit.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.RepositoryItemDateEdit.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.RepositoryItemDateEdit.DisplayFormat.FormatString = "dd MMMM yyyy"
+        Me.RepositoryItemDateEdit.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.RepositoryItemDateEdit.EditFormat.FormatString = "dd MMMM yyyy"
+        Me.RepositoryItemDateEdit.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.RepositoryItemDateEdit.Mask.EditMask = "dd MMMM yyyy"
+        Me.RepositoryItemDateEdit.Name = "RepositoryItemDateEdit"
+        '
+        'RepositoryItemTextEdit
+        '
+        Me.RepositoryItemTextEdit.AutoHeight = False
+        Me.RepositoryItemTextEdit.Name = "RepositoryItemTextEdit"
         '
         'TopMargin
         '
@@ -240,236 +482,6 @@ Partial Public Class ReportPurcOrderCloseReceiving
         Me.XrTableCell1.Visible = False
         Me.XrTableCell1.Weight = 2.99999986405489R
         '
-        'GCPO
-        '
-        Me.GCPO.Location = New System.Drawing.Point(2, 2)
-        Me.GCPO.MainView = Me.GVPO
-        Me.GCPO.Name = "GCPO"
-        Me.GCPO.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RPBRec, Me.RepositoryItemTextEdit, Me.RepositoryItemDateEdit})
-        Me.GCPO.Size = New System.Drawing.Size(1031, 100)
-        Me.GCPO.TabIndex = 3
-        Me.GCPO.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVPO})
-        '
-        'GVPO
-        '
-        Me.GVPO.AppearancePrint.FooterPanel.BackColor = System.Drawing.Color.White
-        Me.GVPO.AppearancePrint.FooterPanel.BorderColor = System.Drawing.Color.Black
-        Me.GVPO.AppearancePrint.FooterPanel.Font = New System.Drawing.Font("Tahoma", 7.25!)
-        Me.GVPO.AppearancePrint.FooterPanel.Options.UseBackColor = True
-        Me.GVPO.AppearancePrint.FooterPanel.Options.UseBorderColor = True
-        Me.GVPO.AppearancePrint.FooterPanel.Options.UseFont = True
-        Me.GVPO.AppearancePrint.GroupFooter.BackColor = System.Drawing.Color.White
-        Me.GVPO.AppearancePrint.GroupFooter.BorderColor = System.Drawing.Color.Black
-        Me.GVPO.AppearancePrint.GroupFooter.Font = New System.Drawing.Font("Tahoma", 7.25!)
-        Me.GVPO.AppearancePrint.GroupFooter.Options.UseBackColor = True
-        Me.GVPO.AppearancePrint.GroupFooter.Options.UseBorderColor = True
-        Me.GVPO.AppearancePrint.GroupFooter.Options.UseFont = True
-        Me.GVPO.AppearancePrint.GroupRow.BackColor = System.Drawing.Color.White
-        Me.GVPO.AppearancePrint.GroupRow.BorderColor = System.Drawing.Color.Black
-        Me.GVPO.AppearancePrint.GroupRow.Font = New System.Drawing.Font("Tahoma", 7.25!, System.Drawing.FontStyle.Bold)
-        Me.GVPO.AppearancePrint.GroupRow.Options.UseBackColor = True
-        Me.GVPO.AppearancePrint.GroupRow.Options.UseBorderColor = True
-        Me.GVPO.AppearancePrint.GroupRow.Options.UseFont = True
-        Me.GVPO.AppearancePrint.HeaderPanel.BackColor = System.Drawing.Color.White
-        Me.GVPO.AppearancePrint.HeaderPanel.BorderColor = System.Drawing.Color.Black
-        Me.GVPO.AppearancePrint.HeaderPanel.Font = New System.Drawing.Font("Tahoma", 7.25!, System.Drawing.FontStyle.Bold)
-        Me.GVPO.AppearancePrint.HeaderPanel.Options.UseBackColor = True
-        Me.GVPO.AppearancePrint.HeaderPanel.Options.UseBorderColor = True
-        Me.GVPO.AppearancePrint.HeaderPanel.Options.UseFont = True
-        Me.GVPO.AppearancePrint.Lines.BackColor = System.Drawing.Color.Black
-        Me.GVPO.AppearancePrint.Lines.Font = New System.Drawing.Font("Tahoma", 7.25!)
-        Me.GVPO.AppearancePrint.Lines.Options.UseBackColor = True
-        Me.GVPO.AppearancePrint.Lines.Options.UseFont = True
-        Me.GVPO.AppearancePrint.Row.BackColor = System.Drawing.Color.White
-        Me.GVPO.AppearancePrint.Row.BorderColor = System.Drawing.Color.Black
-        Me.GVPO.AppearancePrint.Row.Font = New System.Drawing.Font("Tahoma", 7.25!)
-        Me.GVPO.AppearancePrint.Row.Options.UseBackColor = True
-        Me.GVPO.AppearancePrint.Row.Options.UseBorderColor = True
-        Me.GVPO.AppearancePrint.Row.Options.UseFont = True
-        Me.GVPO.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn7, Me.GridColumn1, Me.GridColumn35, Me.GridColumn3, Me.GridColumn4, Me.GridColumnTotPO, Me.GridColumn6, Me.GridColumnRecAmo, Me.GridColumn53, Me.GridColumn54, Me.GridColumn58, Me.GridColumn5, Me.GridColumn2})
-        Me.GVPO.GridControl = Me.GCPO
-        Me.GVPO.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_po", Me.GridColumnTotPO, "{0:N2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_rec", Me.GridColumnRecAmo, "{0:N2}")})
-        Me.GVPO.Name = "GVPO"
-        Me.GVPO.OptionsView.ColumnAutoWidth = False
-        Me.GVPO.OptionsView.GroupFooterShowMode = DevExpress.XtraGrid.Views.Grid.GroupFooterShowMode.VisibleAlways
-        Me.GVPO.OptionsView.ShowFooter = True
-        Me.GVPO.OptionsView.ShowGroupPanel = False
-        '
-        'GridColumn7
-        '
-        Me.GridColumn7.Caption = "ID PO"
-        Me.GridColumn7.FieldName = "id_purc_order"
-        Me.GridColumn7.Name = "GridColumn7"
-        Me.GridColumn7.OptionsColumn.AllowEdit = False
-        '
-        'GridColumn1
-        '
-        Me.GridColumn1.Caption = "PO Number"
-        Me.GridColumn1.FieldName = "purc_order_number"
-        Me.GridColumn1.Name = "GridColumn1"
-        Me.GridColumn1.OptionsColumn.AllowEdit = False
-        Me.GridColumn1.Visible = True
-        Me.GridColumn1.VisibleIndex = 0
-        '
-        'GridColumn35
-        '
-        Me.GridColumn35.Caption = "Vendor Code"
-        Me.GridColumn35.FieldName = "comp_number"
-        Me.GridColumn35.Name = "GridColumn35"
-        Me.GridColumn35.OptionsColumn.AllowEdit = False
-        Me.GridColumn35.Visible = True
-        Me.GridColumn35.VisibleIndex = 2
-        '
-        'GridColumn3
-        '
-        Me.GridColumn3.Caption = "Vendor"
-        Me.GridColumn3.FieldName = "comp_name"
-        Me.GridColumn3.Name = "GridColumn3"
-        Me.GridColumn3.OptionsColumn.AllowEdit = False
-        Me.GridColumn3.Visible = True
-        Me.GridColumn3.VisibleIndex = 1
-        '
-        'GridColumn4
-        '
-        Me.GridColumn4.Caption = "PO Qty"
-        Me.GridColumn4.DisplayFormat.FormatString = "N0"
-        Me.GridColumn4.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.GridColumn4.FieldName = "po_qty"
-        Me.GridColumn4.Name = "GridColumn4"
-        Me.GridColumn4.OptionsColumn.AllowEdit = False
-        Me.GridColumn4.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "po_qty", "{0:N0}")})
-        Me.GridColumn4.Visible = True
-        Me.GridColumn4.VisibleIndex = 3
-        '
-        'GridColumnTotPO
-        '
-        Me.GridColumnTotPO.AppearanceCell.Options.UseTextOptions = True
-        Me.GridColumnTotPO.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.GridColumnTotPO.AppearanceHeader.Options.UseTextOptions = True
-        Me.GridColumnTotPO.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.GridColumnTotPO.Caption = "PO Amount"
-        Me.GridColumnTotPO.DisplayFormat.FormatString = "N2"
-        Me.GridColumnTotPO.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.GridColumnTotPO.FieldName = "total_po"
-        Me.GridColumnTotPO.Name = "GridColumnTotPO"
-        Me.GridColumnTotPO.OptionsColumn.AllowEdit = False
-        Me.GridColumnTotPO.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_po", "{0:N2}")})
-        Me.GridColumnTotPO.Visible = True
-        Me.GridColumnTotPO.VisibleIndex = 4
-        '
-        'GridColumn6
-        '
-        Me.GridColumn6.Caption = "Receive Qty"
-        Me.GridColumn6.DisplayFormat.FormatString = "N0"
-        Me.GridColumn6.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.GridColumn6.FieldName = "rec_qty"
-        Me.GridColumn6.Name = "GridColumn6"
-        Me.GridColumn6.OptionsColumn.AllowEdit = False
-        Me.GridColumn6.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "rec_qty", "{0:N0}")})
-        Me.GridColumn6.Visible = True
-        Me.GridColumn6.VisibleIndex = 5
-        '
-        'GridColumnRecAmo
-        '
-        Me.GridColumnRecAmo.AppearanceCell.Options.UseTextOptions = True
-        Me.GridColumnRecAmo.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.GridColumnRecAmo.AppearanceHeader.Options.UseTextOptions = True
-        Me.GridColumnRecAmo.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.GridColumnRecAmo.Caption = "Receive Amount"
-        Me.GridColumnRecAmo.DisplayFormat.FormatString = "N2"
-        Me.GridColumnRecAmo.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.GridColumnRecAmo.FieldName = "total_rec"
-        Me.GridColumnRecAmo.Name = "GridColumnRecAmo"
-        Me.GridColumnRecAmo.OptionsColumn.AllowEdit = False
-        Me.GridColumnRecAmo.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_rec", "{0:N2}")})
-        Me.GridColumnRecAmo.Visible = True
-        Me.GridColumnRecAmo.VisibleIndex = 6
-        Me.GridColumnRecAmo.Width = 88
-        '
-        'GridColumn53
-        '
-        Me.GridColumn53.Caption = "Receive Progress"
-        Me.GridColumn53.ColumnEdit = Me.RPBRec
-        Me.GridColumn53.FieldName = "rec_progress"
-        Me.GridColumn53.Name = "GridColumn53"
-        Me.GridColumn53.OptionsColumn.AllowEdit = False
-        Me.GridColumn53.Width = 93
-        '
-        'RPBRec
-        '
-        Me.RPBRec.EndColor = System.Drawing.Color.LawnGreen
-        Me.RPBRec.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Flat
-        Me.RPBRec.LookAndFeel.UseDefaultLookAndFeel = False
-        Me.RPBRec.Name = "RPBRec"
-        Me.RPBRec.ProgressViewStyle = DevExpress.XtraEditors.Controls.ProgressViewStyle.Solid
-        Me.RPBRec.ShowTitle = True
-        Me.RPBRec.Step = 1
-        '
-        'GridColumn54
-        '
-        Me.GridColumn54.Caption = "Receive Status"
-        Me.GridColumn54.FieldName = "rec_status"
-        Me.GridColumn54.Name = "GridColumn54"
-        Me.GridColumn54.OptionsColumn.AllowEdit = False
-        Me.GridColumn54.Visible = True
-        Me.GridColumn54.VisibleIndex = 8
-        Me.GridColumn54.Width = 82
-        '
-        'GridColumn58
-        '
-        Me.GridColumn58.Caption = "Est. Receive Date"
-        Me.GridColumn58.DisplayFormat.FormatString = "dd MMMM yyyy"
-        Me.GridColumn58.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.GridColumn58.FieldName = "est_date_receive"
-        Me.GridColumn58.Name = "GridColumn58"
-        Me.GridColumn58.OptionsColumn.AllowEdit = False
-        Me.GridColumn58.Visible = True
-        Me.GridColumn58.VisibleIndex = 7
-        Me.GridColumn58.Width = 96
-        '
-        'GridColumn5
-        '
-        Me.GridColumn5.Caption = "Close Receiving Reason"
-        Me.GridColumn5.FieldName = "close_rec_reason"
-        Me.GridColumn5.Name = "GridColumn5"
-        Me.GridColumn5.Visible = True
-        Me.GridColumn5.VisibleIndex = 9
-        Me.GridColumn5.Width = 124
-        '
-        'GridColumn2
-        '
-        Me.GridColumn2.Caption = "To Est. Receive Date"
-        Me.GridColumn2.ColumnEdit = Me.RepositoryItemDateEdit
-        Me.GridColumn2.FieldName = "to_est_date_receive"
-        Me.GridColumn2.Name = "GridColumn2"
-        Me.GridColumn2.Visible = True
-        Me.GridColumn2.VisibleIndex = 10
-        Me.GridColumn2.Width = 111
-        '
-        'RepositoryItemDateEdit
-        '
-        Me.RepositoryItemDateEdit.AutoHeight = False
-        Me.RepositoryItemDateEdit.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.RepositoryItemDateEdit.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.RepositoryItemDateEdit.DisplayFormat.FormatString = "dd MMMM yyyy"
-        Me.RepositoryItemDateEdit.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.RepositoryItemDateEdit.EditFormat.FormatString = "dd MMMM yyyy"
-        Me.RepositoryItemDateEdit.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.RepositoryItemDateEdit.Mask.EditMask = "dd MMMM yyyy"
-        Me.RepositoryItemDateEdit.Name = "RepositoryItemDateEdit"
-        '
-        'RepositoryItemTextEdit
-        '
-        Me.RepositoryItemTextEdit.AutoHeight = False
-        Me.RepositoryItemTextEdit.Name = "RepositoryItemTextEdit"
-        '
-        'WinControlContainer1
-        '
-        Me.WinControlContainer1.LocationFloat = New DevExpress.Utils.PointFloat(0!, 0!)
-        Me.WinControlContainer1.Name = "WinControlContainer1"
-        Me.WinControlContainer1.SizeF = New System.Drawing.SizeF(1074.0!, 104.0!)
-        Me.WinControlContainer1.WinControl = Me.GCPO
-        '
         'ReportPurcOrderCloseReceiving
         '
         Me.Bands.AddRange(New DevExpress.XtraReports.UI.Band() {Me.Detail, Me.TopMargin, Me.BottomMargin, Me.ReportHeader, Me.ReportFooter})
@@ -480,13 +492,14 @@ Partial Public Class ReportPurcOrderCloseReceiving
         Me.PaperKind = System.Drawing.Printing.PaperKind.A4
         Me.ScriptLanguage = DevExpress.XtraReports.ScriptLanguage.VisualBasic
         Me.Version = "15.1"
-        CType(Me.XrTable1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GCPO, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVPO, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemMemoEdit, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RPBRec, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemDateEdit.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemDateEdit, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemTextEdit, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.XrTable1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me, System.ComponentModel.ISupportInitialize).EndInit()
 
     End Sub
@@ -528,4 +541,5 @@ Partial Public Class ReportPurcOrderCloseReceiving
     Friend WithEvents GridColumn2 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents RepositoryItemDateEdit As DevExpress.XtraEditors.Repository.RepositoryItemDateEdit
     Friend WithEvents RepositoryItemTextEdit As DevExpress.XtraEditors.Repository.RepositoryItemTextEdit
+    Friend WithEvents RepositoryItemMemoEdit As DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit
 End Class

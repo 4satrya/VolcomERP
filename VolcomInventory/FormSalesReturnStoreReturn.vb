@@ -12,6 +12,7 @@
 
     Sub choose()
         FormSalesReturnDet.id_wh_awb_det = GVData.GetFocusedRowCellValue("id_wh_awb_det").ToString
+        FormSalesReturnDet.id_return_note = GVData.GetFocusedRowCellValue("id_return_note").ToString
         FormSalesReturnDet.TxtStoreReturnNumber.Text = GVData.GetFocusedRowCellValue("do_no").ToString
         FormSalesReturnDet.TxtStoreReturnNumber.Properties.ReadOnly = True
         Close()

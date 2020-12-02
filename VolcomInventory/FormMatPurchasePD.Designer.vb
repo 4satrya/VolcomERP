@@ -287,7 +287,7 @@ Partial Class FormMatPurchasePD
         Me.PanelControl2.Controls.Add(Me.BClose)
         Me.PanelControl2.Controls.Add(Me.BSave)
         Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControl2.Location = New System.Drawing.Point(0, 455)
+        Me.PanelControl2.Location = New System.Drawing.Point(0, 468)
         Me.PanelControl2.Name = "PanelControl2"
         Me.PanelControl2.Size = New System.Drawing.Size(1051, 49)
         Me.PanelControl2.TabIndex = 1
@@ -329,7 +329,7 @@ Partial Class FormMatPurchasePD
         Me.GCPD.MainView = Me.GVPD
         Me.GCPD.Name = "GCPD"
         Me.GCPD.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RICEPD})
-        Me.GCPD.Size = New System.Drawing.Size(1051, 272)
+        Me.GCPD.Size = New System.Drawing.Size(1051, 285)
         Me.GCPD.TabIndex = 2
         Me.GCPD.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVPD})
         '
@@ -462,7 +462,7 @@ Partial Class FormMatPurchasePD
         Me.PanelControl3.Controls.Add(Me.PanelControl4)
         Me.PanelControl3.Controls.Add(Me.PanelControl9)
         Me.PanelControl3.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControl3.Location = New System.Drawing.Point(0, 353)
+        Me.PanelControl3.Location = New System.Drawing.Point(0, 366)
         Me.PanelControl3.Name = "PanelControl3"
         Me.PanelControl3.Size = New System.Drawing.Size(1051, 102)
         Me.PanelControl3.TabIndex = 3
@@ -521,6 +521,7 @@ Partial Class FormMatPurchasePD
         'TEToleransi
         '
         Me.TEToleransi.EditValue = ""
+        Me.TEToleransi.Enabled = False
         Me.TEToleransi.Location = New System.Drawing.Point(112, 39)
         Me.TEToleransi.Name = "TEToleransi"
         Me.TEToleransi.Properties.Appearance.Options.UseTextOptions = True
@@ -530,6 +531,7 @@ Partial Class FormMatPurchasePD
         Me.TEToleransi.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
         Me.TEToleransi.Properties.Mask.SaveLiteral = False
         Me.TEToleransi.Properties.Mask.UseMaskAsDisplayFormat = True
+        Me.TEToleransi.Properties.ReadOnly = True
         Me.TEToleransi.Size = New System.Drawing.Size(51, 20)
         Me.TEToleransi.TabIndex = 162
         '
@@ -608,7 +610,7 @@ Partial Class FormMatPurchasePD
         'BCalculate
         '
         Me.BCalculate.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.BCalculate.Location = New System.Drawing.Point(0, 326)
+        Me.BCalculate.Location = New System.Drawing.Point(0, 339)
         Me.BCalculate.Name = "BCalculate"
         Me.BCalculate.Size = New System.Drawing.Size(1051, 27)
         Me.BCalculate.TabIndex = 4
@@ -636,7 +638,7 @@ Partial Class FormMatPurchasePD
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1051, 504)
+        Me.ClientSize = New System.Drawing.Size(1051, 517)
         Me.Controls.Add(Me.GCPD)
         Me.Controls.Add(Me.BCalculate)
         Me.Controls.Add(Me.PanelControl3)

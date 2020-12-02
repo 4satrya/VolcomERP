@@ -25,6 +25,7 @@ Partial Class FormMasterCompany
         Me.CompanyCode = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.company = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.address_primary = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.sub_district = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.is_active = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.Category = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -33,7 +34,6 @@ Partial Class FormMasterCompany
         Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GCStatus = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.is_active_company = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
-        Me.sub_district = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GCCompany, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVCompany, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -47,7 +47,7 @@ Partial Class FormMasterCompany
         Me.GCCompany.MainView = Me.GVCompany
         Me.GCCompany.Name = "GCCompany"
         Me.GCCompany.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.is_active_company, Me.RepositoryItemCheckEdit1})
-        Me.GCCompany.Size = New System.Drawing.Size(1008, 729)
+        Me.GCCompany.Size = New System.Drawing.Size(1008, 619)
         Me.GCCompany.TabIndex = 3
         Me.GCCompany.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVCompany})
         '
@@ -91,6 +91,14 @@ Partial Class FormMasterCompany
         Me.address_primary.Visible = True
         Me.address_primary.VisibleIndex = 3
         Me.address_primary.Width = 289
+        '
+        'sub_district
+        '
+        Me.sub_district.Caption = "Sub District"
+        Me.sub_district.FieldName = "sub_district"
+        Me.sub_district.Name = "sub_district"
+        Me.sub_district.Visible = True
+        Me.sub_district.VisibleIndex = 4
         '
         'is_active
         '
@@ -157,19 +165,11 @@ Partial Class FormMasterCompany
         Me.is_active_company.DisplayValueUnchecked = "0"
         Me.is_active_company.Name = "is_active_company"
         '
-        'sub_district
-        '
-        Me.sub_district.Caption = "Sub District"
-        Me.sub_district.FieldName = "sub_district"
-        Me.sub_district.Name = "sub_district"
-        Me.sub_district.Visible = True
-        Me.sub_district.VisibleIndex = 4
-        '
         'FormMasterCompany
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1008, 729)
+        Me.ClientSize = New System.Drawing.Size(1008, 619)
         Me.Controls.Add(Me.GCCompany)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False

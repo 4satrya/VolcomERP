@@ -104,8 +104,10 @@
             GCTotalAdjustment.Caption = "Total" + Environment.NewLine + "Adjustment"
             GCGrandTotal.Caption = "Grand" + Environment.NewLine + "Total"
             GCActualJoinDateTHR.Caption = "Actual" + Environment.NewLine + "Join Date"
+            GCLastDateTHR.Caption = "Last" + Environment.NewLine + "Working Date"
             GCLengthOfWorkTHR.Caption = "Length of Work" + Environment.NewLine + "(Year)"
             GCTotalSalaryTHR.Caption = "Total" + Environment.NewLine + "THR"
+            GCStatus.Caption = "Employee" + Environment.NewLine + "Status"
 
             GBWorkingDays.Visible = False
 
@@ -118,14 +120,25 @@
             GCTotalPaymentOvertime.Visible = False
             GCTotalDeduction.Visible = False
 
-            GCStatus.Width = 100
+            GCNIP.Width = 40
+            GCActualJoinDateTHR.Width = 60
+            GCLastDateTHR.Width = 60
+            GCNo.Width = 25
+            GCPosition.Width = 100
+            GCStatus.Width = 70
+            GCTotalSalaryTHR.Width = 70
+            GCTotalAdjustment.Width = 70
+            GCGrandTotal.Width = 70
+            GCLengthOfWorkTHR.Width = 60
 
             'store
             GCTotalAdjustmentStore.Caption = "Total" + Environment.NewLine + "Adjustment"
             GCGrandTotalStore.Caption = "Grand" + Environment.NewLine + "Total"
             GCActualJoinDateTHRStore.Caption = "Actual" + Environment.NewLine + "Join Date"
+            GCLastDateTHRStore.Caption = "Last" + Environment.NewLine + "Working Date"
             GCLengthOfWorkTHRStore.Caption = "Length of Work" + Environment.NewLine + "(Year)"
             GCTotalSalaryTHRStore.Caption = "Total" + Environment.NewLine + "THR"
+            GCStatusStore.Caption = "Employee" + Environment.NewLine + "Status"
 
             GBWorkingDaysStore.Visible = False
 
@@ -138,7 +151,16 @@
             GCTotalPaymentOvertimeStore.Visible = False
             GCTotalDeductionStore.Visible = False
 
-            GCStatusStore.Width = 100
+            GCNIPStore.Width = 40
+            GCActualJoinDateTHRStore.Width = 60
+            GCLastDateTHRStore.Width = 60
+            GCNoStore.Width = 25
+            GCPositionStore.Width = 100
+            GCStatusStore.Width = 60
+            GCTotalSalaryTHRStore.Width = 70
+            GCTotalAdjustmentStore.Width = 70
+            GCGrandTotalStore.Width = 70
+            GCLengthOfWorkTHRStore.Width = 60
         End If
 
         GCName.SummaryItem.DisplayFormat = "Grand Total: " + XLLocationOffice.Text.ToUpper

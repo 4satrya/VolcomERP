@@ -73,7 +73,7 @@
             INNER JOIN tb_m_design d ON d.id_design = p.id_design
             INNER JOIN tb_sales_order_det sod ON sod.id_sales_order_det = td.id_sales_order_det
             WHERE t.id_fg_trf=" + id_report_par + " AND d.is_old_design=2  AND t.is_use_unique_code=1 AND so.is_transfer_data=2 "
-            execute_non_query(query_unique, True, "", "", "", "")
+            execute_non_query_long(query_unique, True, "", "", "", "")
 
             'save unreg unique
             execute_non_query("CALL generate_unreg_barcode(" + id_report_par + ",2)", True, "", "", "", "")
@@ -145,7 +145,7 @@
             INNER JOIN tb_m_design d ON d.id_design = p.id_design
             INNER JOIN tb_sales_order_det sod ON sod.id_sales_order_det = td.id_sales_order_det
             WHERE t.id_fg_trf=" + id_report_par + " AND d.is_old_design=2  AND t.is_use_unique_code=1 AND so.is_transfer_data=2 "
-            execute_non_query(query_cancel, True, "", "", "", "")
+            execute_non_query_long(query_cancel, True, "", "", "", "")
         End If
         Dim query As String = String.Format("UPDATE tb_fg_trf SET id_report_status='{0}', id_report_status_rec = '" + id_status_reportx_par + "', last_update=NOW(), last_update_by=" + id_user + " WHERE id_fg_trf ='{1}'", id_status_reportx_par, id_report_par)
         execute_non_query(query, True, "", "", "", "")

@@ -48,6 +48,17 @@ Partial Class FormMailManageReturnDet
         Me.GridColumnmail_address = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnmail_member_type = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.XTPDetail = New DevExpress.XtraTab.XtraTabPage()
+        Me.GCDetail = New DevExpress.XtraGrid.GridControl()
+        Me.GVDetail = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn11 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RICECheckReceive = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
+        Me.RepositoryItemCheckEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
         Me.BtnLog = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnCancel = New DevExpress.XtraEditors.SimpleButton()
@@ -71,17 +82,9 @@ Partial Class FormMailManageReturnDet
         Me.TxtMailType = New DevExpress.XtraEditors.TextEdit()
         Me.TxtEmailNumber = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
-        Me.GCDetail = New DevExpress.XtraGrid.GridControl()
-        Me.GVDetail = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.RICECheckReceive = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
-        Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn11 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.RepositoryItemCheckEdit2 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
+        Me.MEReason = New DevExpress.XtraEditors.MemoEdit()
+        Me.LabelControl14 = New DevExpress.XtraEditors.LabelControl()
+        Me.PanelControl5 = New DevExpress.XtraEditors.PanelControl()
         CType(Me.XTCMail, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCMail.SuspendLayout()
         Me.XTPreview.SuspendLayout()
@@ -98,6 +101,10 @@ Partial Class FormMailManageReturnDet
         CType(Me.GCMember, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVMember, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTPDetail.SuspendLayout()
+        CType(Me.GCDetail, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GVDetail, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RICECheckReceive, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemCheckEdit2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl2.SuspendLayout()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -114,37 +121,36 @@ Partial Class FormMailManageReturnDet
         CType(Me.TxtMailStatus.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtMailType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtEmailNumber.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GCDetail, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GVDetail, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.RICECheckReceive, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.RepositoryItemCheckEdit2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.MEReason.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PanelControl5, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelControl5.SuspendLayout()
         Me.SuspendLayout()
         '
         'XTCMail
         '
         Me.XTCMail.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.XTCMail.Location = New System.Drawing.Point(0, 152)
+        Me.XTCMail.Location = New System.Drawing.Point(0, 195)
         Me.XTCMail.Name = "XTCMail"
         Me.XTCMail.SelectedTabPage = Me.XTPreview
-        Me.XTCMail.Size = New System.Drawing.Size(1008, 529)
+        Me.XTCMail.Size = New System.Drawing.Size(1008, 486)
         Me.XTCMail.TabIndex = 3
         Me.XTCMail.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPreview, Me.XTPData})
         '
         'XTPreview
         '
-        Me.XTPreview.Controls.Add(Me.WebBrowser1)
+        Me.XTPreview.Controls.Add(Me.PanelControl5)
         Me.XTPreview.Controls.Add(Me.PanelControl4)
         Me.XTPreview.Name = "XTPreview"
-        Me.XTPreview.Size = New System.Drawing.Size(1002, 501)
+        Me.XTPreview.Size = New System.Drawing.Size(1002, 458)
         Me.XTPreview.Text = "Preview"
         '
         'WebBrowser1
         '
         Me.WebBrowser1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.WebBrowser1.Location = New System.Drawing.Point(315, 0)
+        Me.WebBrowser1.Location = New System.Drawing.Point(32, 32)
         Me.WebBrowser1.MinimumSize = New System.Drawing.Size(20, 20)
         Me.WebBrowser1.Name = "WebBrowser1"
-        Me.WebBrowser1.Size = New System.Drawing.Size(687, 501)
+        Me.WebBrowser1.Size = New System.Drawing.Size(623, 394)
         Me.WebBrowser1.TabIndex = 1
         '
         'PanelControl4
@@ -163,7 +169,7 @@ Partial Class FormMailManageReturnDet
         Me.PanelControl4.Dock = System.Windows.Forms.DockStyle.Left
         Me.PanelControl4.Location = New System.Drawing.Point(0, 0)
         Me.PanelControl4.Name = "PanelControl4"
-        Me.PanelControl4.Size = New System.Drawing.Size(315, 501)
+        Me.PanelControl4.Size = New System.Drawing.Size(315, 458)
         Me.PanelControl4.TabIndex = 0
         '
         'BtnAttach
@@ -256,7 +262,7 @@ Partial Class FormMailManageReturnDet
         '
         Me.XTPData.Controls.Add(Me.XTCData)
         Me.XTPData.Name = "XTPData"
-        Me.XTPData.Size = New System.Drawing.Size(1002, 501)
+        Me.XTPData.Size = New System.Drawing.Size(1002, 458)
         Me.XTPData.Text = "Data"
         '
         'XTCData
@@ -266,7 +272,7 @@ Partial Class FormMailManageReturnDet
         Me.XTCData.Location = New System.Drawing.Point(0, 0)
         Me.XTCData.Name = "XTCData"
         Me.XTCData.SelectedTabPage = Me.XTPFrom
-        Me.XTCData.Size = New System.Drawing.Size(1002, 501)
+        Me.XTCData.Size = New System.Drawing.Size(1002, 458)
         Me.XTCData.TabIndex = 0
         Me.XTCData.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPFrom, Me.XTPDetail})
         '
@@ -274,7 +280,7 @@ Partial Class FormMailManageReturnDet
         '
         Me.XTPFrom.Controls.Add(Me.GCMember)
         Me.XTPFrom.Name = "XTPFrom"
-        Me.XTPFrom.Size = New System.Drawing.Size(973, 495)
+        Me.XTPFrom.Size = New System.Drawing.Size(973, 452)
         Me.XTPFrom.Text = "From/To/Cc"
         '
         'GCMember
@@ -283,7 +289,7 @@ Partial Class FormMailManageReturnDet
         Me.GCMember.Location = New System.Drawing.Point(0, 0)
         Me.GCMember.MainView = Me.GVMember
         Me.GCMember.Name = "GCMember"
-        Me.GCMember.Size = New System.Drawing.Size(973, 495)
+        Me.GCMember.Size = New System.Drawing.Size(973, 452)
         Me.GCMember.TabIndex = 0
         Me.GCMember.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVMember})
         '
@@ -358,8 +364,118 @@ Partial Class FormMailManageReturnDet
         '
         Me.XTPDetail.Controls.Add(Me.GCDetail)
         Me.XTPDetail.Name = "XTPDetail"
-        Me.XTPDetail.Size = New System.Drawing.Size(973, 495)
+        Me.XTPDetail.Size = New System.Drawing.Size(973, 452)
         Me.XTPDetail.Text = "Detail"
+        '
+        'GCDetail
+        '
+        Me.GCDetail.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GCDetail.Location = New System.Drawing.Point(0, 0)
+        Me.GCDetail.MainView = Me.GVDetail
+        Me.GCDetail.Name = "GCDetail"
+        Me.GCDetail.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RICECheckReceive, Me.RepositoryItemCheckEdit2})
+        Me.GCDetail.Size = New System.Drawing.Size(973, 452)
+        Me.GCDetail.TabIndex = 20
+        Me.GCDetail.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVDetail})
+        '
+        'GVDetail
+        '
+        Me.GVDetail.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn2, Me.GridColumn7, Me.GridColumn3, Me.GridColumn4, Me.GridColumn5, Me.GridColumn11, Me.GridColumn6})
+        Me.GVDetail.GridControl = Me.GCDetail
+        Me.GVDetail.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount", Me.GridColumn11, "{0:N2}")})
+        Me.GVDetail.Name = "GVDetail"
+        Me.GVDetail.OptionsBehavior.AutoExpandAllGroups = True
+        Me.GVDetail.OptionsSelection.EnableAppearanceFocusedRow = False
+        Me.GVDetail.OptionsView.ColumnAutoWidth = False
+        Me.GVDetail.OptionsView.ShowFooter = True
+        Me.GVDetail.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn2
+        '
+        Me.GridColumn2.Caption = "Number"
+        Me.GridColumn2.FieldName = "sales_return_order_number"
+        Me.GridColumn2.Name = "GridColumn2"
+        Me.GridColumn2.OptionsColumn.AllowEdit = False
+        Me.GridColumn2.Visible = True
+        Me.GridColumn2.VisibleIndex = 0
+        '
+        'GridColumn7
+        '
+        Me.GridColumn7.Caption = "Type"
+        Me.GridColumn7.FieldName = "order_type"
+        Me.GridColumn7.Name = "GridColumn7"
+        Me.GridColumn7.OptionsColumn.AllowEdit = False
+        Me.GridColumn7.Visible = True
+        Me.GridColumn7.VisibleIndex = 1
+        '
+        'GridColumn3
+        '
+        Me.GridColumn3.Caption = "To"
+        Me.GridColumn3.FieldName = "store_name_to"
+        Me.GridColumn3.Name = "GridColumn3"
+        Me.GridColumn3.OptionsColumn.AllowEdit = False
+        Me.GridColumn3.Visible = True
+        Me.GridColumn3.VisibleIndex = 2
+        '
+        'GridColumn4
+        '
+        Me.GridColumn4.Caption = "Created Date"
+        Me.GridColumn4.DisplayFormat.FormatString = "dd MMMM yyyy HH:mm:ss"
+        Me.GridColumn4.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumn4.FieldName = "sales_return_order_date"
+        Me.GridColumn4.Name = "GridColumn4"
+        Me.GridColumn4.OptionsColumn.AllowEdit = False
+        Me.GridColumn4.Visible = True
+        Me.GridColumn4.VisibleIndex = 3
+        '
+        'GridColumn5
+        '
+        Me.GridColumn5.Caption = "Estimate Return"
+        Me.GridColumn5.DisplayFormat.FormatString = "dd MMMM yyyy"
+        Me.GridColumn5.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumn5.FieldName = "sales_return_order_est_date"
+        Me.GridColumn5.Name = "GridColumn5"
+        Me.GridColumn5.OptionsColumn.AllowEdit = False
+        Me.GridColumn5.Visible = True
+        Me.GridColumn5.VisibleIndex = 4
+        Me.GridColumn5.Width = 87
+        '
+        'GridColumn11
+        '
+        Me.GridColumn11.Caption = "Amount"
+        Me.GridColumn11.DisplayFormat.FormatString = "N2"
+        Me.GridColumn11.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn11.FieldName = "amount"
+        Me.GridColumn11.Name = "GridColumn11"
+        Me.GridColumn11.OptionsColumn.AllowEdit = False
+        Me.GridColumn11.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount", "{0:N2}")})
+        Me.GridColumn11.Visible = True
+        Me.GridColumn11.VisibleIndex = 6
+        '
+        'GridColumn6
+        '
+        Me.GridColumn6.Caption = "Note"
+        Me.GridColumn6.FieldName = "sales_return_order_note"
+        Me.GridColumn6.Name = "GridColumn6"
+        Me.GridColumn6.OptionsColumn.AllowEdit = False
+        Me.GridColumn6.Visible = True
+        Me.GridColumn6.VisibleIndex = 5
+        '
+        'RICECheckReceive
+        '
+        Me.RICECheckReceive.AutoHeight = False
+        Me.RICECheckReceive.Name = "RICECheckReceive"
+        Me.RICECheckReceive.ValueChecked = "yes"
+        Me.RICECheckReceive.ValueUnchecked = "no"
+        '
+        'RepositoryItemCheckEdit2
+        '
+        Me.RepositoryItemCheckEdit2.AutoHeight = False
+        Me.RepositoryItemCheckEdit2.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.UserDefined
+        Me.RepositoryItemCheckEdit2.Name = "RepositoryItemCheckEdit2"
+        Me.RepositoryItemCheckEdit2.PictureChecked = CType(resources.GetObject("RepositoryItemCheckEdit2.PictureChecked"), System.Drawing.Image)
+        Me.RepositoryItemCheckEdit2.ValueChecked = "Yes"
+        Me.RepositoryItemCheckEdit2.ValueUnchecked = "No"
         '
         'PanelControl2
         '
@@ -417,6 +533,8 @@ Partial Class FormMailManageReturnDet
         '
         'PanelControl1
         '
+        Me.PanelControl1.Controls.Add(Me.MEReason)
+        Me.PanelControl1.Controls.Add(Me.LabelControl14)
         Me.PanelControl1.Controls.Add(Me.PanelControl3)
         Me.PanelControl1.Controls.Add(Me.MENote)
         Me.PanelControl1.Controls.Add(Me.LabelControl4)
@@ -429,7 +547,7 @@ Partial Class FormMailManageReturnDet
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelControl1.Location = New System.Drawing.Point(0, 0)
         Me.PanelControl1.Name = "PanelControl1"
-        Me.PanelControl1.Size = New System.Drawing.Size(1008, 152)
+        Me.PanelControl1.Size = New System.Drawing.Size(1008, 195)
         Me.PanelControl1.TabIndex = 4
         '
         'PanelControl3
@@ -446,7 +564,7 @@ Partial Class FormMailManageReturnDet
         Me.PanelControl3.Dock = System.Windows.Forms.DockStyle.Right
         Me.PanelControl3.Location = New System.Drawing.Point(664, 2)
         Me.PanelControl3.Name = "PanelControl3"
-        Me.PanelControl3.Size = New System.Drawing.Size(342, 148)
+        Me.PanelControl3.Size = New System.Drawing.Size(342, 191)
         Me.PanelControl3.TabIndex = 8
         '
         'DEUpdatedDate
@@ -595,115 +713,31 @@ Partial Class FormMailManageReturnDet
         Me.LabelControl1.TabIndex = 0
         Me.LabelControl1.Text = "Email Number"
         '
-        'GCDetail
+        'MEReason
         '
-        Me.GCDetail.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GCDetail.Location = New System.Drawing.Point(0, 0)
-        Me.GCDetail.MainView = Me.GVDetail
-        Me.GCDetail.Name = "GCDetail"
-        Me.GCDetail.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RICECheckReceive, Me.RepositoryItemCheckEdit2})
-        Me.GCDetail.Size = New System.Drawing.Size(973, 495)
-        Me.GCDetail.TabIndex = 20
-        Me.GCDetail.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVDetail})
+        Me.MEReason.Location = New System.Drawing.Point(89, 140)
+        Me.MEReason.Name = "MEReason"
+        Me.MEReason.Size = New System.Drawing.Size(243, 43)
+        Me.MEReason.TabIndex = 1
         '
-        'GVDetail
+        'LabelControl14
         '
-        Me.GVDetail.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn2, Me.GridColumn7, Me.GridColumn3, Me.GridColumn4, Me.GridColumn5, Me.GridColumn11, Me.GridColumn6})
-        Me.GVDetail.GridControl = Me.GCDetail
-        Me.GVDetail.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount", Me.GridColumn11, "{0:N2}")})
-        Me.GVDetail.Name = "GVDetail"
-        Me.GVDetail.OptionsBehavior.AutoExpandAllGroups = True
-        Me.GVDetail.OptionsSelection.EnableAppearanceFocusedRow = False
-        Me.GVDetail.OptionsView.ColumnAutoWidth = False
-        Me.GVDetail.OptionsView.ShowFooter = True
-        Me.GVDetail.OptionsView.ShowGroupPanel = False
+        Me.LabelControl14.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl14.Location = New System.Drawing.Point(15, 142)
+        Me.LabelControl14.Name = "LabelControl14"
+        Me.LabelControl14.Size = New System.Drawing.Size(36, 13)
+        Me.LabelControl14.TabIndex = 9
+        Me.LabelControl14.Text = "Reason"
         '
-        'RICECheckReceive
+        'PanelControl5
         '
-        Me.RICECheckReceive.AutoHeight = False
-        Me.RICECheckReceive.Name = "RICECheckReceive"
-        Me.RICECheckReceive.ValueChecked = "yes"
-        Me.RICECheckReceive.ValueUnchecked = "no"
-        '
-        'GridColumn2
-        '
-        Me.GridColumn2.Caption = "Number"
-        Me.GridColumn2.FieldName = "sales_return_order_number"
-        Me.GridColumn2.Name = "GridColumn2"
-        Me.GridColumn2.OptionsColumn.AllowEdit = False
-        Me.GridColumn2.Visible = True
-        Me.GridColumn2.VisibleIndex = 4
-        '
-        'GridColumn7
-        '
-        Me.GridColumn7.Caption = "Type"
-        Me.GridColumn7.FieldName = "order_type"
-        Me.GridColumn7.Name = "GridColumn7"
-        Me.GridColumn7.OptionsColumn.AllowEdit = False
-        Me.GridColumn7.Visible = True
-        Me.GridColumn7.VisibleIndex = 5
-        '
-        'GridColumn3
-        '
-        Me.GridColumn3.Caption = "To"
-        Me.GridColumn3.FieldName = "store_name_to"
-        Me.GridColumn3.Name = "GridColumn3"
-        Me.GridColumn3.OptionsColumn.AllowEdit = False
-        Me.GridColumn3.Visible = True
-        Me.GridColumn3.VisibleIndex = 6
-        '
-        'GridColumn4
-        '
-        Me.GridColumn4.Caption = "Created Date"
-        Me.GridColumn4.DisplayFormat.FormatString = "dd MMMM yyyy HH:mm:ss"
-        Me.GridColumn4.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.GridColumn4.FieldName = "sales_return_order_date"
-        Me.GridColumn4.Name = "GridColumn4"
-        Me.GridColumn4.OptionsColumn.AllowEdit = False
-        Me.GridColumn4.Visible = True
-        Me.GridColumn4.VisibleIndex = 7
-        '
-        'GridColumn5
-        '
-        Me.GridColumn5.Caption = "Estimate Return"
-        Me.GridColumn5.DisplayFormat.FormatString = "dd MMMM yyyy"
-        Me.GridColumn5.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.GridColumn5.FieldName = "sales_return_order_est_date"
-        Me.GridColumn5.Name = "GridColumn5"
-        Me.GridColumn5.OptionsColumn.AllowEdit = False
-        Me.GridColumn5.Visible = True
-        Me.GridColumn5.VisibleIndex = 8
-        Me.GridColumn5.Width = 87
-        '
-        'GridColumn11
-        '
-        Me.GridColumn11.Caption = "Amount"
-        Me.GridColumn11.DisplayFormat.FormatString = "N2"
-        Me.GridColumn11.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.GridColumn11.FieldName = "amount"
-        Me.GridColumn11.Name = "GridColumn11"
-        Me.GridColumn11.OptionsColumn.AllowEdit = False
-        Me.GridColumn11.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount", "{0:N2}")})
-        Me.GridColumn11.Visible = True
-        Me.GridColumn11.VisibleIndex = 10
-        '
-        'GridColumn6
-        '
-        Me.GridColumn6.Caption = "Note"
-        Me.GridColumn6.FieldName = "sales_return_order_note"
-        Me.GridColumn6.Name = "GridColumn6"
-        Me.GridColumn6.OptionsColumn.AllowEdit = False
-        Me.GridColumn6.Visible = True
-        Me.GridColumn6.VisibleIndex = 9
-        '
-        'RepositoryItemCheckEdit2
-        '
-        Me.RepositoryItemCheckEdit2.AutoHeight = False
-        Me.RepositoryItemCheckEdit2.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.UserDefined
-        Me.RepositoryItemCheckEdit2.Name = "RepositoryItemCheckEdit2"
-        Me.RepositoryItemCheckEdit2.PictureChecked = CType(resources.GetObject("RepositoryItemCheckEdit2.PictureChecked"), System.Drawing.Image)
-        Me.RepositoryItemCheckEdit2.ValueChecked = "Yes"
-        Me.RepositoryItemCheckEdit2.ValueUnchecked = "No"
+        Me.PanelControl5.Controls.Add(Me.WebBrowser1)
+        Me.PanelControl5.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.PanelControl5.Location = New System.Drawing.Point(315, 0)
+        Me.PanelControl5.Name = "PanelControl5"
+        Me.PanelControl5.Padding = New System.Windows.Forms.Padding(30)
+        Me.PanelControl5.Size = New System.Drawing.Size(687, 458)
+        Me.PanelControl5.TabIndex = 2
         '
         'FormMailManageReturnDet
         '
@@ -733,6 +767,10 @@ Partial Class FormMailManageReturnDet
         CType(Me.GCMember, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVMember, System.ComponentModel.ISupportInitialize).EndInit()
         Me.XTPDetail.ResumeLayout(False)
+        CType(Me.GCDetail, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GVDetail, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RICECheckReceive, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemCheckEdit2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl2.ResumeLayout(False)
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -751,10 +789,9 @@ Partial Class FormMailManageReturnDet
         CType(Me.TxtMailStatus.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TxtMailType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TxtEmailNumber.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GCDetail, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GVDetail, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.RICECheckReceive, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.RepositoryItemCheckEdit2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.MEReason.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PanelControl5, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelControl5.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -821,4 +858,7 @@ Partial Class FormMailManageReturnDet
     Friend WithEvents GridColumn6 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents RICECheckReceive As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
     Friend WithEvents RepositoryItemCheckEdit2 As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
+    Friend WithEvents MEReason As DevExpress.XtraEditors.MemoEdit
+    Friend WithEvents LabelControl14 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents PanelControl5 As DevExpress.XtraEditors.PanelControl
 End Class

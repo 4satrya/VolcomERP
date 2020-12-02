@@ -394,7 +394,7 @@
         End If
 
         Dim query As String = "SELECT d.id_design,d.design_code AS `code`, d.design_display_name AS `name`, sc.size_chart, cls.id_class,cls.class, src.id_source, src.`source`, LEFT(last_prc.design_cat,1) AS `design_cat_view`,ss.season, sd.delivery,
-        IF(d.final_is_approve=1, d.design_cop,0) AS `cost`, IFNULL(np.design_price,0) AS `normal_price`, IFNULL(mp.design_price,0) AS `mkd_price`, 
+        d.design_cop AS `cost`, IFNULL(np.design_price,0) AS `normal_price`, IFNULL(mp.design_price,0) AS `mkd_price`, 
         IFNULL(ep.design_price,0) AS `eos_price`, IFNULL(sp.design_price,0) AS `sale_price`, last_prc.design_price_date AS `last_updated`
         FROM tb_m_design d
         LEFT JOIN (
@@ -468,7 +468,7 @@
           ) a 
           GROUP BY a.id_design 
         ) last_prc ON last_prc.id_design = d.id_design 
-         WHERE d.id_lookup_status_order!=2 
+         WHERE d.id_lookup_status_order!=2 AND d.design_code!=''
         " + cond_season + "
         " + cond_del + "
         " + cond_class + "

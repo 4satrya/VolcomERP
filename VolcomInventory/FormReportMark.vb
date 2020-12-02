@@ -3205,7 +3205,7 @@ WHERE a.id_adj_in_fg = '" & id_report & "'"
 	                        GROUP BY d.id_ol_store_ret_list
                         ) src ON src.id_ol_store_ret_list = main.id_ol_store_ret_list
                         SET main.id_ol_store_ret_stt=7;
-                        INSERT INTO tb_sales_order_det_status(id_sales_order_det, `status`, `status_date`, `input_status_date`, is_internal)
+                        INSERT IGNORE INTO tb_sales_order_det_status(id_sales_order_det, `status`, `status_date`, `input_status_date`, is_internal)
                         SELECT rd.id_sales_order_det, stt.ol_store_ret_stt, NOW(), NOW(),1
                         FROM tb_sales_pos_det d
                         INNER JOIN tb_ol_store_ret_list rl ON rl.id_ol_store_ret_list = d.id_ol_store_ret_list
@@ -4533,7 +4533,7 @@ WHERE a.id_adj_in_fg = '" & id_report & "'"
                        GROUP BY d.id_ol_store_ret_list
                     ) src ON src.id_ol_store_ret_list = main.id_ol_store_ret_list
                     SET main.id_ol_store_ret_stt=8;
-                    INSERT INTO tb_sales_order_det_status(id_sales_order_det, `status`, `status_date`, `input_status_date`, is_internal)
+                    INSERT IGNORE INTO tb_sales_order_det_status(id_sales_order_det, `status`, `status_date`, `input_status_date`, is_internal)
                     SELECT rd.id_sales_order_det, stt.ol_store_ret_stt, NOW(), NOW(),1
                     FROM tb_sales_return_order_det d
                     INNER JOIN tb_ol_store_ret_list rl ON rl.id_ol_store_ret_list = d.id_ol_store_ret_list
@@ -6298,7 +6298,7 @@ WHERE pd.balance_due=pd.`value` AND pd.`id_pn`='" & id_report & "'"
                             ) src ON src.id_ol_store_ret_list = main.id_ol_store_ret_list
                             SET main.id_ol_store_ret_stt=3; 
                             -- update stt order
-                            INSERT INTO tb_sales_order_det_status(id_sales_order_det, `status`, `status_date`, `input_status_date`, is_internal)
+                            INSERT IGNORE INTO tb_sales_order_det_status(id_sales_order_det, `status`, `status_date`, `input_status_date`, is_internal)
                             SELECT rd.id_sales_order_det, stt.ol_store_ret_stt, NOW(), NOW(),1
                             FROM tb_sales_pos_det d
                             INNER JOIN tb_ol_store_ret_list rl ON rl.id_ol_store_ret_list = d.id_ol_store_ret_list
@@ -6732,12 +6732,12 @@ WHERE pd.balance_due=pd.`value` AND pd.`id_pn`='" & id_report & "'"
                                     -- kas keluar
                                     SELECT '" & id_acc_trans & "' AS id_acc_trans,ca.id_acc_from AS `id_acc`, 1,  0 AS `qty`,0 AS `debit`, ca.val_ca AS `credit`,ca.note,167,ca.id_cash_advance, ca.number
                                     FROM tb_cash_advance ca
-                                    WHERE ca.id_cash_advance=" & id_report & " AND ca.`val_ca` > 0
+                                    WHERE ca.id_cash_advance=" & id_report & " AND ca.`val_ca` <> 0
                                     UNION ALL
                                     -- cash advance
                                     SELECT '" & id_acc_trans & "' AS id_acc_trans,ca.id_acc_to AS `id_acc`, 1,  0 AS `qty`,ca.val_ca AS `debit`, 0 AS `credit`,ca.note,167,ca.id_cash_advance, ca.number
                                     FROM tb_cash_advance ca
-                                    WHERE ca.id_cash_advance=" & id_report & " AND ca.`val_ca` > 0"
+                                    WHERE ca.id_cash_advance=" & id_report & " AND ca.`val_ca` <> 0"
                 execute_non_query(qjd, True, "", "", "", "")
             End If
 
@@ -6809,19 +6809,31 @@ WHERE pd.balance_due=pd.`value` AND pd.`id_pn`='" & id_report & "'"
                                     -- cash advance
                                     SELECT '" & id_acc_trans & "' AS id_acc_trans,ca.id_acc_to AS `id_acc`, 1,  0 AS `qty`,0 AS `debit`,ca.val_ca AS `credit`,ca.note AS `note`,174,ca.id_cash_advance,ca.number
                                     FROM tb_cash_advance ca
-                                    WHERE ca.id_cash_advance=" & id_report & " AND ca.`val_ca` > 0
+                                    WHERE ca.id_cash_advance=" & id_report & " AND ca.`val_ca` <> 0
                                     -- detail
                                     UNION ALL
                                     SELECT '" & id_acc_trans & "' AS id_acc_trans,car.id_acc AS `id_acc`, car.id_comp,  0 AS `qty`, car.value AS `debit`,0  AS `credit`,car.description AS `note`,174,ca.id_cash_advance,ca.number
                                     FROM tb_cash_advance ca
                                     INNER JOIN tb_cash_advance_report car ON ca.id_cash_advance = car.id_cash_advance
-                                    WHERE ca.id_cash_advance=" & id_report & " AND car.`value` > 0
+                                    WHERE ca.id_cash_advance=" & id_report & " AND car.`value` <> 0
                                     --
                                     UNION ALL
                                     SELECT '" & id_acc_trans & "' AS id_acc_trans,card.id_acc AS `id_acc`, 1,  0 AS `qty`, IF(card.id_bill_type = 21, card.value, 0) AS `debit`, IF(card.id_bill_type = 21, 0, card.value)  AS `credit`,card.description AS `note`,174,ca.id_cash_advance,ca.number
-                                FROM tb_cash_advance ca
-                                INNER JOIN tb_cash_advance_report_det card ON ca.id_cash_advance = card.id_cash_advance
-                                WHERE ca.id_cash_advance=" & id_report & " AND card.`value` > 0"
+                                    FROM tb_cash_advance ca
+                                    INNER JOIN tb_cash_advance_report_det card ON ca.id_cash_advance = card.id_cash_advance
+                                    WHERE ca.id_cash_advance=" & id_report & " AND card.`value` <> 0
+                                    -- pph
+                                    UNION ALL
+                                    SELECT '" & id_acc_trans & "' AS id_acc_trans,car.pph_coa AS `id_acc`, car.id_comp,  0 AS `qty`, 0 AS `debit`,car.pph_amount  AS `credit`,car.description AS `note`,174,ca.id_cash_advance,ca.number
+                                    FROM tb_cash_advance ca
+                                    INNER JOIN tb_cash_advance_report car ON ca.id_cash_advance = car.id_cash_advance
+                                    WHERE ca.id_cash_advance=" & id_report & " AND car.`pph_amount` <> 0
+                                    -- ppn
+                                    UNION ALL
+                                    (SELECT '" & id_acc_trans & "' AS id_acc_trans,car.ppn_coa AS `id_acc`, car.id_comp,  0 AS `qty`, SUM(car.ppn_amount) AS `debit`,0  AS `credit`,car.description AS `note`,174,ca.id_cash_advance,ca.number
+                                    FROM tb_cash_advance ca
+                                    INNER JOIN tb_cash_advance_report car ON ca.id_cash_advance = car.id_cash_advance
+                                    WHERE ca.id_cash_advance=" & id_report & " AND car.`ppn_amount` <> 0 GROUP BY ppn_coa)"
                 execute_non_query(qjd, True, "", "", "", "")
             End If
 
@@ -7531,6 +7543,7 @@ GROUP BY pn.id_pn_fgpo"
             If id_status_reportx = "6" Then
                 FormEmpPayroll.insert_expense(id_report)
                 FormEmpPayroll.insert_jurnal(id_report)
+                FormEmpPayroll.remaining_leave(id_report)
             End If
 
             FormEmpPayroll.load_payroll()
@@ -8327,7 +8340,7 @@ WHERE invd.`id_inv_mat`='" & id_report & "'"
 
                 'update status order
                 Try
-                    Dim query_upd_stt_order As String = "INSERT INTO tb_sales_order_det_status(id_sales_order_det, `status`, `status_date`, `input_status_date`)
+                    Dim query_upd_stt_order As String = "INSERT IGNORE INTO tb_sales_order_det_status(id_sales_order_det, `status`, `status_date`, `input_status_date`)
                     SELECT d.id_sales_order_det, 'pre return', NOW(), NOW()
                     FROM tb_ol_store_ret_det d
                     WHERE d.id_ol_store_ret=" + id_report + "
@@ -8355,7 +8368,7 @@ WHERE invd.`id_inv_mat`='" & id_report & "'"
                 SET rl.`id_ol_store_ret_stt`='5'
                 WHERE rd.`id_ol_store_cust_ret`='" & id_report & "'; 
                 -- update status internal order
-                INSERT INTO tb_sales_order_det_status(id_sales_order_det, `status`, `status_date`, `input_status_date`, is_internal)
+                INSERT IGNORE INTO tb_sales_order_det_status(id_sales_order_det, `status`, `status_date`, `input_status_date`, is_internal)
                 SELECT rd.id_sales_order_det, stt.ol_store_ret_stt, NOW(), NOW(),1
                 FROM tb_ol_store_cust_ret_det d
                 INNER JOIN tb_ol_store_ret_list rl ON rl.id_ol_store_ret_list = d.id_ol_store_ret_list

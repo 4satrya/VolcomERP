@@ -7,7 +7,13 @@
         'generate type
         Dim location As Integer = 0
 
-        Dim report_mark_types As DataTable = execute_query("SELECT report_mark_type, report_mark_type_name FROM tb_lookup_report_mark_type WHERE is_mail_acc = 1", -1, True, "", "", "", "")
+        Dim report_mark_types As DataTable = New DataTable
+
+        If FormCompanyEmailMapping.mail_dept = "acc" Then
+            report_mark_types = execute_query("SELECT report_mark_type, report_mark_type_name FROM tb_lookup_report_mark_type WHERE is_mail_acc = 1", -1, True, "", "", "", "")
+        ElseIf FormCompanyEmailMapping.mail_dept = "wh" Then
+            report_mark_types = execute_query("SELECT report_mark_type, report_mark_type_name FROM tb_lookup_report_mark_type WHERE is_mail_wh = 1", -1, True, "", "", "", "")
+        End If
 
         Dim i As Integer = 0
 

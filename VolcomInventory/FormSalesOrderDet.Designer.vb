@@ -107,6 +107,7 @@ Partial Class FormSalesOrderDet
         Me.GridColumnOLStoreId = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnOLStoreNumber = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnOLStoreOrderDate = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnid_ol_promo_collection_sku_replace = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PanelControlNav = New DevExpress.XtraEditors.PanelControl()
         Me.BtnExportAsFile = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnImportExcelNew = New DevExpress.XtraEditors.SimpleButton()
@@ -125,7 +126,6 @@ Partial Class FormSalesOrderDet
         Me.GridColumn32 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn33 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.LabelControl12 = New DevExpress.XtraEditors.LabelControl()
-        Me.GridColumnid_ol_promo_collection_sku_replace = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GroupGeneralHeader, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupGeneralHeader.SuspendLayout()
         CType(Me.PanelControlTopLeft, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -246,22 +246,22 @@ Partial Class FormSalesOrderDet
         'LabelControl9
         '
         Me.LabelControl9.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl9.Location = New System.Drawing.Point(11, 103)
+        Me.LabelControl9.Location = New System.Drawing.Point(11, 39)
         Me.LabelControl9.Name = "LabelControl9"
-        Me.LabelControl9.Size = New System.Drawing.Size(55, 13)
+        Me.LabelControl9.Size = New System.Drawing.Size(48, 13)
         Me.LabelControl9.TabIndex = 8907
-        Me.LabelControl9.Text = "Warehouse"
+        Me.LabelControl9.Text = "WH. From"
         '
         'TxtWHCodeTo
         '
         Me.TxtWHCodeTo.EditValue = ""
-        Me.TxtWHCodeTo.Location = New System.Drawing.Point(101, 100)
+        Me.TxtWHCodeTo.Location = New System.Drawing.Point(101, 36)
         Me.TxtWHCodeTo.Name = "TxtWHCodeTo"
         Me.TxtWHCodeTo.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtWHCodeTo.Properties.Appearance.Options.UseFont = True
         Me.TxtWHCodeTo.Properties.EditValueChangedDelay = 1
         Me.TxtWHCodeTo.Size = New System.Drawing.Size(66, 20)
-        Me.TxtWHCodeTo.TabIndex = 2
+        Me.TxtWHCodeTo.TabIndex = 1
         '
         'TxtNameCompTo
         '
@@ -269,7 +269,7 @@ Partial Class FormSalesOrderDet
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtNameCompTo.EditValue = ""
         Me.TxtNameCompTo.Enabled = False
-        Me.TxtNameCompTo.Location = New System.Drawing.Point(170, 35)
+        Me.TxtNameCompTo.Location = New System.Drawing.Point(170, 62)
         Me.TxtNameCompTo.Name = "TxtNameCompTo"
         Me.TxtNameCompTo.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtNameCompTo.Properties.Appearance.Options.UseFont = True
@@ -300,7 +300,7 @@ Partial Class FormSalesOrderDet
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtWHNameTo.EditValue = ""
         Me.TxtWHNameTo.Enabled = False
-        Me.TxtWHNameTo.Location = New System.Drawing.Point(170, 100)
+        Me.TxtWHNameTo.Location = New System.Drawing.Point(170, 36)
         Me.TxtWHNameTo.Name = "TxtWHNameTo"
         Me.TxtWHNameTo.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtWHNameTo.Properties.Appearance.Options.UseFont = True
@@ -324,7 +324,7 @@ Partial Class FormSalesOrderDet
         Me.BtnBrowseWH.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnBrowseWH.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnBrowseWH.Appearance.Options.UseFont = True
-        Me.BtnBrowseWH.Location = New System.Drawing.Point(400, 100)
+        Me.BtnBrowseWH.Location = New System.Drawing.Point(400, 36)
         Me.BtnBrowseWH.Name = "BtnBrowseWH"
         Me.BtnBrowseWH.Size = New System.Drawing.Size(20, 20)
         Me.BtnBrowseWH.TabIndex = 2
@@ -336,7 +336,7 @@ Partial Class FormSalesOrderDet
         Me.MEAdrressCompTo.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.MEAdrressCompTo.Enabled = False
-        Me.MEAdrressCompTo.Location = New System.Drawing.Point(101, 60)
+        Me.MEAdrressCompTo.Location = New System.Drawing.Point(101, 87)
         Me.MEAdrressCompTo.Name = "MEAdrressCompTo"
         Me.MEAdrressCompTo.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.MEAdrressCompTo.Properties.Appearance.Options.UseFont = True
@@ -348,7 +348,7 @@ Partial Class FormSalesOrderDet
         'LabelControl1
         '
         Me.LabelControl1.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl1.Location = New System.Drawing.Point(11, 38)
+        Me.LabelControl1.Location = New System.Drawing.Point(11, 65)
         Me.LabelControl1.Name = "LabelControl1"
         Me.LabelControl1.Size = New System.Drawing.Size(84, 13)
         Me.LabelControl1.TabIndex = 145
@@ -357,20 +357,20 @@ Partial Class FormSalesOrderDet
         'TxtCodeCompTo
         '
         Me.TxtCodeCompTo.EditValue = ""
-        Me.TxtCodeCompTo.Location = New System.Drawing.Point(101, 35)
+        Me.TxtCodeCompTo.Location = New System.Drawing.Point(101, 62)
         Me.TxtCodeCompTo.Name = "TxtCodeCompTo"
         Me.TxtCodeCompTo.Properties.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtCodeCompTo.Properties.Appearance.Options.UseFont = True
         Me.TxtCodeCompTo.Properties.EditValueChangedDelay = 1
         Me.TxtCodeCompTo.Size = New System.Drawing.Size(66, 20)
-        Me.TxtCodeCompTo.TabIndex = 1
+        Me.TxtCodeCompTo.TabIndex = 2
         '
         'BtnBrowseContactTo
         '
         Me.BtnBrowseContactTo.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnBrowseContactTo.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnBrowseContactTo.Appearance.Options.UseFont = True
-        Me.BtnBrowseContactTo.Location = New System.Drawing.Point(400, 35)
+        Me.BtnBrowseContactTo.Location = New System.Drawing.Point(400, 62)
         Me.BtnBrowseContactTo.Name = "BtnBrowseContactTo"
         Me.BtnBrowseContactTo.Size = New System.Drawing.Size(20, 20)
         Me.BtnBrowseContactTo.TabIndex = 1
@@ -380,7 +380,7 @@ Partial Class FormSalesOrderDet
         'LabelControl3
         '
         Me.LabelControl3.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl3.Location = New System.Drawing.Point(11, 65)
+        Me.LabelControl3.Location = New System.Drawing.Point(11, 92)
         Me.LabelControl3.Name = "LabelControl3"
         Me.LabelControl3.Size = New System.Drawing.Size(39, 13)
         Me.LabelControl3.TabIndex = 153
@@ -1121,6 +1121,13 @@ Partial Class FormSalesOrderDet
         Me.GridColumnOLStoreOrderDate.FieldName = "sales_order_ol_shop_date"
         Me.GridColumnOLStoreOrderDate.Name = "GridColumnOLStoreOrderDate"
         '
+        'GridColumnid_ol_promo_collection_sku_replace
+        '
+        Me.GridColumnid_ol_promo_collection_sku_replace.Caption = "id_ol_promo_collection_sku_replace"
+        Me.GridColumnid_ol_promo_collection_sku_replace.FieldName = "id_ol_promo_collection_sku_replace"
+        Me.GridColumnid_ol_promo_collection_sku_replace.Name = "GridColumnid_ol_promo_collection_sku_replace"
+        Me.GridColumnid_ol_promo_collection_sku_replace.OptionsColumn.AllowEdit = False
+        '
         'PanelControlNav
         '
         Me.PanelControlNav.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
@@ -1304,13 +1311,6 @@ Partial Class FormSalesOrderDet
         Me.LabelControl12.Size = New System.Drawing.Size(74, 13)
         Me.LabelControl12.TabIndex = 8895
         Me.LabelControl12.Text = "Parent Account"
-        '
-        'GridColumnid_ol_promo_collection_sku_replace
-        '
-        Me.GridColumnid_ol_promo_collection_sku_replace.Caption = "id_ol_promo_collection_sku_replace"
-        Me.GridColumnid_ol_promo_collection_sku_replace.FieldName = "id_ol_promo_collection_sku_replace"
-        Me.GridColumnid_ol_promo_collection_sku_replace.Name = "GridColumnid_ol_promo_collection_sku_replace"
-        Me.GridColumnid_ol_promo_collection_sku_replace.OptionsColumn.AllowEdit = False
         '
         'FormSalesOrderDet
         '

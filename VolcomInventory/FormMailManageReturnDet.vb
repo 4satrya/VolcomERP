@@ -3,17 +3,21 @@
     Public action As String = "-1"
     Public id As String = "-1"
     Dim id_mail_status As String = "-1"
-    Dim mail_head As String = ""
+    'Dim mail_head As String = ""
     Dim mail_subject As String = ""
-    Dim mail_title As String = ""
-    Dim mail_content_head As String = ""
-    Dim mail_content As String = ""
-    Dim mail_content_end As String = ""
-    Dim mail_content_to As String = ""
+    'Dim mail_title As String = ""
+    'Dim mail_content_head As String = ""
+    'Dim mail_content As String = ""
+    'Dim mail_content_end As String = ""
+    'Dim mail_content_to As String = ""
     Dim super_user As String = get_setup_field("id_role_super_admin")
+
+    Private loaded As Boolean = False
 
     Private Sub FormMailManageReturnDet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         actionLoad()
+
+        loaded = True
     End Sub
 
     Private Sub FormMailManageReturnDet_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
@@ -62,10 +66,11 @@
             If rmt = "45" Then 'RETURN ORDER
                 '-- mail type
                 TxtMailType.Text = execute_query("SELECT report_mark_type_name FROM tb_lookup_report_mark_type WHERE report_mark_type='45'", 0, True, "", "", "", "")
+                MEReason.EditValue = ""
 
                 '--- load member
                 Dim qf As String = "SELECT m.id_mail_manage_mapping_intern AS `index`,0 AS `id_mail_manage_member`,0 AS `id_mail_manage`,m.id_mail_member_type, mmt.mail_member_type,m.id_user,0 AS `id_comp_contact`, 
-                e.employee_name AS `description`,e.email_external AS `mail_address` 
+                e.employee_name AS `description`,e.email_external AS `mail_address`, e.employee_position AS `position` 
                 FROM tb_mail_manage_mapping_intern m
                 INNER JOIN tb_lookup_mail_member_type mmt ON mmt.id_mail_member_type = m.id_mail_member_type
                 INNER JOIN tb_m_user u ON u.id_user = m.id_user
@@ -73,7 +78,7 @@
                 WHERE e.email_external!='' AND m.report_mark_type='" + rmt + "' AND (ISNULL(m.id_comp_group) OR m.id_comp_group='" + FormMailManageReturn.SLEStoreGroup.EditValue.ToString + "')
                 UNION
                 SELECT m.id_mail_manage_mapping AS `index`,0 AS `id_mail_manage_member`,0 AS `id_mail_manage`,m.id_mail_member_type, mmt.mail_member_type, 0 AS `id_user`, m.id_comp_contact,
-                cc.contact_person AS `description`, cc.email AS `mail_address`
+                cc.contact_person AS `description`, cc.email AS `mail_address`, '' AS `position`
                 FROM tb_mail_manage_mapping m
                 INNER JOIN tb_lookup_mail_member_type mmt ON mmt.id_mail_member_type = m.id_mail_member_type
                 INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact = m.id_comp_contact
@@ -95,6 +100,9 @@
                 GCDetail.DataSource = ddet
                 GVDetail.BestFitColumns()
 
+                Dim employee_name_from As String = ""
+                Dim employee_position_from As String = ""
+
                 '-- load 'from/to/cc & html preview
                 GVMember.ActiveFilterString = ""
                 For j As Integer = 0 To ((GVMember.RowCount - 1) - GetGroupRowCount(GVMember))
@@ -103,6 +111,9 @@
 
                     If id_mail_member_type = "1" Then
                         MEFrom.Text += mail_address + "; "
+
+                        employee_name_from = GVMember.GetRowCellValue(j, "description").ToString
+                        employee_position_from = GVMember.GetRowCellValue(j, "position").ToString
                     ElseIf id_mail_member_type = "2" Then
                         METo.Text += mail_address + "; "
                     Else
@@ -114,16 +125,21 @@
                 Dim qopt As String = "SELECT mail_head_sales_return,mail_subject_sales_return, mail_title_sales_return , mail_content_head_sales_return, mail_content_sales_return ,mail_content_end_sales_return
                 FROM tb_opt "
                 Dim dopt As DataTable = execute_query(qopt, -1, True, "", "", "", "")
-                mail_head = dopt.Rows(0)("mail_head_sales_return").ToString
+                'mail_head = dopt.Rows(0)("mail_head_sales_return").ToString
                 mail_subject = dopt.Rows(0)("mail_subject_sales_return").ToString + " - " + ddet.Rows(0)("group_store").ToString
-                mail_title = dopt.Rows(0)("mail_title_sales_return").ToString
-                mail_content_head = dopt.Rows(0)("mail_content_head_sales_return").ToString
-                mail_content = dopt.Rows(0)("mail_content_sales_return").ToString
-                mail_content_end = dopt.Rows(0)("mail_content_end_sales_return").ToString
+                'mail_title = dopt.Rows(0)("mail_title_sales_return").ToString
+                'mail_content_head = dopt.Rows(0)("mail_content_head_sales_return").ToString
+                'mail_content = dopt.Rows(0)("mail_content_sales_return").ToString
+                'mail_content_end = dopt.Rows(0)("mail_content_end_sales_return").ToString
                 MESubject.Text = addSlashes(mail_subject)
 
                 'mail template
-                Dim html As String = email_body_sales_return(ddet, mail_title, mail_content_head + ddet.Rows(0)("store_company").ToString, mail_content, mail_content_end, Double.Parse(getTotalAmo(ddet).ToString).ToString("N2"))
+                Dim html As String = execute_query("SELECT template FROM tb_mail_manage_template WHERE `type` = 'ret'", 0, True, "", "", "", "")
+
+                html = html.Replace("[return_reason]", MEReason.EditValue.ToString)
+                html = html.Replace("[employee_name]", employee_name_from)
+                html = html.Replace("[employee_position]", employee_position_from)
+
                 WebBrowser1.DocumentText = html
             End If
         ElseIf action = "upd" Then
@@ -143,11 +159,12 @@
             DEUpdatedDate.EditValue = data.Rows(0)("updated_date")
             TxtUpdatedBy.Text = data.Rows(0)("updated_by_name").ToString
             MESubject.Text = data.Rows(0)("mail_subject").ToString
+            MEReason.EditValue = data.Rows(0)("reason").ToString
 
             If rmt = "45" Then 'RETURN ORDER
                 '-- load member
                 Dim qf As String = "SELECT m.id_mail_manage_member AS `index`,m.`id_mail_manage_member`,m.`id_mail_manage`,m.id_mail_member_type, mmt.mail_member_type,m.id_user, 0 AS `id_comp_contact`, 
-                e.employee_name AS `description`, m.mail_address AS `mail_address` 
+                e.employee_name AS `description`, m.mail_address AS `mail_address`, e.employee_position AS `position`
                 FROM tb_mail_manage_member m
                 INNER JOIN tb_lookup_mail_member_type mmt ON mmt.id_mail_member_type = m.id_mail_member_type
                 INNER JOIN tb_m_user u ON u.id_user = m.id_user
@@ -155,7 +172,7 @@
                 WHERE m.id_mail_manage=" + id + " AND ISNULL(m.id_comp_contact)
                 UNION
                 SELECT m.id_mail_manage_member AS `index`,m.`id_mail_manage_member`,m.`id_mail_manage`,m.id_mail_member_type, mmt.mail_member_type, 0 AS `id_user`, m.id_comp_contact,
-                cc.contact_person AS `description`, cc.email AS `mail_address`
+                cc.contact_person AS `description`, cc.email AS `mail_address`, '' AS `position`
                 FROM tb_mail_manage_member m
                 INNER JOIN tb_lookup_mail_member_type mmt ON mmt.id_mail_member_type = m.id_mail_member_type
                 INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact = m.id_comp_contact
@@ -172,6 +189,9 @@
                 GVDetail.BestFitColumns()
 
                 '-- load 'from/to/cc & html preview
+                Dim employee_name_from As String = ""
+                Dim employee_position_from As String = ""
+
                 GVMember.ActiveFilterString = ""
                 MEFrom.Text = ""
                 METo.Text = ""
@@ -182,6 +202,9 @@
 
                     If id_mail_member_type = "1" Then
                         MEFrom.Text += mail_address + "; "
+
+                        employee_name_from = GVMember.GetRowCellValue(j, "description").ToString
+                        employee_position_from = GVMember.GetRowCellValue(j, "position").ToString
                     ElseIf id_mail_member_type = "2" Then
                         METo.Text += mail_address + "; "
                     Else
@@ -193,16 +216,21 @@
                 Dim qopt As String = "SELECT mail_head_sales_return, mail_subject_sales_return, mail_title_sales_return , mail_content_head_sales_return, mail_content_sales_return, mail_content_end_sales_return
                 FROM tb_opt"
                 Dim dopt As DataTable = execute_query(qopt, -1, True, "", "", "", "")
-                mail_head = dopt.Rows(0)("mail_head_sales_return").ToString
+                'mail_head = dopt.Rows(0)("mail_head_sales_return").ToString
                 mail_subject = dopt.Rows(0)("mail_subject_sales_return").ToString + " - " + ddet.Rows(0)("group_store").ToString
-                mail_title = dopt.Rows(0)("mail_title_sales_return").ToString
-                mail_content_head = dopt.Rows(0)("mail_content_head_sales_return").ToString
-                mail_content = dopt.Rows(0)("mail_content_sales_return").ToString
-                mail_content_end = dopt.Rows(0)("mail_content_end_sales_return").ToString
+                'mail_title = dopt.Rows(0)("mail_title_sales_return").ToString
+                'mail_content_head = dopt.Rows(0)("mail_content_head_sales_return").ToString
+                'mail_content = dopt.Rows(0)("mail_content_sales_return").ToString
+                'mail_content_end = dopt.Rows(0)("mail_content_end_sales_return").ToString
                 MESubject.Text = addSlashes(mail_subject)
 
                 'mail template
-                Dim html As String = email_body_sales_return(ddet, mail_title, mail_content_head + ddet.Rows(0)("store_company").ToString, mail_content, mail_content_end, Double.Parse(getTotalAmo(ddet).ToString).ToString("N2"))
+                Dim html As String = execute_query("SELECT template FROM tb_mail_manage_template WHERE `type` = 'ret'", 0, True, "", "", "", "")
+
+                html = html.Replace("[return_reason]", MEReason.EditValue.ToString)
+                html = html.Replace("[employee_name]", employee_name_from)
+                html = html.Replace("[employee_position]", employee_position_from)
+
                 WebBrowser1.DocumentText = html
             End If
 
@@ -219,9 +247,11 @@
             If id_mail_status = "1" Or id_mail_status = "3" Then
                 BtnDraft.Visible = True
                 BtnCancel.Visible = True
+                MEReason.ReadOnly = False
             Else
                 BtnDraft.Visible = False
                 BtnCancel.Visible = False
+                MEReason.ReadOnly = True
             End If
 
             'jika cancel
@@ -268,10 +298,14 @@
 
     Private Sub BtnSend_Click(sender As Object, e As EventArgs) Handles BtnSend.Click
         Cursor = Cursors.WaitCursor
-        'ada konfirmasi
-        Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure you want to send this email ? ", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
-        If confirm = Windows.Forms.DialogResult.Yes Then
-            save("2", "")
+        If Not MEReason.Text = "" Then
+            'ada konfirmasi
+            Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Are you sure you want to send this email ? ", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+            If confirm = Windows.Forms.DialogResult.Yes Then
+                save("2", "")
+            End If
+        Else
+            stopCustom("Please add reason.")
         End If
         Cursor = Cursors.Default
     End Sub
@@ -314,8 +348,8 @@
         Dim mail_subject As String = addSlashes(MESubject.Text)
         If action = "ins" Then
             'insert head
-            Dim query As String = "INSERT INTO tb_mail_manage(number, created_date, created_by, updated_date, updated_by, report_mark_type, id_mail_status, mail_status_note, mail_subject) VALUES
-            ('', NOW(), '" + id_user + "', NOW(), '" + id_user + "', '" + rmt + "', '1', '" + note_par + "', '" + mail_subject + "'); SELECT LAST_INSERT_ID(); "
+            Dim query As String = "INSERT INTO tb_mail_manage(number, created_date, created_by, updated_date, updated_by, report_mark_type, id_mail_status, mail_status_note, mail_subject, reason) VALUES
+            ('', NOW(), '" + id_user + "', NOW(), '" + id_user + "', '" + rmt + "', '1', '" + note_par + "', '" + mail_subject + "', '" + addSlashes(MEReason.EditValue.ToString) + "'); SELECT LAST_INSERT_ID(); "
             id = execute_query(query, 0, True, "", "", "", "")
             execute_non_query("UPDATE tb_mail_manage SET `number` = CONCAT((SELECT email_code_head FROM `tb_opt` LIMIT 1),LPAD(" + id + ",(SELECT email_code_digit FROM tb_opt LIMIT 1),'0')) WHERE id_mail_manage=" + id + ";", True, "", "", "", "")
 
@@ -433,9 +467,9 @@
             client.Credentials = New System.Net.NetworkCredential(get_setup_field("system_email").ToString, get_setup_field("system_email_pass").ToString)
         End If
 
-        Dim mail_address_from As String = execute_query("SELECT m.mail_address FROM tb_mail_manage_member m WHERE m.id_mail_manage=" + id + " AND m.id_mail_member_type=1 ORDER BY m.id_mail_manage_member ASC LIMIT 1", 0, True, "", "", "", "")
+        Dim mail_address As DataTable = execute_query("SELECT m.mail_address, IFNULL(e.employee_name, c.contact_person) AS mail_name FROM tb_mail_manage_member m LEFT JOIN tb_m_user u ON m.id_user = u.id_user LEFT JOIN tb_m_employee e ON u.id_employee = e.id_employee LEFT JOIN tb_m_comp_contact c ON m.id_comp_contact = c.id_comp_contact WHERE m.id_mail_manage=" + id + " AND m.id_mail_member_type=1 ORDER BY m.id_mail_manage_member ASC LIMIT 1", -1, True, "", "", "", "")
 
-        Dim from_mail As Net.Mail.MailAddress = New Net.Mail.MailAddress(mail_address_from, mail_head)
+        Dim from_mail As Net.Mail.MailAddress = New Net.Mail.MailAddress(mail_address.Rows(0)("mail_address").ToString, mail_address.Rows(0)("mail_name").ToString)
         Dim mail As Net.Mail.MailMessage = New Net.Mail.MailMessage()
         mail.From = from_mail
 
@@ -501,7 +535,7 @@
         Dim id_sales_return_order As String = getSavedInvoice()
         Dim dtx As DataTable = dtLoadDetail(id_sales_return_order)
 
-        Dim body_temp As String = email_body_sales_return(dtx, mail_title, mail_content_head + " " + dtx.Rows(0)("group_company").ToString, mail_content, mail_content_end, Double.Parse(getTotalAmo(dtx).ToString).ToString("N2"))
+        Dim body_temp As String = WebBrowser1.DocumentText
         Dim subject_mail As String = execute_query("SELECT m.mail_subject FROM tb_mail_manage m WHERE m.id_mail_manage=" + id + "", 0, True, "", "", "", "")
         mail.Subject = subject_mail
         mail.IsBodyHtml = True
@@ -690,4 +724,31 @@
         </table>"
         Return body_temp
     End Function
+
+    Private Sub MEReason_EditValueChanged(sender As Object, e As EventArgs) Handles MEReason.EditValueChanged
+        If loaded Then
+            '-- load 'from/to/cc & html preview
+            Dim employee_name_from As String = ""
+            Dim employee_position_from As String = ""
+
+            GVMember.ActiveFilterString = ""
+            For j As Integer = 0 To ((GVMember.RowCount - 1) - GetGroupRowCount(GVMember))
+                Dim id_mail_member_type As String = GVMember.GetRowCellValue(j, "id_mail_member_type").ToString
+
+                If id_mail_member_type = "1" Then
+                    employee_name_from = GVMember.GetRowCellValue(j, "description").ToString
+                    employee_position_from = GVMember.GetRowCellValue(j, "position").ToString
+                End If
+            Next
+
+            'mail template
+            Dim html As String = execute_query("SELECT template FROM tb_mail_manage_template WHERE `type` = 'ret'", 0, True, "", "", "", "")
+
+            html = html.Replace("[return_reason]", MEReason.EditValue.ToString)
+            html = html.Replace("[employee_name]", employee_name_from)
+            html = html.Replace("[employee_position]", employee_position_from)
+
+            WebBrowser1.DocumentText = html
+        End If
+    End Sub
 End Class

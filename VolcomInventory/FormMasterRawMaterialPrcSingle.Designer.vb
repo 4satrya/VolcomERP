@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class FormMasterRawMaterialPrcSingle
     Inherits DevExpress.XtraEditors.XtraForm
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         If disposing AndAlso components IsNot Nothing Then
             components.Dispose()
@@ -17,7 +17,7 @@ Partial Class FormMasterRawMaterialPrcSingle
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormMasterRawMaterialPrcSingle))
@@ -50,6 +50,8 @@ Partial Class FormMasterRawMaterialPrcSingle
         Me.TEUnit = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl7 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl8 = New DevExpress.XtraEditors.LabelControl()
+        Me.TEMOQ = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl9 = New DevExpress.XtraEditors.LabelControl()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl2.SuspendLayout()
         CType(Me.PictureSeason.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -63,6 +65,7 @@ Partial Class FormMasterRawMaterialPrcSingle
         CType(Me.LECurrency.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEQtyinBulk.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEUnit.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TEMOQ.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControl2
@@ -72,7 +75,7 @@ Partial Class FormMasterRawMaterialPrcSingle
         Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Left
         Me.PanelControl2.Location = New System.Drawing.Point(0, 0)
         Me.PanelControl2.Name = "PanelControl2"
-        Me.PanelControl2.Size = New System.Drawing.Size(153, 282)
+        Me.PanelControl2.Size = New System.Drawing.Size(153, 328)
         Me.PanelControl2.TabIndex = 111
         '
         'PictureSeason
@@ -90,7 +93,7 @@ Partial Class FormMasterRawMaterialPrcSingle
         'BtnCancel
         '
         Me.BtnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.BtnCancel.Location = New System.Drawing.Point(378, 250)
+        Me.BtnCancel.Location = New System.Drawing.Point(378, 298)
         Me.BtnCancel.Name = "BtnCancel"
         Me.BtnCancel.Size = New System.Drawing.Size(86, 20)
         Me.BtnCancel.TabIndex = 7
@@ -98,7 +101,7 @@ Partial Class FormMasterRawMaterialPrcSingle
         '
         'BtnSave
         '
-        Me.BtnSave.Location = New System.Drawing.Point(470, 250)
+        Me.BtnSave.Location = New System.Drawing.Point(470, 298)
         Me.BtnSave.Name = "BtnSave"
         Me.BtnSave.Size = New System.Drawing.Size(86, 20)
         Me.BtnSave.TabIndex = 6
@@ -106,7 +109,7 @@ Partial Class FormMasterRawMaterialPrcSingle
         '
         'TxtPrice
         '
-        Me.TxtPrice.Location = New System.Drawing.Point(359, 219)
+        Me.TxtPrice.Location = New System.Drawing.Point(359, 267)
         Me.TxtPrice.Name = "TxtPrice"
         Me.TxtPrice.Properties.Appearance.Font = New System.Drawing.Font("Calibri", 10.0!)
         Me.TxtPrice.Properties.Appearance.Options.UseFont = True
@@ -123,7 +126,7 @@ Partial Class FormMasterRawMaterialPrcSingle
         'LabelControl4
         '
         Me.LabelControl4.Appearance.Font = New System.Drawing.Font("Calibri", 10.0!)
-        Me.LabelControl4.Location = New System.Drawing.Point(359, 199)
+        Me.LabelControl4.Location = New System.Drawing.Point(359, 247)
         Me.LabelControl4.Name = "LabelControl4"
         Me.LabelControl4.Size = New System.Drawing.Size(28, 15)
         Me.LabelControl4.TabIndex = 109
@@ -266,7 +269,7 @@ Partial Class FormMasterRawMaterialPrcSingle
         'LabelControl5
         '
         Me.LabelControl5.Appearance.Font = New System.Drawing.Font("Calibri", 10.0!)
-        Me.LabelControl5.Location = New System.Drawing.Point(172, 199)
+        Me.LabelControl5.Location = New System.Drawing.Point(172, 247)
         Me.LabelControl5.Name = "LabelControl5"
         Me.LabelControl5.Size = New System.Drawing.Size(49, 15)
         Me.LabelControl5.TabIndex = 126
@@ -274,7 +277,7 @@ Partial Class FormMasterRawMaterialPrcSingle
         '
         'LECurrency
         '
-        Me.LECurrency.Location = New System.Drawing.Point(172, 220)
+        Me.LECurrency.Location = New System.Drawing.Point(172, 268)
         Me.LECurrency.Name = "LECurrency"
         Me.LECurrency.Properties.Appearance.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LECurrency.Properties.Appearance.Options.UseFont = True
@@ -304,9 +307,9 @@ Partial Class FormMasterRawMaterialPrcSingle
         Me.LabelControl6.Appearance.Font = New System.Drawing.Font("Calibri", 10.0!)
         Me.LabelControl6.Location = New System.Drawing.Point(172, 151)
         Me.LabelControl6.Name = "LabelControl6"
-        Me.LabelControl6.Size = New System.Drawing.Size(194, 15)
+        Me.LabelControl6.Size = New System.Drawing.Size(60, 15)
         Me.LabelControl6.TabIndex = 128
-        Me.LabelControl6.Text = "Minimum Purchase Qty Conversion"
+        Me.LabelControl6.Text = "Qty in Bulk"
         '
         'TEUnit
         '
@@ -326,9 +329,9 @@ Partial Class FormMasterRawMaterialPrcSingle
         Me.LabelControl7.Appearance.Font = New System.Drawing.Font("Calibri", 10.0!)
         Me.LabelControl7.Location = New System.Drawing.Point(416, 151)
         Me.LabelControl7.Name = "LabelControl7"
-        Me.LabelControl7.Size = New System.Drawing.Size(88, 15)
+        Me.LabelControl7.Size = New System.Drawing.Size(55, 15)
         Me.LabelControl7.TabIndex = 130
-        Me.LabelControl7.Text = "Conversion Unit"
+        Me.LabelControl7.Text = "Bulk UOM"
         '
         'LabelControl8
         '
@@ -339,13 +342,40 @@ Partial Class FormMasterRawMaterialPrcSingle
         Me.LabelControl8.TabIndex = 131
         Me.LabelControl8.Text = "per"
         '
+        'TEMOQ
+        '
+        Me.TEMOQ.Location = New System.Drawing.Point(172, 219)
+        Me.TEMOQ.Name = "TEMOQ"
+        Me.TEMOQ.Properties.Appearance.Font = New System.Drawing.Font("Calibri", 10.0!)
+        Me.TEMOQ.Properties.Appearance.Options.UseFont = True
+        Me.TEMOQ.Properties.Mask.EditMask = "N4"
+        Me.TEMOQ.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
+        Me.TEMOQ.Properties.Mask.SaveLiteral = False
+        Me.TEMOQ.Properties.Mask.UseMaskAsDisplayFormat = True
+        Me.TEMOQ.Size = New System.Drawing.Size(384, 22)
+        Me.TEMOQ.TabIndex = 132
+        Me.TEMOQ.ToolTip = "2500 in 1 roll"
+        Me.TEMOQ.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Information
+        Me.TEMOQ.ToolTipTitle = "Info"
+        '
+        'LabelControl9
+        '
+        Me.LabelControl9.Appearance.Font = New System.Drawing.Font("Calibri", 10.0!)
+        Me.LabelControl9.Location = New System.Drawing.Point(172, 199)
+        Me.LabelControl9.Name = "LabelControl9"
+        Me.LabelControl9.Size = New System.Drawing.Size(30, 15)
+        Me.LabelControl9.TabIndex = 133
+        Me.LabelControl9.Text = "MOQ"
+        '
         'FormMasterRawMaterialPrcSingle
         '
         Me.AcceptButton = Me.BtnSave
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.BtnCancel
-        Me.ClientSize = New System.Drawing.Size(579, 282)
+        Me.ClientSize = New System.Drawing.Size(579, 328)
+        Me.Controls.Add(Me.TEMOQ)
+        Me.Controls.Add(Me.LabelControl9)
         Me.Controls.Add(Me.LabelControl8)
         Me.Controls.Add(Me.LabelControl7)
         Me.Controls.Add(Me.TEUnit)
@@ -384,6 +414,7 @@ Partial Class FormMasterRawMaterialPrcSingle
         CType(Me.LECurrency.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TEQtyinBulk.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TEUnit.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TEMOQ.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -417,4 +448,6 @@ Partial Class FormMasterRawMaterialPrcSingle
     Friend WithEvents LabelControl7 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents TEUnit As DevExpress.XtraEditors.TextEdit
     Friend WithEvents LabelControl8 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents TEMOQ As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents LabelControl9 As DevExpress.XtraEditors.LabelControl
 End Class

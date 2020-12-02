@@ -43,6 +43,9 @@ Partial Class FormMatPurchase
         Me.ColIdSeason = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn41 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn42 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn43 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PCFilterDate = New DevExpress.XtraEditors.PanelControl()
         Me.PCSelAll = New DevExpress.XtraEditors.PanelControl()
         Me.CheckEditSelAll = New DevExpress.XtraEditors.CheckEdit()
@@ -142,9 +145,7 @@ Partial Class FormMatPurchase
         Me.GridColumn48 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.BViewKO = New DevExpress.XtraEditors.SimpleButton()
         Me.LabelControl10 = New DevExpress.XtraEditors.LabelControl()
-        Me.GridColumn41 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn42 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn43 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn44 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.XTCPurcMat, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCPurcMat.SuspendLayout()
         Me.XTPPurchaseMat.SuspendLayout()
@@ -203,7 +204,7 @@ Partial Class FormMatPurchase
         Me.XTCPurcMat.Location = New System.Drawing.Point(0, 0)
         Me.XTCPurcMat.Name = "XTCPurcMat"
         Me.XTCPurcMat.SelectedTabPage = Me.XTPPurchaseMat
-        Me.XTCPurcMat.Size = New System.Drawing.Size(796, 375)
+        Me.XTCPurcMat.Size = New System.Drawing.Size(1186, 510)
         Me.XTCPurcMat.TabIndex = 7
         Me.XTCPurcMat.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPPurchaseMat, Me.XTPProdDemand, Me.XTPOrderConfirmation})
         '
@@ -213,7 +214,7 @@ Partial Class FormMatPurchase
         Me.XTPPurchaseMat.Controls.Add(Me.PCFilterDate)
         Me.XTPPurchaseMat.Controls.Add(Me.PanelControl2)
         Me.XTPPurchaseMat.Name = "XTPPurchaseMat"
-        Me.XTPPurchaseMat.Size = New System.Drawing.Size(790, 347)
+        Me.XTPPurchaseMat.Size = New System.Drawing.Size(1180, 482)
         Me.XTPPurchaseMat.Text = "List Purchase"
         '
         'GCMatPurchase
@@ -223,7 +224,7 @@ Partial Class FormMatPurchase
         Me.GCMatPurchase.MainView = Me.GVMatPurchase
         Me.GCMatPurchase.Name = "GCMatPurchase"
         Me.GCMatPurchase.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RICECheck})
-        Me.GCMatPurchase.Size = New System.Drawing.Size(790, 265)
+        Me.GCMatPurchase.Size = New System.Drawing.Size(1180, 400)
         Me.GCMatPurchase.TabIndex = 4
         Me.GCMatPurchase.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVMatPurchase})
         '
@@ -410,6 +411,50 @@ Partial Class FormMatPurchase
         Me.GridColumn1.VisibleIndex = 9
         Me.GridColumn1.Width = 146
         '
+        'GridColumn41
+        '
+        Me.GridColumn41.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumn41.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumn41.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumn41.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumn41.Caption = "Qty Order"
+        Me.GridColumn41.DisplayFormat.FormatString = "N4"
+        Me.GridColumn41.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn41.FieldName = "qty_po"
+        Me.GridColumn41.Name = "GridColumn41"
+        Me.GridColumn41.Visible = True
+        Me.GridColumn41.VisibleIndex = 10
+        '
+        'GridColumn42
+        '
+        Me.GridColumn42.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumn42.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumn42.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumn42.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumn42.Caption = "Qty Receiving"
+        Me.GridColumn42.DisplayFormat.FormatString = "N4"
+        Me.GridColumn42.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn42.FieldName = "qty_rec"
+        Me.GridColumn42.Name = "GridColumn42"
+        Me.GridColumn42.Visible = True
+        Me.GridColumn42.VisibleIndex = 11
+        '
+        'GridColumn43
+        '
+        Me.GridColumn43.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumn43.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumn43.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumn43.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
+        Me.GridColumn43.Caption = "Different"
+        Me.GridColumn43.DisplayFormat.FormatString = "N4"
+        Me.GridColumn43.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn43.FieldName = "qty_diff"
+        Me.GridColumn43.Name = "GridColumn43"
+        Me.GridColumn43.UnboundExpression = "[qty_po] - [qty_rec]"
+        Me.GridColumn43.UnboundType = DevExpress.Data.UnboundColumnType.[Decimal]
+        Me.GridColumn43.Visible = True
+        Me.GridColumn43.VisibleIndex = 12
+        '
         'PCFilterDate
         '
         Me.PCFilterDate.Controls.Add(Me.PCSelAll)
@@ -421,9 +466,9 @@ Partial Class FormMatPurchase
         Me.PCFilterDate.Controls.Add(Me.DEEnd)
         Me.PCFilterDate.Controls.Add(Me.DEStart)
         Me.PCFilterDate.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PCFilterDate.Location = New System.Drawing.Point(0, 309)
+        Me.PCFilterDate.Location = New System.Drawing.Point(0, 444)
         Me.PCFilterDate.Name = "PCFilterDate"
-        Me.PCFilterDate.Size = New System.Drawing.Size(790, 38)
+        Me.PCFilterDate.Size = New System.Drawing.Size(1180, 38)
         Me.PCFilterDate.TabIndex = 6
         Me.PCFilterDate.Visible = False
         '
@@ -432,7 +477,7 @@ Partial Class FormMatPurchase
         Me.PCSelAll.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
         Me.PCSelAll.Controls.Add(Me.CheckEditSelAll)
         Me.PCSelAll.Dock = System.Windows.Forms.DockStyle.Right
-        Me.PCSelAll.Location = New System.Drawing.Point(689, 2)
+        Me.PCSelAll.Location = New System.Drawing.Point(1079, 2)
         Me.PCSelAll.Name = "PCSelAll"
         Me.PCSelAll.Size = New System.Drawing.Size(99, 34)
         Me.PCSelAll.TabIndex = 8911
@@ -520,7 +565,7 @@ Partial Class FormMatPurchase
         Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelControl2.Location = New System.Drawing.Point(0, 0)
         Me.PanelControl2.Name = "PanelControl2"
-        Me.PanelControl2.Size = New System.Drawing.Size(790, 44)
+        Me.PanelControl2.Size = New System.Drawing.Size(1180, 44)
         Me.PanelControl2.TabIndex = 5
         '
         'BShowFilterPanel
@@ -588,7 +633,7 @@ Partial Class FormMatPurchase
         '
         Me.XTPProdDemand.Controls.Add(Me.XTCListPD)
         Me.XTPProdDemand.Name = "XTPProdDemand"
-        Me.XTPProdDemand.Size = New System.Drawing.Size(790, 347)
+        Me.XTPProdDemand.Size = New System.Drawing.Size(1180, 482)
         Me.XTPProdDemand.Text = "Generate From PD"
         '
         'XTCListPD
@@ -598,7 +643,7 @@ Partial Class FormMatPurchase
         Me.XTCListPD.Location = New System.Drawing.Point(0, 0)
         Me.XTCListPD.Name = "XTCListPD"
         Me.XTCListPD.SelectedTabPage = Me.XTPList
-        Me.XTCListPD.Size = New System.Drawing.Size(790, 347)
+        Me.XTCListPD.Size = New System.Drawing.Size(1180, 482)
         Me.XTCListPD.TabIndex = 8906
         Me.XTCListPD.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPList, Me.XTPReport})
         '
@@ -608,7 +653,7 @@ Partial Class FormMatPurchase
         Me.XTPList.Controls.Add(Me.PanelControl1)
         Me.XTPList.Controls.Add(Me.BCreatePO)
         Me.XTPList.Name = "XTPList"
-        Me.XTPList.Size = New System.Drawing.Size(784, 319)
+        Me.XTPList.Size = New System.Drawing.Size(1174, 454)
         Me.XTPList.Text = "Final Raw Material List"
         '
         'GCListMatPD
@@ -619,7 +664,7 @@ Partial Class FormMatPurchase
         Me.GCListMatPD.MainView = Me.GVListMatPD
         Me.GCListMatPD.Name = "GCListMatPD"
         Me.GCListMatPD.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RICEPD})
-        Me.GCListMatPD.Size = New System.Drawing.Size(784, 241)
+        Me.GCListMatPD.Size = New System.Drawing.Size(1174, 376)
         Me.GCListMatPD.TabIndex = 7
         Me.GCListMatPD.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVListMatPD})
         '
@@ -637,7 +682,7 @@ Partial Class FormMatPurchase
         '
         'GVListMatPD
         '
-        Me.GVListMatPD.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn17, Me.GridColumn8, Me.GridColumn9, Me.GridColumn24, Me.GridColumn10, Me.GridColumn28, Me.GridColumn25, Me.GridColumn26, Me.GridColumn27, Me.GridColumn11, Me.GridColumn13, Me.GridColumn22, Me.GridColumn19, Me.GridColumn21, Me.GridColumn18, Me.GridColumn23, Me.GridColumn20, Me.GridColumn14})
+        Me.GVListMatPD.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn17, Me.GridColumn8, Me.GridColumn9, Me.GridColumn24, Me.GridColumn10, Me.GridColumn28, Me.GridColumn25, Me.GridColumn26, Me.GridColumn27, Me.GridColumn11, Me.GridColumn44, Me.GridColumn13, Me.GridColumn22, Me.GridColumn19, Me.GridColumn21, Me.GridColumn18, Me.GridColumn23, Me.GridColumn20, Me.GridColumn14})
         Me.GVListMatPD.GridControl = Me.GCListMatPD
         Me.GVListMatPD.Name = "GVListMatPD"
         Me.GVListMatPD.OptionsView.ColumnAutoWidth = False
@@ -729,6 +774,7 @@ Partial Class FormMatPurchase
         Me.GridColumn25.Name = "GridColumn25"
         Me.GridColumn25.Visible = True
         Me.GridColumn25.VisibleIndex = 4
+        Me.GridColumn25.Width = 104
         '
         'GridColumn26
         '
@@ -743,6 +789,7 @@ Partial Class FormMatPurchase
         Me.GridColumn26.Name = "GridColumn26"
         Me.GridColumn26.Visible = True
         Me.GridColumn26.VisibleIndex = 6
+        Me.GridColumn26.Width = 217
         '
         'GridColumn27
         '
@@ -757,6 +804,7 @@ Partial Class FormMatPurchase
         Me.GridColumn27.Name = "GridColumn27"
         Me.GridColumn27.Visible = True
         Me.GridColumn27.VisibleIndex = 7
+        Me.GridColumn27.Width = 140
         '
         'GridColumn11
         '
@@ -769,7 +817,7 @@ Partial Class FormMatPurchase
         Me.GridColumn11.OptionsColumn.ReadOnly = True
         Me.GridColumn11.Visible = True
         Me.GridColumn11.VisibleIndex = 8
-        Me.GridColumn11.Width = 58
+        Me.GridColumn11.Width = 121
         '
         'GridColumn13
         '
@@ -779,7 +827,7 @@ Partial Class FormMatPurchase
         Me.GridColumn13.OptionsColumn.AllowEdit = False
         Me.GridColumn13.OptionsColumn.ReadOnly = True
         Me.GridColumn13.Visible = True
-        Me.GridColumn13.VisibleIndex = 13
+        Me.GridColumn13.VisibleIndex = 14
         Me.GridColumn13.Width = 73
         '
         'GridColumn22
@@ -794,7 +842,7 @@ Partial Class FormMatPurchase
         Me.GridColumn19.FieldName = "comp_name"
         Me.GridColumn19.Name = "GridColumn19"
         Me.GridColumn19.Visible = True
-        Me.GridColumn19.VisibleIndex = 10
+        Me.GridColumn19.VisibleIndex = 11
         Me.GridColumn19.Width = 88
         '
         'GridColumn21
@@ -809,7 +857,7 @@ Partial Class FormMatPurchase
         Me.GridColumn18.FieldName = "currency"
         Me.GridColumn18.Name = "GridColumn18"
         Me.GridColumn18.Visible = True
-        Me.GridColumn18.VisibleIndex = 11
+        Me.GridColumn18.VisibleIndex = 12
         Me.GridColumn18.Width = 34
         '
         'GridColumn23
@@ -824,7 +872,7 @@ Partial Class FormMatPurchase
         Me.GridColumn20.FieldName = "mat_det_price"
         Me.GridColumn20.Name = "GridColumn20"
         Me.GridColumn20.Visible = True
-        Me.GridColumn20.VisibleIndex = 12
+        Me.GridColumn20.VisibleIndex = 13
         Me.GridColumn20.Width = 46
         '
         'GridColumn14
@@ -835,7 +883,7 @@ Partial Class FormMatPurchase
         Me.GridColumn14.OptionsColumn.AllowEdit = False
         Me.GridColumn14.OptionsColumn.ReadOnly = True
         Me.GridColumn14.Visible = True
-        Me.GridColumn14.VisibleIndex = 9
+        Me.GridColumn14.VisibleIndex = 10
         Me.GridColumn14.Width = 96
         '
         'PanelControl1
@@ -847,7 +895,7 @@ Partial Class FormMatPurchase
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelControl1.Location = New System.Drawing.Point(0, 0)
         Me.PanelControl1.Name = "PanelControl1"
-        Me.PanelControl1.Size = New System.Drawing.Size(784, 44)
+        Me.PanelControl1.Size = New System.Drawing.Size(1174, 44)
         Me.PanelControl1.TabIndex = 6
         '
         'BGenerateFromPD
@@ -855,7 +903,7 @@ Partial Class FormMatPurchase
         Me.BGenerateFromPD.Dock = System.Windows.Forms.DockStyle.Right
         Me.BGenerateFromPD.ImageIndex = 4
         Me.BGenerateFromPD.ImageList = Me.LargeImageCollection
-        Me.BGenerateFromPD.Location = New System.Drawing.Point(538, 2)
+        Me.BGenerateFromPD.Location = New System.Drawing.Point(928, 2)
         Me.BGenerateFromPD.Name = "BGenerateFromPD"
         Me.BGenerateFromPD.Size = New System.Drawing.Size(244, 40)
         Me.BGenerateFromPD.TabIndex = 8910
@@ -956,9 +1004,9 @@ Partial Class FormMatPurchase
         'BCreatePO
         '
         Me.BCreatePO.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.BCreatePO.Location = New System.Drawing.Point(0, 285)
+        Me.BCreatePO.Location = New System.Drawing.Point(0, 420)
         Me.BCreatePO.Name = "BCreatePO"
-        Me.BCreatePO.Size = New System.Drawing.Size(784, 34)
+        Me.BCreatePO.Size = New System.Drawing.Size(1174, 34)
         Me.BCreatePO.TabIndex = 8905
         Me.BCreatePO.Text = "Create PO"
         '
@@ -967,7 +1015,7 @@ Partial Class FormMatPurchase
         Me.XTPReport.Controls.Add(Me.GCPD)
         Me.XTPReport.Controls.Add(Me.PanelControl3)
         Me.XTPReport.Name = "XTPReport"
-        Me.XTPReport.Size = New System.Drawing.Size(784, 319)
+        Me.XTPReport.Size = New System.Drawing.Size(1174, 454)
         Me.XTPReport.Text = "Report"
         '
         'GCPD
@@ -978,7 +1026,7 @@ Partial Class FormMatPurchase
         Me.GCPD.MainView = Me.GVPD
         Me.GCPD.Name = "GCPD"
         Me.GCPD.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemCheckEdit1})
-        Me.GCPD.Size = New System.Drawing.Size(784, 275)
+        Me.GCPD.Size = New System.Drawing.Size(1174, 410)
         Me.GCPD.TabIndex = 3
         Me.GCPD.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVPD})
         '
@@ -1123,7 +1171,7 @@ Partial Class FormMatPurchase
         Me.PanelControl3.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelControl3.Location = New System.Drawing.Point(0, 0)
         Me.PanelControl3.Name = "PanelControl3"
-        Me.PanelControl3.Size = New System.Drawing.Size(784, 44)
+        Me.PanelControl3.Size = New System.Drawing.Size(1174, 44)
         Me.PanelControl3.TabIndex = 6
         '
         'BSearchReport
@@ -1184,7 +1232,7 @@ Partial Class FormMatPurchase
         Me.XTPOrderConfirmation.Controls.Add(Me.GCKO)
         Me.XTPOrderConfirmation.Controls.Add(Me.PanelControl5)
         Me.XTPOrderConfirmation.Name = "XTPOrderConfirmation"
-        Me.XTPOrderConfirmation.Size = New System.Drawing.Size(790, 347)
+        Me.XTPOrderConfirmation.Size = New System.Drawing.Size(1180, 482)
         Me.XTPOrderConfirmation.Text = "Order Confirmation"
         '
         'GCKO
@@ -1194,7 +1242,7 @@ Partial Class FormMatPurchase
         Me.GCKO.MainView = Me.GVKO
         Me.GCKO.Name = "GCKO"
         Me.GCKO.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemProgressBar2})
-        Me.GCKO.Size = New System.Drawing.Size(790, 309)
+        Me.GCKO.Size = New System.Drawing.Size(1180, 444)
         Me.GCKO.TabIndex = 11
         Me.GCKO.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVKO})
         '
@@ -1269,7 +1317,7 @@ Partial Class FormMatPurchase
         Me.PanelControl5.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelControl5.Location = New System.Drawing.Point(0, 0)
         Me.PanelControl5.Name = "PanelControl5"
-        Me.PanelControl5.Size = New System.Drawing.Size(790, 38)
+        Me.PanelControl5.Size = New System.Drawing.Size(1180, 38)
         Me.PanelControl5.TabIndex = 5
         '
         'BEditKO
@@ -1277,7 +1325,7 @@ Partial Class FormMatPurchase
         Me.BEditKO.Dock = System.Windows.Forms.DockStyle.Right
         Me.BEditKO.ImageIndex = 2
         Me.BEditKO.ImageList = Me.LargeImageCollection
-        Me.BEditKO.Location = New System.Drawing.Point(698, 2)
+        Me.BEditKO.Location = New System.Drawing.Point(1088, 2)
         Me.BEditKO.Name = "BEditKO"
         Me.BEditKO.Size = New System.Drawing.Size(90, 34)
         Me.BEditKO.TabIndex = 8906
@@ -1344,55 +1392,22 @@ Partial Class FormMatPurchase
         Me.LabelControl10.TabIndex = 8901
         Me.LabelControl10.Text = "Vendor"
         '
-        'GridColumn41
+        'GridColumn44
         '
-        Me.GridColumn41.AppearanceCell.Options.UseTextOptions = True
-        Me.GridColumn41.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.GridColumn41.AppearanceHeader.Options.UseTextOptions = True
-        Me.GridColumn41.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.GridColumn41.Caption = "Qty Order"
-        Me.GridColumn41.DisplayFormat.FormatString = "N4"
-        Me.GridColumn41.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.GridColumn41.FieldName = "qty_po"
-        Me.GridColumn41.Name = "GridColumn41"
-        Me.GridColumn41.Visible = True
-        Me.GridColumn41.VisibleIndex = 10
-        '
-        'GridColumn42
-        '
-        Me.GridColumn42.AppearanceCell.Options.UseTextOptions = True
-        Me.GridColumn42.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.GridColumn42.AppearanceHeader.Options.UseTextOptions = True
-        Me.GridColumn42.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.GridColumn42.Caption = "Qty Receiving"
-        Me.GridColumn42.DisplayFormat.FormatString = "N4"
-        Me.GridColumn42.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.GridColumn42.FieldName = "qty_rec"
-        Me.GridColumn42.Name = "GridColumn42"
-        Me.GridColumn42.Visible = True
-        Me.GridColumn42.VisibleIndex = 11
-        '
-        'GridColumn43
-        '
-        Me.GridColumn43.AppearanceCell.Options.UseTextOptions = True
-        Me.GridColumn43.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.GridColumn43.AppearanceHeader.Options.UseTextOptions = True
-        Me.GridColumn43.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.GridColumn43.Caption = "Different"
-        Me.GridColumn43.DisplayFormat.FormatString = "N4"
-        Me.GridColumn43.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.GridColumn43.FieldName = "qty_diff"
-        Me.GridColumn43.Name = "GridColumn43"
-        Me.GridColumn43.UnboundExpression = "[qty_po] - [qty_rec]"
-        Me.GridColumn43.UnboundType = DevExpress.Data.UnboundColumnType.[Decimal]
-        Me.GridColumn43.Visible = True
-        Me.GridColumn43.VisibleIndex = 12
+        Me.GridColumn44.Caption = "Minimum Order Qty"
+        Me.GridColumn44.DisplayFormat.FormatString = "N2"
+        Me.GridColumn44.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn44.FieldName = "moq"
+        Me.GridColumn44.Name = "GridColumn44"
+        Me.GridColumn44.Visible = True
+        Me.GridColumn44.VisibleIndex = 9
+        Me.GridColumn44.Width = 104
         '
         'FormMatPurchase
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(796, 375)
+        Me.ClientSize = New System.Drawing.Size(1186, 510)
         Me.Controls.Add(Me.XTCPurcMat)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
@@ -1582,4 +1597,5 @@ Partial Class FormMatPurchase
     Friend WithEvents GridColumn41 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn42 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn43 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn44 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

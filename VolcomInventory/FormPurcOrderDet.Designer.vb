@@ -1574,6 +1574,7 @@ Partial Class FormPurcOrderDet
         Me.GridColumn31.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
         Me.GridColumn31.Caption = "Type"
         Me.GridColumn31.FieldName = "item_type"
+        Me.GridColumn31.MinWidth = 60
         Me.GridColumn31.Name = "GridColumn31"
         Me.GridColumn31.Visible = True
         Me.GridColumn31.VisibleIndex = 2

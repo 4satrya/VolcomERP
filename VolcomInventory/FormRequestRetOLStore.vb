@@ -458,4 +458,13 @@
             stopCustom("This propose already process")
         End If
     End Sub
+
+    Private Sub BtnAttachmentFollowUp_Click(sender As Object, e As EventArgs) Handles BtnAttachmentFollowUp.Click
+        Cursor = Cursors.WaitCursor
+        FormDocumentUpload.report_mark_type = "277"
+        FormDocumentUpload.id_report = id
+        FormDocumentUpload.is_view = "1"
+        FormDocumentUpload.ShowDialog()
+        Cursor = Cursors.Default
+    End Sub
 End Class

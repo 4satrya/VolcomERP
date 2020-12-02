@@ -487,7 +487,7 @@
 
             Try
                 'insert status 
-                Dim qstt As String = "INSERT INTO tb_sales_order_det_status(id_sales_order_det, `status`, status_date, input_status_date)
+                Dim qstt As String = "INSERT IGNORE INTO tb_sales_order_det_status(id_sales_order_det, `status`, status_date, input_status_date)
                 SELECT sod.id_sales_order_det, 'shipped', NOW(), NOW()
                 FROM tb_pl_sales_order_del_det d
                 INNER JOIN tb_sales_order_det sod ON sod.id_sales_order_det = d.id_sales_order_det

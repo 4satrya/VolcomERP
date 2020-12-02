@@ -143,6 +143,14 @@
       <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAPICodePack-Core.1.1.1\lib\Microsoft.WindowsAPICodePack.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.Shell, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAPICodePack-Shell.1.1.1\lib\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="MySql.Data, Version=6.9.10.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySqlBackup.NET.2.0.12\lib\net40\MySql.Data.dll</HintPath>
       <Private>True</Private>
@@ -468,6 +476,12 @@
       <DependentUpon>FormBankWithdrawalSum.vb</DependentUpon>
     </Compile>
     <Compile Include="FormBankWithdrawalSum.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormBatchUploadOnlineStore.Designer.vb">
+      <DependentUpon>FormBatchUploadOnlineStore.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormBatchUploadOnlineStore.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormBudgetProdDemand.Designer.vb">
@@ -1150,6 +1164,12 @@
       <DependentUpon>FormDesignImagesDet.vb</DependentUpon>
     </Compile>
     <Compile Include="FormDesignImagesDet.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDesignImagesLog.Designer.vb">
+      <DependentUpon>FormDesignImagesLog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormDesignImagesLog.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormDocTracking.Designer.vb">
@@ -2339,6 +2359,18 @@
     <Compile Include="FormHistoryProposeChanges.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormInbound3PL.Designer.vb">
+      <DependentUpon>FormInbound3PL.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormInbound3PL.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormInboundAWB.Designer.vb">
+      <DependentUpon>FormInboundAWB.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormInboundAWB.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormInvMat.Designer.vb">
       <DependentUpon>FormInvMat.vb</DependentUpon>
     </Compile>
@@ -2589,6 +2621,12 @@
       <DependentUpon>FormListPOMat.vb</DependentUpon>
     </Compile>
     <Compile Include="FormListPOMat.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormListStore.Designer.vb">
+      <DependentUpon>FormListStore.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormListStore.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormMailManage.Designer.vb">
@@ -3867,6 +3905,18 @@
       <DependentUpon>FormRetOLStoreDet.vb</DependentUpon>
     </Compile>
     <Compile Include="FormRetOLStoreDet.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormReturnNote.Designer.vb">
+      <DependentUpon>FormReturnNote.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormReturnNote.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormReturnNoteDet.Designer.vb">
+      <DependentUpon>FormReturnNoteDet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormReturnNoteDet.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormRevenue.Designer.vb">
@@ -5543,6 +5593,12 @@
     <Compile Include="FormSalesReturnOrderMailDet.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormSalesReturnOrderMailPick.Designer.vb">
+      <DependentUpon>FormSalesReturnOrderMailPick.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormSalesReturnOrderMailPick.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormSalesReturnOrderOL.Designer.vb">
       <DependentUpon>FormSalesReturnOrderOL.vb</DependentUpon>
     </Compile>
@@ -6297,6 +6353,42 @@
       <DependentUpon>FormSampleTrf.vb</DependentUpon>
     </Compile>
     <Compile Include="FormSampleTrf.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormScanReturn.Designer.vb">
+      <DependentUpon>FormScanReturn.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormScanReturn.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormScanReturnBAP.Designer.vb">
+      <DependentUpon>FormScanReturnBAP.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormScanReturnBAP.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormScanReturnBAPProduct.Designer.vb">
+      <DependentUpon>FormScanReturnBAPProduct.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormScanReturnBAPProduct.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormScanReturnDet.Designer.vb">
+      <DependentUpon>FormScanReturnDet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormScanReturnDet.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormScanReturnDetManual.Designer.vb">
+      <DependentUpon>FormScanReturnDetManual.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormScanReturnDetManual.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormScanReturnSummary.Designer.vb">
+      <DependentUpon>FormScanReturnSummary.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormScanReturnSummary.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormSearchDesign.Designer.vb">
@@ -7508,6 +7600,12 @@
     <Compile Include="ReportEmpLeaveStock.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ReportEmployeeContract.Designer.vb">
+      <DependentUpon>ReportEmployeeContract.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReportEmployeeContract.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ReportEmpOvertime.Designer.vb">
       <DependentUpon>ReportEmpOvertime.vb</DependentUpon>
     </Compile>
@@ -8414,6 +8512,12 @@
     <Compile Include="ReportRetOLStoreDet.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ReportReturnNote.Designer.vb">
+      <DependentUpon>ReportReturnNote.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReportReturnNote.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ReportSalarySlip.Designer.vb">
       <DependentUpon>ReportSalarySlip.vb</DependentUpon>
     </Compile>
@@ -8574,6 +8678,12 @@
     <Compile Include="ReportSalesReturnOrder.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ReportSalesReturnOrderMailSKPP.Designer.vb">
+      <DependentUpon>ReportSalesReturnOrderMailSKPP.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReportSalesReturnOrderMailSKPP.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ReportSalesReturnQC.Designer.vb">
       <DependentUpon>ReportSalesReturnQC.vb</DependentUpon>
     </Compile>
@@ -8722,6 +8832,24 @@
       <DependentUpon>ReportSampleStockOpname.vb</DependentUpon>
     </Compile>
     <Compile Include="ReportSampleStockOpname.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportScanReturn3PL.Designer.vb">
+      <DependentUpon>ReportScanReturn3PL.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReportScanReturn3PL.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportScanReturnBAP.Designer.vb">
+      <DependentUpon>ReportScanReturnBAP.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReportScanReturnBAP.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportScanReturnLocal.Designer.vb">
+      <DependentUpon>ReportScanReturnLocal.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReportScanReturnLocal.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="ReportSetupBudgetOPEX.Designer.vb">
@@ -8899,6 +9027,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormBankWithdrawalSum.resx">
       <DependentUpon>FormBankWithdrawalSum.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormBatchUploadOnlineStore.resx">
+      <DependentUpon>FormBatchUploadOnlineStore.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormBudgetProdDemand.resx">
       <DependentUpon>FormBudgetProdDemand.vb</DependentUpon>
@@ -9275,6 +9406,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormDesignImagesDet.resx">
       <DependentUpon>FormDesignImagesDet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormDesignImagesLog.resx">
+      <DependentUpon>FormDesignImagesLog.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormDocTracking.resx">
       <DependentUpon>FormDocTracking.vb</DependentUpon>
@@ -9885,6 +10019,12 @@
     <EmbeddedResource Include="FormHistoryProposeChanges.resx">
       <DependentUpon>FormHistoryProposeChanges.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormInbound3PL.resx">
+      <DependentUpon>FormInbound3PL.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormInboundAWB.resx">
+      <DependentUpon>FormInboundAWB.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormInvMat.resx">
       <DependentUpon>FormInvMat.vb</DependentUpon>
     </EmbeddedResource>
@@ -10010,6 +10150,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormListPOMat.resx">
       <DependentUpon>FormListPOMat.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormListStore.resx">
+      <DependentUpon>FormListStore.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormMailManage.resx">
       <DependentUpon>FormMailManage.vb</DependentUpon>
@@ -10650,6 +10793,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormRetOLStoreDet.resx">
       <DependentUpon>FormRetOLStoreDet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormReturnNote.resx">
+      <DependentUpon>FormReturnNote.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormReturnNoteDet.resx">
+      <DependentUpon>FormReturnNoteDet.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormRevenue.resx">
       <DependentUpon>FormRevenue.vb</DependentUpon>
@@ -11725,6 +11874,9 @@
     <EmbeddedResource Include="FormSalesReturnOrderMailDet.resx">
       <DependentUpon>FormSalesReturnOrderMailDet.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormSalesReturnOrderMailPick.resx">
+      <DependentUpon>FormSalesReturnOrderMailPick.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormSalesReturnOrderOL.resx">
       <DependentUpon>FormSalesReturnOrderOL.vb</DependentUpon>
     </EmbeddedResource>
@@ -12194,6 +12346,24 @@
     <EmbeddedResource Include="FormSampleTrf.resx">
       <DependentUpon>FormSampleTrf.vb</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormScanReturn.resx">
+      <DependentUpon>FormScanReturn.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormScanReturnBAP.resx">
+      <DependentUpon>FormScanReturnBAP.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormScanReturnBAPProduct.resx">
+      <DependentUpon>FormScanReturnBAPProduct.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormScanReturnDet.resx">
+      <DependentUpon>FormScanReturnDet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormScanReturnDetManual.resx">
+      <DependentUpon>FormScanReturnDetManual.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormScanReturnSummary.resx">
+      <DependentUpon>FormScanReturnSummary.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormSearchDesign.resx">
       <DependentUpon>FormSearchDesign.vb</DependentUpon>
@@ -12890,6 +13060,9 @@
     <EmbeddedResource Include="ReportEmpLeaveStock.resx">
       <DependentUpon>ReportEmpLeaveStock.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReportEmployeeContract.resx">
+      <DependentUpon>ReportEmployeeContract.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ReportEmpOvertime.resx">
       <DependentUpon>ReportEmpOvertime.vb</DependentUpon>
     </EmbeddedResource>
@@ -13391,6 +13564,9 @@
     <EmbeddedResource Include="ReportRetOLStoreDet.resx">
       <DependentUpon>ReportRetOLStoreDet.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReportReturnNote.resx">
+      <DependentUpon>ReportReturnNote.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ReportSalarySlip.resx">
       <DependentUpon>ReportSalarySlip.vb</DependentUpon>
     </EmbeddedResource>
@@ -13477,6 +13653,9 @@
     <EmbeddedResource Include="ReportSalesReturnOrder.resx">
       <DependentUpon>ReportSalesReturnOrder.vb</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportSalesReturnOrderMailSKPP.resx">
+      <DependentUpon>ReportSalesReturnOrderMailSKPP.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportSalesReturnQC.resx">
       <DependentUpon>ReportSalesReturnQC.vb</DependentUpon>
@@ -13571,6 +13750,15 @@
     <EmbeddedResource Include="ReportSampleStockOpname.resx">
       <DependentUpon>ReportSampleStockOpname.vb</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportScanReturn3PL.resx">
+      <DependentUpon>ReportScanReturn3PL.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportScanReturnBAP.resx">
+      <DependentUpon>ReportScanReturnBAP.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportScanReturnLocal.resx">
+      <DependentUpon>ReportScanReturnLocal.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportSetupBudgetOPEX.resx">
       <DependentUpon>ReportSetupBudgetOPEX.vb</DependentUpon>

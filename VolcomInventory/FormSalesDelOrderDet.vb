@@ -245,6 +245,16 @@ Public Class FormSalesDelOrderDet
         check_but()
         GVItemList.OptionsBehavior.AutoExpandAllGroups = True
         BtnBrowseSO.Enabled = False
+
+        'cek coa online store
+        If id_commerce_type = 2 Then
+            Dim is_valid_coa As String = execute_query("SELECT IF(IFNULL(c.id_acc_ar,0)>0 AND IFNULL(c.id_acc_sales,0)>0 AND IFNULL(c.id_acc_sales_return,0)>0,1,2) AS `is_valid_coa` 
+            FROM tb_m_comp c WHERE c.id_comp=" + id_comp_to + " ", 0, True, "", "", "", "")
+            If is_valid_coa = "2" Then
+                stopCustom("Can't process delivery. Please contact accounting dept. to setup COA AR/Sales for this store")
+                Close()
+            End If
+        End If
     End Sub
 
     Sub viewSoType()

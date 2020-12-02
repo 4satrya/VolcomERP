@@ -8,6 +8,7 @@
         data_group.Columns.Add("number")
         data_group.Columns.Add("report_number")
         data_group.Columns.Add("comp_number")
+        data_group.Columns.Add("vendor_name")
         data_group.Columns.Add("date_created")
         data_group.Columns.Add("report_number_ref")
         data_group.Columns.Add("acc_trans_note")
@@ -38,6 +39,7 @@
                         "",
                         "",
                         "",
+                        "",
                         d_last_parent,
                         c_last_parent,
                         data.Rows(i - 1)("balance"),
@@ -54,6 +56,7 @@
                 If Not last_parent_1 = data.Rows(i)("acc_name_1").ToString Then
                     data_group.Rows.Add(
                         "SUB TOTAL: " + data.Rows(i - 1)("acc_name_1").ToString,
+                        "",
                         "",
                         "",
                         "",
@@ -82,6 +85,7 @@
                     "",
                     "",
                     "",
+                    "",
                     0.00,
                     0.00,
                     0.00,
@@ -92,6 +96,7 @@
             If Not last_parent = data.Rows(i)("acc_name").ToString Then
                 data_group.Rows.Add(
                     data.Rows(i)("acc_name").ToString,
+                    "",
                     "",
                     "",
                     "",
@@ -115,6 +120,7 @@
                 data.Rows(i)("number").ToString,
                 data.Rows(i)("report_number").ToString,
                 data.Rows(i)("comp_number"),
+                data.Rows(i)("vendor_name"),
                 data.Rows(i)("date_created"),
                 data.Rows(i)("report_number_ref"),
                 data.Rows(i)("acc_trans_note"),
@@ -141,6 +147,7 @@
                     "",
                     "",
                     "",
+                    "",
                     d_last_parent,
                     c_last_parent,
                     data.Rows(i)("balance"),
@@ -151,6 +158,7 @@
 
                 data_group.Rows.Add(
                     "SUB TOTAL: " + data.Rows(i)("acc_name_1").ToString,
+                    "",
                     "",
                     "",
                     "",
@@ -198,43 +206,49 @@
             comp_number.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
             comp_number.Borders = DevExpress.XtraPrinting.BorderSide.Right Or DevExpress.XtraPrinting.BorderSide.Bottom
 
-            Dim date_created As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(3)
+            Dim vendor_name As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(3)
+            vendor_name.Text = data_group.Rows(i)("vendor_name").ToString
+            vendor_name.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0)
+            vendor_name.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
+            vendor_name.Borders = DevExpress.XtraPrinting.BorderSide.Right Or DevExpress.XtraPrinting.BorderSide.Bottom
+
+            Dim date_created As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(4)
             date_created.Text = If(data_group.Rows(i)("date_created").ToString = "", "", Date.Parse(data_group.Rows(i)("date_created").ToString).ToString("dd MMM yyyy"))
             date_created.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0)
             date_created.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
             date_created.Borders = DevExpress.XtraPrinting.BorderSide.Right Or DevExpress.XtraPrinting.BorderSide.Bottom
 
-            Dim report_number_ref As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(4)
+            Dim report_number_ref As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(5)
             report_number_ref.Text = data_group.Rows(i)("report_number_ref").ToString
             report_number_ref.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0)
             report_number_ref.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
             report_number_ref.Borders = DevExpress.XtraPrinting.BorderSide.Right Or DevExpress.XtraPrinting.BorderSide.Bottom
 
-            Dim acc_trans_note As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(5)
+            Dim acc_trans_note As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(6)
             acc_trans_note.Text = data_group.Rows(i)("acc_trans_note").ToString
             acc_trans_note.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0)
             acc_trans_note.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
             acc_trans_note.Borders = DevExpress.XtraPrinting.BorderSide.Right Or DevExpress.XtraPrinting.BorderSide.Bottom
             acc_trans_note.WordWrap = False
-            Dim qty As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(6)
+            Dim qty As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(7)
             qty.Text = If(data_group.Rows(i)("qty").ToString = "", "", Format(Decimal.Parse(data_group.Rows(i)("qty").ToString), "##,##0.00"))
             qty.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0)
             qty.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight
             qty.Borders = DevExpress.XtraPrinting.BorderSide.Right Or DevExpress.XtraPrinting.BorderSide.Bottom
 
-            Dim debit As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(7)
+            Dim debit As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(8)
             debit.Text = If(data_group.Rows(i)("debit").ToString = "", "", Format(Decimal.Parse(data_group.Rows(i)("debit").ToString), "##,##0.00"))
             debit.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0)
             debit.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight
             debit.Borders = DevExpress.XtraPrinting.BorderSide.Right Or DevExpress.XtraPrinting.BorderSide.Bottom
 
-            Dim credit As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(8)
+            Dim credit As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(9)
             credit.Text = If(data_group.Rows(i)("credit").ToString = "", "", Format(Decimal.Parse(data_group.Rows(i)("credit").ToString), "##,##0.00"))
             credit.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0)
             credit.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight
             credit.Borders = DevExpress.XtraPrinting.BorderSide.Right Or DevExpress.XtraPrinting.BorderSide.Bottom
 
-            Dim balance As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(9)
+            Dim balance As DevExpress.XtraReports.UI.XRTableCell = row.Cells.Item(10)
             balance.Text = If(data_group.Rows(i)("balance").ToString = "", "", Format(Decimal.Parse(data_group.Rows(i)("balance").ToString), "##,##0.00"))
             balance.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0)
             balance.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight
@@ -244,6 +258,7 @@
         'rowspan
         For i = 0 To XrTable.Rows.Count - 1
             If XrTable.Rows.Item(i).Tag = "group" Then
+                XrTable.Rows.Item(i).Cells.RemoveAt(10)
                 XrTable.Rows.Item(i).Cells.RemoveAt(9)
                 XrTable.Rows.Item(i).Cells.RemoveAt(8)
                 XrTable.Rows.Item(i).Cells.RemoveAt(7)
@@ -254,6 +269,7 @@
                 XrTable.Rows.Item(i).Cells.RemoveAt(2)
                 XrTable.Rows.Item(i).Cells.RemoveAt(1)
             ElseIf XrTable.Rows.Item(i).Tag = "total" Then
+                XrTable.Rows.Item(i).Cells.RemoveAt(7)
                 XrTable.Rows.Item(i).Cells.RemoveAt(6)
                 XrTable.Rows.Item(i).Cells.RemoveAt(5)
                 XrTable.Rows.Item(i).Cells.RemoveAt(4)
@@ -261,7 +277,7 @@
                 XrTable.Rows.Item(i).Cells.RemoveAt(2)
                 XrTable.Rows.Item(i).Cells.RemoveAt(1)
 
-                XrTable.Rows.Item(i).Cells.Item(0).WidthF = XrTableCellNo.WidthF + XrTableCellReportNumber.WidthF + XrTableCellCompany.WidthF + XrTableCellJournalDate.WidthF + XrTableCellReff.WidthF + XrTableCellDescription.WidthF + XrTableCellQty.WidthF
+                XrTable.Rows.Item(i).Cells.Item(0).WidthF = XrTableCellNo.WidthF + XrTableCellReportNumber.WidthF + XrTableCellCompany.WidthF + +XrTableCellVendor.WidthF + XrTableCellJournalDate.WidthF + XrTableCellReff.WidthF + XrTableCellDescription.WidthF + XrTableCellQty.WidthF
                 XrTable.Rows.Item(i).Cells.Item(1).WidthF = XrTableCellDebit.WidthF
                 XrTable.Rows.Item(i).Cells.Item(2).WidthF = XrTableCellCredit.WidthF
                 XrTable.Rows.Item(i).Cells.Item(3).WidthF = XrTableCellBalance.WidthF

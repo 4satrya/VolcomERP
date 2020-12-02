@@ -19,7 +19,6 @@ Partial Class FormOlStoreReturnList
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormOlStoreReturnList))
         Me.RICECheck = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
@@ -37,7 +36,7 @@ Partial Class FormOlStoreReturnList
         Me.GridColumn15 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.BSearch = New DevExpress.XtraEditors.SimpleButton()
         Me.GCList = New DevExpress.XtraGrid.GridControl()
-        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip()
         Me.DetailRefundToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GVList = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn11 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -86,6 +85,7 @@ Partial Class FormOlStoreReturnList
         Me.XTCFollowUp = New DevExpress.XtraTab.XtraTabControl()
         Me.XTPList = New DevExpress.XtraTab.XtraTabPage()
         Me.XTPRequestList = New DevExpress.XtraTab.XtraTabPage()
+        Me.AddAttachmentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.RICECheck, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
@@ -252,14 +252,14 @@ Partial Class FormOlStoreReturnList
         '
         'ContextMenuStrip1
         '
-        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DetailRefundToolStripMenuItem})
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DetailRefundToolStripMenuItem, Me.AddAttachmentToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(146, 26)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(163, 70)
         '
         'DetailRefundToolStripMenuItem
         '
         Me.DetailRefundToolStripMenuItem.Name = "DetailRefundToolStripMenuItem"
-        Me.DetailRefundToolStripMenuItem.Size = New System.Drawing.Size(145, 22)
+        Me.DetailRefundToolStripMenuItem.Size = New System.Drawing.Size(162, 22)
         Me.DetailRefundToolStripMenuItem.Text = "Detail Refund"
         '
         'GVList
@@ -650,6 +650,12 @@ Partial Class FormOlStoreReturnList
         Me.XTPRequestList.Size = New System.Drawing.Size(1129, 525)
         Me.XTPRequestList.Text = "Requested List"
         '
+        'AddAttachmentToolStripMenuItem
+        '
+        Me.AddAttachmentToolStripMenuItem.Name = "AddAttachmentToolStripMenuItem"
+        Me.AddAttachmentToolStripMenuItem.Size = New System.Drawing.Size(162, 22)
+        Me.AddAttachmentToolStripMenuItem.Text = "Add Attachment"
+        '
         'FormOlStoreReturnList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -753,4 +759,5 @@ Partial Class FormOlStoreReturnList
     Friend WithEvents XTCFollowUp As DevExpress.XtraTab.XtraTabControl
     Friend WithEvents XTPList As DevExpress.XtraTab.XtraTabPage
     Friend WithEvents XTPRequestList As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents AddAttachmentToolStripMenuItem As ToolStripMenuItem
 End Class

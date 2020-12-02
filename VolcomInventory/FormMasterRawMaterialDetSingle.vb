@@ -501,8 +501,8 @@ Public Class FormMasterRawMaterialDetSingle
 
         If Not res = "0" Then
             stopCustom("Material already used with default cost.")
-        ElseIf Not res = "0" Then
-            stopCustom("Material price already used on PO.")
+        ElseIf Not list_pd = "0" Then
+            stopCustom("Material price already used on Final Raw Material List.")
         Else
             FormMasterRawMaterialPrcSingle.action = "upd"
             If GVPrice.GetFocusedRowCellValue("is_default_po").ToString = "yes" Then

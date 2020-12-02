@@ -23,6 +23,7 @@ Partial Class FormCompanyEmailMapping
         Me.GVListStoreGroup = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn13 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn15 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -40,7 +41,15 @@ Partial Class FormCompanyEmailMapping
         Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn11 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn12 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn15 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.XTP3PL = New DevExpress.XtraTab.XtraTabPage()
+        Me.GC3PL = New DevExpress.XtraGrid.GridControl()
+        Me.GV3PL = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn16 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn18 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn17 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn19 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn20 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn22 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GCListStoreGroup, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVListStoreGroup, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XtraTabControl, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -49,6 +58,9 @@ Partial Class FormCompanyEmailMapping
         Me.XTPInternal.SuspendLayout()
         CType(Me.GCListInternal, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVListInternal, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.XTP3PL.SuspendLayout()
+        CType(Me.GC3PL, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GV3PL, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GCListStoreGroup
@@ -89,6 +101,15 @@ Partial Class FormCompanyEmailMapping
         Me.GridColumn1.Visible = True
         Me.GridColumn1.VisibleIndex = 0
         Me.GridColumn1.Width = 81
+        '
+        'GridColumn15
+        '
+        Me.GridColumn15.Caption = "Company Name"
+        Me.GridColumn15.FieldName = "comp_name"
+        Me.GridColumn15.Name = "GridColumn15"
+        Me.GridColumn15.Visible = True
+        Me.GridColumn15.VisibleIndex = 1
+        Me.GridColumn15.Width = 85
         '
         'GridColumn2
         '
@@ -140,7 +161,7 @@ Partial Class FormCompanyEmailMapping
         Me.XtraTabControl.SelectedTabPage = Me.XTPStoreGroup
         Me.XtraTabControl.Size = New System.Drawing.Size(1008, 729)
         Me.XtraTabControl.TabIndex = 1
-        Me.XtraTabControl.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPStoreGroup, Me.XTPInternal})
+        Me.XtraTabControl.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPStoreGroup, Me.XTPInternal, Me.XTP3PL})
         '
         'XTPStoreGroup
         '
@@ -233,14 +254,78 @@ Partial Class FormCompanyEmailMapping
         Me.GridColumn12.Visible = True
         Me.GridColumn12.VisibleIndex = 3
         '
-        'GridColumn15
+        'XTP3PL
         '
-        Me.GridColumn15.Caption = "Company Name"
-        Me.GridColumn15.FieldName = "comp_name"
-        Me.GridColumn15.Name = "GridColumn15"
-        Me.GridColumn15.Visible = True
-        Me.GridColumn15.VisibleIndex = 1
-        Me.GridColumn15.Width = 85
+        Me.XTP3PL.Controls.Add(Me.GC3PL)
+        Me.XTP3PL.Name = "XTP3PL"
+        Me.XTP3PL.Size = New System.Drawing.Size(1002, 701)
+        Me.XTP3PL.Text = "3PL"
+        '
+        'GC3PL
+        '
+        Me.GC3PL.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GC3PL.Location = New System.Drawing.Point(0, 0)
+        Me.GC3PL.MainView = Me.GV3PL
+        Me.GC3PL.Name = "GC3PL"
+        Me.GC3PL.Size = New System.Drawing.Size(1002, 701)
+        Me.GC3PL.TabIndex = 2
+        Me.GC3PL.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GV3PL})
+        '
+        'GV3PL
+        '
+        Me.GV3PL.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn16, Me.GridColumn18, Me.GridColumn17, Me.GridColumn19, Me.GridColumn20, Me.GridColumn22})
+        Me.GV3PL.GridControl = Me.GC3PL
+        Me.GV3PL.Name = "GV3PL"
+        Me.GV3PL.OptionsBehavior.AutoExpandAllGroups = True
+        Me.GV3PL.OptionsBehavior.Editable = False
+        Me.GV3PL.OptionsFind.AlwaysVisible = True
+        Me.GV3PL.OptionsView.ColumnAutoWidth = False
+        Me.GV3PL.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn16
+        '
+        Me.GridColumn16.Caption = "GridColumn14"
+        Me.GridColumn16.FieldName = "id_comp"
+        Me.GridColumn16.Name = "GridColumn16"
+        '
+        'GridColumn18
+        '
+        Me.GridColumn18.Caption = "3PL"
+        Me.GridColumn18.FieldName = "comp_name"
+        Me.GridColumn18.Name = "GridColumn18"
+        Me.GridColumn18.Visible = True
+        Me.GridColumn18.VisibleIndex = 0
+        '
+        'GridColumn17
+        '
+        Me.GridColumn17.Caption = "Name"
+        Me.GridColumn17.FieldName = "contact_person"
+        Me.GridColumn17.Name = "GridColumn17"
+        Me.GridColumn17.Visible = True
+        Me.GridColumn17.VisibleIndex = 1
+        '
+        'GridColumn19
+        '
+        Me.GridColumn19.Caption = "Position"
+        Me.GridColumn19.FieldName = "position"
+        Me.GridColumn19.Name = "GridColumn19"
+        '
+        'GridColumn20
+        '
+        Me.GridColumn20.Caption = "Email"
+        Me.GridColumn20.FieldName = "email"
+        Me.GridColumn20.Name = "GridColumn20"
+        Me.GridColumn20.Visible = True
+        Me.GridColumn20.VisibleIndex = 2
+        Me.GridColumn20.Width = 78
+        '
+        'GridColumn22
+        '
+        Me.GridColumn22.Caption = "Member Type"
+        Me.GridColumn22.FieldName = "mail_member_type"
+        Me.GridColumn22.Name = "GridColumn22"
+        Me.GridColumn22.Visible = True
+        Me.GridColumn22.VisibleIndex = 3
         '
         'FormCompanyEmailMapping
         '
@@ -258,6 +343,9 @@ Partial Class FormCompanyEmailMapping
         Me.XTPInternal.ResumeLayout(False)
         CType(Me.GCListInternal, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVListInternal, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.XTP3PL.ResumeLayout(False)
+        CType(Me.GC3PL, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GV3PL, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -284,4 +372,13 @@ Partial Class FormCompanyEmailMapping
     Friend WithEvents GridColumn9 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn10 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn15 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents XTP3PL As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents GC3PL As DevExpress.XtraGrid.GridControl
+    Friend WithEvents GV3PL As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn16 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn17 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn19 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn20 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn22 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn18 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

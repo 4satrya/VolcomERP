@@ -7,7 +7,21 @@
         DEBBKFrom.EditValue = Now
         DEBBKTo.EditValue = Now
         '
+        load_unit()
         viewData()
+    End Sub
+
+    Sub load_unit()
+        Dim query As String = "SELECT 0 AS id_coa_tag,'ALL' AS tag_code,'ALL' AS tag_description 
+UNION ALL
+SELECT id_coa_tag,tag_code,tag_description FROM `tb_coa_tag`"
+        '        query = "SELECT '0' AS id_comp,'-' AS comp_number, 'All Unit' AS comp_name
+        'UNION ALL
+        'SELECT ad.`id_comp`,c.`comp_number`,c.`comp_name` FROM `tb_a_acc_trans_det` ad
+        'INNER JOIN tb_m_comp c ON c.`id_comp`=ad.`id_comp`
+        'GROUP BY ad.id_comp"
+        viewSearchLookupQuery(SLEUnit, query, "id_coa_tag", "tag_description", "id_coa_tag")
+        SLEUnit.EditValue = "1"
     End Sub
 
     Sub viewData()
@@ -15,7 +29,11 @@
         Dim exp As New ClassItemExpense()
         Dim cond As String = "-1"
 
-        cond = " AND DATE(e.created_date)>='" & Date.Parse(DEBBKFrom.EditValue.ToString).ToString("yyyy-MM-dd") & "' AND DATE(e.created_date)<='" & Date.Parse(DEBBKTo.EditValue.ToString).ToString("yyyy-MM-dd") & "' "
+        cond = " AND DATE(e.created_date)>='" & Date.Parse(DEBBKFrom.EditValue.ToString).ToString("yyyy-MM-dd") & "' AND DATE(e.created_date)<='" & Date.Parse(DEBBKTo.EditValue.ToString).ToString("yyyy-MM-dd") & "'"
+
+        If Not SLEUnit.EditValue.ToString = "0" Then
+            cond += "  AND e.id_coa_tag='" & SLEUnit.EditValue.ToString & "' "
+        End If
 
         Dim query As String = exp.queryMain(cond, "2", False)
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")

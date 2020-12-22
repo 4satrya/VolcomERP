@@ -201,6 +201,8 @@
 
         Dim data_payment_gateway As DataTable = execute_query("SELECT ol_store_pay FROM tb_ol_store_pay", -1, True, "", "", "", "")
 
+        Dim is_allow_check_discount_app As String = get_setup_field("is_allow_check_discount_app")
+
         Using dataStream As IO.Stream = response.GetResponseStream()
             Dim reader As IO.StreamReader = New IO.StreamReader(dataStream)
 
@@ -255,6 +257,17 @@
                                 Next
                             Else
                                 discount_code = ""
+                            End If
+
+                            'discount codes app
+                            If is_allow_check_discount_app = "1" Then
+                                If row("tags").ToString.Contains("giftbox") And discount_code = "" Then
+                                    For Each row_app In row("discount_applications").ToList
+                                        If row_app("type").ToString = "manual" Then
+                                            discount_code = row_app("title").ToString
+                                        End If
+                                    Next
+                                End If
                             End If
 
                             'data customer
@@ -325,11 +338,12 @@
 
                             'detail line item
                             Dim qins As String = "INSERT tb_ol_store_order(id, sales_order_ol_shop_number, sales_order_ol_shop_date, customer_name, shipping_name, shipping_address,shipping_address1,shipping_address2, shipping_phone, 
-                    shipping_city, shipping_post_code, shipping_region, payment_method, tracking_code, ol_store_sku, ol_store_id, sku, design_price, sales_order_det_qty, grams, financial_status, total_disc_order, discount_allocations_amo,checkout_id, shipping_price, discount_code, id_comp_group) VALUES "
+                    shipping_city, shipping_post_code, shipping_region, payment_method, tracking_code, ol_store_sku, ol_store_id, sku, design_price, ol_order_qty, sales_order_det_qty, grams, financial_status, total_disc_order, discount_allocations_amo,checkout_id, shipping_price, discount_code, id_comp_group) VALUES "
                             Dim ol_store_sku As String = ""
                             Dim ol_store_id As String = ""
                             Dim sku As String = ""
                             Dim design_price As String = ""
+                            Dim ol_order_qty As String = ""
                             Dim sales_order_det_qty As String = ""
                             Dim grams As String = ""
                             Dim discount_allocations_amo As String = "0"
@@ -339,6 +353,7 @@
                                 ol_store_id = row_item("id").ToString
                                 sku = row_item("sku").ToString.Replace("-GWP", "").Trim
                                 design_price = decimalSQL(row_item("price").ToString)
+                                ol_order_qty = decimalSQL(row_item("quantity").ToString)
                                 sales_order_det_qty = decimalSQL(row_item("quantity").ToString)
                                 grams = decimalSQL(row_item("grams").ToString)
 
@@ -356,7 +371,7 @@
                                     qins += ","
                                 End If
                                 qins += "('" + id + "', '" + sales_order_ol_shop_number + "', '" + sales_order_ol_shop_date + "', '" + addSlashes(customer_name) + "', '" + addSlashes(shipping_name) + "', '" + addSlashes(shipping_address) + "','" + addSlashes(shipping_address1) + "','" + addSlashes(shipping_address2) + "', '" + addSlashes(shipping_phone) + "', 
-                        '" + addSlashes(shipping_city) + "', '" + addSlashes(shipping_post_code) + "', '" + addSlashes(shipping_region) + "', '" + payment_method + "', '" + tracking_code + "', '" + ol_store_sku + "', '" + ol_store_id + "', '" + sku + "', '" + design_price + "', '" + sales_order_det_qty + "','" + grams + "', '" + addSlashes(financial_status) + "', '" + total_discounts + "', '" + discount_allocations_amo + "','" + addSlashes(checkout_id) + "', '" + shipping_price + "', '" + discount_code + "', '" + id_comp_group + "') "
+                        '" + addSlashes(shipping_city) + "', '" + addSlashes(shipping_post_code) + "', '" + addSlashes(shipping_region) + "', '" + payment_method + "', '" + tracking_code + "', '" + ol_store_sku + "', '" + ol_store_id + "', '" + sku + "', '" + design_price + "', '" + ol_order_qty + "', '" + sales_order_det_qty + "','" + grams + "', '" + addSlashes(financial_status) + "', '" + total_discounts + "', '" + discount_allocations_amo + "','" + addSlashes(checkout_id) + "', '" + shipping_price + "', '" + discount_code + "', '" + id_comp_group + "') "
                                 i += 1
                             Next
 
@@ -687,58 +702,134 @@ GROUP BY p.sku"
                         Dim end_period As String = ""
 
                         'get discount code
-                        Dim url_dc As String = "https://" + username + ":" + password + "@" + shop + "/admin/api/2020-04/price_rules/" + price_rule_id + "/discount_codes.json"
-                        Dim request_dc As Net.WebRequest = Net.WebRequest.Create(url_dc)
-                        request_dc.Method = "GET"
-                        request_dc.Credentials = New Net.NetworkCredential(username, password)
-                        Dim response_dc As Net.WebResponse = request_dc.GetResponse()
-                        Using dataStreamDc As IO.Stream = response_dc.GetResponseStream()
-                            Dim reader_dc As IO.StreamReader = New IO.StreamReader(dataStreamDc)
-                            Dim responseFromServerDc As String = reader_dc.ReadToEnd()
-                            Dim json_diskon As Newtonsoft.Json.Linq.JObject = Newtonsoft.Json.Linq.JObject.Parse(responseFromServerDc)
-                            If json_diskon("discount_codes").Count > 0 Then
-                                Dim j As Integer = 0
-                                Dim id_ol_promo_collection As String = ""
-                                For Each row_diskon In json_diskon("discount_codes").ToList
-                                    If j = 0 Then
-                                        'insert to promo
-                                        discount_title = addSlashes(row("title").ToString)
-                                        value_type = addSlashes(row("value_type").ToString)
-                                        value = decimalSQL(row("value").ToString)
-                                        once_per_customer = row("once_per_customer").ToString
-                                        If once_per_customer = "true" Then
-                                            once_per_customer = "1"
-                                        Else
-                                            once_per_customer = "2"
-                                        End If
-                                        usage_limit = 0
-                                        Try
-                                            usage_limit = decimalSQL(row("usage_limit").ToString)
-                                        Catch ex As Exception
-                                        End Try
-                                        start_period = DateTime.Parse(row("starts_at").ToString).ToString("yyyy-MM-dd HH:mm:ss")
-                                        end_period = DateTime.Parse(row("ends_at").ToString).ToString("yyyy-MM-dd HH:mm:ss")
-                                        Dim query_prm_head As String = "INSERT INTO tb_ol_promo_collection(id_promo, price_rule_id, promo_name, discount_title, value_type, value, once_per_customer,usage_limit,is_use_discount_code, created_date, created_by, start_period, end_period, id_report_status, is_confirm) 
-                                        VALUES('0', '" + price_rule_id + "', '" + discount_title + "', '" + discount_title + "', '" + value_type + "', '" + value + "', '" + once_per_customer + "', '" + usage_limit + "', '1', NOW(), '" + id_user + "', '" + start_period + "', '" + end_period + "','1','2');SELECT LAST_INSERT_ID(); "
-                                        id_ol_promo_collection = execute_query(query_prm_head, 0, True, "", "", "", "")
-                                        Dim rmt As String = "250"
-                                        execute_non_query("CALL gen_number(" + id_ol_promo_collection + ", " + rmt + ")", True, "", "", "", "")
-                                    End If
+                        Dim url_dc As String = "https://" + username + ":" + password + "@" + shop + "/admin/api/2020-04/price_rules/" + price_rule_id + "/discount_codes.json?limit=50"
+                        Dim page_info As String = ""
+                        Dim i As Integer = 0
+                        Dim is_loop As Boolean = True
+                        While is_loop
+                            Dim url_page_info As String = ""
+                            url_page_info = url_dc + (If(Not page_info = "", "&page_info=" + page_info, ""))
+                            Dim request_dc As Net.WebRequest = Net.WebRequest.Create(url_dc)
+                            request_dc.Method = "GET"
+                            request_dc.Credentials = New Net.NetworkCredential(username, password)
+                            Dim response_dc As Net.WebResponse = request_dc.GetResponse()
 
-                                    'insert detail diskon kode
-                                    Dim disc_code As String = ""
-                                    disc_code = row_diskon("code").ToString
-                                    Dim query_insert_diskon As String = "INSERT INTO tb_ol_promo_collection_disc_code(id_ol_promo_collection,disc_code) VALUES('" + id_ol_promo_collection + "','" + disc_code + "'); "
-                                    execute_non_query(query_insert_diskon, True, "", "", "", "")
-                                    j += 1
-                                Next
+                            If Not page_info = "" Or i = 0 Then
+                                Using dataStreamDc As IO.Stream = response_dc.GetResponseStream()
+                                    Dim reader_dc As IO.StreamReader = New IO.StreamReader(dataStreamDc)
+                                    Dim responseFromServerDc As String = reader_dc.ReadToEnd()
+                                    Dim json_diskon As Newtonsoft.Json.Linq.JObject = Newtonsoft.Json.Linq.JObject.Parse(responseFromServerDc)
+                                    If json_diskon("discount_codes").Count > 0 Then
+                                        Dim j As Integer = 0
+                                        Dim id_ol_promo_collection As String = ""
+                                        For Each row_diskon In json_diskon("discount_codes").ToList
+                                            If j = 0 Then
+                                                'insert to promo
+                                                discount_title = addSlashes(row("title").ToString)
+                                                value_type = addSlashes(row("value_type").ToString)
+                                                value = decimalSQL(row("value").ToString)
+                                                once_per_customer = row("once_per_customer").ToString
+                                                If once_per_customer = "true" Then
+                                                    once_per_customer = "1"
+                                                Else
+                                                    once_per_customer = "2"
+                                                End If
+                                                usage_limit = 0
+                                                Try
+                                                    usage_limit = decimalSQL(row("usage_limit").ToString)
+                                                Catch ex As Exception
+                                                End Try
+                                                start_period = DateTime.Parse(row("starts_at").ToString).ToString("yyyy-MM-dd HH:mm:ss")
+                                                end_period = DateTime.Parse(row("ends_at").ToString).ToString("yyyy-MM-dd HH:mm:ss")
+                                                Dim query_prm_head As String = "INSERT INTO tb_ol_promo_collection(id_promo, price_rule_id, promo_name, discount_title, value_type, value, once_per_customer,usage_limit,is_use_discount_code, created_date, created_by, start_period, end_period, id_report_status, is_confirm) 
+                                                VALUES('0', '" + price_rule_id + "', '" + discount_title + "', '" + discount_title + "', '" + value_type + "', '" + value + "', '" + once_per_customer + "', '" + usage_limit + "', '1', NOW(), '" + id_user + "', '" + start_period + "', '" + end_period + "','1','2');SELECT LAST_INSERT_ID(); "
+                                                id_ol_promo_collection = execute_query(query_prm_head, 0, True, "", "", "", "")
+                                                Dim rmt As String = "250"
+                                                execute_non_query("CALL gen_number(" + id_ol_promo_collection + ", " + rmt + ")", True, "", "", "", "")
+                                            End If
+
+                                            'insert detail diskon kode
+                                            Dim disc_code As String = ""
+                                            disc_code = row_diskon("code").ToString
+                                            Dim query_insert_diskon As String = "INSERT INTO tb_ol_promo_collection_disc_code(id_ol_promo_collection,disc_code, sync_date, sync_by) VALUES('" + id_ol_promo_collection + "','" + disc_code + "',NOW(), '" + id_user + "'); "
+                                            execute_non_query(query_insert_diskon, True, "", "", "", "")
+                                            j += 1
+                                        Next
+                                    End If
+                                End Using
+                                is_loop = True
+                            Else
+                                is_loop = False
                             End If
-                        End Using
-                        response_dc.Close()
+                            i += 1
+
+                            'get next page
+                            Dim link As String() = response.Headers.GetValues(16)
+                            Dim j1 As Integer = link(link.Count - 1).LastIndexOf(">; rel=""next")
+                            Dim j2 As Integer = link(link.Count - 1).LastIndexOf("o=") + 2
+                            If j1 > 0 And j2 > 0 Then
+                                page_info = link(link.Count - 1).Substring(0, j1).Substring(j2)
+                            Else
+                                page_info = ""
+                            End If
+
+                            response_dc.Close()
+                        End While
                     End If
                 Next
             End If
         End Using
         response.Close()
+    End Sub
+
+    Sub get_discount_code_addition(ByVal id_promo As String, ByVal id_price_rule As String)
+        Net.ServicePointManager.Expect100Continue = True
+        Net.ServicePointManager.SecurityProtocol = CType(3072, Net.SecurityProtocolType)
+        Dim url_dc As String = "https://" + username + ":" + password + "@" + shop + "/admin/api/2020-04/price_rules/" + id_price_rule + "/discount_codes.json?limit=50"
+        Dim page_info As String = ""
+        Dim i As Integer = 0
+        Dim is_loop As Boolean = True
+        While is_loop
+            Dim url_page_info As String = ""
+            url_page_info = url_dc + (If(Not page_info = "", "&page_info=" + page_info, ""))
+            Dim request As Net.WebRequest = Net.WebRequest.Create(url_page_info)
+            request.Method = "GET"
+            request.Credentials = New Net.NetworkCredential(username, password)
+            Dim response As Net.WebResponse = request.GetResponse()
+            If Not page_info = "" Or i = 0 Then
+                Using dataStream As IO.Stream = response.GetResponseStream()
+                    Dim reader As IO.StreamReader = New IO.StreamReader(dataStream)
+                    Dim responseFromServer As String = reader.ReadToEnd()
+                    Dim json As Newtonsoft.Json.Linq.JObject = Newtonsoft.Json.Linq.JObject.Parse(responseFromServer)
+                    For Each row In json("discount_codes").ToList
+                        Dim disc_code As String = ""
+                        disc_code = addSlashes(row("code").ToString)
+                        Dim query_cek As String = "SELECT * FROM tb_ol_promo_collection_disc_code c WHERE c.id_ol_promo_collection='" + id_promo + "' AND c.disc_code='" + disc_code + "' "
+                        Dim data_cek As DataTable = execute_query(query_cek, -1, True, "", "", "", "")
+                        If data_cek.Rows.Count <= 0 Then
+                            'Console.WriteLine(disc_code)
+                            Dim query_insert_diskon As String = "INSERT INTO tb_ol_promo_collection_disc_code(id_ol_promo_collection, disc_code, sync_date, sync_by, is_additional) VALUES('" + id_promo + "', '" + disc_code + "', NOW(), '" + id_user + "', '1'); "
+                            execute_non_query(query_insert_diskon, True, "", "", "", "")
+                        End If
+                    Next
+                End Using
+                is_loop = True
+            Else
+                is_loop = False
+            End If
+            i += 1
+
+            'get next page
+            Dim link As String() = response.Headers.GetValues(16)
+            Dim j1 As Integer = link(link.Count - 1).LastIndexOf(">; rel=""next")
+            Dim j2 As Integer = link(link.Count - 1).LastIndexOf("o=") + 2
+            If j1 > 0 And j2 > 0 Then
+                page_info = link(link.Count - 1).Substring(0, j1).Substring(j2)
+            Else
+                page_info = ""
+            End If
+
+            response.Close()
+        End While
     End Sub
 End Class

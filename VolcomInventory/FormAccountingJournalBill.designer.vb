@@ -72,6 +72,12 @@ Partial Class FormAccountingJournalBill
         Me.BCancel = New DevExpress.XtraEditors.SimpleButton()
         Me.BSave = New DevExpress.XtraEditors.SimpleButton()
         Me.PCGeneralheader = New DevExpress.XtraEditors.PanelControl()
+        Me.SLEUnit = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GridView6 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn25 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn26 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn27 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.LabelControl16 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl5 = New DevExpress.XtraEditors.LabelControl()
         Me.DERefDate = New DevExpress.XtraEditors.DateEdit()
         Me.TEDate = New DevExpress.XtraEditors.DateEdit()
@@ -109,6 +115,8 @@ Partial Class FormAccountingJournalBill
         Me.PanelControl2.SuspendLayout()
         CType(Me.PCGeneralheader, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PCGeneralheader.SuspendLayout()
+        CType(Me.SLEUnit.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView6, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DERefDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DERefDate.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -164,11 +172,11 @@ Partial Class FormAccountingJournalBill
         'GCJournalDet
         '
         Me.GCJournalDet.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GCJournalDet.Location = New System.Drawing.Point(0, 134)
+        Me.GCJournalDet.Location = New System.Drawing.Point(0, 141)
         Me.GCJournalDet.MainView = Me.GVJournalDet
         Me.GCJournalDet.Name = "GCJournalDet"
         Me.GCJournalDet.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemTextEdit1, Me.RepositoryItemTextEdit2, Me.RepositoryItemComboBox1, Me.RSLEStatusOpen, Me.RISLEVendor})
-        Me.GCJournalDet.Size = New System.Drawing.Size(826, 266)
+        Me.GCJournalDet.Size = New System.Drawing.Size(826, 259)
         Me.GCJournalDet.TabIndex = 16
         Me.GCJournalDet.TabStop = False
         Me.GCJournalDet.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVJournalDet})
@@ -437,7 +445,7 @@ Partial Class FormAccountingJournalBill
         'LEReportStatus
         '
         Me.LEReportStatus.Enabled = False
-        Me.LEReportStatus.Location = New System.Drawing.Point(117, 5)
+        Me.LEReportStatus.Location = New System.Drawing.Point(59, 18)
         Me.LEReportStatus.Name = "LEReportStatus"
         Me.LEReportStatus.Properties.Appearance.Options.UseTextOptions = True
         Me.LEReportStatus.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near
@@ -445,12 +453,12 @@ Partial Class FormAccountingJournalBill
         Me.LEReportStatus.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_report_status", "ID Report Status", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("report_status", "Report Status")})
         Me.LEReportStatus.Properties.NullText = ""
         Me.LEReportStatus.Properties.ShowFooter = False
-        Me.LEReportStatus.Size = New System.Drawing.Size(196, 20)
+        Me.LEReportStatus.Size = New System.Drawing.Size(254, 20)
         Me.LEReportStatus.TabIndex = 7
         '
         'LabelControl21
         '
-        Me.LabelControl21.Location = New System.Drawing.Point(73, 8)
+        Me.LabelControl21.Location = New System.Drawing.Point(12, 21)
         Me.LabelControl21.Name = "LabelControl21"
         Me.LabelControl21.Size = New System.Drawing.Size(31, 13)
         Me.LabelControl21.TabIndex = 144
@@ -480,7 +488,7 @@ Partial Class FormAccountingJournalBill
         Me.PCButton.Dock = System.Windows.Forms.DockStyle.Top
         Me.PCButton.Location = New System.Drawing.Point(0, 98)
         Me.PCButton.Name = "PCButton"
-        Me.PCButton.Size = New System.Drawing.Size(826, 36)
+        Me.PCButton.Size = New System.Drawing.Size(826, 43)
         Me.PCButton.TabIndex = 17
         '
         'BDelMat
@@ -490,7 +498,7 @@ Partial Class FormAccountingJournalBill
         Me.BDelMat.ImageList = Me.LargeImageCollection
         Me.BDelMat.Location = New System.Drawing.Point(513, 2)
         Me.BDelMat.Name = "BDelMat"
-        Me.BDelMat.Size = New System.Drawing.Size(91, 32)
+        Me.BDelMat.Size = New System.Drawing.Size(91, 39)
         Me.BDelMat.TabIndex = 16
         Me.BDelMat.TabStop = False
         Me.BDelMat.Text = "Delete (-)"
@@ -502,7 +510,7 @@ Partial Class FormAccountingJournalBill
         Me.BAddMat.ImageList = Me.LargeImageCollection
         Me.BAddMat.Location = New System.Drawing.Point(604, 2)
         Me.BAddMat.Name = "BAddMat"
-        Me.BAddMat.Size = New System.Drawing.Size(85, 32)
+        Me.BAddMat.Size = New System.Drawing.Size(85, 39)
         Me.BAddMat.TabIndex = 17
         Me.BAddMat.TabStop = False
         Me.BAddMat.Text = "Add (+)"
@@ -515,7 +523,7 @@ Partial Class FormAccountingJournalBill
         Me.BtnRef.ImageList = Me.LargeImageCollection
         Me.BtnRef.Location = New System.Drawing.Point(689, 2)
         Me.BtnRef.Name = "BtnRef"
-        Me.BtnRef.Size = New System.Drawing.Size(135, 32)
+        Me.BtnRef.Size = New System.Drawing.Size(135, 39)
         Me.BtnRef.TabIndex = 19
         Me.BtnRef.Text = "Browse Reference"
         '
@@ -580,6 +588,8 @@ Partial Class FormAccountingJournalBill
         '
         'PCGeneralheader
         '
+        Me.PCGeneralheader.Controls.Add(Me.SLEUnit)
+        Me.PCGeneralheader.Controls.Add(Me.LabelControl16)
         Me.PCGeneralheader.Controls.Add(Me.LabelControl5)
         Me.PCGeneralheader.Controls.Add(Me.DERefDate)
         Me.PCGeneralheader.Controls.Add(Me.TEDate)
@@ -597,6 +607,60 @@ Partial Class FormAccountingJournalBill
         Me.PCGeneralheader.Name = "PCGeneralheader"
         Me.PCGeneralheader.Size = New System.Drawing.Size(826, 98)
         Me.PCGeneralheader.TabIndex = 13
+        '
+        'SLEUnit
+        '
+        Me.SLEUnit.Location = New System.Drawing.Point(90, 38)
+        Me.SLEUnit.Name = "SLEUnit"
+        Me.SLEUnit.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLEUnit.Properties.View = Me.GridView6
+        Me.SLEUnit.Size = New System.Drawing.Size(252, 20)
+        Me.SLEUnit.TabIndex = 160
+        '
+        'GridView6
+        '
+        Me.GridView6.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn25, Me.GridColumn26, Me.GridColumn27})
+        Me.GridView6.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView6.Name = "GridView6"
+        Me.GridView6.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView6.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn25
+        '
+        Me.GridColumn25.Caption = "id_coa_tag"
+        Me.GridColumn25.FieldName = "id_comp"
+        Me.GridColumn25.Name = "GridColumn25"
+        '
+        'GridColumn26
+        '
+        Me.GridColumn26.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumn26.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumn26.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumn26.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumn26.Caption = "Number"
+        Me.GridColumn26.FieldName = "tag_code"
+        Me.GridColumn26.Name = "GridColumn26"
+        Me.GridColumn26.Visible = True
+        Me.GridColumn26.VisibleIndex = 0
+        Me.GridColumn26.Width = 281
+        '
+        'GridColumn27
+        '
+        Me.GridColumn27.Caption = "Unit"
+        Me.GridColumn27.FieldName = "tag_description"
+        Me.GridColumn27.Name = "GridColumn27"
+        Me.GridColumn27.Visible = True
+        Me.GridColumn27.VisibleIndex = 1
+        Me.GridColumn27.Width = 1351
+        '
+        'LabelControl16
+        '
+        Me.LabelControl16.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl16.Location = New System.Drawing.Point(12, 41)
+        Me.LabelControl16.Name = "LabelControl16"
+        Me.LabelControl16.Size = New System.Drawing.Size(19, 13)
+        Me.LabelControl16.TabIndex = 159
+        Me.LabelControl16.Text = "Unit"
         '
         'LabelControl5
         '
@@ -649,29 +713,32 @@ Partial Class FormAccountingJournalBill
         'Blink
         '
         Me.Blink.ImageList = Me.LargeImageCollection
-        Me.Blink.Location = New System.Drawing.Point(284, 41)
+        Me.Blink.Location = New System.Drawing.Point(284, 63)
         Me.Blink.Name = "Blink"
         Me.Blink.Size = New System.Drawing.Size(58, 21)
         Me.Blink.TabIndex = 3
         Me.Blink.Text = "Link"
+        Me.Blink.Visible = False
         '
         'TEReffNumber
         '
         Me.TEReffNumber.EditValue = ""
-        Me.TEReffNumber.Location = New System.Drawing.Point(90, 42)
+        Me.TEReffNumber.Location = New System.Drawing.Point(90, 64)
         Me.TEReffNumber.Name = "TEReffNumber"
         Me.TEReffNumber.Properties.EditValueChangedDelay = 1
         Me.TEReffNumber.Size = New System.Drawing.Size(188, 20)
         Me.TEReffNumber.TabIndex = 2
+        Me.TEReffNumber.Visible = False
         '
         'LabelControl4
         '
         Me.LabelControl4.Appearance.Font = New System.Drawing.Font("Tahoma", 8.0!)
-        Me.LabelControl4.Location = New System.Drawing.Point(12, 45)
+        Me.LabelControl4.Location = New System.Drawing.Point(12, 67)
         Me.LabelControl4.Name = "LabelControl4"
         Me.LabelControl4.Size = New System.Drawing.Size(61, 13)
         Me.LabelControl4.TabIndex = 152
         Me.LabelControl4.Text = "Reff Number"
+        Me.LabelControl4.Visible = False
         '
         'LEBilling
         '
@@ -774,6 +841,8 @@ Partial Class FormAccountingJournalBill
         CType(Me.PCGeneralheader, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PCGeneralheader.ResumeLayout(False)
         Me.PCGeneralheader.PerformLayout()
+        CType(Me.SLEUnit.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView6, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DERefDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DERefDate.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TEDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -848,4 +917,10 @@ Partial Class FormAccountingJournalBill
     Friend WithEvents GridColumnNumberReff As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn9 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn14 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents SLEUnit As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents GridView6 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn25 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn26 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn27 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents LabelControl16 As DevExpress.XtraEditors.LabelControl
 End Class

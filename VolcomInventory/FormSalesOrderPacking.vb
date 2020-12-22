@@ -72,6 +72,19 @@
             ElseIf id_pop_up = "4" Then
                 Cursor = Cursors.WaitCursor
                 Dim final_comment As String = addSlashes(MENote.Text)
+                Dim type_restock As String = FormSalesOrderSvcLevel.LETypeRestockTOO.EditValue.ToString
+                Dim ord As New ClassSalesOrder()
+                'oos action
+                If type_restock = "2" Then
+                    Dim is_processed_order As String = get_setup_field("is_processed_order")
+                    If is_processed_order = "1" Then
+                        stopCustom("Sync still running")
+                        Cursor = Cursors.Default
+                        Exit Sub
+                    Else
+                        ord.setProceccedWebOrder("1")
+                    End If
+                End If
                 Dim qry As String = ""
                 Dim qry_stt As String = ""
                 For i As Integer = 0 To ((FormSalesOrderSvcLevel.GVSalesOrder.RowCount - 1) - GetGroupRowCount(FormSalesOrderSvcLevel.GVSalesOrder))
@@ -96,6 +109,31 @@
 
                     Dim query_upd As String = "UPDATE tb_sales_order SET id_prepare_status='" + SLEPackingStatus.EditValue.ToString + "', final_comment='" + final_comment + "', final_date=NOW(), final_by='" + id_user + "' WHERE (" + qry_stt + ") "
                     execute_non_query(query_upd, True, "", "", "", "")
+
+                    'oos action
+                    If type_restock = "2" Then
+                        If Not FormMain.SplashScreenManager1.IsSplashFormVisible Then
+                            FormMain.SplashScreenManager1.ShowWaitForm()
+                        End If
+                        For o As Integer = 0 To ((FormSalesOrderSvcLevel.GVSalesOrder.RowCount - 1) - GetGroupRowCount(FormSalesOrderSvcLevel.GVSalesOrder))
+                            Dim id_oos As String = FormSalesOrderSvcLevel.GVSalesOrder.GetRowCellValue(o, "id_ol_store_oos").ToString
+                            Dim qoss As String = "SELECT oos.id_ol_store_oos, oos.id_comp_group, oos.id_order, cg.id_api_type
+                            FROM tb_ol_store_oos oos 
+                            INNER JOIN tb_m_comp_group cg ON cg.id_comp_group = oos.id_comp_group
+                            WHERE oos.id_ol_store_oos='" + id_oos + "' "
+                            Dim doss As DataTable = execute_query(qoss, -1, True, "", "", "", "")
+                            If doss.Rows.Count > 0 Then
+                                Dim id_comp_group As String = doss.Rows(0)("id_comp_group").ToString
+                                Dim id_api_type As String = doss.Rows(0)("id_api_type").ToString
+                                Dim id_web_order As String = doss.Rows(0)("id_order").ToString
+                                'finalisasi restock
+                                Dim oos As New ClassOLStore()
+                                oos.oosRestockChecking(id_web_order, id_comp_group, id_oos, id_api_type)
+                            End If
+                        Next
+                        ord.setProceccedWebOrder("2")
+                        FormMain.SplashScreenManager1.CloseWaitForm()
+                    End If
                     FormSalesOrderSvcLevel.viewSalesOrder()
                     Close()
                 End If

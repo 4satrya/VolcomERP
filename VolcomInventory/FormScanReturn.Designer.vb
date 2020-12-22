@@ -63,6 +63,27 @@ Partial Class FormScanReturn
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
         Me.DEStartBAP = New DevExpress.XtraEditors.DateEdit()
+        Me.XTPAllScan = New DevExpress.XtraTab.XtraTabPage()
+        Me.PanelControl3 = New DevExpress.XtraEditors.PanelControl()
+        Me.BViewScan = New DevExpress.XtraEditors.SimpleButton()
+        Me.DEUntilScan = New DevExpress.XtraEditors.DateEdit()
+        Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelControl6 = New DevExpress.XtraEditors.LabelControl()
+        Me.DEStartScan = New DevExpress.XtraEditors.DateEdit()
+        Me.GCListProduct = New DevExpress.XtraGrid.GridControl()
+        Me.GVListProduct = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn23 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn24 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn25 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn26 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn27 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn28 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn29 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn30 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn31 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn32 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RepositoryItemMemoEdit3 = New DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit()
+        Me.BPrintScan = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.DEUntil.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -85,6 +106,16 @@ Partial Class FormScanReturn
         CType(Me.DEUntilBAP.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEStartBAP.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEStartBAP.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.XTPAllScan.SuspendLayout()
+        CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelControl3.SuspendLayout()
+        CType(Me.DEUntilScan.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEUntilScan.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEStartScan.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DEStartScan.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GCListProduct, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GVListProduct, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemMemoEdit3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControl1
@@ -347,7 +378,7 @@ Partial Class FormScanReturn
         Me.XTCScanReturn.SelectedTabPage = Me.XTPScanReturn
         Me.XTCScanReturn.Size = New System.Drawing.Size(903, 513)
         Me.XTCScanReturn.TabIndex = 3
-        Me.XTCScanReturn.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPScanReturn, Me.XTPBAP})
+        Me.XTCScanReturn.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPScanReturn, Me.XTPBAP, Me.XTPAllScan})
         '
         'XTPScanReturn
         '
@@ -525,6 +556,205 @@ Partial Class FormScanReturn
         Me.DEStartBAP.Size = New System.Drawing.Size(136, 20)
         Me.DEStartBAP.TabIndex = 8920
         '
+        'XTPAllScan
+        '
+        Me.XTPAllScan.Controls.Add(Me.GCListProduct)
+        Me.XTPAllScan.Controls.Add(Me.PanelControl3)
+        Me.XTPAllScan.Name = "XTPAllScan"
+        Me.XTPAllScan.Size = New System.Drawing.Size(897, 485)
+        Me.XTPAllScan.Text = "All Scan"
+        '
+        'PanelControl3
+        '
+        Me.PanelControl3.Controls.Add(Me.BPrintScan)
+        Me.PanelControl3.Controls.Add(Me.BViewScan)
+        Me.PanelControl3.Controls.Add(Me.DEUntilScan)
+        Me.PanelControl3.Controls.Add(Me.LabelControl3)
+        Me.PanelControl3.Controls.Add(Me.LabelControl6)
+        Me.PanelControl3.Controls.Add(Me.DEStartScan)
+        Me.PanelControl3.Dock = System.Windows.Forms.DockStyle.Top
+        Me.PanelControl3.Location = New System.Drawing.Point(0, 0)
+        Me.PanelControl3.Name = "PanelControl3"
+        Me.PanelControl3.Size = New System.Drawing.Size(897, 45)
+        Me.PanelControl3.TabIndex = 1
+        '
+        'BViewScan
+        '
+        Me.BViewScan.Location = New System.Drawing.Point(363, 10)
+        Me.BViewScan.Name = "BViewScan"
+        Me.BViewScan.Size = New System.Drawing.Size(49, 23)
+        Me.BViewScan.TabIndex = 8924
+        Me.BViewScan.Text = "view"
+        '
+        'DEUntilScan
+        '
+        Me.DEUntilScan.EditValue = Nothing
+        Me.DEUntilScan.Location = New System.Drawing.Point(209, 12)
+        Me.DEUntilScan.Name = "DEUntilScan"
+        Me.DEUntilScan.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEUntilScan.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEUntilScan.Properties.DisplayFormat.FormatString = "dd MMMM yyyy"
+        Me.DEUntilScan.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DEUntilScan.Properties.EditFormat.FormatString = "dd MMMM yyyy"
+        Me.DEUntilScan.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DEUntilScan.Properties.Mask.EditMask = "dd MMMM yyyy"
+        Me.DEUntilScan.Size = New System.Drawing.Size(148, 20)
+        Me.DEUntilScan.TabIndex = 8923
+        '
+        'LabelControl3
+        '
+        Me.LabelControl3.Location = New System.Drawing.Point(182, 15)
+        Me.LabelControl3.Name = "LabelControl3"
+        Me.LabelControl3.Size = New System.Drawing.Size(21, 13)
+        Me.LabelControl3.TabIndex = 8922
+        Me.LabelControl3.Text = "Until"
+        '
+        'LabelControl6
+        '
+        Me.LabelControl6.Location = New System.Drawing.Point(11, 15)
+        Me.LabelControl6.Name = "LabelControl6"
+        Me.LabelControl6.Size = New System.Drawing.Size(23, 13)
+        Me.LabelControl6.TabIndex = 8921
+        Me.LabelControl6.Text = "Date"
+        '
+        'DEStartScan
+        '
+        Me.DEStartScan.EditValue = Nothing
+        Me.DEStartScan.Location = New System.Drawing.Point(40, 12)
+        Me.DEStartScan.Name = "DEStartScan"
+        Me.DEStartScan.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEStartScan.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.DEStartScan.Properties.DisplayFormat.FormatString = "dd MMMM yyyy"
+        Me.DEStartScan.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DEStartScan.Properties.EditFormat.FormatString = "dd MMMM yyyy"
+        Me.DEStartScan.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.DEStartScan.Properties.Mask.EditMask = "dd MMMM yyyy"
+        Me.DEStartScan.Size = New System.Drawing.Size(136, 20)
+        Me.DEStartScan.TabIndex = 8920
+        '
+        'GCListProduct
+        '
+        Me.GCListProduct.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GCListProduct.Location = New System.Drawing.Point(0, 45)
+        Me.GCListProduct.MainView = Me.GVListProduct
+        Me.GCListProduct.Name = "GCListProduct"
+        Me.GCListProduct.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemMemoEdit3})
+        Me.GCListProduct.Size = New System.Drawing.Size(897, 440)
+        Me.GCListProduct.TabIndex = 4
+        Me.GCListProduct.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVListProduct})
+        '
+        'GVListProduct
+        '
+        Me.GVListProduct.Appearance.FooterPanel.Font = New System.Drawing.Font("Tahoma", 11.0!)
+        Me.GVListProduct.Appearance.FooterPanel.Options.UseFont = True
+        Me.GVListProduct.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn23, Me.GridColumn24, Me.GridColumn25, Me.GridColumn30, Me.GridColumn31, Me.GridColumn32, Me.GridColumn26, Me.GridColumn27, Me.GridColumn28, Me.GridColumn29})
+        Me.GVListProduct.GridControl = Me.GCListProduct
+        Me.GVListProduct.Name = "GVListProduct"
+        Me.GVListProduct.OptionsBehavior.Editable = False
+        Me.GVListProduct.OptionsBehavior.ReadOnly = True
+        Me.GVListProduct.OptionsView.ColumnAutoWidth = False
+        Me.GVListProduct.OptionsView.RowAutoHeight = True
+        Me.GVListProduct.OptionsView.ShowFooter = True
+        Me.GVListProduct.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn23
+        '
+        Me.GridColumn23.Caption = "ID"
+        Me.GridColumn23.FieldName = "id_scan_return_det"
+        Me.GridColumn23.Name = "GridColumn23"
+        '
+        'GridColumn24
+        '
+        Me.GridColumn24.Caption = "Type"
+        Me.GridColumn24.FieldName = "type"
+        Me.GridColumn24.Name = "GridColumn24"
+        '
+        'GridColumn25
+        '
+        Me.GridColumn25.Caption = "ID Product"
+        Me.GridColumn25.FieldName = "id_product"
+        Me.GridColumn25.Name = "GridColumn25"
+        '
+        'GridColumn26
+        '
+        Me.GridColumn26.Caption = "Code"
+        Me.GridColumn26.FieldName = "product_full_code"
+        Me.GridColumn26.Name = "GridColumn26"
+        Me.GridColumn26.Visible = True
+        Me.GridColumn26.VisibleIndex = 3
+        Me.GridColumn26.Width = 173
+        '
+        'GridColumn27
+        '
+        Me.GridColumn27.Caption = "Product"
+        Me.GridColumn27.FieldName = "product_display_name"
+        Me.GridColumn27.Name = "GridColumn27"
+        Me.GridColumn27.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom, "product_display_name", "Total Qty Scan")})
+        Me.GridColumn27.Visible = True
+        Me.GridColumn27.VisibleIndex = 4
+        Me.GridColumn27.Width = 241
+        '
+        'GridColumn28
+        '
+        Me.GridColumn28.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumn28.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumn28.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumn28.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumn28.Caption = "Size"
+        Me.GridColumn28.FieldName = "size"
+        Me.GridColumn28.Name = "GridColumn28"
+        Me.GridColumn28.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Count, "size", "{0}")})
+        Me.GridColumn28.Visible = True
+        Me.GridColumn28.VisibleIndex = 5
+        Me.GridColumn28.Width = 59
+        '
+        'GridColumn29
+        '
+        Me.GridColumn29.Caption = "Note"
+        Me.GridColumn29.FieldName = "notes"
+        Me.GridColumn29.Name = "GridColumn29"
+        Me.GridColumn29.Visible = True
+        Me.GridColumn29.VisibleIndex = 6
+        Me.GridColumn29.Width = 226
+        '
+        'GridColumn30
+        '
+        Me.GridColumn30.Caption = "List Store"
+        Me.GridColumn30.ColumnEdit = Me.RepositoryItemMemoEdit3
+        Me.GridColumn30.FieldName = "list_store"
+        Me.GridColumn30.Name = "GridColumn30"
+        Me.GridColumn30.Visible = True
+        Me.GridColumn30.VisibleIndex = 0
+        Me.GridColumn30.Width = 180
+        '
+        'GridColumn31
+        '
+        Me.GridColumn31.Caption = "Return Note"
+        Me.GridColumn31.FieldName = "number_return_note"
+        Me.GridColumn31.Name = "GridColumn31"
+        Me.GridColumn31.Visible = True
+        Me.GridColumn31.VisibleIndex = 1
+        '
+        'GridColumn32
+        '
+        Me.GridColumn32.Caption = "Return Label"
+        Me.GridColumn32.FieldName = "label_number"
+        Me.GridColumn32.Name = "GridColumn32"
+        Me.GridColumn32.Visible = True
+        Me.GridColumn32.VisibleIndex = 2
+        '
+        'RepositoryItemMemoEdit3
+        '
+        Me.RepositoryItemMemoEdit3.Name = "RepositoryItemMemoEdit3"
+        '
+        'BPrintScan
+        '
+        Me.BPrintScan.Location = New System.Drawing.Point(418, 10)
+        Me.BPrintScan.Name = "BPrintScan"
+        Me.BPrintScan.Size = New System.Drawing.Size(89, 23)
+        Me.BPrintScan.TabIndex = 8925
+        Me.BPrintScan.Text = "export excel"
+        '
         'FormScanReturn
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -561,6 +791,17 @@ Partial Class FormScanReturn
         CType(Me.DEUntilBAP.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEStartBAP.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEStartBAP.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.XTPAllScan.ResumeLayout(False)
+        CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelControl3.ResumeLayout(False)
+        Me.PanelControl3.PerformLayout()
+        CType(Me.DEUntilScan.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEUntilScan.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEStartScan.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DEStartScan.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GCListProduct, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GVListProduct, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemMemoEdit3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -609,4 +850,25 @@ Partial Class FormScanReturn
     Friend WithEvents GridColumn10 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn22 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents BPrintSummary As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents XTPAllScan As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents PanelControl3 As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents BViewScan As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents DEUntilScan As DevExpress.XtraEditors.DateEdit
+    Friend WithEvents LabelControl3 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents LabelControl6 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents DEStartScan As DevExpress.XtraEditors.DateEdit
+    Friend WithEvents GCListProduct As DevExpress.XtraGrid.GridControl
+    Friend WithEvents GVListProduct As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn23 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn24 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn25 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn26 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn27 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn28 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn29 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn30 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn31 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn32 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents RepositoryItemMemoEdit3 As DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit
+    Friend WithEvents BPrintScan As DevExpress.XtraEditors.SimpleButton
 End Class

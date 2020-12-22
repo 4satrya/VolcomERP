@@ -21,7 +21,15 @@ Partial Class FormInboundAWB
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormInboundAWB))
-        Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
+        Me.PCHeader = New DevExpress.XtraEditors.PanelControl()
+        Me.SLERate = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GridView2 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn19 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn21 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn22 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
         Me.SLEDelType = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn13 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -53,6 +61,7 @@ Partial Class FormInboundAWB
         Me.GCKoli = New DevExpress.XtraGrid.GridControl()
         Me.GVKoli = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn23 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -66,18 +75,14 @@ Partial Class FormInboundAWB
         Me.BDelKoli = New DevExpress.XtraEditors.SimpleButton()
         Me.BAddKoli = New DevExpress.XtraEditors.SimpleButton()
         Me.PanelControl4 = New DevExpress.XtraEditors.PanelControl()
+        Me.BEditAWB = New DevExpress.XtraEditors.SimpleButton()
+        Me.BPrintAWB = New DevExpress.XtraEditors.SimpleButton()
         Me.BNext = New DevExpress.XtraEditors.SimpleButton()
         Me.BSubmitAwb = New DevExpress.XtraEditors.SimpleButton()
-        Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
-        Me.SLERate = New DevExpress.XtraEditors.SearchLookUpEdit()
-        Me.GridView2 = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn19 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn21 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn22 = New DevExpress.XtraGrid.Columns.GridColumn()
-        CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.PanelControl1.SuspendLayout()
+        CType(Me.PCHeader, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PCHeader.SuspendLayout()
+        CType(Me.SLERate.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SLEDelType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SLEVendor.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -100,23 +105,88 @@ Partial Class FormInboundAWB
         Me.PanelControl2.SuspendLayout()
         CType(Me.PanelControl4, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl4.SuspendLayout()
-        CType(Me.SLERate.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'PanelControl1
+        'PCHeader
         '
-        Me.PanelControl1.Controls.Add(Me.SLERate)
-        Me.PanelControl1.Controls.Add(Me.LabelControl4)
-        Me.PanelControl1.Controls.Add(Me.SLEDelType)
-        Me.PanelControl1.Controls.Add(Me.LabelControl3)
-        Me.PanelControl1.Controls.Add(Me.SLEVendor)
-        Me.PanelControl1.Controls.Add(Me.LabelControl2)
-        Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Top
-        Me.PanelControl1.Location = New System.Drawing.Point(0, 0)
-        Me.PanelControl1.Name = "PanelControl1"
-        Me.PanelControl1.Size = New System.Drawing.Size(990, 70)
-        Me.PanelControl1.TabIndex = 0
+        Me.PCHeader.Controls.Add(Me.SLERate)
+        Me.PCHeader.Controls.Add(Me.LabelControl4)
+        Me.PCHeader.Controls.Add(Me.SLEDelType)
+        Me.PCHeader.Controls.Add(Me.LabelControl3)
+        Me.PCHeader.Controls.Add(Me.SLEVendor)
+        Me.PCHeader.Controls.Add(Me.LabelControl2)
+        Me.PCHeader.Dock = System.Windows.Forms.DockStyle.Top
+        Me.PCHeader.Location = New System.Drawing.Point(0, 0)
+        Me.PCHeader.Name = "PCHeader"
+        Me.PCHeader.Size = New System.Drawing.Size(990, 70)
+        Me.PCHeader.TabIndex = 0
+        '
+        'SLERate
+        '
+        Me.SLERate.Location = New System.Drawing.Point(339, 38)
+        Me.SLERate.Name = "SLERate"
+        Me.SLERate.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLERate.Properties.View = Me.GridView2
+        Me.SLERate.Size = New System.Drawing.Size(190, 20)
+        Me.SLERate.TabIndex = 7
+        '
+        'GridView2
+        '
+        Me.GridView2.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn3, Me.GridColumn19, Me.GridColumn21, Me.GridColumn22})
+        Me.GridView2.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView2.Name = "GridView2"
+        Me.GridView2.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView2.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn1
+        '
+        Me.GridColumn1.Caption = "ID"
+        Me.GridColumn1.FieldName = "id_3pl_rate"
+        Me.GridColumn1.Name = "GridColumn1"
+        '
+        'GridColumn3
+        '
+        Me.GridColumn3.Caption = "Sub District"
+        Me.GridColumn3.FieldName = "sub_district"
+        Me.GridColumn3.Name = "GridColumn3"
+        Me.GridColumn3.Visible = True
+        Me.GridColumn3.VisibleIndex = 0
+        '
+        'GridColumn19
+        '
+        Me.GridColumn19.Caption = "Rate"
+        Me.GridColumn19.DisplayFormat.FormatString = "N0"
+        Me.GridColumn19.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn19.FieldName = "cargo_rate"
+        Me.GridColumn19.Name = "GridColumn19"
+        Me.GridColumn19.Visible = True
+        Me.GridColumn19.VisibleIndex = 1
+        '
+        'GridColumn21
+        '
+        Me.GridColumn21.Caption = "Lead Time (days)"
+        Me.GridColumn21.FieldName = "cargo_lead_time"
+        Me.GridColumn21.Name = "GridColumn21"
+        Me.GridColumn21.Visible = True
+        Me.GridColumn21.VisibleIndex = 2
+        '
+        'GridColumn22
+        '
+        Me.GridColumn22.Caption = "Minimum Weight"
+        Me.GridColumn22.DisplayFormat.FormatString = "N0"
+        Me.GridColumn22.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn22.FieldName = "cargo_min_weight"
+        Me.GridColumn22.Name = "GridColumn22"
+        Me.GridColumn22.Visible = True
+        Me.GridColumn22.VisibleIndex = 3
+        '
+        'LabelControl4
+        '
+        Me.LabelControl4.Location = New System.Drawing.Point(308, 41)
+        Me.LabelControl4.Name = "LabelControl4"
+        Me.LabelControl4.Size = New System.Drawing.Size(23, 13)
+        Me.LabelControl4.TabIndex = 6
+        Me.LabelControl4.Text = "Rate"
         '
         'SLEDelType
         '
@@ -366,7 +436,7 @@ Partial Class FormInboundAWB
         '
         'GVKoli
         '
-        Me.GVKoli.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn4, Me.GridColumn5, Me.GridColumn6, Me.GridColumn7, Me.GridColumn8, Me.GridColumn9, Me.GridColumn10, Me.GridColumn12, Me.GridColumn11})
+        Me.GVKoli.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn4, Me.GridColumn23, Me.GridColumn5, Me.GridColumn6, Me.GridColumn7, Me.GridColumn8, Me.GridColumn9, Me.GridColumn10, Me.GridColumn12, Me.GridColumn11})
         Me.GVKoli.GridControl = Me.GCKoli
         Me.GVKoli.Name = "GVKoli"
         Me.GVKoli.OptionsView.ShowGroupPanel = False
@@ -377,14 +447,27 @@ Partial Class FormInboundAWB
         Me.GridColumn4.FieldName = "id_inbound_koli"
         Me.GridColumn4.Name = "GridColumn4"
         '
+        'GridColumn23
+        '
+        Me.GridColumn23.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumn23.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumn23.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumn23.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumn23.Caption = "No"
+        Me.GridColumn23.FieldName = "no"
+        Me.GridColumn23.Name = "GridColumn23"
+        Me.GridColumn23.Visible = True
+        Me.GridColumn23.VisibleIndex = 0
+        Me.GridColumn23.Width = 100
+        '
         'GridColumn5
         '
-        Me.GridColumn5.Caption = "Description"
+        Me.GridColumn5.Caption = "Remark"
         Me.GridColumn5.FieldName = "koli_notes"
         Me.GridColumn5.Name = "GridColumn5"
         Me.GridColumn5.Visible = True
-        Me.GridColumn5.VisibleIndex = 0
-        Me.GridColumn5.Width = 433
+        Me.GridColumn5.VisibleIndex = 7
+        Me.GridColumn5.Width = 313
         '
         'GridColumn6
         '
@@ -394,8 +477,8 @@ Partial Class FormInboundAWB
         Me.GridColumn6.FieldName = "panjang"
         Me.GridColumn6.Name = "GridColumn6"
         Me.GridColumn6.Visible = True
-        Me.GridColumn6.VisibleIndex = 1
-        Me.GridColumn6.Width = 203
+        Me.GridColumn6.VisibleIndex = 2
+        Me.GridColumn6.Width = 200
         '
         'GridColumn7
         '
@@ -405,8 +488,8 @@ Partial Class FormInboundAWB
         Me.GridColumn7.FieldName = "lebar"
         Me.GridColumn7.Name = "GridColumn7"
         Me.GridColumn7.Visible = True
-        Me.GridColumn7.VisibleIndex = 2
-        Me.GridColumn7.Width = 219
+        Me.GridColumn7.VisibleIndex = 3
+        Me.GridColumn7.Width = 216
         '
         'GridColumn8
         '
@@ -416,8 +499,8 @@ Partial Class FormInboundAWB
         Me.GridColumn8.FieldName = "tinggi"
         Me.GridColumn8.Name = "GridColumn8"
         Me.GridColumn8.Visible = True
-        Me.GridColumn8.VisibleIndex = 3
-        Me.GridColumn8.Width = 219
+        Me.GridColumn8.VisibleIndex = 4
+        Me.GridColumn8.Width = 216
         '
         'GridColumn9
         '
@@ -427,8 +510,8 @@ Partial Class FormInboundAWB
         Me.GridColumn9.FieldName = "berat"
         Me.GridColumn9.Name = "GridColumn9"
         Me.GridColumn9.Visible = True
-        Me.GridColumn9.VisibleIndex = 6
-        Me.GridColumn9.Width = 215
+        Me.GridColumn9.VisibleIndex = 1
+        Me.GridColumn9.Width = 213
         '
         'GridColumn10
         '
@@ -442,8 +525,8 @@ Partial Class FormInboundAWB
         Me.GridColumn10.UnboundExpression = "[lebar] * [panjang] * [tinggi] / [divide_by]"
         Me.GridColumn10.UnboundType = DevExpress.Data.UnboundColumnType.[Decimal]
         Me.GridColumn10.Visible = True
-        Me.GridColumn10.VisibleIndex = 5
-        Me.GridColumn10.Width = 251
+        Me.GridColumn10.VisibleIndex = 6
+        Me.GridColumn10.Width = 265
         '
         'GridColumn12
         '
@@ -454,13 +537,15 @@ Partial Class FormInboundAWB
         'GridColumn11
         '
         Me.GridColumn11.Caption = "Pembagi"
+        Me.GridColumn11.DisplayFormat.FormatString = "N0"
+        Me.GridColumn11.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumn11.FieldName = "divide_by"
         Me.GridColumn11.Name = "GridColumn11"
         Me.GridColumn11.OptionsColumn.AllowEdit = False
         Me.GridColumn11.OptionsColumn.ReadOnly = True
         Me.GridColumn11.Visible = True
-        Me.GridColumn11.VisibleIndex = 4
-        Me.GridColumn11.Width = 92
+        Me.GridColumn11.VisibleIndex = 5
+        Me.GridColumn11.Width = 90
         '
         'BUpdateKoli
         '
@@ -508,6 +593,8 @@ Partial Class FormInboundAWB
         '
         'PanelControl4
         '
+        Me.PanelControl4.Controls.Add(Me.BEditAWB)
+        Me.PanelControl4.Controls.Add(Me.BPrintAWB)
         Me.PanelControl4.Controls.Add(Me.BNext)
         Me.PanelControl4.Controls.Add(Me.BSubmitAwb)
         Me.PanelControl4.Controls.Add(Me.LabelControl1)
@@ -517,6 +604,24 @@ Partial Class FormInboundAWB
         Me.PanelControl4.Name = "PanelControl4"
         Me.PanelControl4.Size = New System.Drawing.Size(990, 43)
         Me.PanelControl4.TabIndex = 3
+        '
+        'BEditAWB
+        '
+        Me.BEditAWB.Enabled = False
+        Me.BEditAWB.Location = New System.Drawing.Point(675, 9)
+        Me.BEditAWB.Name = "BEditAWB"
+        Me.BEditAWB.Size = New System.Drawing.Size(107, 23)
+        Me.BEditAWB.TabIndex = 6
+        Me.BEditAWB.Text = "Edit AWB"
+        '
+        'BPrintAWB
+        '
+        Me.BPrintAWB.Location = New System.Drawing.Point(914, 9)
+        Me.BPrintAWB.Name = "BPrintAWB"
+        Me.BPrintAWB.Size = New System.Drawing.Size(64, 23)
+        Me.BPrintAWB.TabIndex = 5
+        Me.BPrintAWB.Text = "Print AWB"
+        Me.BPrintAWB.Visible = False
         '
         'BNext
         '
@@ -535,73 +640,6 @@ Partial Class FormInboundAWB
         Me.BSubmitAwb.TabIndex = 3
         Me.BSubmitAwb.Text = "Submit"
         '
-        'LabelControl4
-        '
-        Me.LabelControl4.Location = New System.Drawing.Point(308, 41)
-        Me.LabelControl4.Name = "LabelControl4"
-        Me.LabelControl4.Size = New System.Drawing.Size(23, 13)
-        Me.LabelControl4.TabIndex = 6
-        Me.LabelControl4.Text = "Rate"
-        '
-        'SLERate
-        '
-        Me.SLERate.Location = New System.Drawing.Point(339, 38)
-        Me.SLERate.Name = "SLERate"
-        Me.SLERate.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.SLERate.Properties.View = Me.GridView2
-        Me.SLERate.Size = New System.Drawing.Size(190, 20)
-        Me.SLERate.TabIndex = 7
-        '
-        'GridView2
-        '
-        Me.GridView2.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn3, Me.GridColumn19, Me.GridColumn21, Me.GridColumn22})
-        Me.GridView2.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
-        Me.GridView2.Name = "GridView2"
-        Me.GridView2.OptionsSelection.EnableAppearanceFocusedCell = False
-        Me.GridView2.OptionsView.ShowGroupPanel = False
-        '
-        'GridColumn1
-        '
-        Me.GridColumn1.Caption = "ID"
-        Me.GridColumn1.FieldName = "id_3pl_rate"
-        Me.GridColumn1.Name = "GridColumn1"
-        '
-        'GridColumn3
-        '
-        Me.GridColumn3.Caption = "Sub District"
-        Me.GridColumn3.FieldName = "sub_district"
-        Me.GridColumn3.Name = "GridColumn3"
-        Me.GridColumn3.Visible = True
-        Me.GridColumn3.VisibleIndex = 0
-        '
-        'GridColumn19
-        '
-        Me.GridColumn19.Caption = "Rate"
-        Me.GridColumn19.DisplayFormat.FormatString = "N0"
-        Me.GridColumn19.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.GridColumn19.FieldName = "cargo_rate"
-        Me.GridColumn19.Name = "GridColumn19"
-        Me.GridColumn19.Visible = True
-        Me.GridColumn19.VisibleIndex = 1
-        '
-        'GridColumn21
-        '
-        Me.GridColumn21.Caption = "Lead Time (days)"
-        Me.GridColumn21.FieldName = "cargo_lead_time"
-        Me.GridColumn21.Name = "GridColumn21"
-        Me.GridColumn21.Visible = True
-        Me.GridColumn21.VisibleIndex = 2
-        '
-        'GridColumn22
-        '
-        Me.GridColumn22.Caption = "Minimum Weight"
-        Me.GridColumn22.DisplayFormat.FormatString = "N0"
-        Me.GridColumn22.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.GridColumn22.FieldName = "cargo_min_weight"
-        Me.GridColumn22.Name = "GridColumn22"
-        Me.GridColumn22.Visible = True
-        Me.GridColumn22.VisibleIndex = 3
-        '
         'FormInboundAWB
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -609,16 +647,18 @@ Partial Class FormInboundAWB
         Me.ClientSize = New System.Drawing.Size(990, 544)
         Me.Controls.Add(Me.XTCdetail)
         Me.Controls.Add(Me.PanelControl4)
-        Me.Controls.Add(Me.PanelControl1)
+        Me.Controls.Add(Me.PCHeader)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MinimizeBox = False
         Me.Name = "FormInboundAWB"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Inbound AWB"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
-        CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.PanelControl1.ResumeLayout(False)
-        Me.PanelControl1.PerformLayout()
+        CType(Me.PCHeader, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PCHeader.ResumeLayout(False)
+        Me.PCHeader.PerformLayout()
+        CType(Me.SLERate.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SLEDelType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SLEVendor.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -642,13 +682,11 @@ Partial Class FormInboundAWB
         CType(Me.PanelControl4, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl4.ResumeLayout(False)
         Me.PanelControl4.PerformLayout()
-        CType(Me.SLERate.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GridView2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
 
-    Friend WithEvents PanelControl1 As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents PCHeader As DevExpress.XtraEditors.PanelControl
     Friend WithEvents TEAwb As DevExpress.XtraEditors.TextEdit
     Friend WithEvents LabelControl2 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents LabelControl1 As DevExpress.XtraEditors.LabelControl
@@ -703,4 +741,7 @@ Partial Class FormInboundAWB
     Friend WithEvents LabelControl4 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents GridColumn21 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn22 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn23 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents BPrintAWB As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents BEditAWB As DevExpress.XtraEditors.SimpleButton
 End Class

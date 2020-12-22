@@ -45,8 +45,8 @@ Partial Class FormReportMarkCancel
         Me.BAddColumn = New DevExpress.XtraEditors.SimpleButton()
         Me.BUpdateValue = New DevExpress.XtraEditors.SimpleButton()
         Me.PCAddDel = New DevExpress.XtraEditors.PanelControl()
-        Me.LargeImageCollection = New DevExpress.Utils.ImageCollection(Me.components)
         Me.BDelete = New DevExpress.XtraEditors.SimpleButton()
+        Me.LargeImageCollection = New DevExpress.Utils.ImageCollection(Me.components)
         Me.BAdd = New DevExpress.XtraEditors.SimpleButton()
         Me.GroupControl3 = New DevExpress.XtraEditors.GroupControl()
         Me.PCPrint = New DevExpress.XtraEditors.PanelControl()
@@ -312,6 +312,17 @@ Partial Class FormReportMarkCancel
         Me.PCAddDel.Size = New System.Drawing.Size(695, 39)
         Me.PCAddDel.TabIndex = 1
         '
+        'BDelete
+        '
+        Me.BDelete.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BDelete.ImageIndex = 1
+        Me.BDelete.ImageList = Me.LargeImageCollection
+        Me.BDelete.Location = New System.Drawing.Point(503, 2)
+        Me.BDelete.Name = "BDelete"
+        Me.BDelete.Size = New System.Drawing.Size(93, 35)
+        Me.BDelete.TabIndex = 1
+        Me.BDelete.Text = "Delete"
+        '
         'LargeImageCollection
         '
         Me.LargeImageCollection.ImageSize = New System.Drawing.Size(24, 24)
@@ -332,17 +343,6 @@ Partial Class FormReportMarkCancel
         Me.LargeImageCollection.Images.SetKeyName(13, "folder-documents-icon.png")
         Me.LargeImageCollection.Images.SetKeyName(14, "mail_attachment.png")
         Me.LargeImageCollection.Images.SetKeyName(15, "attachment-icon.png")
-        '
-        'BDelete
-        '
-        Me.BDelete.Dock = System.Windows.Forms.DockStyle.Right
-        Me.BDelete.ImageIndex = 1
-        Me.BDelete.ImageList = Me.LargeImageCollection
-        Me.BDelete.Location = New System.Drawing.Point(503, 2)
-        Me.BDelete.Name = "BDelete"
-        Me.BDelete.Size = New System.Drawing.Size(93, 35)
-        Me.BDelete.TabIndex = 1
-        Me.BDelete.Text = "Delete"
         '
         'BAdd
         '

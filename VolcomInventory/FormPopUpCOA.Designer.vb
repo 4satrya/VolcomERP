@@ -115,7 +115,7 @@ Partial Class FormPopUpCOA
         Me.TreeList1.OptionsView.EnableAppearanceEvenRow = True
         Me.TreeList1.ParentFieldName = "id_acc_parent"
         Me.TreeList1.RootValue = "0"
-        Me.TreeList1.Size = New System.Drawing.Size(809, 275)
+        Me.TreeList1.Size = New System.Drawing.Size(809, 262)
         Me.TreeList1.TabIndex = 7
         '
         'id_acc
@@ -213,9 +213,9 @@ Partial Class FormPopUpCOA
         Me.PanelControl2.Controls.Add(Me.BCancel)
         Me.PanelControl2.Controls.Add(Me.BSave)
         Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControl2.Location = New System.Drawing.Point(0, 344)
+        Me.PanelControl2.Location = New System.Drawing.Point(0, 331)
         Me.PanelControl2.Name = "PanelControl2"
-        Me.PanelControl2.Size = New System.Drawing.Size(809, 33)
+        Me.PanelControl2.Size = New System.Drawing.Size(809, 46)
         Me.PanelControl2.TabIndex = 8
         '
         'BCancel
@@ -226,7 +226,7 @@ Partial Class FormPopUpCOA
         Me.BCancel.ImageList = Me.ImgBut
         Me.BCancel.Location = New System.Drawing.Point(627, 2)
         Me.BCancel.Name = "BCancel"
-        Me.BCancel.Size = New System.Drawing.Size(88, 29)
+        Me.BCancel.Size = New System.Drawing.Size(88, 42)
         Me.BCancel.TabIndex = 19
         Me.BCancel.Text = "Cancel"
         '
@@ -254,7 +254,7 @@ Partial Class FormPopUpCOA
         Me.BSave.ImageList = Me.ImgBut
         Me.BSave.Location = New System.Drawing.Point(715, 2)
         Me.BSave.Name = "BSave"
-        Me.BSave.Size = New System.Drawing.Size(92, 29)
+        Me.BSave.Size = New System.Drawing.Size(92, 42)
         Me.BSave.TabIndex = 18
         Me.BSave.Text = "Pick"
         '

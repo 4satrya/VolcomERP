@@ -22,12 +22,13 @@ Partial Class FormSalesReturnStoreReturn
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormSalesReturnStoreReturn))
         Me.GCData = New DevExpress.XtraGrid.GridControl()
         Me.GVData = New DevExpress.XtraGrid.Views.Grid.GridView()
-        Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
-        Me.BtnChoose = New DevExpress.XtraEditors.SimpleButton()
         Me.GridColumnid_wh_awb_det = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnid_awbill = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumnqty = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumndo_no = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnqty = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
+        Me.BtnChoose = New DevExpress.XtraEditors.SimpleButton()
+        Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GCData, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVData, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -46,13 +47,44 @@ Partial Class FormSalesReturnStoreReturn
         '
         'GVData
         '
-        Me.GVData.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnid_wh_awb_det, Me.GridColumnid_awbill, Me.GridColumndo_no, Me.GridColumnqty})
+        Me.GVData.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnid_wh_awb_det, Me.GridColumnid_awbill, Me.GridColumndo_no, Me.GridColumn1, Me.GridColumnqty})
         Me.GVData.GridControl = Me.GCData
         Me.GVData.Name = "GVData"
         Me.GVData.OptionsBehavior.AutoExpandAllGroups = True
         Me.GVData.OptionsBehavior.Editable = False
         Me.GVData.OptionsFind.AlwaysVisible = True
         Me.GVData.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumnid_wh_awb_det
+        '
+        Me.GridColumnid_wh_awb_det.Caption = "id_wh_awb_det"
+        Me.GridColumnid_wh_awb_det.FieldName = "id_wh_awb_det"
+        Me.GridColumnid_wh_awb_det.Name = "GridColumnid_wh_awb_det"
+        '
+        'GridColumnid_awbill
+        '
+        Me.GridColumnid_awbill.Caption = "id_awbill"
+        Me.GridColumnid_awbill.FieldName = "id_awbill"
+        Me.GridColumnid_awbill.Name = "GridColumnid_awbill"
+        '
+        'GridColumndo_no
+        '
+        Me.GridColumndo_no.Caption = "Store Return Number"
+        Me.GridColumndo_no.FieldName = "do_no"
+        Me.GridColumndo_no.Name = "GridColumndo_no"
+        Me.GridColumndo_no.Visible = True
+        Me.GridColumndo_no.VisibleIndex = 0
+        '
+        'GridColumnqty
+        '
+        Me.GridColumnqty.Caption = "Qty"
+        Me.GridColumnqty.DisplayFormat.FormatString = "N0"
+        Me.GridColumnqty.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnqty.FieldName = "qty"
+        Me.GridColumnqty.Name = "GridColumnqty"
+        Me.GridColumnqty.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty", "{0:N0}")})
+        Me.GridColumnqty.Visible = True
+        Me.GridColumnqty.VisibleIndex = 2
         '
         'PanelControl1
         '
@@ -73,36 +105,13 @@ Partial Class FormSalesReturnStoreReturn
         Me.BtnChoose.TabIndex = 0
         Me.BtnChoose.Text = "Choose"
         '
-        'GridColumnid_wh_awb_det
+        'GridColumn1
         '
-        Me.GridColumnid_wh_awb_det.Caption = "id_wh_awb_det"
-        Me.GridColumnid_wh_awb_det.FieldName = "id_wh_awb_det"
-        Me.GridColumnid_wh_awb_det.Name = "GridColumnid_wh_awb_det"
-        '
-        'GridColumnid_awbill
-        '
-        Me.GridColumnid_awbill.Caption = "id_awbill"
-        Me.GridColumnid_awbill.FieldName = "id_awbill"
-        Me.GridColumnid_awbill.Name = "GridColumnid_awbill"
-        '
-        'GridColumnqty
-        '
-        Me.GridColumnqty.Caption = "Qty"
-        Me.GridColumnqty.DisplayFormat.FormatString = "N0"
-        Me.GridColumnqty.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.GridColumnqty.FieldName = "qty"
-        Me.GridColumnqty.Name = "GridColumnqty"
-        Me.GridColumnqty.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty", "{0:N0}")})
-        Me.GridColumnqty.Visible = True
-        Me.GridColumnqty.VisibleIndex = 1
-        '
-        'GridColumndo_no
-        '
-        Me.GridColumndo_no.Caption = "Store Return Number"
-        Me.GridColumndo_no.FieldName = "do_no"
-        Me.GridColumndo_no.Name = "GridColumndo_no"
-        Me.GridColumndo_no.Visible = True
-        Me.GridColumndo_no.VisibleIndex = 0
+        Me.GridColumn1.Caption = "Return Label"
+        Me.GridColumn1.FieldName = "label_number"
+        Me.GridColumn1.Name = "GridColumn1"
+        Me.GridColumn1.Visible = True
+        Me.GridColumn1.VisibleIndex = 1
         '
         'FormSalesReturnStoreReturn
         '
@@ -133,4 +142,5 @@ Partial Class FormSalesReturnStoreReturn
     Friend WithEvents GridColumnid_awbill As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumndo_no As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnqty As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn1 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

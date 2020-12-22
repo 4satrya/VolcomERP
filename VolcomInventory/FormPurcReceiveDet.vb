@@ -8,6 +8,8 @@
     Dim is_confirm As String = "2"
     Dim created_date As String = ""
 
+    Dim id_coa_tag As String = "1"
+
     Private Sub FormPurcReceiveDet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         viewReportStatus()
         actionLoad()
@@ -25,20 +27,22 @@
 
             'cek coa persediaan dan hutang
             Dim cond_coa As Boolean = True
-            Dim qcoa As String = "SELECT * 
+
+            If id_coa_tag = "1" Then
+                Dim qcoa As String = "SELECT * 
             FROM tb_opt_purchasing o
             INNER JOIN tb_a_acc d ON d.id_acc = o.acc_coa_receive 
             INNER JOIN tb_a_acc k ON k.id_acc = o.acc_coa_vat_in 
             WHERE !ISNULL(d.id_acc) AND !ISNULL(k.id_acc) "
-            Dim dcoa As DataTable = execute_query(qcoa, -1, True, "", "", "", "")
-            If dcoa.Rows.Count <= 0 Then
-                err_coa += "- COA : Vat In & Inventory " + System.Environment.NewLine
-                cond_coa = False
-            End If
+                Dim dcoa As DataTable = execute_query(qcoa, -1, True, "", "", "", "")
+                If dcoa.Rows.Count <= 0 Then
+                    err_coa += "- COA : Vat In & Inventory " + System.Environment.NewLine
+                    cond_coa = False
+                End If
 
-            'cek coa biaya
-            Dim cond_coa_biaya As Boolean = True
-            Dim qcoa_biaya As String = "SELECT itm.`id_item_cat`,cat.`item_cat`,coa.`id_item_coa`,dep.`departement` FROM tb_purc_order_det pod
+                'cek coa biaya
+                Dim cond_coa_biaya As Boolean = True
+                Dim qcoa_biaya As String = "SELECT itm.`id_item_cat`,cat.`item_cat`,coa.`id_item_coa`,dep.`departement` FROM tb_purc_order_det pod
 INNER JOIN tb_purc_req_det rd ON rd.`id_purc_req_det`=pod.`id_purc_req_det`
 INNER JOIN tb_purc_req req ON req.`id_purc_req`=rd.`id_purc_req`
 INNER JOIN tb_item itm ON rd.`id_item`=itm.`id_item`
@@ -46,49 +50,79 @@ INNER JOIN `tb_item_cat` cat ON cat.`id_item_cat` = itm.`id_item_cat`
 INNER JOIN tb_m_departement dep ON dep.`id_departement`=req.`id_departement`
 LEFT JOIN tb_item_coa coa ON coa.`id_item_cat`=itm.`id_item_cat` AND req.`id_departement`=coa.`id_departement`
 WHERE pod.`id_purc_order`='1' AND ISNULL(coa.id_item_coa)"
-            Dim dcoa_biaya As DataTable = execute_query(qcoa_biaya, -1, True, "", "", "", "")
-            If dcoa_biaya.Rows.Count > 0 Then
-                For i = 0 To dcoa_biaya.Rows.Count - 1
-                    err_coa += "- COA : Mapping Category " & dcoa_biaya.Rows(i)("item_cat").ToString & " for Departement " & dcoa_biaya.Rows(i)("departement").ToString & System.Environment.NewLine
-                Next
-                cond_coa_biaya = False
-            End If
+                Dim dcoa_biaya As DataTable = execute_query(qcoa_biaya, -1, True, "", "", "", "")
+                If dcoa_biaya.Rows.Count > 0 Then
+                    For i = 0 To dcoa_biaya.Rows.Count - 1
+                        err_coa += "- COA : Mapping Category " & dcoa_biaya.Rows(i)("item_cat").ToString & " for Departement " & dcoa_biaya.Rows(i)("departement").ToString & System.Environment.NewLine
+                    Next
+                    cond_coa_biaya = False
+                End If
 
-            'cek coa vendor
-            Dim cond_coa_vendor As Boolean = True
-            Dim qcoa_vendor As String = "SELECT c.id_comp, ap.id_acc 
+                'cek coa vendor
+                Dim cond_coa_vendor As Boolean = True
+                Dim qcoa_vendor As String = "SELECT c.id_comp, ap.id_acc 
             FROM tb_m_comp c
             LEFT JOIN tb_a_acc ap ON ap.id_acc = c.id_acc_ap
             WHERE c.id_comp=" + id_comp + "
             AND !ISNULL(ap.id_acc) "
-            Dim dcoa_vendor As DataTable = execute_query(qcoa_vendor, -1, True, "", "", "", "")
-            If dcoa_vendor.Rows.Count <= 0 Then
-                err_coa += "- COA : Account Payable Vendor " + System.Environment.NewLine
-                cond_coa_vendor = False
-            End If
+                Dim dcoa_vendor As DataTable = execute_query(qcoa_vendor, -1, True, "", "", "", "")
+                If dcoa_vendor.Rows.Count <= 0 Then
+                    err_coa += "- COA : Account Payable Vendor " + System.Environment.NewLine
+                    cond_coa_vendor = False
+                End If
 
-            'cek PPH jika dia ada jasa
-            '            Dim cond_pph As Boolean = True
-            '            Dim q_cek_pph As String = "SELECT po.`id_purc_order`,po.`purc_order_number`,emp.`employee_name` AS emp_created,c.comp_name,cc.`contact_person`,cc.`contact_number`,po.`date_created`
-            'FROM tb_purc_order_det pod
-            'INNER JOIN tb_purc_order po ON po.`id_purc_order`=pod.`id_purc_order` AND po.`id_report_status`=6 AND po.`id_purc_order`='" & id_purc_order & "'
-            'INNER JOIN tb_m_comp_contact cc ON po.`id_comp_contact`=cc.`id_comp_contact`
-            'INNER JOIN tb_m_comp c ON c.`id_comp`=cc.`id_comp`
-            'INNER JOIN tb_m_user usr ON usr.`id_user`=po.`created_by`
-            'INNER JOIN tb_m_employee emp ON emp.id_employee=usr.`id_employee`
-            'INNER JOIN tb_purc_req_det prd ON prd.`id_purc_req_det`=pod.`id_purc_req_det`
-            'INNER JOIN tb_item it ON it.`id_item`=prd.`id_item`
-            'WHERE it.id_item_type='2' AND po.`is_active_payment`=2 AND po.`is_close_pay`=2
-            'GROUP BY pod.`id_purc_order`"
-            '            Dim dpph As DataTable = execute_query(q_cek_pph, -1, True, "", "", "", "")
-            '            If dpph.Rows.Count > 0 Then
-            '                err_coa += "- PPH " + System.Environment.NewLine
-            '                cond_pph = False
-            '            End If
+                If Not cond_coa Or Not cond_coa_vendor Or Not cond_coa_biaya Then
+                    warningCustom("Please contact Accounting Department to setup : " + System.Environment.NewLine + err_coa)
+                    Close()
+                End If
+            Else
+                'cabang
+                Dim qcoa As String = "SELECT * 
+            FROM tb_opt_purchasing o
+            INNER JOIN tb_a_acc d ON d.id_acc = o.acc_coa_receive_cabang
+            INNER JOIN tb_a_acc k ON k.id_acc = o.acc_coa_vat_in_cabang 
+            WHERE !ISNULL(d.id_acc) AND !ISNULL(k.id_acc) "
+                Dim dcoa As DataTable = execute_query(qcoa, -1, True, "", "", "", "")
+                If dcoa.Rows.Count <= 0 Then
+                    err_coa += "- COA : Vat In & Inventory " + System.Environment.NewLine
+                    cond_coa = False
+                End If
 
-            If Not cond_coa Or Not cond_coa_vendor Or Not cond_coa_biaya Then
-                warningCustom("Please contact Accounting Department to setup : " + System.Environment.NewLine + err_coa)
-                Close()
+                'cek coa biaya
+                Dim cond_coa_biaya As Boolean = True
+                Dim qcoa_biaya As String = "SELECT itm.`id_item_cat`,cat.`item_cat`,coa.`id_item_coa`,dep.`departement` FROM tb_purc_order_det pod
+INNER JOIN tb_purc_req_det rd ON rd.`id_purc_req_det`=pod.`id_purc_req_det`
+INNER JOIN tb_purc_req req ON req.`id_purc_req`=rd.`id_purc_req`
+INNER JOIN tb_item itm ON rd.`id_item`=itm.`id_item`
+INNER JOIN `tb_item_cat` cat ON cat.`id_item_cat` = itm.`id_item_cat`
+INNER JOIN tb_m_departement dep ON dep.`id_departement`=req.`id_departement`
+LEFT JOIN tb_item_coa coa ON coa.`id_item_cat`=itm.`id_item_cat` AND req.`id_departement`=coa.`id_departement`
+WHERE pod.`id_purc_order`='1' AND ISNULL(coa.id_item_coa)"
+                Dim dcoa_biaya As DataTable = execute_query(qcoa_biaya, -1, True, "", "", "", "")
+                If dcoa_biaya.Rows.Count > 0 Then
+                    For i = 0 To dcoa_biaya.Rows.Count - 1
+                        err_coa += "- COA : Mapping Category " & dcoa_biaya.Rows(i)("item_cat").ToString & " for Departement " & dcoa_biaya.Rows(i)("departement").ToString & System.Environment.NewLine
+                    Next
+                    cond_coa_biaya = False
+                End If
+
+                'cek coa vendor
+                Dim cond_coa_vendor As Boolean = True
+                Dim qcoa_vendor As String = "SELECT c.id_comp, ap.id_acc 
+            FROM tb_m_comp c
+            LEFT JOIN tb_a_acc ap ON ap.id_acc = c.id_acc_cabang_ap
+            WHERE c.id_comp=" + id_comp + "
+            AND !ISNULL(ap.id_acc) "
+                Dim dcoa_vendor As DataTable = execute_query(qcoa_vendor, -1, True, "", "", "", "")
+                If dcoa_vendor.Rows.Count <= 0 Then
+                    err_coa += "- COA : Account Payable Vendor " + System.Environment.NewLine
+                    cond_coa_vendor = False
+                End If
+
+                If Not cond_coa Or Not cond_coa_vendor Or Not cond_coa_biaya Then
+                    warningCustom("Please contact Accounting Department to setup : " + System.Environment.NewLine + err_coa)
+                    Close()
+                End If
             End If
 
             'cek coa biaya

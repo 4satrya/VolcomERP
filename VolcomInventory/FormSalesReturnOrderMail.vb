@@ -14,9 +14,10 @@
 
     Sub form_load()
         Dim query As String = "
-            SELECT m.id_mail_3pl, s.store_name, c.comp_name AS 3pl, l.status, m.created_date, e.employee_name AS created_by
+            SELECT m.id_mail_3pl, IF(m.id_type = 1, 'Warehouse', '3PL') AS `type`, s.store_name, IF(m.id_type = 1, r.employee_name, c.comp_name) AS 3pl, l.status, m.created_date, e.employee_name AS created_by
             FROM tb_sales_return_order_mail_3pl AS m
             LEFT JOIN tb_m_employee AS e ON m.created_by = e.id_employee
+            LEFT JOIN tb_m_employee AS r ON m.id_employee = r.id_employee
             LEFT JOIN tb_m_comp AS c ON c.id_comp = m.id_3pl 
             LEFT JOIN tb_lookup_ror_mail_3pl_status_lookup AS l ON l.id_status = m.id_status
             LEFT JOIN (

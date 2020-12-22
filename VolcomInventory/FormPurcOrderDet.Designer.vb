@@ -40,6 +40,12 @@ Partial Class FormPurcOrderDet
         Me.BPickVendor = New DevExpress.XtraEditors.SimpleButton()
         Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
         Me.PanelControlTopRight = New DevExpress.XtraEditors.PanelControl()
+        Me.LabelControl29 = New DevExpress.XtraEditors.LabelControl()
+        Me.SLEUnit = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GridView12 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn229 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn230 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn231 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.CECashPurchase = New DevExpress.XtraEditors.CheckEdit()
         Me.SLEPurcType = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
@@ -171,6 +177,8 @@ Partial Class FormPurcOrderDet
         CType(Me.TEVendorCode.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControlTopRight, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControlTopRight.SuspendLayout()
+        CType(Me.SLEUnit.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView12, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CECashPurchase.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SLEPurcType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -463,6 +471,8 @@ Partial Class FormPurcOrderDet
         'PanelControlTopRight
         '
         Me.PanelControlTopRight.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
+        Me.PanelControlTopRight.Controls.Add(Me.LabelControl29)
+        Me.PanelControlTopRight.Controls.Add(Me.SLEUnit)
         Me.PanelControlTopRight.Controls.Add(Me.CECashPurchase)
         Me.PanelControlTopRight.Controls.Add(Me.SLEPurcType)
         Me.PanelControlTopRight.Controls.Add(Me.LabelControl25)
@@ -483,14 +493,68 @@ Partial Class FormPurcOrderDet
         Me.PanelControlTopRight.Controls.Add(Me.LabelControl7)
         Me.PanelControlTopRight.Controls.Add(Me.LEPaymentTerm)
         Me.PanelControlTopRight.Dock = System.Windows.Forms.DockStyle.Right
-        Me.PanelControlTopRight.Location = New System.Drawing.Point(578, 2)
+        Me.PanelControlTopRight.Location = New System.Drawing.Point(490, 2)
         Me.PanelControlTopRight.Name = "PanelControlTopRight"
-        Me.PanelControlTopRight.Size = New System.Drawing.Size(464, 166)
+        Me.PanelControlTopRight.Size = New System.Drawing.Size(552, 166)
         Me.PanelControlTopRight.TabIndex = 8936
+        '
+        'LabelControl29
+        '
+        Me.LabelControl29.Location = New System.Drawing.Point(251, 65)
+        Me.LabelControl29.Name = "LabelControl29"
+        Me.LabelControl29.Size = New System.Drawing.Size(19, 13)
+        Me.LabelControl29.TabIndex = 8936
+        Me.LabelControl29.Text = "Unit"
+        '
+        'SLEUnit
+        '
+        Me.SLEUnit.Location = New System.Drawing.Point(323, 62)
+        Me.SLEUnit.Name = "SLEUnit"
+        Me.SLEUnit.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLEUnit.Properties.ReadOnly = True
+        Me.SLEUnit.Properties.View = Me.GridView12
+        Me.SLEUnit.Size = New System.Drawing.Size(215, 20)
+        Me.SLEUnit.TabIndex = 8935
+        '
+        'GridView12
+        '
+        Me.GridView12.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn229, Me.GridColumn230, Me.GridColumn231})
+        Me.GridView12.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView12.Name = "GridView12"
+        Me.GridView12.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView12.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn229
+        '
+        Me.GridColumn229.Caption = "id_coa_tag"
+        Me.GridColumn229.FieldName = "id_comp"
+        Me.GridColumn229.Name = "GridColumn229"
+        '
+        'GridColumn230
+        '
+        Me.GridColumn230.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumn230.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumn230.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumn230.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumn230.Caption = "Number"
+        Me.GridColumn230.FieldName = "tag_code"
+        Me.GridColumn230.Name = "GridColumn230"
+        Me.GridColumn230.Visible = True
+        Me.GridColumn230.VisibleIndex = 0
+        Me.GridColumn230.Width = 281
+        '
+        'GridColumn231
+        '
+        Me.GridColumn231.Caption = "Unit"
+        Me.GridColumn231.FieldName = "tag_description"
+        Me.GridColumn231.Name = "GridColumn231"
+        Me.GridColumn231.Visible = True
+        Me.GridColumn231.VisibleIndex = 1
+        Me.GridColumn231.Width = 1351
         '
         'CECashPurchase
         '
-        Me.CECashPurchase.Location = New System.Drawing.Point(355, 10)
+        Me.CECashPurchase.Location = New System.Drawing.Point(443, 10)
         Me.CECashPurchase.Name = "CECashPurchase"
         Me.CECashPurchase.Properties.Caption = "Cash Purchase"
         Me.CECashPurchase.Size = New System.Drawing.Size(95, 19)
@@ -503,7 +567,7 @@ Partial Class FormPurcOrderDet
         Me.SLEPurcType.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.SLEPurcType.Properties.ReadOnly = True
         Me.SLEPurcType.Properties.View = Me.GridView1
-        Me.SLEPurcType.Size = New System.Drawing.Size(127, 20)
+        Me.SLEPurcType.Size = New System.Drawing.Size(215, 20)
         Me.SLEPurcType.TabIndex = 8908
         '
         'GridView1
@@ -554,7 +618,7 @@ Partial Class FormPurcOrderDet
         Me.DEDueDate.Properties.DisplayFormat.FormatString = "dd MMMM yyyy"
         Me.DEDueDate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
         Me.DEDueDate.Properties.ReadOnly = True
-        Me.DEDueDate.Size = New System.Drawing.Size(127, 20)
+        Me.DEDueDate.Size = New System.Drawing.Size(215, 20)
         Me.DEDueDate.TabIndex = 172
         '
         'LEShipVia
@@ -569,7 +633,7 @@ Partial Class FormPurcOrderDet
         Me.LEShipVia.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_shipping_method", "ID Shipping Method", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("shipping_method", "Shipping Method")})
         Me.LEShipVia.Properties.NullText = ""
         Me.LEShipVia.Properties.ShowFooter = False
-        Me.LEShipVia.Size = New System.Drawing.Size(127, 20)
+        Me.LEShipVia.Size = New System.Drawing.Size(215, 20)
         Me.LEShipVia.TabIndex = 170
         '
         'LabelControl17
@@ -592,7 +656,7 @@ Partial Class FormPurcOrderDet
         Me.LEOrderTerm.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_order_term", "ID Order Term", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("order_term", "Order Term")})
         Me.LEOrderTerm.Properties.NullText = ""
         Me.LEOrderTerm.Properties.ShowFooter = False
-        Me.LEOrderTerm.Size = New System.Drawing.Size(348, 20)
+        Me.LEOrderTerm.Size = New System.Drawing.Size(436, 20)
         Me.LEOrderTerm.TabIndex = 168
         '
         'LabelControl16
@@ -650,7 +714,7 @@ Partial Class FormPurcOrderDet
         Me.DEDateCreated.Properties.DisplayFormat.FormatString = "dd MMMM yyyy"
         Me.DEDateCreated.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
         Me.DEDateCreated.Properties.ReadOnly = True
-        Me.DEDateCreated.Size = New System.Drawing.Size(247, 20)
+        Me.DEDateCreated.Size = New System.Drawing.Size(335, 20)
         Me.DEDateCreated.TabIndex = 160
         '
         'TECreatedBy
@@ -660,7 +724,7 @@ Partial Class FormPurcOrderDet
         Me.TECreatedBy.Name = "TECreatedBy"
         Me.TECreatedBy.Properties.EditValueChangedDelay = 1
         Me.TECreatedBy.Properties.ReadOnly = True
-        Me.TECreatedBy.Size = New System.Drawing.Size(348, 20)
+        Me.TECreatedBy.Size = New System.Drawing.Size(143, 20)
         Me.TECreatedBy.TabIndex = 162
         Me.TECreatedBy.TabStop = False
         '
@@ -1795,6 +1859,8 @@ Partial Class FormPurcOrderDet
         CType(Me.PanelControlTopRight, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControlTopRight.ResumeLayout(False)
         Me.PanelControlTopRight.PerformLayout()
+        CType(Me.SLEUnit.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView12, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CECashPurchase.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SLEPurcType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1994,4 +2060,10 @@ Partial Class FormPurcOrderDet
     Friend WithEvents TEDPPPercent As DevExpress.XtraEditors.TextEdit
     Friend WithEvents LabelControl27 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents GridColumn32 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents LabelControl29 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents SLEUnit As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents GridView12 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn229 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn230 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn231 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

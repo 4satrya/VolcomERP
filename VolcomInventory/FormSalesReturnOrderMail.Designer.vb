@@ -27,6 +27,7 @@ Partial Class FormSalesReturnOrderMail
         Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GCDetail, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVDetail, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -43,7 +44,7 @@ Partial Class FormSalesReturnOrderMail
         '
         'GVDetail
         '
-        Me.GVDetail.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn7, Me.GridColumn2, Me.GridColumn3, Me.GridColumn4, Me.GridColumn5})
+        Me.GVDetail.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn6, Me.GridColumn7, Me.GridColumn2, Me.GridColumn3, Me.GridColumn4, Me.GridColumn5})
         Me.GVDetail.GridControl = Me.GCDetail
         Me.GVDetail.Name = "GVDetail"
         Me.GVDetail.OptionsBehavior.AutoExpandAllGroups = True
@@ -64,24 +65,24 @@ Partial Class FormSalesReturnOrderMail
         Me.GridColumn7.MinWidth = 300
         Me.GridColumn7.Name = "GridColumn7"
         Me.GridColumn7.Visible = True
-        Me.GridColumn7.VisibleIndex = 0
+        Me.GridColumn7.VisibleIndex = 1
         Me.GridColumn7.Width = 300
         '
         'GridColumn2
         '
-        Me.GridColumn2.Caption = "3PL"
+        Me.GridColumn2.Caption = "Employee / 3PL"
         Me.GridColumn2.FieldName = "3pl"
         Me.GridColumn2.Name = "GridColumn2"
         Me.GridColumn2.Visible = True
-        Me.GridColumn2.VisibleIndex = 1
+        Me.GridColumn2.VisibleIndex = 2
         '
         'GridColumn3
         '
-        Me.GridColumn3.Caption = "3PL Status"
+        Me.GridColumn3.Caption = "Status"
         Me.GridColumn3.FieldName = "status"
         Me.GridColumn3.Name = "GridColumn3"
         Me.GridColumn3.Visible = True
-        Me.GridColumn3.VisibleIndex = 2
+        Me.GridColumn3.VisibleIndex = 3
         '
         'GridColumn4
         '
@@ -91,7 +92,7 @@ Partial Class FormSalesReturnOrderMail
         Me.GridColumn4.FieldName = "created_date"
         Me.GridColumn4.Name = "GridColumn4"
         Me.GridColumn4.Visible = True
-        Me.GridColumn4.VisibleIndex = 3
+        Me.GridColumn4.VisibleIndex = 4
         '
         'GridColumn5
         '
@@ -99,7 +100,15 @@ Partial Class FormSalesReturnOrderMail
         Me.GridColumn5.FieldName = "created_by"
         Me.GridColumn5.Name = "GridColumn5"
         Me.GridColumn5.Visible = True
-        Me.GridColumn5.VisibleIndex = 4
+        Me.GridColumn5.VisibleIndex = 5
+        '
+        'GridColumn6
+        '
+        Me.GridColumn6.Caption = "Type"
+        Me.GridColumn6.FieldName = "type"
+        Me.GridColumn6.Name = "GridColumn6"
+        Me.GridColumn6.Visible = True
+        Me.GridColumn6.VisibleIndex = 0
         '
         'FormSalesReturnOrderMail
         '
@@ -124,4 +133,5 @@ Partial Class FormSalesReturnOrderMail
     Friend WithEvents GridColumn4 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn5 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn7 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn6 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

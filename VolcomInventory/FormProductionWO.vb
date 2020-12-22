@@ -52,13 +52,23 @@
             BMark.Visible = True
 
             Dim query = "SELECT a.id_report_status,h.report_status,a.id_prod_order_wo,a.id_ovh_price,a.id_payment, "
-            query += "a.id_prod_order,g.payment,b.id_currency,a.prod_order_wo_note,a.prod_order_wo_kurs, "
+            query += "a.id_prod_order,g.payment,b.id_currency,a.prod_order_wo_note,IFNULL(wo_old.old_kurs,a.`prod_order_wo_kurs`) AS prod_order_wo_kurs, "
             query += "d.comp_name AS comp_name_to, "
             query += "f.comp_name AS comp_name_ship_to,(SELECT id_own_company_contact FROM tb_opt) AS id_comp_contact_ship_to, "
             query += "a.prod_order_wo_number,a.id_ovh_price,j.overhead, "
             query += "a.prod_order_wo_del_date,a.is_manual_add, "
             query += "DATE_FORMAT(a.prod_order_wo_date,'%Y-%m-%d') as prod_order_wo_datex,a.prod_order_wo_date,a.prod_order_wo_lead_time,a.prod_order_wo_top,a.prod_order_wo_vat, a.is_main_vendor "
             query += "FROM tb_prod_order_wo a INNER JOIN tb_m_ovh_price b ON a.id_ovh_price=b.id_ovh_price "
+            query += "  
+            LEFT JOIN
+	        (
+		        SELECT id_wo,old_kurs FROM `tb_prod_order_wo_log`
+		        WHERE id_wo_log IN (
+			        SELECT MIN(id_wo_log)
+			        FROM tb_prod_order_wo_log logx
+			        WHERE id_wo='" & id_wo & "'
+		        )
+	        )wo_old ON wo_old.id_wo=a.id_prod_order_wo "
             query += "INNER JOIN tb_m_comp_contact c ON b.id_comp_contact = c.id_comp_contact "
             query += "INNER JOIN tb_m_comp d ON c.id_comp = d.id_comp "
             query += "INNER JOIN tb_m_comp_contact e ON a.id_comp_contact_ship_to = e.id_comp_contact "

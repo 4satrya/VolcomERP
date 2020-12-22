@@ -41,11 +41,14 @@ Module Common
         emp_image_path = get_setup_field("pic_path_emp") & "\"
     End Sub
 
-    Sub set_min_date_reference(ByRef date_edit As DateEdit, ByVal coa_type As String)
+    Sub set_min_date_reference(ByRef date_edit As DateEdit, ByVal id_coa_tag As String)
         Dim q As String = "SELECT DATE_ADD(MAX(date_until),INTERVAL 1 DAY) AS min_date FROM `tb_closing_log` 
-WHERE note='Closing End' AND id_coa_type='" & coa_type & "'"
-        Dim min_date As Date = Date.Parse(execute_query(q, 0, True, "", "", "", "").ToString)
-        date_edit.Properties.MinValue = min_date
+WHERE note='Closing End' AND id_coa_tag='" & id_coa_tag & "'"
+        Try
+            Dim min_date As Date = Date.Parse(execute_query(q, 0, True, "", "", "", "").ToString)
+            date_edit.Properties.MinValue = min_date
+        Catch ex As Exception
+        End Try
     End Sub
 
     '============ = OPT CODE HEAD ======================================

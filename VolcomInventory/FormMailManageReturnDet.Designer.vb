@@ -22,6 +22,7 @@ Partial Class FormMailManageReturnDet
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormMailManageReturnDet))
         Me.XTCMail = New DevExpress.XtraTab.XtraTabControl()
         Me.XTPreview = New DevExpress.XtraTab.XtraTabPage()
+        Me.PanelControl5 = New DevExpress.XtraEditors.PanelControl()
         Me.WebBrowser1 = New System.Windows.Forms.WebBrowser()
         Me.PanelControl4 = New DevExpress.XtraEditors.PanelControl()
         Me.BtnAttach = New DevExpress.XtraEditors.SimpleButton()
@@ -65,6 +66,8 @@ Partial Class FormMailManageReturnDet
         Me.BtnDraft = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnSend = New DevExpress.XtraEditors.SimpleButton()
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
+        Me.MEReason = New DevExpress.XtraEditors.MemoEdit()
+        Me.LabelControl14 = New DevExpress.XtraEditors.LabelControl()
         Me.PanelControl3 = New DevExpress.XtraEditors.PanelControl()
         Me.DEUpdatedDate = New DevExpress.XtraEditors.DateEdit()
         Me.DECreatedDate = New DevExpress.XtraEditors.DateEdit()
@@ -82,12 +85,13 @@ Partial Class FormMailManageReturnDet
         Me.TxtMailType = New DevExpress.XtraEditors.TextEdit()
         Me.TxtEmailNumber = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
-        Me.MEReason = New DevExpress.XtraEditors.MemoEdit()
-        Me.LabelControl14 = New DevExpress.XtraEditors.LabelControl()
-        Me.PanelControl5 = New DevExpress.XtraEditors.PanelControl()
+        Me.MEAdditionalInfo = New DevExpress.XtraEditors.MemoEdit()
+        Me.LabelControl15 = New DevExpress.XtraEditors.LabelControl()
         CType(Me.XTCMail, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCMail.SuspendLayout()
         Me.XTPreview.SuspendLayout()
+        CType(Me.PanelControl5, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelControl5.SuspendLayout()
         CType(Me.PanelControl4, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl4.SuspendLayout()
         CType(Me.MESubject.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -109,6 +113,7 @@ Partial Class FormMailManageReturnDet
         Me.PanelControl2.SuspendLayout()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
+        CType(Me.MEReason.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl3.SuspendLayout()
         CType(Me.DEUpdatedDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -121,18 +126,16 @@ Partial Class FormMailManageReturnDet
         CType(Me.TxtMailStatus.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtMailType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtEmailNumber.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.MEReason.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PanelControl5, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.PanelControl5.SuspendLayout()
+        CType(Me.MEAdditionalInfo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'XTCMail
         '
         Me.XTCMail.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.XTCMail.Location = New System.Drawing.Point(0, 195)
+        Me.XTCMail.Location = New System.Drawing.Point(0, 242)
         Me.XTCMail.Name = "XTCMail"
         Me.XTCMail.SelectedTabPage = Me.XTPreview
-        Me.XTCMail.Size = New System.Drawing.Size(1008, 486)
+        Me.XTCMail.Size = New System.Drawing.Size(1008, 439)
         Me.XTCMail.TabIndex = 3
         Me.XTCMail.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPreview, Me.XTPData})
         '
@@ -141,8 +144,18 @@ Partial Class FormMailManageReturnDet
         Me.XTPreview.Controls.Add(Me.PanelControl5)
         Me.XTPreview.Controls.Add(Me.PanelControl4)
         Me.XTPreview.Name = "XTPreview"
-        Me.XTPreview.Size = New System.Drawing.Size(1002, 458)
+        Me.XTPreview.Size = New System.Drawing.Size(1002, 411)
         Me.XTPreview.Text = "Preview"
+        '
+        'PanelControl5
+        '
+        Me.PanelControl5.Controls.Add(Me.WebBrowser1)
+        Me.PanelControl5.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.PanelControl5.Location = New System.Drawing.Point(315, 0)
+        Me.PanelControl5.Name = "PanelControl5"
+        Me.PanelControl5.Padding = New System.Windows.Forms.Padding(30)
+        Me.PanelControl5.Size = New System.Drawing.Size(687, 411)
+        Me.PanelControl5.TabIndex = 2
         '
         'WebBrowser1
         '
@@ -150,7 +163,7 @@ Partial Class FormMailManageReturnDet
         Me.WebBrowser1.Location = New System.Drawing.Point(32, 32)
         Me.WebBrowser1.MinimumSize = New System.Drawing.Size(20, 20)
         Me.WebBrowser1.Name = "WebBrowser1"
-        Me.WebBrowser1.Size = New System.Drawing.Size(623, 394)
+        Me.WebBrowser1.Size = New System.Drawing.Size(623, 347)
         Me.WebBrowser1.TabIndex = 1
         '
         'PanelControl4
@@ -169,7 +182,7 @@ Partial Class FormMailManageReturnDet
         Me.PanelControl4.Dock = System.Windows.Forms.DockStyle.Left
         Me.PanelControl4.Location = New System.Drawing.Point(0, 0)
         Me.PanelControl4.Name = "PanelControl4"
-        Me.PanelControl4.Size = New System.Drawing.Size(315, 458)
+        Me.PanelControl4.Size = New System.Drawing.Size(315, 411)
         Me.PanelControl4.TabIndex = 0
         '
         'BtnAttach
@@ -533,6 +546,8 @@ Partial Class FormMailManageReturnDet
         '
         'PanelControl1
         '
+        Me.PanelControl1.Controls.Add(Me.MEAdditionalInfo)
+        Me.PanelControl1.Controls.Add(Me.LabelControl15)
         Me.PanelControl1.Controls.Add(Me.MEReason)
         Me.PanelControl1.Controls.Add(Me.LabelControl14)
         Me.PanelControl1.Controls.Add(Me.PanelControl3)
@@ -547,8 +562,24 @@ Partial Class FormMailManageReturnDet
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelControl1.Location = New System.Drawing.Point(0, 0)
         Me.PanelControl1.Name = "PanelControl1"
-        Me.PanelControl1.Size = New System.Drawing.Size(1008, 195)
+        Me.PanelControl1.Size = New System.Drawing.Size(1008, 242)
         Me.PanelControl1.TabIndex = 4
+        '
+        'MEReason
+        '
+        Me.MEReason.Location = New System.Drawing.Point(94, 140)
+        Me.MEReason.Name = "MEReason"
+        Me.MEReason.Size = New System.Drawing.Size(243, 43)
+        Me.MEReason.TabIndex = 1
+        '
+        'LabelControl14
+        '
+        Me.LabelControl14.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl14.Location = New System.Drawing.Point(15, 142)
+        Me.LabelControl14.Name = "LabelControl14"
+        Me.LabelControl14.Size = New System.Drawing.Size(36, 13)
+        Me.LabelControl14.TabIndex = 9
+        Me.LabelControl14.Text = "Reason"
         '
         'PanelControl3
         '
@@ -564,7 +595,7 @@ Partial Class FormMailManageReturnDet
         Me.PanelControl3.Dock = System.Windows.Forms.DockStyle.Right
         Me.PanelControl3.Location = New System.Drawing.Point(664, 2)
         Me.PanelControl3.Name = "PanelControl3"
-        Me.PanelControl3.Size = New System.Drawing.Size(342, 191)
+        Me.PanelControl3.Size = New System.Drawing.Size(342, 238)
         Me.PanelControl3.TabIndex = 8
         '
         'DEUpdatedDate
@@ -648,7 +679,7 @@ Partial Class FormMailManageReturnDet
         'MENote
         '
         Me.MENote.Enabled = False
-        Me.MENote.Location = New System.Drawing.Point(89, 91)
+        Me.MENote.Location = New System.Drawing.Point(94, 91)
         Me.MENote.Name = "MENote"
         Me.MENote.Size = New System.Drawing.Size(243, 43)
         Me.MENote.TabIndex = 7
@@ -674,7 +705,7 @@ Partial Class FormMailManageReturnDet
         'TxtMailStatus
         '
         Me.TxtMailStatus.Enabled = False
-        Me.TxtMailStatus.Location = New System.Drawing.Point(89, 65)
+        Me.TxtMailStatus.Location = New System.Drawing.Point(94, 65)
         Me.TxtMailStatus.Name = "TxtMailStatus"
         Me.TxtMailStatus.Size = New System.Drawing.Size(243, 20)
         Me.TxtMailStatus.TabIndex = 4
@@ -691,7 +722,7 @@ Partial Class FormMailManageReturnDet
         'TxtMailType
         '
         Me.TxtMailType.Enabled = False
-        Me.TxtMailType.Location = New System.Drawing.Point(89, 39)
+        Me.TxtMailType.Location = New System.Drawing.Point(94, 39)
         Me.TxtMailType.Name = "TxtMailType"
         Me.TxtMailType.Size = New System.Drawing.Size(243, 20)
         Me.TxtMailType.TabIndex = 2
@@ -699,7 +730,7 @@ Partial Class FormMailManageReturnDet
         'TxtEmailNumber
         '
         Me.TxtEmailNumber.Enabled = False
-        Me.TxtEmailNumber.Location = New System.Drawing.Point(89, 13)
+        Me.TxtEmailNumber.Location = New System.Drawing.Point(94, 13)
         Me.TxtEmailNumber.Name = "TxtEmailNumber"
         Me.TxtEmailNumber.Size = New System.Drawing.Size(243, 20)
         Me.TxtEmailNumber.TabIndex = 1
@@ -713,31 +744,21 @@ Partial Class FormMailManageReturnDet
         Me.LabelControl1.TabIndex = 0
         Me.LabelControl1.Text = "Email Number"
         '
-        'MEReason
+        'MEAdditionalInfo
         '
-        Me.MEReason.Location = New System.Drawing.Point(89, 140)
-        Me.MEReason.Name = "MEReason"
-        Me.MEReason.Size = New System.Drawing.Size(243, 43)
-        Me.MEReason.TabIndex = 1
+        Me.MEAdditionalInfo.Location = New System.Drawing.Point(94, 189)
+        Me.MEAdditionalInfo.Name = "MEAdditionalInfo"
+        Me.MEAdditionalInfo.Size = New System.Drawing.Size(243, 43)
+        Me.MEAdditionalInfo.TabIndex = 10
         '
-        'LabelControl14
+        'LabelControl15
         '
-        Me.LabelControl14.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelControl14.Location = New System.Drawing.Point(15, 142)
-        Me.LabelControl14.Name = "LabelControl14"
-        Me.LabelControl14.Size = New System.Drawing.Size(36, 13)
-        Me.LabelControl14.TabIndex = 9
-        Me.LabelControl14.Text = "Reason"
-        '
-        'PanelControl5
-        '
-        Me.PanelControl5.Controls.Add(Me.WebBrowser1)
-        Me.PanelControl5.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PanelControl5.Location = New System.Drawing.Point(315, 0)
-        Me.PanelControl5.Name = "PanelControl5"
-        Me.PanelControl5.Padding = New System.Windows.Forms.Padding(30)
-        Me.PanelControl5.Size = New System.Drawing.Size(687, 458)
-        Me.PanelControl5.TabIndex = 2
+        Me.LabelControl15.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl15.Location = New System.Drawing.Point(15, 191)
+        Me.LabelControl15.Name = "LabelControl15"
+        Me.LabelControl15.Size = New System.Drawing.Size(70, 13)
+        Me.LabelControl15.TabIndex = 11
+        Me.LabelControl15.Text = "Additional Info"
         '
         'FormMailManageReturnDet
         '
@@ -753,6 +774,8 @@ Partial Class FormMailManageReturnDet
         CType(Me.XTCMail, System.ComponentModel.ISupportInitialize).EndInit()
         Me.XTCMail.ResumeLayout(False)
         Me.XTPreview.ResumeLayout(False)
+        CType(Me.PanelControl5, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelControl5.ResumeLayout(False)
         CType(Me.PanelControl4, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl4.ResumeLayout(False)
         Me.PanelControl4.PerformLayout()
@@ -776,6 +799,7 @@ Partial Class FormMailManageReturnDet
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl1.ResumeLayout(False)
         Me.PanelControl1.PerformLayout()
+        CType(Me.MEReason.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl3.ResumeLayout(False)
         Me.PanelControl3.PerformLayout()
@@ -789,9 +813,7 @@ Partial Class FormMailManageReturnDet
         CType(Me.TxtMailStatus.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TxtMailType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TxtEmailNumber.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.MEReason.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PanelControl5, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.PanelControl5.ResumeLayout(False)
+        CType(Me.MEAdditionalInfo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -861,4 +883,6 @@ Partial Class FormMailManageReturnDet
     Friend WithEvents MEReason As DevExpress.XtraEditors.MemoEdit
     Friend WithEvents LabelControl14 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents PanelControl5 As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents MEAdditionalInfo As DevExpress.XtraEditors.MemoEdit
+    Friend WithEvents LabelControl15 As DevExpress.XtraEditors.LabelControl
 End Class

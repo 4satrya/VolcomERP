@@ -205,7 +205,11 @@ SELECT id_comp,comp_number,comp_name,address_primary FROM `tb_m_comp` WHERE is_a
             BtnDel.Visible = False
             BtnAdd.Visible = False
             '
-            BtnPrint.Visible = True
+            If id_report_status = "1" Then
+                BtnPrint.Visible = False
+            Else
+                BtnPrint.Visible = True
+            End If
             BMark.Visible = True
         End If
 

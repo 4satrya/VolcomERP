@@ -398,4 +398,19 @@
     Private Sub GVItemList_ColumnFilterChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GVItemList.ColumnFilterChanged
 
     End Sub
+
+    Private Sub CESelAll_EditValueChanged(sender As Object, e As EventArgs) Handles CESelAll.EditValueChanged
+        GVItemList.CloseEditor()
+        If CESelAll.EditValue = True Then
+            For i As Integer = 0 To GVItemList.RowCount - 1
+                GVItemList.SetRowCellValue(i, "sales_pos_det_qty_credit_note", GVItemList.GetRowCellValue(i, "sales_pos_det_qty_limit"))
+            Next
+            GCItemList.Enabled = False
+        Else
+            For i As Integer = 0 To GVItemList.RowCount - 1
+                GVItemList.SetRowCellValue(i, "sales_pos_det_qty_credit_note", 0)
+            Next
+            GCItemList.Enabled = True
+        End If
+    End Sub
 End Class

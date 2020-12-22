@@ -1,5 +1,6 @@
 ﻿Public Class FormCompanyEmailMapping
     Public mail_dept As String = ""
+    Public id_super_user As String = get_setup_field("id_role_super_admin")
 
     Private Sub FormCompanyEmailMapping_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         form_load()
@@ -32,6 +33,8 @@
             query_dept = "WHERE mm.report_mark_type IN (SELECT report_mark_type FROM tb_lookup_report_mark_type WHERE is_mail_acc = 1)"
         ElseIf mail_dept = "wh" Then
             query_dept = "WHERE mm.report_mark_type IN (SELECT report_mark_type FROM tb_lookup_report_mark_type WHERE is_mail_wh = 1)"
+        ElseIf mail_dept = "mt" Then
+            query_dept = "WHERE mm.report_mark_type IN (278)"
         End If
 
         Dim query_store As String = "
@@ -91,6 +94,13 @@
         Else
             checkFormAccess(Name)
             button_main("1", "0", "1")
+        End If
+    End Sub
+
+    Private Sub FormCompanyEmailMapping_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
+        If e.KeyCode = Keys.F7 Then
+            mail_dept = "mt"
+            form_load()
         End If
     End Sub
 End Class

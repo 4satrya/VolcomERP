@@ -22,6 +22,13 @@
             cond_status = "AND a.id_prepare_status='" + SLEPackingStatus.EditValue.ToString + "' "
         End If
 
+        'oos
+        If LETypeRestockTOO.EditValue.ToString = "1" Then
+            cond_status += "AND ISNULL(a.id_ol_store_oos) "
+        ElseIf LETypeRestockTOO.EditValue.ToString = "2" Then
+            cond_status += "AND !ISNULL(a.id_ol_store_oos) "
+        End If
+
         'prepare query
         Dim query_c As ClassSalesOrder = New ClassSalesOrder()
         Dim query As String = query_c.queryMain("AND a.id_report_status='6' AND (a.sales_order_date>='" + date_from_selected + "' AND a.sales_order_date<='" + date_until_selected + "') " + cond_status, "1")
@@ -198,6 +205,14 @@
             cond_status = "AND trf.id_report_status=" + SLEStatusTrf.EditValue.ToString + " "
         End If
 
+        'type restock
+        Dim id_type_restock As String = LETypeRestock.EditValue.ToString
+        If id_type_restock = "1" Then
+            cond_status += "AND ISNULL(so.id_ol_store_oos)"
+        ElseIf id_type_restock = "2" Then
+            cond_status += "AND !ISNULL(so.id_ol_store_oos)"
+        End If
+
         'prepare query
         Dim query_c As ClassFGTrf = New ClassFGTrf()
         Dim query As String = query_c.queryMain("AND (trf.fg_trf_date>=''" + date_from_selected + "'' AND trf.fg_trf_date<=''" + date_until_selected + "'') " + cond_status, "1")
@@ -249,9 +264,14 @@
     End Sub
 
     Private Sub FormSalesOrderSvcLevel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        For Each t As DevExpress.XtraTab.XtraTabPage In XTCSvcLevel.TabPages
+            XTCSvcLevel.SelectedTabPage = t
+        Next t
+        XTCSvcLevel.SelectedTabPage = XTCSvcLevel.TabPages(0)
         viewPackingStatus()
         viewReportStatus()
         view_store()
+        view_type_restock()
 
         'date now
         Dim data_dt As DataTable = execute_query("SELECT DATE(NOW()) AS `dt`", -1, True, "", "", "", "")
@@ -273,6 +293,16 @@
         DEUntilNonStock.EditValue = data_dt.Rows(0)("dt")
 
         load_surat_jalan()
+    End Sub
+
+    Sub view_type_restock()
+        Cursor = Cursors.WaitCursor
+        Dim query As String = "SELECT 1 AS `id_type`, 'Reguler' AS `type`
+        UNION ALL
+        SELECT 2 AS `id_type`, 'Restock Online Order' AS `type` "
+        viewLookupQuery(LETypeRestock, query, 0, "type", "id_type")
+        viewLookupQuery(LETypeRestockTOO, query, 0, "type", "id_type")
+        Cursor = Cursors.Default
     End Sub
 
     Sub viewPackingStatus()
@@ -1238,5 +1268,9 @@
 
     Private Sub BarButtonItem2_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonItem2.ItemClick
         FormSalesReturnOrderMail.ShowDialog()
+    End Sub
+
+    Private Sub GroupControl4_Paint(sender As Object, e As PaintEventArgs) Handles GroupControl4.Paint
+
     End Sub
 End Class

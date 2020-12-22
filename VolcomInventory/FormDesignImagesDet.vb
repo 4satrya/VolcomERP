@@ -56,9 +56,9 @@
         If confirm = DialogResult.Yes Then
             FormMain.SplashScreenManager1.ShowWaitForm()
 
-            Dim design_code As DataTable = execute_query("SELECT id_design, design_code FROM tb_m_design WHERE design_code <> '' ORDER BY id_design DESC", -1, True, "", "", "", "")
+            Dim group_upload As String = execute_query("SELECT (MAX(group_upload) + 1) AS group_upload FROM tb_design_images", 0, True, "", "", "", "")
 
-            Dim last_id_design As String = ""
+            Dim design_code As DataTable = execute_query("SELECT id_design, design_code FROM tb_m_design WHERE design_code <> '' ORDER BY id_design DESC", -1, True, "", "", "", "")
 
             'upload
             Dim sftp As Renci.SshNet.SftpClient = New Renci.SshNet.SftpClient(cloud_host, cloud_username, cloud_password)
@@ -104,12 +104,10 @@
 
                     'store database
                     If GVList.GetRowCellValue(i, "status").ToString.Contains("Warning") Then
-                        execute_non_query("UPDATE tb_design_images SET created_at = NOW(), created_by = " + id_user + " WHERE id_design_images = " + GVList.GetRowCellValue(i, "id_design_images").ToString, True, "", "", "", "")
+                        execute_non_query("UPDATE tb_design_images SET created_at = NOW(), created_by = " + id_user + ", group_upload = " + group_upload + " WHERE id_design_images = " + GVList.GetRowCellValue(i, "id_design_images").ToString, True, "", "", "", "")
                     Else
-                        execute_non_query("INSERT INTO tb_design_images (id_design, store, file_name, sort, created_at, created_by) VALUES (" + dv_design(0)("id_design").ToString + ", '" + array_name(0) + "', '" + IO.Path.GetFileName(GVList.GetRowCellValue(i, "file_name").ToString) + "', " + array_name(2) + ", NOW(), " + id_user + ")", True, "", "", "", "")
+                        execute_non_query("INSERT INTO tb_design_images (id_design, store, file_name, sort, created_at, created_by, group_upload) VALUES (" + dv_design(0)("id_design").ToString + ", '" + array_name(0) + "', '" + IO.Path.GetFileName(GVList.GetRowCellValue(i, "file_name").ToString) + "', " + array_name(2) + ", NOW(), " + id_user + ", " + group_upload + ")", True, "", "", "", "")
                     End If
-
-                    last_id_design = dv_design(0)("id_design").ToString
                 Next
             End If
 
@@ -120,7 +118,7 @@
 
             Close()
 
-            FormDesignImages.SLUESeason.EditValue = execute_query("SELECT id_season FROM tb_m_design WHERE id_design = " + last_id_design, 0, True, "", "", "", "")
+            FormDesignImages.SLUESeason.EditValue = "LAST"
 
             FormDesignImages.view_images()
         End If

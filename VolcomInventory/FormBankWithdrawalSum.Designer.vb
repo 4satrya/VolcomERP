@@ -66,6 +66,8 @@ Partial Class FormBankWithdrawalSum
         Me.GridColumn100 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.BGenerate = New DevExpress.XtraEditors.SimpleButton()
+        Me.TECOAType = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl2.SuspendLayout()
         CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -93,6 +95,7 @@ Partial Class FormBankWithdrawalSum
         CType(Me.GVList, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RICECheck, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TECOAType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControl2
@@ -107,6 +110,8 @@ Partial Class FormBankWithdrawalSum
         'PanelControl3
         '
         Me.PanelControl3.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
+        Me.PanelControl3.Controls.Add(Me.TECOAType)
+        Me.PanelControl3.Controls.Add(Me.LabelControl3)
         Me.PanelControl3.Controls.Add(Me.DEChangeDate)
         Me.PanelControl3.Controls.Add(Me.LChangeTo)
         Me.PanelControl3.Controls.Add(Me.BChangeDate)
@@ -581,6 +586,26 @@ Partial Class FormBankWithdrawalSum
         Me.BGenerate.TabStop = False
         Me.BGenerate.Text = "Generate"
         '
+        'TECOAType
+        '
+        Me.TECOAType.EditValue = ""
+        Me.TECOAType.Location = New System.Drawing.Point(438, 12)
+        Me.TECOAType.Name = "TECOAType"
+        Me.TECOAType.Properties.EditValueChangedDelay = 1
+        Me.TECOAType.Properties.ReadOnly = True
+        Me.TECOAType.Size = New System.Drawing.Size(227, 20)
+        Me.TECOAType.TabIndex = 172
+        Me.TECOAType.TabStop = False
+        '
+        'LabelControl3
+        '
+        Me.LabelControl3.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl3.Location = New System.Drawing.Point(408, 15)
+        Me.LabelControl3.Name = "LabelControl3"
+        Me.LabelControl3.Size = New System.Drawing.Size(24, 13)
+        Me.LabelControl3.TabIndex = 173
+        Me.LabelControl3.Text = "Type"
+        '
         'FormBankWithdrawalSum
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -626,6 +651,7 @@ Partial Class FormBankWithdrawalSum
         CType(Me.GVList, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RICECheck, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TECOAType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -676,4 +702,6 @@ Partial Class FormBankWithdrawalSum
     Friend WithEvents DEChangeDate As DevExpress.XtraEditors.DateEdit
     Friend WithEvents LChangeTo As DevExpress.XtraEditors.LabelControl
     Friend WithEvents GridColumn4 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents TECOAType As DevExpress.XtraEditors.TextEdit
+    Friend WithEvents LabelControl3 As DevExpress.XtraEditors.LabelControl
 End Class

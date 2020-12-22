@@ -40,6 +40,12 @@ Partial Class FormItemExpense
         Me.DEBBKFrom = New DevExpress.XtraEditors.DateEdit()
         Me.BViewPayment = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnBankWithdrawal = New DevExpress.XtraEditors.SimpleButton()
+        Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.SLEUnit = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GridView6 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn25 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn26 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn27 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GCData, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVData, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemTextEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -49,6 +55,8 @@ Partial Class FormItemExpense
         CType(Me.DEBBKTo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEBBKFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEBBKFrom.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SLEUnit.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView6, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GCData
@@ -64,7 +72,7 @@ Partial Class FormItemExpense
         '
         'GVData
         '
-        Me.GVData.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnId, Me.GridColumnNumber, Me.GridColumnCreatedDate, Me.GridColumnCreatedByName, Me.GridColumnReortStt, Me.GridColumnPaidStt, Me.GridColumnBal, Me.GridColumntotal, Me.GridColumnIdComp, Me.GridColumnBeneficiary})
+        Me.GVData.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumnId, Me.GridColumnNumber, Me.GridColumnCreatedDate, Me.GridColumnCreatedByName, Me.GridColumnReortStt, Me.GridColumnPaidStt, Me.GridColumnBal, Me.GridColumntotal, Me.GridColumnIdComp, Me.GridColumnBeneficiary})
         Me.GVData.GridControl = Me.GCData
         Me.GVData.Name = "GVData"
         Me.GVData.OptionsBehavior.Editable = False
@@ -84,7 +92,8 @@ Partial Class FormItemExpense
         Me.GridColumnNumber.FieldName = "number"
         Me.GridColumnNumber.Name = "GridColumnNumber"
         Me.GridColumnNumber.Visible = True
-        Me.GridColumnNumber.VisibleIndex = 0
+        Me.GridColumnNumber.VisibleIndex = 1
+        Me.GridColumnNumber.Width = 83
         '
         'GridColumnCreatedDate
         '
@@ -94,7 +103,8 @@ Partial Class FormItemExpense
         Me.GridColumnCreatedDate.FieldName = "created_date"
         Me.GridColumnCreatedDate.Name = "GridColumnCreatedDate"
         Me.GridColumnCreatedDate.Visible = True
-        Me.GridColumnCreatedDate.VisibleIndex = 2
+        Me.GridColumnCreatedDate.VisibleIndex = 3
+        Me.GridColumnCreatedDate.Width = 83
         '
         'GridColumnCreatedByName
         '
@@ -102,7 +112,8 @@ Partial Class FormItemExpense
         Me.GridColumnCreatedByName.FieldName = "created_by_name"
         Me.GridColumnCreatedByName.Name = "GridColumnCreatedByName"
         Me.GridColumnCreatedByName.Visible = True
-        Me.GridColumnCreatedByName.VisibleIndex = 3
+        Me.GridColumnCreatedByName.VisibleIndex = 4
+        Me.GridColumnCreatedByName.Width = 83
         '
         'GridColumnReortStt
         '
@@ -110,7 +121,8 @@ Partial Class FormItemExpense
         Me.GridColumnReortStt.FieldName = "report_status"
         Me.GridColumnReortStt.Name = "GridColumnReortStt"
         Me.GridColumnReortStt.Visible = True
-        Me.GridColumnReortStt.VisibleIndex = 4
+        Me.GridColumnReortStt.VisibleIndex = 5
+        Me.GridColumnReortStt.Width = 83
         '
         'GridColumnPaidStt
         '
@@ -118,7 +130,8 @@ Partial Class FormItemExpense
         Me.GridColumnPaidStt.FieldName = "paid_status"
         Me.GridColumnPaidStt.Name = "GridColumnPaidStt"
         Me.GridColumnPaidStt.Visible = True
-        Me.GridColumnPaidStt.VisibleIndex = 5
+        Me.GridColumnPaidStt.VisibleIndex = 6
+        Me.GridColumnPaidStt.Width = 83
         '
         'GridColumnBal
         '
@@ -129,7 +142,8 @@ Partial Class FormItemExpense
         Me.GridColumnBal.Name = "GridColumnBal"
         Me.GridColumnBal.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "balance", "{0:N2}")})
         Me.GridColumnBal.Visible = True
-        Me.GridColumnBal.VisibleIndex = 6
+        Me.GridColumnBal.VisibleIndex = 7
+        Me.GridColumnBal.Width = 83
         '
         'GridColumntotal
         '
@@ -140,7 +154,8 @@ Partial Class FormItemExpense
         Me.GridColumntotal.Name = "GridColumntotal"
         Me.GridColumntotal.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total", "{0:N2}")})
         Me.GridColumntotal.Visible = True
-        Me.GridColumntotal.VisibleIndex = 7
+        Me.GridColumntotal.VisibleIndex = 8
+        Me.GridColumntotal.Width = 88
         '
         'GridColumnIdComp
         '
@@ -155,7 +170,8 @@ Partial Class FormItemExpense
         Me.GridColumnBeneficiary.FieldName = "comp"
         Me.GridColumnBeneficiary.Name = "GridColumnBeneficiary"
         Me.GridColumnBeneficiary.Visible = True
-        Me.GridColumnBeneficiary.VisibleIndex = 1
+        Me.GridColumnBeneficiary.VisibleIndex = 2
+        Me.GridColumnBeneficiary.Width = 83
         '
         'RepositoryItemTextEdit1
         '
@@ -165,6 +181,7 @@ Partial Class FormItemExpense
         '
         'PanelControlNav
         '
+        Me.PanelControlNav.Controls.Add(Me.SLEUnit)
         Me.PanelControlNav.Controls.Add(Me.DEBBKTo)
         Me.PanelControlNav.Controls.Add(Me.LabelControl19)
         Me.PanelControlNav.Controls.Add(Me.LabelControl18)
@@ -219,7 +236,7 @@ Partial Class FormItemExpense
         '
         'BViewPayment
         '
-        Me.BViewPayment.Location = New System.Drawing.Point(388, 11)
+        Me.BViewPayment.Location = New System.Drawing.Point(548, 11)
         Me.BViewPayment.Name = "BViewPayment"
         Me.BViewPayment.Size = New System.Drawing.Size(60, 23)
         Me.BViewPayment.TabIndex = 8926
@@ -234,6 +251,60 @@ Partial Class FormItemExpense
         Me.BtnBankWithdrawal.Size = New System.Drawing.Size(130, 42)
         Me.BtnBankWithdrawal.TabIndex = 0
         Me.BtnBankWithdrawal.Text = "Bank Withdrawal"
+        '
+        'GridColumn1
+        '
+        Me.GridColumn1.Caption = "Unit"
+        Me.GridColumn1.FieldName = "tag_description"
+        Me.GridColumn1.Name = "GridColumn1"
+        Me.GridColumn1.Visible = True
+        Me.GridColumn1.VisibleIndex = 0
+        Me.GridColumn1.Width = 96
+        '
+        'SLEUnit
+        '
+        Me.SLEUnit.Location = New System.Drawing.Point(388, 13)
+        Me.SLEUnit.Name = "SLEUnit"
+        Me.SLEUnit.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLEUnit.Properties.View = Me.GridView6
+        Me.SLEUnit.Size = New System.Drawing.Size(154, 20)
+        Me.SLEUnit.TabIndex = 8931
+        '
+        'GridView6
+        '
+        Me.GridView6.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn25, Me.GridColumn26, Me.GridColumn27})
+        Me.GridView6.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView6.Name = "GridView6"
+        Me.GridView6.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView6.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn25
+        '
+        Me.GridColumn25.Caption = "id_coa_tag"
+        Me.GridColumn25.FieldName = "id_comp"
+        Me.GridColumn25.Name = "GridColumn25"
+        '
+        'GridColumn26
+        '
+        Me.GridColumn26.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumn26.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumn26.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumn26.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumn26.Caption = "Number"
+        Me.GridColumn26.FieldName = "tag_code"
+        Me.GridColumn26.Name = "GridColumn26"
+        Me.GridColumn26.Visible = True
+        Me.GridColumn26.VisibleIndex = 0
+        Me.GridColumn26.Width = 281
+        '
+        'GridColumn27
+        '
+        Me.GridColumn27.Caption = "Unit"
+        Me.GridColumn27.FieldName = "tag_description"
+        Me.GridColumn27.Name = "GridColumn27"
+        Me.GridColumn27.Visible = True
+        Me.GridColumn27.VisibleIndex = 1
+        Me.GridColumn27.Width = 1351
         '
         'FormItemExpense
         '
@@ -255,6 +326,8 @@ Partial Class FormItemExpense
         CType(Me.DEBBKTo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEBBKFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEBBKFrom.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SLEUnit.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView6, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -279,4 +352,10 @@ Partial Class FormItemExpense
     Friend WithEvents LabelControl18 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents DEBBKFrom As DevExpress.XtraEditors.DateEdit
     Friend WithEvents BViewPayment As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents GridColumn1 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents SLEUnit As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents GridView6 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn25 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn26 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn27 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

@@ -60,6 +60,7 @@ Partial Class FormViewMatPurc
         Me.ColDiscount = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ColSubtotal = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.ColNote = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnSize = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GroupGeneralHeader = New DevExpress.XtraEditors.GroupControl()
         Me.TEPORevNumber = New DevExpress.XtraEditors.TextEdit()
@@ -99,7 +100,6 @@ Partial Class FormViewMatPurc
         Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
         Me.TEPONumber = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
-        Me.GridColumnSize = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GroupControl3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupControl3.SuspendLayout()
         CType(Me.GroupGeneralFooter, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -650,6 +650,18 @@ Partial Class FormViewMatPurc
         Me.ColNote.Visible = True
         Me.ColNote.VisibleIndex = 9
         '
+        'GridColumnSize
+        '
+        Me.GridColumnSize.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumnSize.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumnSize.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumnSize.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumnSize.Caption = "Size"
+        Me.GridColumnSize.FieldName = "size"
+        Me.GridColumnSize.Name = "GridColumnSize"
+        Me.GridColumnSize.Visible = True
+        Me.GridColumnSize.VisibleIndex = 4
+        '
         'GridColumn5
         '
         Me.GridColumn5.AppearanceCell.Options.UseTextOptions = True
@@ -1105,18 +1117,6 @@ Partial Class FormViewMatPurc
         Me.LabelControl3.TabIndex = 86
         Me.LabelControl3.Text = "PO Number"
         '
-        'GridColumnSize
-        '
-        Me.GridColumnSize.AppearanceCell.Options.UseTextOptions = True
-        Me.GridColumnSize.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
-        Me.GridColumnSize.AppearanceHeader.Options.UseTextOptions = True
-        Me.GridColumnSize.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
-        Me.GridColumnSize.Caption = "Size"
-        Me.GridColumnSize.FieldName = "size"
-        Me.GridColumnSize.Name = "GridColumnSize"
-        Me.GridColumnSize.Visible = True
-        Me.GridColumnSize.VisibleIndex = 4
-        '
         'FormViewMatPurc
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1132,7 +1132,7 @@ Partial Class FormViewMatPurc
         Me.Name = "FormViewMatPurc"
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "View Purchase Raw material"
+        Me.Text = "View Purchase Order Raw material"
         CType(Me.GroupControl3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupControl3.ResumeLayout(False)
         CType(Me.GroupGeneralFooter, System.ComponentModel.ISupportInitialize).EndInit()

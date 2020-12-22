@@ -3,10 +3,17 @@
     '
     Dim is_from_storage As Boolean = False
     Public id_departement As String = "-1"
+    Public id_coa_tag As String = "1"
     '
     Private Sub FormItemReqAdd_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         viewCat()
         fill_dt()
+        '
+        If id_coa_tag = "1" Then
+            CEStoreRequest.Enabled = True
+        Else
+            CEStoreRequest.Enabled = False
+        End If
     End Sub
 
     Sub fill_dt()

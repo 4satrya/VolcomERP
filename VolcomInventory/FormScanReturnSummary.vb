@@ -220,15 +220,15 @@ WHERE c.id_comp='" & SLEVendor.EditValue.ToString & "'"
                 Dim dt As DataTable = execute_query(q, -1, True, "", "", "", "")
                 Report.DataSource = dt
                 '
-                q = "SELECT awb.`id_inbound_awb`,awb.`awb_number`,awb.`id_comp`,koli.`panjang`,koli.`lebar`,koli.`tinggi`,koli.`berat`,koli.`berat_dimensi`,IF(koli.`berat`>koli.`berat_dimensi`,koli.`berat`,koli.`berat_dimensi`) AS final_berat
-FROM tb_inbound_koli koli
-INNER JOIN tb_inbound_awb awb ON awb.`id_inbound_awb`=koli.`id_inbound_awb`
-INNER JOIN tb_return_note rn ON rn.`id_inbound_awb`=awb.`id_inbound_awb`
-WHERE rn.`date_created`='" & Date.Parse(DEStart3pl.EditValue.ToString).ToString("yyyy-MM-dd") & "' 
-AND awb.`id_comp`='" & SLEVendor.EditValue.ToString & "'
-GROUP BY koli.`id_inbound_koli`"
-                dt = execute_query(q, -1, True, "", "", "", "")
-                Report.data_awb = dt
+                '                q = "SELECT awb.`id_inbound_awb`,awb.`awb_number`,awb.`id_comp`,koli.`panjang`,koli.`lebar`,koli.`tinggi`,koli.`berat`,koli.`berat_dimensi`,IF(koli.`berat`>koli.`berat_dimensi`,koli.`berat`,koli.`berat_dimensi`) AS final_berat
+                'FROM tb_inbound_koli koli
+                'INNER JOIN tb_inbound_awb awb ON awb.`id_inbound_awb`=koli.`id_inbound_awb`
+                'INNER JOIN tb_return_note rn ON rn.`id_inbound_awb`=awb.`id_inbound_awb`
+                'WHERE rn.`date_created`='" & Date.Parse(DEStart3pl.EditValue.ToString).ToString("yyyy-MM-dd") & "' 
+                'AND awb.`id_comp`='" & SLEVendor.EditValue.ToString & "'
+                'GROUP BY koli.`id_inbound_koli`"
+                '                dt = execute_query(q, -1, True, "", "", "", "")
+                '                Report.data_awb = dt
                 '
                 Report.data_det = GC3PL.DataSource
                 Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)

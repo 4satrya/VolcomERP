@@ -364,12 +364,12 @@ Public Class FormSalesReturnDet
     End Sub
 
     Function getRefStoreRetNumber(ByVal id_store_par As String) As DataTable
-        Dim query As String = "SELECT ad.id_wh_awb_det,'0' AS id_return_note, ad.do_no, ad.qty, ad.is_active 
+        Dim query As String = "SELECT ad.id_wh_awb_det,'0' AS id_return_note,'' AS label_number, ad.do_no, ad.qty, ad.is_active 
         FROM tb_wh_awbill_det_in ad
         INNER JOIN tb_wh_awbill a ON a.id_awbill = ad.id_awbill
         WHERE a.id_store=" + id_store_par + " AND ad.is_active=1 AND a.is_lock=1 
         UNION ALL 
-        SELECT '0' AS id_wh_awb_det,rn.id_return_note,rn.number_return_note AS do_no,rn.qty AS qty,1 AS is_active
+        SELECT '0' AS id_wh_awb_det,rn.id_return_note,rn.label_number,rn.number_return_note AS do_no,rn.qty AS qty,1 AS is_active
         FROM tb_return_note rn 
         INNER JOIN tb_return_note_store st ON st.id_return_note=rn.id_return_note AND st.id_comp='" + id_store_par + "'
         WHERE rn.is_lock=1 AND rn.is_void=2"

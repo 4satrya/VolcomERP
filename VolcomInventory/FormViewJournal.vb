@@ -2,10 +2,25 @@
     Public id_trans As String = "-1"
     Public is_enable_view_doc As Boolean = True
     Public show_trans_number As Boolean = False
-
+    '
+    Public is_enable_search As Boolean = False
+    '
     Private Sub FormViewJournal_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         load_billing_type(LEBilling)
-        Dim query As String = "SELECT a.id_user,a.acc_trans_number, a.report_number,DATE_FORMAT(a.date_created,'%Y-%m-%d') as date_created,a.acc_trans_note,id_report_status, a.id_bill_type FROM tb_a_acc_trans a WHERE a.id_acc_trans='" & id_trans & "'"
+
+        If is_enable_search Then
+            PCSearch.Visible = True
+            TEVoucherSearch.Text = "JUR00001"
+        Else
+            PCSearch.Visible = False
+            load_det()
+        End If
+    End Sub
+
+    Sub load_det()
+        PCButton.Visible = True
+
+        Dim query As String = "SELECT a.id_user,a.acc_trans_number, a.report_number,DATE_FORMAT(a.date_reference,'%d-%M-%Y') as date_reference,DATE_FORMAT(a.date_created,'%d-%M-%Y') as date_created,a.acc_trans_note,id_report_status, a.id_bill_type FROM tb_a_acc_trans a WHERE a.id_acc_trans='" & id_trans & "'"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
 
         TEUserEntry.Text = get_user_identify(data.Rows(0)("id_user").ToString, 1)
@@ -14,8 +29,10 @@
         Else
             TENumber.Text = data.Rows(0)("acc_trans_number").ToString
         End If
-        Dim strDate As String = data.Rows(0)("date_created").ToString
-        TEDate.Text = view_date_from(strDate, 0)
+
+        TEReffDate.Text = data.Rows(0)("date_reference").ToString
+        TEDate.Text = data.Rows(0)("date_created").ToString
+
         MENote.Text = data.Rows(0)("acc_trans_note").ToString
         MENote.Enabled = False
         LEBilling.ItemIndex = LEBilling.Properties.GetDataSourceRowIndex("id_bill_type", data.Rows(0)("id_bill_type").ToString)
@@ -40,7 +57,7 @@
     End Sub
 
     Sub view_det()
-        Dim query As String = "SELECT a.id_acc_trans_det,a.id_acc,b.acc_name,b.acc_description, c.comp_number,CAST(a.debit AS DECIMAL(13,2)) as debit,CAST(a.credit AS DECIMAL(13,2)) as credit,a.acc_trans_det_note as note,a.report_mark_type,a.id_report 
+        Dim query As String = "SELECT a.report_number,a.report_number_ref,a.id_acc_trans_det,a.id_acc,b.acc_name,b.acc_description, c.comp_number,CAST(a.debit AS DECIMAL(13,2)) as debit,CAST(a.credit AS DECIMAL(13,2)) as credit,a.acc_trans_det_note as note,a.report_mark_type,a.id_report 
         FROM tb_a_acc_trans_det a 
         INNER JOIN tb_a_acc b ON a.id_acc=b.id_acc 
         LEFT JOIN tb_m_comp c ON c.id_comp = a.id_comp
@@ -97,5 +114,20 @@
         Dim Report As New ReportAccountingJournal()
         Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
         Tool.ShowPreview()
+    End Sub
+
+    Private Sub BViewVoucher_Click(sender As Object, e As EventArgs) Handles BViewVoucher.Click
+        If TEVoucherSearch.Text = "" Then
+            warningCustom("Please put voucher number (JURXXXX)")
+        Else
+            Dim q As String = "SELECT id_acc_trans FROM tb_a_acc_trans WHERE acc_trans_number='" & addSlashes(TEVoucherSearch.Text) & "'"
+            Dim dt As DataTable = execute_query(q, -1, True, "", "", "", "")
+            If dt.Rows.Count = 0 Then
+                warningCustom("Voucher number not found. Please check again your number.")
+            Else
+                id_trans = dt.Rows(0)("id_acc_trans").ToString
+                load_det()
+            End If
+        End If
     End Sub
 End Class

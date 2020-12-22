@@ -67,6 +67,7 @@
                 '-- mail type
                 TxtMailType.Text = execute_query("SELECT report_mark_type_name FROM tb_lookup_report_mark_type WHERE report_mark_type='45'", 0, True, "", "", "", "")
                 MEReason.EditValue = ""
+                MEAdditionalInfo.EditValue = ""
 
                 '--- load member
                 Dim qf As String = "SELECT m.id_mail_manage_mapping_intern AS `index`,0 AS `id_mail_manage_member`,0 AS `id_mail_manage`,m.id_mail_member_type, mmt.mail_member_type,m.id_user,0 AS `id_comp_contact`, 
@@ -137,6 +138,7 @@
                 Dim html As String = execute_query("SELECT template FROM tb_mail_manage_template WHERE `type` = 'ret'", 0, True, "", "", "", "")
 
                 html = html.Replace("[return_reason]", MEReason.EditValue.ToString)
+                html = html.Replace("[additional_info]", If(MEAdditionalInfo.EditValue.ToString = "", "", "<p style="" Font-family 'Times New Roman', Times, serif; Font-Size:  16px; margin: 5px 0 15px 0; "">" + MEAdditionalInfo.EditValue.ToString + "</p>"))
                 html = html.Replace("[employee_name]", employee_name_from)
                 html = html.Replace("[employee_position]", employee_position_from)
 
@@ -160,6 +162,7 @@
             TxtUpdatedBy.Text = data.Rows(0)("updated_by_name").ToString
             MESubject.Text = data.Rows(0)("mail_subject").ToString
             MEReason.EditValue = data.Rows(0)("reason").ToString
+            MEAdditionalInfo.EditValue = data.Rows(0)("additional_info").ToString
 
             If rmt = "45" Then 'RETURN ORDER
                 '-- load member
@@ -228,6 +231,7 @@
                 Dim html As String = execute_query("SELECT template FROM tb_mail_manage_template WHERE `type` = 'ret'", 0, True, "", "", "", "")
 
                 html = html.Replace("[return_reason]", MEReason.EditValue.ToString)
+                html = html.Replace("[additional_info]", If(MEAdditionalInfo.EditValue.ToString = "", "", "<p style="" Font-family 'Times New Roman', Times, serif; Font-Size:  16px; margin: 5px 0 15px 0; "">" + MEAdditionalInfo.EditValue.ToString + "</p>"))
                 html = html.Replace("[employee_name]", employee_name_from)
                 html = html.Replace("[employee_position]", employee_position_from)
 
@@ -248,10 +252,12 @@
                 BtnDraft.Visible = True
                 BtnCancel.Visible = True
                 MEReason.ReadOnly = False
+                MEAdditionalInfo.ReadOnly = False
             Else
                 BtnDraft.Visible = False
                 BtnCancel.Visible = False
                 MEReason.ReadOnly = True
+                MEAdditionalInfo.ReadOnly = True
             End If
 
             'jika cancel
@@ -348,8 +354,8 @@
         Dim mail_subject As String = addSlashes(MESubject.Text)
         If action = "ins" Then
             'insert head
-            Dim query As String = "INSERT INTO tb_mail_manage(number, created_date, created_by, updated_date, updated_by, report_mark_type, id_mail_status, mail_status_note, mail_subject, reason) VALUES
-            ('', NOW(), '" + id_user + "', NOW(), '" + id_user + "', '" + rmt + "', '1', '" + note_par + "', '" + mail_subject + "', '" + addSlashes(MEReason.EditValue.ToString) + "'); SELECT LAST_INSERT_ID(); "
+            Dim query As String = "INSERT INTO tb_mail_manage(number, created_date, created_by, updated_date, updated_by, report_mark_type, id_mail_status, mail_status_note, mail_subject, reason, additional_info) VALUES
+            ('', NOW(), '" + id_user + "', NOW(), '" + id_user + "', '" + rmt + "', '1', '" + note_par + "', '" + mail_subject + "', '" + addSlashes(MEReason.EditValue.ToString) + "', '" + addSlashes(MEAdditionalInfo.EditValue.ToString) + "'); SELECT LAST_INSERT_ID(); "
             id = execute_query(query, 0, True, "", "", "", "")
             execute_non_query("UPDATE tb_mail_manage SET `number` = CONCAT((SELECT email_code_head FROM `tb_opt` LIMIT 1),LPAD(" + id + ",(SELECT email_code_digit FROM tb_opt LIMIT 1),'0')) WHERE id_mail_manage=" + id + ";", True, "", "", "", "")
 
@@ -745,6 +751,35 @@
             Dim html As String = execute_query("SELECT template FROM tb_mail_manage_template WHERE `type` = 'ret'", 0, True, "", "", "", "")
 
             html = html.Replace("[return_reason]", MEReason.EditValue.ToString)
+            html = html.Replace("[additional_info]", If(MEAdditionalInfo.EditValue.ToString = "", "", "<p style="" Font-family 'Times New Roman', Times, serif; Font-Size:  16px; margin: 5px 0 15px 0; "">" + MEAdditionalInfo.EditValue.ToString + "</p>"))
+            html = html.Replace("[employee_name]", employee_name_from)
+            html = html.Replace("[employee_position]", employee_position_from)
+
+            WebBrowser1.DocumentText = html
+        End If
+    End Sub
+
+    Private Sub MEAdditionalInfo_EditValueChanged(sender As Object, e As EventArgs) Handles MEAdditionalInfo.EditValueChanged
+        If loaded Then
+            '-- load 'from/to/cc & html preview
+            Dim employee_name_from As String = ""
+            Dim employee_position_from As String = ""
+
+            GVMember.ActiveFilterString = ""
+            For j As Integer = 0 To ((GVMember.RowCount - 1) - GetGroupRowCount(GVMember))
+                Dim id_mail_member_type As String = GVMember.GetRowCellValue(j, "id_mail_member_type").ToString
+
+                If id_mail_member_type = "1" Then
+                    employee_name_from = GVMember.GetRowCellValue(j, "description").ToString
+                    employee_position_from = GVMember.GetRowCellValue(j, "position").ToString
+                End If
+            Next
+
+            'mail template
+            Dim html As String = execute_query("SELECT template FROM tb_mail_manage_template WHERE `type` = 'ret'", 0, True, "", "", "", "")
+
+            html = html.Replace("[return_reason]", MEReason.EditValue.ToString)
+            html = html.Replace("[additional_info]", If(MEAdditionalInfo.EditValue.ToString = "", "", "<p style="" Font-family 'Times New Roman', Times, serif; Font-Size:  16px; margin: 5px 0 15px 0; "">" + MEAdditionalInfo.EditValue.ToString + "</p>"))
             html = html.Replace("[employee_name]", employee_name_from)
             html = html.Replace("[employee_position]", employee_position_from)
 

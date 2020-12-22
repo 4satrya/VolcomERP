@@ -42,20 +42,23 @@ Partial Public Class ReportAccountingWorksheet
         Me.XrLine1 = New DevExpress.XtraReports.UI.XRLine()
         Me.XLTitle = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrPictureBox1 = New DevExpress.XtraReports.UI.XRPictureBox()
+        Me.XrLabel5 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel6 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.LUnit = New DevExpress.XtraReports.UI.XRLabel()
         CType(Me.XrTable, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
         '
         'Detail
         '
-        Me.Detail.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrTable, Me.XLPeriod, Me.XrLabel3, Me.XrLabel1, Me.XrLabel2, Me.XrLabel4, Me.XLAccount})
-        Me.Detail.HeightF = 106.0!
+        Me.Detail.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLabel5, Me.XrLabel6, Me.LUnit, Me.XrTable, Me.XLPeriod, Me.XrLabel3, Me.XrLabel1, Me.XrLabel2, Me.XrLabel4, Me.XLAccount})
+        Me.Detail.HeightF = 126.8333!
         Me.Detail.Name = "Detail"
         Me.Detail.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100.0!)
         Me.Detail.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
         '
         'XrTable
         '
-        Me.XrTable.LocationFloat = New DevExpress.Utils.PointFloat(0!, 66.00002!)
+        Me.XrTable.LocationFloat = New DevExpress.Utils.PointFloat(0!, 86.83334!)
         Me.XrTable.Name = "XrTable"
         Me.XrTable.Rows.AddRange(New DevExpress.XtraReports.UI.XRTableRow() {Me.XrTableRow})
         Me.XrTable.SizeF = New System.Drawing.SizeF(1075.0!, 40.0!)
@@ -169,7 +172,7 @@ Partial Public Class ReportAccountingWorksheet
         'XrLabel2
         '
         Me.XrLabel2.Font = New System.Drawing.Font("Tahoma", 9.75!)
-        Me.XrLabel2.LocationFloat = New DevExpress.Utils.PointFloat(0!, 27.99999!)
+        Me.XrLabel2.LocationFloat = New DevExpress.Utils.PointFloat(0!, 50.99998!)
         Me.XrLabel2.Name = "XrLabel2"
         Me.XrLabel2.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel2.SizeF = New System.Drawing.SizeF(60.0!, 23.0!)
@@ -181,7 +184,7 @@ Partial Public Class ReportAccountingWorksheet
         'XrLabel4
         '
         Me.XrLabel4.Font = New System.Drawing.Font("Tahoma", 9.75!)
-        Me.XrLabel4.LocationFloat = New DevExpress.Utils.PointFloat(60.00001!, 27.99999!)
+        Me.XrLabel4.LocationFloat = New DevExpress.Utils.PointFloat(60.00001!, 50.99998!)
         Me.XrLabel4.Name = "XrLabel4"
         Me.XrLabel4.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XrLabel4.SizeF = New System.Drawing.SizeF(15.0!, 23.0!)
@@ -193,7 +196,7 @@ Partial Public Class ReportAccountingWorksheet
         'XLAccount
         '
         Me.XLAccount.Font = New System.Drawing.Font("Tahoma", 9.75!)
-        Me.XLAccount.LocationFloat = New DevExpress.Utils.PointFloat(75.00003!, 28.00002!)
+        Me.XLAccount.LocationFloat = New DevExpress.Utils.PointFloat(75.00003!, 51.00001!)
         Me.XLAccount.Name = "XLAccount"
         Me.XLAccount.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
         Me.XLAccount.SizeF = New System.Drawing.SizeF(1000.0!, 23.0!)
@@ -264,6 +267,41 @@ Partial Public Class ReportAccountingWorksheet
         Me.XrPictureBox1.SizeF = New System.Drawing.SizeF(220.0!, 41.15!)
         Me.XrPictureBox1.Sizing = DevExpress.XtraPrinting.ImageSizeMode.StretchImage
         '
+        'XrLabel5
+        '
+        Me.XrLabel5.Font = New System.Drawing.Font("Tahoma", 9.75!)
+        Me.XrLabel5.LocationFloat = New DevExpress.Utils.PointFloat(0!, 28.00001!)
+        Me.XrLabel5.Name = "XrLabel5"
+        Me.XrLabel5.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel5.SizeF = New System.Drawing.SizeF(60.0!, 23.0!)
+        Me.XrLabel5.StylePriority.UseFont = False
+        Me.XrLabel5.StylePriority.UseTextAlignment = False
+        Me.XrLabel5.Text = "Unit"
+        Me.XrLabel5.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
+        '
+        'XrLabel6
+        '
+        Me.XrLabel6.Font = New System.Drawing.Font("Tahoma", 9.75!)
+        Me.XrLabel6.LocationFloat = New DevExpress.Utils.PointFloat(60.00001!, 28.00001!)
+        Me.XrLabel6.Name = "XrLabel6"
+        Me.XrLabel6.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XrLabel6.SizeF = New System.Drawing.SizeF(15.0!, 23.0!)
+        Me.XrLabel6.StylePriority.UseFont = False
+        Me.XrLabel6.StylePriority.UseTextAlignment = False
+        Me.XrLabel6.Text = ":"
+        Me.XrLabel6.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
+        '
+        'LUnit
+        '
+        Me.LUnit.Font = New System.Drawing.Font("Tahoma", 9.75!)
+        Me.LUnit.LocationFloat = New DevExpress.Utils.PointFloat(75.0!, 28.00001!)
+        Me.LUnit.Name = "LUnit"
+        Me.LUnit.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.LUnit.SizeF = New System.Drawing.SizeF(1000.0!, 23.0!)
+        Me.LUnit.StylePriority.UseFont = False
+        Me.LUnit.StylePriority.UseTextAlignment = False
+        Me.LUnit.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
+        '
         'ReportAccountingWorksheet
         '
         Me.Bands.AddRange(New DevExpress.XtraReports.UI.Band() {Me.Detail, Me.TopMargin, Me.BottomMargin, Me.ReportHeader})
@@ -300,4 +338,7 @@ Partial Public Class ReportAccountingWorksheet
     Friend WithEvents XrTableCellCredit As DevExpress.XtraReports.UI.XRTableCell
     Friend WithEvents XrTableCellEnding As DevExpress.XtraReports.UI.XRTableCell
     Friend WithEvents XrPageInfo1 As DevExpress.XtraReports.UI.XRPageInfo
+    Friend WithEvents XrLabel5 As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents XrLabel6 As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents LUnit As DevExpress.XtraReports.UI.XRLabel
 End Class

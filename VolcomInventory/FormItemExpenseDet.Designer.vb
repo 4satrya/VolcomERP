@@ -48,6 +48,12 @@ Partial Class FormItemExpenseDet
         Me.LabelControl10 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl8 = New DevExpress.XtraEditors.LabelControl()
         Me.PanelControlPay = New DevExpress.XtraEditors.PanelControl()
+        Me.SLEUnit = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GridView6 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn25 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn26 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn27 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.LabelControl16 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl9 = New DevExpress.XtraEditors.LabelControl()
         Me.SLEPayFrom = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
@@ -164,6 +170,8 @@ Partial Class FormItemExpenseDet
         CType(Me.TxtSubTotal.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControlPay, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControlPay.SuspendLayout()
+        CType(Me.SLEUnit.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView6, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SLEPayFrom.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEInvNo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -510,6 +518,8 @@ Partial Class FormItemExpenseDet
         '
         Me.PanelControlPay.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.PanelControlPay.Appearance.Options.UseFont = True
+        Me.PanelControlPay.Controls.Add(Me.SLEUnit)
+        Me.PanelControlPay.Controls.Add(Me.LabelControl16)
         Me.PanelControlPay.Controls.Add(Me.LabelControl9)
         Me.PanelControlPay.Controls.Add(Me.SLEPayFrom)
         Me.PanelControlPay.Controls.Add(Me.TEInvNo)
@@ -527,8 +537,62 @@ Partial Class FormItemExpenseDet
         Me.PanelControlPay.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelControlPay.Location = New System.Drawing.Point(0, 0)
         Me.PanelControlPay.Name = "PanelControlPay"
-        Me.PanelControlPay.Size = New System.Drawing.Size(1052, 129)
+        Me.PanelControlPay.Size = New System.Drawing.Size(1052, 148)
         Me.PanelControlPay.TabIndex = 16
+        '
+        'SLEUnit
+        '
+        Me.SLEUnit.Location = New System.Drawing.Point(109, 117)
+        Me.SLEUnit.Name = "SLEUnit"
+        Me.SLEUnit.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLEUnit.Properties.View = Me.GridView6
+        Me.SLEUnit.Size = New System.Drawing.Size(312, 20)
+        Me.SLEUnit.TabIndex = 25
+        '
+        'GridView6
+        '
+        Me.GridView6.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn25, Me.GridColumn26, Me.GridColumn27})
+        Me.GridView6.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView6.Name = "GridView6"
+        Me.GridView6.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView6.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn25
+        '
+        Me.GridColumn25.Caption = "id_coa_tag"
+        Me.GridColumn25.FieldName = "id_comp"
+        Me.GridColumn25.Name = "GridColumn25"
+        '
+        'GridColumn26
+        '
+        Me.GridColumn26.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumn26.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumn26.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumn26.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumn26.Caption = "Number"
+        Me.GridColumn26.FieldName = "tag_code"
+        Me.GridColumn26.Name = "GridColumn26"
+        Me.GridColumn26.Visible = True
+        Me.GridColumn26.VisibleIndex = 0
+        Me.GridColumn26.Width = 281
+        '
+        'GridColumn27
+        '
+        Me.GridColumn27.Caption = "Unit"
+        Me.GridColumn27.FieldName = "tag_description"
+        Me.GridColumn27.Name = "GridColumn27"
+        Me.GridColumn27.Visible = True
+        Me.GridColumn27.VisibleIndex = 1
+        Me.GridColumn27.Width = 1351
+        '
+        'LabelControl16
+        '
+        Me.LabelControl16.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelControl16.Location = New System.Drawing.Point(17, 120)
+        Me.LabelControl16.Name = "LabelControl16"
+        Me.LabelControl16.Size = New System.Drawing.Size(19, 13)
+        Me.LabelControl16.TabIndex = 24
+        Me.LabelControl16.Text = "Unit"
         '
         'LabelControl9
         '
@@ -639,7 +703,7 @@ Partial Class FormItemExpenseDet
         Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Right
         Me.PanelControl2.Location = New System.Drawing.Point(758, 2)
         Me.PanelControl2.Name = "PanelControl2"
-        Me.PanelControl2.Size = New System.Drawing.Size(292, 125)
+        Me.PanelControl2.Size = New System.Drawing.Size(292, 144)
         Me.PanelControl2.TabIndex = 5
         '
         'LabelControl15
@@ -771,7 +835,7 @@ Partial Class FormItemExpenseDet
         Me.GCData.MainView = Me.GVData
         Me.GCData.Name = "GCData"
         Me.GCData.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemSearchLookUpEdit1, Me.RepositoryItemTextEdit1, Me.RepositoryItemSpinEdit1, Me.RISLEType, Me.RISLECatExpense, Me.RISLECC, Me.RISLECOAPPH, Me.RepositoryItemTextEdit2, Me.RepositoryItemTextEdit3, Me.RISLECurrency, Me.RepositoryItemMemoEdit1, Me.RepositoryItemMemoEdit2, Me.RepositoryItemMemoEdit3})
-        Me.GCData.Size = New System.Drawing.Size(1046, 209)
+        Me.GCData.Size = New System.Drawing.Size(1046, 190)
         Me.GCData.TabIndex = 18
         Me.GCData.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVData})
         '
@@ -1346,10 +1410,10 @@ Partial Class FormItemExpenseDet
         'XTPDraftJournal
         '
         Me.XTPDraftJournal.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.XTPDraftJournal.Location = New System.Drawing.Point(0, 129)
+        Me.XTPDraftJournal.Location = New System.Drawing.Point(0, 148)
         Me.XTPDraftJournal.Name = "XTPDraftJournal"
         Me.XTPDraftJournal.SelectedTabPage = Me.XTPDetail
-        Me.XTPDraftJournal.Size = New System.Drawing.Size(1052, 275)
+        Me.XTPDraftJournal.Size = New System.Drawing.Size(1052, 256)
         Me.XTPDraftJournal.TabIndex = 19
         Me.XTPDraftJournal.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPDetail, Me.XTPDraft})
         '
@@ -1358,14 +1422,14 @@ Partial Class FormItemExpenseDet
         Me.XTPDetail.Controls.Add(Me.GCData)
         Me.XTPDetail.Controls.Add(Me.PanelControlNav)
         Me.XTPDetail.Name = "XTPDetail"
-        Me.XTPDetail.Size = New System.Drawing.Size(1046, 247)
+        Me.XTPDetail.Size = New System.Drawing.Size(1046, 228)
         Me.XTPDetail.Text = "Detail"
         '
         'XTPDraft
         '
         Me.XTPDraft.Controls.Add(Me.GCDraft)
         Me.XTPDraft.Name = "XTPDraft"
-        Me.XTPDraft.Size = New System.Drawing.Size(1046, 247)
+        Me.XTPDraft.Size = New System.Drawing.Size(1046, 228)
         Me.XTPDraft.Text = "Draft Journal"
         '
         'GCDraft
@@ -1374,7 +1438,7 @@ Partial Class FormItemExpenseDet
         Me.GCDraft.Location = New System.Drawing.Point(0, 0)
         Me.GCDraft.MainView = Me.GVDraft
         Me.GCDraft.Name = "GCDraft"
-        Me.GCDraft.Size = New System.Drawing.Size(1046, 247)
+        Me.GCDraft.Size = New System.Drawing.Size(1046, 228)
         Me.GCDraft.TabIndex = 2
         Me.GCDraft.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVDraft})
         '
@@ -1503,6 +1567,8 @@ Partial Class FormItemExpenseDet
         CType(Me.PanelControlPay, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControlPay.ResumeLayout(False)
         Me.PanelControlPay.PerformLayout()
+        CType(Me.SLEUnit.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView6, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SLEPayFrom.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TEInvNo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1677,4 +1743,10 @@ Partial Class FormItemExpenseDet
     Friend WithEvents RepositoryItemMemoEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit
     Friend WithEvents RepositoryItemMemoEdit2 As DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit
     Friend WithEvents RepositoryItemMemoEdit3 As DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit
+    Friend WithEvents LabelControl16 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents SLEUnit As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents GridView6 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn25 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn26 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn27 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

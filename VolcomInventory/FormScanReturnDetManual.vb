@@ -13,7 +13,7 @@
             FormScanReturnDet.GVListProduct.FocusedRowHandle = FormScanReturnDet.GVListProduct.RowCount - 1
             '
             FormScanReturnDet.GVListProduct.SetRowCellValue(FormScanReturnDet.GVListProduct.RowCount - 1, "type", "2")
-            FormScanReturnDet.GVListProduct.SetRowCellValue(FormScanReturnDet.GVListProduct.RowCount - 1, "notes", "Input manual")
+            FormScanReturnDet.GVListProduct.SetRowCellValue(FormScanReturnDet.GVListProduct.RowCount - 1, "notes", "No Tag")
 
             FormScanReturnDet.GVListProduct.SetRowCellValue(FormScanReturnDet.GVListProduct.RowCount - 1, "id_product", "0")
             FormScanReturnDet.GVListProduct.SetRowCellValue(FormScanReturnDet.GVListProduct.RowCount - 1, "product_full_code", TEBarcode.Text)

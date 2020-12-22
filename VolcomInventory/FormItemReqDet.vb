@@ -6,7 +6,9 @@
     Dim created_date As String = ""
     Public is_for_store As String = "2"
     Dim rmt As String = ""
-
+    '
+    Dim id_coa_tag As String = "-1"
+    '
     Private Sub FormItemReqDet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         viewReportStatus()
         actionLoad()
@@ -24,15 +26,24 @@
             TxtNumber.Text = "[auto generate]"
             DECreated.EditValue = getTimeDB()
             If get_opt_purchasing_field("is_can_all_dep") = "1" And Not FormItemReq.SLEDepartement.EditValue.ToString = "0" Then
-                TxtDept.Text = get_departement_x(FormItemReq.SLEDepartement.EditValue.ToString, "1")
+                TxtDept.Text = get_departement_x(id_departement_user, "1")
             Else
                 TxtDept.Text = get_departement_x(FormItemReq.SLEDepartement.EditValue.ToString, "1")
             End If
 
             TxtRequestedBy.Text = get_user_identify(id_user, "1")
 
+            '
+            Dim q As String = "SELECT id_coa_tag FROM tb_m_departement WHERE id_departement='" & FormItemReq.SLEDepartement.EditValue.ToString() & "'"
+            id_coa_tag = execute_query(q, 0, True, "", "", "", "")
+
             'menu
             If is_for_store = "1" Then
+                '
+                If Not id_coa_tag = "1" Then
+                    warningCustom("Please use normal item request")
+                End If
+                '
                 XTPDetail.PageVisible = True
                 PanelControlNav.Visible = False
                 viewDetailAlloc()
@@ -49,6 +60,7 @@
             Dim query As String = r.queryMain("AND r.id_item_req='" + id + "' ", "1")
             Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
 
+            id_coa_tag = data.Rows(0)("id_coa_tag").ToString
             id_report_status = data.Rows(0)("id_report_status").ToString
             TxtNumber.Text = data.Rows(0)("number").ToString
             created_date = DateTime.Parse(data.Rows(0)("created_date")).ToString("yyyy-MM-dd HH:mm:ss")
@@ -444,9 +456,11 @@ INNER JOIN tb_item i ON ic.id_item_cat=i.id_item_cat AND ic.id_departement='" & 
     Private Sub BtnAdd_Click(sender As Object, e As EventArgs) Handles BtnAdd.Click
         Cursor = Cursors.WaitCursor
         If get_opt_purchasing_field("is_can_all_dep") = "1" And Not FormItemReq.SLEDepartement.EditValue.ToString = "0" Then
-            FormItemReqAdd.id_departement = FormItemReq.SLEDepartement.EditValue.ToString
+            FormItemReqAdd.id_departement = id_departement_user
+            FormItemReqAdd.id_coa_tag = id_coa_tag
         Else
             FormItemReqAdd.id_departement = FormItemReq.SLEDepartement.EditValue.ToString
+            FormItemReqAdd.id_coa_tag = id_coa_tag
         End If
         FormItemReqAdd.ShowDialog()
         Cursor = Cursors.Default
@@ -483,7 +497,7 @@ INNER JOIN tb_item i ON ic.id_item_cat=i.id_item_cat AND ic.id_departement='" & 
     Private Sub BtnAddDetail_Click(sender As Object, e As EventArgs) Handles BtnAddDetail.Click
         Cursor = Cursors.WaitCursor
         If get_opt_purchasing_field("is_can_all_dep") = "1" And Not FormItemReq.SLEDepartement.EditValue.ToString = "0" Then
-            FormItemReqAddStore.id_departement = FormItemReq.SLEDepartement.EditValue.ToString
+            FormItemReqAddStore.id_departement = id_departement_user
         Else
             FormItemReqAddStore.id_departement = FormItemReq.SLEDepartement.EditValue.ToString
         End If

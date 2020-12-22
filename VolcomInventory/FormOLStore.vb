@@ -499,7 +499,7 @@
 
     Sub viewPendingOrders()
         Cursor = Cursors.WaitCursor
-        viewVolcomOrder("AND vo.is_process=2")
+        viewVolcomOrder("AND vo.is_process=2 AND ISNULL(vo.id_ol_store_oos) ")
         Cursor = Cursors.Default
     End Sub
 
@@ -538,7 +538,9 @@
         If is_processed_order = "1" Then
             stopCustom("Sync still running")
         Else
-            SplashScreenManager1.ShowWaitForm()
+            If Not FormMain.SplashScreenManager1.IsSplashFormVisible Then
+                FormMain.SplashScreenManager1.ShowWaitForm()
+            End If
             Dim ord As New ClassSalesOrder()
             ord.setProceccedWebOrder("1")
             ord.insertLogWebOrder("0", "Start", "0")
@@ -557,6 +559,7 @@
             Dim comp_group As String = dt_grp.Rows(0)("comp_group").ToString.ToUpper
 
             'get order from web
+            'hide when developed
             ord.insertLogWebOrder("0", "Get order from website. " + err, id_comp_group)
             If id_api_type = "1" Then
                 'SHOPIFY
@@ -586,14 +589,14 @@
 
             'get order yg belum diproses
             Dim qord As String = "SELECT o.id, o.sales_order_ol_shop_number  FROM tb_ol_store_order o
-            WHERE o.is_process=2 AND o.id_comp_group='" + id_comp_group + "'
+            WHERE o.is_process=2 AND o.id_comp_group='" + id_comp_group + "' AND ISNULL(o.id_ol_store_oos)
             GROUP BY o.id "
             Dim dord As DataTable = execute_query(qord, -1, True, "", "", "", "")
             Dim id_order_in As String = ""
             If dord.Rows.Count > 0 Then
                 Try
                     For i As Integer = 0 To dord.Rows.Count - 1
-                        SplashScreenManager1.SetWaitFormDescription(comp_group + " ORDER : #" + dord.Rows(i)("sales_order_ol_shop_number").ToString)
+                        FormMain.SplashScreenManager1.SetWaitFormDescription(comp_group + " ORDER : " + (i + 1).ToString + "/" + dord.Rows.Count.ToString)
                         execute_non_query_long("CALL create_web_order_grp(" + dord.Rows(i)("id").ToString + ", " + is_must_ok_stock + ",'" + id_comp_group + "');", True, "", "", "", "")
                         If i > 0 Then
                             id_order_in += ","
@@ -610,34 +613,62 @@
             Dim err_other_act As String = ""
             If id_api_type = "2" Then
                 'ZALORA
-                Dim query_item As String = "SELECT od.id,od.sales_order_ol_shop_number AS `order_number`, GROUP_CONCAT(DISTINCT od.item_id ORDER BY od.item_id ASC) AS `item_id`, od.tracking_code, od.shipment_provider
-                FROM tb_sales_order so
-                INNER JOIN tb_m_comp_contact sc ON sc.id_comp_contact = so.id_store_contact_to
-                INNER JOIN tb_m_comp s ON s.id_comp = sc.id_comp
-                INNER JOIN tb_ol_store_order od ON od.id = so.id_sales_order_ol_shop AND od.id_comp_group= s.id_comp_group
-                WHERE so.id_report_status=6 AND s.id_commerce_type=2 AND !ISNULL(od.item_id) AND od.tracking_code!=''
-                AND s.id_comp_group IN (SELECT o.zalora_comp_group FROM tb_opt o)
-                AND od.is_process=1 AND od.is_rts=2
-                GROUP BY od.sales_order_ol_shop_number "
-                Dim data_item As DataTable = execute_query(query_item, -1, True, "", "", "", "")
-                If data_item.Rows.Count > 0 Then
-                    For t As Integer = 0 To data_item.Rows.Count - 1
-                        Try
-                            SplashScreenManager1.SetWaitFormDescription("Set status (rts) : #" + data_item.Rows(t)("order_number").ToString)
-                            Dim zal_stt As New ClassZaloraApi()
-                            zal_stt.setReadyToShip(data_item.Rows(t)("item_id").ToString, data_item.Rows(t)("shipment_provider").ToString, data_item.Rows(t)("tracking_code").ToString)
-                            execute_non_query("UPDATE tb_ol_store_order od SET od.is_rts=1 WHERE od.id_comp_group='" + id_comp_group + "' AND od.id='" + data_item.Rows(t)("id").ToString + "' ", True, "", "", "", "")
-                        Catch ex As Exception
-                            err_other_act = addSlashes(ex.ToString)
-                            ord.insertLogWebOrder(data_item.Rows(t)("id").ToString, "Error set status rts : " + err_other_act, id_comp_group)
-                        End Try
+                Dim zal As New ClassZaloraApi()
+                err_other_act = zal.setRTSPending()
+            End If
+
+            'evaluasi
+            Dim jum_eval As Integer = 0
+            If id_api_type <> "1" Then 'selain VIOS
+                Dim query_eval As String = "SELECT od.id, od.sales_order_ol_shop_number AS `order_number`
+                FROM tb_ol_store_order od 
+                WHERE od.id_comp_group='" + id_comp_group + "'  AND od.note_price='OK' AND od.note_promo='OK' AND od.note_stock<>'OK' AND od.is_process=2 AND ISNULL(od.id_ol_store_oos)
+                GROUP BY od.id "
+                Dim data_eval As DataTable = execute_query(query_eval, -1, True, "", "", "", "")
+                If data_eval.Rows.Count > 0 Then
+                    For e As Integer = 0 To data_eval.Rows.Count - 1
+                        jum_eval += 1
+                        Dim id_order_eval As String = data_eval.Rows(e)("id").ToString
+                        Dim no_eval As String = data_eval.Rows(e)("order_number").ToString
+                        FormMain.SplashScreenManager1.SetWaitFormDescription("Evaluate order : " + (e + 1).ToString + "/" + data_eval.Rows.Count.ToString)
+                        'evaluate oos
+                        Dim oos As New ClassOLStore()
+                        oos.evaluateOOS(id_order_eval, id_comp_group)
+                        ord.insertLogWebOrder(id_order_eval, "Evaluate OOS", id_comp_group)
+
+                        'cek apa ada yang bisa restok
+                        Dim is_restock As Boolean = oos.checkOOSRestockOrder(id_order_eval, id_comp_group)
+                        ord.insertLogWebOrder(id_order_eval, "Evaluating restock", id_comp_group)
+                        If Not is_restock Then
+                            'jika ndak ada yang bisa direstock langsung kirim email
+                            Try
+                                oos.sendEmailOOS(id_order_eval, id_comp_group)
+                                Dim id_oos As String = execute_query("SELECT id_ol_store_oos FROM tb_ol_store_oos WHERE id_comp_group='" + id_comp_group + "' AND id_order='" + id_order_eval + "' ", 0, True, "", "", "", "")
+                                execute_non_query("UPDATE tb_ol_store_oos SET id_ol_store_oos_stt=3, sent_email_date=NOW() WHERE id_ol_store_oos='" + id_oos + "' ", True, "", "", "", "")
+                                ord.insertLogWebOrder(id_order_eval, "Evaluate result : No stock;Send Email OOS success; Status=email sent", id_comp_group)
+                            Catch ex As Exception
+                                ord.insertLogWebOrder(id_order_eval, "Evaluate result : No stock & Send Email OOS failed", id_comp_group)
+                            End Try
+
+                            'check jika kosong langsung di closed
+                            oos.checkOOSEmptyOrder(id_order_eval, id_comp_group)
+
+                            'other action
+                            If id_api_type = "2" Then
+                                'ZALORA
+                                Dim zal As New ClassZaloraApi()
+                                err_other_act = zal.setRTSPending()
+                            End If
+                        Else
+                            ord.insertLogWebOrder(id_order_eval, "Evaluate result : Restock process", id_comp_group)
+                        End If
                     Next
                 End If
             End If
 
             ord.insertLogWebOrder("0", "End", "0")
             ord.setProceccedWebOrder("2")
-            SplashScreenManager1.CloseWaitForm()
+            FormMain.SplashScreenManager1.CloseWaitForm()
             If err = "" And err_other_act = "" Then
                 infoCustom("Sync completed.")
             Else
@@ -648,13 +679,17 @@
                 stopCustom("Some orders cannot be processed")
                 viewPendingOrders()
             End If
+            If jum_eval > 0 Then
+                stopCustom("Some orders out of stock.")
+                viewOOSList()
+            End If
         End If
         CEAllow.EditValue = False
         Cursor = Cursors.Default
     End Sub
 
     Function orderNotProcessed()
-        Dim query As String="SELECT * FROM tb_ol_store_order od WHERE od.is_process=2 "
+        Dim query As String = "SELECT * FROM tb_ol_store_order od WHERE od.is_process=2 AND ISNULL(od.id_ol_store_oos) "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         If data.Rows.Count > 0 Then
             Return True
@@ -744,5 +779,22 @@
         GCSummary.DataSource = Nothing
         GCDetail.DataSource = Nothing
         GCCancellOrder.DataSource = Nothing
+    End Sub
+
+    Private Sub BtnFollowUp_Click(sender As Object, e As EventArgs)
+        Cursor = Cursors.WaitCursor
+
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub BtnOOS_Click(sender As Object, e As EventArgs) Handles BtnOOS.Click
+        viewOOSList()
+    End Sub
+
+    Sub viewOOSList()
+        Cursor = Cursors.WaitCursor
+        FormOLStoreOOS.id_type = "2"
+        FormOLStoreOOS.ShowDialog()
+        Cursor = Cursors.Default
     End Sub
 End Class

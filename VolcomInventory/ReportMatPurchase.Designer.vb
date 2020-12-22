@@ -901,7 +901,7 @@ Partial Public Class ReportMatPurchase
         Me.LTitle.SizeF = New System.Drawing.SizeF(371.2501!, 25.08334!)
         Me.LTitle.StylePriority.UseFont = False
         Me.LTitle.StylePriority.UseTextAlignment = False
-        Me.LTitle.Text = "PURCHASE ORDER MATERIAL"
+        Me.LTitle.Text = "PURCHASE ORDER RAW MATERIAL"
         Me.LTitle.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
         '
         'LPONumber

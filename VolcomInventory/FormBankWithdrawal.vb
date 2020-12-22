@@ -37,6 +37,7 @@
         TEKurs.EditValue = 1.0
         TEKursDPKhusus.EditValue = 1.0
         '
+        load_coa_type()
         load_vendor()
         load_trans_type()
         load_status_payment()
@@ -54,8 +55,16 @@
         'VS sales
         viewCoaTag()
 
+        'cabang
+        load_unit()
+
         DECAFrom.EditValue = Date.Parse(Now)
         DECATo.EditValue = Date.Parse(Now)
+    End Sub
+
+    Sub load_coa_type()
+        Dim q As String = "SELECT id_coa_type,coa_type FROM `tb_coa_type`"
+        viewSearchLookupQuery(SLECOAType, q, "id_coa_type", "coa_type", "id_coa_type")
     End Sub
 
     Sub load_group_store_cn()
@@ -146,7 +155,9 @@ SELECT cc.id_comp_contact,CONCAT(c.comp_number,' - ',c.comp_name) as comp_name
     Sub load_trans_type_po()
         Dim query As String = "SELECT id_pay_type,pay_type FROM tb_lookup_pay_type"
         viewSearchLookupQuery(SLEPayType, query, "id_pay_type", "pay_type", "id_pay_type")
+        SLEPayType.EditValue = "2"
         viewSearchLookupQuery(SLEPayTypeExpense, query, "id_pay_type", "pay_type", "id_pay_type")
+        SLEPayTypeExpense.EditValue = "2"
     End Sub
 
     Sub load_trans_type()
@@ -179,7 +190,7 @@ INNER JOIN `tb_lookup_pay_type` pt ON pt.`id_pay_type`=py.`id_pay_type`
 INNER JOIN tb_m_user usr ON usr.id_user=py.id_user_created
 INNER JOIN tb_m_employee emp ON emp.id_employee=usr.id_employee
 INNER JOIN tb_lookup_report_status sts ON sts.id_report_status=py.id_report_status
-WHERE DATE(py.date_payment) >= '" & Date.Parse(DEBBKFrom.EditValue.ToString).ToString("yyyy-MM-dd") & "' AND DATE(py.date_payment) <= '" & Date.Parse(DEBBKTo.EditValue.ToString).ToString("yyyy-MM-dd") & "'
+WHERE py.id_coa_tag='" & SLEUnitBBKList.EditValue.ToString & "' AND DATE(py.date_payment) >= '" & Date.Parse(DEBBKFrom.EditValue.ToString).ToString("yyyy-MM-dd") & "' AND DATE(py.date_payment) <= '" & Date.Parse(DEBBKTo.EditValue.ToString).ToString("yyyy-MM-dd") & "'
 " & where_string & " ORDER BY py.id_pn DESC"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCList.DataSource = data
@@ -190,6 +201,19 @@ WHERE DATE(py.date_payment) >= '" & Date.Parse(DEBBKFrom.EditValue.ToString).ToS
         Dim query As String = "SELECT ct.id_coa_tag, ct.tag_code, ct.tag_description, CONCAT(ct.tag_code,' - ', ct.tag_description)  AS `coa_tag`
         FROM tb_coa_tag ct WHERE ct.id_coa_tag>1 ORDER BY ct.id_coa_tag ASC "
         viewSearchLookupQuery(SLEUnit, query, "id_coa_tag", "tag_description", "id_coa_tag")
+    End Sub
+
+    Sub load_unit()
+        Dim query As String = "SELECT id_coa_tag,tag_code,tag_description FROM `tb_coa_tag`"
+        '        query = "SELECT '0' AS id_comp,'-' AS comp_number, 'All Unit' AS comp_name
+        'UNION ALL
+        'SELECT ad.`id_comp`,c.`comp_number`,c.`comp_name` FROM `tb_a_acc_trans_det` ad
+        'INNER JOIN tb_m_comp c ON c.`id_comp`=ad.`id_comp`
+        'GROUP BY ad.id_comp"
+        viewSearchLookupQuery(SLEUnitExpense, query, "id_coa_tag", "tag_description", "id_coa_tag")
+        SLEUnitExpense.EditValue = "1"
+        viewSearchLookupQuery(SLEUnitBBKList, query, "id_coa_tag", "tag_description", "id_coa_tag")
+        SLEUnitBBKList.EditValue = "1"
     End Sub
     '
     Sub load_fgpo()
@@ -230,12 +254,12 @@ WHERE DATE(py.date_payment) >= '" & Date.Parse(DEBBKFrom.EditValue.ToString).ToS
 
         If SLEPayType.EditValue.ToString = "2" Then 'payment
             q_acc = ",acc.id_acc,acc.acc_name,acc.acc_description "
-            q_join_acc = " INNER JOIN tb_a_acc acc ON acc.id_acc=c.id_acc_ap "
+            q_join_acc = " INNER JOIN tb_a_acc acc ON acc.id_acc=IF(po.id_coa_tag=1,c.id_acc_ap,c.id_acc_cabang_ap) "
             where_string += " AND po.is_close_rec='1'"
             q_dp = "-IFNULL(payment.value,0)"
         ElseIf SLEPayType.EditValue.ToString = "1" Then 'DP
             q_acc = ",acc.id_acc,acc.acc_name,acc.acc_description "
-            q_join_acc = " INNER JOIN tb_a_acc acc ON acc.id_acc=c.id_acc_dp "
+            q_join_acc = " INNER JOIN tb_a_acc acc ON acc.id_acc=IF(po.id_coa_tag=1,c.id_acc_dp,c.id_acc_cabang_dp) "
             q_dp = "*(payment_purc.dp_percent/100)"
         End If
 
@@ -280,7 +304,7 @@ WHERE DATE(py.date_payment) >= '" & Date.Parse(DEBBKFrom.EditValue.ToString).ToS
 ,IFNULL(payment_pending.jml,0) as total_pending
 ,DATEDIFF(po.`due_date`,NOW()) AS due_days
 ,cf.id_comp AS `id_comp_default`, cf.comp_number as `comp_number_default`
-,po.report_mark_type,tag.id_coa_tag,tag.tag_code
+,po.report_mark_type,po.id_coa_tag AS po_coa_tag,tag.id_coa_tag,tag.tag_code
 ,SUM(pod.gross_up_value) AS gross_up_value
 " & q_acc & "
 FROM tb_purc_order po
@@ -452,6 +476,9 @@ WHERE c.id_comp='" & SLEVendorExpense.EditValue & "'"
             where_string = "AND e.id_comp='" & SLEVendorExpense.EditValue.ToString & "' "
         End If
 
+        'cabang
+        where_string += " AND e.id_coa_tag='" & SLEUnitExpense.EditValue.ToString & "' "
+
         If SLEPayTypeExpense.EditValue.ToString = "2" Then 'payment
             q_acc = ",acc.id_acc,acc.acc_name,acc.acc_description "
             q_join_acc = " LEFT JOIN tb_a_acc acc ON acc.id_acc=c.id_acc_ap "
@@ -592,6 +619,7 @@ WHERE c.id_comp='" & SLEVendorExpense.EditValue & "'"
     Private Sub BCreatePay_Click(sender As Object, e As EventArgs) Handles BCreatePay.Click
         If Not SLEVendorPayment.EditValue.ToString = "0" Then
             FormBankWithdrawalDet.report_mark_type = "159"
+            FormBankWithdrawalDet.id_coa_tag = SLEUnitBBKList.EditValue.ToString
             FormBankWithdrawalDet.ShowDialog()
         End If
     End Sub
@@ -1109,6 +1137,7 @@ GROUP BY sr.`id_sales_return`"
 
     Private Sub BCreateBookTrf_Click(sender As Object, e As EventArgs) Handles BCreateBookTrf.Click
         FormBankWithdrawalDet.is_book_transfer = True
+        FormBankWithdrawalDet.id_coa_tag = SLEUnitBBKList.EditValue.ToString
         FormBankWithdrawalDet.ShowDialog()
     End Sub
 
@@ -1251,7 +1280,7 @@ GROUP BY sr.`id_sales_return`"
     End Sub
 
     Sub view_po_og()
-        Dim q As String = "SELECT po.`id_purc_order`,po.`purc_order_number`,emp.`employee_name` AS emp_created,c.comp_name,cc.`contact_person`,cc.`contact_number`,po.`date_created`
+        Dim q As String = "SELECT po.`id_purc_order`,po.inv_number,po.`purc_order_number`,emp.`employee_name` AS emp_created,c.comp_name,cc.`contact_person`,cc.`contact_number`,po.`date_created`
 FROM tb_purc_order_det pod
 INNER JOIN tb_purc_order po ON po.`id_purc_order`=pod.`id_purc_order` AND po.`id_report_status`=6
 INNER JOIN tb_m_comp_contact cc ON po.`id_comp_contact`=cc.`id_comp_contact`
@@ -1313,10 +1342,11 @@ ORDER BY pod.id_purc_order DESC"
     End Sub
 
     Sub view_sum()
-        Dim q As String = "SELECT pns.`id_pn_summary`,sts.report_status,pns.number,pns.`date_payment`,pns.`created_date`,emp.`employee_name`, cur.`currency`,SUM(IFNULL(pnd.`val_bef_kurs`,0)) AS val_bef_kurs
+        Dim q As String = "SELECT ct.id_coa_type,ct.coa_type,pns.`id_pn_summary`,sts.report_status,pns.number,pns.`date_payment`,pns.`created_date`,emp.`employee_name`, cur.`currency`,SUM(IFNULL(pnd.`val_bef_kurs`,0)) AS val_bef_kurs
 FROM tb_pn_summary pns
 LEFT JOIN tb_pn_summary_det pnsd ON pnsd.id_pn_summary=pns.id_pn_summary
 LEFT JOIN tb_pn_det pnd ON pnd.`id_pn`=pnsd.`id_pn` AND pnd.`id_currency`=pns.`id_currency`
+INNER JOIN tb_coa_type ct ON ct.id_coa_type=pns.id_coa_type AND ct.id_coa_type='" & SLECOAType.EditValue.ToString & "'
 INNER JOIN tb_lookup_currency cur ON cur.`id_currency`=pns.`id_currency`
 INNER JOIN tb_m_user usr ON usr.`id_user`=pns.`created_by`
 INNER JOIN tb_m_employee emp ON emp.`id_employee`=usr.`id_employee`
@@ -1369,7 +1399,7 @@ GROUP BY pns.`id_pn_summary`"
         Dim id_coa_tag As String = SLEUnit.EditValue.ToString
         Dim query As String = "SELECT *, 'no' AS `is_check` 
         FROM (
-	        SELECT b.id_sales_branch, b.number, b.id_coa_tag,b.comp_rev_normal_note AS `note`,
+	        SELECT b.transaction_date,b.id_sales_branch, b.number, b.id_coa_tag,b.comp_rev_normal_note AS `note`,
 	        IFNULL(pyd.total_pay,0) AS `total_pay`,b.comp_rev_normal-IFNULL(pyd.total_pay,0)-IFNULL(cn.amount_cn,0.00) AS `amount`, c.id_comp, c.comp_number, c.comp_name,
 	        IFNULL(pyd.on_process,0) AS `on_process`, b.report_mark_type,
             coa.id_acc, coa.acc_name, coa.acc_description
@@ -1392,10 +1422,10 @@ GROUP BY pns.`id_pn_summary`"
 	          WHERE m.id_report_status!=5 
 	          GROUP BY m.id_sales_branch_ref, c.comp_number
 	        ) cn ON cn.id_sales_branch_ref = b.id_sales_branch AND cn.comp_number = c.comp_number
-	        WHERE b.id_report_status=6 AND b.id_memo_type=1
+	        WHERE b.id_report_status=6 AND b.id_memo_type=1 AND b.is_close_bbk=2
 	        GROUP BY b.id_sales_branch
 	        UNION ALL
-	        SELECT b.id_sales_branch,b.number, b.id_coa_tag, b.comp_rev_normal_note AS `note`,
+	        SELECT b.transaction_date,b.id_sales_branch,b.number, b.id_coa_tag, b.comp_rev_normal_note AS `note`,
 	        IFNULL(pyd.total_pay,0) AS `total_pay`, b.comp_rev_sale-IFNULL(pyd.total_pay,0)-IFNULL(cn.amount_cn,0.00) AS `amount`, c.id_comp, c.comp_number, c.comp_name,
 	        IFNULL(pyd.on_process,0) AS `on_process`,b.report_mark_type,
             coa.id_acc, coa.acc_name, coa.acc_description
@@ -1418,7 +1448,7 @@ GROUP BY pns.`id_pn_summary`"
 	          WHERE m.id_report_status!=5 
 	          GROUP BY m.id_sales_branch_ref, c.comp_number
 	        ) cn ON cn.id_sales_branch_ref = b.id_sales_branch AND cn.comp_number = c.comp_number
-	        WHERE b.id_report_status=6 AND b.id_memo_type=1
+	        WHERE b.id_report_status=6 AND b.id_memo_type=1 AND b.is_close_bbk=2
 	        GROUP BY b.id_sales_branch
         ) a 
         HAVING id_coa_tag='" + id_coa_tag + "' AND amount>0

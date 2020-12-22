@@ -9,6 +9,9 @@
         DESOHUntil.EditValue = dt
         DEFromSC.EditValue = dt
         DEUntilSC.EditValue = dt
+
+        load_unit()
+
         viewItem()
         viewDept()
         viewCat()
@@ -16,6 +19,19 @@
         '
         DEStart.EditValue = Now
         DEUntil.EditValue = Now
+    End Sub
+
+    Sub load_unit()
+        Dim query As String = "SELECT 0 AS id_coa_tag,'ALL' AS tag_code,'ALL' AS tag_description 
+UNION ALL
+SELECT id_coa_tag,tag_code,tag_description FROM `tb_coa_tag`"
+        '        query = "SELECT '0' AS id_comp,'-' AS comp_number, 'All Unit' AS comp_name
+        'UNION ALL
+        'SELECT ad.`id_comp`,c.`comp_number`,c.`comp_name` FROM `tb_a_acc_trans_det` ad
+        'INNER JOIN tb_m_comp c ON c.`id_comp`=ad.`id_comp`
+        'GROUP BY ad.id_comp"
+        viewSearchLookupQuery(SLEUnit, query, "id_coa_tag", "tag_description", "id_coa_tag")
+        SLEUnit.EditValue = "1"
     End Sub
 
     Sub viewItem()
@@ -204,13 +220,24 @@
             zero_filter = " HAVING qty_beg!=0 "
         End If
 
+        Dim q_unit As String = ""
+        Dim q_where_unit As String = ""
+        If Not SLEUnit.EditValue.ToString = "0" Then
+            If SLEUnit.EditValue.ToString = "1" Then
+                q_unit = " LEFT JOIN tb_m_departement ON tb_m_departement.id_departement=tb_storage_item.id_departement AND tb_m_departement.`id_coa_tag`='1' "
+                q_where_unit = " AND (NOT ISNULL(tb_m_departement.id_departement) OR tb_storage_item.id_departement=0) "
+            Else
+                q_unit = " INNER JOIN tb_m_departement ON tb_m_departement.id_departement=tb_storage_item.id_departement AND tb_m_departement.`id_coa_tag`='" & SLEUnit.EditValue.ToString & "' "
+            End If
+        End If
+
         Dim q As String = "SELECT it.`id_item`,it.`item_desc`,IFNULL(beg.min_date,rec.min_date) AS min_date,uom.uom
 ,IFNULL(beg.qty_beg,0) AS qty_beg,IFNULL(beg.harga_satuan_beg,0) AS harga_satuan_beg,IF(IFNULL(beg.qty_beg,0)=0,0,IFNULL(beg.amount_beg,0)) AS amount_beg
 ,IFNULL(rec.qty_rec,0) AS qty_rec,IFNULL(rec.harga_satuan_rec,0) AS harga_satuan_rec,IFNULL(rec.amount_rec,0) AS amount_rec
 ,IFNULL(req.qty_used,0) AS qty_req,IFNULL(req.harga_satuan_used,0) AS harga_satuan_req,IFNULL(req.amount_used,0) AS amount_req
 ,IFNULL(used.qty_used,0) AS qty_used,IFNULL(used.harga_satuan_used,0) AS harga_satuan_used,IFNULL(used.amount_used,0) AS amount_used
 -- ,IFNULL(rem.qty_rem,0) AS qty_rem,IFNULL(rem.harga_satuan_rem,0) AS harga_satuan_rem,IFNULL(rem.amount_rem,0) AS amount_rem
-,IFNULL(rem.qty_rem,0) AS qty_rem,(IF(IFNULL(beg.qty_beg,0)=0,0,IFNULL(beg.amount_beg,0))+IFNULL(rec.amount_rec,0)-IFNULL(used.amount_used,0))/IFNULL(rem.qty_rem,0) AS harga_satuan_rem,(IF(IFNULL(beg.qty_beg,0)=0,0,IFNULL(beg.amount_beg,0))+IFNULL(rec.amount_rec,0)-IFNULL(used.amount_used,0)) AS amount_rem
+,IFNULL(rem.qty_rem,0) AS qty_rem,IF(IFNULL(rem.qty_rem,0)=0,0,(IF(IFNULL(beg.qty_beg,0)=0,0,IFNULL(beg.amount_beg,0))+IFNULL(rec.amount_rec,0)-IFNULL(used.amount_used,0))/IFNULL(rem.qty_rem,0)) AS harga_satuan_rem,IF(IFNULL(rem.qty_rem,0)=0,0,(IF(IFNULL(beg.qty_beg,0)=0,0,IFNULL(beg.amount_beg,0))+IFNULL(rec.amount_rec,0)-IFNULL(used.amount_used,0))) AS amount_rem
 ,IFNULL(rem_book.qty_rem,0) AS qty_rem_book,IFNULL(rem_book.harga_satuan_rem,0) AS harga_satuan_rem_book,IFNULL(rem_book.amount_rem,0) AS amount_rem_book
 ,itc.item_cat
 FROM tb_item it
@@ -221,7 +248,8 @@ LEFT JOIN (
 	,SUM(IF(id_storage_category=1,storage_item_qty,-storage_item_qty)*`value`)/SUM(IF(id_storage_category=1,storage_item_qty,-storage_item_qty)) AS harga_satuan_beg
 	,SUM(IF(id_storage_category=1,storage_item_qty,-storage_item_qty)*`value`) AS amount_beg
 	FROM `tb_storage_item`
-	WHERE DATE(storage_item_datetime)<'" & date_start & "'
+    " & q_unit & "
+	WHERE DATE(storage_item_datetime)<'" & date_start & "' " & q_where_unit & "
 	GROUP BY id_item
 	" & zero_filter & "
 )beg ON beg.id_item=it.id_item
@@ -230,7 +258,8 @@ LEFT JOIN (
 	,SUM(IF(id_storage_category=1,storage_item_qty,-storage_item_qty)*`value`)/SUM(IF(id_storage_category=1,storage_item_qty,-storage_item_qty)) AS harga_satuan_rec
 	,SUM(IF(id_storage_category=1,storage_item_qty,-storage_item_qty)*`value`) AS amount_rec
 	FROM `tb_storage_item`
-	WHERE DATE(storage_item_datetime)>='" & date_start & "' AND DATE(storage_item_datetime)<='" & date_until & "' AND report_mark_type='148'
+    " & q_unit & "
+	WHERE DATE(storage_item_datetime)>='" & date_start & "' AND DATE(storage_item_datetime)<='" & date_until & "' AND report_mark_type='148'  " & q_where_unit & "
 	GROUP BY id_item
 	HAVING qty_rec!=0
 )rec ON rec.id_item=it.id_item
@@ -239,7 +268,8 @@ LEFT JOIN (
 	,SUM(IF(id_storage_category=2,storage_item_qty,-storage_item_qty)*`value`)/SUM(IF(id_storage_category=2,storage_item_qty,-storage_item_qty)) AS harga_satuan_used
 	,SUM(IF(id_storage_category=2,storage_item_qty,-storage_item_qty)*`value`) AS amount_used
 	FROM `tb_storage_item`
-	WHERE DATE(storage_item_datetime)>='" & date_start & "' AND DATE(storage_item_datetime)<='" & date_until & "' AND (report_mark_type='154' OR report_mark_type='163')
+    " & q_unit & "
+	WHERE DATE(storage_item_datetime)>='" & date_start & "' AND DATE(storage_item_datetime)<='" & date_until & "' AND (report_mark_type='154' OR report_mark_type='163')  " & q_where_unit & "
 	GROUP BY id_item
 	HAVING qty_used!=0
 )req ON req.id_item=it.id_item
@@ -248,7 +278,8 @@ LEFT JOIN (
 	,SUM(IF(id_storage_category=2,storage_item_qty,-storage_item_qty)*`value`)/SUM(IF(id_storage_category=2,storage_item_qty,-storage_item_qty)) AS harga_satuan_used
 	,SUM(IF(id_storage_category=2,storage_item_qty,-storage_item_qty)*`value`) AS amount_used
 	FROM `tb_storage_item`
-	WHERE DATE(storage_item_datetime)>='" & date_start & "' AND DATE(storage_item_datetime)<='" & date_until & "' AND NOT report_mark_type='148' AND NOT report_mark_type='154' AND NOT report_mark_type='163'
+    " & q_unit & "
+	WHERE DATE(storage_item_datetime)>='" & date_start & "' AND DATE(storage_item_datetime)<='" & date_until & "' AND NOT report_mark_type='148' AND NOT report_mark_type='154' AND NOT report_mark_type='163'  " & q_where_unit & "
 	GROUP BY id_item
 	HAVING qty_used!=0
 )used ON used.id_item=it.id_item
@@ -257,7 +288,8 @@ LEFT JOIN (
 	,SUM(IF(id_storage_category=1,storage_item_qty,-storage_item_qty)*`value`)/SUM(IF(id_storage_category=1,storage_item_qty,-storage_item_qty)) AS harga_satuan_rem
 	,SUM(IF(id_storage_category=1,storage_item_qty,-storage_item_qty)*`value`) AS amount_rem
 	FROM `tb_storage_item`
-	WHERE DATE(storage_item_datetime)<='" & date_until & "' AND NOT report_mark_type='154' AND NOT report_mark_type='163'
+    " & q_unit & "
+	WHERE DATE(storage_item_datetime)<='" & date_until & "' AND NOT report_mark_type='154' AND NOT report_mark_type='163'  " & q_where_unit & "
 	GROUP BY id_item
 	HAVING qty_rem!=0
 )rem ON rem.id_item=it.id_item
@@ -266,7 +298,8 @@ LEFT JOIN (
 	,SUM(IF(id_storage_category=1,storage_item_qty,-storage_item_qty)*`value`)/SUM(IF(id_storage_category=1,storage_item_qty,-storage_item_qty)) AS harga_satuan_rem
 	,SUM(IF(id_storage_category=1,storage_item_qty,-storage_item_qty)*`value`) AS amount_rem
 	FROM `tb_storage_item`
-	WHERE DATE(storage_item_datetime)<='" & date_until & "' 
+    " & q_unit & "
+	WHERE DATE(storage_item_datetime)<='" & date_until & "' " & q_where_unit & "
 	GROUP BY id_item
 	HAVING qty_rem!=0
 )rem_book ON rem_book.id_item=it.id_item
@@ -277,7 +310,7 @@ WHERE NOT ISNULL(beg.id_item) OR NOT ISNULL(rec.id_item) OR NOT ISNULL(used.id_i
     End Sub
 
     Private Sub BPrint_Click(sender As Object, e As EventArgs) Handles BPrint.Click
-        print(GCPemakaian, "Report Pemakaian")
+        print(GCPemakaian, "Report Pemakaian " & "(" & SLEUnit.EditValue.ToString & ")")
     End Sub
 
     Private Sub SimpleButton1_Click(sender As Object, e As EventArgs) Handles SimpleButton1.Click

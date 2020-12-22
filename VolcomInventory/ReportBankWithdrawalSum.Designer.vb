@@ -394,13 +394,13 @@ Partial Public Class ReportBankWithdrawalSum
         'LabelTitle
         '
         Me.LabelTitle.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelTitle.LocationFloat = New DevExpress.Utils.PointFloat(457.5833!, 0!)
+        Me.LabelTitle.LocationFloat = New DevExpress.Utils.PointFloat(0!, 0!)
         Me.LabelTitle.Name = "LabelTitle"
         Me.LabelTitle.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.LabelTitle.SizeF = New System.Drawing.SizeF(282.4167!, 23.0!)
+        Me.LabelTitle.SizeF = New System.Drawing.SizeF(740.0!, 23.0!)
         Me.LabelTitle.StylePriority.UseFont = False
         Me.LabelTitle.StylePriority.UseTextAlignment = False
-        Me.LabelTitle.Text = "SUMMARY BANK WITHDRAWAL"
+        Me.LabelTitle.Text = "SUMMARY BANK WITHDRAWAL ([coa_type])"
         Me.LabelTitle.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight
         '
         'LabelTitleNumber

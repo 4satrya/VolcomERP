@@ -37,6 +37,7 @@ Partial Class FormReturnNote
         Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn9 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.DEUntil.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -128,7 +129,7 @@ Partial Class FormReturnNote
         '
         'GVAwb
         '
-        Me.GVAwb.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn2, Me.GridColumn6, Me.GridColumn3, Me.GridColumn11, Me.GridColumn7, Me.GridColumn5, Me.GridColumn9, Me.GridColumn4})
+        Me.GVAwb.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn8, Me.GridColumn2, Me.GridColumn6, Me.GridColumn3, Me.GridColumn11, Me.GridColumn7, Me.GridColumn5, Me.GridColumn9, Me.GridColumn4})
         Me.GVAwb.GridControl = Me.GCAwb
         Me.GVAwb.Name = "GVAwb"
         Me.GVAwb.OptionsBehavior.Editable = False
@@ -157,7 +158,7 @@ Partial Class FormReturnNote
         Me.GridColumn6.FieldName = "label_number"
         Me.GridColumn6.Name = "GridColumn6"
         Me.GridColumn6.Visible = True
-        Me.GridColumn6.VisibleIndex = 1
+        Me.GridColumn6.VisibleIndex = 2
         Me.GridColumn6.Width = 199
         '
         'GridColumn3
@@ -168,7 +169,7 @@ Partial Class FormReturnNote
         Me.GridColumn3.FieldName = "date_created"
         Me.GridColumn3.Name = "GridColumn3"
         Me.GridColumn3.Visible = True
-        Me.GridColumn3.VisibleIndex = 3
+        Me.GridColumn3.VisibleIndex = 4
         Me.GridColumn3.Width = 183
         '
         'GridColumn11
@@ -177,7 +178,7 @@ Partial Class FormReturnNote
         Me.GridColumn11.FieldName = "employee_name"
         Me.GridColumn11.Name = "GridColumn11"
         Me.GridColumn11.Visible = True
-        Me.GridColumn11.VisibleIndex = 2
+        Me.GridColumn11.VisibleIndex = 3
         Me.GridColumn11.Width = 163
         '
         'GridColumn7
@@ -187,8 +188,8 @@ Partial Class FormReturnNote
         Me.GridColumn7.FieldName = "store_list"
         Me.GridColumn7.Name = "GridColumn7"
         Me.GridColumn7.Visible = True
-        Me.GridColumn7.VisibleIndex = 4
-        Me.GridColumn7.Width = 264
+        Me.GridColumn7.VisibleIndex = 5
+        Me.GridColumn7.Width = 155
         '
         'RepositoryItemMemoEdit1
         '
@@ -200,7 +201,7 @@ Partial Class FormReturnNote
         Me.GridColumn5.FieldName = "number_return_note"
         Me.GridColumn5.Name = "GridColumn5"
         Me.GridColumn5.Visible = True
-        Me.GridColumn5.VisibleIndex = 5
+        Me.GridColumn5.VisibleIndex = 6
         Me.GridColumn5.Width = 222
         '
         'GridColumn9
@@ -209,7 +210,7 @@ Partial Class FormReturnNote
         Me.GridColumn9.FieldName = "qty"
         Me.GridColumn9.Name = "GridColumn9"
         Me.GridColumn9.Visible = True
-        Me.GridColumn9.VisibleIndex = 6
+        Me.GridColumn9.VisibleIndex = 7
         Me.GridColumn9.Width = 222
         '
         'GridColumn4
@@ -220,8 +221,16 @@ Partial Class FormReturnNote
         Me.GridColumn4.FieldName = "date_return_note"
         Me.GridColumn4.Name = "GridColumn4"
         Me.GridColumn4.Visible = True
-        Me.GridColumn4.VisibleIndex = 7
+        Me.GridColumn4.VisibleIndex = 8
         Me.GridColumn4.Width = 247
+        '
+        'GridColumn8
+        '
+        Me.GridColumn8.Caption = "AWB"
+        Me.GridColumn8.FieldName = "awb_number"
+        Me.GridColumn8.Name = "GridColumn8"
+        Me.GridColumn8.Visible = True
+        Me.GridColumn8.VisibleIndex = 1
         '
         'FormReturnNote
         '
@@ -268,4 +277,5 @@ Partial Class FormReturnNote
     Friend WithEvents GridColumn11 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn5 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn4 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn8 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

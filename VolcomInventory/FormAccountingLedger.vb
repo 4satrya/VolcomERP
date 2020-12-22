@@ -145,6 +145,7 @@ SELECT id_coa_tag,tag_code,tag_description FROM `tb_coa_tag`"
 
             report.XLPeriod.Text = DEFrom.Text + " - " + DETo.Text
             report.XLAccount.Text = SLUEFrom.Text + " - " + SLUETo.Text
+            report.LUnit.Text = SLEUnit.Text
 
             Dim tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(report)
 
@@ -293,5 +294,10 @@ SELECT id_coa_tag,tag_code,tag_description FROM `tb_coa_tag`"
             stopCustom(ex.ToString)
         End Try
         Cursor = Cursors.Default
+    End Sub
+
+    Private Sub BSearchVoucher_Click(sender As Object, e As EventArgs) Handles BSearchVoucher.Click
+        FormViewJournal.is_enable_search = True
+        FormViewJournal.ShowDialog()
     End Sub
 End Class

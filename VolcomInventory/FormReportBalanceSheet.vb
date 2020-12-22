@@ -215,7 +215,7 @@ INNER JOIN tb_a_acc_trans at ON at.id_acc_trans=atd.id_acc_trans AND DATE(at.dat
             If XTCProfitAndLoss.SelectedTabPageIndex = 0 Then
                 print_treelist(TLProfitAndLoss, "Profit And Loss")
             ElseIf XTCProfitAndLoss.SelectedTabPageIndex = 1 Then
-                print_custom(GCProfitAndLoss, "Profit And Loss " & vbNewLine & " Until : " & Date.Parse(DEUntil.EditValue.ToString).ToString("MMMM yyyy"))
+                print_custom(GCProfitAndLoss, "Profit And Loss (Unit : " & SLEUnit.Text & ")" & vbNewLine & " Until : " & Date.Parse(DEUntil.EditValue.ToString).ToString("MMMM yyyy"))
             End If
         End If
     End Sub
@@ -224,6 +224,7 @@ INNER JOIN tb_a_acc_trans at ON at.id_acc_trans=atd.id_acc_trans AND DATE(at.dat
         Cursor = Cursors.WaitCursor
         Dim Report As New ReportBalanceSheet()
 
+        Report.Lunit.Text = SLEUnit.Text
         Report.LUntil1.Text = " Until : " & Date.DaysInMonth(Date.Parse(DEUntil.EditValue.ToString).AddMonths(-1).Year, Date.Parse(DEUntil.EditValue.ToString).AddMonths(-1).Month).ToString & " " & Date.Parse(DEUntil.EditValue.ToString).AddMonths(-1).ToString("MMMM yyyy")
         Report.LUntil2.Text = " Until : " & Date.DaysInMonth(Date.Parse(DEUntil.EditValue.ToString).AddMonths(-1).Year, Date.Parse(DEUntil.EditValue.ToString).AddMonths(-1).Month).ToString & " " & Date.Parse(DEUntil.EditValue.ToString).AddMonths(-1).ToString("MMMM yyyy")
 
@@ -349,7 +350,7 @@ INNER JOIN tb_purc_rec rec ON rec.id_purc_rec=recd.id_purc_rec
 INNER JOIN tb_purc_order_det ied ON ied.id_purc_order_det=recd.id_purc_order_det
 INNER JOIN tb_purc_req_det rd ON rd.id_purc_req_det=ied.id_purc_req_det
 INNER JOIN `tb_purc_order` ie ON ie.id_purc_order=ied.id_purc_order AND ie.`vat_percent` > 0 
-INNER JOIN tb_a_acc acc_pph ON acc_pph.`id_acc`=(SELECT acc_coa_vat_in FROM tb_opt_purchasing) AND ie.`id_report_status`=6 AND ie.is_close_rec=1
+INNER JOIN tb_a_acc acc_pph ON acc_pph.`id_acc`=(SELECT acc_coa_vat_in FROM tb_opt_purchasing) AND ie.`id_report_status`=6
 INNER JOIN tb_lookup_tax_report rpt ON rpt.id_tax_report=acc_pph.id_tax_report AND rpt.id_type=2
 INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact=ie.id_comp_contact
 INNER JOIN tb_m_comp c ON c.`id_comp`=cc.`id_comp`
@@ -847,7 +848,7 @@ INNER JOIN tb_purc_rec rec ON rec.id_purc_rec=recd.id_purc_rec
 INNER JOIN tb_purc_order_det ied ON ied.id_purc_order_det=recd.id_purc_order_det
 INNER JOIN tb_purc_req_det rd ON rd.id_purc_req_det=ied.id_purc_req_det
 INNER JOIN `tb_purc_order` ie ON ie.id_purc_order=ied.id_purc_order AND ie.`vat_percent` > 0 
-INNER JOIN tb_a_acc acc_pph ON acc_pph.`id_acc`=(SELECT acc_coa_vat_in FROM tb_opt_purchasing) AND ie.`id_report_status`=6 AND ie.is_close_rec=1
+INNER JOIN tb_a_acc acc_pph ON acc_pph.`id_acc`=(SELECT acc_coa_vat_in FROM tb_opt_purchasing) AND ie.`id_report_status`=6
 INNER JOIN tb_lookup_tax_report rpt ON rpt.id_tax_report=acc_pph.id_tax_report AND rpt.id_type=2
 INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact=ie.id_comp_contact
 INNER JOIN tb_m_comp c ON c.`id_comp`=cc.`id_comp`

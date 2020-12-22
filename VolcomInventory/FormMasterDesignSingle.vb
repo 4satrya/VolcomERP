@@ -3311,4 +3311,25 @@
     Private Sub TEPrimaryName_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles TEPrimaryName.Validating
         EP_TE_cant_blank(EPMasterDesign, TEPrimaryName)
     End Sub
+
+    Private Sub XTCDesign_SelectedPageChanged(sender As Object, e As DevExpress.XtraTab.TabPageChangedEventArgs) Handles XTCDesign.SelectedPageChanged
+        If XTCDesign.SelectedTabPage.Name = "XTPImages" Then
+            Try
+                FormDesignImagesDetail.Dispose()
+            Catch ex As Exception
+            End Try
+
+            FormDesignImagesDetail.TopLevel = False
+
+            XTPImages.Controls.Clear()
+            XTPImages.Controls.Add(FormDesignImagesDetail)
+
+            FormDesignImagesDetail.id_design = id_design
+
+            FormDesignImagesDetail.Show()
+
+            FormDesignImagesDetail.FormBorderStyle = FormBorderStyle.None
+            FormDesignImagesDetail.Dock = DockStyle.Fill
+        End If
+    End Sub
 End Class

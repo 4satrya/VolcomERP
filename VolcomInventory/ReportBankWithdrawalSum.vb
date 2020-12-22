@@ -2,8 +2,9 @@
     Public Shared id_sum As String = "-1"
 
     Private Sub ReportBankWithdrawalSum_BeforePrint(sender As Object, e As Printing.PrintEventArgs) Handles MyBase.BeforePrint
-        Dim query_head As String = "SELECT pns.`id_pn_summary`,kb.nama_bank,bnk.bank_no,bnk.bank_attn,pns.number,DATE_FORMAT(pns.`date_payment`,'%d %M %Y') as date_payment,DATE_FORMAT(pns.`created_date`,'%d %M %Y') AS created_date,emp.`employee_name`, cur.`id_currency`,cur.`currency`,SUM(pnd.`val_bef_kurs`) AS val_bef_kurs, pns.note
+        Dim query_head As String = "SELECT ct.coa_type,pns.`id_pn_summary`,kb.nama_bank,bnk.bank_no,bnk.bank_attn,pns.number,DATE_FORMAT(pns.`date_payment`,'%d %M %Y') as date_payment,DATE_FORMAT(pns.`created_date`,'%d %M %Y') AS created_date,emp.`employee_name`, cur.`id_currency`,cur.`currency`,SUM(pnd.`val_bef_kurs`) AS val_bef_kurs, pns.note
 FROM tb_pn_summary pns
+INNER JOIN tb_coa_type ct ON ct.id_coa_type=pns.id_coa_type
 INNER JOIN tb_pn_summary_det pnsd ON pnsd.id_pn_summary=pns.id_pn_summary
 INNER JOIN tb_pn_det pnd ON pnd.`id_pn`=pnsd.`id_pn` AND pnd.`id_currency`=pns.`id_currency`
 INNER JOIN tb_lookup_currency cur ON cur.`id_currency`=pns.`id_currency`

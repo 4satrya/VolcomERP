@@ -30,6 +30,10 @@ WHERE id_comp_cat='6' AND is_active='1' AND id_sub_district=(SELECT id_sub_distr
     End Sub
 
     Private Sub FormInboundAWB_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        load_form()
+    End Sub
+
+    Sub load_form()
         load_type()
         load_3pl()
         '
@@ -54,7 +58,9 @@ WHERE inb.id_inbound_awb='" & id_awb_inbound & "'"
                 XTCdetail.Enabled = True
                 TEAwb.Enabled = False
                 BNext.Enabled = True
+                PCHeader.Enabled = False
                 BSubmitAwb.Enabled = False
+                BEditAWB.Enabled = True
                 '
                 'check sudah dipakai
                 Dim qc As String = "SELECT * from tb_return_note WHERE id_inbound_awb='" & id_awb_inbound & "' AND is_void=2"
@@ -62,10 +68,10 @@ WHERE inb.id_inbound_awb='" & id_awb_inbound & "'"
                 If dtc.Rows.Count > 0 Then
                     BUpdateKoli.Visible = False
                     BUpdateStore.Visible = False
+                    BEditAWB.Visible = False
                 End If
             End If
         End If
-        '
     End Sub
 
     Sub load_koli()
@@ -101,28 +107,60 @@ WHERE id_inbound_awb='" & id_awb_inbound & "'"
         If TEAwb.Text = "" Then
             warningCustom("Please input AWB")
         Else
-            'check AWB
-            Dim qc As String = "SELECT * FROM tb_inbound_awb
-WHERE id_comp='" & SLEVendor.EditValue.ToString & "' AND awb_number='" & addSlashes(TEAwb.Text.ToString) & "'"
-            Dim dtc As DataTable = execute_query(qc, -1, True, "", "", "", "")
-            If dtc.Rows.Count > 0 Then
-                warningCustom("AWB already exist.")
+            If BSubmitAwb.Text = "Update" Then
+                'Update AWB
+                Dim qc As String = "SELECT * FROM tb_inbound_awb
+WHERE id_comp='" & SLEVendor.EditValue.ToString & "' AND awb_number='" & addSlashes(TEAwb.Text.ToString) & "' AND id_inbound_awb!='" & id_awb_inbound & "'"
+                Dim dtc As DataTable = execute_query(qc, -1, True, "", "", "", "")
+                If dtc.Rows.Count > 0 Then
+                    warningCustom("AWB already exist.")
+                Else
+                    Dim q As String = "UPDATE `tb_inbound_awb` SET id_comp='" & SLEVendor.EditValue.ToString & "',id_del_type='" & SLEDelType.EditValue.ToString & "',id_3pl_rate='" & SLERate.EditValue.ToString & "',awb_number='" & addSlashes(TEAwb.Text.ToString) & "',created_by='" & id_user & "',created_date=NOW()
+WHERE id_inbound_awb='" & id_awb_inbound & "'"
+                    execute_non_query(q, True, "", "", "", "")
+                    '
+                    empty_store()
+                    empty_koli()
+                    'divide by
+                    Dim qdb As String = "SELECT volume_divide_by FROM `tb_lookup_del_type` WHERE id_del_type='" & SLEDelType.EditValue.ToString & "'"
+                    Dim dtb As DataTable = execute_query(qdb, -1, True, "", "", "", "")
+                    divide_by = dtb.Rows(0)("volume_divide_by")
+                    '
+                    XTCdetail.Enabled = True
+                    TEAwb.Enabled = False
+                    BNext.Enabled = True
+                    PCHeader.Enabled = False
+                    BSubmitAwb.Text = "Submit"
+                    BSubmitAwb.Enabled = False
+                    '
+                    load_form()
+                End If
             Else
-                Dim q As String = "INSERT INTO `tb_inbound_awb`(id_comp,id_del_type,id_3pl_rate,awb_number,created_by,created_date)
+                'Insert AWB
+                Dim qc As String = "SELECT * FROM tb_inbound_awb
+WHERE id_comp='" & SLEVendor.EditValue.ToString & "' AND awb_number='" & addSlashes(TEAwb.Text.ToString) & "'"
+                Dim dtc As DataTable = execute_query(qc, -1, True, "", "", "", "")
+                If dtc.Rows.Count > 0 Then
+                    warningCustom("AWB already exist.")
+                Else
+                    Dim q As String = "INSERT INTO `tb_inbound_awb`(id_comp,id_del_type,id_3pl_rate,awb_number,created_by,created_date)
 VALUES('" & SLEVendor.EditValue.ToString & "','" & SLEDelType.EditValue.ToString & "','" & SLERate.EditValue.ToString & "','" & addSlashes(TEAwb.Text.ToString) & "','" & id_user & "',NOW());SELECT LAST_INSERT_ID()"
-                id_awb_inbound = execute_query(q, 0, True, "", "", "", "")
-                '
-                empty_store()
-                empty_koli()
-                'divide by
-                Dim qdb As String = "SELECT volume_divide_by FROM `tb_lookup_del_type` WHERE id_del_type='" & SLEDelType.EditValue.ToString & "'"
-                Dim dtb As DataTable = execute_query(qdb, -1, True, "", "", "", "")
-                divide_by = dtb.Rows(0)("volume_divide_by")
-                '
-                XTCdetail.Enabled = True
-                TEAwb.Enabled = False
-                BNext.Enabled = True
-                BSubmitAwb.Enabled = False
+                    id_awb_inbound = execute_query(q, 0, True, "", "", "", "")
+                    '
+                    empty_store()
+                    empty_koli()
+                    'divide by
+                    Dim qdb As String = "SELECT volume_divide_by FROM `tb_lookup_del_type` WHERE id_del_type='" & SLEDelType.EditValue.ToString & "'"
+                    Dim dtb As DataTable = execute_query(qdb, -1, True, "", "", "", "")
+                    divide_by = dtb.Rows(0)("volume_divide_by")
+                    '
+                    XTCdetail.Enabled = True
+                    TEAwb.Enabled = False
+                    BNext.Enabled = True
+                    PCHeader.Enabled = False
+                    BSubmitAwb.Enabled = False
+                    BEditAWB.Enabled = True
+                End If
             End If
         End If
     End Sub
@@ -153,7 +191,10 @@ VALUES('" & SLEVendor.EditValue.ToString & "','" & SLEDelType.EditValue.ToString
         Dim q As String = "SELECT rte.id_3pl_rate,ds.id_sub_district,ds.sub_district,rte.cargo_rate,rte.cargo_lead_time,rte.cargo_min_weight
 FROM `tb_3pl_rate` rte
 INNER JOIN tb_m_sub_district ds ON ds.id_sub_district=rte.id_sub_district
-WHERE rte.is_active=1 AND rte.id_del_type='" & SLEDelType.EditValue.ToString & "' AND rte.id_comp='" & SLEVendor.EditValue.ToString & "'"
+WHERE rte.id_type=2 AND rte.id_del_type='" & SLEDelType.EditValue.ToString & "' AND rte.id_comp='" & SLEVendor.EditValue.ToString & "'"
+        If id_awb_inbound = "-1" Then
+            q += " AND rte.is_active=1 "
+        End If
         viewSearchLookupQuery(SLERate, q, "id_3pl_rate", "sub_district", "id_3pl_rate")
     End Sub
 
@@ -188,6 +229,7 @@ WHERE rte.is_active=1 AND rte.id_del_type='" & SLEDelType.EditValue.ToString & "
     Private Sub BNext_Click(sender As Object, e As EventArgs) Handles BNext.Click
         BSubmitAwb.Enabled = True
         BNext.Enabled = False
+        PCHeader.Enabled = True
         TEAwb.Enabled = True
         XTCdetail.Enabled = False
 
@@ -299,5 +341,41 @@ VALUES"
 
     Private Sub SLERate_EditValueChanged(sender As Object, e As EventArgs) Handles SLERate.EditValueChanged
         load_repo_store()
+    End Sub
+
+    Private Sub BPrintAWB_Click(sender As Object, e As EventArgs) Handles BPrintAWB.Click
+        If Not id_awb_inbound = "-1" Then
+
+        Else
+            warningCustom("Detail AWB not saved yet")
+        End If
+    End Sub
+
+    Private Sub GVKoli_CustomColumnDisplayText(sender As Object, e As DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs) Handles GVKoli.CustomColumnDisplayText
+        If e.Column.FieldName = "no" Then
+            e.DisplayText = (e.ListSourceRowIndex + 1).ToString()
+        End If
+    End Sub
+
+    Private Sub BEditAWB_Click(sender As Object, e As EventArgs) Handles BEditAWB.Click
+        If Not id_awb_inbound = "-1" Then
+            Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("Update AWB akan mereset koli dan list toko, lanjutkan ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+            If confirm = Windows.Forms.DialogResult.Yes Then
+                Dim q As String = ""
+                q = "DELETE FROM tb_inbound_koli WHERE id_inbound_awb='" & id_awb_inbound & "';DELETE FROM tb_inbound_store WHERE id_inbound_awb='" & id_awb_inbound & "';"
+                execute_non_query(q, True, "", "", "", "")
+                '
+                BSubmitAwb.Text = "Update"
+                BEditAWB.Enabled = False
+                BSubmitAwb.Enabled = True
+                BNext.Enabled = False
+                PCHeader.Enabled = True
+                TEAwb.Enabled = True
+                XTCdetail.Enabled = False
+
+                empty_store()
+                empty_koli()
+            End If
+        End If
     End Sub
 End Class

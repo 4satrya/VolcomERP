@@ -25,7 +25,7 @@
         m.created_date, m.created_by, ec.employee_name AS `created_by_name`, 
         m.updated_date, m.updated_by, eu.employee_name AS `updated_by_name`,
         m.report_mark_type, rmt.report_mark_type_name, 
-        m.id_mail_status, ms.mail_status, m.mail_status_note, m.mail_subject, mto.`to`, m.reason
+        m.id_mail_status, ms.mail_status, m.mail_status_note, m.mail_subject, mto.`to`, m.reason, m.additional_info
         FROM tb_mail_manage m
         LEFT JOIN tb_m_user uc ON uc.id_user = m.created_by
         LEFT JOIN tb_m_employee ec ON ec.id_employee = uc.id_employee

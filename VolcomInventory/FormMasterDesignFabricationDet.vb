@@ -27,7 +27,7 @@
         If id_design_fabrication = "0" Then
             query = "INSERT INTO tb_design_fabrication (design_fabrication, created_date, created_by) VALUES ('" + addSlashes(TEFabrication.EditValue.ToString) + "', NOW(), " + id_employee_user + ")"
         Else
-            query = "UPDATE tb_design_fabrication SET design_fabrication = '" + addSlashes(TEFabrication.EditValue.ToString) + "', updated_date = NOW(), updated_by = " + id_employee_user
+            query = "UPDATE tb_design_fabrication SET design_fabrication = '" + addSlashes(TEFabrication.EditValue.ToString) + "', updated_date = NOW(), updated_by = " + id_employee_user + " WHERE id_design_fabrication = " + id_design_fabrication
         End If
 
         execute_non_query(query, True, "", "", "", "")

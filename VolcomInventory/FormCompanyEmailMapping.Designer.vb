@@ -333,6 +333,7 @@ Partial Class FormCompanyEmailMapping
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1008, 729)
         Me.Controls.Add(Me.XtraTabControl)
+        Me.KeyPreview = True
         Me.Name = "FormCompanyEmailMapping"
         Me.Text = "Email Mapping"
         CType(Me.GCListStoreGroup, System.ComponentModel.ISupportInitialize).EndInit()

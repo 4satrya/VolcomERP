@@ -174,6 +174,25 @@ WHERE 1=1 AND pn.doc_type = 4 " & query_where & " ORDER BY pn.created_date DESC"
                 Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
                 GCDPKhusus.DataSource = data
                 GVDPKhusus.BestFitColumns()
+            ElseIf XTCInvoiceFGPO.SelectedTabPageIndex = 4 Then
+                'list invoice claim lain-lain
+                Dim query As String = "SELECT pn.*,sts.report_status,emp.`employee_name`,c.`comp_number`,c.`comp_name`,det.amount,det.amount_vat,det.total_amount 
+,det.report_number
+FROM tb_inv_claim_other pn
+INNER JOIN tb_m_user usr ON usr.`id_user`=pn.`created_by`
+INNER JOIN tb_m_employee emp ON emp.`id_employee`=usr.`id_employee`
+INNER JOIN tb_m_comp c ON c.`id_comp`=pn.`id_comp`
+INNER JOIN (
+	SELECT id_inv_claim_other,SUM(`value`) AS amount,SUM(`vat`) AS amount_vat,SUM(`value`+`vat`) AS total_amount 
+        ,GROUP_CONCAT(pnd.report_number) AS report_number
+	FROM tb_inv_claim_other_det pnd 
+	GROUP BY pnd.`id_inv_claim_other`
+) det ON det.id_inv_claim_other=pn.`id_inv_claim_other`
+INNER JOIN tb_lookup_report_status sts ON sts.id_report_status=pn.id_report_status
+WHERE 1=1  " & query_where & " ORDER BY pn.created_date DESC"
+                Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+                GCInvoiceLain.DataSource = data
+                GVInvoiceLain.BestFitColumns()
             End If
         End If
     End Sub
@@ -286,6 +305,18 @@ WHERE pnd.`id_report` IN (" & id & ") AND pnd.report_mark_type='22'"
             FormInvoiceFGPODP.id_invoice = GVDPKhusus.GetFocusedRowCellValue("id_pn_fgpo").ToString
             FormInvoiceFGPODP.doc_type = GVDPKhusus.GetFocusedRowCellValue("doc_type").ToString
             FormInvoiceFGPODP.ShowDialog()
+        End If
+    End Sub
+
+    Private Sub BCreateInvoiceLain_Click(sender As Object, e As EventArgs) Handles BCreateInvoiceLain.Click
+        FormInvoiceClaimOther.id_invoice = "-1"
+        FormInvoiceClaimOther.ShowDialog()
+    End Sub
+
+    Private Sub GVInvoiceLain_DoubleClick(sender As Object, e As EventArgs) Handles GVInvoiceLain.DoubleClick
+        If GVInvoiceLain.RowCount > 0 Then
+            FormInvoiceClaimOther.id_invoice = GVInvoiceLain.GetFocusedRowCellValue("id_inv_claim_other").ToString
+            FormInvoiceClaimOther.ShowDialog()
         End If
     End Sub
 End Class

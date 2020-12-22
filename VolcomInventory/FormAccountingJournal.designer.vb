@@ -67,13 +67,20 @@ Partial Class FormAccountingJournal
         Me.GridColumn19 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn20 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
+        Me.BViewReff = New DevExpress.XtraEditors.SimpleButton()
         Me.LEBillingView = New DevExpress.XtraEditors.LookUpEdit()
         Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.DETo = New DevExpress.XtraEditors.DateEdit()
         Me.DEFrom = New DevExpress.XtraEditors.DateEdit()
         Me.BView = New DevExpress.XtraEditors.SimpleButton()
-        Me.BViewReff = New DevExpress.XtraEditors.SimpleButton()
+        Me.GridColumn21 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.SLEUnit = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GridView6 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn25 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn26 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn27 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.LabelControl5 = New DevExpress.XtraEditors.LabelControl()
         CType(Me.GCAccTrans, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVAccTrans, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XTCJurnal, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -99,6 +106,8 @@ Partial Class FormAccountingJournal
         CType(Me.DETo.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEFrom.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SLEUnit.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView6, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GCAccTrans
@@ -107,13 +116,13 @@ Partial Class FormAccountingJournal
         Me.GCAccTrans.Location = New System.Drawing.Point(0, 44)
         Me.GCAccTrans.MainView = Me.GVAccTrans
         Me.GCAccTrans.Name = "GCAccTrans"
-        Me.GCAccTrans.Size = New System.Drawing.Size(753, 304)
+        Me.GCAccTrans.Size = New System.Drawing.Size(799, 304)
         Me.GCAccTrans.TabIndex = 6
         Me.GCAccTrans.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVAccTrans})
         '
         'GVAccTrans
         '
-        Me.GVAccTrans.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn2, Me.GridColumn3, Me.GridColumn4, Me.GridColumn5, Me.GridColumn6, Me.GridColumn7, Me.GridColumnBillType, Me.GridColumnIdBillType, Me.GridColumnstatus})
+        Me.GVAccTrans.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn21, Me.GridColumn2, Me.GridColumn3, Me.GridColumn4, Me.GridColumn5, Me.GridColumn6, Me.GridColumn7, Me.GridColumnBillType, Me.GridColumnIdBillType, Me.GridColumnstatus})
         Me.GVAccTrans.GridControl = Me.GCAccTrans
         Me.GVAccTrans.Name = "GVAccTrans"
         Me.GVAccTrans.OptionsBehavior.Editable = False
@@ -131,8 +140,8 @@ Partial Class FormAccountingJournal
         Me.GridColumn2.FieldName = "acc_trans_number"
         Me.GridColumn2.Name = "GridColumn2"
         Me.GridColumn2.Visible = True
-        Me.GridColumn2.VisibleIndex = 1
-        Me.GridColumn2.Width = 108
+        Me.GridColumn2.VisibleIndex = 2
+        Me.GridColumn2.Width = 211
         '
         'GridColumn3
         '
@@ -140,8 +149,8 @@ Partial Class FormAccountingJournal
         Me.GridColumn3.FieldName = "date_created"
         Me.GridColumn3.Name = "GridColumn3"
         Me.GridColumn3.Visible = True
-        Me.GridColumn3.VisibleIndex = 4
-        Me.GridColumn3.Width = 99
+        Me.GridColumn3.VisibleIndex = 5
+        Me.GridColumn3.Width = 194
         '
         'GridColumn4
         '
@@ -149,8 +158,8 @@ Partial Class FormAccountingJournal
         Me.GridColumn4.FieldName = "employee_name"
         Me.GridColumn4.Name = "GridColumn4"
         Me.GridColumn4.Visible = True
-        Me.GridColumn4.VisibleIndex = 3
-        Me.GridColumn4.Width = 99
+        Me.GridColumn4.VisibleIndex = 4
+        Me.GridColumn4.Width = 194
         '
         'GridColumn5
         '
@@ -171,8 +180,8 @@ Partial Class FormAccountingJournal
         Me.GridColumn7.FieldName = "acc_trans_note"
         Me.GridColumn7.Name = "GridColumn7"
         Me.GridColumn7.Visible = True
-        Me.GridColumn7.VisibleIndex = 2
-        Me.GridColumn7.Width = 300
+        Me.GridColumn7.VisibleIndex = 3
+        Me.GridColumn7.Width = 588
         '
         'GridColumnBillType
         '
@@ -185,7 +194,8 @@ Partial Class FormAccountingJournal
         Me.GridColumnBillType.FieldNameSortGroup = "id_bill_type"
         Me.GridColumnBillType.Name = "GridColumnBillType"
         Me.GridColumnBillType.Visible = True
-        Me.GridColumnBillType.VisibleIndex = 0
+        Me.GridColumnBillType.VisibleIndex = 1
+        Me.GridColumnBillType.Width = 146
         '
         'GridColumnIdBillType
         '
@@ -199,7 +209,8 @@ Partial Class FormAccountingJournal
         Me.GridColumnstatus.FieldName = "report_status"
         Me.GridColumnstatus.Name = "GridColumnstatus"
         Me.GridColumnstatus.Visible = True
-        Me.GridColumnstatus.VisibleIndex = 5
+        Me.GridColumnstatus.VisibleIndex = 6
+        Me.GridColumnstatus.Width = 152
         '
         'XTCJurnal
         '
@@ -218,11 +229,13 @@ Partial Class FormAccountingJournal
         Me.XtraTabPage1.Controls.Add(Me.GCAccTrans)
         Me.XtraTabPage1.Controls.Add(Me.PanelControl2)
         Me.XtraTabPage1.Name = "XtraTabPage1"
-        Me.XtraTabPage1.Size = New System.Drawing.Size(753, 348)
+        Me.XtraTabPage1.Size = New System.Drawing.Size(799, 348)
         Me.XtraTabPage1.Text = "List Input"
         '
         'PanelControl2
         '
+        Me.PanelControl2.Controls.Add(Me.LabelControl5)
+        Me.PanelControl2.Controls.Add(Me.SLEUnit)
         Me.PanelControl2.Controls.Add(Me.BViewJournal)
         Me.PanelControl2.Controls.Add(Me.LabelControl3)
         Me.PanelControl2.Controls.Add(Me.LabelControl4)
@@ -232,20 +245,20 @@ Partial Class FormAccountingJournal
         Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelControl2.Location = New System.Drawing.Point(0, 0)
         Me.PanelControl2.Name = "PanelControl2"
-        Me.PanelControl2.Size = New System.Drawing.Size(753, 44)
+        Me.PanelControl2.Size = New System.Drawing.Size(799, 44)
         Me.PanelControl2.TabIndex = 7
         '
         'BViewJournal
         '
-        Me.BViewJournal.Location = New System.Drawing.Point(557, 11)
+        Me.BViewJournal.Location = New System.Drawing.Point(737, 11)
         Me.BViewJournal.Name = "BViewJournal"
-        Me.BViewJournal.Size = New System.Drawing.Size(119, 22)
+        Me.BViewJournal.Size = New System.Drawing.Size(57, 22)
         Me.BViewJournal.TabIndex = 152
-        Me.BViewJournal.Text = "View Transaction"
+        Me.BViewJournal.Text = "view"
         '
         'LabelControl3
         '
-        Me.LabelControl3.Location = New System.Drawing.Point(344, 15)
+        Me.LabelControl3.Location = New System.Drawing.Point(532, 15)
         Me.LabelControl3.Name = "LabelControl3"
         Me.LabelControl3.Size = New System.Drawing.Size(17, 13)
         Me.LabelControl3.TabIndex = 151
@@ -253,7 +266,7 @@ Partial Class FormAccountingJournal
         '
         'LabelControl4
         '
-        Me.LabelControl4.Location = New System.Drawing.Point(120, 15)
+        Me.LabelControl4.Location = New System.Drawing.Point(317, 16)
         Me.LabelControl4.Name = "LabelControl4"
         Me.LabelControl4.Size = New System.Drawing.Size(31, 13)
         Me.LabelControl4.TabIndex = 150
@@ -262,7 +275,7 @@ Partial Class FormAccountingJournal
         'DEToViewJournal
         '
         Me.DEToViewJournal.EditValue = Nothing
-        Me.DEToViewJournal.Location = New System.Drawing.Point(371, 12)
+        Me.DEToViewJournal.Location = New System.Drawing.Point(559, 12)
         Me.DEToViewJournal.Name = "DEToViewJournal"
         Me.DEToViewJournal.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.DEToViewJournal.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
@@ -274,7 +287,7 @@ Partial Class FormAccountingJournal
         'DEFromViewJournal
         '
         Me.DEFromViewJournal.EditValue = Nothing
-        Me.DEFromViewJournal.Location = New System.Drawing.Point(157, 12)
+        Me.DEFromViewJournal.Location = New System.Drawing.Point(354, 13)
         Me.DEFromViewJournal.Name = "DEFromViewJournal"
         Me.DEFromViewJournal.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.DEFromViewJournal.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
@@ -285,7 +298,7 @@ Partial Class FormAccountingJournal
         '
         'LEBilling
         '
-        Me.LEBilling.Location = New System.Drawing.Point(12, 12)
+        Me.LEBilling.Location = New System.Drawing.Point(218, 12)
         Me.LEBilling.Name = "LEBilling"
         Me.LEBilling.Properties.Appearance.Options.UseTextOptions = True
         Me.LEBilling.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near
@@ -547,6 +560,14 @@ Partial Class FormAccountingJournal
         Me.PanelControl1.Size = New System.Drawing.Size(799, 43)
         Me.PanelControl1.TabIndex = 13
         '
+        'BViewReff
+        '
+        Me.BViewReff.Location = New System.Drawing.Point(663, 10)
+        Me.BViewReff.Name = "BViewReff"
+        Me.BViewReff.Size = New System.Drawing.Size(119, 22)
+        Me.BViewReff.TabIndex = 148
+        Me.BViewReff.Text = "View By Reff"
+        '
         'LEBillingView
         '
         Me.LEBillingView.Location = New System.Drawing.Point(11, 11)
@@ -612,13 +633,67 @@ Partial Class FormAccountingJournal
         Me.BView.TabIndex = 0
         Me.BView.Text = "View Transaction"
         '
-        'BViewReff
+        'GridColumn21
         '
-        Me.BViewReff.Location = New System.Drawing.Point(663, 10)
-        Me.BViewReff.Name = "BViewReff"
-        Me.BViewReff.Size = New System.Drawing.Size(119, 22)
-        Me.BViewReff.TabIndex = 148
-        Me.BViewReff.Text = "View By Reff"
+        Me.GridColumn21.Caption = "Unit"
+        Me.GridColumn21.FieldName = "unit"
+        Me.GridColumn21.Name = "GridColumn21"
+        Me.GridColumn21.Visible = True
+        Me.GridColumn21.VisibleIndex = 0
+        Me.GridColumn21.Width = 128
+        '
+        'SLEUnit
+        '
+        Me.SLEUnit.Location = New System.Drawing.Point(36, 13)
+        Me.SLEUnit.Name = "SLEUnit"
+        Me.SLEUnit.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLEUnit.Properties.View = Me.GridView6
+        Me.SLEUnit.Size = New System.Drawing.Size(176, 20)
+        Me.SLEUnit.TabIndex = 8932
+        '
+        'GridView6
+        '
+        Me.GridView6.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn25, Me.GridColumn26, Me.GridColumn27})
+        Me.GridView6.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView6.Name = "GridView6"
+        Me.GridView6.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView6.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn25
+        '
+        Me.GridColumn25.Caption = "id_coa_tag"
+        Me.GridColumn25.FieldName = "id_comp"
+        Me.GridColumn25.Name = "GridColumn25"
+        '
+        'GridColumn26
+        '
+        Me.GridColumn26.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumn26.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumn26.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumn26.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumn26.Caption = "Number"
+        Me.GridColumn26.FieldName = "tag_code"
+        Me.GridColumn26.Name = "GridColumn26"
+        Me.GridColumn26.Visible = True
+        Me.GridColumn26.VisibleIndex = 0
+        Me.GridColumn26.Width = 281
+        '
+        'GridColumn27
+        '
+        Me.GridColumn27.Caption = "Unit"
+        Me.GridColumn27.FieldName = "tag_description"
+        Me.GridColumn27.Name = "GridColumn27"
+        Me.GridColumn27.Visible = True
+        Me.GridColumn27.VisibleIndex = 1
+        Me.GridColumn27.Width = 1351
+        '
+        'LabelControl5
+        '
+        Me.LabelControl5.Location = New System.Drawing.Point(11, 16)
+        Me.LabelControl5.Name = "LabelControl5"
+        Me.LabelControl5.Size = New System.Drawing.Size(19, 13)
+        Me.LabelControl5.TabIndex = 8933
+        Me.LabelControl5.Text = "Unit"
         '
         'FormAccountingJournal
         '
@@ -660,6 +735,8 @@ Partial Class FormAccountingJournal
         CType(Me.DETo.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEFrom.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEFrom.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SLEUnit.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView6, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -717,4 +794,11 @@ Partial Class FormAccountingJournal
     Friend WithEvents ViewDetailToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SMEditEcopPD As ToolStripMenuItem
     Friend WithEvents BViewReff As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents GridColumn21 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents LabelControl5 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents SLEUnit As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents GridView6 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn25 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn26 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn27 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

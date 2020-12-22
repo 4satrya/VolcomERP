@@ -73,31 +73,40 @@ Public Class FormAccounting
     Sub viewCompany()
         Cursor = Cursors.WaitCursor
         Dim id_comp_cat As String = LECompanyCategory.EditValue.ToString
-        Dim query As String = "SELECT tb_m_comp.id_comp as id_comp,tb_m_comp.comp_number as comp_number,
-        tb_m_comp.comp_name as comp_name,tb_m_comp.address_primary as address_primary,IF(tb_m_comp.is_active=1,'yes', 'no') as is_active,
-        tb_m_comp_cat.comp_cat_name as company_category , tb_m_comp.comp_commission,
-        IFNULL(tb_m_comp.id_acc_ap,0) AS `id_acc_ap`, 
-        IFNULL(tb_m_comp.id_acc_dp,0) AS `id_acc_dp`,
-        IFNULL(tb_m_comp.id_acc_ar,0) AS `id_acc_ar`,
-        IFNULL(tb_m_comp.id_acc_sales,0) AS `id_acc_sales`,
-        IFNULL(tb_m_comp.id_acc_sales_return,0) AS `id_acc_sales_return`,
-        CONCAT(ap.acc_name,' - ', ap.acc_description) AS `acc_ap`,
-        CONCAT(dp.acc_name,' - ', dp.acc_description) AS `acc_dp`,
-        CONCAT(ar.acc_name,' - ', ar.acc_description) AS `acc_ar`,
-        CONCAT(sal.acc_name,' - ', sal.acc_description) AS `acc_sales`,
-        CONCAT(sal_ret.acc_name,' - ', sal_ret.acc_description) AS `acc_sales_return`,are.area_acc_sales AS `area`, cg.comp_group
-        FROM tb_m_comp
-        INNER JOIN tb_m_comp_cat ON tb_m_comp.id_comp_cat=tb_m_comp_cat.id_comp_cat
-        LEFT JOIN tb_a_acc ap ON ap.id_acc = tb_m_comp.id_acc_ap
-        LEFT JOIN tb_a_acc dp ON dp.id_acc = tb_m_comp.id_acc_dp
-        LEFT JOIN tb_a_acc ar ON ar.id_acc = tb_m_comp.id_acc_ar
-        LEFT JOIN tb_a_acc sal ON sal.id_acc = tb_m_comp.id_acc_sales
-        LEFT JOIN tb_a_acc sal_ret ON sal_ret.id_acc = tb_m_comp.id_acc_sales_return
-        INNER JOIN tb_m_city cty ON cty.id_city = tb_m_comp.id_city
-        INNER JOIN tb_m_state stt ON stt.id_state = cty.id_state
-        LEFT JOIN tb_m_area_acc are ON are.id_area_acc = stt.id_area_acc
-        LEFT JOIN tb_m_comp_group cg ON cg.id_comp_group = tb_m_comp.id_comp_group
-        WHERE tb_m_comp.id_comp>0 "
+        Dim query As String = "SELECT tb_m_comp.id_comp AS id_comp,tb_m_comp.comp_number AS comp_number,
+tb_m_comp.comp_name AS comp_name,tb_m_comp.address_primary AS address_primary,IF(tb_m_comp.is_active=1,'yes', 'no') AS is_active,
+tb_m_comp_cat.comp_cat_name AS company_category , tb_m_comp.comp_commission,
+IFNULL(tb_m_comp.id_acc_ap,0) AS `id_acc_ap`, 
+IFNULL(tb_m_comp.id_acc_dp,0) AS `id_acc_dp`,
+IFNULL(tb_m_comp.id_acc_cabang_ap,0) AS `id_acc_cabang_ap`, 
+IFNULL(tb_m_comp.id_acc_cabang_dp,0) AS `id_acc_cabang_dp`,
+IFNULL(tb_m_comp.id_acc_ar,0) AS `id_acc_ar`,
+IFNULL(tb_m_comp.id_acc_cabang_ar,0) AS `id_acc_cabang_ar`,
+IFNULL(tb_m_comp.id_acc_sales,0) AS `id_acc_sales`,
+IFNULL(tb_m_comp.id_acc_sales_return,0) AS `id_acc_sales_return`,
+CONCAT(ap.acc_name,' - ', ap.acc_description) AS `acc_ap`,
+CONCAT(dp.acc_name,' - ', dp.acc_description) AS `acc_dp`,
+CONCAT(ap_cabang.acc_name,' - ', ap_cabang.acc_description) AS `acc_cabang_ap`,
+CONCAT(dp_cabang.acc_name,' - ', dp_cabang.acc_description) AS `acc_cabang_dp`,
+CONCAT(ar.acc_name,' - ', ar.acc_description) AS `acc_ar`,
+CONCAT(ar.acc_name,' - ', ar.acc_description) AS `acc_cabang_ar`,
+CONCAT(sal.acc_name,' - ', sal.acc_description) AS `acc_sales`,
+CONCAT(sal_ret.acc_name,' - ', sal_ret.acc_description) AS `acc_sales_return`,are.area_acc_sales AS `area`, cg.comp_group
+FROM tb_m_comp
+INNER JOIN tb_m_comp_cat ON tb_m_comp.id_comp_cat=tb_m_comp_cat.id_comp_cat
+LEFT JOIN tb_a_acc ap ON ap.id_acc = tb_m_comp.id_acc_ap
+LEFT JOIN tb_a_acc dp ON dp.id_acc = tb_m_comp.id_acc_dp
+LEFT JOIN tb_a_acc ap_cabang ON ap_cabang.id_acc = tb_m_comp.id_acc_cabang_ap
+LEFT JOIN tb_a_acc dp_cabang ON dp_cabang.id_acc = tb_m_comp.id_acc_dp
+LEFT JOIN tb_a_acc ar ON ar.id_acc = tb_m_comp.id_acc_ar
+LEFT JOIN tb_a_acc ar_cabang ON ar_cabang.id_acc = tb_m_comp.id_acc_cabang_ar
+LEFT JOIN tb_a_acc sal ON sal.id_acc = tb_m_comp.id_acc_sales
+LEFT JOIN tb_a_acc sal_ret ON sal_ret.id_acc = tb_m_comp.id_acc_sales_return
+INNER JOIN tb_m_city cty ON cty.id_city = tb_m_comp.id_city
+INNER JOIN tb_m_state stt ON stt.id_state = cty.id_state
+LEFT JOIN tb_m_area_acc are ON are.id_area_acc = stt.id_area_acc
+LEFT JOIN tb_m_comp_group cg ON cg.id_comp_group = tb_m_comp.id_comp_group
+WHERE tb_m_comp.id_comp>0 "
         If id_comp_cat <> "0" Then
             query += "AND tb_m_comp.id_comp_cat='" + id_comp_cat + "' "
         End If
@@ -108,11 +117,15 @@ Public Class FormAccounting
             tb_m_comp_cat.comp_cat_name as company_category , tb_m_comp_comm_extra.comp_commission,
             0 AS `id_acc_ap`, 
             0 AS `id_acc_dp`,
+            0 AS `id_acc_cabang_ap`, 
+            0 AS `id_acc_cabang_dp`,
             IFNULL(tb_m_comp_comm_extra.id_acc_ar,0) AS `id_acc_ar`,
             IFNULL(tb_m_comp_comm_extra.id_acc_sales,0) AS `id_acc_sales`,
             IFNULL(tb_m_comp_comm_extra.id_acc_sales_return,0) AS `id_acc_sales_return`,
             NULL AS `acc_ap`,
             NULL AS `acc_dp`,
+            NULL AS `acc_cabang_ap`,
+            NULL AS `acc_cabang_dp`,
             CONCAT(ar.acc_name,' - ', ar.acc_description) AS `acc_ar`,
             CONCAT(sal.acc_name,' - ', sal.acc_description) AS `acc_sales`,
             CONCAT(sal_ret.acc_name,' - ', sal_ret.acc_description) AS `acc_sales_return`,are.area_acc_sales AS `area`, cg.comp_group

@@ -1,6 +1,10 @@
 ﻿Public Class FormScanReturnBAP
     Public id_bap As String = "-1"
     Private Sub FormScanReturnBAP_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        load_bap()
+    End Sub
+
+    Sub load_bap()
         DEBAP.EditValue = Now
         load_type()
         load_3pl()
@@ -153,6 +157,7 @@ VALUES"
                     execute_non_query(q, True, "", "", "", "")
                     '
                     infoCustom("BAP created")
+                    load_bap()
                 Else 'edit
                     Dim q As String = ""
                     q = "UPDATE `tb_scan_return_bap` SET `bap_date`='" & Date.Parse(DEBAP.EditValue.ToString).ToString("yyyy-MM-dd") & "',`is_lubang`='" & If(CELubang.Checked = True, "1", "2") & "'
@@ -172,6 +177,7 @@ VALUES"
                     execute_non_query(q, True, "", "", "", "")
                     '
                     infoCustom("BAP updated")
+                    load_bap()
                 End If
             End If
         End If

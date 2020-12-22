@@ -183,6 +183,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
@@ -284,6 +285,7 @@
     <Compile Include="ClassItemRequest.vb" />
     <Compile Include="ClassMailManage.vb" />
     <Compile Include="ClassMailManageReturn.vb" />
+    <Compile Include="ClassOLStore.vb" />
     <Compile Include="ClassOLStoreRefund.vb" />
     <Compile Include="ClassOwnMenu.vb" />
     <Compile Include="ClassPayout.Designer.vb">
@@ -380,6 +382,24 @@
       <DependentUpon>FormAdditionalCostDet.vb</DependentUpon>
     </Compile>
     <Compile Include="FormAdditionalCostDet.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAdjustmentOG.Designer.vb">
+      <DependentUpon>FormAdjustmentOG.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormAdjustmentOG.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAdjustmentOGDet.Designer.vb">
+      <DependentUpon>FormAdjustmentOGDet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormAdjustmentOGDet.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAdjustmentOGPick.Designer.vb">
+      <DependentUpon>FormAdjustmentOGPick.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormAdjustmentOGPick.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormAllocationHist.Designer.vb">
@@ -482,6 +502,12 @@
       <DependentUpon>FormBatchUploadOnlineStore.vb</DependentUpon>
     </Compile>
     <Compile Include="FormBatchUploadOnlineStore.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormBatchUploadOnlineStoreSearch.Designer.vb">
+      <DependentUpon>FormBatchUploadOnlineStoreSearch.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormBatchUploadOnlineStoreSearch.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormBudgetProdDemand.Designer.vb">
@@ -1164,6 +1190,12 @@
       <DependentUpon>FormDesignImagesDet.vb</DependentUpon>
     </Compile>
     <Compile Include="FormDesignImagesDet.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDesignImagesDetail.Designer.vb">
+      <DependentUpon>FormDesignImagesDetail.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormDesignImagesDetail.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormDesignImagesLog.Designer.vb">
@@ -2383,6 +2415,12 @@
     <Compile Include="FormInvMatDet.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormInvoiceClaimOther.Designer.vb">
+      <DependentUpon>FormInvoiceClaimOther.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormInvoiceClaimOther.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormInvoiceFGPO.Designer.vb">
       <DependentUpon>FormInvoiceFGPO.vb</DependentUpon>
     </Compile>
@@ -3061,6 +3099,36 @@
     <Compile Include="FormOLStoreImportXLS.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormOLStoreLog.Designer.vb">
+      <DependentUpon>FormOLStoreLog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormOLStoreLog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormOLStoreOOS.Designer.vb">
+      <DependentUpon>FormOLStoreOOS.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormOLStoreOOS.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormOLStoreOOSDetail.Designer.vb">
+      <DependentUpon>FormOLStoreOOSDetail.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormOLStoreOOSDetail.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormOLStoreOOSList.Designer.vb">
+      <DependentUpon>FormOLStoreOOSList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormOLStoreOOSList.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormOLStoreOOSManualEmail.Designer.vb">
+      <DependentUpon>FormOLStoreOOSManualEmail.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormOLStoreOOSManualEmail.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormOLStoreOrderId.Designer.vb">
       <DependentUpon>FormOLStoreOrderId.vb</DependentUpon>
     </Compile>
@@ -3071,6 +3139,12 @@
       <DependentUpon>FormOLStorePeriod.vb</DependentUpon>
     </Compile>
     <Compile Include="FormOLStorePeriod.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormOLStoreRestock.Designer.vb">
+      <DependentUpon>FormOLStoreRestock.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormOLStoreRestock.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormOlStoreRetCust.Designer.vb">
@@ -3119,6 +3193,12 @@
       <DependentUpon>FormOLStoreUpdateStatus.vb</DependentUpon>
     </Compile>
     <Compile Include="FormOLStoreUpdateStatus.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormOOSFinalize.Designer.vb">
+      <DependentUpon>FormOOSFinalize.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormOOSFinalize.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormOpt.Designer.vb">
@@ -6373,6 +6453,12 @@
     <Compile Include="FormScanReturnBAPProduct.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormScanReturnConfirm.Designer.vb">
+      <DependentUpon>FormScanReturnConfirm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormScanReturnConfirm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormScanReturnDet.Designer.vb">
       <DependentUpon>FormScanReturnDet.vb</DependentUpon>
     </Compile>
@@ -7429,6 +7515,12 @@
     <Compile Include="ReportAdditionalCost.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ReportAdjustmentOG.Designer.vb">
+      <DependentUpon>ReportAdjustmentOG.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReportAdjustmentOG.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ReportAttnSum.Designer.vb">
       <DependentUpon>ReportAttnSum.vb</DependentUpon>
     </Compile>
@@ -7972,10 +8064,22 @@
     <Compile Include="ReportFormInvoiceTrackingSummary.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ReportInboundAWB.Designer.vb">
+      <DependentUpon>ReportInboundAWB.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReportInboundAWB.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ReportInvMat.Designer.vb">
       <DependentUpon>ReportInvMat.vb</DependentUpon>
     </Compile>
     <Compile Include="ReportInvMat.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportInvoiceClaimOther.Designer.vb">
+      <DependentUpon>ReportInvoiceClaimOther.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReportInvoiceClaimOther.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="ReportItemDel.Designer.vb">
@@ -8678,6 +8782,12 @@
     <Compile Include="ReportSalesReturnOrder.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ReportSalesReturnOrderMailSKPB.Designer.vb">
+      <DependentUpon>ReportSalesReturnOrderMailSKPB.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReportSalesReturnOrderMailSKPB.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ReportSalesReturnOrderMailSKPP.Designer.vb">
       <DependentUpon>ReportSalesReturnOrderMailSKPP.vb</DependentUpon>
     </Compile>
@@ -8980,6 +9090,15 @@
     <EmbeddedResource Include="FormAdditionalCostDet.resx">
       <DependentUpon>FormAdditionalCostDet.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormAdjustmentOG.resx">
+      <DependentUpon>FormAdjustmentOG.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAdjustmentOGDet.resx">
+      <DependentUpon>FormAdjustmentOGDet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAdjustmentOGPick.resx">
+      <DependentUpon>FormAdjustmentOGPick.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormAllocationHist.resx">
       <DependentUpon>FormAllocationHist.vb</DependentUpon>
     </EmbeddedResource>
@@ -9030,6 +9149,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormBatchUploadOnlineStore.resx">
       <DependentUpon>FormBatchUploadOnlineStore.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormBatchUploadOnlineStoreSearch.resx">
+      <DependentUpon>FormBatchUploadOnlineStoreSearch.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormBudgetProdDemand.resx">
       <DependentUpon>FormBudgetProdDemand.vb</DependentUpon>
@@ -9406,6 +9528,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormDesignImagesDet.resx">
       <DependentUpon>FormDesignImagesDet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormDesignImagesDetail.resx">
+      <DependentUpon>FormDesignImagesDetail.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormDesignImagesLog.resx">
       <DependentUpon>FormDesignImagesLog.vb</DependentUpon>
@@ -10031,6 +10156,9 @@
     <EmbeddedResource Include="FormInvMatDet.resx">
       <DependentUpon>FormInvMatDet.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormInvoiceClaimOther.resx">
+      <DependentUpon>FormInvoiceClaimOther.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormInvoiceFGPO.resx">
       <DependentUpon>FormInvoiceFGPO.vb</DependentUpon>
     </EmbeddedResource>
@@ -10370,11 +10498,29 @@
     <EmbeddedResource Include="FormOLStoreImportXLS.resx">
       <DependentUpon>FormOLStoreImportXLS.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormOLStoreLog.resx">
+      <DependentUpon>FormOLStoreLog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormOLStoreOOS.resx">
+      <DependentUpon>FormOLStoreOOS.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormOLStoreOOSDetail.resx">
+      <DependentUpon>FormOLStoreOOSDetail.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormOLStoreOOSList.resx">
+      <DependentUpon>FormOLStoreOOSList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormOLStoreOOSManualEmail.resx">
+      <DependentUpon>FormOLStoreOOSManualEmail.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormOLStoreOrderId.resx">
       <DependentUpon>FormOLStoreOrderId.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormOLStorePeriod.resx">
       <DependentUpon>FormOLStorePeriod.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormOLStoreRestock.resx">
+      <DependentUpon>FormOLStoreRestock.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormOlStoreRetCust.resx">
       <DependentUpon>FormOlStoreRetCust.vb</DependentUpon>
@@ -12356,6 +12502,9 @@
     <EmbeddedResource Include="FormScanReturnBAPProduct.resx">
       <DependentUpon>FormScanReturnBAPProduct.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormScanReturnConfirm.resx">
+      <DependentUpon>FormScanReturnConfirm.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormScanReturnDet.resx">
       <DependentUpon>FormScanReturnDet.vb</DependentUpon>
     </EmbeddedResource>
@@ -12973,6 +13122,9 @@
     <EmbeddedResource Include="ReportAdditionalCost.resx">
       <DependentUpon>ReportAdditionalCost.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReportAdjustmentOG.resx">
+      <DependentUpon>ReportAdjustmentOG.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ReportAttnSum.resx">
       <DependentUpon>ReportAttnSum.vb</DependentUpon>
     </EmbeddedResource>
@@ -13262,8 +13414,14 @@
     <EmbeddedResource Include="ReportFormInvoiceTrackingSummary.resx">
       <DependentUpon>ReportFormInvoiceTrackingSummary.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReportInboundAWB.resx">
+      <DependentUpon>ReportInboundAWB.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ReportInvMat.resx">
       <DependentUpon>ReportInvMat.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportInvoiceClaimOther.resx">
+      <DependentUpon>ReportInvoiceClaimOther.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportItemDel.resx">
       <DependentUpon>ReportItemDel.vb</DependentUpon>
@@ -13653,6 +13811,9 @@
     <EmbeddedResource Include="ReportSalesReturnOrder.resx">
       <DependentUpon>ReportSalesReturnOrder.vb</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportSalesReturnOrderMailSKPB.resx">
+      <DependentUpon>ReportSalesReturnOrderMailSKPB.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportSalesReturnOrderMailSKPP.resx">
       <DependentUpon>ReportSalesReturnOrderMailSKPP.vb</DependentUpon>

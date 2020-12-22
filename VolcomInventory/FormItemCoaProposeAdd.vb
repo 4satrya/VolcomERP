@@ -6,9 +6,10 @@
     End Sub
 
     Sub viewData()
-        Dim query As String = "SELECT d.id_departement, d.departement, NULL AS `exp_acc`, NULL AS `inv_acc`,
+        Dim query As String = "SELECT tag.id_coa_type,d.id_departement, d.departement, NULL AS `exp_acc`, NULL AS `inv_acc`,
         '2' AS `is_request`, '1' AS `is_expense`, cp.id_item_coa_propose_det
         FROM tb_m_departement d 
+        INNER JOIN tb_coa_tag tag ON tag.id_coa_tag=d.id_coa_tag
         LEFT JOIN (
 	        SELECT cp.id_item_coa_propose_det, cp.id_departement 
 	        FROM tb_item_coa_propose_det cp
@@ -30,7 +31,7 @@
     End Sub
 
     Sub viewCOA()
-        Dim query As String = "SELECT a.id_acc, a.acc_name, a.acc_description, a.id_acc_parent, 
+        Dim query As String = "SELECT a.id_coa_type,a.id_acc, a.acc_name, a.acc_description, a.id_acc_parent, 
         a.id_acc_parent, a.id_acc_cat, a.id_is_det, a.id_status, a.id_comp
         FROM tb_a_acc a WHERE a.id_status=1 AND a.id_is_det=2 "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
@@ -155,5 +156,28 @@
 
     Private Sub SLECat_EditValueChanged(sender As Object, e As EventArgs) Handles SLECat.EditValueChanged
         viewData()
+    End Sub
+
+    Private Sub GVData_ShownEditor(sender As Object, e As EventArgs) Handles GVData.ShownEditor
+        Dim view As DevExpress.XtraGrid.Views.Grid.GridView = CType(sender, DevExpress.XtraGrid.Views.Grid.GridView)
+        If view.FocusedColumn.FieldName = "exp_acc" AndAlso TypeOf view.ActiveEditor Is DevExpress.XtraEditors.SearchLookUpEdit Then
+            Dim clone_dsg As DataView = Nothing
+
+            Dim edit As DevExpress.XtraEditors.SearchLookUpEdit
+            Dim table As DataTable
+            Dim row As DataRow
+
+            edit = CType(view.ActiveEditor, DevExpress.XtraEditors.SearchLookUpEdit)
+            Try
+                table = CType(edit.Properties.DataSource, DataTable)
+            Catch ex As Exception
+                table = CType(edit.Properties.DataSource, DataView).Table
+            End Try
+            clone_dsg = New DataView(table)
+
+            row = view.GetDataRow(view.FocusedRowHandle)
+            clone_dsg.RowFilter = "[id_coa_type] = " + row("id_coa_type").ToString()
+            edit.Properties.DataSource = clone_dsg
+        End If
     End Sub
 End Class

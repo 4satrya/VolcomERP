@@ -27,6 +27,7 @@ Partial Class FormReturnNoteDet
         Me.LabelControl11 = New DevExpress.XtraEditors.LabelControl()
         Me.TELabelNumber = New DevExpress.XtraEditors.TextEdit()
         Me.PanelControl8 = New DevExpress.XtraEditors.PanelControl()
+        Me.BPrint = New DevExpress.XtraEditors.SimpleButton()
         Me.BSaveAndPrint = New DevExpress.XtraEditors.SimpleButton()
         Me.BNextReturnNote = New DevExpress.XtraEditors.SimpleButton()
         Me.TEQtyReturnNote = New DevExpress.XtraEditors.TextEdit()
@@ -64,7 +65,6 @@ Partial Class FormReturnNoteDet
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
         Me.BReset = New DevExpress.XtraEditors.SimpleButton()
-        Me.BPrint = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl3.SuspendLayout()
         CType(Me.PCReturnNote, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -178,6 +178,17 @@ Partial Class FormReturnNoteDet
         Me.PanelControl8.Name = "PanelControl8"
         Me.PanelControl8.Size = New System.Drawing.Size(412, 43)
         Me.PanelControl8.TabIndex = 8917
+        '
+        'BPrint
+        '
+        Me.BPrint.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BPrint.Image = CType(resources.GetObject("BPrint.Image"), System.Drawing.Image)
+        Me.BPrint.Location = New System.Drawing.Point(72, 2)
+        Me.BPrint.Name = "BPrint"
+        Me.BPrint.Size = New System.Drawing.Size(90, 39)
+        Me.BPrint.TabIndex = 5
+        Me.BPrint.Text = "Print"
+        Me.BPrint.Visible = False
         '
         'BSaveAndPrint
         '
@@ -504,17 +515,6 @@ Partial Class FormReturnNoteDet
         Me.BReset.Size = New System.Drawing.Size(89, 39)
         Me.BReset.TabIndex = 4
         Me.BReset.Text = "Reset"
-        '
-        'BPrint
-        '
-        Me.BPrint.Dock = System.Windows.Forms.DockStyle.Right
-        Me.BPrint.Image = CType(resources.GetObject("BPrint.Image"), System.Drawing.Image)
-        Me.BPrint.Location = New System.Drawing.Point(72, 2)
-        Me.BPrint.Name = "BPrint"
-        Me.BPrint.Size = New System.Drawing.Size(90, 39)
-        Me.BPrint.TabIndex = 5
-        Me.BPrint.Text = "Print"
-        Me.BPrint.Visible = False
         '
         'FormReturnNoteDet
         '

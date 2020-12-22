@@ -127,6 +127,7 @@
 
             report.XLPeriod.Text = DEFrom.Text + " - " + DETo.Text
             report.XLAccount.Text = SLUEFrom.Text + " - " + SLUETo.Text
+            report.LUnit.Text = SLEUnit.Text
 
             Dim tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(report)
 

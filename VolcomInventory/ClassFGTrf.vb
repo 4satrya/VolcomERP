@@ -22,18 +22,23 @@
 
     Public Sub changeStatus(ByVal id_report_par As String, ByVal id_status_reportx_par As String)
         'rollback stock if cancelled and complerted
+        Dim id_so As String = ""
+        Dim id_oos As String = ""
+        Dim id_comp_group As String = ""
+        Dim id_web_order As String = ""
+        Dim id_api_type As String = ""
         If id_status_reportx_par = "6" Then
-            Dim id_so As String = execute_query("SELECT id_sales_order FROM tb_fg_trf WHERE id_fg_trf='" + id_report_par + "' ", 0, True, "", "", "", "")
+            id_so = execute_query("SELECT id_sales_order FROM tb_fg_trf WHERE id_fg_trf='" + id_report_par + "' ", 0, True, "", "", "", "")
 
             Dim query_complete As String = "
-             -- delete so first (strage)
-            DELETE FROM tb_storage_fg 
-            WHERE report_mark_type=39 AND id_report=" + id_so + " AND report_mark_type_ref=57 AND id_report_ref=" + id_report_par + " AND id_storage_category=1 AND id_stock_status=2 ;
-            -- delete del first (strage)
-            DELETE FROM tb_storage_fg 
-            WHERE report_mark_type=57 AND id_report=" + id_report_par + ";
-            -- insert storage
-            INSERT INTO tb_storage_fg(id_wh_drawer, id_storage_category, id_product, bom_unit_price, report_mark_type, id_report, storage_product_qty, storage_product_datetime, storage_product_notes, id_stock_status, report_mark_type_ref, id_report_ref) "
+                 -- delete so first (strage)
+                DELETE FROM tb_storage_fg 
+                WHERE report_mark_type=39 AND id_report=" + id_so + " AND report_mark_type_ref=57 AND id_report_ref=" + id_report_par + " AND id_storage_category=1 AND id_stock_status=2 ;
+                -- delete del first (strage)
+                DELETE FROM tb_storage_fg 
+                WHERE report_mark_type=57 AND id_report=" + id_report_par + ";
+                -- insert storage
+                INSERT INTO tb_storage_fg(id_wh_drawer, id_storage_category, id_product, bom_unit_price, report_mark_type, id_report, storage_product_qty, storage_product_datetime, storage_product_notes, id_stock_status, report_mark_type_ref, id_report_ref) "
             query_complete += "SELECT (getCompByContact(trf.id_comp_contact_from, 4)) AS `drawer`, '1', trf_det.id_product, dsg.design_cop, '39' AS `report_mark_type`, trf.id_sales_order AS `id_report`, trf_det.fg_trf_det_qty, NOW(), '', '2', 57, " + id_report_par + " "
             query_complete += "FROM tb_fg_trf trf "
             query_complete += "INNER JOIN tb_fg_trf_det trf_det ON trf_det.id_fg_trf = trf.id_fg_trf "
@@ -54,7 +59,7 @@
             query_complete += "INNER JOIN tb_m_product prod ON prod.id_product = trf_det.id_product "
             query_complete += "INNER JOIN tb_m_design dsg ON dsg.id_design = prod.id_design "
             query_complete += "WHERE trf.id_fg_trf=" + id_report_par + " AND trf_det.fg_trf_det_qty >0  "
-            execute_non_query(query_complete, True, "", "", "", "")
+            execute_non_query_long(query_complete, True, "", "", "", "")
 
             'complete unique
             Dim query_unique As String = "DELETE FROM tb_m_unique_code WHERE id_report=" + id_report_par + " AND report_mark_type=57 AND id_report_status=6;
@@ -147,7 +152,84 @@
             WHERE t.id_fg_trf=" + id_report_par + " AND d.is_old_design=2  AND t.is_use_unique_code=1 AND so.is_transfer_data=2 "
             execute_non_query_long(query_cancel, True, "", "", "", "")
         End If
-        Dim query As String = String.Format("UPDATE tb_fg_trf SET id_report_status='{0}', id_report_status_rec = '" + id_status_reportx_par + "', last_update=NOW(), last_update_by=" + id_user + " WHERE id_fg_trf ='{1}'", id_status_reportx_par, id_report_par)
-        execute_non_query(query, True, "", "", "", "")
+
+        Try
+            Dim query As String = String.Format("UPDATE tb_fg_trf SET id_report_status='{0}', id_report_status_rec = '" + id_status_reportx_par + "', last_update=NOW(), last_update_by=" + id_user + " WHERE id_fg_trf ='{1}'", id_status_reportx_par, id_report_par)
+            execute_non_query(query, True, "", "", "", "")
+            'action for restock
+            If id_status_reportx_par = "6" Then
+                'close too
+                execute_non_query_long("CALL closing_too(" + id_so + ")", True, "", "", "", "")
+            End If
+        Catch ex As Exception
+            stopCustom("Problem execute. Don't continue process. Please contact administrator. Detail: id_trf=" + id_report_par + ";id_status=" + id_status_reportx_par + ";" + ex.ToString)
+        End Try
+
+    End Sub
+
+    Sub processRestockOnline(ByVal id_report_par As String)
+        Dim query_stt As String = "SELECT id_sales_order,id_report_status FROM tb_fg_trf WHERE id_fg_trf='" + id_report_par + "'"
+        Dim data_stt As DataTable = execute_query(query_stt, -1, True, "", "", "", "")
+        Dim id_so As String = data_stt.Rows(0)("id_sales_order").ToString
+        Dim trf_stt As String = data_stt.Rows(0)("id_report_status").ToString
+        If trf_stt = "6" Then
+            'get oos
+            Dim query_oos As String = "SELECT so.id_ol_store_oos, oos.id_comp_group, oos.id_order, cg.id_api_type
+                FROM tb_sales_order so
+                INNER JOIN tb_ol_store_oos oos ON oos.id_ol_store_oos = so.id_ol_store_oos
+                INNER JOIN tb_m_comp_group cg ON cg.id_comp_group = oos.id_comp_group
+                WHERE so.id_sales_order='" + id_so + "' "
+            Dim data_oos As DataTable = execute_query(query_oos, -1, True, "", "", "", "")
+            Dim id_oos As String = data_oos.Rows(0)("id_ol_store_oos").ToString
+            Dim id_comp_group As String = data_oos.Rows(0)("id_comp_group").ToString
+            Dim id_api_type As String = data_oos.Rows(0)("id_api_type").ToString
+            Dim id_web_order As String = data_oos.Rows(0)("id_order").ToString
+
+            'get product restok
+            Dim query_prod As String = "SELECT td.id_product, CAST(SUM(td.fg_trf_det_qty) AS DECIMAL(10,0)) AS `qty` 
+                FROM tb_fg_trf t 
+                INNER JOIN tb_fg_trf_det td ON td.id_fg_trf = t.id_fg_trf
+                WHERE t.id_fg_trf='" + id_report_par + "'
+                GROUP BY td.id_product "
+            Dim data_prod As DataTable = execute_query(query_prod, -1, True, "", "", "", "")
+            Dim id_product_restock As String = data_prod.Rows(0)("id_product").ToString
+            Dim qty_restock As String = data_prod.Rows(0)("qty").ToString
+
+            'get from
+            Dim query_from As String = "SELECT c.id_wh_type, c.id_comp 
+            FROM tb_fg_trf t
+            INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact = t.id_comp_contact_to
+            INNER JOIN tb_m_comp c ON c.id_comp = cc.id_comp
+            WHERE t.id_fg_trf='" + id_report_par + "'"
+            Dim data_from As DataTable = execute_query(query_from, -1, True, "", "", "", "")
+            Dim id_wh_from As String = data_from.Rows(0)("id_comp").ToString
+            Dim id_wh_type_from As String = data_from.Rows(0)("id_wh_type").ToString
+
+            'get to
+            Dim query_to As String = "SELECT wh_normal.id_comp AS `id_wh_normal`,
+            wh_sale.id_comp AS `id_wh_sale`
+            FROM tb_m_comp_group cg
+            INNER JOIN tb_m_comp_contact whc_normal ON whc_normal.id_comp_contact = cg.id_wh_order_contact_normal
+            INNER JOIN tb_m_comp wh_normal ON wh_normal.id_comp = whc_normal.id_comp
+            INNER JOIN tb_m_comp_contact whc_sale ON whc_sale.id_comp_contact = cg.id_wh_order_contact_sale
+            INNER JOIN tb_m_comp wh_sale ON wh_sale.id_comp = whc_sale.id_comp
+            WHERE cg.id_comp_group='" + id_comp_group + "'; "
+            Dim data_to As DataTable = execute_query(query_to, -1, True, "", "", "", "")
+            Dim id_wh_to As String = ""
+            If id_wh_type_from = "1" Then
+                'normal
+                id_wh_to = data_to.Rows(0)("id_wh_normal").ToString
+            Else
+                'sale
+                id_wh_to = data_to.Rows(0)("id_wh_sale").ToString
+            End If
+
+            'trf virtual by data
+            execute_non_query_long("CALL create_oos_restock_wh_ol_grp(" + id_oos + ", " + id_wh_from + ", " + id_wh_to + ", " + id_product_restock + ", " + qty_restock + ", 1)", True, "", "", "", "")
+
+            'finalisasi restock
+            Dim oos As New ClassOLStore()
+            oos.oosRestockChecking(id_web_order, id_comp_group, id_oos, id_api_type)
+        End If
     End Sub
 End Class

@@ -7,6 +7,7 @@
     Dim rmt As String = "250"
     Public dt As DataTable
     Dim is_use_discount_code As String = "-1"
+    Dim id_price_rule As String = "-1"
 
     Private Sub FormPromoCollectionDet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         viewReportStatus()
@@ -65,6 +66,7 @@
             TxtUseDiscountCode.Text = data.Rows(0)("use_discount_code").ToString
             TxtDiscountTitle.Text = data.Rows(0)("discount_title").ToString
             is_use_discount_code = data.Rows(0)("is_use_discount_code").ToString
+            id_price_rule = data.Rows(0)("price_rule_id").ToString
 
             'properti
             If is_confirm = "2" Then
@@ -588,7 +590,12 @@
     End Sub
 
     Sub viewDiscountCodeList()
-        Dim query As String = "SELECT 0 AS no, disc_code FROM tb_ol_promo_collection_disc_code WHERE id_ol_promo_collection = " + id
+        Dim query As String = "SELECT 0 AS `no`, c.disc_code, c.sync_date, c.sync_by, e.employee_name AS `sync_by_name`,
+c.is_additional, IF(c.is_additional=1,'Yes', 'No') AS `is_additional_view`
+FROM tb_ol_promo_collection_disc_code c 
+INNER JOIN tb_m_user us ON us.id_user = c.sync_by
+INNER JOIN tb_m_employee e ON e.id_employee = us.id_employee
+WHERE c.id_ol_promo_collection = '" + id + "' "
 
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
 
@@ -599,5 +606,20 @@
         GCDiscountCode.DataSource = data
 
         GVDiscountCode.BestFitColumns()
+    End Sub
+
+    Private Sub BtnSync_Click(sender As Object, e As EventArgs) Handles BtnSync.Click
+        If Not FormMain.SplashScreenManager1.IsSplashFormVisible Then
+            FormMain.SplashScreenManager1.ShowWaitForm()
+        End If
+        FormMain.SplashScreenManager1.SetWaitFormCaption("Sync Discount Code")
+        Try
+            Dim vios As New ClassShopifyApi()
+            vios.get_discount_code_addition(id, id_price_rule)
+        Catch ex As Exception
+            stopCustom("Error sync : " + ex.ToString)
+        End Try
+        viewDiscountCodeList()
+        FormMain.SplashScreenManager1.CloseWaitForm()
     End Sub
 End Class

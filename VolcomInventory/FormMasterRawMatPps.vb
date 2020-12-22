@@ -421,8 +421,8 @@ SELECT COUNT(id_mat_det_pps) AS jml FROM tb_m_mat_det_pps WHERE mat_det_code='{0
             Dim id_method As String = "3" 'average
             Dim lifetime As String = TxtLifetime.Text
 
-            Dim is_rev As String = If(id_mat_det_revise = "-1", "2", "1")
-            Dim id_mat_rev As String = If(id_mat_det_revise = "-1", "NULL", "'" & id_mat_det_revise & "'")
+            Dim is_rev As String = If(id_mat_det_revise = "-1" Or id_mat_det_revise = "0" Or id_mat_det_revise = "", "2", "1")
+            Dim id_mat_rev As String = If(id_mat_det_revise = "-1" Or id_mat_det_revise = "0" Or id_mat_det_revise = "", "NULL", "'" & id_mat_det_revise & "'")
 
             Dim gramasi As String = "0"
 

@@ -7,11 +7,13 @@
     Dim is_confirm As String = "2"
     Dim created_date As String = ""
 
-    Dim id_coa_tag As String = "1"
+    Public id_coa_tag As String = "1"
 
     Private Sub FormItemExpenseDet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         DEDateReff.EditValue = Now()
-
+        '
+        load_unit()
+        '
         viewReportStatus()
         viewCCRepo()
         viewCOAPPH()
@@ -28,6 +30,17 @@
         GridColumnPPH.UnboundExpression = "Iif([id_acc_pph] = " & get_opt_acc_field("id_acc_skbp") & ", 0, floor([pph_percent] / 100 * [amount]))"
         CEPayLater.Checked = True
         CEPayLater.Enabled = False
+    End Sub
+
+    Sub load_unit()
+        Dim query As String = "SELECT id_coa_tag,tag_code,tag_description FROM `tb_coa_tag`"
+        '        query = "SELECT '0' AS id_comp,'-' AS comp_number, 'All Unit' AS comp_name
+        'UNION ALL
+        'SELECT ad.`id_comp`,c.`comp_number`,c.`comp_name` FROM `tb_a_acc_trans_det` ad
+        'INNER JOIN tb_m_comp c ON c.`id_comp`=ad.`id_comp`
+        'GROUP BY ad.id_comp"
+        viewSearchLookupQuery(SLEUnit, query, "id_coa_tag", "tag_description", "id_coa_tag")
+        SLEUnit.EditValue = "1"
     End Sub
 
     Sub load_currency()
@@ -281,6 +294,10 @@ WHERE bo.`year`=YEAR(NOW()) AND bo.is_active='1'"
         Else
             'tidak bisa edit
             GVData.OptionsBehavior.Editable = False
+            '
+            SLEUnit.Enabled = False
+            DEDateReff.Enabled = False
+            '
             SLEPayFrom.Enabled = False
             LEPaymentMethod.Enabled = False
             CEPayLater.Enabled = False
@@ -379,13 +396,13 @@ WHERE bo.`year`=YEAR(NOW()) AND bo.is_active='1'"
         '
         GridColumnNo.MaxWidth = 30
         GridColumnCurrView.MaxWidth = 30
-        GridColumnBefKurs.MaxWidth = 65
+        GridColumnBefKurs.MaxWidth = 70
         GridColumnKurs.MaxWidth = 50
         GridColumnAmount.MaxWidth = 80
         GridColumnTaxPercent.MaxWidth = 30
         GridColumnTaxValue.MaxWidth = 70
         GridColumnPPHPercent.MaxWidth = 30
-        GridColumnPPH.MaxWidth = 60
+        GridColumnPPH.MaxWidth = 70
 
         'creating and saving the view's layout to a new memory stream 
         Dim str As System.IO.Stream
@@ -456,6 +473,7 @@ WHERE bo.`year`=YEAR(NOW()) AND bo.is_active='1'"
         Report.LNote.Text = MENote.Text.ToString
         Report.LabelPaymentMethod.Text = LEPaymentMethod.Text
         Report.LabelPaymentStatus.Text = TxtPaymentStatus.Text
+        Report.LUnit.Text = SLEUnit.Text
 
         If CEPayLater.EditValue = True Then
             Report.LabelBeneficiary.Text = TxtCompName.Text
@@ -529,6 +547,7 @@ WHERE bo.`year`=YEAR(NOW()) AND bo.is_active='1'"
     Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles BtnSave.Click
         GVData.RefreshData()
         makeSafeGV(GVData)
+        calculate()
 
         Dim multiple_curr As Boolean = False
 
@@ -600,8 +619,8 @@ WHERE bo.`year`=YEAR(NOW()) AND bo.is_active='1'"
                             due_date = "NULL"
                             is_open = "2"
                         End If
-                        Dim qm As String = "INSERT INTO tb_item_expense(id_comp,inv_number, created_date, due_date, created_by, id_acc_from, id_payment_purchasing, id_report_status, note, sub_total, vat_total, total, is_pay_later, is_open, date_reff) VALUES 
-                (" + id_comp + ",'" + inv_no + "', NOW()," + due_date + ", '" + id_user + "', '" + id_acc_from + "', '" + id_payment_purchasing + "', 1, '" + note + "','" + sub_total + "', '" + vat_total + "', '" + total + "', '" + is_pay_later + "', '" + is_open + "', '" + date_reff + "'); SELECT LAST_INSERT_ID(); "
+                        Dim qm As String = "INSERT INTO tb_item_expense(id_comp,inv_number, created_date, due_date, created_by, id_acc_from, id_payment_purchasing, id_report_status, note, sub_total, vat_total, total, is_pay_later, is_open, date_reff, id_coa_tag) VALUES 
+                (" + id_comp + ",'" + inv_no + "', NOW()," + due_date + ", '" + id_user + "', '" + id_acc_from + "', '" + id_payment_purchasing + "', 1, '" + note + "','" + sub_total + "', '" + vat_total + "', '" + total + "', '" + is_pay_later + "', '" + is_open + "', '" + date_reff + "','" & SLEUnit.EditValue.ToString & "'); SELECT LAST_INSERT_ID(); "
                         id = execute_query(qm, 0, True, "", "", "", "")
                         execute_non_query("CALL gen_number(" + id + ",157); ", True, "", "", "", "")
 
@@ -673,7 +692,7 @@ WHERE bo.`year`=YEAR(NOW()) AND bo.is_active='1'"
                             is_open = "2"
                         End If
 
-                        Dim qm As String = "UPDATE tb_item_expense SET id_comp=" + id_comp + ",inv_number='" + inv_no + "', created_date=NOW(), due_date=" + due_date + ", created_by='" + id_user + "', id_acc_from= '" + id_acc_from + "', id_payment_purchasing='" + id_payment_purchasing + "', note='" + note + "', sub_total='" + sub_total + "', vat_total='" + vat_total + "', total='" + total + "', is_pay_later='" + is_pay_later + "', is_open='" + is_open + "', date_reff='" + date_reff + "' WHERE id_item_expense='" & id & "' ; "
+                        Dim qm As String = "UPDATE tb_item_expense SET id_comp=" + id_comp + ",inv_number='" + inv_no + "', created_date=NOW(), due_date=" + due_date + ", created_by='" + id_user + "', id_acc_from= '" + id_acc_from + "', id_payment_purchasing='" + id_payment_purchasing + "', note='" + note + "', sub_total='" + sub_total + "', vat_total='" + vat_total + "', total='" + total + "', is_pay_later='" + is_pay_later + "', is_open='" + is_open + "', date_reff='" + date_reff + "',id_coa_tag='" & SLEUnit.EditValue.ToString & "' WHERE id_item_expense='" & id & "' ; "
                         execute_non_query(qm, True, "", "", "", "")
 
                         'query det
@@ -1074,5 +1093,17 @@ WHERE c.id_comp='" + id_comp + "' "
     Private Sub RISLECurrency_EditValueChanging(sender As Object, e As DevExpress.XtraEditors.Controls.ChangingEventArgs) Handles RISLECurrency.EditValueChanging
         GCData.RefreshDataSource()
         GVData.RefreshData()
+    End Sub
+
+    Private Sub SLEUnit_EditValueChanged(sender As Object, e As EventArgs) Handles SLEUnit.EditValueChanged
+        id_coa_tag = SLEUnit.EditValue.ToString
+        '
+        id_comp = "-1"
+        TxtCompNumber.Text = ""
+        TxtCompName.Text = ""
+        '
+        viewCOA()
+        viewCOARepo()
+        viewCOAPPH()
     End Sub
 End Class

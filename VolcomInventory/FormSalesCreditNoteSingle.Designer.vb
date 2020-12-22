@@ -48,6 +48,7 @@ Partial Class FormSalesCreditNoteSingle
         Me.GridColumnIsSelect = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.CheckItemList = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.RepositoryItemSpinEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit()
+        Me.CESelAll = New DevExpress.XtraEditors.CheckEdit()
         CType(Me.PanelControlChoose, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControlChoose.SuspendLayout()
         CType(Me.CheckEditSelectAll.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -56,10 +57,12 @@ Partial Class FormSalesCreditNoteSingle
         CType(Me.SPQtyCreditNote, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CheckItemList, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RepositoryItemSpinEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.CESelAll.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelControlChoose
         '
+        Me.PanelControlChoose.Controls.Add(Me.CESelAll)
         Me.PanelControlChoose.Controls.Add(Me.CheckEditSelectAll)
         Me.PanelControlChoose.Controls.Add(Me.BtnCancel)
         Me.PanelControlChoose.Controls.Add(Me.BtnChoose)
@@ -73,10 +76,10 @@ Partial Class FormSalesCreditNoteSingle
         '
         'CheckEditSelectAll
         '
-        Me.CheckEditSelectAll.Location = New System.Drawing.Point(12, 9)
+        Me.CheckEditSelectAll.Location = New System.Drawing.Point(582, 9)
         Me.CheckEditSelectAll.Name = "CheckEditSelectAll"
-        Me.CheckEditSelectAll.Properties.Caption = "Select All Item"
-        Me.CheckEditSelectAll.Size = New System.Drawing.Size(108, 19)
+        Me.CheckEditSelectAll.Properties.Caption = "Select All Item (Not Use)"
+        Me.CheckEditSelectAll.Size = New System.Drawing.Size(144, 19)
         Me.CheckEditSelectAll.TabIndex = 2
         '
         'BtnCancel
@@ -377,6 +380,14 @@ Partial Class FormSalesCreditNoteSingle
         Me.RepositoryItemSpinEdit1.MaxValue = New Decimal(New Integer() {-1530494977, 232830, 0, 0})
         Me.RepositoryItemSpinEdit1.Name = "RepositoryItemSpinEdit1"
         '
+        'CESelAll
+        '
+        Me.CESelAll.Location = New System.Drawing.Point(12, 9)
+        Me.CESelAll.Name = "CESelAll"
+        Me.CESelAll.Properties.Caption = "Select All"
+        Me.CESelAll.Size = New System.Drawing.Size(75, 19)
+        Me.CESelAll.TabIndex = 4
+        '
         'FormSalesCreditNoteSingle
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -398,6 +409,7 @@ Partial Class FormSalesCreditNoteSingle
         CType(Me.SPQtyCreditNote, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CheckItemList, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RepositoryItemSpinEdit1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.CESelAll.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -430,4 +442,5 @@ Partial Class FormSalesCreditNoteSingle
     Friend WithEvents CheckItemList As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
     Friend WithEvents GridColumn1 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents SPQtyCreditNote As DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit
+    Friend WithEvents CESelAll As DevExpress.XtraEditors.CheckEdit
 End Class

@@ -127,4 +127,71 @@ WHERE DATE(bap.`created_date`)>='" & date_start & "' AND DATE(bap.`created_date`
     Private Sub BPrintSummary_Click(sender As Object, e As EventArgs) Handles BPrintSummary.Click
         FormScanReturnSummary.ShowDialog()
     End Sub
+
+    Private Sub BViewScan_Click(sender As Object, e As EventArgs) Handles BViewScan.Click
+        Dim date_start As String = Date.Parse(DEStartScan.EditValue.ToString).ToString("yyyy-MM-dd")
+        Dim date_until As String = Date.Parse(DEUntilScan.EditValue.ToString).ToString("yyyy-MM-dd")
+        Dim q As String = "SELECT st_list.store AS list_store,rn.`number_return_note`,rn.`label_number`,scd.id_scan_return_det,scd.id_product,prd.product_full_code,prd.product_display_name,pc.size,scd.`type`,IF(scd.`type`=1,'Ok',IF(scd.`type`=2,'No Tag','Unique Duplicate')) AS notes 
+FROM `tb_scan_return_det` scd
+INNER JOIN tb_m_product prd ON prd.id_product=scd.id_product
+LEFT JOIN 
+(
+	SELECT pc.id_product,cd.`code_detail_name` AS size
+	FROM tb_m_product_code pc 
+	INNER JOIN tb_m_code_detail cd ON cd.`id_code_detail`=pc.`id_code_detail`
+	GROUP BY pc.`id_product`
+)pc ON pc.id_product=prd.`id_product`
+INNER JOIN tb_scan_return sc ON sc.`id_scan_return`=scd.`id_scan_return`
+INNER JOIN tb_return_note rn ON rn.`id_return_note`=sc.`id_return_note`
+LEFT JOIN
+(
+    SELECT st.`id_return_note`,GROUP_CONCAT(DISTINCT CONCAT(c.comp_number,' - ',c.comp_name) ORDER BY c.`comp_number` ASC SEPARATOR '\n') AS store
+    FROM `tb_return_note_store` st
+    INNER JOIN tb_m_comp c ON c.id_comp=st.id_comp
+    GROUP BY st.`id_return_note`
+)st_list ON st_list.id_return_note=rn.id_return_note
+WHERE DATE(rn.`date_created`)>='" & date_start & "' AND DATE(rn.`date_created`)<='" & date_until & "'"
+
+        Dim dt As DataTable = execute_query(q, -1, True, "", "", "", "")
+        GCListProduct.DataSource = dt
+        GVListProduct.BestFitColumns()
+    End Sub
+
+    Private Sub BPrintScan_Click(sender As Object, e As EventArgs) Handles BPrintScan.Click
+        If GVListProduct.RowCount > 0 Then
+            Cursor = Cursors.WaitCursor
+            Dim path As String = Application.StartupPath & "\download\"
+            'create directory if not exist
+            If Not IO.Directory.Exists(path) Then
+                System.IO.Directory.CreateDirectory(path)
+            End If
+            path = path + "scan_list.xlsx"
+            exportToXLS(path, "scan_list", GCListProduct)
+            Cursor = Cursors.Default
+        End If
+    End Sub
+
+    Sub exportToXLS(ByVal path_par As String, ByVal sheet_name_par As String, ByVal gc_par As DevExpress.XtraGrid.GridControl)
+        Cursor = Cursors.WaitCursor
+        Dim path As String = path_par
+
+        ' Customize export options 
+        CType(gc_par.MainView, DevExpress.XtraGrid.Views.Grid.GridView).OptionsPrint.PrintHeader = True
+        Dim advOptions As DevExpress.XtraPrinting.XlsxExportOptionsEx = New DevExpress.XtraPrinting.XlsxExportOptionsEx()
+        advOptions.AllowSortingAndFiltering = DevExpress.Utils.DefaultBoolean.False
+        advOptions.ShowGridLines = DevExpress.Utils.DefaultBoolean.False
+        advOptions.AllowGrouping = DevExpress.Utils.DefaultBoolean.False
+        advOptions.ShowTotalSummaries = DevExpress.Utils.DefaultBoolean.False
+        advOptions.SheetName = sheet_name_par
+        advOptions.ExportType = DevExpress.Export.ExportType.DataAware
+
+        Try
+            gc_par.ExportToXlsx(path, advOptions)
+            Process.Start(path)
+            ' Open the created XLSX file with the default application. 
+        Catch ex As Exception
+            stopCustom(ex.ToString)
+        End Try
+        Cursor = Cursors.Default
+    End Sub
 End Class

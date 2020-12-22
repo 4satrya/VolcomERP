@@ -24,13 +24,14 @@ SELECT 1 AS id,'Yes' AS auto_debet"
     End Sub
 
     Sub form_load()
+        '
         TETrfFee.EditValue = 0.0
         TEKurs.EditValue = 1.0
         TETotal.EditValue = 0.00
         DEDateCreated.EditValue = Now
         DEPayment.EditValue = Now
         TEPayNumber.Text = "[Auto generate]"
-        TxtTag.EditValue = execute_query("SELECT CONCAT(tag_code, ' - ', tag_description) AS tag FROM tb_coa_tag WHERE id_coa_tag = 1", 0, True, "", "", "", "")
+        TxtTag.EditValue = execute_query("SELECT CONCAT(tag_code, ' - ', tag_description) AS tag FROM tb_coa_tag WHERE id_coa_tag = " & id_coa_tag, 0, True, "", "", "", "")
 
         load_pay_from()
         load_trf_cost()
@@ -47,10 +48,12 @@ SELECT 1 AS id,'Yes' AS auto_debet"
             BtnSave.Visible = True
             '
             If is_book_transfer = True Then
+                FormBankWithdrawalBookTransfer.id_coa_tag = id_coa_tag
                 FormBankWithdrawalBookTransfer.ShowDialog()
             ElseIf report_mark_type = "159" Then 'BBK umum
                 'load header
                 Try
+                    '
                     SLEVendor.EditValue = FormBankWithdrawal.SLEVendorPayment.EditValue
                     SLEPayType.EditValue = "2"
                     '
@@ -65,7 +68,7 @@ SELECT 1 AS id,'Yes' AS auto_debet"
                 Try
                     SLEVendor.EditValue = FormBankWithdrawal.SLEVendor.EditValue
                     SLEPayType.EditValue = id_pay_type
-                    TxtTag.EditValue = execute_query("SELECT CONCAT(tag_code, ' - ', tag_description) AS tag FROM tb_coa_tag WHERE id_coa_tag = " + FormBankWithdrawal.GVPOList.GetRowCellValue(0, "id_coa_tag").ToString, 0, True, "", "", "", "")
+                    TxtTag.EditValue = execute_query("SELECT CONCAT(tag_code, ' - ', tag_description) AS tag FROM tb_coa_tag WHERE id_coa_tag = " + FormBankWithdrawal.GVPOList.GetRowCellValue(0, "po_coa_tag").ToString, 0, True, "", "", "", "")
                     '
                     SLEReportType.EditValue = report_mark_type
                     'load detail
@@ -249,7 +252,8 @@ GROUP BY pnd.kurs"
                             newRow("id_currency") = FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "id_currency").ToString
                             newRow("currency") = FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "currency").ToString
                             newRow("val_bef_kurs") = If(FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "id_currency").ToString = "1", FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "balance"), FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "value_bef_kurs"))
-                            newRow("value_view") = If(FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "balance") < 0, -FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "balance"), FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "balance"))
+                            'newRow("value_view") = If(FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "balance") < 0, -FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "balance"), FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "balance"))
+                            newRow("value_view") = FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "balance")
                             newRow("balance_due") = FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "balance")
                             newRow("note") = FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "type").ToString & " - " & FormBankWithdrawal.GVFGPO.GetRowCellValue(i, "inv_number").ToString
                             TryCast(GCList.DataSource, DataTable).Rows.Add(newRow)
@@ -1147,7 +1151,7 @@ GROUP BY pnd.kurs"
                     newRow("id_acc") = FormBankWithdrawal.GVSales.GetRowCellValue(i, "id_acc").ToString
                     newRow("acc_name") = FormBankWithdrawal.GVSales.GetRowCellValue(i, "acc_name").ToString
                     newRow("acc_description") = FormBankWithdrawal.GVSales.GetRowCellValue(i, "acc_description").ToString
-                    newRow("note") = FormBankWithdrawal.GVSales.GetRowCellValue(i, "note").ToString
+                    newRow("note") = Date.Parse(FormBankWithdrawal.GVSales.GetRowCellValue(i, "transaction_date").ToString).ToString("dd MMMM yyyy") & " - " & FormBankWithdrawal.GVSales.GetRowCellValue(i, "note").ToString
                     newRow("vendor") = FormBankWithdrawal.GVSales.GetRowCellValue(i, "comp_number").ToString
                     newRow("id_dc") = "1"
                     newRow("dc_code") = "D"
@@ -1184,6 +1188,7 @@ GROUP BY pnd.kurs"
             Dim query As String = "Select * FROM tb_pn WHERE id_pn='" & id_payment & "'"
             Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
             If data.Rows.Count > 0 Then
+                id_coa_tag = data.Rows(0)("id_coa_tag").ToString
                 TEPayNumber.Text = data.Rows(0)("number").ToString
                 TEKurs.EditValue = data.Rows(0)("kurs")
                 report_mark_type = data.Rows(0)("report_mark_type").ToString
@@ -1314,7 +1319,9 @@ GROUP BY pnd.kurs"
 
     Private Sub FormBankWithdrawalDet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If report_mark_type = "139" Or report_mark_type = "202" Then
-            id_coa_tag = FormBankWithdrawal.GVPOList.GetRowCellValue(0, "id_coa_tag").ToString
+            id_coa_tag = FormBankWithdrawal.GVPOList.GetRowCellValue(0, "po_coa_tag").ToString
+        ElseIf report_mark_type = "157" Then 'expense
+            id_coa_tag = FormBankWithdrawal.GVExpense.GetRowCellValue(0, "id_coa_tag").ToString
         End If
 
         form_load()
@@ -1354,6 +1361,9 @@ WHERE pnd.id_pn='" & id_payment & "'"
 
     Sub load_pay_from()
         Dim query As String = "SELECT id_acc,acc_name,acc_description FROM `tb_a_acc` WHERE id_status='1' AND id_is_det='2'"
+        'If report_mark_type = "157" Or report_mark_type = "159" Then 'expense
+
+        'End If
         If id_coa_tag = "1" Then
             query += " AND id_coa_type='1' "
         Else
@@ -1488,127 +1498,145 @@ WHERE py.`id_pn`='" & id_payment & "'"
 
     Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles BtnSave.Click
         calculate_amount()
-        If id_payment = "-1" Then
-            'cek value 0
-            Dim value_is_zero As Boolean = False
-            For i As Integer = 0 To GVList.RowCount - 1
-                If GVList.GetRowCellValue(i, "value") = 0 Then
-                    value_is_zero = True
-                End If
-            Next
-
-            'cek debit negatif or kredit positif
-            Dim value_is_wrong As Boolean = False
-            For i As Integer = 0 To GVList.RowCount - 1
-                If GVList.GetRowCellValue(i, "id_dc").ToString = "1" And GVList.GetRowCellValue(i, "value") < 0 Then 'debit negatif
-                    value_is_wrong = True
-                ElseIf GVList.GetRowCellValue(i, "id_dc").ToString = "2" And GVList.GetRowCellValue(i, "value") > 0 Then 'kredit positif
-                    value_is_wrong = True
-                End If
-            Next
-
-            'cek paid no exceed balance
-            Dim paid_more As Boolean = False
-            For i As Integer = 0 To GVList.RowCount - 1
-                If GVList.GetRowCellValue(i, "value") < 0 And GVList.GetRowCellValue(i, "balance_due") < 0 Then
-                    If Math.Abs(GVList.GetRowCellValue(i, "value")) > Math.Abs(GVList.GetRowCellValue(i, "balance_due")) Then
-                        paid_more = True
-                    End If
-                Else
-                    If GVList.GetRowCellValue(i, "value") > GVList.GetRowCellValue(i, "balance_due") Then
-                        paid_more = True
-                    End If
-                End If
-            Next
-
-            'description is nothing
-            Dim desc_blank As Boolean = False
-            For i As Integer = 0 To GVList.RowCount - 1
-                If GVList.GetRowCellValue(i, "note").ToString = "" Then
-                    desc_blank = True
-                    Exit For
-                End If
-            Next
-            '
-            If GVList.RowCount = 0 Then
-                warningCustom("No item listed.")
-            ElseIf desc_blank Then
-                warningCustom("Please fill the description.")
-            ElseIf value_is_zero = True Then
-                warningCustom("You must fill value.")
-            ElseIf paid_more = True Then
-                warningCustom("You pay more than balance due.")
-            ElseIf MENote.Text = "" Then
-                warningCustom("Please put some note")
-            ElseIf value_is_wrong Then
-                warningCustom("Make sure debit is positive value, credit is negative value")
-            ElseIf TETotal.EditValue < 0 Then
-                warningCustom("Amount paid is negative")
-            Else
-                'header
-                Dim is_book_trf As String = "2"
-
-                If is_book_transfer Then
-                    is_book_transfer = "1"
-                End If
-
-                If report_mark_type = "139" Or report_mark_type = "202" Then
-                    id_coa_tag = FormBankWithdrawal.GVPOList.GetRowCellValue(0, "id_coa_tag").ToString
-                End If
-
-                Dim query As String = "INSERT INTO tb_pn(report_mark_type,kurs,id_acc_payfrom,id_comp_contact,id_pay_type,id_user_created,date_created,date_payment,value,note,is_book_transfer,id_report_status,id_coa_tag,id_acc_trf_fee,trf_fee,is_auto_debet) 
-VALUES('" & report_mark_type & "','" & decimalSQL(Decimal.Parse(TEKurs.EditValue.ToString).ToString) & "','" & SLEPayFrom.EditValue.ToString & "','" & SLEVendor.EditValue.ToString & "','" & SLEPayType.EditValue.ToString & "','" & id_user & "',NOW(),'" & Date.Parse(DEPayment.EditValue.ToString).ToString("yyyy-MM-dd") & "','" & decimalSQL(TETotal.EditValue.ToString) & "','" & addSlashes(MENote.Text) & "','" & is_book_trf & "','1','" + id_coa_tag + "','" & SLEACCTrfFee.EditValue.ToString & "','" & decimalSQL(TETrfFee.EditValue.ToString) & "','" & SLEAutoDebet.EditValue.ToString & "'); SELECT LAST_INSERT_ID(); "
-                id_payment = execute_query(query, 0, True, "", "", "", "")
-                'detail
-                Dim id_currency, kurs, val_bef_kurs As String
-                id_currency = "1"
-                kurs = "0"
-                val_bef_kurs = "0"
-
-                query = "INSERT INTO tb_pn_det(id_pn,id_report,report_mark_type,number,vendor,id_comp,id_acc,id_dc,total_pay,value,id_currency,kurs,val_bef_kurs,balance_due,note) VALUES"
+        'check again, paranoid
+        Dim total As Decimal = 0.00
+        For i As Integer = 0 To GVList.RowCount - 1
+            total += GVList.GetRowCellValue(i, "value")
+        Next
+        '
+        If total = TETotal.EditValue Then
+            If id_payment = "-1" Then
+                'cek value 0
+                Dim value_is_zero As Boolean = False
                 For i As Integer = 0 To GVList.RowCount - 1
-                    If Not i = 0 Then
-                        query += ","
+                    If GVList.GetRowCellValue(i, "value") = 0 Then
+                        value_is_zero = True
                     End If
-                    '
-                    If GVList.GetRowCellValue(i, "id_currency").ToString = "" Or GVList.GetRowCellValue(i, "id_currency").ToString = "0" Then
-                        id_currency = "1"
-                    Else
-                        id_currency = GVList.GetRowCellValue(i, "id_currency").ToString
-                    End If
-                    If GVList.GetRowCellValue(i, "kurs").ToString = "" Or GVList.GetRowCellValue(i, "kurs") = 0 Then
-                        kurs = "0"
-                    Else
-                        kurs = decimalSQL(GVList.GetRowCellValue(i, "kurs").ToString)
-                    End If
-                    If GVList.GetRowCellValue(i, "val_bef_kurs").ToString = "" Or GVList.GetRowCellValue(i, "val_bef_kurs") = 0 Then
-                        val_bef_kurs = "0"
-                    Else
-                        val_bef_kurs = decimalSQL(GVList.GetRowCellValue(i, "val_bef_kurs").ToString)
-                    End If
-
-                    query += "('" & id_payment & "','" & GVList.GetRowCellValue(i, "id_report").ToString & "','" & GVList.GetRowCellValue(i, "report_mark_type").ToString & "','" & GVList.GetRowCellValue(i, "number").ToString & "','" & GVList.GetRowCellValue(i, "vendor").ToString & "','" & GVList.GetRowCellValue(i, "id_comp").ToString & "','" & GVList.GetRowCellValue(i, "id_acc").ToString & "','" & GVList.GetRowCellValue(i, "id_dc").ToString & "','" & decimalSQL(GVList.GetRowCellValue(i, "total_pay").ToString) & "','" & decimalSQL(GVList.GetRowCellValue(i, "value").ToString) & "','" & id_currency & "','" & kurs & "','" & val_bef_kurs & "','" & decimalSQL(GVList.GetRowCellValue(i, "balance_due").ToString) & "','" & addSlashes(GVList.GetRowCellValue(i, "note").ToString) & "')"
                 Next
-                execute_non_query(query, True, "", "", "", "")
-                'generate number
-                query = "CALL gen_number('" & id_payment & "','159')"
-                execute_non_query(query, True, "", "", "", "")
-                'add journal + mark
-                submit_who_prepared("159", id_payment, id_user)
 
-                'done
-                infoCustom("Payment created")
-                If FormBankWithdrawal.XTCPO.SelectedTabPageIndex = 1 Then
-                    FormBankWithdrawal.load_po()
-                ElseIf FormBankWithdrawal.XTCPO.SelectedTabPageIndex = 2 Then
-                    FormBankWithdrawal.load_expense()
+                'cek debit negatif or kredit positif
+                Dim value_is_wrong As Boolean = False
+                For i As Integer = 0 To GVList.RowCount - 1
+                    If GVList.GetRowCellValue(i, "id_dc").ToString = "1" And GVList.GetRowCellValue(i, "value") < 0 Then 'debit negatif
+                        value_is_wrong = True
+                    ElseIf GVList.GetRowCellValue(i, "id_dc").ToString = "2" And GVList.GetRowCellValue(i, "value") > 0 Then 'kredit positif
+                        value_is_wrong = True
+                    End If
+                Next
+
+                'cek paid no exceed balance
+                Dim paid_more As Boolean = False
+                For i As Integer = 0 To GVList.RowCount - 1
+                    If GVList.GetRowCellValue(i, "value") < 0 And GVList.GetRowCellValue(i, "balance_due") < 0 Then
+                        If Math.Abs(GVList.GetRowCellValue(i, "value")) > Math.Abs(GVList.GetRowCellValue(i, "balance_due")) Then
+                            paid_more = True
+                        End If
+                    Else
+                        If GVList.GetRowCellValue(i, "value") > GVList.GetRowCellValue(i, "balance_due") Then
+                            paid_more = True
+                        End If
+                    End If
+                Next
+
+                'description is nothing
+                Dim desc_blank As Boolean = False
+                For i As Integer = 0 To GVList.RowCount - 1
+                    If GVList.GetRowCellValue(i, "note").ToString = "" Then
+                        desc_blank = True
+                        Exit For
+                    End If
+                Next
+                '
+                If GVList.RowCount = 0 Then
+                    warningCustom("No item listed.")
+                ElseIf desc_blank Then
+                    warningCustom("Please fill the description.")
+                ElseIf value_is_zero = True Then
+                    warningCustom("You must fill value.")
+                ElseIf paid_more = True Then
+                    warningCustom("You pay more than balance due.")
+                ElseIf MENote.Text = "" Then
+                    warningCustom("Please put some note")
+                ElseIf value_is_wrong Then
+                    warningCustom("Make sure debit is positive value, credit is negative value")
+                ElseIf TETotal.EditValue < 0 Then
+                    warningCustom("Amount paid is negative")
+                Else
+                    'header
+                    Dim is_book_trf As String = "2"
+
+                    If is_book_transfer Then
+                        is_book_transfer = "1"
+                    End If
+
+                    If report_mark_type = "139" Or report_mark_type = "202" Then
+                        id_coa_tag = FormBankWithdrawal.GVPOList.GetRowCellValue(0, "id_coa_tag").ToString
+                    ElseIf report_mark_type = "157" Then 'expense
+                        id_coa_tag = FormBankWithdrawal.GVExpense.GetRowCellValue(0, "id_coa_tag").ToString
+                    End If
+
+                    Dim query As String = "INSERT INTO tb_pn(report_mark_type,kurs,id_acc_payfrom,id_comp_contact,id_pay_type,id_user_created,date_created,date_payment,value,note,is_book_transfer,id_report_status,id_coa_tag,id_acc_trf_fee,trf_fee,is_auto_debet) 
+VALUES('" & report_mark_type & "','" & decimalSQL(Decimal.Parse(TEKurs.EditValue.ToString).ToString) & "','" & SLEPayFrom.EditValue.ToString & "','" & SLEVendor.EditValue.ToString & "','" & SLEPayType.EditValue.ToString & "','" & id_user & "',NOW(),'" & Date.Parse(DEPayment.EditValue.ToString).ToString("yyyy-MM-dd") & "','" & decimalSQL(TETotal.EditValue.ToString) & "','" & addSlashes(MENote.Text) & "','" & is_book_trf & "','1','" + id_coa_tag + "','" & SLEACCTrfFee.EditValue.ToString & "','" & decimalSQL(TETrfFee.EditValue.ToString) & "','" & SLEAutoDebet.EditValue.ToString & "'); SELECT LAST_INSERT_ID(); "
+                    id_payment = execute_query(query, 0, True, "", "", "", "")
+                    'detail
+                    Dim id_currency, kurs, val_bef_kurs, is_include_total As String
+                    id_currency = "1"
+                    kurs = "0"
+                    val_bef_kurs = "0"
+                    is_include_total = "1"
+
+                    query = "INSERT INTO tb_pn_det(id_pn,id_report,report_mark_type,number,vendor,id_comp,id_acc,id_dc,total_pay,value,id_currency,kurs,val_bef_kurs,balance_due,note,is_include_total) VALUES"
+                    For i As Integer = 0 To GVList.RowCount - 1
+                        If Not i = 0 Then
+                            query += ","
+                        End If
+                        '
+                        If GVList.GetRowCellValue(i, "id_currency").ToString = "" Or GVList.GetRowCellValue(i, "id_currency").ToString = "0" Then
+                            id_currency = "1"
+                        Else
+                            id_currency = GVList.GetRowCellValue(i, "id_currency").ToString
+                        End If
+                        If GVList.GetRowCellValue(i, "kurs").ToString = "" Or GVList.GetRowCellValue(i, "kurs") = 0 Then
+                            kurs = "0"
+                        Else
+                            kurs = decimalSQL(GVList.GetRowCellValue(i, "kurs").ToString)
+                        End If
+                        If GVList.GetRowCellValue(i, "val_bef_kurs").ToString = "" Or GVList.GetRowCellValue(i, "val_bef_kurs") = 0 Then
+                            val_bef_kurs = "0"
+                        Else
+                            val_bef_kurs = decimalSQL(GVList.GetRowCellValue(i, "val_bef_kurs").ToString)
+                        End If
+
+                        is_include_total = "1"
+                        If get_opt_acc_field("id_acc_pend_selisih_kurs").ToString = GVList.GetRowCellValue(i, "id_acc").ToString Or get_opt_acc_field("id_acc_rugi_selisih_kurs").ToString = GVList.GetRowCellValue(i, "id_acc").ToString Then
+                            is_include_total = "2"
+                        End If
+
+                        query += "('" & id_payment & "','" & GVList.GetRowCellValue(i, "id_report").ToString & "','" & GVList.GetRowCellValue(i, "report_mark_type").ToString & "','" & GVList.GetRowCellValue(i, "number").ToString & "','" & GVList.GetRowCellValue(i, "vendor").ToString & "','" & GVList.GetRowCellValue(i, "id_comp").ToString & "','" & GVList.GetRowCellValue(i, "id_acc").ToString & "','" & GVList.GetRowCellValue(i, "id_dc").ToString & "','" & decimalSQL(GVList.GetRowCellValue(i, "total_pay").ToString) & "','" & decimalSQL(GVList.GetRowCellValue(i, "value").ToString) & "','" & id_currency & "','" & kurs & "','" & val_bef_kurs & "','" & decimalSQL(GVList.GetRowCellValue(i, "balance_due").ToString) & "','" & addSlashes(GVList.GetRowCellValue(i, "note").ToString) & "','" & is_include_total & "')"
+                    Next
+                    execute_non_query(query, True, "", "", "", "")
+                    'generate number
+                    query = "CALL gen_number('" & id_payment & "','159')"
+                    execute_non_query(query, True, "", "", "", "")
+                    'add journal + mark
+                    submit_who_prepared("159", id_payment, id_user)
+
+                    'done
+                    infoCustom("Payment created")
+                    If FormBankWithdrawal.XTCPO.SelectedTabPageIndex = 1 Then
+                        FormBankWithdrawal.load_po()
+                    ElseIf FormBankWithdrawal.XTCPO.SelectedTabPageIndex = 2 Then
+                        FormBankWithdrawal.load_expense()
+                    End If
+
+                    FormBankWithdrawal.load_payment()
+                    FormBankWithdrawal.GVList.FocusedRowHandle = find_row(FormBankWithdrawal.GVList, "id_pn", id_payment)
+                    FormBankWithdrawal.XTCPO.SelectedTabPageIndex = 0
+                    Close()
                 End If
-
-                FormBankWithdrawal.load_payment()
-                FormBankWithdrawal.GVList.FocusedRowHandle = find_row(FormBankWithdrawal.GVList, "id_pn", id_payment)
-                FormBankWithdrawal.XTCPO.SelectedTabPageIndex = 0
-                Close()
             End If
+        Else
+            warningCustom("Please check total first")
         End If
     End Sub
 

@@ -133,7 +133,7 @@ Public Class FormFGTrfNewDet
         Dim query As String = "SELECT a.id_so_type, a.id_so_status, a.id_sales_order, a.id_store_contact_to, d.id_wh_type, (d.comp_name) AS store_name_to,a.id_report_status, f.report_status, "
         query += "a.sales_order_note,a.sales_order_date, a.sales_order_note, a.sales_order_number, "
         query += "DATE_FORMAT(a.sales_order_date,'%d %M %Y') AS sales_order_date, (SELECT COUNT(id_pl_sales_order_del) FROM tb_pl_sales_order_del WHERE tb_pl_sales_order_del.id_sales_order = a.id_sales_order) AS pl_created, "
-        query += "a.id_warehouse_contact_to, (wh.comp_number) AS `wh_number`, (wh.comp_name) AS `wh_name`, wh.is_use_unique_code, wh.id_drawer_def AS `id_wh_drawer_from`, a.id_prepare_status "
+        query += "a.id_warehouse_contact_to, (wh.comp_number) AS `wh_number`, (wh.comp_name) AS `wh_name`, wh.is_use_unique_code, wh.id_drawer_def AS `id_wh_drawer_from`, a.id_prepare_status, IFNULL(a.id_ol_store_oos,0) AS `id_ol_store_oos` "
         query += "FROM tb_sales_order a "
         query += "INNER JOIN tb_m_comp_contact c ON c.id_comp_contact = a.id_store_contact_to "
         query += "INNER JOIN tb_m_comp d ON c.id_comp = d.id_comp "
@@ -170,6 +170,16 @@ Public Class FormFGTrfNewDet
         TxtCodeCompFrom.Text = data.Rows(0)("wh_number").ToString
         TxtNameCompFrom.Text = data.Rows(0)("wh_name").ToString
         id_wh_drawer_from = data.Rows(0)("id_wh_drawer_from").ToString
+
+        'restock oos
+        Dim id_ol_store_oos As String = data.Rows(0)("id_ol_store_oos").ToString
+        If id_ol_store_oos <> "0" Then
+            Dim status_restock As String = execute_query("SELECT id_ol_store_oos_stt FROM tb_ol_store_oos WHERE id_ol_store_oos='" + id_ol_store_oos + "' ", 0, True, "", "", "", "")
+            If status_restock <> "2" Then
+                stopCustom("Restock order still on process")
+                Close()
+            End If
+        End If
 
         'general
         viewSalesOrderDetail()

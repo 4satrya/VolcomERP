@@ -1,5 +1,5 @@
 ﻿Public Class FormBankWithdrawalBookTransfer
-    Dim id_coa_tag As String = FormBankWithdrawalDet.id_coa_tag
+    Public id_coa_tag As String = FormBankWithdrawalDet.id_coa_tag
 
     Private Sub FormBankWithdrawalBookTransfer_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
         Dispose()

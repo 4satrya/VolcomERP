@@ -104,7 +104,7 @@ WHERE rn.id_return_note='" & id_return_note & "'"
     End Sub
 
     Sub load_emp()
-        Dim q As String = "SELECT id_employee,employee_code,employee_name FROM tb_m_employee WHERE id_employee_status='1' AND id_departement='6'"
+        Dim q As String = "SELECT id_employee,employee_code,employee_name FROM tb_m_employee WHERE id_employee_active='1' AND id_departement='6'"
         viewSearchLookupQuery(SLEEmp, q, "id_employee", "employee_name", "id_employee")
     End Sub
 
@@ -194,7 +194,7 @@ WHERE rn.id_return_note='" & id_return_note & "'"
         '
         GVStore.ActiveFilterString = "Not IsNullOrEmpty([id_comp])"
         '
-        If SLEType.EditValue.ToString = "1" And GVStore.RowCount = 0 Then
+        If GVStore.RowCount = 0 Then
             warningCustom("Please input store first")
         ElseIf TEQtyReturnNote.EditValue = 0 Or TEReturnNoteNumber.Text = "" Then
             warningCustom("Please fill return note detail")
@@ -279,5 +279,10 @@ GROUP BY rn.id_return_note"
         TEQtyReturnNote.EditValue = 0
         id_return_note = "-1"
         check_but()
+    End Sub
+
+    Private Sub BPrint_Click(sender As Object, e As EventArgs) Handles BPrint.Click
+        'print
+        print()
     End Sub
 End Class

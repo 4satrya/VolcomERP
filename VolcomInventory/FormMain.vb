@@ -1853,6 +1853,8 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
             Else
                 FormScanReturnBAP.ShowDialog()
             End If
+        ElseIf formName = "FormAdjustmentOG" Then
+            FormAdjustmentOGDet.ShowDialog()
         Else
             RPSubMenu.Visible = False
         End If
@@ -3096,6 +3098,9 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
             ElseIf formName = "FormCompanyEmailMapping" Then
                 FormMasterCompanyContact.id_company = FormCompanyEmailMapping.GV3PL.GetFocusedRowCellValue("id_comp").ToString
                 FormMasterCompanyContact.ShowDialog()
+            ElseIf formName = "FormAdjustmentOG" Then
+                FormAdjustmentOGDet.id_adjustment = FormAdjustmentOG.GVList.GetFocusedRowCellValue("id_adjustment").ToString
+                FormAdjustmentOGDet.ShowDialog()
             Else
                 RPSubMenu.Visible = False
             End If
@@ -8474,6 +8479,8 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
             Else
                 print(FormScanReturn.GCBAP, "BAP List")
             End If
+        ElseIf formName = "FormAdjustmentOG" Then
+            print(FormAdjustmentOG.GCList, "Adjustment Operational Goods")
         Else
             RPSubMenu.Visible = False
         End If
@@ -9432,6 +9439,9 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
         ElseIf formName = "FormBatchUploadOnlineStore" Then
             FormBatchUploadOnlineStore.Close()
             FormBatchUploadOnlineStore.Dispose()
+        ElseIf formName = "FormAdjustmentOG" Then
+            FormAdjustmentOG.Close()
+            FormAdjustmentOG.Dispose()
         Else
             RPSubMenu.Visible = False
         End If
@@ -10418,6 +10428,8 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
         ElseIf formName = "FormBatchUploadOnlineStore" Then
             FormBatchUploadOnlineStore.GCBatchUpload.DataSource = Nothing
             FormBatchUploadOnlineStore.GVBatchUpload.Columns.Clear()
+        ElseIf formName = "FormAdjustmentOG" Then
+            FormAdjustmentOG.form_load()
         End If
     End Sub
     'Switch
@@ -15661,6 +15673,30 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
             FormBatchUploadOnlineStore.Show()
             FormBatchUploadOnlineStore.WindowState = FormWindowState.Maximized
             FormBatchUploadOnlineStore.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+    End Sub
+
+    Private Sub NBOOSFinalize_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBOOSFinalize.LinkClicked
+        'menu here
+        Try
+            FormOLStoreOOS.MdiParent = Me
+            FormOLStoreOOS.id_type = "3"
+            FormOLStoreOOS.Show()
+            FormOLStoreOOS.WindowState = FormWindowState.Maximized
+            FormOLStoreOOS.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+    End Sub
+
+    Private Sub NBAdjustmentOG_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBAdjustmentOG.LinkClicked
+        Try
+            FormAdjustmentOG.MdiParent = Me
+            FormAdjustmentOG.Show()
+            FormAdjustmentOG.WindowState = FormWindowState.Maximized
+            FormAdjustmentOG.Focus()
         Catch ex As Exception
             errorProcess()
         End Try

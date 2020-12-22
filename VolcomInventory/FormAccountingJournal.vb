@@ -38,9 +38,23 @@
     End Sub
 
     Private Sub FormAccountingJournal_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        load_unit()
         load_billing_type(LEBilling)
         load_billing_type(LEBillingView)
         check_but()
+    End Sub
+
+    Sub load_unit()
+        Dim query As String = "SELECT 0 AS id_coa_tag,'ALL' AS tag_code,'ALL' AS tag_description 
+UNION ALL
+SELECT id_coa_tag,tag_code,tag_description FROM `tb_coa_tag`"
+        '        query = "SELECT '0' AS id_comp,'-' AS comp_number, 'All Unit' AS comp_name
+        'UNION ALL
+        'SELECT ad.`id_comp`,c.`comp_number`,c.`comp_name` FROM `tb_a_acc_trans_det` ad
+        'INNER JOIN tb_m_comp c ON c.`id_comp`=ad.`id_comp`
+        'GROUP BY ad.id_comp"
+        viewSearchLookupQuery(SLEUnit, query, "id_coa_tag", "tag_description", "id_coa_tag")
+        SLEUnit.EditValue = "1"
     End Sub
 
     Sub view_det(ByVal start_date As String, ByVal end_date As String, ByVal opt As String)
@@ -115,12 +129,24 @@ LEFT JOIN tb_m_comp comp ON comp.id_comp=a.id_comp"
             enddate = DateTime.Parse(DEToViewJournal.EditValue.ToString).ToString("yyy-MM-dd")
         End If
         Dim query As String = ""
-        query = "SELECT bill.bill_type,bill.id_bill_type,t.id_report_status,f.report_status,t.id_acc_trans,t.acc_trans_number,t.acc_trans_note,i.employee_name,  DATE_FORMAT(t.date_created, '%d %M %Y') AS date_created FROM tb_a_acc_trans t "
+        query = "SELECT ct.id_coa_tag,ct.unit,bill.bill_type,bill.id_bill_type,t.id_report_status,f.report_status,t.id_acc_trans,t.acc_trans_number,t.acc_trans_note,i.employee_name,  DATE_FORMAT(t.date_created, '%d %M %Y') AS date_created FROM tb_a_acc_trans t "
         query += "INNER JOIN tb_m_user h ON t.id_user = h.id_user "
         query += "INNER JOIN tb_m_employee i ON h.id_employee = i.id_employee "
         query += "INNER JOIN tb_lookup_report_status f ON t.id_report_status = f.id_report_status "
         query += "INNER JOIN tb_lookup_bill_type bill ON bill.id_bill_type=t.id_bill_type "
+        query += " LEFT JOIN
+(
+	SELECT actd.id_acc_trans,actd.id_coa_tag,ct.tag_description AS unit 
+	FROM tb_a_acc_trans_det actd
+	INNER JOIN `tb_coa_tag` ct ON ct.id_coa_tag=actd.id_coa_tag
+	GROUP BY actd.id_acc_trans
+)ct ON ct.id_acc_trans=t.id_acc_trans "
         query += "WHERE (DATE(t.date_created) <= '" & enddate & "') AND (DATE(t.date_created) >= '" & fromdate & "')"
+
+        If Not SLEUnit.EditValue.ToString = "0" Then
+            query += " AND ct.id_coa_tag='" & SLEUnit.EditValue.ToString & "' "
+        End If
+
         If Not LEBilling.EditValue.ToString = "ALL" Then
             query += " AND t.id_bill_type = '" + id_type + "' "
         End If

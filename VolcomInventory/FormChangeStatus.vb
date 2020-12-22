@@ -296,14 +296,43 @@
                     If confirm = Windows.Forms.DialogResult.Yes Then
                         Cursor = Cursors.WaitCursor
                         BtnUpdateRec.Enabled = False
-                        For i As Integer = 0 To ((FormSalesOrderSvcLevel.GVFGTrf.RowCount - 1) - GetGroupRowCount(FormSalesOrderSvcLevel.GVFGTrf))
-                            Dim stt As ClassFGTrf = New ClassFGTrf()
-                            stt.changeStatus(FormSalesOrderSvcLevel.GVFGTrf.GetRowCellValue(i, "id_fg_trf").ToString, SLEStatusRec.EditValue.ToString)
-                            removeAppList(report_mark_type, FormSalesOrderSvcLevel.GVFGTrf.GetRowCellValue(i, "id_fg_trf").ToString, id_status_reportx)
-                            insertFinalComment(report_mark_type, FormSalesOrderSvcLevel.GVFGTrf.GetRowCellValue(i, "id_fg_trf").ToString, id_status_reportx, note)
-                            PBC.PerformStep()
-                            PBC.Update()
-                        Next
+                        Dim type_restock As String = FormSalesOrderSvcLevel.LETypeRestock.EditValue.ToString
+                        If type_restock = "1" Then
+                            'reguler
+                            For i As Integer = 0 To ((FormSalesOrderSvcLevel.GVFGTrf.RowCount - 1) - GetGroupRowCount(FormSalesOrderSvcLevel.GVFGTrf))
+                                Dim stt As ClassFGTrf = New ClassFGTrf()
+                                stt.changeStatus(FormSalesOrderSvcLevel.GVFGTrf.GetRowCellValue(i, "id_fg_trf").ToString, SLEStatusRec.EditValue.ToString)
+                                removeAppList(report_mark_type, FormSalesOrderSvcLevel.GVFGTrf.GetRowCellValue(i, "id_fg_trf").ToString, id_status_reportx)
+                                insertFinalComment(report_mark_type, FormSalesOrderSvcLevel.GVFGTrf.GetRowCellValue(i, "id_fg_trf").ToString, id_status_reportx, note)
+                                PBC.PerformStep()
+                                PBC.Update()
+                            Next
+                        ElseIf type_restock = "2" Then
+                            'oos
+                            Dim is_processed_order As String = get_setup_field("is_processed_order")
+                            If is_processed_order = "1" Then
+                                stopCustom("Sync still running")
+                                Cursor = Cursors.Default
+                            Else
+                                If Not FormMain.SplashScreenManager1.IsSplashFormVisible Then
+                                    FormMain.SplashScreenManager1.ShowWaitForm()
+                                End If
+                                Dim ord As New ClassSalesOrder()
+                                ord.setProceccedWebOrder("1")
+                                For i As Integer = 0 To ((FormSalesOrderSvcLevel.GVFGTrf.RowCount - 1) - GetGroupRowCount(FormSalesOrderSvcLevel.GVFGTrf))
+                                    FormMain.SplashScreenManager1.SetWaitFormDescription("Processing " + (i + 1).ToString + " of " + FormSalesOrderSvcLevel.GVFGTrf.RowCount.ToString)
+                                    Dim stt As ClassFGTrf = New ClassFGTrf()
+                                    stt.changeStatus(FormSalesOrderSvcLevel.GVFGTrf.GetRowCellValue(i, "id_fg_trf").ToString, SLEStatusRec.EditValue.ToString)
+                                    stt.processRestockOnline(FormSalesOrderSvcLevel.GVFGTrf.GetRowCellValue(i, "id_fg_trf").ToString)
+                                    removeAppList(report_mark_type, FormSalesOrderSvcLevel.GVFGTrf.GetRowCellValue(i, "id_fg_trf").ToString, id_status_reportx)
+                                    insertFinalComment(report_mark_type, FormSalesOrderSvcLevel.GVFGTrf.GetRowCellValue(i, "id_fg_trf").ToString, id_status_reportx, note)
+                                    PBC.PerformStep()
+                                    PBC.Update()
+                                Next
+                                ord.setProceccedWebOrder("2")
+                                FormMain.SplashScreenManager1.CloseWaitForm()
+                            End If
+                        End If
                         Cursor = Cursors.Default
                     End If
                 End If

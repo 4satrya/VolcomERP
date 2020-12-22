@@ -127,7 +127,7 @@ Partial Class FormScanReturnDetManual
         Me.MinimizeBox = False
         Me.Name = "FormScanReturnDetManual"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Input Manual"
+        Me.Text = "Input No Tag"
         CType(Me.TEBarcode.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TEDescription.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()

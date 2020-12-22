@@ -4,6 +4,7 @@
     Dim bdel_active As String = "1"
     '
     Public is_purc_dep As String = "-1"
+    Public id_coa_tag As String = "1"
 
     Private Sub FormPurcOrder_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
         Dispose()
@@ -43,7 +44,20 @@
         viewSearchLookupQuery(LEPOStatus, query, "id_po_status", "po_status", "id_po_status")
     End Sub
 
+    Sub load_unit()
+        Dim query As String = "SELECT id_coa_tag,tag_code,tag_description FROM `tb_coa_tag`"
+        '        query = "SELECT '0' AS id_comp,'-' AS comp_number, 'All Unit' AS comp_name
+        'UNION ALL
+        'SELECT ad.`id_comp`,c.`comp_number`,c.`comp_name` FROM `tb_a_acc_trans_det` ad
+        'INNER JOIN tb_m_comp c ON c.`id_comp`=ad.`id_comp`
+        'GROUP BY ad.id_comp"
+        viewSearchLookupQuery(SLEUnit, query, "id_coa_tag", "tag_description", "id_coa_tag")
+        SLEUnit.EditValue = "1"
+    End Sub
+
     Private Sub FormPurcOrder_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        load_unit()
+
         load_vendor()
         load_vendor_list_po()
         load_po_item()
@@ -88,7 +102,7 @@
             where_string += " AND po.is_close_rec='1'"
         End If
 
-        Dim query As String = "SELECT 'no' AS is_check,po.est_date_receive,po.id_purc_order,c.comp_number,c.comp_name,cc.contact_person,cc.contact_number,po.purc_order_number,po.date_created,emp_cre.employee_name AS emp_created,po.last_update,emp_upd.employee_name AS emp_updated ,po.pay_due_date,po.date_created
+        Dim query As String = "SELECT 'no' AS is_check,tag.tag_description,po.est_date_receive,po.id_purc_order,c.comp_number,c.comp_name,cc.contact_person,cc.contact_number,po.purc_order_number,po.date_created,emp_cre.employee_name AS emp_created,po.last_update,emp_upd.employee_name AS emp_updated ,po.pay_due_date,po.date_created
 ,SUM(pod.qty) AS qty_po,(SUM(pod.qty*(pod.value-pod.discount))-po.disc_value+po.vat_value) AS total_po
 ,IFNULL(SUM(rec.qty),0) AS qty_rec,IF(ISNULL(rec.id_purc_order_det),0,SUM(rec.qty*(pod.value-pod.discount))-(SUM(rec.qty*(pod.value-pod.discount))/SUM(pod.qty*(pod.value-pod.discount))*po.disc_value)+(SUM(rec.qty*(pod.value-pod.discount))/SUM(pod.qty*(pod.value-pod.discount))*po.vat_value)) AS total_rec
 ,(IFNULL(SUM(rec.qty*pod.value),0)/SUM(pod.qty*pod.value))*100 AS rec_progress,IF(po.is_close_rec=1,'Closed',IF((IFNULL(SUM(rec.qty),0)/SUM(pod.qty))<=0,'Waiting',IF((IFNULL(SUM(rec.qty),0)/SUM(pod.qty))<1,'Partial','Complete'))) AS rec_status
@@ -96,6 +110,7 @@
 ,IFNULL(payment.value,0) AS val_pay
 ,IF(po.is_close_pay=1,'Closed',IF(DATE(NOW())>po.pay_due_date,'Overdue','Open')) as pay_status, po.is_close_rec, po.id_expense_type, po.id_report_status
 FROM tb_purc_order po
+INNER JOIN tb_coa_tag tag ON tag.id_coa_tag=po.id_coa_tag
 INNER JOIN tb_purc_order_det pod ON pod.`id_purc_order`=po.`id_purc_order`
 INNER JOIN tb_m_user usr_cre ON usr_cre.id_user=po.created_by
 INNER JOIN tb_m_employee emp_cre ON emp_cre.id_employee=usr_cre.id_employee
@@ -126,7 +141,7 @@ WHERE 1=1 " & where_string & " GROUP BY po.id_purc_order ORDER BY po.id_purc_ord
     Sub load_dep()
         Dim query As String = "SELECT 0 AS id_departement,'All Departement' AS departement 
                                 UNION
-                                SELECT id_departement,departement FROM tb_m_departement"
+                                SELECT id_departement,departement FROM tb_m_departement WHERE id_coa_tag='" & SLEUnit.EditValue.ToString & "'"
         viewSearchLookupQuery(SLEDepartement, query, "id_departement", "departement", "id_departement")
     End Sub
 
@@ -172,17 +187,19 @@ WHERE po.id_report_status='6' AND po.is_close_rec='2'"
             query_where += " AND dep.id_departement='" & SLEDepartement.EditValue.ToString & "' "
         End If
         '
+        query_where += " AND dep.id_coa_tag='" & SLEUnit.EditValue.ToString & "' "
+        '
         If Not SLEItemCat.EditValue.ToString = "0" Then 'category
             query_where += " AND cat.id_item_cat='" & SLEItemCat.EditValue.ToString & "' "
         End If
         '
-        If Not SLEItem.EditValue.ToString = "0" Then 'item
-            query_where += " AND itm.id_item='" & SLEItem.EditValue.ToString & "' "
-        End If
+        'If Not SLEItem.EditValue.ToString = "0" Then 'item
+        '    query_where += " AND itm.id_item='" & SLEItem.EditValue.ToString & "' "
+        'End If
         '
         If Not LEPOStatus.EditValue.ToString = "3" Then 'item
             If LEPOStatus.EditValue.ToString = "1" Then 'Not created PO
-                query_where += " AND IFNULL(po.qty,0) = 0"
+                query_where += " AND (IFNULL(po.qty,0) = 0 OR (po.is_close_rec = 1 AND po.qty <> po.qty_rec))"
             Else 'PO created
                 query_where += " AND IFNULL(po.qty,0) > 0"
             End If
@@ -191,7 +208,7 @@ WHERE po.id_report_status='6' AND po.is_close_rec='2'"
         query_where += " AND cat.id_expense_type='" & SLEExpenseType.EditValue.ToString & "' "
         '
         Dim query As String = "SELECT '-' AS status_val,cat.id_expense_type,rd.item_detail,rd.id_b_expense,rd.id_b_expense_opex,icd.id_vendor_type,icd.item_cat_detail,vt.vendor_type,req.date_created AS pr_created,dep.`departement`,rd.`id_purc_req_det`,req.`id_purc_req`,req.`purc_req_number`,cat.`item_cat`,itm.`item_desc`,rd.`value` AS val_pr,rd.`qty` AS qty_pr,'no' AS is_check 
-                                ,req.note,IFNULL(po.qty,0) AS qty_po_created,IFNULL(rec.qty,0)-IFNULL(ret.qty,0) AS qty_rec,0.00 AS qty_po,uom.uom,rd.id_item,req.id_item_type,req.id_report_status,typ.item_type,itm.latest_price,rd.ship_destination,rd.ship_address
+                                ,req.note,IFNULL(po.qty,0) AS qty_po_created,IFNULL(rec.qty,0)-IFNULL(ret.qty,0) AS qty_rec,0.00 AS qty_po,uom.uom,rd.id_item,req.id_item_type,req.id_report_status,typ.item_type,itm.latest_price,rd.ship_destination,rd.ship_address, (IFNULL(po.qty_rec,0) - IFNULL(po.qty,0)) qty_s_rec
                                 FROM tb_purc_req_det rd 
                                 INNER JOIN tb_purc_req req ON req.id_purc_req=rd.id_purc_req
                                 INNER JOIN tb_lookup_purc_item_type typ ON typ.id_item_type=req.id_item_type
@@ -203,9 +220,11 @@ WHERE po.id_report_status='6' AND po.is_close_rec='2'"
                                 INNER JOIN tb_vendor_type vt ON vt.id_vendor_type=icd.id_vendor_type
                                 LEFT JOIN 
                                 (
-	                                SELECT pod.`id_purc_order_det`,pod.`id_purc_req_det`,SUM(pod.`qty`) as qty FROM tb_purc_order_det pod
-	                                INNER JOIN tb_purc_order po ON po.`id_purc_order`=pod.`id_purc_order`
-	                                WHERE po.`id_report_status`!='5' AND pod.is_drop='2'
+	                                SELECT pod.`id_purc_order_det`,pod.`id_purc_req_det`,SUM(pod.`qty`) AS qty, po.is_close_rec, SUM(rec.`qty`) AS qty_rec 
+                                    FROM tb_purc_order_det pod
+                                    INNER JOIN tb_purc_order po ON po.`id_purc_order`=pod.`id_purc_order`
+                                    LEFT JOIN `tb_purc_rec_det` rec ON pod.`id_purc_order_det` = rec.`id_purc_order_det`
+                                    WHERE po.`id_report_status`!='5' AND pod.is_drop='2'
                                     GROUP BY pod.`id_purc_req_det`
                                 )po ON po.id_purc_req_det=rd.`id_purc_req_det`
                                 LEFT JOIN 
@@ -254,6 +273,7 @@ WHERE po.id_report_status='6' AND po.is_close_rec='2'"
     End Sub
 
     Private Sub BViewReqList_Click(sender As Object, e As EventArgs) Handles BViewReqList.Click
+        id_coa_tag = SLEUnit.EditValue.ToString
         load_req()
     End Sub
 
@@ -284,7 +304,7 @@ WHERE po.id_report_status='6' AND po.is_close_rec='2'"
             Next
             '
             For i As Integer = 0 To GVPurcReq.RowCount - 1
-                If (GVPurcReq.GetRowCellValue(i, "qty_po_created") > 0) Then
+                If (GVPurcReq.GetRowCellValue(i, "qty_po_created") > 0) And (GVPurcReq.GetRowCellValue(i, "qty_s_rec") >= 0) Then
                     'qty PO already not 0
                     is_already_created = True
                     GVPurcReq.SetRowCellValue(i, "status_val", "Already created PO")
@@ -604,5 +624,9 @@ GROUP BY pod.id_purc_order_det"
         FormPurcOrderCloseReceiving.id_receive_date = "0"
 
         FormPurcOrderCloseReceiving.ShowDialog()
+    End Sub
+
+    Private Sub SLEUnit_EditValueChanged(sender As Object, e As EventArgs) Handles SLEUnit.EditValueChanged
+        load_dep()
     End Sub
 End Class

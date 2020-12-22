@@ -52,7 +52,6 @@
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
 
         GCList.DataSource = data
-
         GVList.BestFitColumns()
     End Sub
 

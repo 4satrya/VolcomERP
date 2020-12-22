@@ -121,6 +121,7 @@
                 Dim checkout_id As String = ""
                 Dim sku As String = ""
                 Dim design_price As String = ""
+                Dim ol_order_qty As String = ""
                 Dim sales_order_det_qty As String = ""
                 Dim shipping_price As String = ""
                 Dim other_price As String = ""
@@ -150,6 +151,7 @@
                 checkout_id = ""
                 sku = json("value")("merchantSku").ToString
                 design_price = decimalSQL(json("value")("finalPrice").ToString)
+                ol_order_qty = decimalSQL(json("value")("qty").ToString)
                 sales_order_det_qty = decimalSQL(json("value")("qty").ToString)
                 shipping_price = "0"
                 other_price = "0"
@@ -180,6 +182,7 @@
                 checkout_id ,
                 sku ,
                 design_price, 
+                ol_order_qty,
                 sales_order_det_qty, 
                 shipping_price ,
                 other_price ,
@@ -209,6 +212,7 @@
                 '" + checkout_id + "',
                 '" + sku + "',
                 '" + design_price + "', 
+                '" + ol_order_qty + "',
                 '" + sales_order_det_qty + "', 
                 '" + shipping_price + "',
                 '" + other_price + "',

@@ -172,6 +172,8 @@ Partial Class FormMasterCompanySingle
         Me.GridColumn9 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn16 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RICEDownload = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
+        Me.GridColumn31 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RICEDocView = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         Me.PCVendorLegal = New DevExpress.XtraEditors.PanelControl()
         Me.BrefreshTemplateContract = New DevExpress.XtraEditors.SimpleButton()
         Me.BSetContract = New DevExpress.XtraEditors.SimpleButton()
@@ -234,8 +236,6 @@ Partial Class FormMasterCompanySingle
         Me.BClearAR = New DevExpress.XtraEditors.SimpleButton()
         Me.TxtARCode = New DevExpress.XtraEditors.TextEdit()
         Me.BCreateCOA = New DevExpress.XtraEditors.SimpleButton()
-        Me.GridColumn31 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.RICEDocView = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         CType(Me.EPCompany, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GCCP, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GCCP.SuspendLayout()
@@ -310,6 +310,7 @@ Partial Class FormMasterCompanySingle
         CType(Me.GCLegal, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVLegal, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RICEDownload, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RICEDocView, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PCVendorLegal, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PCVendorLegal.SuspendLayout()
         CType(Me.LEContractTemplate.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -346,7 +347,6 @@ Partial Class FormMasterCompanySingle
         CType(Me.SLEAR.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView6, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtARCode.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.RICEDocView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'EPCompany
@@ -1908,6 +1908,24 @@ Partial Class FormMasterCompanySingle
         Me.RICEDownload.PictureGrayed = CType(resources.GetObject("RICEDownload.PictureGrayed"), System.Drawing.Image)
         Me.RICEDownload.PictureUnchecked = CType(resources.GetObject("RICEDownload.PictureUnchecked"), System.Drawing.Image)
         '
+        'GridColumn31
+        '
+        Me.GridColumn31.Caption = "View"
+        Me.GridColumn31.ColumnEdit = Me.RICEDocView
+        Me.GridColumn31.FieldName = "view_attachment"
+        Me.GridColumn31.Name = "GridColumn31"
+        Me.GridColumn31.Visible = True
+        Me.GridColumn31.VisibleIndex = 6
+        '
+        'RICEDocView
+        '
+        Me.RICEDocView.AutoHeight = False
+        Me.RICEDocView.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.UserDefined
+        Me.RICEDocView.Name = "RICEDocView"
+        Me.RICEDocView.PictureChecked = CType(resources.GetObject("RICEDocView.PictureChecked"), System.Drawing.Image)
+        Me.RICEDocView.PictureGrayed = CType(resources.GetObject("RICEDocView.PictureGrayed"), System.Drawing.Image)
+        Me.RICEDocView.PictureUnchecked = CType(resources.GetObject("RICEDocView.PictureUnchecked"), System.Drawing.Image)
+        '
         'PCVendorLegal
         '
         Me.PCVendorLegal.Controls.Add(Me.BrefreshTemplateContract)
@@ -2270,7 +2288,7 @@ Partial Class FormMasterCompanySingle
         Me.GroupControl9.Controls.Add(Me.BClearDP)
         Me.GroupControl9.Controls.Add(Me.TxtAPCode)
         Me.GroupControl9.Dock = System.Windows.Forms.DockStyle.Top
-        Me.GroupControl9.Location = New System.Drawing.Point(2, 110)
+        Me.GroupControl9.Location = New System.Drawing.Point(2, 106)
         Me.GroupControl9.Name = "GroupControl9"
         Me.GroupControl9.Size = New System.Drawing.Size(635, 122)
         Me.GroupControl9.TabIndex = 25
@@ -2418,7 +2436,7 @@ Partial Class FormMasterCompanySingle
         Me.GroupControl7.Dock = System.Windows.Forms.DockStyle.Top
         Me.GroupControl7.Location = New System.Drawing.Point(2, 35)
         Me.GroupControl7.Name = "GroupControl7"
-        Me.GroupControl7.Size = New System.Drawing.Size(635, 75)
+        Me.GroupControl7.Size = New System.Drawing.Size(635, 71)
         Me.GroupControl7.TabIndex = 24
         Me.GroupControl7.Text = "Receiveable"
         '
@@ -2503,24 +2521,6 @@ Partial Class FormMasterCompanySingle
         Me.BCreateCOA.TabIndex = 28
         Me.BCreateCOA.Text = "Manage COA"
         Me.BCreateCOA.Visible = False
-        '
-        'GridColumn31
-        '
-        Me.GridColumn31.Caption = "View"
-        Me.GridColumn31.ColumnEdit = Me.RICEDocView
-        Me.GridColumn31.FieldName = "view_attachment"
-        Me.GridColumn31.Name = "GridColumn31"
-        Me.GridColumn31.Visible = True
-        Me.GridColumn31.VisibleIndex = 6
-        '
-        'RICEDocView
-        '
-        Me.RICEDocView.AutoHeight = False
-        Me.RICEDocView.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.UserDefined
-        Me.RICEDocView.Name = "RICEDocView"
-        Me.RICEDocView.PictureChecked = CType(resources.GetObject("RICEDocView.PictureChecked"), System.Drawing.Image)
-        Me.RICEDocView.PictureGrayed = CType(resources.GetObject("RICEDocView.PictureGrayed"), System.Drawing.Image)
-        Me.RICEDocView.PictureUnchecked = CType(resources.GetObject("RICEDocView.PictureUnchecked"), System.Drawing.Image)
         '
         'FormMasterCompanySingle
         '
@@ -2615,6 +2615,7 @@ Partial Class FormMasterCompanySingle
         CType(Me.GCLegal, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVLegal, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RICEDownload, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RICEDocView, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PCVendorLegal, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PCVendorLegal.ResumeLayout(False)
         Me.PCVendorLegal.PerformLayout()
@@ -2656,7 +2657,6 @@ Partial Class FormMasterCompanySingle
         CType(Me.SLEAR.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView6, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TxtARCode.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.RICEDocView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

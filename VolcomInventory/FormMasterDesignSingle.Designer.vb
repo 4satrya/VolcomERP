@@ -293,6 +293,7 @@ Partial Class FormMasterDesignSingle
         Me.ViewMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.SMViewDel = New System.Windows.Forms.ToolStripMenuItem()
         Me.EPChanges = New System.Windows.Forms.ErrorProvider(Me.components)
+        Me.XTPImages = New DevExpress.XtraTab.XtraTabPage()
         CType(Me.RILEValNon, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.EPMasterDesign, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GCCode, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1917,7 +1918,7 @@ Partial Class FormMasterDesignSingle
         Me.XTCDesign.SelectedTabPage = Me.XTPGeneral
         Me.XTCDesign.Size = New System.Drawing.Size(1015, 762)
         Me.XTCDesign.TabIndex = 96
-        Me.XTCDesign.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPGeneral, Me.XTPSize, Me.XTPLineList, Me.XTPPrice, Me.XTPComment})
+        Me.XTCDesign.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPGeneral, Me.XTPSize, Me.XTPLineList, Me.XTPPrice, Me.XTPComment, Me.XTPImages})
         '
         'LargeImageCollection
         '
@@ -3124,6 +3125,13 @@ Partial Class FormMasterDesignSingle
         Me.EPChanges.ContainerControl = Me
         Me.EPChanges.Icon = CType(resources.GetObject("EPChanges.Icon"), System.Drawing.Icon)
         '
+        'XTPImages
+        '
+        Me.XTPImages.Image = CType(resources.GetObject("XTPImages.Image"), System.Drawing.Image)
+        Me.XTPImages.Name = "XTPImages"
+        Me.XTPImages.Size = New System.Drawing.Size(907, 756)
+        Me.XTPImages.Text = "Images"
+        '
         'FormMasterDesignSingle
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -3556,4 +3564,5 @@ Partial Class FormMasterDesignSingle
     Friend WithEvents TEPrimaryName As DevExpress.XtraEditors.TextEdit
     Friend WithEvents SBFabricationBrowse As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents GridColumn60 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents XTPImages As DevExpress.XtraTab.XtraTabPage
 End Class

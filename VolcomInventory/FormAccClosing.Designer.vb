@@ -21,8 +21,12 @@ Partial Class FormAccClosing
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
+        Me.SLEUnit = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.SearchLookUpEdit1View = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn12 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn15 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn16 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
-        Me.LECOAType = New DevExpress.XtraEditors.LookUpEdit()
         Me.BClosing = New DevExpress.XtraEditors.SimpleButton()
         Me.BView = New DevExpress.XtraEditors.SimpleButton()
         Me.DEUntil = New DevExpress.XtraEditors.DateEdit()
@@ -58,7 +62,8 @@ Partial Class FormAccClosing
         Me.GridColumn19 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
-        CType(Me.LECOAType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SLEUnit.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEUntil.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DEUntil.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GCClosing, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -77,8 +82,8 @@ Partial Class FormAccClosing
         '
         'PanelControl1
         '
+        Me.PanelControl1.Controls.Add(Me.SLEUnit)
         Me.PanelControl1.Controls.Add(Me.LabelControl2)
-        Me.PanelControl1.Controls.Add(Me.LECOAType)
         Me.PanelControl1.Controls.Add(Me.BClosing)
         Me.PanelControl1.Controls.Add(Me.BView)
         Me.PanelControl1.Controls.Add(Me.DEUntil)
@@ -89,25 +94,62 @@ Partial Class FormAccClosing
         Me.PanelControl1.Size = New System.Drawing.Size(1194, 38)
         Me.PanelControl1.TabIndex = 0
         '
+        'SLEUnit
+        '
+        Me.SLEUnit.Location = New System.Drawing.Point(38, 10)
+        Me.SLEUnit.Name = "SLEUnit"
+        Me.SLEUnit.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLEUnit.Properties.View = Me.SearchLookUpEdit1View
+        Me.SLEUnit.Size = New System.Drawing.Size(193, 20)
+        Me.SLEUnit.TabIndex = 7
+        '
+        'SearchLookUpEdit1View
+        '
+        Me.SearchLookUpEdit1View.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn12, Me.GridColumn15, Me.GridColumn16})
+        Me.SearchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.SearchLookUpEdit1View.Name = "SearchLookUpEdit1View"
+        Me.SearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.SearchLookUpEdit1View.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn12
+        '
+        Me.GridColumn12.Caption = "id_coa_tag"
+        Me.GridColumn12.FieldName = "id_comp"
+        Me.GridColumn12.Name = "GridColumn12"
+        '
+        'GridColumn15
+        '
+        Me.GridColumn15.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumn15.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumn15.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumn15.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumn15.Caption = "Number"
+        Me.GridColumn15.FieldName = "tag_code"
+        Me.GridColumn15.Name = "GridColumn15"
+        Me.GridColumn15.Visible = True
+        Me.GridColumn15.VisibleIndex = 0
+        Me.GridColumn15.Width = 281
+        '
+        'GridColumn16
+        '
+        Me.GridColumn16.Caption = "Unit"
+        Me.GridColumn16.FieldName = "tag_description"
+        Me.GridColumn16.Name = "GridColumn16"
+        Me.GridColumn16.Visible = True
+        Me.GridColumn16.VisibleIndex = 1
+        Me.GridColumn16.Width = 1351
+        '
         'LabelControl2
         '
-        Me.LabelControl2.Location = New System.Drawing.Point(12, 13)
+        Me.LabelControl2.Location = New System.Drawing.Point(13, 13)
         Me.LabelControl2.Name = "LabelControl2"
-        Me.LabelControl2.Size = New System.Drawing.Size(24, 13)
-        Me.LabelControl2.TabIndex = 3
-        Me.LabelControl2.Text = "Type"
-        '
-        'LECOAType
-        '
-        Me.LECOAType.Location = New System.Drawing.Point(42, 10)
-        Me.LECOAType.Name = "LECOAType"
-        Me.LECOAType.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.LECOAType.Size = New System.Drawing.Size(178, 20)
-        Me.LECOAType.TabIndex = 124
+        Me.LabelControl2.Size = New System.Drawing.Size(19, 13)
+        Me.LabelControl2.TabIndex = 6
+        Me.LabelControl2.Text = "Unit"
         '
         'BClosing
         '
-        Me.BClosing.Location = New System.Drawing.Point(525, 8)
+        Me.BClosing.Location = New System.Drawing.Point(536, 8)
         Me.BClosing.Name = "BClosing"
         Me.BClosing.Size = New System.Drawing.Size(50, 23)
         Me.BClosing.TabIndex = 4
@@ -116,7 +158,7 @@ Partial Class FormAccClosing
         '
         'BView
         '
-        Me.BView.Location = New System.Drawing.Point(469, 8)
+        Me.BView.Location = New System.Drawing.Point(480, 8)
         Me.BView.Name = "BView"
         Me.BView.Size = New System.Drawing.Size(50, 23)
         Me.BView.TabIndex = 4
@@ -125,7 +167,7 @@ Partial Class FormAccClosing
         'DEUntil
         '
         Me.DEUntil.EditValue = Nothing
-        Me.DEUntil.Location = New System.Drawing.Point(290, 10)
+        Me.DEUntil.Location = New System.Drawing.Point(301, 10)
         Me.DEUntil.Name = "DEUntil"
         Me.DEUntil.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.DEUntil.Properties.CalendarTimeProperties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
@@ -136,7 +178,7 @@ Partial Class FormAccClosing
         '
         'LabelControl1
         '
-        Me.LabelControl1.Location = New System.Drawing.Point(226, 13)
+        Me.LabelControl1.Location = New System.Drawing.Point(237, 13)
         Me.LabelControl1.Name = "LabelControl1"
         Me.LabelControl1.Size = New System.Drawing.Size(58, 13)
         Me.LabelControl1.TabIndex = 0
@@ -443,7 +485,8 @@ Partial Class FormAccClosing
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl1.ResumeLayout(False)
         Me.PanelControl1.PerformLayout()
-        CType(Me.LECOAType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SLEUnit.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEUntil.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DEUntil.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GCClosing, System.ComponentModel.ISupportInitialize).EndInit()
@@ -496,6 +539,10 @@ Partial Class FormAccClosing
     Friend WithEvents GridColumn19 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents ViewMenuBottom As ContextMenuStrip
     Friend WithEvents TSViewReport As ToolStripMenuItem
+    Friend WithEvents SLEUnit As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents SearchLookUpEdit1View As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn12 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn15 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn16 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents LabelControl2 As DevExpress.XtraEditors.LabelControl
-    Friend WithEvents LECOAType As DevExpress.XtraEditors.LookUpEdit
 End Class

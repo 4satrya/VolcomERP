@@ -2,6 +2,7 @@
     Public id_sum As String = "-1"
     Public id_report_status As String = "-1"
     Public is_view As String = "-1"
+    Public id_coa_type As String = "-1"
     Private Sub FormBankWithdrawalSum_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         TETotal.EditValue = 0.0
         load_type()
@@ -14,6 +15,9 @@
             BRelease.Visible = False
             BtnPrint.Visible = False
             BtnAttachment.Visible = False
+            '
+            id_coa_type = FormBankWithdrawal.SLECOAType.EditValue.ToString
+            TECOAType.Text = FormBankWithdrawal.SLECOAType.Text
         Else
             DEPayment.Enabled = False
             SLEType.ReadOnly = True
@@ -22,10 +26,11 @@
             BGenerate.Visible = False
             BtnPrint.Visible = True
             BtnAttachment.Visible = True
-            Dim q As String = "SELECT pns.id_report_status,pns.`id_pn_summary`,pns.number,pns.`date_payment`,pns.`created_date`,emp.`employee_name`, cur.`id_currency`,cur.`currency`,IFNULL(SUM(pnd.`val_bef_kurs`),0) AS val_bef_kurs, pns.note
+            Dim q As String = "SELECT typ.id_coa_type,typ.coa_type,pns.id_report_status,pns.`id_pn_summary`,pns.number,pns.`date_payment`,pns.`created_date`,emp.`employee_name`, cur.`id_currency`,cur.`currency`,IFNULL(SUM(pnd.`val_bef_kurs`),0) AS val_bef_kurs, pns.note
 FROM tb_pn_summary pns
 LEFT JOIN tb_pn_summary_det pnsd ON pnsd.id_pn_summary=pns.id_pn_summary
 LEFT JOIN tb_pn_det pnd ON pnd.`id_pn`=pnsd.`id_pn` AND pnd.`id_currency`=pns.`id_currency`
+INNER JOIN tb_coa_type typ ON typ.id_coa_type=pns.id_coa_type
 INNER JOIN tb_lookup_currency cur ON cur.`id_currency`=pns.`id_currency`
 INNER JOIN tb_m_user usr ON usr.`id_user`=pns.`created_by`
 INNER JOIN tb_m_employee emp ON emp.`id_employee`=usr.`id_employee`
@@ -33,6 +38,8 @@ WHERE pns.`id_pn_summary`='" & id_sum & "'
 GROUP BY pns.`id_pn_summary`"
             Dim dt As DataTable = execute_query(q, -1, True, "", "", "", "")
             If dt.Rows.Count > 0 Then
+                id_coa_type = dt.Rows(0)("id_coa_type").ToString
+                TECOAType.Text = dt.Rows(0)("coa_type").ToString
                 TEPayNumber.Text = dt.Rows(0)("number").ToString
                 DEDateCreated.EditValue = dt.Rows(0)("created_date")
                 DEPayment.EditValue = dt.Rows(0)("date_payment")
@@ -114,7 +121,7 @@ INNER JOIN tb_pn_summary_det pnsd ON pnsd.`id_pn`=pyd.`id_pn` AND pnsd.`id_pn_su
 
     Sub generate()
         'check if already
-        Dim qc As String = "SELECT id_pn_summary FROM tb_pn_summary WHERE id_pn_summary!='" & id_sum & "' AND id_currency='" & SLEType.EditValue.ToString & "' AND id_report_status!=5 AND id_report_status!=6 AND DATE(date_payment)='" & Date.Parse(DEPayment.EditValue.ToString).ToString("yyyy-MM-dd") & "'"
+        Dim qc As String = "SELECT id_pn_summary FROM tb_pn_summary WHERE id_pn_summary!='" & id_sum & "' AND id_coa_type='" & id_coa_type & "' AND id_currency='" & SLEType.EditValue.ToString & "' AND id_report_status!=5 AND id_report_status!=6 AND DATE(date_payment)='" & Date.Parse(DEPayment.EditValue.ToString).ToString("yyyy-MM-dd") & "'"
         Dim dtc As DataTable = execute_query(qc, -1, True, "", "", "", "")
         If dtc.Rows.Count = 0 Then
             Dim q As String = "SELECT 'no' AS is_check,sts.report_status,py.number,emp.employee_name AS created_by, py.date_created, py.`id_pn`,SUM(pyd.`val_bef_kurs`) AS value ,CONCAT(c.`comp_number`,' - ',c.`comp_name`) AS comp_name,rm.`report_mark_type_name`,pt.`pay_type`,py.note,py.date_payment
@@ -128,6 +135,7 @@ INNER JOIN tb_m_employee emp ON emp.id_employee=usr.id_employee
 INNER JOIN tb_lookup_report_status sts ON sts.id_report_status=py.id_report_status
 INNER JOIN tb_pn_det pyd ON pyd.id_pn=py.id_pn AND pyd.`id_currency`='" & SLEType.EditValue.ToString & "' AND pyd.`is_include_total`=1
 INNER JOIN tb_a_acc acc ON acc.id_acc=pyd.id_acc AND acc.is_no_summary=2
+INNER JOIN tb_coa_tag ct ON ct.id_coa_tag=py.id_coa_tag AND ct.id_coa_type='" & id_coa_type & "'
 WHERE py.`id_report_status`!='5' AND py.is_auto_debet='2' AND py.`id_report_status`!='6' AND  DATE(py.`date_payment`)='" & Date.Parse(DEPayment.EditValue.ToString).ToString("yyyy-MM-dd") & "'"
             q += " GROUP BY py.id_pn "
 
@@ -183,8 +191,8 @@ WHERE py.id_pn='-1'"
             warningCustom("No BBK listed.")
         Else
             If id_sum = "-1" Then 'new
-                Dim q As String = "INSERT INTO tb_pn_summary(id_currency,date_payment,created_date,created_by,note,id_report_status)
-VALUES('" & SLEType.EditValue.ToString & "','" & Date.Parse(DEPayment.EditValue.ToString).ToString("yyyy-MM-dd") & "',NOW(),'" & id_user & "','" & addSlashes(MENote.Text) & "',1); SELECT LAST_INSERT_ID();"
+                Dim q As String = "INSERT INTO tb_pn_summary(id_coa_type,id_currency,date_payment,created_date,created_by,note,id_report_status)
+VALUES('" & id_coa_type & "','" & SLEType.EditValue.ToString & "','" & Date.Parse(DEPayment.EditValue.ToString).ToString("yyyy-MM-dd") & "',NOW(),'" & id_user & "','" & addSlashes(MENote.Text) & "',1); SELECT LAST_INSERT_ID();"
                 id_sum = execute_query(q, 0, True, "", "", "", "")
                 For i As Integer = 0 To GVList.RowCount - 1
                     q = "INSERT INTO tb_pn_summary_det(id_pn_summary,id_pn) VALUES('" & id_sum & "','" & GVList.GetRowCellValue(i, "id_pn").ToString & "')"

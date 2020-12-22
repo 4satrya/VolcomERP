@@ -56,6 +56,7 @@
             TxtPrice.Text = data.Rows(0)("mat_det_price").ToString
             TEQtyinBulk.EditValue = data.Rows(0)("min_qty_in_bulk")
             TEUnit.Text = data.Rows(0)("bulk_unit").ToString
+            TEMOQ.EditValue = data.Rows(0)("moq")
         End If
     End Sub
     'Form Closed

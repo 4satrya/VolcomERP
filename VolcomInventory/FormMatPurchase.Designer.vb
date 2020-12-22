@@ -82,6 +82,7 @@ Partial Class FormMatPurchase
         Me.GridColumn26 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn27 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn11 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn44 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn13 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn22 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn19 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -145,7 +146,6 @@ Partial Class FormMatPurchase
         Me.GridColumn48 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.BViewKO = New DevExpress.XtraEditors.SimpleButton()
         Me.LabelControl10 = New DevExpress.XtraEditors.LabelControl()
-        Me.GridColumn44 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.XTCPurcMat, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCPurcMat.SuspendLayout()
         Me.XTPPurchaseMat.SuspendLayout()
@@ -819,6 +819,17 @@ Partial Class FormMatPurchase
         Me.GridColumn11.VisibleIndex = 8
         Me.GridColumn11.Width = 121
         '
+        'GridColumn44
+        '
+        Me.GridColumn44.Caption = "Minimum Order Qty"
+        Me.GridColumn44.DisplayFormat.FormatString = "N2"
+        Me.GridColumn44.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn44.FieldName = "moq"
+        Me.GridColumn44.Name = "GridColumn44"
+        Me.GridColumn44.Visible = True
+        Me.GridColumn44.VisibleIndex = 9
+        Me.GridColumn44.Width = 104
+        '
         'GridColumn13
         '
         Me.GridColumn13.Caption = "PO Number"
@@ -1392,17 +1403,6 @@ Partial Class FormMatPurchase
         Me.LabelControl10.TabIndex = 8901
         Me.LabelControl10.Text = "Vendor"
         '
-        'GridColumn44
-        '
-        Me.GridColumn44.Caption = "Minimum Order Qty"
-        Me.GridColumn44.DisplayFormat.FormatString = "N2"
-        Me.GridColumn44.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.GridColumn44.FieldName = "moq"
-        Me.GridColumn44.Name = "GridColumn44"
-        Me.GridColumn44.Visible = True
-        Me.GridColumn44.VisibleIndex = 9
-        Me.GridColumn44.Width = 104
-        '
         'FormMatPurchase
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1415,7 +1415,7 @@ Partial Class FormMatPurchase
         Me.Name = "FormMatPurchase"
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Purchase Raw Material"
+        Me.Text = "Purchase Order Raw Material"
         CType(Me.XTCPurcMat, System.ComponentModel.ISupportInitialize).EndInit()
         Me.XTCPurcMat.ResumeLayout(False)
         Me.XTPPurchaseMat.ResumeLayout(False)

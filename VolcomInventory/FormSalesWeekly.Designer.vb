@@ -146,6 +146,7 @@ Partial Class FormSalesWeekly
         Me.GroupControlMonthlySales = New DevExpress.XtraEditors.GroupControl()
         Me.GCSalesPOSMonthly = New DevExpress.XtraGrid.GridControl()
         Me.BGVSalesPOSMonthly = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridView()
+        Me.GridColumnsales_pos_tax = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.GVSalesPOSDet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GCSalesPOS, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVSalesPOS, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -437,7 +438,7 @@ Partial Class FormSalesWeekly
         '
         'GVSalesPOS
         '
-        Me.GVSalesPOS.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnStore, Me.GridColumnSalesPOSDate, Me.GridColumnMemoType, Me.GridColumn1, Me.GridColumnSalesStore, Me.GridColumnType, Me.GridColumnQty, Me.GridColumnTotal, Me.GridColumnDiscount, Me.GridColumnSalesTax, Me.GridColumnNetto, Me.GridColumnSalesPosRev, Me.GridColumnStatus, Me.GridColumnDueDate, Me.GridColumnAge, Me.GridColumnRemark, Me.GridColumnstore_number, Me.GridColumnstore_name, Me.GridColumnsales_pos_discount_value, Me.GridColumnsales_pos_potongan, Me.GridColumnstore_group})
+        Me.GVSalesPOS.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnStore, Me.GridColumnSalesPOSDate, Me.GridColumnMemoType, Me.GridColumn1, Me.GridColumnSalesStore, Me.GridColumnType, Me.GridColumnQty, Me.GridColumnTotal, Me.GridColumnDiscount, Me.GridColumnSalesTax, Me.GridColumnNetto, Me.GridColumnSalesPosRev, Me.GridColumnStatus, Me.GridColumnDueDate, Me.GridColumnAge, Me.GridColumnRemark, Me.GridColumnstore_number, Me.GridColumnstore_name, Me.GridColumnsales_pos_discount_value, Me.GridColumnsales_pos_potongan, Me.GridColumnstore_group, Me.GridColumnsales_pos_tax})
         Me.GVSalesPOS.GridControl = Me.GCSalesPOS
         Me.GVSalesPOS.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_pos_det_qty", Me.GridColumnQty, "{0:n2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_pos_total_retail", Me.GridColumnTotal, "{0:n2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_pos_netto", Me.GridColumnNetto, "{0:n2}"), New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_pos_revenue", Me.GridColumnSalesPosRev, "{0:n2}")})
         Me.GVSalesPOS.Name = "GVSalesPOS"
@@ -562,7 +563,7 @@ Partial Class FormSalesWeekly
         Me.GridColumnSalesPosRev.Name = "GridColumnSalesPosRev"
         Me.GridColumnSalesPosRev.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "sales_pos_revenue", "{0:n2}")})
         Me.GridColumnSalesPosRev.Visible = True
-        Me.GridColumnSalesPosRev.VisibleIndex = 14
+        Me.GridColumnSalesPosRev.VisibleIndex = 15
         '
         'GridColumnStatus
         '
@@ -594,7 +595,7 @@ Partial Class FormSalesWeekly
         Me.GridColumnRemark.FieldName = "sales_pos_note"
         Me.GridColumnRemark.Name = "GridColumnRemark"
         Me.GridColumnRemark.Visible = True
-        Me.GridColumnRemark.VisibleIndex = 15
+        Me.GridColumnRemark.VisibleIndex = 16
         '
         'GridColumnstore_number
         '
@@ -1443,6 +1444,16 @@ Partial Class FormSalesWeekly
         Me.BGVSalesPOSMonthly.OptionsView.ShowFooter = True
         Me.BGVSalesPOSMonthly.OptionsView.ShowGroupPanel = False
         '
+        'GridColumnsales_pos_tax
+        '
+        Me.GridColumnsales_pos_tax.Caption = "TAX"
+        Me.GridColumnsales_pos_tax.DisplayFormat.FormatString = "N2"
+        Me.GridColumnsales_pos_tax.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnsales_pos_tax.FieldName = "sales_pos_tax"
+        Me.GridColumnsales_pos_tax.Name = "GridColumnsales_pos_tax"
+        Me.GridColumnsales_pos_tax.Visible = True
+        Me.GridColumnsales_pos_tax.VisibleIndex = 14
+        '
         'FormSalesWeekly
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1664,4 +1675,5 @@ Partial Class FormSalesWeekly
     Friend WithEvents PanelControl3 As DevExpress.XtraEditors.PanelControl
     Friend WithEvents PanelControl4 As DevExpress.XtraEditors.PanelControl
     Friend WithEvents CEAllUnit As DevExpress.XtraEditors.CheckEdit
+    Friend WithEvents GridColumnsales_pos_tax As DevExpress.XtraGrid.Columns.GridColumn
 End Class

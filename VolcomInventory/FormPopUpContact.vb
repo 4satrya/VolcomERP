@@ -647,6 +647,7 @@
                 FormSalesPOSDet.SPDiscount.EditValue = Decimal.Parse(GVCompany.GetFocusedRowCellValue("comp_commission").ToString)
             End If
             FormSalesPOSDet.id_comp = GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString
+            FormSalesPOSDet.id_store_type = GVCompany.GetFocusedRowCellDisplayText("id_account_type").ToString
             FormSalesPOSDet.id_store_contact_from = GVCompanyContactList.GetFocusedRowCellDisplayText("id_comp_contact").ToString
             FormSalesPOSDet.is_use_unique_code = GVCompany.GetFocusedRowCellValue("is_use_unique_code").ToString
             FormSalesPOSDet.TxtNameCompFrom.Text = get_company_x(GVCompany.GetFocusedRowCellDisplayText("id_comp").ToString, "1")

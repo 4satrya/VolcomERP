@@ -16,7 +16,7 @@
         BMark.Visible = False
         Bprint.Visible = False
         TEUserEntry.Text = get_user_identify(id_user, 1)
-        TENumber.Text = header_number_acc("1")
+        TENumber.Text = "Auto number"
         TEDate.Text = view_date_from(strDate, 0)
 
         If id_trans = "-1" Then 'new

@@ -416,9 +416,9 @@ GROUP BY po.id_purc_order,dep.id_main_comp"
                     'main journal
                     Dim id_acc_trans As String = ""
                     Dim qjm As String = "INSERT INTO tb_a_acc_trans(acc_trans_number, report_number, id_bill_type, id_user, date_created, acc_trans_note, id_report_status)
-                VALUES ('" + header_number_acc("1") + "','" + addSlashes(TextEditPONumber.Text) + "','24','" + id_user + "', NOW(), 'Auto Posting', '6'); SELECT LAST_INSERT_ID(); "
+                VALUES ('','" + addSlashes(TextEditPONumber.Text) + "','24','" + id_user + "', NOW(), 'Auto Posting', '6'); SELECT LAST_INSERT_ID(); "
                     id_acc_trans = execute_query(qjm, 0, True, "", "", "", "")
-                    increase_inc_acc("1")
+                    execute_non_query("CALL gen_number(" + id_acc_trans + ",36)", True, "", "", "", "")
 
                     If SLEPPHAccount.EditValue.ToString = get_opt_acc_field("id_acc_skbp") Then 'skbp
                         query = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, id_comp, qty, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number, report_mark_type_ref, id_report_ref, report_number_ref,id_coa_tag)

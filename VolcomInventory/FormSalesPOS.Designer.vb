@@ -20,6 +20,7 @@ Partial Class FormSalesPOS
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim GridLevelNode1 As DevExpress.XtraGrid.GridLevelNode = New DevExpress.XtraGrid.GridLevelNode()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormSalesPOS))
         Me.GVSalesPOSDet = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumnNo = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnCode = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -112,6 +113,69 @@ Partial Class FormSalesPOS
         Me.GridColumncustomer_name = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumncomp_number = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumncomp_name = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.XTPProblemList = New DevExpress.XtraTab.XtraTabPage()
+        Me.GCProbList = New DevExpress.XtraGrid.GridControl()
+        Me.GVProbList = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridView()
+        Me.BandedGridColumnis_select = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
+        Me.BandedGridColumnproduct_full_code = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumnname = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumnsize = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumnsales_pos_number = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumnsales_pos_start_period = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumnsales_pos_end_period = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumnsales_pos_due_date = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumncomp_number = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumncomp_name = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumncomp_group = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumncomp_group_desc = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumnis_open_invoice_view = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumndesign_price_store = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumndesign_price_retail = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumndesign_price_valid = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumninvoice_qty = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumnno_stock_qty = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumnqty_proceed = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumnno_stock_diff = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumnqty_on_process = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumnqty_new = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.SPQty = New DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit()
+        Me.GridColumnid_sales_pos_prob = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumnid_sales_pos = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumnid_comp = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumnid_comp_contact = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumnid_comp_group = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumnis_invalid_price = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumnis_no_stock = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumnid_product = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumnid_design_price_retail = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumnid_design_price_valid = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumnstore_qty = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumntotal_qty = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumnis_open_invoice = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumnqty_on_process_price = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumnqty_proceed_price = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumnid_design = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumndesign_price_type_valid = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.RepositoryItemTextEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
+        Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
+        Me.CESelectAll = New DevExpress.XtraEditors.CheckEdit()
+        Me.BtnCreatePriceReconcile = New DevExpress.XtraEditors.SimpleButton()
+        Me.BtnCreateInvoice = New DevExpress.XtraEditors.SimpleButton()
+        Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
+        Me.BtnHistProbList = New DevExpress.XtraEditors.SimpleButton()
+        Me.BtnPrintProb = New DevExpress.XtraEditors.SimpleButton()
+        Me.BtnViewProb = New DevExpress.XtraEditors.SimpleButton()
+        Me.PanelControl3 = New DevExpress.XtraEditors.PanelControl()
+        Me.SLEStoreProb = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GridView2 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumnid_comp = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumncomp = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.LabelControl13 = New DevExpress.XtraEditors.LabelControl()
+        Me.LEInvoiceStt = New DevExpress.XtraEditors.LookUpEdit()
+        Me.LabelControl5 = New DevExpress.XtraEditors.LabelControl()
+        Me.LabelControl12 = New DevExpress.XtraEditors.LabelControl()
+        Me.LETypeProb = New DevExpress.XtraEditors.LookUpEdit()
         Me.LookUpEdit1 = New DevExpress.XtraEditors.LookUpEdit()
         Me.LabelControl8 = New DevExpress.XtraEditors.LabelControl()
         Me.SimpleButton1 = New DevExpress.XtraEditors.SimpleButton()
@@ -119,6 +183,11 @@ Partial Class FormSalesPOS
         Me.DateEdit2 = New DevExpress.XtraEditors.DateEdit()
         Me.LabelControl9 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl10 = New DevExpress.XtraEditors.LabelControl()
+        Me.gridBandSelect = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
+        Me.gridBand4 = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
+        Me.gridBand2 = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
+        Me.gridBandPrice = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
+        Me.gridBandNoStock = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
         CType(Me.GVSalesPOSDet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GCSalesPOS, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVSalesPOS, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -156,6 +225,23 @@ Partial Class FormSalesPOS
         Me.XTPCNOnlineStore.SuspendLayout()
         CType(Me.GCPendingCN, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVPendingCN, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.XTPProblemList.SuspendLayout()
+        CType(Me.GCProbList, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GVProbList, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SPQty, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemTextEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelControl1.SuspendLayout()
+        CType(Me.CESelectAll.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelControl2.SuspendLayout()
+        CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelControl3.SuspendLayout()
+        CType(Me.SLEStoreProb.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LEInvoiceStt.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LETypeProb.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LookUpEdit1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DateEdit1.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DateEdit1.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -749,7 +835,7 @@ Partial Class FormSalesPOS
         Me.XTCInvoice.SelectedTabPage = Me.XTPListInv
         Me.XTCInvoice.Size = New System.Drawing.Size(1240, 533)
         Me.XTCInvoice.TabIndex = 3
-        Me.XTCInvoice.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPListInv, Me.XTPListWholesale, Me.XTPCNOnlineStore})
+        Me.XTCInvoice.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPListInv, Me.XTPListWholesale, Me.XTPCNOnlineStore, Me.XTPProblemList})
         '
         'XTPListInv
         '
@@ -757,7 +843,7 @@ Partial Class FormSalesPOS
         Me.XTPListInv.Controls.Add(Me.GCFilter)
         Me.XTPListInv.Name = "XTPListInv"
         Me.XTPListInv.Size = New System.Drawing.Size(1234, 505)
-        Me.XTPListInv.Text = "List Invoice"
+        Me.XTPListInv.Text = "Invoice List"
         '
         'XTPListWholesale
         '
@@ -1054,6 +1140,590 @@ Partial Class FormSalesPOS
         Me.GridColumncomp_name.Visible = True
         Me.GridColumncomp_name.VisibleIndex = 3
         '
+        'XTPProblemList
+        '
+        Me.XTPProblemList.Controls.Add(Me.GCProbList)
+        Me.XTPProblemList.Controls.Add(Me.PanelControl1)
+        Me.XTPProblemList.Controls.Add(Me.PanelControl2)
+        Me.XTPProblemList.Name = "XTPProblemList"
+        Me.XTPProblemList.Size = New System.Drawing.Size(1234, 505)
+        Me.XTPProblemList.Text = "Problem List"
+        '
+        'GCProbList
+        '
+        Me.GCProbList.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GCProbList.Location = New System.Drawing.Point(0, 46)
+        Me.GCProbList.MainView = Me.GVProbList
+        Me.GCProbList.Name = "GCProbList"
+        Me.GCProbList.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemCheckEdit1, Me.RepositoryItemTextEdit1, Me.SPQty})
+        Me.GCProbList.Size = New System.Drawing.Size(1234, 415)
+        Me.GCProbList.TabIndex = 3
+        Me.GCProbList.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVProbList})
+        '
+        'GVProbList
+        '
+        Me.GVProbList.Bands.AddRange(New DevExpress.XtraGrid.Views.BandedGrid.GridBand() {Me.gridBandSelect, Me.gridBand4, Me.gridBand2, Me.gridBandPrice, Me.gridBandNoStock})
+        Me.GVProbList.Columns.AddRange(New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn() {Me.GridColumnid_sales_pos_prob, Me.BandedGridColumnid_sales_pos, Me.BandedGridColumnsales_pos_number, Me.BandedGridColumnsales_pos_start_period, Me.BandedGridColumnsales_pos_end_period, Me.BandedGridColumnsales_pos_due_date, Me.BandedGridColumnid_comp, Me.BandedGridColumnid_comp_contact, Me.BandedGridColumncomp_number, Me.BandedGridColumncomp_name, Me.BandedGridColumnid_comp_group, Me.BandedGridColumncomp_group, Me.BandedGridColumncomp_group_desc, Me.BandedGridColumnis_invalid_price, Me.BandedGridColumnis_no_stock, Me.BandedGridColumnid_product, Me.BandedGridColumnproduct_full_code, Me.BandedGridColumnname, Me.BandedGridColumnsize, Me.BandedGridColumnid_design_price_retail, Me.BandedGridColumndesign_price_retail, Me.BandedGridColumndesign_price_store, Me.BandedGridColumnid_design_price_valid, Me.BandedGridColumndesign_price_valid, Me.BandedGridColumnno_stock_qty, Me.BandedGridColumnstore_qty, Me.BandedGridColumninvoice_qty, Me.BandedGridColumntotal_qty, Me.BandedGridColumnis_open_invoice, Me.BandedGridColumnis_open_invoice_view, Me.BandedGridColumnis_select, Me.BandedGridColumnqty_on_process, Me.BandedGridColumnno_stock_diff, Me.BandedGridColumnqty_proceed, Me.BandedGridColumnqty_new, Me.BandedGridColumnqty_on_process_price, Me.BandedGridColumnqty_proceed_price, Me.BandedGridColumnid_design, Me.BandedGridColumndesign_price_type_valid})
+        Me.GVProbList.GridControl = Me.GCProbList
+        Me.GVProbList.Name = "GVProbList"
+        Me.GVProbList.OptionsFind.AlwaysVisible = True
+        Me.GVProbList.OptionsView.ColumnAutoWidth = False
+        Me.GVProbList.OptionsView.ShowFooter = True
+        Me.GVProbList.OptionsView.ShowGroupPanel = False
+        '
+        'BandedGridColumnis_select
+        '
+        Me.BandedGridColumnis_select.Caption = "Select"
+        Me.BandedGridColumnis_select.ColumnEdit = Me.RepositoryItemCheckEdit1
+        Me.BandedGridColumnis_select.FieldName = "is_select"
+        Me.BandedGridColumnis_select.Name = "BandedGridColumnis_select"
+        Me.BandedGridColumnis_select.Visible = True
+        '
+        'RepositoryItemCheckEdit1
+        '
+        Me.RepositoryItemCheckEdit1.AutoHeight = False
+        Me.RepositoryItemCheckEdit1.Name = "RepositoryItemCheckEdit1"
+        Me.RepositoryItemCheckEdit1.ValueChecked = "Yes"
+        Me.RepositoryItemCheckEdit1.ValueUnchecked = "No"
+        '
+        'BandedGridColumnproduct_full_code
+        '
+        Me.BandedGridColumnproduct_full_code.Caption = "Code"
+        Me.BandedGridColumnproduct_full_code.FieldName = "code"
+        Me.BandedGridColumnproduct_full_code.Name = "BandedGridColumnproduct_full_code"
+        Me.BandedGridColumnproduct_full_code.OptionsColumn.ReadOnly = True
+        Me.BandedGridColumnproduct_full_code.Visible = True
+        '
+        'BandedGridColumnname
+        '
+        Me.BandedGridColumnname.Caption = "Description"
+        Me.BandedGridColumnname.FieldName = "name"
+        Me.BandedGridColumnname.Name = "BandedGridColumnname"
+        Me.BandedGridColumnname.OptionsColumn.ReadOnly = True
+        Me.BandedGridColumnname.Visible = True
+        '
+        'BandedGridColumnsize
+        '
+        Me.BandedGridColumnsize.Caption = "Size"
+        Me.BandedGridColumnsize.FieldName = "size"
+        Me.BandedGridColumnsize.Name = "BandedGridColumnsize"
+        Me.BandedGridColumnsize.OptionsColumn.ReadOnly = True
+        Me.BandedGridColumnsize.Visible = True
+        '
+        'BandedGridColumnsales_pos_number
+        '
+        Me.BandedGridColumnsales_pos_number.Caption = "Invoice No."
+        Me.BandedGridColumnsales_pos_number.FieldName = "sales_pos_number"
+        Me.BandedGridColumnsales_pos_number.Name = "BandedGridColumnsales_pos_number"
+        Me.BandedGridColumnsales_pos_number.OptionsColumn.ReadOnly = True
+        Me.BandedGridColumnsales_pos_number.Visible = True
+        '
+        'BandedGridColumnsales_pos_start_period
+        '
+        Me.BandedGridColumnsales_pos_start_period.Caption = "Start Period"
+        Me.BandedGridColumnsales_pos_start_period.DisplayFormat.FormatString = "dd MMMM yyyy"
+        Me.BandedGridColumnsales_pos_start_period.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.BandedGridColumnsales_pos_start_period.FieldName = "sales_pos_start_period"
+        Me.BandedGridColumnsales_pos_start_period.Name = "BandedGridColumnsales_pos_start_period"
+        Me.BandedGridColumnsales_pos_start_period.OptionsColumn.ReadOnly = True
+        Me.BandedGridColumnsales_pos_start_period.Visible = True
+        '
+        'BandedGridColumnsales_pos_end_period
+        '
+        Me.BandedGridColumnsales_pos_end_period.Caption = "End Period"
+        Me.BandedGridColumnsales_pos_end_period.DisplayFormat.FormatString = "dd MMMM yyyy"
+        Me.BandedGridColumnsales_pos_end_period.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.BandedGridColumnsales_pos_end_period.FieldName = "sales_pos_end_period"
+        Me.BandedGridColumnsales_pos_end_period.Name = "BandedGridColumnsales_pos_end_period"
+        Me.BandedGridColumnsales_pos_end_period.OptionsColumn.ReadOnly = True
+        Me.BandedGridColumnsales_pos_end_period.Visible = True
+        '
+        'BandedGridColumnsales_pos_due_date
+        '
+        Me.BandedGridColumnsales_pos_due_date.Caption = "Due Date"
+        Me.BandedGridColumnsales_pos_due_date.DisplayFormat.FormatString = "dd MMMM yyyy"
+        Me.BandedGridColumnsales_pos_due_date.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.BandedGridColumnsales_pos_due_date.FieldName = "sales_pos_due_date"
+        Me.BandedGridColumnsales_pos_due_date.Name = "BandedGridColumnsales_pos_due_date"
+        Me.BandedGridColumnsales_pos_due_date.OptionsColumn.ReadOnly = True
+        '
+        'BandedGridColumncomp_number
+        '
+        Me.BandedGridColumncomp_number.Caption = "Store Acc."
+        Me.BandedGridColumncomp_number.FieldName = "comp_number"
+        Me.BandedGridColumncomp_number.Name = "BandedGridColumncomp_number"
+        Me.BandedGridColumncomp_number.OptionsColumn.ReadOnly = True
+        Me.BandedGridColumncomp_number.Visible = True
+        '
+        'BandedGridColumncomp_name
+        '
+        Me.BandedGridColumncomp_name.Caption = "Store"
+        Me.BandedGridColumncomp_name.FieldName = "comp_name"
+        Me.BandedGridColumncomp_name.Name = "BandedGridColumncomp_name"
+        Me.BandedGridColumncomp_name.OptionsColumn.ReadOnly = True
+        Me.BandedGridColumncomp_name.Visible = True
+        '
+        'BandedGridColumncomp_group
+        '
+        Me.BandedGridColumncomp_group.Caption = "Store Group"
+        Me.BandedGridColumncomp_group.FieldName = "comp_group"
+        Me.BandedGridColumncomp_group.Name = "BandedGridColumncomp_group"
+        Me.BandedGridColumncomp_group.OptionsColumn.ReadOnly = True
+        Me.BandedGridColumncomp_group.Visible = True
+        '
+        'BandedGridColumncomp_group_desc
+        '
+        Me.BandedGridColumncomp_group_desc.Caption = "Store Group Desc."
+        Me.BandedGridColumncomp_group_desc.FieldName = "comp_group_desc"
+        Me.BandedGridColumncomp_group_desc.Name = "BandedGridColumncomp_group_desc"
+        Me.BandedGridColumncomp_group_desc.OptionsColumn.ReadOnly = True
+        Me.BandedGridColumncomp_group_desc.Visible = True
+        '
+        'BandedGridColumnis_open_invoice_view
+        '
+        Me.BandedGridColumnis_open_invoice_view.Caption = "Inv. Status"
+        Me.BandedGridColumnis_open_invoice_view.FieldName = "is_open_invoice_view"
+        Me.BandedGridColumnis_open_invoice_view.Name = "BandedGridColumnis_open_invoice_view"
+        Me.BandedGridColumnis_open_invoice_view.OptionsColumn.ReadOnly = True
+        Me.BandedGridColumnis_open_invoice_view.Visible = True
+        '
+        'BandedGridColumndesign_price_store
+        '
+        Me.BandedGridColumndesign_price_store.Caption = "Store Price"
+        Me.BandedGridColumndesign_price_store.DisplayFormat.FormatString = "N0"
+        Me.BandedGridColumndesign_price_store.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.BandedGridColumndesign_price_store.FieldName = "design_price_store"
+        Me.BandedGridColumndesign_price_store.Name = "BandedGridColumndesign_price_store"
+        Me.BandedGridColumndesign_price_store.OptionsColumn.ReadOnly = True
+        Me.BandedGridColumndesign_price_store.Visible = True
+        Me.BandedGridColumndesign_price_store.Width = 180
+        '
+        'BandedGridColumndesign_price_retail
+        '
+        Me.BandedGridColumndesign_price_retail.Caption = "Default Price"
+        Me.BandedGridColumndesign_price_retail.DisplayFormat.FormatString = "N0"
+        Me.BandedGridColumndesign_price_retail.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.BandedGridColumndesign_price_retail.FieldName = "design_price_retail"
+        Me.BandedGridColumndesign_price_retail.Name = "BandedGridColumndesign_price_retail"
+        Me.BandedGridColumndesign_price_retail.OptionsColumn.ReadOnly = True
+        Me.BandedGridColumndesign_price_retail.Visible = True
+        Me.BandedGridColumndesign_price_retail.Width = 86
+        '
+        'BandedGridColumndesign_price_valid
+        '
+        Me.BandedGridColumndesign_price_valid.Caption = "Used Price"
+        Me.BandedGridColumndesign_price_valid.DisplayFormat.FormatString = "N0"
+        Me.BandedGridColumndesign_price_valid.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.BandedGridColumndesign_price_valid.FieldName = "design_price_valid"
+        Me.BandedGridColumndesign_price_valid.Name = "BandedGridColumndesign_price_valid"
+        Me.BandedGridColumndesign_price_valid.OptionsColumn.ReadOnly = True
+        Me.BandedGridColumndesign_price_valid.Visible = True
+        Me.BandedGridColumndesign_price_valid.Width = 86
+        '
+        'BandedGridColumninvoice_qty
+        '
+        Me.BandedGridColumninvoice_qty.Caption = "Hold Qty"
+        Me.BandedGridColumninvoice_qty.DisplayFormat.FormatString = "N0"
+        Me.BandedGridColumninvoice_qty.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.BandedGridColumninvoice_qty.FieldName = "invoice_qty"
+        Me.BandedGridColumninvoice_qty.Name = "BandedGridColumninvoice_qty"
+        Me.BandedGridColumninvoice_qty.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "invoice_qty", "{0:N0}")})
+        Me.BandedGridColumninvoice_qty.Visible = True
+        Me.BandedGridColumninvoice_qty.Width = 86
+        '
+        'BandedGridColumnno_stock_qty
+        '
+        Me.BandedGridColumnno_stock_qty.Caption = "Qty"
+        Me.BandedGridColumnno_stock_qty.DisplayFormat.FormatString = "N0"
+        Me.BandedGridColumnno_stock_qty.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.BandedGridColumnno_stock_qty.FieldName = "no_stock_qty"
+        Me.BandedGridColumnno_stock_qty.Name = "BandedGridColumnno_stock_qty"
+        Me.BandedGridColumnno_stock_qty.OptionsColumn.ReadOnly = True
+        Me.BandedGridColumnno_stock_qty.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "no_stock_qty", "{0:N0}")})
+        Me.BandedGridColumnno_stock_qty.Visible = True
+        Me.BandedGridColumnno_stock_qty.Width = 101
+        '
+        'BandedGridColumnqty_proceed
+        '
+        Me.BandedGridColumnqty_proceed.Caption = "Created Inv."
+        Me.BandedGridColumnqty_proceed.DisplayFormat.FormatString = "N0"
+        Me.BandedGridColumnqty_proceed.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.BandedGridColumnqty_proceed.FieldName = "qty_proceed"
+        Me.BandedGridColumnqty_proceed.Name = "BandedGridColumnqty_proceed"
+        Me.BandedGridColumnqty_proceed.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_proceed", "{0:N0}")})
+        Me.BandedGridColumnqty_proceed.UnboundType = DevExpress.Data.UnboundColumnType.[Decimal]
+        Me.BandedGridColumnqty_proceed.Visible = True
+        Me.BandedGridColumnqty_proceed.Width = 101
+        '
+        'BandedGridColumnno_stock_diff
+        '
+        Me.BandedGridColumnno_stock_diff.Caption = "Diff Qty"
+        Me.BandedGridColumnno_stock_diff.DisplayFormat.FormatString = "N0"
+        Me.BandedGridColumnno_stock_diff.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.BandedGridColumnno_stock_diff.FieldName = "no_stock_diff"
+        Me.BandedGridColumnno_stock_diff.Name = "BandedGridColumnno_stock_diff"
+        Me.BandedGridColumnno_stock_diff.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "no_stock_diff", "{0:N0}")})
+        Me.BandedGridColumnno_stock_diff.UnboundExpression = "[qty_proceed] - [no_stock_qty]"
+        Me.BandedGridColumnno_stock_diff.UnboundType = DevExpress.Data.UnboundColumnType.[Decimal]
+        Me.BandedGridColumnno_stock_diff.Visible = True
+        Me.BandedGridColumnno_stock_diff.Width = 101
+        '
+        'BandedGridColumnqty_on_process
+        '
+        Me.BandedGridColumnqty_on_process.Caption = "On Process"
+        Me.BandedGridColumnqty_on_process.DisplayFormat.FormatString = "N0"
+        Me.BandedGridColumnqty_on_process.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.BandedGridColumnqty_on_process.FieldName = "qty_on_process"
+        Me.BandedGridColumnqty_on_process.Name = "BandedGridColumnqty_on_process"
+        Me.BandedGridColumnqty_on_process.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_on_process", "{0:N0}")})
+        Me.BandedGridColumnqty_on_process.Visible = True
+        Me.BandedGridColumnqty_on_process.Width = 101
+        '
+        'BandedGridColumnqty_new
+        '
+        Me.BandedGridColumnqty_new.AppearanceCell.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold)
+        Me.BandedGridColumnqty_new.AppearanceCell.Options.UseFont = True
+        Me.BandedGridColumnqty_new.AppearanceHeader.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold)
+        Me.BandedGridColumnqty_new.AppearanceHeader.Options.UseFont = True
+        Me.BandedGridColumnqty_new.Caption = "Input Qty Inv."
+        Me.BandedGridColumnqty_new.ColumnEdit = Me.SPQty
+        Me.BandedGridColumnqty_new.DisplayFormat.FormatString = "N0"
+        Me.BandedGridColumnqty_new.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.BandedGridColumnqty_new.FieldName = "qty_new"
+        Me.BandedGridColumnqty_new.Name = "BandedGridColumnqty_new"
+        Me.BandedGridColumnqty_new.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_new", "{0:N0}")})
+        Me.BandedGridColumnqty_new.Visible = True
+        Me.BandedGridColumnqty_new.Width = 102
+        '
+        'SPQty
+        '
+        Me.SPQty.AutoHeight = False
+        Me.SPQty.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SPQty.DisplayFormat.FormatString = "N0"
+        Me.SPQty.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.SPQty.Mask.EditMask = "N0"
+        Me.SPQty.MaxValue = New Decimal(New Integer() {1874919423, 2328306, 0, 0})
+        Me.SPQty.Name = "SPQty"
+        '
+        'GridColumnid_sales_pos_prob
+        '
+        Me.GridColumnid_sales_pos_prob.Caption = "id_sales_pos_prob"
+        Me.GridColumnid_sales_pos_prob.FieldName = "id_sales_pos_prob"
+        Me.GridColumnid_sales_pos_prob.Name = "GridColumnid_sales_pos_prob"
+        Me.GridColumnid_sales_pos_prob.OptionsColumn.ReadOnly = True
+        '
+        'BandedGridColumnid_sales_pos
+        '
+        Me.BandedGridColumnid_sales_pos.Caption = "id_sales_pos"
+        Me.BandedGridColumnid_sales_pos.FieldName = "id_sales_pos"
+        Me.BandedGridColumnid_sales_pos.Name = "BandedGridColumnid_sales_pos"
+        Me.BandedGridColumnid_sales_pos.OptionsColumn.ReadOnly = True
+        '
+        'BandedGridColumnid_comp
+        '
+        Me.BandedGridColumnid_comp.Caption = "id_comp"
+        Me.BandedGridColumnid_comp.FieldName = "id_comp"
+        Me.BandedGridColumnid_comp.Name = "BandedGridColumnid_comp"
+        Me.BandedGridColumnid_comp.OptionsColumn.ReadOnly = True
+        '
+        'BandedGridColumnid_comp_contact
+        '
+        Me.BandedGridColumnid_comp_contact.Caption = "id_comp_contact"
+        Me.BandedGridColumnid_comp_contact.FieldName = "id_comp_contact"
+        Me.BandedGridColumnid_comp_contact.Name = "BandedGridColumnid_comp_contact"
+        Me.BandedGridColumnid_comp_contact.OptionsColumn.ReadOnly = True
+        '
+        'BandedGridColumnid_comp_group
+        '
+        Me.BandedGridColumnid_comp_group.Caption = "id_comp_group"
+        Me.BandedGridColumnid_comp_group.FieldName = "id_comp_group"
+        Me.BandedGridColumnid_comp_group.Name = "BandedGridColumnid_comp_group"
+        Me.BandedGridColumnid_comp_group.OptionsColumn.ReadOnly = True
+        '
+        'BandedGridColumnis_invalid_price
+        '
+        Me.BandedGridColumnis_invalid_price.Caption = "is_invalid_price"
+        Me.BandedGridColumnis_invalid_price.FieldName = "is_invalid_price"
+        Me.BandedGridColumnis_invalid_price.Name = "BandedGridColumnis_invalid_price"
+        Me.BandedGridColumnis_invalid_price.OptionsColumn.ReadOnly = True
+        '
+        'BandedGridColumnis_no_stock
+        '
+        Me.BandedGridColumnis_no_stock.Caption = "is_no_stock"
+        Me.BandedGridColumnis_no_stock.FieldName = "is_no_stock"
+        Me.BandedGridColumnis_no_stock.Name = "BandedGridColumnis_no_stock"
+        Me.BandedGridColumnis_no_stock.OptionsColumn.ReadOnly = True
+        '
+        'BandedGridColumnid_product
+        '
+        Me.BandedGridColumnid_product.Caption = "id_product"
+        Me.BandedGridColumnid_product.FieldName = "id_product"
+        Me.BandedGridColumnid_product.Name = "BandedGridColumnid_product"
+        Me.BandedGridColumnid_product.OptionsColumn.ReadOnly = True
+        '
+        'BandedGridColumnid_design_price_retail
+        '
+        Me.BandedGridColumnid_design_price_retail.Caption = "id_design_price_retail"
+        Me.BandedGridColumnid_design_price_retail.FieldName = "id_design_price_retail"
+        Me.BandedGridColumnid_design_price_retail.Name = "BandedGridColumnid_design_price_retail"
+        Me.BandedGridColumnid_design_price_retail.OptionsColumn.ReadOnly = True
+        '
+        'BandedGridColumnid_design_price_valid
+        '
+        Me.BandedGridColumnid_design_price_valid.Caption = "id_design_price_valid"
+        Me.BandedGridColumnid_design_price_valid.FieldName = "id_design_price_valid"
+        Me.BandedGridColumnid_design_price_valid.Name = "BandedGridColumnid_design_price_valid"
+        Me.BandedGridColumnid_design_price_valid.OptionsColumn.ReadOnly = True
+        '
+        'BandedGridColumnstore_qty
+        '
+        Me.BandedGridColumnstore_qty.Caption = "Store Qty"
+        Me.BandedGridColumnstore_qty.DisplayFormat.FormatString = "N0"
+        Me.BandedGridColumnstore_qty.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.BandedGridColumnstore_qty.FieldName = "store_qty"
+        Me.BandedGridColumnstore_qty.Name = "BandedGridColumnstore_qty"
+        Me.BandedGridColumnstore_qty.OptionsColumn.ReadOnly = True
+        Me.BandedGridColumnstore_qty.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "store_qty", "{0:N0}")})
+        Me.BandedGridColumnstore_qty.Visible = True
+        '
+        'BandedGridColumntotal_qty
+        '
+        Me.BandedGridColumntotal_qty.Caption = "Total Qty"
+        Me.BandedGridColumntotal_qty.DisplayFormat.FormatString = "N0"
+        Me.BandedGridColumntotal_qty.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.BandedGridColumntotal_qty.FieldName = "total_qty"
+        Me.BandedGridColumntotal_qty.Name = "BandedGridColumntotal_qty"
+        Me.BandedGridColumntotal_qty.OptionsColumn.ReadOnly = True
+        Me.BandedGridColumntotal_qty.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "total_qty", "{0:N0}")})
+        Me.BandedGridColumntotal_qty.Visible = True
+        '
+        'BandedGridColumnis_open_invoice
+        '
+        Me.BandedGridColumnis_open_invoice.Caption = "is_open_invoice"
+        Me.BandedGridColumnis_open_invoice.FieldName = "is_open_invoice"
+        Me.BandedGridColumnis_open_invoice.Name = "BandedGridColumnis_open_invoice"
+        Me.BandedGridColumnis_open_invoice.OptionsColumn.ReadOnly = True
+        '
+        'BandedGridColumnqty_on_process_price
+        '
+        Me.BandedGridColumnqty_on_process_price.Caption = "On Process Inv."
+        Me.BandedGridColumnqty_on_process_price.DisplayFormat.FormatString = "N0"
+        Me.BandedGridColumnqty_on_process_price.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.BandedGridColumnqty_on_process_price.FieldName = "qty_on_process_price"
+        Me.BandedGridColumnqty_on_process_price.Name = "BandedGridColumnqty_on_process_price"
+        Me.BandedGridColumnqty_on_process_price.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_on_process_price", "{0:N0}")})
+        Me.BandedGridColumnqty_on_process_price.Visible = True
+        Me.BandedGridColumnqty_on_process_price.Width = 92
+        '
+        'BandedGridColumnqty_proceed_price
+        '
+        Me.BandedGridColumnqty_proceed_price.Caption = "Created Inv."
+        Me.BandedGridColumnqty_proceed_price.DisplayFormat.FormatString = "N0"
+        Me.BandedGridColumnqty_proceed_price.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.BandedGridColumnqty_proceed_price.FieldName = "qty_proceed_price"
+        Me.BandedGridColumnqty_proceed_price.Name = "BandedGridColumnqty_proceed_price"
+        Me.BandedGridColumnqty_proceed_price.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_proceed_price", "{0:N0}")})
+        Me.BandedGridColumnqty_proceed_price.Visible = True
+        Me.BandedGridColumnqty_proceed_price.Width = 80
+        '
+        'BandedGridColumnid_design
+        '
+        Me.BandedGridColumnid_design.Caption = "id_design"
+        Me.BandedGridColumnid_design.FieldName = "id_design"
+        Me.BandedGridColumnid_design.Name = "BandedGridColumnid_design"
+        '
+        'BandedGridColumndesign_price_type_valid
+        '
+        Me.BandedGridColumndesign_price_type_valid.Caption = "Price Type Used"
+        Me.BandedGridColumndesign_price_type_valid.FieldName = "design_price_type_valid"
+        Me.BandedGridColumndesign_price_type_valid.Name = "BandedGridColumndesign_price_type_valid"
+        '
+        'RepositoryItemTextEdit1
+        '
+        Me.RepositoryItemTextEdit1.AutoHeight = False
+        Me.RepositoryItemTextEdit1.DisplayFormat.FormatString = "N0"
+        Me.RepositoryItemTextEdit1.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.RepositoryItemTextEdit1.Mask.EditMask = "N0"
+        Me.RepositoryItemTextEdit1.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric
+        Me.RepositoryItemTextEdit1.Name = "RepositoryItemTextEdit1"
+        '
+        'PanelControl1
+        '
+        Me.PanelControl1.Controls.Add(Me.CESelectAll)
+        Me.PanelControl1.Controls.Add(Me.BtnCreatePriceReconcile)
+        Me.PanelControl1.Controls.Add(Me.BtnCreateInvoice)
+        Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.PanelControl1.Location = New System.Drawing.Point(0, 461)
+        Me.PanelControl1.Name = "PanelControl1"
+        Me.PanelControl1.Size = New System.Drawing.Size(1234, 44)
+        Me.PanelControl1.TabIndex = 4
+        '
+        'CESelectAll
+        '
+        Me.CESelectAll.Location = New System.Drawing.Point(10, 12)
+        Me.CESelectAll.Name = "CESelectAll"
+        Me.CESelectAll.Properties.Caption = "Select All"
+        Me.CESelectAll.Size = New System.Drawing.Size(75, 19)
+        Me.CESelectAll.TabIndex = 12
+        '
+        'BtnCreatePriceReconcile
+        '
+        Me.BtnCreatePriceReconcile.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnCreatePriceReconcile.Appearance.Options.UseFont = True
+        Me.BtnCreatePriceReconcile.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnCreatePriceReconcile.Image = CType(resources.GetObject("BtnCreatePriceReconcile.Image"), System.Drawing.Image)
+        Me.BtnCreatePriceReconcile.Location = New System.Drawing.Point(962, 2)
+        Me.BtnCreatePriceReconcile.LookAndFeel.SkinMaskColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.BtnCreatePriceReconcile.LookAndFeel.UseDefaultLookAndFeel = False
+        Me.BtnCreatePriceReconcile.Name = "BtnCreatePriceReconcile"
+        Me.BtnCreatePriceReconcile.Size = New System.Drawing.Size(135, 40)
+        Me.BtnCreatePriceReconcile.TabIndex = 11
+        Me.BtnCreatePriceReconcile.Text = "Price Reconcile"
+        Me.BtnCreatePriceReconcile.Visible = False
+        '
+        'BtnCreateInvoice
+        '
+        Me.BtnCreateInvoice.Appearance.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnCreateInvoice.Appearance.Options.UseFont = True
+        Me.BtnCreateInvoice.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnCreateInvoice.Image = CType(resources.GetObject("BtnCreateInvoice.Image"), System.Drawing.Image)
+        Me.BtnCreateInvoice.Location = New System.Drawing.Point(1097, 2)
+        Me.BtnCreateInvoice.LookAndFeel.SkinMaskColor = System.Drawing.Color.LightSkyBlue
+        Me.BtnCreateInvoice.LookAndFeel.UseDefaultLookAndFeel = False
+        Me.BtnCreateInvoice.Name = "BtnCreateInvoice"
+        Me.BtnCreateInvoice.Size = New System.Drawing.Size(135, 40)
+        Me.BtnCreateInvoice.TabIndex = 10
+        Me.BtnCreateInvoice.Text = "Create Invoice"
+        Me.BtnCreateInvoice.Visible = False
+        '
+        'PanelControl2
+        '
+        Me.PanelControl2.Controls.Add(Me.BtnHistProbList)
+        Me.PanelControl2.Controls.Add(Me.BtnPrintProb)
+        Me.PanelControl2.Controls.Add(Me.BtnViewProb)
+        Me.PanelControl2.Controls.Add(Me.PanelControl3)
+        Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Top
+        Me.PanelControl2.Location = New System.Drawing.Point(0, 0)
+        Me.PanelControl2.Name = "PanelControl2"
+        Me.PanelControl2.Size = New System.Drawing.Size(1234, 46)
+        Me.PanelControl2.TabIndex = 2
+        '
+        'BtnHistProbList
+        '
+        Me.BtnHistProbList.Dock = System.Windows.Forms.DockStyle.Left
+        Me.BtnHistProbList.Image = CType(resources.GetObject("BtnHistProbList.Image"), System.Drawing.Image)
+        Me.BtnHistProbList.Location = New System.Drawing.Point(777, 2)
+        Me.BtnHistProbList.Name = "BtnHistProbList"
+        Me.BtnHistProbList.Size = New System.Drawing.Size(141, 42)
+        Me.BtnHistProbList.TabIndex = 6
+        Me.BtnHistProbList.Text = "Transaction History"
+        '
+        'BtnPrintProb
+        '
+        Me.BtnPrintProb.Dock = System.Windows.Forms.DockStyle.Left
+        Me.BtnPrintProb.Image = CType(resources.GetObject("BtnPrintProb.Image"), System.Drawing.Image)
+        Me.BtnPrintProb.Location = New System.Drawing.Point(679, 2)
+        Me.BtnPrintProb.Name = "BtnPrintProb"
+        Me.BtnPrintProb.Size = New System.Drawing.Size(98, 42)
+        Me.BtnPrintProb.TabIndex = 7
+        Me.BtnPrintProb.Text = "Print List"
+        '
+        'BtnViewProb
+        '
+        Me.BtnViewProb.Dock = System.Windows.Forms.DockStyle.Left
+        Me.BtnViewProb.Image = CType(resources.GetObject("BtnViewProb.Image"), System.Drawing.Image)
+        Me.BtnViewProb.Location = New System.Drawing.Point(581, 2)
+        Me.BtnViewProb.Name = "BtnViewProb"
+        Me.BtnViewProb.Size = New System.Drawing.Size(98, 42)
+        Me.BtnViewProb.TabIndex = 4
+        Me.BtnViewProb.Text = "View List"
+        '
+        'PanelControl3
+        '
+        Me.PanelControl3.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
+        Me.PanelControl3.Controls.Add(Me.SLEStoreProb)
+        Me.PanelControl3.Controls.Add(Me.LabelControl13)
+        Me.PanelControl3.Controls.Add(Me.LEInvoiceStt)
+        Me.PanelControl3.Controls.Add(Me.LabelControl5)
+        Me.PanelControl3.Controls.Add(Me.LabelControl12)
+        Me.PanelControl3.Controls.Add(Me.LETypeProb)
+        Me.PanelControl3.Dock = System.Windows.Forms.DockStyle.Left
+        Me.PanelControl3.Location = New System.Drawing.Point(2, 2)
+        Me.PanelControl3.Name = "PanelControl3"
+        Me.PanelControl3.Size = New System.Drawing.Size(579, 42)
+        Me.PanelControl3.TabIndex = 5
+        '
+        'SLEStoreProb
+        '
+        Me.SLEStoreProb.Location = New System.Drawing.Point(448, 12)
+        Me.SLEStoreProb.Name = "SLEStoreProb"
+        Me.SLEStoreProb.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLEStoreProb.Properties.View = Me.GridView2
+        Me.SLEStoreProb.Size = New System.Drawing.Size(117, 20)
+        Me.SLEStoreProb.TabIndex = 5
+        '
+        'GridView2
+        '
+        Me.GridView2.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnid_comp, Me.GridColumncomp})
+        Me.GridView2.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView2.Name = "GridView2"
+        Me.GridView2.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView2.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumnid_comp
+        '
+        Me.GridColumnid_comp.Caption = "id_comp"
+        Me.GridColumnid_comp.FieldName = "id_comp"
+        Me.GridColumnid_comp.Name = "GridColumnid_comp"
+        '
+        'GridColumncomp
+        '
+        Me.GridColumncomp.Caption = "Account"
+        Me.GridColumncomp.FieldName = "comp"
+        Me.GridColumncomp.Name = "GridColumncomp"
+        Me.GridColumncomp.Visible = True
+        Me.GridColumncomp.VisibleIndex = 0
+        '
+        'LabelControl13
+        '
+        Me.LabelControl13.Location = New System.Drawing.Point(416, 15)
+        Me.LabelControl13.Name = "LabelControl13"
+        Me.LabelControl13.Size = New System.Drawing.Size(26, 13)
+        Me.LabelControl13.TabIndex = 4
+        Me.LabelControl13.Text = "Store"
+        '
+        'LEInvoiceStt
+        '
+        Me.LEInvoiceStt.Location = New System.Drawing.Point(266, 12)
+        Me.LEInvoiceStt.Name = "LEInvoiceStt"
+        Me.LEInvoiceStt.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.LEInvoiceStt.Size = New System.Drawing.Size(144, 20)
+        Me.LEInvoiceStt.TabIndex = 2
+        '
+        'LabelControl5
+        '
+        Me.LabelControl5.Location = New System.Drawing.Point(8, 15)
+        Me.LabelControl5.Name = "LabelControl5"
+        Me.LabelControl5.Size = New System.Drawing.Size(24, 13)
+        Me.LabelControl5.TabIndex = 0
+        Me.LabelControl5.Text = "Type"
+        '
+        'LabelControl12
+        '
+        Me.LabelControl12.Location = New System.Drawing.Point(191, 15)
+        Me.LabelControl12.Name = "LabelControl12"
+        Me.LabelControl12.Size = New System.Drawing.Size(69, 13)
+        Me.LabelControl12.TabIndex = 3
+        Me.LabelControl12.Text = "Invoice Status"
+        '
+        'LETypeProb
+        '
+        Me.LETypeProb.Location = New System.Drawing.Point(41, 12)
+        Me.LETypeProb.Name = "LETypeProb"
+        Me.LETypeProb.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.LETypeProb.Size = New System.Drawing.Size(144, 20)
+        Me.LETypeProb.TabIndex = 1
+        '
         'LookUpEdit1
         '
         Me.LookUpEdit1.Location = New System.Drawing.Point(391, 14)
@@ -1120,6 +1790,65 @@ Partial Class FormSalesPOS
         Me.LabelControl10.TabIndex = 8892
         Me.LabelControl10.Text = "From"
         '
+        'gridBandSelect
+        '
+        Me.gridBandSelect.Columns.Add(Me.BandedGridColumnis_select)
+        Me.gridBandSelect.Name = "gridBandSelect"
+        Me.gridBandSelect.VisibleIndex = 0
+        Me.gridBandSelect.Width = 75
+        '
+        'gridBand4
+        '
+        Me.gridBand4.Caption = "Product"
+        Me.gridBand4.Columns.Add(Me.BandedGridColumnproduct_full_code)
+        Me.gridBand4.Columns.Add(Me.BandedGridColumnname)
+        Me.gridBand4.Columns.Add(Me.BandedGridColumnsize)
+        Me.gridBand4.Name = "gridBand4"
+        Me.gridBand4.VisibleIndex = 1
+        Me.gridBand4.Width = 225
+        '
+        'gridBand2
+        '
+        Me.gridBand2.Caption = "Invoice Ref."
+        Me.gridBand2.Columns.Add(Me.BandedGridColumnsales_pos_number)
+        Me.gridBand2.Columns.Add(Me.BandedGridColumnsales_pos_start_period)
+        Me.gridBand2.Columns.Add(Me.BandedGridColumnsales_pos_end_period)
+        Me.gridBand2.Columns.Add(Me.BandedGridColumnsales_pos_due_date)
+        Me.gridBand2.Columns.Add(Me.BandedGridColumncomp_number)
+        Me.gridBand2.Columns.Add(Me.BandedGridColumncomp_name)
+        Me.gridBand2.Columns.Add(Me.BandedGridColumncomp_group)
+        Me.gridBand2.Columns.Add(Me.BandedGridColumncomp_group_desc)
+        Me.gridBand2.Columns.Add(Me.BandedGridColumnis_open_invoice_view)
+        Me.gridBand2.Name = "gridBand2"
+        Me.gridBand2.VisibleIndex = 2
+        Me.gridBand2.Width = 600
+        '
+        'gridBandPrice
+        '
+        Me.gridBandPrice.Caption = "Invalid Price"
+        Me.gridBandPrice.Columns.Add(Me.BandedGridColumndesign_price_store)
+        Me.gridBandPrice.Columns.Add(Me.BandedGridColumndesign_price_retail)
+        Me.gridBandPrice.Columns.Add(Me.BandedGridColumndesign_price_valid)
+        Me.gridBandPrice.Columns.Add(Me.BandedGridColumninvoice_qty)
+        Me.gridBandPrice.Columns.Add(Me.BandedGridColumnqty_proceed_price)
+        Me.gridBandPrice.Columns.Add(Me.BandedGridColumnqty_on_process_price)
+        Me.gridBandPrice.Name = "gridBandPrice"
+        Me.gridBandPrice.VisibleIndex = 3
+        Me.gridBandPrice.Width = 610
+        '
+        'gridBandNoStock
+        '
+        Me.gridBandNoStock.Caption = "No Stock"
+        Me.gridBandNoStock.Columns.Add(Me.BandedGridColumnno_stock_qty)
+        Me.gridBandNoStock.Columns.Add(Me.BandedGridColumnqty_proceed)
+        Me.gridBandNoStock.Columns.Add(Me.BandedGridColumnno_stock_diff)
+        Me.gridBandNoStock.Columns.Add(Me.BandedGridColumnqty_on_process)
+        Me.gridBandNoStock.Columns.Add(Me.BandedGridColumnqty_new)
+        Me.gridBandNoStock.Name = "gridBandNoStock"
+        Me.gridBandNoStock.Visible = False
+        Me.gridBandNoStock.VisibleIndex = -1
+        Me.gridBandNoStock.Width = 506
+        '
         'FormSalesPOS
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1172,6 +1901,24 @@ Partial Class FormSalesPOS
         Me.XTPCNOnlineStore.ResumeLayout(False)
         CType(Me.GCPendingCN, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVPendingCN, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.XTPProblemList.ResumeLayout(False)
+        CType(Me.GCProbList, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GVProbList, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SPQty, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemTextEdit1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelControl1.ResumeLayout(False)
+        CType(Me.CESelectAll.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelControl2.ResumeLayout(False)
+        CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelControl3.ResumeLayout(False)
+        Me.PanelControl3.PerformLayout()
+        CType(Me.SLEStoreProb.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LEInvoiceStt.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LETypeProb.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LookUpEdit1.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DateEdit1.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DateEdit1.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1279,4 +2026,72 @@ Partial Class FormSalesPOS
     Friend WithEvents GridColumncustomer_name As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumncomp_number As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumncomp_name As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents XTPProblemList As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents GCProbList As DevExpress.XtraGrid.GridControl
+    Friend WithEvents PanelControl2 As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents BtnViewProb As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents LabelControl12 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents LEInvoiceStt As DevExpress.XtraEditors.LookUpEdit
+    Friend WithEvents LETypeProb As DevExpress.XtraEditors.LookUpEdit
+    Friend WithEvents LabelControl5 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents PanelControl3 As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents BtnPrintProb As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents BtnHistProbList As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents PanelControl1 As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents CESelectAll As DevExpress.XtraEditors.CheckEdit
+    Friend WithEvents BtnCreatePriceReconcile As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents BtnCreateInvoice As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents GVProbList As DevExpress.XtraGrid.Views.BandedGrid.BandedGridView
+    Friend WithEvents GridColumnid_sales_pos_prob As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents BandedGridColumnid_sales_pos As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents BandedGridColumnsales_pos_number As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents BandedGridColumnsales_pos_start_period As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents BandedGridColumnsales_pos_end_period As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents BandedGridColumnsales_pos_due_date As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents BandedGridColumnid_comp As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents BandedGridColumnid_comp_contact As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents BandedGridColumncomp_number As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents BandedGridColumncomp_name As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents BandedGridColumnid_comp_group As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents BandedGridColumncomp_group As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents BandedGridColumncomp_group_desc As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents BandedGridColumnis_invalid_price As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents BandedGridColumnis_no_stock As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents BandedGridColumnid_product As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents BandedGridColumnproduct_full_code As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents BandedGridColumnname As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents BandedGridColumnsize As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents BandedGridColumnid_design_price_retail As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents BandedGridColumndesign_price_retail As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents BandedGridColumndesign_price_store As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents BandedGridColumnid_design_price_valid As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents BandedGridColumndesign_price_valid As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents BandedGridColumnno_stock_qty As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents BandedGridColumnstore_qty As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents BandedGridColumninvoice_qty As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents BandedGridColumntotal_qty As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents BandedGridColumnis_open_invoice As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents BandedGridColumnis_open_invoice_view As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents BandedGridColumnis_select As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents RepositoryItemCheckEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
+    Friend WithEvents BandedGridColumnqty_proceed As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents BandedGridColumnno_stock_diff As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents BandedGridColumnqty_on_process As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents SLEStoreProb As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents GridView2 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents LabelControl13 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents GridColumnid_comp As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumncomp As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents BandedGridColumnqty_new As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents RepositoryItemTextEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemTextEdit
+    Friend WithEvents SPQty As DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit
+    Friend WithEvents BandedGridColumnqty_on_process_price As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents BandedGridColumnqty_proceed_price As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents BandedGridColumnid_design As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents BandedGridColumndesign_price_type_valid As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents gridBandSelect As DevExpress.XtraGrid.Views.BandedGrid.GridBand
+    Friend WithEvents gridBand4 As DevExpress.XtraGrid.Views.BandedGrid.GridBand
+    Friend WithEvents gridBand2 As DevExpress.XtraGrid.Views.BandedGrid.GridBand
+    Friend WithEvents gridBandPrice As DevExpress.XtraGrid.Views.BandedGrid.GridBand
+    Friend WithEvents gridBandNoStock As DevExpress.XtraGrid.Views.BandedGrid.GridBand
 End Class

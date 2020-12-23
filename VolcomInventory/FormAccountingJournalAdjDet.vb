@@ -15,7 +15,7 @@
 
         If id_trans_adj = "-1" Then 'new
             TEUserEntry.Text = get_user_identify(id_user, 1)
-            TENumber.Text = header_number_acc("2")
+            TENumber.Text = "Auto number"
             Dim regDate As Date = Date.Now()
             Dim strDate As String = regDate.ToString("yyyy\-MM\-dd")
             TEDate.Text = view_date_from(strDate, 0)
@@ -166,7 +166,7 @@ WHERE a.id_acc_trans_adj='" & id_trans_adj & "'"
         Else
             If id_trans_adj = "-1" Then
                 'new
-                Dim query As String = String.Format("INSERT INTO tb_a_acc_trans_adj(id_acc_trans,acc_trans_adj_number,date_created,id_user,acc_trans_adj_note,date_reffrence,id_report,report_mark_type,report_number) VALUES('{3}','{0}',NOW(),'{1}','{2}','{4}','{5}','{6}','{7}');SELECT LAST_INSERT_ID(); ", TENumber.Text, id_user, addSlashes(MENote.Text), id_trans, Date.Parse(DERefDate.EditValue.ToString).ToString("yyyy-MM-dd"), id_report, report_mark_type, report_number)
+                Dim query As String = String.Format("INSERT INTO tb_a_acc_trans_adj(id_acc_trans,acc_trans_adj_number,date_created,id_user,acc_trans_adj_note,date_reffrence,id_report,report_mark_type,report_number) VALUES('{3}','{0}',NOW(),'{1}','{2}','{4}','{5}','{6}','{7}');SELECT LAST_INSERT_ID(); ", "", id_user, addSlashes(MENote.Text), id_trans, Date.Parse(DERefDate.EditValue.ToString).ToString("yyyy-MM-dd"), id_report, report_mark_type, report_number)
                 id_trans_adj = execute_query(query, 0, True, "", "", "", "")
 
                 'entry detail
@@ -182,7 +182,9 @@ WHERE a.id_acc_trans_adj='" & id_trans_adj & "'"
 
                 FormAccountingJournalAdj.view_jurnal()
                 FormAccountingJournalAdj.GVAccTrans.FocusedRowHandle = find_row(FormAccountingJournalAdj.GVAccTrans, "id_acc_trans_adj", id_trans_adj)
-                increase_inc_acc("2")
+
+                execute_non_query("CALL gen_number(" + id_trans_adj + ",40)", True, "", "", "", "")
+
                 'insert who prepared
                 submit_who_prepared("40", id_trans_adj, id_user)
                 Close()

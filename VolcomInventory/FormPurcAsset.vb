@@ -154,9 +154,9 @@
 
             'main journal
             Dim qjm As String = "INSERT INTO tb_a_acc_trans(acc_trans_number, report_number, id_bill_type, id_user, date_created, acc_trans_note, id_report_status) 
-                VALUES ('" + header_number_acc("1") + "','" + number_first_month + "','0','" + id_user + "', NOW(), 'Auto Posting', '6'); SELECT LAST_INSERT_ID(); "
+                VALUES ('','" + number_first_month + "','0','" + id_user + "', NOW(), 'Auto Posting', '6'); SELECT LAST_INSERT_ID(); "
             Dim id_acc_trans As String = execute_query(qjm, 0, True, "", "", "", "")
-            increase_inc_acc("1")
+            execute_non_query("CALL gen_number(" + id_acc_trans + ",36)", True, "", "", "", "")
 
             'det journal
             Dim qjd As String = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number)
@@ -193,9 +193,9 @@
 
                 'main journal
                 Dim qjm As String = "INSERT INTO tb_a_acc_trans(acc_trans_number, report_number, id_bill_type, id_user, date_created, acc_trans_note, id_report_status) 
-                VALUES ('" + header_number_acc("1") + "','" + number_full_day + "','0','" + id_user + "', NOW(), 'Auto Posting', '6'); SELECT LAST_INSERT_ID(); "
+                VALUES ('','" + number_full_day + "','0','" + id_user + "', NOW(), 'Auto Posting', '6'); SELECT LAST_INSERT_ID(); "
                 Dim id_acc_trans As String = execute_query(qjm, 0, True, "", "", "", "")
-                increase_inc_acc("1")
+                execute_non_query("CALL gen_number(" + id_acc_trans + ",36)", True, "", "", "", "")
 
                 'det journal
                 Dim qjd As String = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number)
@@ -225,9 +225,9 @@
 
             'main journal
             Dim qjm As String = "INSERT INTO tb_a_acc_trans(acc_trans_number, report_number, id_bill_type, id_user, date_created, acc_trans_note, id_report_status) 
-            VALUES ('" + header_number_acc("1") + "','" + number_last_month + "','0','" + id_user + "', NOW(), 'Auto Posting', '6'); SELECT LAST_INSERT_ID(); "
+            VALUES ('','" + number_last_month + "','0','" + id_user + "', NOW(), 'Auto Posting', '6'); SELECT LAST_INSERT_ID(); "
             Dim id_acc_trans As String = execute_query(qjm, 0, True, "", "", "", "")
-            increase_inc_acc("1")
+            execute_non_query("CALL gen_number(" + id_acc_trans + ",36)", True, "", "", "", "")
 
             'det journal
             Dim qjd As String = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number)

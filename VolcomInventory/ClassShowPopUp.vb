@@ -401,6 +401,9 @@
         ElseIf report_mark_type = "241" Then
             'adj og
             FormAdjustmentOGDet.Close()
+        ElseIf report_mark_type = "281" Then
+            'inv price recon
+            FormSalesPosPriceRecon.Close()
         End If
     End Sub
     Sub show()
@@ -1350,6 +1353,12 @@ GROUP BY rec.`id_prod_order`"
         ElseIf report_mark_type = "241" Then
             FormAdjustmentOGDet.id_adjustment = id_report
             FormAdjustmentOGDet.ShowDialog()
+        ElseIf report_mark_type = "281" Then
+            'inv price recon
+            FormSalesPosPriceRecon.id = id_report
+            FormSalesPosPriceRecon.action = "upd"
+            FormSalesPosPriceRecon.is_view = "1"
+            FormSalesPosPriceRecon.ShowDialog()
         Else
             'MsgBox(id_report)
             stopCustom("Document Not Found")

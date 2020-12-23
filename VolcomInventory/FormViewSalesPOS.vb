@@ -198,6 +198,7 @@
 
         ''detail2
         viewDetail()
+        viewProb()
         viewDetailCode()
         check_but()
         calculate()
@@ -242,6 +243,24 @@
         Dim query As String = "CALL view_sales_pos_less('" + id_sales_pos + "')"
         Dim data As DataTable = execute_query(query, "-1", True, "", "", "", "")
         GCItemList.DataSource = data
+    End Sub
+
+    Sub viewProb()
+        Cursor = Cursors.WaitCursor
+        Dim query As String = "SELECT p.id_sales_pos_prob, p.is_invalid_price, p.is_no_stock, 
+        p.id_product, prod.product_full_code AS `code`, prod.product_name AS `name`, cd.display_name AS `size`,
+        p.id_design_price_retail, p.design_price_retail, p.design_price_store, p.id_design_price_valid, p.design_price_valid,
+        p.store_qty, p.invoice_qty, p.no_stock_qty,(p.invoice_qty+p.no_stock_qty) AS `total_qty`,
+        IF(p.is_invalid_price=1,'Not Valid', 'OK') AS `note_price`
+        FROM tb_sales_pos_prob p
+        INNER JOIN tb_m_product prod ON prod.id_product = p.id_product
+        INNER JOIN tb_m_product_code prod_code ON prod_code.id_product = prod.id_product
+        INNER JOIN tb_m_code_detail cd ON cd.id_code_detail = prod_code.id_code_detail
+        WHERE p.id_sales_pos='" + id_sales_pos + "' "
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        GCProbList.DataSource = data
+        GVProbList.BestFitColumns()
+        Cursor = Cursors.Default
     End Sub
 
     Sub viewDetailCode()
@@ -426,6 +445,54 @@
         Else
             warningCustom("Auto journal not found.")
         End If
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub GVProbList_RowCellStyle(sender As Object, e As DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs) Handles GVProbList.RowCellStyle
+        If e.Column.FieldName = "note_price" Then
+            Dim note As String = ""
+            Try
+                note = GVProbList.GetRowCellValue(e.RowHandle, "note_price").ToString
+            Catch ex As Exception
+            End Try
+            If note <> "OK" Then
+                e.Appearance.BackColor = Color.Salmon
+                e.Appearance.BackColor2 = Color.Salmon
+            End If
+        ElseIf e.Column.FieldName = "no_stock_qty" Then
+            Dim oos As String = ""
+            Try
+                oos = GVProbList.GetRowCellValue(e.RowHandle, "no_stock_qty")
+            Catch ex As Exception
+            End Try
+            If oos > 0 Then
+                e.Appearance.BackColor = Color.Yellow
+                e.Appearance.BackColor2 = Color.Yellow
+            End If
+        End If
+    End Sub
+
+    Private Sub ViewPriceReconcileToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ViewPriceReconcileToolStripMenuItem.Click
+        Cursor = Cursors.WaitCursor
+        Dim id_sales_pos_prob_price As String = "-1"
+        Try
+            id_sales_pos_prob_price = GVItemList.GetFocusedRowCellValue("id_sales_pos_prob_price")
+        Catch ex As Exception
+        End Try
+        Dim query As String = "SELECT IFNULL(r.id_sales_pos_recon,0) AS `id_sales_pos_recon`
+FROM tb_sales_pos_recon_det rd
+INNER JOIN tb_sales_pos_recon r ON r.id_sales_pos_recon = rd.id_sales_pos_recon
+WHERE rd.id_sales_pos_prob=" + id_sales_pos_prob_price + " AND r.id_report_status=6
+GROUP BY r.id_sales_pos_recon "
+        Try
+            Dim id_report As String = execute_query(query, 0, True, "", "", "", "")
+            Dim m As New ClassShowPopUp()
+            m.id_report = id_report
+            m.report_mark_type = "281"
+            m.show()
+        Catch ex As Exception
+            stopCustom("Price recon not found.")
+        End Try
         Cursor = Cursors.Default
     End Sub
 End Class

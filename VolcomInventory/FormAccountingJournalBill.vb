@@ -211,10 +211,10 @@ WHERE a.id_acc_trans='" & id_trans & "'"
                     Dim date_reference As String = DateTime.Parse(DERefDate.EditValue.ToString).ToString("yyyy-MM-dd")
                     If id_trans = "-1" Then
                         'new
-                        Dim query As String = String.Format("INSERT INTO tb_a_acc_trans(acc_trans_number,date_created, date_reference,id_user,acc_trans_note,id_bill_type) VALUES('{0}',NOW(),'" + date_reference + "','{1}','{2}','{3}'); SELECT LAST_INSERT_ID()", header_number_acc("1"), id_user, addSlashes(MENote.Text), LEBilling.EditValue.ToString)
+                        Dim query As String = String.Format("INSERT INTO tb_a_acc_trans(acc_trans_number,date_created, date_reference,id_user,acc_trans_note,id_bill_type) VALUES('{0}',NOW(),'" + date_reference + "','{1}','{2}','{3}'); SELECT LAST_INSERT_ID()", "", id_user, addSlashes(MENote.Text), LEBilling.EditValue.ToString)
                         id_trans = execute_query(query, 0, True, "", "", "", "")
 
-                        increase_inc_acc("1")
+                        execute_non_query("CALL gen_number(" + id_trans + ",36)", True, "", "", "", "")
                         'If LEBilling.EditValue.ToString = "1" Then
                         '    increase_inc_acc("3")
                         'ElseIf LEBilling.EditValue.ToString = "3" Then

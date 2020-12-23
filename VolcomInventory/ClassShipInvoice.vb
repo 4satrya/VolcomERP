@@ -59,12 +59,12 @@
 
         'main journal
         Dim query As String = "INSERT INTO tb_a_acc_trans(acc_trans_number, report_number, id_bill_type, id_user, date_created, date_reference, acc_trans_note, id_report_status) 
-        SELECT'" + header_number_acc("1") + "',s.number," + id_bill_type + ",rm.id_user, s.created_date,s.end_period, 'Auto Posting', '6'
+        SELECT '',s.number," + id_bill_type + ",rm.id_user, s.created_date,s.end_period, 'Auto Posting', '6'
         FROM tb_invoice_ship s
         INNER JOIN tb_report_mark rm ON rm.id_report = s.id_invoice_ship AND rm.report_mark_type=" + rmt + " AND rm.id_report_status=1
         WHERE s.id_invoice_ship=" + id_invoice_ship + "; SELECT LAST_INSERT_ID(); "
         Dim id As String = execute_query(query, 0, True, "", "", "", "")
-        increase_inc_acc("1")
+        execute_non_query("CALL gen_number(" + id + ",36)", True, "", "", "", "")
 
         'det journal
         Dim qd As String = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, id_comp, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number, id_status_open) 

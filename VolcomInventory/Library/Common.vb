@@ -551,51 +551,54 @@ WHERE note='Closing End' AND id_coa_tag='" & id_coa_tag & "'"
 
         Return ret_var
     End Function
-    Function header_number_acc(ByVal opt As String)
-        'opt
-        '1 = acc trans
 
-        Dim header_number_x As String
-        header_number_x = ""
+    'ganti gen_number
+    'Function header_number_acc(ByVal opt As String)
+    '    'opt
+    '    '1 = acc trans
 
-        If opt = "1" Then
-            header_number_x = combine_header_number(get_opt_acc_field("acc_trans_code_head"), Integer.Parse(get_opt_acc_field("acc_trans_code_inc")), Integer.Parse(get_opt_acc_field("acc_trans_code_digit")))
-        ElseIf opt = "2" Then
-            header_number_x = combine_header_number(get_opt_acc_field("acc_trans_adj_code_head"), Integer.Parse(get_opt_acc_field("acc_trans_adj_code_inc")), Integer.Parse(get_opt_acc_field("acc_trans_adj_code_digit")))
-        ElseIf opt = "3" Then 'BPJ
-            header_number_x = combine_header_number(get_opt_acc_field("bpj_code_head"), Integer.Parse(get_opt_acc_field("bpj_code_inc")), Integer.Parse(get_opt_acc_field("bpj_code_digit")))
-        ElseIf opt = "4" Then 'BPL
-            header_number_x = combine_header_number(get_opt_acc_field("bpl_code_head"), Integer.Parse(get_opt_acc_field("bpl_code_inc")), Integer.Parse(get_opt_acc_field("bpl_code_digit")))
-        ElseIf opt = "5" Then 'PRM
-            header_number_x = combine_header_number(get_opt_acc_field("prm_code_head"), Integer.Parse(get_opt_acc_field("prm_code_inc")), Integer.Parse(get_opt_acc_field("prm_code_digit")))
-        End If
+    '    Dim header_number_x As String
+    '    header_number_x = ""
 
-        Return header_number_x
-    End Function
-    Sub increase_inc_acc(ByVal opt As String)
-        'opt
-        '1 = acc trans
+    '    If opt = "1" Then
+    '        header_number_x = combine_header_number(get_opt_acc_field("acc_trans_code_head"), Integer.Parse(get_opt_acc_field("acc_trans_code_inc")), Integer.Parse(get_opt_acc_field("acc_trans_code_digit")))
+    '    ElseIf opt = "2" Then
+    '        header_number_x = combine_header_number(get_opt_acc_field("acc_trans_adj_code_head"), Integer.Parse(get_opt_acc_field("acc_trans_adj_code_inc")), Integer.Parse(get_opt_acc_field("acc_trans_adj_code_digit")))
+    '    ElseIf opt = "3" Then 'BPJ
+    '        header_number_x = combine_header_number(get_opt_acc_field("bpj_code_head"), Integer.Parse(get_opt_acc_field("bpj_code_inc")), Integer.Parse(get_opt_acc_field("bpj_code_digit")))
+    '    ElseIf opt = "4" Then 'BPL
+    '        header_number_x = combine_header_number(get_opt_acc_field("bpl_code_head"), Integer.Parse(get_opt_acc_field("bpl_code_inc")), Integer.Parse(get_opt_acc_field("bpl_code_digit")))
+    '    ElseIf opt = "5" Then 'PRM
+    '        header_number_x = combine_header_number(get_opt_acc_field("prm_code_head"), Integer.Parse(get_opt_acc_field("prm_code_inc")), Integer.Parse(get_opt_acc_field("prm_code_digit")))
+    '    End If
 
-        Dim query As String
-        query = ""
+    '    Return header_number_x
+    'End Function
 
-        If opt = "1" Then
-            query = "UPDATE tb_opt_accounting SET acc_trans_code_inc=(tb_opt_accounting.acc_trans_code_inc+1)"
-            execute_non_query(query, True, "", "", "", "")
-        ElseIf opt = "2" Then
-            query = "UPDATE tb_opt_accounting SET acc_trans_adj_code_inc=(tb_opt_accounting.acc_trans_adj_code_inc+1)"
-            execute_non_query(query, True, "", "", "", "")
-        ElseIf opt = "3" Then ' BPJ
-            query = "UPDATE tb_opt_accounting SET bpj_code_inc=(tb_opt_accounting.bpj_code_inc+1)"
-            execute_non_query(query, True, "", "", "", "")
-        ElseIf opt = "4" Then ' BPL
-            query = "UPDATE tb_opt_accounting SET bpl_code_inc=(tb_opt_accounting.bpl_code_inc+1)"
-            execute_non_query(query, True, "", "", "", "")
-        ElseIf opt = "5" Then ' PRM
-            query = "UPDATE tb_opt_accounting SET prm_code_inc=(tb_opt_accounting.prm_code_inc+1)"
-            execute_non_query(query, True, "", "", "", "")
-        End If
-    End Sub
+    'Sub increase_inc_acc(ByVal opt As String)
+    '    'opt
+    '    '1 = acc trans
+
+    '    Dim query As String
+    '    query = ""
+
+    '    If opt = "1" Then
+    '        query = "UPDATE tb_opt_accounting SET acc_trans_code_inc=(tb_opt_accounting.acc_trans_code_inc+1)"
+    '        execute_non_query(query, True, "", "", "", "")
+    '    ElseIf opt = "2" Then
+    '        query = "UPDATE tb_opt_accounting SET acc_trans_adj_code_inc=(tb_opt_accounting.acc_trans_adj_code_inc+1)"
+    '        execute_non_query(query, True, "", "", "", "")
+    '    ElseIf opt = "3" Then ' BPJ
+    '        query = "UPDATE tb_opt_accounting SET bpj_code_inc=(tb_opt_accounting.bpj_code_inc+1)"
+    '        execute_non_query(query, True, "", "", "", "")
+    '    ElseIf opt = "4" Then ' BPL
+    '        query = "UPDATE tb_opt_accounting SET bpl_code_inc=(tb_opt_accounting.bpl_code_inc+1)"
+    '        execute_non_query(query, True, "", "", "", "")
+    '    ElseIf opt = "5" Then ' PRM
+    '        query = "UPDATE tb_opt_accounting SET prm_code_inc=(tb_opt_accounting.prm_code_inc+1)"
+    '        execute_non_query(query, True, "", "", "", "")
+    '    End If
+    'End Sub
 
     '=>=========== opt code header purchasing =====================
     Function get_opt_purchasing_field(ByVal field As String)

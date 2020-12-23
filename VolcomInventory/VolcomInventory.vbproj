@@ -5535,6 +5535,12 @@
     <Compile Include="FormSalesPOSCheckXLS.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormSalesPOSCompare.Designer.vb">
+      <DependentUpon>FormSalesPOSCompare.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormSalesPOSCompare.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormSalesPOSDetCheckCollectionCode.Designer.vb">
       <DependentUpon>FormSalesPOSDetCheckCollectionCode.vb</DependentUpon>
     </Compile>
@@ -5577,10 +5583,22 @@
     <Compile Include="FormSalesPosPrice.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormSalesPosPriceRecon.Designer.vb">
+      <DependentUpon>FormSalesPosPriceRecon.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormSalesPosPriceRecon.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormSalesPOSQty.Designer.vb">
       <DependentUpon>FormSalesPOSQty.vb</DependentUpon>
     </Compile>
     <Compile Include="FormSalesPOSQty.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSalesProbTransHistory.Designer.vb">
+      <DependentUpon>FormSalesProbTransHistory.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormSalesProbTransHistory.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormSalesPromo.designer.vb">
@@ -11948,6 +11966,9 @@
     <EmbeddedResource Include="FormSalesPOSCheckXLS.resx">
       <DependentUpon>FormSalesPOSCheckXLS.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormSalesPOSCompare.resx">
+      <DependentUpon>FormSalesPOSCompare.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormSalesPOSDetCheckCollectionCode.resx">
       <DependentUpon>FormSalesPOSDetCheckCollectionCode.vb</DependentUpon>
     </EmbeddedResource>
@@ -11969,8 +11990,14 @@
     <EmbeddedResource Include="FormSalesPosPrice.resx">
       <DependentUpon>FormSalesPosPrice.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormSalesPosPriceRecon.resx">
+      <DependentUpon>FormSalesPosPriceRecon.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormSalesPOSQty.resx">
       <DependentUpon>FormSalesPOSQty.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSalesProbTransHistory.resx">
+      <DependentUpon>FormSalesProbTransHistory.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormSalesPromo.resx">
       <DependentUpon>FormSalesPromo.vb</DependentUpon>

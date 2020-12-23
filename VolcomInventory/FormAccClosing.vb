@@ -110,9 +110,9 @@ GROUP BY trxd.`id_acc_trans`"
 
         'main journal bulanan
         Dim qjm As String = "INSERT INTO tb_a_acc_trans(acc_trans_number, report_number, id_bill_type, id_user, date_created,date_reference, acc_trans_note, id_report_status, is_close)
-                        VALUES ('" + header_number_acc("1") + "','" + report_number + "','0','" + id_user_prepared + "', NOW(), '" & Date.Parse(DEUntil.EditValue.ToString).ToString("yyyy-MM-dd") & "', 'Auto Posting', '6', '1'); SELECT LAST_INSERT_ID(); "
+                        VALUES ('','" + report_number + "','0','" + id_user_prepared + "', NOW(), '" & Date.Parse(DEUntil.EditValue.ToString).ToString("yyyy-MM-dd") & "', 'Auto Posting', '6', '1'); SELECT LAST_INSERT_ID(); "
         Dim id_acc_trans As String = execute_query(qjm, 0, True, "", "", "", "")
-        increase_inc_acc("1")
+        execute_non_query("CALL gen_number(" + id_acc_trans + ",36)", True, "", "", "", "")
 
         'det journal bulanan
         Dim qjd As String = "INSERT INTO tb_a_acc_trans_det(id_acc_trans,id_comp, id_acc, qty, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number,id_coa_tag)
@@ -155,9 +155,9 @@ GROUP BY trxd.`id_acc_trans`"
 
             'pindah laba berjalan ke ditahan
             qjm = "INSERT INTO tb_a_acc_trans(acc_trans_number, report_number, id_bill_type, id_user, date_created,date_reference, acc_trans_note, id_report_status, is_close)
-                        VALUES ('" + header_number_acc("1") + "','" + report_number + "','0','" + id_user_prepared + "', NOW(), DATE_ADD('" & Date.Parse(DEUntil.EditValue.ToString).ToString("yyyy-MM-dd") & "',INTERVAL 1 DAY), 'Closing pindah saldo tahun berjalan ke laba ditahan', '6', '1'); SELECT LAST_INSERT_ID(); "
+                        VALUES ('','" + report_number + "','0','" + id_user_prepared + "', NOW(), DATE_ADD('" & Date.Parse(DEUntil.EditValue.ToString).ToString("yyyy-MM-dd") & "',INTERVAL 1 DAY), 'Closing pindah saldo tahun berjalan ke laba ditahan', '6', '1'); SELECT LAST_INSERT_ID(); "
             id_acc_trans = execute_query(qjm, 0, True, "", "", "", "")
-            increase_inc_acc("1")
+            execute_non_query("CALL gen_number(" + id_acc_trans + ",36)", True, "", "", "", "")
             '
             If id_coa_type = "1" Then 'office
                 q = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, qty, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number,id_coa_tag)

@@ -10,7 +10,7 @@
         BMark.Visible = False
         Bprint.Visible = False
         TEUserEntry.Text = get_user_identify(id_user, 1)
-        TENumber.Text = header_number_acc("1")
+        TENumber.Text = "Auto number"
         Dim regDate As Date = Date.Now()
         Dim strDate As String = regDate.ToString("yyyy\-MM\-dd")
         TEDate.Text = view_date_from(strDate, 0)
@@ -104,11 +104,11 @@
         Else
             If id_trans = "-1" Then
                 'new
-                Dim query As String = String.Format("INSERT INTO tb_a_acc_trans(acc_trans_number,date_created,id_user,acc_trans_note) VALUES('{0}',NOW(),'{1}','{2}');SELECT LAST_INSERT_ID(); ", TENumber.Text, id_user, MENote.Text)
+                Dim query As String = String.Format("INSERT INTO tb_a_acc_trans(acc_trans_number,date_created,id_user,acc_trans_note) VALUES('{0}',NOW(),'{1}','{2}');SELECT LAST_INSERT_ID(); ", "", id_user, MENote.Text)
 
                 id_trans = execute_query(query, 0, True, "", "", "", "")
 
-                increase_inc_acc("1")
+                execute_non_query("CALL gen_number(" + id_trans + ",36)", True, "", "", "", "")
                 'insert who prepared
                 insert_who_prepared("36", id_trans, id_user)
 

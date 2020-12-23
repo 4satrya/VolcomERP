@@ -356,6 +356,8 @@
                         newRow("id_design_price_retail") = GVItemList.GetRowCellValue(ls, "id_design_price_retail").ToString
                         newRow("id_sales_pos_det_ref") = GVItemList.GetRowCellValue(ls, "id_sales_pos_det").ToString
                         newRow("id_sales_pos_det") = "0"
+                        newRow("id_sales_pos_prob") = "0"
+                        newRow("id_sales_pos_prob_price") = "0"
 
                         TryCast(FormSalesPOSDet.GCItemList.DataSource, DataTable).Rows.Add(newRow)
                         FormSalesPOSDet.GCItemList.RefreshDataSource()

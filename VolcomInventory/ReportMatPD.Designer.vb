@@ -1150,10 +1150,10 @@ Partial Public Class ReportMatPD
         'XrLabel4
         '
         Me.XrLabel4.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Bold)
-        Me.XrLabel4.LocationFloat = New DevExpress.Utils.PointFloat(0!, 45.99999!)
+        Me.XrLabel4.LocationFloat = New DevExpress.Utils.PointFloat(0!, 45.99997!)
         Me.XrLabel4.Name = "XrLabel4"
         Me.XrLabel4.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel4.SizeF = New System.Drawing.SizeF(77.08334!, 23.0!)
+        Me.XrLabel4.SizeF = New System.Drawing.SizeF(471.875!, 23.0!)
         Me.XrLabel4.StylePriority.UseFont = False
         Me.XrLabel4.StylePriority.UseTextAlignment = False
         Me.XrLabel4.Text = "[season]"
@@ -1165,7 +1165,7 @@ Partial Public Class ReportMatPD
         Me.XrLabel3.LocationFloat = New DevExpress.Utils.PointFloat(0!, 23.0!)
         Me.XrLabel3.Name = "XrLabel3"
         Me.XrLabel3.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel3.SizeF = New System.Drawing.SizeF(277.0833!, 23.0!)
+        Me.XrLabel3.SizeF = New System.Drawing.SizeF(471.875!, 23.0!)
         Me.XrLabel3.StylePriority.UseFont = False
         Me.XrLabel3.StylePriority.UseTextAlignment = False
         Me.XrLabel3.Text = "VENDOR : [comp_name]"

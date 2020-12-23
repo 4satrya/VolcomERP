@@ -630,6 +630,9 @@
         ElseIf report_mark_type = "241" Then
             'adj og
             query = String.Format("SELECT id_report_status, number as report_number FROM tb_adjustment_og WHERE id_adjustment = '{0}'", id_report)
+        ElseIf report_mark_type = "281" Then
+            'price recon
+            query = String.Format("SELECT id_report_status, number as report_number FROM tb_sales_pos_recon WHERE id_sales_pos_recon = '{0}'", id_report)
         End If
 
         data = execute_query(query, -1, True, "", "", "", "")
@@ -979,99 +982,101 @@
         End If
         Cursor = Cursors.Default
     End Sub
-    Sub auto_journal()
-        Dim id_status_reportx As String = LEReportStatus.EditValue
-        Dim acc_trans_number As String = ""
-        Dim last_id As String = ""
-        Dim id_cc As String = "-1"
-        Dim query As String = ""
-        Dim query_det As String = ""
-        Dim id_ref As String = ""
-        Dim id_acc As String = ""
-        Dim acc_name As String = ""
-        Dim acc_desc As String = ""
-        Dim debit, credit As Decimal
-        Dim comp_name As String = ""
-        Dim no_journal As String = ""
-        Dim id_trans As String = ""
 
-        'q_posting = String.Format("INSERT INTO tb_a_acc_trans(acc_trans_number,id_user,date_created,acc_trans_note) VALUES('{0}','{1}',NOW(),'Auto posting {2}');SELECT LAST_INSERT_ID()", acc_trans_number, id_user, report_number)
-        'last_id = execute_query(q_posting, 0, True, "", "", "", "")
+    'Sub auto_journal()
+    '    Dim id_status_reportx As String = LEReportStatus.EditValue
+    '    Dim acc_trans_number As String = ""
+    '    Dim last_id As String = ""
+    '    Dim id_cc As String = "-1"
+    '    Dim query As String = ""
+    '    Dim query_det As String = ""
+    '    Dim id_ref As String = ""
+    '    Dim id_acc As String = ""
+    '    Dim acc_name As String = ""
+    '    Dim acc_desc As String = ""
+    '    Dim debit, credit As Decimal
+    '    Dim comp_name As String = ""
+    '    Dim id_trans As String = ""
 
-        If report_mark_type = "48" And id_status_reportx = "6" Then ' sales FG; 1 = BPJ
-            query = "SELECT s_p.id_sales_pos,comp_c.id_comp,comp.comp_name,s_p.sales_pos_number, s_p.sales_pos_total,s_p.sales_pos_discount,s_p.sales_pos_vat,(s_p.sales_pos_total*((100-s_p.sales_pos_discount)/100) ) AS netto, ((100/(100+s_p.sales_pos_vat))*(s_p.sales_pos_total*((100-s_p.sales_pos_discount)/100))) AS kena_ppn,((s_p.sales_pos_vat/(100+s_p.sales_pos_vat))*(s_p.sales_pos_total*((100-s_p.sales_pos_discount)/100))) AS ppn"
-            query += " FROM tb_sales_pos s_p INNER JOIN tb_m_comp_contact comp_c ON comp_c.id_comp_contact=s_p.id_store_contact_from "
-            query += " INNER JOIN tb_m_comp comp ON comp.id_comp=comp_c.id_comp "
-            query += " WHERE sales_pos_number = '" + report_number + "' AND id_memo_type='1'"
-            Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+    '    'q_posting = String.Format("INSERT INTO tb_a_acc_trans(acc_trans_number,id_user,date_created,acc_trans_note) VALUES('{0}','{1}',NOW(),'Auto posting {2}');SELECT LAST_INSERT_ID()", acc_trans_number, id_user, report_number)
+    '    'last_id = execute_query(q_posting, 0, True, "", "", "", "")
 
-            'auto posting COA
-            id_cc = data.Rows(0)("id_comp").ToString
-            report_number = data.Rows(0)("sales_pos_number").ToString
-            id_ref = data.Rows(0)("id_sales_pos").ToString
-            comp_name = data.Rows(0)("comp_name").ToString
+    '    If report_mark_type = "48" And id_status_reportx = "6" Then ' sales FG; 1 = BPJ
+    '        query = "SELECT s_p.id_sales_pos,comp_c.id_comp,comp.comp_name,s_p.sales_pos_number, s_p.sales_pos_total,s_p.sales_pos_discount,s_p.sales_pos_vat,(s_p.sales_pos_total*((100-s_p.sales_pos_discount)/100) ) AS netto, ((100/(100+s_p.sales_pos_vat))*(s_p.sales_pos_total*((100-s_p.sales_pos_discount)/100))) AS kena_ppn,((s_p.sales_pos_vat/(100+s_p.sales_pos_vat))*(s_p.sales_pos_total*((100-s_p.sales_pos_discount)/100))) AS ppn"
+    '        query += " FROM tb_sales_pos s_p INNER JOIN tb_m_comp_contact comp_c ON comp_c.id_comp_contact=s_p.id_store_contact_from "
+    '        query += " INNER JOIN tb_m_comp comp ON comp.id_comp=comp_c.id_comp "
+    '        query += " WHERE sales_pos_number = '" + report_number + "' AND id_memo_type='1'"
+    '        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
 
-            query = "SELECT coa_map_d.id_coa_map_det,comp_coa.id_acc,acc.acc_name,acc.acc_description "
-            query += " FROM tb_m_comp_coa comp_coa "
-            query += " INNER JOIN tb_coa_map_det coa_map_d ON coa_map_d.id_coa_map_det=comp_coa.id_coa_map_det"
-            query += " INNER JOIN tb_coa_map coa_map ON coa_map_d.id_coa_map=coa_map.id_coa_map"
-            query += " INNER JOIN tb_a_acc acc ON acc.id_acc=comp_coa.id_acc"
-            query += " WHERE comp_coa.id_comp='" + id_cc + "' AND coa_map.id_coa_map='1'"
-            Dim data_acc As DataTable = execute_query(query, -1, True, "", "", "", "")
+    '        'auto posting COA
+    '        id_cc = data.Rows(0)("id_comp").ToString
+    '        report_number = data.Rows(0)("sales_pos_number").ToString
+    '        id_ref = data.Rows(0)("id_sales_pos").ToString
+    '        comp_name = data.Rows(0)("comp_name").ToString
 
-            If data_acc.Rows.Count > 0 Then 'id_coa_map = 1
-                no_journal = header_number_acc("3") 'journal number
-                'insert journal header
-                query = String.Format("INSERT INTO tb_a_acc_trans(acc_trans_number,date_created,id_user,acc_trans_note,id_bill_type,report_mark_type,id_report,report_number,id_cc) VALUES('{0}',NOW(),'{1}','{2}','{3}','{4}','{5}','{6}','{7}'); SELECT LAST_INSERT_ID()", no_journal, id_user, "Auto posting sales finish goods.", 1, report_mark_type, id_ref, report_number, id_cc)
-                id_trans = execute_query(query, 0, True, "", "", "", "")
+    '        query = "SELECT coa_map_d.id_coa_map_det,comp_coa.id_acc,acc.acc_name,acc.acc_description "
+    '        query += " FROM tb_m_comp_coa comp_coa "
+    '        query += " INNER JOIN tb_coa_map_det coa_map_d ON coa_map_d.id_coa_map_det=comp_coa.id_coa_map_det"
+    '        query += " INNER JOIN tb_coa_map coa_map ON coa_map_d.id_coa_map=coa_map.id_coa_map"
+    '        query += " INNER JOIN tb_a_acc acc ON acc.id_acc=comp_coa.id_acc"
+    '        query += " WHERE comp_coa.id_comp='" + id_cc + "' AND coa_map.id_coa_map='1'"
+    '        Dim data_acc As DataTable = execute_query(query, -1, True, "", "", "", "")
 
-                increase_inc_acc("3")
+    '        If data_acc.Rows.Count > 0 Then 'id_coa_map = 1
+    '            no_journal = header_number_acc("3") 'journal number
+    '            'insert journal header
+    '            query = String.Format("INSERT INTO tb_a_acc_trans(acc_trans_number,date_created,id_user,acc_trans_note,id_bill_type,report_mark_type,id_report,report_number,id_cc) VALUES('{0}',NOW(),'{1}','{2}','{3}','{4}','{5}','{6}','{7}'); SELECT LAST_INSERT_ID()", no_journal, id_user, "Auto posting sales finish goods.", 1, report_mark_type, id_ref, report_number, id_cc)
+    '            id_trans = execute_query(query, 0, True, "", "", "", "")
 
-                'id_acc piutang dagang
-                Dim data_filter As DataRow() = data_acc.Select("[id_coa_map_det]='1'")
-                id_acc = data_filter(0)("id_acc").ToString
-                acc_name = data_filter(0)("acc_name").ToString
-                acc_desc = data_filter(0)("acc_description").ToString
+    '            increase_inc_acc("3")
 
-                debit = 0
-                credit = data.Rows(0)("netto")
+    '            'id_acc piutang dagang
+    '            Dim data_filter As DataRow() = data_acc.Select("[id_coa_map_det]='1'")
+    '            id_acc = data_filter(0)("id_acc").ToString
+    '            acc_name = data_filter(0)("acc_name").ToString
+    '            acc_desc = data_filter(0)("acc_description").ToString
 
-                query_det = add_journal(id_trans, id_acc, acc_name, acc_desc, debit, credit, id_cc, report_mark_type, id_ref, report_number)
-                'end id_acc piutang dagang
+    '            debit = 0
+    '            credit = data.Rows(0)("netto")
 
-                'id_acc PPN
-                data_filter = data_acc.Select("[id_coa_map_det]='2'")
-                id_acc = data_filter(0)("id_acc").ToString
-                acc_name = data_filter(0)("acc_name").ToString
-                acc_desc = data_filter(0)("acc_description").ToString
+    '            query_det = add_journal(id_trans, id_acc, acc_name, acc_desc, debit, credit, id_cc, report_mark_type, id_ref, report_number)
+    '            'end id_acc piutang dagang
 
-                debit = data.Rows(0)("ppn")
-                credit = 0
-                query_det += "," + add_journal(id_trans, id_acc, acc_name, acc_desc, debit, credit, id_cc, report_mark_type, id_ref, report_number)
-                'end id_acc PPN
+    '            'id_acc PPN
+    '            data_filter = data_acc.Select("[id_coa_map_det]='2'")
+    '            id_acc = data_filter(0)("id_acc").ToString
+    '            acc_name = data_filter(0)("acc_name").ToString
+    '            acc_desc = data_filter(0)("acc_description").ToString
 
-                'id_acc penjualan
-                data_filter = data_acc.Select("[id_coa_map_det]='3'")
-                id_acc = data_filter(0)("id_acc").ToString
-                acc_name = data_filter(0)("acc_name").ToString
-                acc_desc = data_filter(0)("acc_description").ToString
+    '            debit = data.Rows(0)("ppn")
+    '            credit = 0
+    '            query_det += "," + add_journal(id_trans, id_acc, acc_name, acc_desc, debit, credit, id_cc, report_mark_type, id_ref, report_number)
+    '            'end id_acc PPN
 
-                debit = data.Rows(0)("kena_ppn")
-                credit = 0
-                query_det += "," + add_journal(id_trans, id_acc, acc_name, acc_desc, debit, credit, id_cc, report_mark_type, id_ref, report_number)
-                'end id_acc penjualan
+    '            'id_acc penjualan
+    '            data_filter = data_acc.Select("[id_coa_map_det]='3'")
+    '            id_acc = data_filter(0)("id_acc").ToString
+    '            acc_name = data_filter(0)("acc_name").ToString
+    '            acc_desc = data_filter(0)("acc_description").ToString
 
-                query = "INSERT INTO tb_a_acc_trans_det(id_acc_trans,id_acc,debit,credit,acc_trans_det_note,id_status_open,report_mark_type,id_report,report_number,id_comp) VALUES" + query_det
-                execute_non_query(query, True, "", "", "", "")
-            Else
-                stopCustom("Store account not registered")
-            End If
-        End If
-    End Sub
+    '            debit = data.Rows(0)("kena_ppn")
+    '            credit = 0
+    '            query_det += "," + add_journal(id_trans, id_acc, acc_name, acc_desc, debit, credit, id_cc, report_mark_type, id_ref, report_number)
+    '            'end id_acc penjualan
+
+    '            query = "INSERT INTO tb_a_acc_trans_det(id_acc_trans,id_acc,debit,credit,acc_trans_det_note,id_status_open,report_mark_type,id_report,report_number,id_comp) VALUES" + query_det
+    '            execute_non_query(query, True, "", "", "", "")
+    '        Else
+    '            stopCustom("Store account not registered")
+    '        End If
+    '    End If
+    'End Sub
+
     Function add_journal(ByVal id_acc_trans As String, ByVal id_acc As String, ByVal acc_name As String, ByVal note As String, ByVal debit As Decimal, ByVal credit As Decimal, ByVal id_comp As String, ByVal report_mark_type As String, ByVal id_report As String, ByVal report_numberx As String)
         Dim query As String = "('" + id_acc_trans + "','" + id_acc + "','" + decimalSQL(debit.ToString) + "','" + decimalSQL(credit.ToString) + "','" + note + "',1,'" + report_mark_type + "','" + id_report + "','" + report_numberx + "','" + id_comp + "')"
         Return query
     End Function
+
     Sub change_status(ByVal id_status_reportx As String)
         Dim query As String = ""
         If report_mark_type = "1" Then
@@ -2491,9 +2496,9 @@ WHERE adjd.id_adj_out_mat='" & id_report & "'"
 
                 'main journal
                 Dim qjm As String = "INSERT INTO tb_a_acc_trans(acc_trans_number, report_number, id_bill_type, id_user, date_created, acc_trans_note, id_report_status)
-                VALUES ('" + header_number_acc("1") + "','" + report_number + "','25','" + id_user_prepared + "', '" & date_created & "', 'Auto Posting', '6'); SELECT LAST_INSERT_ID(); "
+                VALUES ('','" + report_number + "','25','" + id_user_prepared + "', '" & date_created & "', 'Auto Posting', '6'); SELECT LAST_INSERT_ID(); "
                 Dim id_acc_trans As String = execute_query(qjm, 0, True, "", "", "", "")
-                increase_inc_acc("1")
+                execute_non_query("CALL gen_number(" + id_acc_trans + ",36)", True, "", "", "", "")
 
                 'det journal
                 Dim qjd As String = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, qty, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number,report_mark_type_ref, id_report_ref, report_number_ref, id_comp)
@@ -5526,9 +5531,9 @@ WHERE a.id_adj_in_fg = '" & id_report & "'"
 
                 'main journal
                 Dim qjm As String = "INSERT INTO tb_a_acc_trans(acc_trans_number, report_number, id_bill_type, id_user, date_created, acc_trans_note, id_report_status)
-                VALUES ('" + header_number_acc("1") + "','" + report_number + "','24','" + id_user_prepared + "', NOW(), 'Auto Posting', '6'); SELECT LAST_INSERT_ID(); "
+                VALUES ('','" + report_number + "','24','" + id_user_prepared + "', NOW(), 'Auto Posting', '6'); SELECT LAST_INSERT_ID(); "
                 id_acc_trans = execute_query(qjm, 0, True, "", "", "", "")
-                increase_inc_acc("1")
+                execute_non_query("CALL gen_number(" + id_acc_trans + ",36)", True, "", "", "", "")
 
                 'det journal
                 qjd = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, id_vendor, id_comp, qty, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number, report_mark_type_ref, id_report_ref, report_number_ref, id_coa_tag)
@@ -5896,9 +5901,9 @@ WHERE copd.id_design_cop_propose='" & id_report & "';"
 
                 'main journal
                 Dim qjm As String = "INSERT INTO tb_a_acc_trans(acc_trans_number, report_number, id_bill_type, id_user, date_created, acc_trans_note, id_report_status)
-                VALUES ('" + header_number_acc("1") + "','" + report_number + "','0','" + id_user_prepared + "', NOW(), 'Auto Posting', '6'); SELECT LAST_INSERT_ID(); "
+                VALUES ('','" + report_number + "','0','" + id_user_prepared + "', NOW(), 'Auto Posting', '6'); SELECT LAST_INSERT_ID(); "
                 Dim id_acc_trans As String = execute_query(qjm, 0, True, "", "", "", "")
-                increase_inc_acc("1")
+                execute_non_query("CALL gen_number(" + id_acc_trans + ",36)", True, "", "", "", "")
 
                 'det journal
                 Dim qjd As String = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, id_comp, qty, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number)
@@ -6012,9 +6017,9 @@ WHERE copd.id_design_cop_propose='" & id_report & "';"
 
                 'main journal
                 Dim qjm As String = "INSERT INTO tb_a_acc_trans(acc_trans_number, report_number, id_bill_type, id_user, date_created, acc_trans_note, id_report_status)
-                VALUES ('" + header_number_acc("1") + "','" + report_number + "','0','" + id_user_prepared + "', NOW(), 'Auto Posting', '6'); SELECT LAST_INSERT_ID(); "
+                VALUES ('','" + report_number + "','0','" + id_user_prepared + "', NOW(), 'Auto Posting', '6'); SELECT LAST_INSERT_ID(); "
                 Dim id_acc_trans As String = execute_query(qjm, 0, True, "", "", "", "")
-                increase_inc_acc("1")
+                execute_non_query("CALL gen_number(" + id_acc_trans + ",36)", True, "", "", "", "")
 
                 'det journal
                 If FormItemDelDetail.is_for_store = "1" Then
@@ -6118,9 +6123,9 @@ WHERE copd.id_design_cop_propose='" & id_report & "';"
 
                 'main journal
                 Dim qjm As String = "INSERT INTO tb_a_acc_trans(acc_trans_number, report_number, id_bill_type, id_user, date_created, date_reference, acc_trans_note, id_report_status)
-                VALUES ('" + header_number_acc("1") + "','" + report_number + "','0','" + id_user_prepared + "', NOW(), '" & date_reff & "', 'Auto Posting', '6'); SELECT LAST_INSERT_ID(); "
+                VALUES ('','" + report_number + "','0','" + id_user_prepared + "', NOW(), '" & date_reff & "', 'Auto Posting', '6'); SELECT LAST_INSERT_ID(); "
                 Dim id_acc_trans As String = execute_query(qjm, 0, True, "", "", "", "")
-                increase_inc_acc("1")
+                execute_non_query("CALL gen_number(" + id_acc_trans + ",36)", True, "", "", "", "")
 
                 If FormItemExpenseDet.CEPayLater.EditValue = True Then
                     'utang
@@ -6235,9 +6240,9 @@ WHERE copd.id_design_cop_propose='" & id_report & "';"
 
                 'main journal
                 Dim qjm As String = "INSERT INTO tb_a_acc_trans(acc_trans_number, report_number, id_bill_type, id_user, date_created, date_reference, acc_trans_note, id_report_status)
-                VALUES('" + header_number_acc("1") + "','" + report_number + "','22','" + id_user_prepared + "', NOW(), '" & date_reff & "', 'Auto Posting', '6'); SELECT LAST_INSERT_ID(); "
+                VALUES('','" + report_number + "','22','" + id_user_prepared + "', NOW(), '" & date_reff & "', 'Auto Posting', '6'); SELECT LAST_INSERT_ID(); "
                 Dim id_acc_trans As String = execute_query(qjm, 0, True, "", "", "", "")
-                increase_inc_acc("1")
+                execute_non_query("CALL gen_number(" + id_acc_trans + ",36)", True, "", "", "", "")
 
                 'det journal
                 Dim qjd As String = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, id_vendor, id_comp, qty, debit, credit, id_currency, kurs, debit_valas, credit_valas, acc_trans_det_note, report_mark_type, id_report, report_number,report_mark_type_ref, id_report_ref, report_number_ref, vendor, id_coa_tag)
@@ -6457,9 +6462,9 @@ WHERE id_sales_branch IN (SELECT id_report FROM tb_pn_det WHERE id_pn='" & id_re
                     Dim date_reference As String = DateTime.Parse(FormBankDepositDet.DERecDate.EditValue.ToString).ToString("yyyy-MM-dd")
                     Dim date_created As String = DateTime.Parse(FormBankDepositDet.DEDateCreated.EditValue.ToString).ToString("yyyy-MM-dd")
                     Dim qjm As String = "INSERT INTO tb_a_acc_trans(acc_trans_number, report_number, id_bill_type, id_user, date_created, date_reference, acc_trans_note, id_report_status)
-                        VALUES ('" + header_number_acc("1") + "','" + report_number + "','21','" + id_user_prepared + "', '" + date_created + "','" + date_reference + "',  'Auto Posting', '6'); SELECT LAST_INSERT_ID(); "
+                        VALUES ('','" + report_number + "','21','" + id_user_prepared + "', '" + date_created + "','" + date_reference + "',  'Auto Posting', '6'); SELECT LAST_INSERT_ID(); "
                     Dim id_acc_trans As String = execute_query(qjm, 0, True, "", "", "", "")
-                    increase_inc_acc("1")
+                    execute_non_query("CALL gen_number(" + id_acc_trans + ",36)", True, "", "", "", "")
 
                     'det journal
                     Dim qjd As String = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, id_comp, qty, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number, report_mark_type_ref, id_report_ref, report_number_ref, vendor, id_coa_tag)
@@ -6648,9 +6653,9 @@ WHERE id_sales_branch IN (SELECT id_report FROM tb_pn_det WHERE id_pn='" & id_re
                     Dim date_reference As String = DateTime.Parse(FormPaymentMissingDet.DERecDate.EditValue.ToString).ToString("yyyy-MM-dd")
                     Dim date_created As String = DateTime.Parse(FormPaymentMissingDet.DEDateCreated.EditValue.ToString).ToString("yyyy-MM-dd")
                     Dim qjm As String = "INSERT INTO tb_a_acc_trans(acc_trans_number, report_number, id_bill_type, id_user, date_created, date_reference, acc_trans_note, id_report_status)
-                        VALUES ('" + header_number_acc("1") + "','" + report_number + "','25','" + id_user_prepared + "', '" + date_created + "','" + date_reference + "',  'Auto Posting', '6'); SELECT LAST_INSERT_ID(); "
+                        VALUES ('','" + report_number + "','25','" + id_user_prepared + "', '" + date_created + "','" + date_reference + "',  'Auto Posting', '6'); SELECT LAST_INSERT_ID(); "
                     Dim id_acc_trans As String = execute_query(qjm, 0, True, "", "", "", "")
-                    increase_inc_acc("1")
+                    execute_non_query("CALL gen_number(" + id_acc_trans + ",36)", True, "", "", "", "")
 
                     'det journal
                     Dim qjd As String = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, id_comp, qty, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number, report_mark_type_ref, id_report_ref, report_number_ref, vendor)
@@ -6811,9 +6816,9 @@ WHERE id_sales_branch IN (SELECT id_report FROM tb_pn_det WHERE id_pn='" & id_re
 
                 'main journal
                 Dim qjm As String = "INSERT INTO tb_a_acc_trans(acc_trans_number, report_number, id_bill_type, id_user, date_created, acc_trans_note, id_report_status)
-                        VALUES ('" + header_number_acc("1") + "','" + report_number + "','7','" + id_user_prepared + "', NOW(), 'Auto Posting', '6'); SELECT LAST_INSERT_ID(); "
+                        VALUES ('','" + report_number + "','7','" + id_user_prepared + "', NOW(), 'Auto Posting', '6'); SELECT LAST_INSERT_ID(); "
                 Dim id_acc_trans As String = execute_query(qjm, 0, True, "", "", "", "")
-                increase_inc_acc("1")
+                execute_non_query("CALL gen_number(" + id_acc_trans + ",36)", True, "", "", "", "")
 
                 'det journal
                 Dim qjd As String = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, id_comp, qty, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number)
@@ -6888,9 +6893,9 @@ WHERE id_sales_branch IN (SELECT id_report FROM tb_pn_det WHERE id_pn='" & id_re
                 End If
 
                 Dim qjm As String = "INSERT INTO tb_a_acc_trans(acc_trans_number, report_number, id_bill_type, id_user, date_created, acc_trans_note, id_report_status)
-                        VALUES ('" + header_number_acc("1") + "','" + report_number + "','" + id_bill_type + "','" + id_user_prepared + "', NOW(), 'Auto Posting', '6'); SELECT LAST_INSERT_ID(); "
+                        VALUES ('','" + report_number + "','" + id_bill_type + "','" + id_user_prepared + "', NOW(), 'Auto Posting', '6'); SELECT LAST_INSERT_ID(); "
                 Dim id_acc_trans As String = execute_query(qjm, 0, True, "", "", "", "")
-                increase_inc_acc("1")
+                execute_non_query("CALL gen_number(" + id_acc_trans + ",36)", True, "", "", "", "")
 
                 'det journal
                 Dim qjd As String = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, id_comp, qty, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number)
@@ -7460,9 +7465,9 @@ SELECT '" & data_det.Rows(i)("id_sample_purc_budget").ToString & "' AS id_det,id
 
                 'main journal
                 Dim qjm As String = "INSERT INTO tb_a_acc_trans(acc_trans_number, report_number, id_bill_type, id_user, date_created, date_reference, acc_trans_note, id_report_status)
-                        VALUES ('" + header_number_acc("1") + "','" + report_number + "','24','" + id_user_prepared + "', NOW(), '" & ref_date & "', 'Auto Posting', '6'); SELECT LAST_INSERT_ID(); "
+                        VALUES ('','" + report_number + "','24','" + id_user_prepared + "', NOW(), '" & ref_date & "', 'Auto Posting', '6'); SELECT LAST_INSERT_ID(); "
                 Dim id_acc_trans As String = execute_query(qjm, 0, True, "", "", "", "")
-                increase_inc_acc("1")
+                execute_non_query("CALL gen_number(" + id_acc_trans + ",36)", True, "", "", "", "")
 
                 'det journal
                 Dim qjd As String = ""
@@ -7887,9 +7892,9 @@ WHERE pocd.id_prod_order_close = '" & id_report & "'"
 
                 'main journal
                 Dim qjm As String = "INSERT INTO tb_a_acc_trans(acc_trans_number, report_number, id_bill_type, id_user, date_created, date_reference, acc_trans_note, id_report_status)
-                VALUES ('" + header_number_acc("1") + "','" + report_number + "','24','" + id_user_prepared + "','" & dn_date & "','" & ref_date & "', 'Auto Posting', '6'); SELECT LAST_INSERT_ID(); "
+                VALUES ('','" + report_number + "','24','" + id_user_prepared + "','" & dn_date & "','" & ref_date & "', 'Auto Posting', '6'); SELECT LAST_INSERT_ID(); "
                 Dim id_acc_trans As String = execute_query(qjm, 0, True, "", "", "", "")
-                increase_inc_acc("1")
+                execute_non_query("CALL gen_number(" + id_acc_trans + ",36)", True, "", "", "", "")
 
                 'det journal
                 If FormDebitNoteDet.id_dn_type = "1" Then 'claim reject
@@ -8010,9 +8015,9 @@ WHERE pocd.id_prod_order_close = '" & id_report & "'"
 
                 'main journal
                 Dim qjm As String = "INSERT INTO tb_a_acc_trans(acc_trans_number, report_number, id_bill_type, id_user, date_created, date_reference, acc_trans_note, id_report_status)
-                VALUES ('" + header_number_acc("1") + "','" + report_number + "','" & bill_type & "','" + id_user_prepared + "','" & dn_date & "','" & ref_date & "', 'Auto Posting', '6'); SELECT LAST_INSERT_ID(); "
+                VALUES ('','" + report_number + "','" & bill_type & "','" + id_user_prepared + "','" & dn_date & "','" & ref_date & "', 'Auto Posting', '6'); SELECT LAST_INSERT_ID(); "
                 Dim id_acc_trans As String = execute_query(qjm, 0, True, "", "", "", "")
-                increase_inc_acc("1")
+                execute_non_query("CALL gen_number(" + id_acc_trans + ",36)", True, "", "", "", "")
 
                 'det journal
                 If is_deposit = "1" Then
@@ -8147,9 +8152,9 @@ WHERE invd.`id_inv_mat`='" & id_report & "'"
 
                     'main journal
                     Dim qjm As String = "INSERT INTO tb_a_acc_trans(acc_trans_number, report_number, id_bill_type, id_user, date_created, date_reference, acc_trans_note, id_report_status)
-                VALUES ('" + header_number_acc("1") + "','" + report_number + "','" & bill_type & "','" + id_user_prepared + "','" & dn_date & "','" & ref_date & "', 'Auto Posting', '6'); SELECT LAST_INSERT_ID(); "
+                VALUES ('','" + report_number + "','" & bill_type & "','" + id_user_prepared + "','" & dn_date & "','" & ref_date & "', 'Auto Posting', '6'); SELECT LAST_INSERT_ID(); "
                     Dim id_acc_trans As String = execute_query(qjm, 0, True, "", "", "", "")
-                    increase_inc_acc("1")
+                    execute_non_query("CALL gen_number(" + id_acc_trans + ",36)", True, "", "", "", "")
 
                     'det journal
                     If is_deposit = "1" Then
@@ -8384,9 +8389,9 @@ WHERE invd.`id_inv_mat`='" & id_report & "'"
                 Dim id_bill_type As String = "8"
 
                 Dim qjm As String = "INSERT INTO tb_a_acc_trans(acc_trans_number, report_number, id_bill_type, id_user, date_created, acc_trans_note, id_report_status)
-                        VALUES ('" + header_number_acc("1") + "','" + report_number + "','" + id_bill_type + "','" + id_user_prepared + "', NOW(), 'Auto Posting', '6'); SELECT LAST_INSERT_ID(); "
+                        VALUES ('','" + report_number + "','" + id_bill_type + "','" + id_user_prepared + "', NOW(), 'Auto Posting', '6'); SELECT LAST_INSERT_ID(); "
                 Dim id_acc_trans As String = execute_query(qjm, 0, True, "", "", "", "")
-                increase_inc_acc("1")
+                execute_non_query("CALL gen_number(" + id_acc_trans + ",36)", True, "", "", "", "")
 
                 'det journal
                 Dim qjd As String = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, id_comp, qty, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number)
@@ -8595,9 +8600,9 @@ WHERE invd.`id_inv_mat`='" & id_report & "'"
                 Dim date_reference As String = DateTime.Parse(FormSalesBranchDet.DESalesDate.EditValue.ToString).ToString("yyyy-MM-dd")
                 Dim date_created As String = DateTime.Parse(FormSalesBranchDet.DECreatedDate.EditValue.ToString).ToString("yyyy-MM-dd")
                 Dim qjm As String = "INSERT INTO tb_a_acc_trans(acc_trans_number, report_number, id_bill_type, id_user, date_created, date_reference, acc_trans_note, id_report_status)
-                VALUES ('" + header_number_acc("1") + "','" + report_number + "','19','" + id_user_prepared + "', '" + date_created + "','" + date_reference + "',  'Auto Posting', '6'); SELECT LAST_INSERT_ID(); "
+                VALUES ('','" + report_number + "','19','" + id_user_prepared + "', '" + date_created + "','" + date_reference + "',  'Auto Posting', '6'); SELECT LAST_INSERT_ID(); "
                 Dim id_acc_trans As String = execute_query(qjm, 0, True, "", "", "", "")
-                increase_inc_acc("1")
+                execute_non_query("CALL gen_number(" + id_acc_trans + ",36)", True, "", "", "", "")
 
                 'det journal
                 Dim qjd As String = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, id_comp, qty, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number, vendor, id_coa_tag) 
@@ -8670,9 +8675,9 @@ WHERE invd.`id_inv_mat`='" & id_report & "'"
                 Dim date_reference As String = DateTime.Parse(FormSalesBranchDet.DESalesDate.EditValue.ToString).ToString("yyyy-MM-dd")
                 Dim date_created As String = DateTime.Parse(FormSalesBranchDet.DECreatedDate.EditValue.ToString).ToString("yyyy-MM-dd")
                 Dim qjm As String = "INSERT INTO tb_a_acc_trans(acc_trans_number, report_number, id_bill_type, id_user, date_created, date_reference, acc_trans_note, id_report_status)
-                VALUES ('" + header_number_acc("1") + "','" + report_number + "','13','" + id_user_prepared + "', '" + date_created + "','" + date_reference + "',  'Auto Posting', '6'); SELECT LAST_INSERT_ID(); "
+                VALUES ('','" + report_number + "','13','" + id_user_prepared + "', '" + date_created + "','" + date_reference + "',  'Auto Posting', '6'); SELECT LAST_INSERT_ID(); "
                 Dim id_acc_trans As String = execute_query(qjm, 0, True, "", "", "", "")
-                increase_inc_acc("1")
+                execute_non_query("CALL gen_number(" + id_acc_trans + ",36)", True, "", "", "", "")
 
                 'det journal
                 Dim qjd As String = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, id_comp, qty, credit,debit, acc_trans_det_note, report_mark_type, id_report, report_number, vendor, id_coa_tag) 
@@ -9100,9 +9105,9 @@ WHERE id_additional_cost_pps='" & id_report & "'"
 
                 'main journal
                 Dim qjm As String = "INSERT INTO tb_a_acc_trans(acc_trans_number, report_number, id_bill_type, id_user, date_created, date_reference, acc_trans_note, id_report_status)
-                        VALUES ('" + header_number_acc("1") + "','" + report_number + "','24','" + id_user_prepared + "', NOW(), '" & ref_date & "', 'Auto Posting', '6'); SELECT LAST_INSERT_ID(); "
+                        VALUES ('','" + report_number + "','24','" + id_user_prepared + "', NOW(), '" & ref_date & "', 'Auto Posting', '6'); SELECT LAST_INSERT_ID(); "
                 Dim id_acc_trans As String = execute_query(qjm, 0, True, "", "", "", "")
-                increase_inc_acc("1")
+                execute_non_query("CALL gen_number(" + id_acc_trans + ",36)", True, "", "", "", "")
 
                 'det journal
                 Dim qjd As String = ""
@@ -9154,6 +9159,23 @@ WHERE id_additional_cost_pps='" & id_report & "'"
 
             'update status
             query = String.Format("UPDATE tb_adjustment_og SET id_report_status='{0}' WHERE id_adjustment ='{1}'", id_status_reportx, id_report)
+            execute_non_query(query, True, "", "", "", "")
+        ElseIf report_mark_type = "281" Then
+            'price recon
+            If id_status_reportx = "3" Then
+                id_status_reportx = "6"
+            End If
+
+            If id_status_reportx = "6" Then
+                Dim query_prc_valid As String = "UPDATE tb_sales_pos_prob main
+                INNER JOIN tb_sales_pos_recon_det rd ON rd.id_sales_pos_prob = main.id_sales_pos_prob AND rd.id_sales_pos_recon=" + id_report + "
+                SET main.id_design_price_valid = rd.id_design_price_valid, main.design_price_valid = rd.design_price_valid
+                WHERE main.is_invalid_price=1 "
+                execute_non_query(query_prc_valid, True, "", "", "", "")
+            End If
+
+            'update status
+            query = String.Format("UPDATE tb_sales_pos_recon SET id_report_status='{0}' WHERE id_sales_pos_recon ='{1}'", id_status_reportx, id_report)
             execute_non_query(query, True, "", "", "", "")
         End If
 

@@ -493,6 +493,8 @@
                 Next
 
                 'check is valid all
+                Dim list_is_not_valid As List(Of String) = New List(Of String)
+
                 Dim is_valid_all As Boolean = True
 
                 For i = 0 To data_excel.Rows.Count - 1
@@ -500,13 +502,9 @@
                         If data_excel.Rows(i)("IsValid" + column_check(j)).ToString = "0" Then
                             is_valid_all = False
 
-                            Exit For
+                            list_is_not_valid.Add(column_check(j))
                         End If
                     Next
-
-                    If Not is_valid_all Then
-                        Exit For
-                    End If
                 Next
 
                 'sorting
@@ -635,7 +633,23 @@
                     SLUEDivision.ReadOnly = True
                     TEFileName.ReadOnly = True
                     SBImportExcel.Enabled = False
+                    DropDownButtonExport.Enabled = False
                 Else
+                    PopupMenuExport.ClearLinks()
+
+                    For i = 0 To list_is_not_valid.Count - 1
+                        Dim b As DevExpress.XtraBars.BarButtonItem = New DevExpress.XtraBars.BarButtonItem
+
+                        b.Caption = list_is_not_valid(i) + " Not Matched"
+                        b.Tag = list_is_not_valid(i)
+
+                        AddHandler b.ItemClick, AddressOf exportClick
+
+                        PopupMenuExport.AddItem(b)
+                    Next
+
+                    DropDownButtonExport.Enabled = True
+
                     errorCustom("There are some excel data wrong.")
                 End If
             Catch ex As Exception
@@ -920,6 +934,8 @@
                 Next
 
                 'check is valid all
+                Dim list_is_not_valid As List(Of String) = New List(Of String)
+
                 Dim is_valid_all As Boolean = True
 
                 For i = 0 To data_excel.Rows.Count - 1
@@ -927,13 +943,9 @@
                         If data_excel.Rows(i)("IsValid" + column_check(j)).ToString = "0" Then
                             is_valid_all = False
 
-                            Exit For
+                            list_is_not_valid.Add(column_check(j))
                         End If
                     Next
-
-                    If Not is_valid_all Then
-                        Exit For
-                    End If
                 Next
 
                 'sorting
@@ -1100,7 +1112,23 @@
                     SLUEDivision.ReadOnly = True
                     TEFileName.ReadOnly = True
                     SBImportExcel.Enabled = False
+                    DropDownButtonExport.Enabled = False
                 Else
+                    PopupMenuExport.ClearLinks()
+
+                    For i = 0 To list_is_not_valid.Count - 1
+                        Dim b As DevExpress.XtraBars.BarButtonItem = New DevExpress.XtraBars.BarButtonItem
+
+                        b.Caption = list_is_not_valid(i) + " Not Matched"
+                        b.Tag = list_is_not_valid(i)
+
+                        AddHandler b.ItemClick, AddressOf exportClick
+
+                        PopupMenuExport.AddItem(b)
+                    Next
+
+                    DropDownButtonExport.Enabled = True
+
                     errorCustom("There are some excel data wrong.")
                 End If
             Catch ex As Exception
@@ -1302,6 +1330,8 @@
                 Next
 
                 'check is valid all
+                Dim list_is_not_valid As List(Of String) = New List(Of String)
+
                 Dim is_valid_all As Boolean = True
 
                 For i = 0 To data_excel.Rows.Count - 1
@@ -1309,13 +1339,9 @@
                         If data_excel.Rows(i)("IsValid" + column_check(j)).ToString = "0" Then
                             is_valid_all = False
 
-                            Exit For
+                            list_is_not_valid.Add(column_check(j))
                         End If
                     Next
-
-                    If Not is_valid_all Then
-                        Exit For
-                    End If
                 Next
 
                 'sorting
@@ -1416,7 +1442,23 @@
                     SLUEDivision.ReadOnly = True
                     TEFileName.ReadOnly = True
                     SBImportExcel.Enabled = False
+                    DropDownButtonExport.Enabled = False
                 Else
+                    PopupMenuExport.ClearLinks()
+
+                    For i = 0 To list_is_not_valid.Count - 1
+                        Dim b As DevExpress.XtraBars.BarButtonItem = New DevExpress.XtraBars.BarButtonItem
+
+                        b.Caption = list_is_not_valid(i) + " Not Matched"
+                        b.Tag = list_is_not_valid(i)
+
+                        AddHandler b.ItemClick, AddressOf exportClick
+
+                        PopupMenuExport.AddItem(b)
+                    Next
+
+                    DropDownButtonExport.Enabled = True
+
                     errorCustom("There are some excel data wrong.")
                 End If
             Catch ex As Exception
@@ -1708,6 +1750,8 @@
                 Next
 
                 'check is valid all
+                Dim list_is_not_valid As List(Of String) = New List(Of String)
+
                 Dim is_valid_all As Boolean = True
 
                 For i = 0 To data_excel.Rows.Count - 1
@@ -1715,13 +1759,9 @@
                         If data_excel.Rows(i)("IsValid" + column_check(j)).ToString = "0" Then
                             is_valid_all = False
 
-                            Exit For
+                            list_is_not_valid.Add(column_check(j))
                         End If
                     Next
-
-                    If Not is_valid_all Then
-                        Exit For
-                    End If
                 Next
 
                 'sorting
@@ -1879,7 +1919,23 @@
                     SLUEDivision.ReadOnly = True
                     TEFileName.ReadOnly = True
                     SBImportExcel.Enabled = False
+                    DropDownButtonExport.Enabled = False
                 Else
+                    PopupMenuExport.ClearLinks()
+
+                    For i = 0 To list_is_not_valid.Count - 1
+                        Dim b As DevExpress.XtraBars.BarButtonItem = New DevExpress.XtraBars.BarButtonItem
+
+                        b.Caption = list_is_not_valid(i) + " Not Matched"
+                        b.Tag = list_is_not_valid(i)
+
+                        AddHandler b.ItemClick, AddressOf exportClick
+
+                        PopupMenuExport.AddItem(b)
+                    Next
+
+                    DropDownButtonExport.Enabled = True
+
                     errorCustom("There are some excel data wrong.")
                 End If
             Catch ex As Exception
@@ -1938,5 +1994,26 @@
         Else
             SLUETemplate.Visible = False
         End If
+    End Sub
+
+    Private Sub exportClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs)
+        GVVerification.ActiveFilterString = "[IsValid" + e.Item.Tag.ToString + "] = 0"
+
+        Dim save As SaveFileDialog = New SaveFileDialog
+
+        save.Filter = "Excel File | *.xls"
+        save.ShowDialog()
+
+        If Not save.FileName = "" Then
+            Dim op As DevExpress.XtraPrinting.XlsExportOptionsEx = New DevExpress.XtraPrinting.XlsExportOptionsEx
+
+            op.ExportType = DevExpress.Export.ExportType.WYSIWYG
+
+            GVVerification.ExportToXls(save.FileName, op)
+
+            infoCustom("File saved.")
+        End If
+
+        GVVerification.ActiveFilterString = ""
     End Sub
 End Class

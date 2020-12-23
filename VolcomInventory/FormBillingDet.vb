@@ -18,9 +18,9 @@
 
     Sub load_number()
         If LEBilling.EditValue.ToString = "1" Then
-            TENumber.Text = header_number_acc("3")
+            TENumber.Text = ""
         ElseIf LEBilling.EditValue.ToString = "2" Then
-            TENumber.Text = header_number_acc("4")
+            TENumber.Text = ""
         End If
     End Sub
 

@@ -170,7 +170,7 @@ WHERE rn.id_return_note='" & id_return_note & "'"
             Else
                 Dim is_ok As Boolean = False
                 'check
-                Dim qc As String = "SELECT id_inbound_awb FROM tb_inbound_awb WHERE awb_number='" & addSlashes(TEAWB.Text) & "'"
+                Dim qc As String = "SELECT id_inbound_awb FROM tb_inbound_awb WHERE awb_number='" & addSlashes(TEAWB.Text) & "' WHERE is_void=2"
                 Dim dtc As DataTable = execute_query(qc, -1, True, "", "", "", "")
                 If dtc.Rows.Count <= 0 Then
                     warningCustom("AWB not found")

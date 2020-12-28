@@ -42,7 +42,7 @@ Partial Class FormScanReturnBAP
         Me.CELakbanRusak = New DevExpress.XtraEditors.CheckEdit()
         Me.CELubang = New DevExpress.XtraEditors.CheckEdit()
         Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
-        Me.PanelControl4 = New DevExpress.XtraEditors.PanelControl()
+        Me.PCAddDel = New DevExpress.XtraEditors.PanelControl()
         Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
         Me.BDeleteScan = New DevExpress.XtraEditors.SimpleButton()
         Me.BInputManual = New DevExpress.XtraEditors.SimpleButton()
@@ -53,6 +53,9 @@ Partial Class FormScanReturnBAP
         Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RISLEReturnNote = New DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit()
         Me.RepositoryItemSearchLookUpEdit1View = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn11 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn12 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -61,14 +64,11 @@ Partial Class FormScanReturnBAP
         Me.GridColumn10 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RISLEType = New DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit()
         Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn13 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn14 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnListToko = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnTypeDesc = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnSuratjalanDesc = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn11 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn12 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn13 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn14 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.SLEVendor.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -85,8 +85,8 @@ Partial Class FormScanReturnBAP
         CType(Me.CEBasah.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CELakbanRusak.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CELubang.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PanelControl4, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.PanelControl4.SuspendLayout()
+        CType(Me.PCAddDel, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PCAddDel.SuspendLayout()
         CType(Me.GCListProduct, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVListProduct, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RISLEReturnNote, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -299,16 +299,16 @@ Partial Class FormScanReturnBAP
         Me.LabelControl3.TabIndex = 1
         Me.LabelControl3.Text = "BOX Condition"
         '
-        'PanelControl4
+        'PCAddDel
         '
-        Me.PanelControl4.Controls.Add(Me.LabelControl4)
-        Me.PanelControl4.Controls.Add(Me.BDeleteScan)
-        Me.PanelControl4.Controls.Add(Me.BInputManual)
-        Me.PanelControl4.Dock = System.Windows.Forms.DockStyle.Top
-        Me.PanelControl4.Location = New System.Drawing.Point(0, 98)
-        Me.PanelControl4.Name = "PanelControl4"
-        Me.PanelControl4.Size = New System.Drawing.Size(932, 44)
-        Me.PanelControl4.TabIndex = 4
+        Me.PCAddDel.Controls.Add(Me.LabelControl4)
+        Me.PCAddDel.Controls.Add(Me.BDeleteScan)
+        Me.PCAddDel.Controls.Add(Me.BInputManual)
+        Me.PCAddDel.Dock = System.Windows.Forms.DockStyle.Top
+        Me.PCAddDel.Location = New System.Drawing.Point(0, 98)
+        Me.PCAddDel.Name = "PCAddDel"
+        Me.PCAddDel.Size = New System.Drawing.Size(932, 44)
+        Me.PCAddDel.TabIndex = 4
         '
         'LabelControl4
         '
@@ -400,6 +400,28 @@ Partial Class FormScanReturnBAP
         Me.RepositoryItemSearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = False
         Me.RepositoryItemSearchLookUpEdit1View.OptionsView.ShowGroupPanel = False
         '
+        'GridColumn2
+        '
+        Me.GridColumn2.Caption = "ID"
+        Me.GridColumn2.FieldName = "id_return_note"
+        Me.GridColumn2.Name = "GridColumn2"
+        '
+        'GridColumn11
+        '
+        Me.GridColumn11.Caption = "Return Note"
+        Me.GridColumn11.FieldName = "number_return_note"
+        Me.GridColumn11.Name = "GridColumn11"
+        Me.GridColumn11.Visible = True
+        Me.GridColumn11.VisibleIndex = 0
+        '
+        'GridColumn12
+        '
+        Me.GridColumn12.Caption = "GridColumn12"
+        Me.GridColumn12.FieldName = "qty"
+        Me.GridColumn12.Name = "GridColumn12"
+        Me.GridColumn12.Visible = True
+        Me.GridColumn12.VisibleIndex = 1
+        '
         'GridColumn3
         '
         Me.GridColumn3.Caption = "Code"
@@ -481,6 +503,20 @@ Partial Class FormScanReturnBAP
         Me.GridView1.OptionsSelection.EnableAppearanceFocusedCell = False
         Me.GridView1.OptionsView.ShowGroupPanel = False
         '
+        'GridColumn13
+        '
+        Me.GridColumn13.Caption = "ID"
+        Me.GridColumn13.FieldName = "id_type"
+        Me.GridColumn13.Name = "GridColumn13"
+        '
+        'GridColumn14
+        '
+        Me.GridColumn14.Caption = "Type"
+        Me.GridColumn14.FieldName = "type"
+        Me.GridColumn14.Name = "GridColumn14"
+        Me.GridColumn14.Visible = True
+        Me.GridColumn14.VisibleIndex = 0
+        '
         'GridColumnListToko
         '
         Me.GridColumnListToko.Caption = "List Toko"
@@ -502,49 +538,13 @@ Partial Class FormScanReturnBAP
         Me.GridColumnSuratjalanDesc.OptionsColumn.AllowEdit = False
         Me.GridColumnSuratjalanDesc.OptionsColumn.ReadOnly = True
         '
-        'GridColumn2
-        '
-        Me.GridColumn2.Caption = "ID"
-        Me.GridColumn2.FieldName = "id_return_note"
-        Me.GridColumn2.Name = "GridColumn2"
-        '
-        'GridColumn11
-        '
-        Me.GridColumn11.Caption = "Return Note"
-        Me.GridColumn11.FieldName = "number_return_note"
-        Me.GridColumn11.Name = "GridColumn11"
-        Me.GridColumn11.Visible = True
-        Me.GridColumn11.VisibleIndex = 0
-        '
-        'GridColumn12
-        '
-        Me.GridColumn12.Caption = "GridColumn12"
-        Me.GridColumn12.FieldName = "qty"
-        Me.GridColumn12.Name = "GridColumn12"
-        Me.GridColumn12.Visible = True
-        Me.GridColumn12.VisibleIndex = 1
-        '
-        'GridColumn13
-        '
-        Me.GridColumn13.Caption = "ID"
-        Me.GridColumn13.FieldName = "id_type"
-        Me.GridColumn13.Name = "GridColumn13"
-        '
-        'GridColumn14
-        '
-        Me.GridColumn14.Caption = "Type"
-        Me.GridColumn14.FieldName = "type"
-        Me.GridColumn14.Name = "GridColumn14"
-        Me.GridColumn14.Visible = True
-        Me.GridColumn14.VisibleIndex = 0
-        '
         'FormScanReturnBAP
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(932, 587)
         Me.Controls.Add(Me.GCListProduct)
-        Me.Controls.Add(Me.PanelControl4)
+        Me.Controls.Add(Me.PCAddDel)
         Me.Controls.Add(Me.PanelControl3)
         Me.Controls.Add(Me.PanelControl2)
         Me.Controls.Add(Me.PanelControl1)
@@ -572,9 +572,9 @@ Partial Class FormScanReturnBAP
         CType(Me.CEBasah.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CELakbanRusak.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CELubang.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PanelControl4, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.PanelControl4.ResumeLayout(False)
-        Me.PanelControl4.PerformLayout()
+        CType(Me.PCAddDel, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PCAddDel.ResumeLayout(False)
+        Me.PCAddDel.PerformLayout()
         CType(Me.GCListProduct, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVListProduct, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RISLEReturnNote, System.ComponentModel.ISupportInitialize).EndInit()
@@ -600,7 +600,7 @@ Partial Class FormScanReturnBAP
     Friend WithEvents CELakbanRusak As DevExpress.XtraEditors.CheckEdit
     Friend WithEvents CELubang As DevExpress.XtraEditors.CheckEdit
     Friend WithEvents LabelControl3 As DevExpress.XtraEditors.LabelControl
-    Friend WithEvents PanelControl4 As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents PCAddDel As DevExpress.XtraEditors.PanelControl
     Friend WithEvents BDeleteScan As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents BInputManual As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents GCListProduct As DevExpress.XtraGrid.GridControl

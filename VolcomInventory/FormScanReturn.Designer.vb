@@ -84,6 +84,7 @@ Partial Class FormScanReturn
         Me.LabelControl3 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl6 = New DevExpress.XtraEditors.LabelControl()
         Me.DEStartScan = New DevExpress.XtraEditors.DateEdit()
+        Me.GridColumn33 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.DEUntil.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -207,7 +208,7 @@ Partial Class FormScanReturn
         '
         'GVAwb
         '
-        Me.GVAwb.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn18, Me.GridColumn2, Me.GridColumn6, Me.GridColumn17, Me.GridColumn22, Me.GridColumn3, Me.GridColumn7, Me.GridColumn4, Me.GridColumn5, Me.GridColumn8, Me.GridColumn21, Me.GridColumn9, Me.GridColumn10})
+        Me.GVAwb.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn18, Me.GridColumn2, Me.GridColumn6, Me.GridColumn17, Me.GridColumn22, Me.GridColumn3, Me.GridColumn7, Me.GridColumn4, Me.GridColumn5, Me.GridColumn8, Me.GridColumn21, Me.GridColumn9, Me.GridColumn10, Me.GridColumn33})
         Me.GVAwb.GridControl = Me.GCAwb
         Me.GVAwb.Name = "GVAwb"
         Me.GVAwb.OptionsBehavior.Editable = False
@@ -760,6 +761,18 @@ Partial Class FormScanReturn
         Me.DEStartScan.Size = New System.Drawing.Size(136, 20)
         Me.DEStartScan.TabIndex = 8920
         '
+        'GridColumn33
+        '
+        Me.GridColumn33.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumn33.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumn33.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumn33.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumn33.Caption = "Void"
+        Me.GridColumn33.FieldName = "sts_void"
+        Me.GridColumn33.Name = "GridColumn33"
+        Me.GridColumn33.Visible = True
+        Me.GridColumn33.VisibleIndex = 12
+        '
         'FormScanReturn
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -876,4 +889,5 @@ Partial Class FormScanReturn
     Friend WithEvents GridColumn32 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents RepositoryItemMemoEdit3 As DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit
     Friend WithEvents BPrintScan As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents GridColumn33 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

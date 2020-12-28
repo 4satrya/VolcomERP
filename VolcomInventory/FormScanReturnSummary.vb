@@ -49,7 +49,7 @@ LEFT JOIN
     GROUP BY sc.`id_return_note`
 )sc ON sc.id_return_note=rn.id_return_note
 INNER JOIN tb_m_employee emp ON emp.id_employee=rn.id_emp_driver
-WHERE rn.id_type=1 AND rn.id_emp_driver='" & SLEEmp.EditValue.ToString & "' AND DATE(rn.`date_created`)>='" & date_start & "' AND DATE(rn.`date_created`)<='" & date_start & "'"
+WHERE rn.id_type=1 AND rn.is_void=2 AND rn.id_emp_driver='" & SLEEmp.EditValue.ToString & "' AND DATE(rn.`date_created`)>='" & date_start & "' AND DATE(rn.`date_created`)<='" & date_start & "'"
         Dim dt As DataTable = execute_query(q, -1, True, "", "", "", "")
         GCLocal.DataSource = dt
         GVLocal.BestFitColumns()
@@ -67,7 +67,7 @@ WHERE rn.id_type=1 AND rn.id_emp_driver='" & SLEEmp.EditValue.ToString & "' AND 
 ,awb.`awb_number`
 ,c.comp_name
 FROM `tb_return_note` rn
-INNER JOIN `tb_inbound_awb` awb ON awb.`id_inbound_awb`=rn.`id_inbound_awb`
+INNER JOIN `tb_inbound_awb` awb ON awb.`id_inbound_awb`=rn.`id_inbound_awb` AND awb.is_void=2
 INNER JOIN tb_m_comp c ON c.id_comp=awb.id_comp
 LEFT JOIN
 (
@@ -91,7 +91,7 @@ LEFT JOIN
     WHERE sc.is_void!=1
     GROUP BY sc.`id_return_note`
 )sc ON sc.id_return_note=rn.id_return_note
-WHERE rn.id_type=2 AND awb.id_comp='" & SLEVendor.EditValue.ToString & "' AND DATE(rn.`date_created`)>='" & date_start & "' AND DATE(rn.`date_created`)<='" & date_start & "'"
+WHERE rn.id_type=2 AND rn.is_void=2 AND awb.id_comp='" & SLEVendor.EditValue.ToString & "' AND DATE(rn.`date_created`)>='" & date_start & "' AND DATE(rn.`date_created`)<='" & date_start & "'"
         Dim dt As DataTable = execute_query(q, -1, True, "", "", "", "")
         GC3PL.DataSource = dt
         GV3PL.BestFitColumns()

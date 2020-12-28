@@ -93,6 +93,19 @@ WHERE bo.`year`=YEAR(NOW()) AND bo.is_active='1'"
         Else
             query += " AND id_coa_type='2' "
         End If
+
+        If Not action = "ins" Then
+            'update 
+            If check_edit_report_status(id_report_status, "157", id) And Not is_view = "1" Then
+                'msh bisa edit
+                query += " AND id_acc_cat='4' "
+            Else
+                'tidak bisa edit
+            End If
+        Else
+            query += " AND id_acc_cat='4' "
+        End If
+
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         RepositoryItemSearchLookUpEdit1.DataSource = Nothing
         RepositoryItemSearchLookUpEdit1.DataSource = data
@@ -220,7 +233,7 @@ WHERE bo.`year`=YEAR(NOW()) AND bo.is_active='1'"
     Sub viewDetail()
         Cursor = Cursors.WaitCursor
         Dim query As String = "SELECT ed.id_currency,cur.currency,ed.amount_before,ed.kurs,ed.id_item_expense_det,ed.cc,c.comp_number AS cc_desc, ed.id_item_expense,ed.id_expense_type,ed.id_b_expense,bex.item_cat_main,typ.expense_type,
-        ed.id_acc,pphacc.acc_description AS coa_desc_pph, a.acc_description AS `coa_desc`, ed.description,a.acc_name,ed.id_acc_pph,ed.pph_percent,ed.pph, "
+        ed.id_acc,pphacc.acc_description AS coa_desc_pph,a.id_acc_cat, a.acc_description AS `coa_desc`, ed.description,a.acc_name,ed.id_acc_pph,ed.pph_percent,ed.pph, "
 
         If action = "ins" Then
             query += "0.00 AS tax_percent,0.00 AS `amount` "
@@ -529,6 +542,19 @@ WHERE bo.`year`=YEAR(NOW()) AND bo.is_active='1'"
 
     Private Sub BtnMark_Click(sender As Object, e As EventArgs) Handles BtnMark.Click
         Cursor = Cursors.WaitCursor
+
+        'warning system
+        Dim is_not_expense As Boolean = False
+        For i As Integer = 0 To GVData.RowCount - 1
+            If Not GVData.GetRowCellValue(i, "id_acc_cat").ToString = "4" Then
+                is_not_expense = True
+            End If
+        Next
+
+        If is_not_expense Then
+            warningCustom("Warning : This expense contain COA that not expense.")
+        End If
+
         FormReportMark.report_mark_type = "157"
         FormReportMark.id_report = id
         FormReportMark.is_view = is_view

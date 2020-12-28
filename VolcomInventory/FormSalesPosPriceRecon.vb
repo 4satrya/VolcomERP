@@ -344,10 +344,9 @@
     Private Sub RepoLinkInvoice_Click(sender As Object, e As EventArgs) Handles RepoLinkInvoice.Click
         If GVData.RowCount > 0 And GVData.FocusedRowHandle >= 0 Then
             Cursor = Cursors.WaitCursor
-            Dim m As New ClassShowPopUp()
-            m.report_mark_type = GVData.GetFocusedRowCellValue("rmt_inv").ToString
-            m.id_report = GVData.GetFocusedRowCellValue("id_sales_pos").ToString
-            m.show()
+            Dim sp As New FormViewSalesPOS()
+            sp.id_sales_pos = GVData.GetFocusedRowCellValue("id_sales_pos").ToString
+            sp.ShowDialog()
             Cursor = Cursors.Default
         End If
     End Sub

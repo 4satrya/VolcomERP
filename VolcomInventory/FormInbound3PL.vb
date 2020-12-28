@@ -67,7 +67,7 @@ GROUP BY rate.id_comp"
         End If
 
         Dim q As String = "SELECT awb.`id_inbound_awb`,awb.`id_comp`,c.`comp_name`,emp.`employee_name`,del.`del_type`,awb.`awb_number`,awb.`created_date`,st_list.store AS store_list
-,koli_list.total_koli,koli_list.total_berat_dimensi,koli_list.total_berat
+,koli_list.total_koli,koli_list.total_berat_dimensi,koli_list.total_berat,IF(awb.is_void=1,'-','Void') as sts_void
 FROM tb_inbound_awb awb
 INNER JOIN tb_m_comp c ON c.`id_comp`=awb.`id_comp`
 INNER JOIN tb_lookup_del_type del ON del.`id_del_type`=awb.`id_del_type`
@@ -112,7 +112,7 @@ ORDER BY awb.id_inbound_awb DESC"
             Dim q As String = "SELECT awb.`id_inbound_awb`,awb.created_date,awb.`awb_number`,awb.`id_comp`,koli.`panjang`,koli.`lebar`,koli.`tinggi`,koli.`berat`,koli.`berat_dimensi`,IF(koli.`berat`>koli.`berat_dimensi`,koli.`berat`,koli.`berat_dimensi`) AS final_berat
 ,st_list.store AS store_list
 FROM tb_inbound_koli koli
-INNER JOIN tb_inbound_awb awb ON awb.`id_inbound_awb`=koli.`id_inbound_awb`
+INNER JOIN tb_inbound_awb awb ON awb.`id_inbound_awb`=koli.`id_inbound_awb` AND awb.is_void=2
 LEFT JOIN
 (
     SELECT st.`id_inbound_awb`,GROUP_CONCAT(DISTINCT CONCAT(c.comp_number,' - ',c.comp_name) ORDER BY c.`comp_number` ASC SEPARATOR '\n') AS store

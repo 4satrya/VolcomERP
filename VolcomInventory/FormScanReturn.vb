@@ -73,6 +73,7 @@
 ,COUNT(DISTINCT srd.`id_scan_return_det`) AS qty_scan
 ,IFNULL(bap.qty_bap,0) AS qty_bap
 ,bap.bap_number
+,IF(sr.is_void=2,'-','Void') AS sts_void
 FROM tb_scan_return_det srd
 INNER JOIN tb_scan_return sr ON sr.`id_scan_return`=srd.`id_scan_return`
 INNER JOIN tb_return_note rn ON rn.`id_return_note`=sr.`id_return_note`

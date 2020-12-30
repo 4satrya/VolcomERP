@@ -21,6 +21,7 @@ Partial Class FormSalesPosPriceRecon
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormSalesPosPriceRecon))
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
+        Me.SBPrint = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnAttachment = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnCancell = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnResetPropose = New DevExpress.XtraEditors.SimpleButton()
@@ -81,6 +82,7 @@ Partial Class FormSalesPosPriceRecon
         '
         'PanelControl1
         '
+        Me.PanelControl1.Controls.Add(Me.SBPrint)
         Me.PanelControl1.Controls.Add(Me.BtnAttachment)
         Me.PanelControl1.Controls.Add(Me.BtnCancell)
         Me.PanelControl1.Controls.Add(Me.BtnResetPropose)
@@ -92,6 +94,17 @@ Partial Class FormSalesPosPriceRecon
         Me.PanelControl1.Name = "PanelControl1"
         Me.PanelControl1.Size = New System.Drawing.Size(836, 46)
         Me.PanelControl1.TabIndex = 0
+        '
+        'SBPrint
+        '
+        Me.SBPrint.Dock = System.Windows.Forms.DockStyle.Right
+        Me.SBPrint.Image = CType(resources.GetObject("SBPrint.Image"), System.Drawing.Image)
+        Me.SBPrint.Location = New System.Drawing.Point(179, 2)
+        Me.SBPrint.Name = "SBPrint"
+        Me.SBPrint.Size = New System.Drawing.Size(87, 42)
+        Me.SBPrint.TabIndex = 12
+        Me.SBPrint.Text = "Print"
+        Me.SBPrint.Visible = False
         '
         'BtnAttachment
         '
@@ -524,4 +537,5 @@ Partial Class FormSalesPosPriceRecon
     Friend WithEvents GridColumnid_comp As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents RepoLinkInvoice As DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit
     Friend WithEvents GridColumnrmt_inv As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents SBPrint As DevExpress.XtraEditors.SimpleButton
 End Class

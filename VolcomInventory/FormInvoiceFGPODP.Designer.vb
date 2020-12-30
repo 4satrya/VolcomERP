@@ -128,6 +128,7 @@ Partial Class FormInvoiceFGPODP
         Me.GridColumndebit_draft = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumncredit_draft = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumncc = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.TEDocType = New DevExpress.XtraEditors.TextEdit()
         CType(Me.LargeImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl7, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl7.SuspendLayout()
@@ -183,6 +184,7 @@ Partial Class FormInvoiceFGPODP
         Me.XTPDraft.SuspendLayout()
         CType(Me.GCDraft, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVDraft, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TEDocType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'LargeImageCollection
@@ -405,6 +407,7 @@ Partial Class FormInvoiceFGPODP
         'PanelControl3
         '
         Me.PanelControl3.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
+        Me.PanelControl3.Controls.Add(Me.TEDocType)
         Me.PanelControl3.Controls.Add(Me.SLEPayType)
         Me.PanelControl3.Controls.Add(Me.SLEVendor)
         Me.PanelControl3.Controls.Add(Me.LabelControl3)
@@ -419,12 +422,12 @@ Partial Class FormInvoiceFGPODP
         '
         'SLEPayType
         '
-        Me.SLEPayType.Location = New System.Drawing.Point(88, 64)
+        Me.SLEPayType.Location = New System.Drawing.Point(206, 64)
         Me.SLEPayType.Name = "SLEPayType"
         Me.SLEPayType.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.SLEPayType.Properties.ReadOnly = True
         Me.SLEPayType.Properties.View = Me.GridView1
-        Me.SLEPayType.Size = New System.Drawing.Size(287, 20)
+        Me.SLEPayType.Size = New System.Drawing.Size(169, 20)
         Me.SLEPayType.TabIndex = 8919
         '
         'GridView1
@@ -1258,6 +1261,17 @@ Partial Class FormInvoiceFGPODP
         Me.GridColumncc.VisibleIndex = 1
         Me.GridColumncc.Width = 39
         '
+        'TEDocType
+        '
+        Me.TEDocType.EditValue = ""
+        Me.TEDocType.Location = New System.Drawing.Point(88, 64)
+        Me.TEDocType.Name = "TEDocType"
+        Me.TEDocType.Properties.EditValueChangedDelay = 1
+        Me.TEDocType.Properties.ReadOnly = True
+        Me.TEDocType.Size = New System.Drawing.Size(112, 20)
+        Me.TEDocType.TabIndex = 8920
+        Me.TEDocType.TabStop = False
+        '
         'FormInvoiceFGPODP
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1333,6 +1347,7 @@ Partial Class FormInvoiceFGPODP
         Me.XTPDraft.ResumeLayout(False)
         CType(Me.GCDraft, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVDraft, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TEDocType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1444,4 +1459,5 @@ Partial Class FormInvoiceFGPODP
     Friend WithEvents LabelControl12 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents TETotalPPH As DevExpress.XtraEditors.TextEdit
     Friend WithEvents GridColumnPPHDesc As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents TEDocType As DevExpress.XtraEditors.TextEdit
 End Class

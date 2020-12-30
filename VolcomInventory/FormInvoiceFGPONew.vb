@@ -669,7 +669,7 @@ WHERE pn.`type`=1 AND pnd.`id_prod_order`='" & SLEFGPO.EditValue.ToString & "' A
         FROM tb_pn_fgpo_det pnd
         INNER JOIN tb_pn_fgpo pn ON pn.`id_pn_fgpo`=pnd.`id_pn_fgpo` AND pn.`id_report_status`!=5
         INNER JOIN tb_pn_type pnt ON pnt.id_type=pn.type
-        WHERE pnd.`id_prod_order`=@id_po
+        WHERE pnd.`id_prod_order`=@id_po AND pn.doc_type=2
         GROUP BY pnd.id_pn_fgpo"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCRec.DataSource = data

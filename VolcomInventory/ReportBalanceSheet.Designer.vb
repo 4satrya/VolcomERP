@@ -50,14 +50,14 @@ Partial Public Class ReportBalanceSheet
         Me.XrTableRow6 = New DevExpress.XtraReports.UI.XRTableRow()
         Me.XrTableCell17 = New DevExpress.XtraReports.UI.XRTableCell()
         Me.XrTableCell18 = New DevExpress.XtraReports.UI.XRTableCell()
-        Me.CPThisMonth = New DevExpress.XtraReports.UI.XRTableCell()
         Me.CPPrevMonth = New DevExpress.XtraReports.UI.XRTableCell()
+        Me.CPThisMonth = New DevExpress.XtraReports.UI.XRTableCell()
         Me.XrTable5 = New DevExpress.XtraReports.UI.XRTable()
         Me.XrTableRow5 = New DevExpress.XtraReports.UI.XRTableRow()
         Me.XrTableCell9 = New DevExpress.XtraReports.UI.XRTableCell()
         Me.XrTableCell10 = New DevExpress.XtraReports.UI.XRTableCell()
-        Me.CAThisMonth = New DevExpress.XtraReports.UI.XRTableCell()
         Me.CAPrevMonth = New DevExpress.XtraReports.UI.XRTableCell()
+        Me.CAThisMonth = New DevExpress.XtraReports.UI.XRTableCell()
         Me.XrTable3 = New DevExpress.XtraReports.UI.XRTable()
         Me.XrTableRow3 = New DevExpress.XtraReports.UI.XRTableRow()
         Me.XrTableCell5 = New DevExpress.XtraReports.UI.XRTableCell()
@@ -403,7 +403,7 @@ Partial Public Class ReportBalanceSheet
         '
         'XrTableRow6
         '
-        Me.XrTableRow6.Cells.AddRange(New DevExpress.XtraReports.UI.XRTableCell() {Me.XrTableCell17, Me.XrTableCell18, Me.CPThisMonth, Me.CPPrevMonth})
+        Me.XrTableRow6.Cells.AddRange(New DevExpress.XtraReports.UI.XRTableCell() {Me.XrTableCell17, Me.XrTableCell18, Me.CPPrevMonth, Me.CPThisMonth})
         Me.XrTableRow6.Name = "XrTableRow6"
         Me.XrTableRow6.Weight = 1.0R
         '
@@ -427,19 +427,6 @@ Partial Public Class ReportBalanceSheet
         Me.XrTableCell18.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
         Me.XrTableCell18.Weight = 0.91904276158423781R
         '
-        'CPThisMonth
-        '
-        Me.CPThisMonth.Borders = CType((((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Top) _
-            Or DevExpress.XtraPrinting.BorderSide.Right) _
-            Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
-        Me.CPThisMonth.Name = "CPThisMonth"
-        Me.CPThisMonth.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 5, 0, 0, 100.0!)
-        Me.CPThisMonth.StylePriority.UseBorders = False
-        Me.CPThisMonth.StylePriority.UsePadding = False
-        Me.CPThisMonth.StylePriority.UseTextAlignment = False
-        Me.CPThisMonth.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight
-        Me.CPThisMonth.Weight = 0.39958380748639089R
-        '
         'CPPrevMonth
         '
         Me.CPPrevMonth.Borders = CType((((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Top) _
@@ -451,7 +438,20 @@ Partial Public Class ReportBalanceSheet
         Me.CPPrevMonth.StylePriority.UsePadding = False
         Me.CPPrevMonth.StylePriority.UseTextAlignment = False
         Me.CPPrevMonth.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight
-        Me.CPPrevMonth.Weight = 0.39958380748639105R
+        Me.CPPrevMonth.Weight = 0.39958380748639089R
+        '
+        'CPThisMonth
+        '
+        Me.CPThisMonth.Borders = CType((((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Top) _
+            Or DevExpress.XtraPrinting.BorderSide.Right) _
+            Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
+        Me.CPThisMonth.Name = "CPThisMonth"
+        Me.CPThisMonth.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 5, 0, 0, 100.0!)
+        Me.CPThisMonth.StylePriority.UseBorders = False
+        Me.CPThisMonth.StylePriority.UsePadding = False
+        Me.CPThisMonth.StylePriority.UseTextAlignment = False
+        Me.CPThisMonth.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight
+        Me.CPThisMonth.Weight = 0.39958380748639105R
         '
         'XrTable5
         '
@@ -470,7 +470,7 @@ Partial Public Class ReportBalanceSheet
         '
         'XrTableRow5
         '
-        Me.XrTableRow5.Cells.AddRange(New DevExpress.XtraReports.UI.XRTableCell() {Me.XrTableCell9, Me.XrTableCell10, Me.CAThisMonth, Me.CAPrevMonth})
+        Me.XrTableRow5.Cells.AddRange(New DevExpress.XtraReports.UI.XRTableCell() {Me.XrTableCell9, Me.XrTableCell10, Me.CAPrevMonth, Me.CAThisMonth})
         Me.XrTableRow5.Name = "XrTableRow5"
         Me.XrTableRow5.Weight = 1.0R
         '
@@ -497,19 +497,6 @@ Partial Public Class ReportBalanceSheet
         Me.XrTableCell10.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
         Me.XrTableCell10.Weight = 0.91904276158423781R
         '
-        'CAThisMonth
-        '
-        Me.CAThisMonth.Borders = CType((((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Top) _
-            Or DevExpress.XtraPrinting.BorderSide.Right) _
-            Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
-        Me.CAThisMonth.Name = "CAThisMonth"
-        Me.CAThisMonth.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 5, 0, 0, 100.0!)
-        Me.CAThisMonth.StylePriority.UseBorders = False
-        Me.CAThisMonth.StylePriority.UsePadding = False
-        Me.CAThisMonth.StylePriority.UseTextAlignment = False
-        Me.CAThisMonth.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight
-        Me.CAThisMonth.Weight = 0.39958380748639089R
-        '
         'CAPrevMonth
         '
         Me.CAPrevMonth.Borders = CType((((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Top) _
@@ -521,7 +508,20 @@ Partial Public Class ReportBalanceSheet
         Me.CAPrevMonth.StylePriority.UsePadding = False
         Me.CAPrevMonth.StylePriority.UseTextAlignment = False
         Me.CAPrevMonth.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight
-        Me.CAPrevMonth.Weight = 0.39958380748639105R
+        Me.CAPrevMonth.Weight = 0.39958380748639089R
+        '
+        'CAThisMonth
+        '
+        Me.CAThisMonth.Borders = CType((((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Top) _
+            Or DevExpress.XtraPrinting.BorderSide.Right) _
+            Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
+        Me.CAThisMonth.Name = "CAThisMonth"
+        Me.CAThisMonth.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 5, 0, 0, 100.0!)
+        Me.CAThisMonth.StylePriority.UseBorders = False
+        Me.CAThisMonth.StylePriority.UsePadding = False
+        Me.CAThisMonth.StylePriority.UseTextAlignment = False
+        Me.CAThisMonth.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight
+        Me.CAThisMonth.Weight = 0.39958380748639105R
         '
         'XrTable3
         '
@@ -719,14 +719,14 @@ Partial Public Class ReportBalanceSheet
     Friend WithEvents XrTableRow6 As DevExpress.XtraReports.UI.XRTableRow
     Friend WithEvents XrTableCell17 As DevExpress.XtraReports.UI.XRTableCell
     Friend WithEvents XrTableCell18 As DevExpress.XtraReports.UI.XRTableCell
-    Friend WithEvents CPThisMonth As DevExpress.XtraReports.UI.XRTableCell
     Friend WithEvents CPPrevMonth As DevExpress.XtraReports.UI.XRTableCell
+    Friend WithEvents CPThisMonth As DevExpress.XtraReports.UI.XRTableCell
     Friend WithEvents XrTable5 As DevExpress.XtraReports.UI.XRTable
     Friend WithEvents XrTableRow5 As DevExpress.XtraReports.UI.XRTableRow
     Friend WithEvents XrTableCell9 As DevExpress.XtraReports.UI.XRTableCell
     Friend WithEvents XrTableCell10 As DevExpress.XtraReports.UI.XRTableCell
-    Friend WithEvents CAThisMonth As DevExpress.XtraReports.UI.XRTableCell
     Friend WithEvents CAPrevMonth As DevExpress.XtraReports.UI.XRTableCell
+    Friend WithEvents CAThisMonth As DevExpress.XtraReports.UI.XRTableCell
     Friend WithEvents PageHeader As DevExpress.XtraReports.UI.PageHeaderBand
     Friend WithEvents XTablePasiva As DevExpress.XtraReports.UI.XRTable
     Friend WithEvents XRowPasiva As DevExpress.XtraReports.UI.XRTableRow

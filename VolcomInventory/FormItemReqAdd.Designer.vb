@@ -68,14 +68,14 @@ Partial Class FormItemReqAdd
         '
         Me.CEStoreRequest.Location = New System.Drawing.Point(252, 14)
         Me.CEStoreRequest.Name = "CEStoreRequest"
-        Me.CEStoreRequest.Properties.Caption = "From Purchasing Storage"
-        Me.CEStoreRequest.Size = New System.Drawing.Size(143, 19)
+        Me.CEStoreRequest.Properties.Caption = "Stok From Purchasing Storage"
+        Me.CEStoreRequest.Size = New System.Drawing.Size(171, 19)
         Me.CEStoreRequest.TabIndex = 8911
         '
         'BtnView
         '
         Me.BtnView.Image = CType(resources.GetObject("BtnView.Image"), System.Drawing.Image)
-        Me.BtnView.Location = New System.Drawing.Point(401, 12)
+        Me.BtnView.Location = New System.Drawing.Point(429, 12)
         Me.BtnView.Name = "BtnView"
         Me.BtnView.Size = New System.Drawing.Size(75, 23)
         Me.BtnView.TabIndex = 23
@@ -83,16 +83,16 @@ Partial Class FormItemReqAdd
         '
         'LECat
         '
-        Me.LECat.Location = New System.Drawing.Point(71, 14)
+        Me.LECat.Location = New System.Drawing.Point(63, 14)
         Me.LECat.Name = "LECat"
         Me.LECat.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.LECat.Properties.Columns.AddRange(New DevExpress.XtraEditors.Controls.LookUpColumnInfo() {New DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_item_cat", "Id", 20, DevExpress.Utils.FormatType.None, "", False, DevExpress.Utils.HorzAlignment.[Default]), New DevExpress.XtraEditors.Controls.LookUpColumnInfo("item_cat", "Category")})
-        Me.LECat.Size = New System.Drawing.Size(175, 20)
+        Me.LECat.Size = New System.Drawing.Size(183, 20)
         Me.LECat.TabIndex = 22
         '
         'LabelControl1
         '
-        Me.LabelControl1.Location = New System.Drawing.Point(20, 17)
+        Me.LabelControl1.Location = New System.Drawing.Point(12, 17)
         Me.LabelControl1.Name = "LabelControl1"
         Me.LabelControl1.Size = New System.Drawing.Size(45, 13)
         Me.LabelControl1.TabIndex = 21

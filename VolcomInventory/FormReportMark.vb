@@ -6218,7 +6218,7 @@ WHERE copd.id_design_cop_propose='" & id_report & "';"
             'id_status_reportx = "6"
             'End If
             'select header
-            Dim qu_payment As String = "SELECT id_pay_type,report_mark_type,date_created,date_payment,is_auto_debet FROM tb_pn py WHERE py.id_pn='" & id_report & "'"
+            Dim qu_payment As String = "SELECT id_pay_type,report_mark_type,date_created,date_payment,is_auto_debet,is_buy_valas,kurs FROM tb_pn py WHERE py.id_pn='" & id_report & "'"
             Dim data_payment As DataTable = execute_query(qu_payment, -1, True, "", "", "", "")
 
             If data_payment.Rows(0)("is_auto_debet").ToString = "1" Then
@@ -6229,7 +6229,6 @@ WHERE copd.id_design_cop_propose='" & id_report & "';"
 
             'completed
             If id_status_reportx = "6" Then
-
                 'auto journal
                 Dim qu As String = "SELECT rm.id_user, rm.report_number FROM tb_report_mark rm WHERE rm.report_mark_type=" + report_mark_type + " AND rm.id_report='" + id_report + "' AND rm.id_report_status=1 "
                 Dim du As DataTable = execute_query(qu, -1, True, "", "", "", "")
@@ -6351,7 +6350,6 @@ WHERE pd.balance_due=pd.`value` AND pd.`id_pn`='" & id_report & "'"
                             execute_non_query(qc, True, "", "", "", "")
                         End If
                     Next
-                    '
                     'FormBankWithdrawal.load_fgpo()
                 ElseIf data_payment.Rows(0)("report_mark_type").ToString = "223" Then
                     'close bpjs
@@ -6416,6 +6414,20 @@ WHERE id_sales_branch IN (SELECT id_report FROM tb_pn_det WHERE id_pn='" & id_re
                     execute_non_query(qe, True, "", "", "", "")
                 Next
                 '
+                If data_payment.Rows(0)("is_buy_valas").ToString = "1" Then
+                    'insert to stok valas
+                    Dim qi As String = "INSERT INTO tb_stock_valas(`id_report`,`report_mark_type`,`id_currency`,`amount`,`trans_datetime`,`kurs_transaksi`)
+SELECT pnd.`id_pn`,'189',pnd.id_currency,pnd.val_bef_kurs,NOW(),pnd.kurs
+FROM tb_pn_det pnd
+WHERE pnd.id_currency!=1 AND pnd.`id_pn`='" & id_report & "'"
+                    execute_non_query(qi, True, "", "", "", "")
+                Else
+                    Dim qi As String = "INSERT INTO tb_stock_valas(`id_report`,`report_mark_type`,`id_currency`,`amount`,`trans_datetime`)
+SELECT pnd.`id_pn`,'189',pnd.id_currency,-pnd.val_bef_kurs,NOW()
+FROM tb_pn_det pnd
+WHERE pnd.id_currency!=1 AND pnd.`id_pn`='" & id_report & "'"
+                    execute_non_query(qi, True, "", "", "", "")
+                End If
             End If
 
             'update

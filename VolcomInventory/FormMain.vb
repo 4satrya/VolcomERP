@@ -9397,6 +9397,9 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
         ElseIf formName = "FormVerificationMasterOL" Then
             FormVerificationMasterOL.Close()
             FormVerificationMasterOL.Dispose()
+        ElseIf formName = "FormVerificationMasterPrice" Then
+            FormVerificationMasterPrice.Close()
+            FormVerificationMasterPrice.Dispose()
         ElseIf formName = "FormMasterDesignFabrication" Then
             FormMasterDesignFabrication.Close()
             FormMasterDesignFabrication.Dispose()
@@ -15697,6 +15700,17 @@ WHERE pddr.id_prod_demand_design='" & FormProduction.GVDesign.GetFocusedRowCellV
             FormAdjustmentOG.Show()
             FormAdjustmentOG.WindowState = FormWindowState.Maximized
             FormAdjustmentOG.Focus()
+        Catch ex As Exception
+            errorProcess()
+        End Try
+    End Sub
+
+    Private Sub NBVerificationMasterPrice_LinkClicked(sender As Object, e As DevExpress.XtraNavBar.NavBarLinkEventArgs) Handles NBVerificationMasterPrice.LinkClicked
+        Try
+            FormVerificationMasterPrice.MdiParent = Me
+            FormVerificationMasterPrice.Show()
+            FormVerificationMasterPrice.WindowState = FormWindowState.Maximized
+            FormVerificationMasterPrice.Focus()
         Catch ex As Exception
             errorProcess()
         End Try

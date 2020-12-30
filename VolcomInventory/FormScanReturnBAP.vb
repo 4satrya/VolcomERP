@@ -8,7 +8,7 @@
         DEBAP.EditValue = Now
         load_type()
         load_3pl()
-        load_surat_jalan()
+
         '
         If Not id_bap = "-1" Then
             Dim q As String = "SELECT bap_number,`bap_date`,`is_lubang`,`is_seal_rusak`,`is_basah`,`is_other_cond`,`other_cond`,id_3pl,is_lock FROM tb_scan_return_bap WHERE id_scan_return_bap='" & id_bap & "'"
@@ -40,12 +40,15 @@
                 '
                 If dt.Rows(0)("is_lock").ToString = "1" Then
                     BSave.Visible = False
+                    PCAddDel.Visible = False
                 Else
                     BSave.Visible = True
+                    PCAddDel.Visible = True
                 End If
             End If
         End If
         '
+        load_surat_jalan()
         load_det()
         check_but()
     End Sub
@@ -87,7 +90,7 @@ FROM tb_scan_return_bap_det WHERE id_scan_return_bap='" & id_bap & "'"
 
         Dim q As String = "SELECT rn.`id_return_note`,rn.`label_number`,rn.`number_return_note`,rn.`qty`,IFNULL(sc.qty_scan,0) AS qty_scan
 FROM tb_return_note rn
-LEFT JOIN tb_inbound_awb awb ON awb.id_inbound_awb=rn.id_inbound_awb
+LEFT JOIN tb_inbound_awb awb ON awb.id_inbound_awb=rn.id_inbound_awb AND awb.is_void=2
 INNER JOIN
 (
 	SELECT st.`id_return_note`,GROUP_CONCAT(DISTINCT CONCAT(c.comp_number,' - ',c.comp_name) ORDER BY c.`comp_number` ASC SEPARATOR '\n') AS store
@@ -103,7 +106,10 @@ LEFT JOIN
 	WHERE sc.is_void=2
 	GROUP BY sc.id_scan_return
 )sc ON sc.id_return_note=rn.`id_return_note`
-WHERE rn.`is_lock`=2 AND rn.`is_void`=2 " & q_where
+WHERE rn.`is_void`=2 " & q_where
+        If BSave.Visible = True Then
+            q += " AND rn.is_lock=2 "
+        End If
         viewSearchLookupRepositoryQuery(RISLEReturnNote, q, 0, "number_return_note", "id_return_note")
     End Sub
 

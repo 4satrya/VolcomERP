@@ -101,7 +101,7 @@ Partial Class FormBankWithdrawalBuyValas
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelControl1.Location = New System.Drawing.Point(0, 0)
         Me.PanelControl1.Name = "PanelControl1"
-        Me.PanelControl1.Size = New System.Drawing.Size(565, 106)
+        Me.PanelControl1.Size = New System.Drawing.Size(806, 106)
         Me.PanelControl1.TabIndex = 1
         '
         'PanelControl4
@@ -211,16 +211,16 @@ Partial Class FormBankWithdrawalBuyValas
         Me.PanelControl7.Controls.Add(Me.BtnCancel)
         Me.PanelControl7.Controls.Add(Me.BtnSave)
         Me.PanelControl7.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControl7.Location = New System.Drawing.Point(0, 364)
+        Me.PanelControl7.Location = New System.Drawing.Point(0, 365)
         Me.PanelControl7.Name = "PanelControl7"
-        Me.PanelControl7.Size = New System.Drawing.Size(565, 40)
+        Me.PanelControl7.Size = New System.Drawing.Size(806, 40)
         Me.PanelControl7.TabIndex = 3
         '
         'BtnViewJournal
         '
         Me.BtnViewJournal.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnViewJournal.Image = CType(resources.GetObject("BtnViewJournal.Image"), System.Drawing.Image)
-        Me.BtnViewJournal.Location = New System.Drawing.Point(233, 2)
+        Me.BtnViewJournal.Location = New System.Drawing.Point(474, 2)
         Me.BtnViewJournal.Name = "BtnViewJournal"
         Me.BtnViewJournal.Size = New System.Drawing.Size(105, 36)
         Me.BtnViewJournal.TabIndex = 20
@@ -232,7 +232,7 @@ Partial Class FormBankWithdrawalBuyValas
         Me.BtnPrint.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnPrint.ImageIndex = 6
         Me.BtnPrint.ImageList = Me.LargeImageCollection
-        Me.BtnPrint.Location = New System.Drawing.Point(338, 2)
+        Me.BtnPrint.Location = New System.Drawing.Point(579, 2)
         Me.BtnPrint.Name = "BtnPrint"
         Me.BtnPrint.Size = New System.Drawing.Size(75, 36)
         Me.BtnPrint.TabIndex = 17
@@ -256,7 +256,7 @@ Partial Class FormBankWithdrawalBuyValas
         Me.BtnCancel.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnCancel.ImageIndex = 5
         Me.BtnCancel.ImageList = Me.LargeImageCollection
-        Me.BtnCancel.Location = New System.Drawing.Point(413, 2)
+        Me.BtnCancel.Location = New System.Drawing.Point(654, 2)
         Me.BtnCancel.Name = "BtnCancel"
         Me.BtnCancel.Size = New System.Drawing.Size(75, 36)
         Me.BtnCancel.TabIndex = 18
@@ -268,7 +268,7 @@ Partial Class FormBankWithdrawalBuyValas
         Me.BtnSave.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnSave.ImageIndex = 7
         Me.BtnSave.ImageList = Me.LargeImageCollection
-        Me.BtnSave.Location = New System.Drawing.Point(488, 2)
+        Me.BtnSave.Location = New System.Drawing.Point(729, 2)
         Me.BtnSave.Name = "BtnSave"
         Me.BtnSave.Size = New System.Drawing.Size(75, 36)
         Me.BtnSave.TabIndex = 16
@@ -279,9 +279,9 @@ Partial Class FormBankWithdrawalBuyValas
         '
         Me.PanelControl8.Controls.Add(Me.PanelControl10)
         Me.PanelControl8.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControl8.Location = New System.Drawing.Point(0, 267)
+        Me.PanelControl8.Location = New System.Drawing.Point(0, 268)
         Me.PanelControl8.Name = "PanelControl8"
-        Me.PanelControl8.Size = New System.Drawing.Size(565, 97)
+        Me.PanelControl8.Size = New System.Drawing.Size(806, 97)
         Me.PanelControl8.TabIndex = 4
         '
         'PanelControl10
@@ -318,7 +318,7 @@ Partial Class FormBankWithdrawalBuyValas
         Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelControl2.Location = New System.Drawing.Point(0, 106)
         Me.PanelControl2.Name = "PanelControl2"
-        Me.PanelControl2.Size = New System.Drawing.Size(565, 161)
+        Me.PanelControl2.Size = New System.Drawing.Size(806, 162)
         Me.PanelControl2.TabIndex = 5
         '
         'XTCBBK
@@ -327,7 +327,7 @@ Partial Class FormBankWithdrawalBuyValas
         Me.XTCBBK.Location = New System.Drawing.Point(2, 2)
         Me.XTCBBK.Name = "XTCBBK"
         Me.XTCBBK.SelectedTabPage = Me.XTPPayment
-        Me.XTCBBK.Size = New System.Drawing.Size(561, 157)
+        Me.XTCBBK.Size = New System.Drawing.Size(802, 158)
         Me.XTCBBK.TabIndex = 20
         Me.XTCBBK.TabPages.AddRange(New DevExpress.XtraTab.XtraTabPage() {Me.XTPPayment, Me.XTPJournal})
         '
@@ -335,7 +335,7 @@ Partial Class FormBankWithdrawalBuyValas
         '
         Me.XTPPayment.Controls.Add(Me.PanelControl3)
         Me.XTPPayment.Name = "XTPPayment"
-        Me.XTPPayment.Size = New System.Drawing.Size(555, 129)
+        Me.XTPPayment.Size = New System.Drawing.Size(796, 130)
         Me.XTPPayment.Text = "Transaction"
         '
         'PanelControl3
@@ -350,7 +350,7 @@ Partial Class FormBankWithdrawalBuyValas
         Me.PanelControl3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelControl3.Location = New System.Drawing.Point(0, 0)
         Me.PanelControl3.Name = "PanelControl3"
-        Me.PanelControl3.Size = New System.Drawing.Size(555, 129)
+        Me.PanelControl3.Size = New System.Drawing.Size(796, 130)
         Me.PanelControl3.TabIndex = 0
         '
         'TextEdit2
@@ -458,7 +458,7 @@ Partial Class FormBankWithdrawalBuyValas
         '
         Me.XTPJournal.Controls.Add(Me.GCDraft)
         Me.XTPJournal.Name = "XTPJournal"
-        Me.XTPJournal.Size = New System.Drawing.Size(555, 129)
+        Me.XTPJournal.Size = New System.Drawing.Size(796, 130)
         Me.XTPJournal.Text = "Draft Journal"
         '
         'GCDraft
@@ -467,7 +467,7 @@ Partial Class FormBankWithdrawalBuyValas
         Me.GCDraft.Location = New System.Drawing.Point(0, 0)
         Me.GCDraft.MainView = Me.GVDraft
         Me.GCDraft.Name = "GCDraft"
-        Me.GCDraft.Size = New System.Drawing.Size(555, 129)
+        Me.GCDraft.Size = New System.Drawing.Size(796, 130)
         Me.GCDraft.TabIndex = 1
         Me.GCDraft.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVDraft})
         '
@@ -565,7 +565,7 @@ Partial Class FormBankWithdrawalBuyValas
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(565, 404)
+        Me.ClientSize = New System.Drawing.Size(806, 405)
         Me.Controls.Add(Me.PanelControl2)
         Me.Controls.Add(Me.PanelControl8)
         Me.Controls.Add(Me.PanelControl7)

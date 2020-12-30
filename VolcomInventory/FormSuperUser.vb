@@ -19,6 +19,21 @@
     End Function
 
     Private Sub BtnOther_Click(sender As Object, e As EventArgs) Handles BtnOther.Click
+        '        Dim q As String = "SELECT pos.`id_sales_pos`,pos.`report_mark_type`,pos.`sales_pos_total`,a.id_acc_trans FROM `tb_a_acc_trans` a
+        'LEFT JOIN tb_a_acc_trans_det ad ON ad.`id_acc_trans`=a.`id_acc_trans`
+        'INNER JOIN tb_sales_pos pos ON pos.`sales_pos_number`=a.`report_number`
+        'WHERE a.`id_acc_trans`>=40855 AND ISNULL(ad.`id_acc_trans_det`)
+        'AND pos.`sales_pos_total`>0"
+        '        Dim dt As DataTable = execute_query(q, -1, True, "", "", "", "")
+        '        For i As Integer = 0 To dt.Rows.Count - 1
+        '            q = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, id_comp, qty, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number, id_status_open) 
+        '	SELECT '" & dt.Rows(i)("id_acc_trans").ToString & "', d.id_acc, d.id_comp, d.qty, d.debit, d.credit, d.acc_trans_det_note, d.report_mark_type, d.id_report, d.report_number, '1'
+        '	FROM tb_a_acc_trans_draft d
+        '	WHERE d.report_mark_type='" & dt.Rows(i)("report_mark_type").ToString & "' AND d.id_report='" & dt.Rows(i)("id_sales_pos").ToString & "';
+        '	UPDATE tb_a_acc_trans_draft SET id_status_open=2 WHERE report_mark_type='" & dt.Rows(i)("report_mark_type").ToString & "' AND id_report='" & dt.Rows(i)("id_sales_pos").ToString & "';"
+        '            execute_non_query(q, True, "", "", "", "")
+        '        Next
+
         'cek api
         'Dim bli As New ClassBliBliApi()
         'bli.get_order_list()

@@ -11,6 +11,7 @@
     Public date_until_selected As String = "9999-12-01"
     Public label_type_selected As String = "1"
     Public dt As DataTable
+    Dim tgl_sekarang As Date
 
     'menu : 1=invoice 2=credit note
     Public id_menu As String = "1"
@@ -68,6 +69,9 @@
             XTPCNOnlineStore.PageVisible = False
             XTPProblemList.PageVisible = False
         End If
+
+        'now time
+        tgl_sekarang = getTimeDB()
     End Sub
 
     Sub viewTypeProb()
@@ -382,8 +386,25 @@
             cond_store = "AND c.id_comp='" + SLEStoreProb.EditValue.ToString + "' "
         End If
 
+        'period
+        Dim cond_period As String = ""
+        If CEPeriod.EditValue = False Then
+            Dim date_from_selected As String = "0000-01-01"
+            Dim date_until_selected As String = "9999-01-01"
+            Try
+                date_from_selected = DateTime.Parse(DEPeriodFrom.EditValue.ToString).ToString("yyyy-MM-dd")
+            Catch ex As Exception
+            End Try
+            Try
+                date_until_selected = DateTime.Parse(DEPeriodUntil.EditValue.ToString).ToString("yyyy-MM-dd")
+            Catch ex As Exception
+            End Try
+            cond_period = "AND (sp.sales_pos_end_period>='" + date_from_selected + "' AND sp.sales_pos_end_period<='" + date_until_selected + "') "
+        End If
+
+
         Dim query As String = "SELECT p.id_sales_pos_prob, 
-        p.id_sales_pos, sp.sales_pos_number, sp.sales_pos_start_period, sp.sales_pos_end_period, sp.sales_pos_due_date,
+        p.id_sales_pos, sp.sales_pos_number, sp.sales_pos_start_period, sp.sales_pos_end_period, sp.sales_pos_due_date, sp.report_mark_type AS `rmt_inv`,
         c.id_comp, cc.id_comp_contact, c.comp_number, c.comp_name, cg.id_comp_group, cg.comp_group, cg.description AS `comp_group_desc`,
         p.is_invalid_price, p.is_no_stock, 
         p.id_product, prod.id_design, prod.product_full_code AS `code`, prod.product_name AS `name`, cd.display_name AS `size`,
@@ -423,7 +444,7 @@
             WHERE !ISNULL(spd.id_sales_pos_prob_price)
             GROUP BY spd.id_sales_pos_prob_price
         ) proc_prc ON proc_prc.id_sales_pos_prob_price = p.id_sales_pos_prob
-        WHERE 1=1 AND sp.id_report_status=6 " + cond_type + cond_store
+        WHERE 1=1 AND sp.id_report_status=6 " + cond_period + cond_type + cond_store
         query += "HAVING 1=1 " + cond_status
         query += "ORDER BY id_sales_pos ASC,name ASC, code ASC "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
@@ -561,6 +582,7 @@
                 'price
                 Dim err As String = ""
                 Dim err_price_valid As String = ""
+                Dim err_qty As String = ""
                 For c As Integer = 0 To GVProbList.RowCount - 1
                     Dim id_sales_pos_prob_cek As String = GVProbList.GetRowCellValue(c, "id_sales_pos_prob").ToString
                     Dim code As String = GVProbList.GetRowCellValue(c, "code").ToString
@@ -579,12 +601,20 @@
                     If id_design_price_valid_cek = "0" Then
                         err_price_valid += code + System.Environment.NewLine
                     End If
+
+                    'qty
+                    Dim hold_qty As Decimal = GVProbList.GetRowCellValue(c, "invoice_qty")
+                    If hold_qty <= 0 Then
+                        err_qty += code + System.Environment.NewLine
+                    End If
                 Next
 
                 If err <> "" Then
                     stopCustom("Already processed : " + System.Environment.NewLine + err)
                 ElseIf err_price_valid <> "" Then
                     stopCustom("Please propose 'Price Reconcile' first for these product : " + System.Environment.NewLine + err_price_valid)
+                ElseIf err_qty <> "" Then
+                    stopCustom("No available qty for these product : " + System.Environment.NewLine + err_qty)
                 Else
                     FormSalesPOSDet.is_from_prob_list = True
                     FormSalesPOSDet.action = "ins"
@@ -679,6 +709,41 @@
                 stopCustom("Can't exceed " + qty_limit.ToString)
                 GVProbList.SetFocusedRowCellValue("qty_new", 0)
             End If
+        End If
+    End Sub
+
+    Private Sub RepoBtnTransHist_ButtonClick(sender As Object, e As DevExpress.XtraEditors.Controls.ButtonPressedEventArgs) Handles RepoBtnTransHist.ButtonClick
+        If GVProbList.RowCount > 0 And GVProbList.FocusedRowHandle >= 0 Then
+            Cursor = Cursors.WaitCursor
+            FormSalesProbTransHistory.id_sales_pos_prob = GVProbList.GetFocusedRowCellValue("id_sales_pos_prob").ToString
+            FormSalesProbTransHistory.ShowDialog()
+            Cursor = Cursors.Default
+        End If
+    End Sub
+
+    Private Sub RepoLinkInvoice_Click(sender As Object, e As EventArgs) Handles RepoLinkInvoice.Click
+        If GVProbList.RowCount > 0 And GVProbList.FocusedRowHandle >= 0 Then
+            Cursor = Cursors.WaitCursor
+            Dim m As New ClassShowPopUp()
+            m.id_report = GVProbList.GetFocusedRowCellValue("id_sales_pos").ToString
+            m.report_mark_type = GVProbList.GetFocusedRowCellValue("rmt_inv").ToString
+            m.show()
+            Cursor = Cursors.Default
+        End If
+    End Sub
+
+    Private Sub CEPeriod_EditValueChanged(sender As Object, e As EventArgs) Handles CEPeriod.EditValueChanged
+        If CEPeriod.EditValue = True Then
+            DEPeriodFrom.EditValue = Nothing
+            DEPeriodUntil.EditValue = Nothing
+            DEPeriodFrom.Enabled = False
+            DEPeriodUntil.Enabled = False
+        Else
+            DEPeriodFrom.EditValue = tgl_sekarang
+            DEPeriodUntil.EditValue = tgl_sekarang
+            DEPeriodFrom.Enabled = True
+            DEPeriodUntil.Enabled = True
+            DEPeriodFrom.Focus()
         End If
     End Sub
 End Class

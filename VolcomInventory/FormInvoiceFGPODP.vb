@@ -102,7 +102,14 @@
 
                     SLEPayType.Properties.ReadOnly = True
                 End If
+                If doc_type = "4" Then
+                    TEDocType.Text = "Khusus"
+                Else
+                    TEDocType.Text = "Umum"
+                End If
             Else
+                TEDocType.Text = "FGPO"
+
                 GCReff.OptionsColumn.AllowFocus = False
                 GCDescription.OptionsColumn.AllowFocus = False
                 GCQty.OptionsColumn.AllowFocus = False
@@ -202,6 +209,13 @@ INNER JOIN tb_m_employee emp ON emp.`id_employee`=usr.`id_employee`
 WHERE pn.`id_pn_fgpo`='" & id_invoice & "'"
             Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
             If data.Rows.Count > 0 Then
+                If data.Rows(0)("doc_type").ToString = "2" Then
+                    TEDocType.Text = "FGPO"
+                ElseIf data.Rows(0)("doc_type").ToString = "4" Then
+                    TEDocType.Text = "Khusus"
+                Else
+                    TEDocType.Text = "Umum"
+                End If
                 TENumber.Text = data.Rows(0)("number").ToString
                 DEDateCreated.EditValue = data.Rows(0)("created_date")
                 DEDueDate.EditValue = data.Rows(0)("due_date")
@@ -639,7 +653,7 @@ WHERE pnd.`id_pn_fgpo`='" & id_invoice & "' AND pnd.report_mark_type='199'"
             dp = Decimal.Parse(dt_dp.Rows(0)("tot_dp").ToString).ToString("N2")
         End If
         'Parse val
-        Dim query As String = "SELECT '" & TENumber.Text & "' AS number,'" & addSlashes(MENote.Text) & "' AS note,'" & ConvertCurrencyToIndonesian(TEGrandTotal.EditValue) & "' AS tot_say,'" & SLEPayType.Text & "' AS type,'" & SLEVendor.Text & "' AS comp_name,'" & DERefDate.Text & "' AS ref_date,'" & DEDueDate.Text & "' AS due_date,'" & DEDueDateInv.Text & "' AS due_date_inv,'" & tot & "' AS total_amount,'" & tot_vat & "' AS total_vat,'" & dp & "' AS tot_dp,'" & TEGrandTotal.Text & "' AS total_after_vat,'" & DEDateCreated.Text & "' AS date_created,DATE_FORMAT(NOW(),'%d %M %Y') AS printed_date"
+        Dim query As String = "SELECT '" & TENumber.Text & "' AS number,'" & addSlashes(MENote.Text) & "' AS note,'" & ConvertCurrencyToIndonesian(TEGrandTotal.EditValue) & "' AS tot_say,'" & If(doc_type = 2, "FGPO", If(doc_type = 4, "Khusus", "Umum")) & " - " & SLEPayType.Text & "' AS type,'" & SLEVendor.Text & "' AS comp_name,'" & DERefDate.Text & "' AS ref_date,'" & DEDueDate.Text & "' AS due_date,'" & DEDueDateInv.Text & "' AS due_date_inv,'" & tot & "' AS total_amount,'" & tot_vat & "' AS total_vat,'" & dp & "' AS tot_dp,'" & TEGrandTotal.Text & "' AS total_after_vat,'" & DEDateCreated.Text & "' AS date_created,DATE_FORMAT(NOW(),'%d %M %Y') AS printed_date"
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         Report.DataSource = data
 

@@ -285,7 +285,7 @@ Public Class FormSalesPOSDet
                     'from price recon
                     DEDueDate.EditValue = FormSalesPOS.GVProbList.GetFocusedRowCellValue("sales_pos_due_date")
                     DEStart.EditValue = FormSalesPOS.GVProbList.GetFocusedRowCellValue("sales_pos_start_period")
-                    DEEnd.EditValue = FormSalesPOS.GVProbList.GetFocusedRowCellValue("sales_pos_start_period")
+                    DEEnd.EditValue = FormSalesPOS.GVProbList.GetFocusedRowCellValue("sales_pos_end_period")
                 End If
                 DeleteToolStripMenuItem.Visible = False
             End If
@@ -650,7 +650,7 @@ Public Class FormSalesPOSDet
         ValidateChildren()
         If Not formIsValidInPanel(EPForm, PanelControlTopLeft) Or Not formIsValidInPanel(EPForm, PanelControlTopMiddle) Then
             errorInput()
-        ElseIf GVItemList.RowCount <= 0 Then
+        ElseIf GVItemList.RowCount <= 0 And GVProbList.RowCount <= 0 Then
             stopCustom("Item list can't blank ")
         ElseIf start_period_cek = "0000-01-01" Or end_period_cek = "9999-12-01" Or due_date_cek = "-1" Then
             stopCustom("Please fill period and due date!")
@@ -754,7 +754,7 @@ Public Class FormSalesPOSDet
             End If
 
             'cek same invoice
-            If is_block_same_invoice = 1 And (id_menu = "1" Or id_menu = "4") Then
+            If is_block_same_invoice = 1 And (id_menu = "1" Or id_menu = "4") And GVItemList.RowCount > 0 Then
                 Cursor = Cursors.WaitCursor
                 Dim qry As String = ""
                 For f As Integer = 0 To GVItemList.RowCount - 1
@@ -3083,4 +3083,42 @@ GROUP BY r.id_sales_pos_recon "
         Cursor = Cursors.Default
     End Sub
 
+    Private Sub SBPrintPL_Click(sender As Object, e As EventArgs) Handles SBPrintPL.Click
+        ReportSalesInvoiceProblemList.id_sales_pos = id_sales_pos
+        ReportSalesInvoiceProblemList.id_report_status = id_report_status
+        ReportSalesInvoiceProblemList.rmt = report_mark_type
+        ReportSalesInvoiceProblemList.data = GCProbList.DataSource
+        Dim Report As New ReportSalesInvoiceProblemList()
+        'Report.LabelTitle.Text = print_title
+        Report.XLOLStoreNumber3.Text = TxtOLStoreNumber.Text
+        Report.XLName3.Text = TXTName.Text
+
+        'if volcom online store
+        Dim is_volcom_online As String = execute_query("SELECT COUNT(*) AS total FROM tb_m_comp_volcom_ol WHERE id_store = " + id_comp, 0, True, "", "", "", "")
+
+        If Not is_volcom_online = "0" Then
+            Report.XLName1.Visible = True
+            Report.XLName2.Visible = True
+            Report.XLName3.Visible = True
+            Report.XLOLStoreNumber1.Visible = True
+            Report.XLOLStoreNumber2.Visible = True
+            Report.XLOLStoreNumber3.Visible = True
+        Else
+            Report.XLName1.Visible = False
+            Report.XLName2.Visible = False
+            Report.XLName3.Visible = False
+            Report.XLOLStoreNumber1.Visible = False
+            Report.XLOLStoreNumber2.Visible = False
+            Report.XLOLStoreNumber3.Visible = False
+        End If
+
+        Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(Report)
+        Tool.ShowPreviewDialog()
+    End Sub
+
+    Private Sub GVProbList_CustomColumnDisplayText(sender As Object, e As DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs) Handles GVProbList.CustomColumnDisplayText
+        If e.Column.FieldName = "no" Then
+            e.DisplayText = (e.ListSourceRowIndex + 1).ToString()
+        End If
+    End Sub
 End Class

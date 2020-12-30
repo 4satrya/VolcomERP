@@ -130,7 +130,7 @@
                 assigned = False
             Else
                 assigned = True
-                query_jml = String.Format("SELECT count(id_report_mark) FROM tb_report_mark WHERE report_mark_type='{0}' AND id_report='{1}' AND id_report_status <= '{2}' AND id_mark != '2' AND is_use='1'", report_mark_type, FormReportMark.id_report, id_report_status)
+                query_jml = String.Format("SELECT count(id_report_mark) FROM tb_report_mark WHERE report_mark_type='{0}' AND id_report='{1}' AND id_report_status <= '{2}' AND id_mark != '2' AND is_use='1'", report_mark_type, id_report, id_report_status)
                 jml = execute_query(query_jml, 0, True, "", "", "", "")
             End If
             '

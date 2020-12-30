@@ -5,6 +5,7 @@
     '
     Public is_view As String = "-1"
     Public is_book_transfer As Boolean = False
+    Public is_buy_valas As Boolean = False
     '
     Public id_coa_tag As String = "1"
     Private Sub FormBankWithdrawalDet_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
@@ -90,10 +91,10 @@ SELECT 1 AS id,'Yes' AS auto_debet"
                         newRow("kurs") = 1
                         newRow("id_currency") = "1"
                         newRow("currency") = "Rp"
-                        newRow("val_bef_kurs") = FormBankWithdrawal.GVPOList.GetRowCellValue(i, "total_po") - FormBankWithdrawal.GVPOList.GetRowCellValue(i, "pph_total") + FormBankWithdrawal.GVPOList.GetRowCellValue(i, "gross_up_value")
-                        newRow("value") = FormBankWithdrawal.GVPOList.GetRowCellValue(i, "total_po") - FormBankWithdrawal.GVPOList.GetRowCellValue(i, "pph_total") + FormBankWithdrawal.GVPOList.GetRowCellValue(i, "gross_up_value")
-                        newRow("value_view") = FormBankWithdrawal.GVPOList.GetRowCellValue(i, "total_po") - FormBankWithdrawal.GVPOList.GetRowCellValue(i, "pph_total") + FormBankWithdrawal.GVPOList.GetRowCellValue(i, "gross_up_value")
-                        newRow("balance_due") = FormBankWithdrawal.GVPOList.GetRowCellValue(i, "total_po") - FormBankWithdrawal.GVPOList.GetRowCellValue(i, "pph_total") + FormBankWithdrawal.GVPOList.GetRowCellValue(i, "gross_up_value")
+                        newRow("val_bef_kurs") = FormBankWithdrawal.GVPOList.GetRowCellValue(i, "total_rec") - FormBankWithdrawal.GVPOList.GetRowCellValue(i, "pph_total") + FormBankWithdrawal.GVPOList.GetRowCellValue(i, "gross_up_value")
+                        newRow("value") = FormBankWithdrawal.GVPOList.GetRowCellValue(i, "total_rec") - FormBankWithdrawal.GVPOList.GetRowCellValue(i, "pph_total") + FormBankWithdrawal.GVPOList.GetRowCellValue(i, "gross_up_value")
+                        newRow("value_view") = FormBankWithdrawal.GVPOList.GetRowCellValue(i, "total_rec") - FormBankWithdrawal.GVPOList.GetRowCellValue(i, "pph_total") + FormBankWithdrawal.GVPOList.GetRowCellValue(i, "gross_up_value")
+                        newRow("balance_due") = FormBankWithdrawal.GVPOList.GetRowCellValue(i, "total_rec") - FormBankWithdrawal.GVPOList.GetRowCellValue(i, "pph_total") + FormBankWithdrawal.GVPOList.GetRowCellValue(i, "gross_up_value")
                         newRow("note") = FormBankWithdrawal.GVPOList.GetRowCellValue(i, "inv_number").ToString
                         TryCast(GCList.DataSource, DataTable).Rows.Add(newRow)
                         'isi DP
@@ -1175,6 +1176,7 @@ GROUP BY pnd.kurs"
             BtnAdd.Visible = False
             BtnDelete.Visible = False
             BPickDP.Visible = False
+            BCompen.Visible = False
             '
             SLEACCTrfFee.ReadOnly = True
             TETrfFee.Enabled = False
@@ -1189,9 +1191,16 @@ GROUP BY pnd.kurs"
             Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
             If data.Rows.Count > 0 Then
                 id_coa_tag = data.Rows(0)("id_coa_tag").ToString
+                load_pay_from()
                 TEPayNumber.Text = data.Rows(0)("number").ToString
                 TEKurs.EditValue = data.Rows(0)("kurs")
                 report_mark_type = data.Rows(0)("report_mark_type").ToString
+                '
+                If data.Rows(0)("is_buy_valas").ToString = "1" Then
+                    is_buy_valas = True
+                Else
+                    is_buy_valas = False
+                End If
                 '
                 TETrfFee.EditValue = data.Rows(0)("trf_fee").ToString
                 SLEACCTrfFee.EditValue = data.Rows(0)("id_acc_trf_fee").ToString
@@ -1442,6 +1451,14 @@ WHERE py.`id_pn`='" & id_payment & "'"
             Report.LBookTrf.Visible = False
         End If
         '
+        If is_buy_valas Then
+            Report.LBookTrf.Visible = True
+            Report.LBookTrf.Text = "Pembelian Valuta Asing"
+        Else
+            Report.LBookTrf.Visible = False
+            Report.LBookTrf.Text = "Book Transfer"
+        End If
+        '
         If TEKurs.EditValue = 1 Then
             Report.LKurs.Visible = False
             Report.LkursLabel.Visible = False
@@ -1506,6 +1523,14 @@ WHERE py.`id_pn`='" & id_payment & "'"
         '
         If total = TETotal.EditValue Then
             If id_payment = "-1" Then
+                'cek valas tidak mencantumkan kurs
+                Dim kurs_is_blank As Boolean = False
+                For i As Integer = 0 To GVList.RowCount - 1
+                    If Not GVList.GetRowCellValue(i, "id_currency").ToString = 1 And TEKurs.EditValue = 1 Then
+                        kurs_is_blank = True
+                    End If
+                Next
+
                 'cek value 0
                 Dim value_is_zero As Boolean = False
                 For i As Integer = 0 To GVList.RowCount - 1
@@ -1547,10 +1572,13 @@ WHERE py.`id_pn`='" & id_payment & "'"
                     End If
                 Next
                 '
+
                 If GVList.RowCount = 0 Then
                     warningCustom("No item listed.")
                 ElseIf desc_blank Then
                     warningCustom("Please fill the description.")
+                ElseIf report_mark_type = "189" And kurs_is_blank Then
+                    warningCustom("Please fill kurs when selecting BPL with foreign currency.")
                 ElseIf value_is_zero = True Then
                     warningCustom("You must fill value.")
                 ElseIf paid_more = True Then
@@ -1566,7 +1594,13 @@ WHERE py.`id_pn`='" & id_payment & "'"
                     Dim is_book_trf As String = "2"
 
                     If is_book_transfer Then
-                        is_book_transfer = "1"
+                        is_book_trf = "1"
+                    End If
+
+                    Dim is_buy_valas_param As String = "2"
+
+                    If is_buy_valas Then
+                        is_buy_valas_param = "1"
                     End If
 
                     If report_mark_type = "139" Or report_mark_type = "202" Then
@@ -1575,8 +1609,8 @@ WHERE py.`id_pn`='" & id_payment & "'"
                         id_coa_tag = FormBankWithdrawal.GVExpense.GetRowCellValue(0, "id_coa_tag").ToString
                     End If
 
-                    Dim query As String = "INSERT INTO tb_pn(report_mark_type,kurs,id_acc_payfrom,id_comp_contact,id_pay_type,id_user_created,date_created,date_payment,value,note,is_book_transfer,id_report_status,id_coa_tag,id_acc_trf_fee,trf_fee,is_auto_debet) 
-VALUES('" & report_mark_type & "','" & decimalSQL(Decimal.Parse(TEKurs.EditValue.ToString).ToString) & "','" & SLEPayFrom.EditValue.ToString & "','" & SLEVendor.EditValue.ToString & "','" & SLEPayType.EditValue.ToString & "','" & id_user & "',NOW(),'" & Date.Parse(DEPayment.EditValue.ToString).ToString("yyyy-MM-dd") & "','" & decimalSQL(TETotal.EditValue.ToString) & "','" & addSlashes(MENote.Text) & "','" & is_book_trf & "','1','" + id_coa_tag + "','" & SLEACCTrfFee.EditValue.ToString & "','" & decimalSQL(TETrfFee.EditValue.ToString) & "','" & SLEAutoDebet.EditValue.ToString & "'); SELECT LAST_INSERT_ID(); "
+                    Dim query As String = "INSERT INTO tb_pn(report_mark_type,kurs,id_acc_payfrom,id_comp_contact,id_pay_type,id_user_created,date_created,date_payment,value,note,is_book_transfer,id_report_status,id_coa_tag,id_acc_trf_fee,trf_fee,is_auto_debet,is_buy_valas) 
+VALUES('" & report_mark_type & "','" & decimalSQL(Decimal.Parse(TEKurs.EditValue.ToString).ToString) & "','" & SLEPayFrom.EditValue.ToString & "','" & SLEVendor.EditValue.ToString & "','" & SLEPayType.EditValue.ToString & "','" & id_user & "',NOW(),'" & Date.Parse(DEPayment.EditValue.ToString).ToString("yyyy-MM-dd") & "','" & decimalSQL(TETotal.EditValue.ToString) & "','" & addSlashes(MENote.Text) & "','" & is_book_trf & "','1','" + id_coa_tag + "','" & SLEACCTrfFee.EditValue.ToString & "','" & decimalSQL(TETrfFee.EditValue.ToString) & "','" & SLEAutoDebet.EditValue.ToString & "','" & is_buy_valas_param & "'); SELECT LAST_INSERT_ID(); "
                     id_payment = execute_query(query, 0, True, "", "", "", "")
                     'detail
                     Dim id_currency, kurs, val_bef_kurs, is_include_total As String

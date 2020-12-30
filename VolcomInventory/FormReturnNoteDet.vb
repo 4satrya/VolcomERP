@@ -78,6 +78,7 @@ WHERE rn.id_return_note='" & id_return_note & "'"
                 If dt.Rows(0)("id_type").ToString = "2" Then
                     id_inbound_awb = dt.Rows(0)("id_inbound_awb").ToString
                 End If
+
                 SLEEmp.EditValue = dt.Rows(0)("id_emp_driver").ToString
                 TEAWB.Text = dt.Rows(0)("awb_number").ToString
                 load_store()
@@ -170,7 +171,7 @@ WHERE rn.id_return_note='" & id_return_note & "'"
             Else
                 Dim is_ok As Boolean = False
                 'check
-                Dim qc As String = "SELECT id_inbound_awb FROM tb_inbound_awb WHERE awb_number='" & addSlashes(TEAWB.Text) & "'"
+                Dim qc As String = "SELECT id_inbound_awb FROM tb_inbound_awb WHERE awb_number='" & addSlashes(TEAWB.Text) & "' AND is_void=2"
                 Dim dtc As DataTable = execute_query(qc, -1, True, "", "", "", "")
                 If dtc.Rows.Count <= 0 Then
                     warningCustom("AWB not found")

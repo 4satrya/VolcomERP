@@ -54,7 +54,7 @@
             '
             If XTCInvoiceFGPO.SelectedTabPageIndex = 0 Then
                 'list payment
-                Dim query As String = "SELECT pn.*,pnt.pn_type,sts.report_status,emp.`employee_name`,c.`comp_number`,c.`comp_name`,det.amount,det.amount_vat,det.total_amount 
+                Dim query As String = "SELECT pn.*,CONCAT((IF(pn.doc_type=2,'FGPO','Umum')),' - ',pnt.pn_type) AS pn_type,sts.report_status,emp.`employee_name`,c.`comp_number`,c.`comp_name`,det.amount,det.amount_vat,det.total_amount 
 ,det.report_number,det.inv_number
 FROM tb_pn_fgpo pn
 INNER JOIN tb_m_user usr ON usr.`id_user`=pn.`created_by`

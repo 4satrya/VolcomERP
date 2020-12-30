@@ -14,6 +14,7 @@
 
     'menu : 1=invoice 2=credit note
     Public id_menu As String = "1"
+    Dim first_load As Boolean = True
 
 
     Private Sub FormSalesPOSDet_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -80,6 +81,7 @@
             LabelName.Visible = False
             TXTName.Visible = False
         End If
+        first_load = False
     End Sub
 
     Sub actionLoad()
@@ -240,9 +242,10 @@
     End Sub
 
     Sub viewDetail()
-        Dim query As String = "CALL view_sales_pos_less('" + id_sales_pos + "')"
+        Dim query As String = "CALL view_sales_pos_approval('" + id_sales_pos + "')"
         Dim data As DataTable = execute_query(query, "-1", True, "", "", "", "")
         GCItemList.DataSource = data
+        GVItemList.BestFitColumns()
     End Sub
 
     Sub viewProb()
@@ -260,6 +263,9 @@
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCProbList.DataSource = data
         GVProbList.BestFitColumns()
+        If first_load And GVProbList.RowCount > 0 And LEReportStatus.EditValue < 5 Then
+            stopCustom("There are some items that can't be invoiced, please see in tab 'Problem List' ")
+        End If
         Cursor = Cursors.Default
     End Sub
 
@@ -283,7 +289,7 @@
     End Sub
 
     Sub allow_status()
-        GVItemList.OptionsBehavior.Editable = False
+        GVItemList.OptionsBehavior.Editable = True
         MENote.Properties.ReadOnly = True
         LETypeSO.Enabled = False
 
@@ -494,5 +500,17 @@ GROUP BY r.id_sales_pos_recon "
             stopCustom("Price recon not found.")
         End Try
         Cursor = Cursors.Default
+    End Sub
+
+    Private Sub RepoLinkInvRef_Click(sender As Object, e As EventArgs) Handles RepoLinkInvRef.Click
+        If GVItemList.RowCount > 0 And GVItemList.FocusedRowHandle >= 0 Then
+            Cursor = Cursors.WaitCursor
+            Dim rmt As String = GVItemList.GetFocusedRowCellValue("rmt_err_prc_ref").ToString
+            Dim id As String = GVItemList.GetFocusedRowCellValue("id_sales_pos_err_prc_ref").ToString
+            Dim sp As New FormViewSalesPOS()
+            sp.id_sales_pos = id
+            sp.ShowDialog()
+            Cursor = Cursors.Default
+        End If
     End Sub
 End Class

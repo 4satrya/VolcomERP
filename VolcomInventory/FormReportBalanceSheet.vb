@@ -215,7 +215,7 @@ INNER JOIN tb_a_acc_trans at ON at.id_acc_trans=atd.id_acc_trans AND DATE(at.dat
             If XTCProfitAndLoss.SelectedTabPageIndex = 0 Then
                 print_treelist(TLProfitAndLoss, "Profit And Loss")
             ElseIf XTCProfitAndLoss.SelectedTabPageIndex = 1 Then
-                print_custom(GCProfitAndLoss, "Profit And Loss (Unit : " & SLEUnit.Text & ")" & vbNewLine & " Until : " & Date.Parse(DEUntil.EditValue.ToString).ToString("MMMM yyyy"))
+                print_custom(GCProfitAndLoss, "Profit And Loss (Unit : " & SLEUnit.Text & ")" & vbNewLine & "Until : " & Date.Parse(DEUntil.EditValue.ToString).ToString("MMMM yyyy"))
             End If
         End If
     End Sub

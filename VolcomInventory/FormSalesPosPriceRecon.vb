@@ -36,6 +36,7 @@
                 Dim newRow As DataRow = (TryCast(GCData.DataSource, DataTable)).NewRow()
                 newRow("id_sales_pos_prob") = FormSalesPOS.GVProbList.GetRowCellValue(d, "id_sales_pos_prob").ToString
                 newRow("id_sales_pos") = FormSalesPOS.GVProbList.GetRowCellValue(d, "id_sales_pos").ToString
+                newRow("rmt_inv") = FormSalesPOS.GVProbList.GetRowCellValue(d, "rmt_inv").ToString
                 newRow("sales_pos_number") = FormSalesPOS.GVProbList.GetRowCellValue(d, "sales_pos_number").ToString
                 newRow("id_comp") = FormSalesPOS.GVProbList.GetRowCellValue(d, "id_comp").ToString
                 newRow("comp_number") = FormSalesPOS.GVProbList.GetRowCellValue(d, "comp_number").ToString
@@ -140,6 +141,12 @@
         ElseIf id_report_status = "5" Then
             BtnCancell.Visible = False
             BtnResetPropose.Visible = False
+        End If
+
+        If id_report_status = "-1" Then
+            SBPrint.Visible = False
+        Else
+            SBPrint.Visible = True
         End If
     End Sub
 
@@ -337,11 +344,25 @@
     Private Sub RepoLinkInvoice_Click(sender As Object, e As EventArgs) Handles RepoLinkInvoice.Click
         If GVData.RowCount > 0 And GVData.FocusedRowHandle >= 0 Then
             Cursor = Cursors.WaitCursor
-            Dim m As New ClassShowPopUp()
-            m.report_mark_type = GVData.GetFocusedRowCellValue("rmt_inv").ToString
-            m.id_report = GVData.GetFocusedRowCellValue("id_sales_pos").ToString
-            m.show()
+            Dim sp As New FormViewSalesPOS()
+            sp.id_sales_pos = GVData.GetFocusedRowCellValue("id_sales_pos").ToString
+            sp.ShowDialog()
             Cursor = Cursors.Default
         End If
+    End Sub
+
+    Private Sub SBPrint_Click(sender As Object, e As EventArgs) Handles SBPrint.Click
+        'overtime
+        Dim report As New ReportSalesPosPriceRecon()
+
+        report.LabelNumber.Text = TxtNumber.Text
+        report.LPODate.Text = DECreated.Text
+        report.GCData.DataSource = GCData.DataSource
+
+        pre_load_mark_horz("281", id, "2", "2", report.XrTable1)
+
+        Dim tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(report)
+
+        tool.ShowPreviewDialog()
     End Sub
 End Class

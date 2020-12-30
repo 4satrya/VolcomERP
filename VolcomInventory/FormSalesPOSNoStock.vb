@@ -12,7 +12,7 @@
             BtnAction.Visible = False
             CESelectAll.Visible = False
         ElseIf id_menu = "2" Then 'IA
-            BtnAdd.Visible = False
+            'BtnAdd.Visible = False
         End If
     End Sub
 
@@ -41,7 +41,7 @@
         End If
     End Sub
 
-    Private Sub BtnAdd_Click(sender As Object, e As EventArgs) Handles BtnAdd.Click
+    Private Sub BtnAdd_Click(sender As Object, e As EventArgs)
         Cursor = Cursors.WaitCursor
         FormSalesPOSNoStockDet.action = "ins"
         FormSalesPOSNoStockDet.ShowDialog()

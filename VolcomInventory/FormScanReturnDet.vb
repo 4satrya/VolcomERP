@@ -260,4 +260,10 @@ WHERE rn.label_number='" & addSlashes(TEReturnLabel.Text) & "'"
     Private Sub BClose_Click(sender As Object, e As EventArgs) Handles BClose.Click
         Close()
     End Sub
+
+    Private Sub BResetScan_Click(sender As Object, e As EventArgs) Handles BResetScan.Click
+        For i = GVListProduct.RowCount - 1 To 0 Step -1
+            GVListProduct.DeleteRow(i)
+        Next
+    End Sub
 End Class

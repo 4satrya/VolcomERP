@@ -1,7 +1,10 @@
 ﻿Public Class FormSalesProbTransHistory
     Public id_sales_pos_prob As String = "-1"
     Private Sub FormSalesProbTransHistory_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        If id_sales_pos_prob <> "-1" Then
+            viewPriceRecon()
+            viewInvoice()
+        End If
     End Sub
 
     Private Sub FormSalesProbTransHistory_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
@@ -47,6 +50,14 @@
 
     Sub viewInvoice()
         Cursor = Cursors.WaitCursor
+        Dim cond_det_price As String = ""
+        If id_sales_pos_prob <> "-1" Then
+            cond_det_price = "AND spd.id_sales_pos_prob_price='" + id_sales_pos_prob + "' "
+        End If
+        Dim cond_det As String = ""
+        If id_sales_pos_prob <> "-1" Then
+            cond_det = "AND spd.id_sales_pos_prob='" + id_sales_pos_prob + "' "
+        End If
         Dim query As String = "SELECT sp.id_sales_pos, sp.sales_pos_number, sp.sales_pos_date,sp.sales_pos_start_period, sp.sales_pos_end_period, 
 c.id_comp, c.comp_number, c.comp_name, CONCAT(c.comp_number,' - ', c.comp_name) AS `comp`, cg.comp_group,
 sp.id_report_status, stt.report_status, 'Price Reconcile' AS `ref_type`, sp.report_mark_type, rmt.report_mark_type_name AS `inv_type`
@@ -57,7 +68,7 @@ INNER JOIN tb_m_comp_contact cc ON cc.`id_comp_contact`= IF(sp.id_memo_type=8 OR
 INNER JOIN tb_lookup_report_mark_type rmt ON rmt.report_mark_type=sp.report_mark_type
 INNER JOIN tb_m_comp c ON c.`id_comp`=cc.`id_comp`
 INNER JOIN tb_m_comp_group cg ON cg.id_comp_group = c.id_comp_group
-WHERE 1=1 AND !ISNULL(spd.id_sales_pos_prob_price)
+WHERE 1=1 AND !ISNULL(spd.id_sales_pos_prob_price) " + cond_det_price + "
 GROUP BY sp.id_sales_pos
 UNION ALL
 SELECT sp.id_sales_pos, sp.sales_pos_number, sp.sales_pos_date,sp.sales_pos_start_period, sp.sales_pos_end_period, 
@@ -70,7 +81,7 @@ INNER JOIN tb_m_comp_contact cc ON cc.`id_comp_contact`= IF(sp.id_memo_type=8 OR
 INNER JOIN tb_lookup_report_mark_type rmt ON rmt.report_mark_type=sp.report_mark_type
 INNER JOIN tb_m_comp c ON c.`id_comp`=cc.`id_comp`
 INNER JOIN tb_m_comp_group cg ON cg.id_comp_group = c.id_comp_group
-WHERE 1=1 AND !ISNULL(spd.id_sales_pos_prob)
+WHERE 1=1 AND !ISNULL(spd.id_sales_pos_prob) " + cond_det + "
 GROUP BY sp.id_sales_pos
 ORDER BY id_sales_pos DESC "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
@@ -86,5 +97,17 @@ ORDER BY id_sales_pos DESC "
             m.report_mark_type = GVInv.GetFocusedRowCellValue("report_mark_type").ToString
             m.show()
         End If
+    End Sub
+
+    Private Sub BtnPrint_Click(sender As Object, e As EventArgs) Handles BtnPrint.Click
+        Cursor = Cursors.WaitCursor
+        print(GCPriceRecon, "Price Reconcile List")
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub SimpleButton1_Click(sender As Object, e As EventArgs) Handles BtnPrintInvoice.Click
+        Cursor = Cursors.WaitCursor
+        print(GCInv, "Invoice List")
+        Cursor = Cursors.Default
     End Sub
 End Class

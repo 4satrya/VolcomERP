@@ -202,16 +202,16 @@ GROUP BY po.id_purc_order,dep.id_main_comp"
         DateEditDueDate.EditValue = data.Rows(0)("due_date")
 
         'item
-        Dim query_item As String = "
-            SELECT pod.`id_purc_order_det`, item.`item_desc`,itt.id_item_type,itt.item_type, pod.`qty` AS qty_po, pod.`value` AS val_po, pod.pph_percent, pod.gross_up_value
-            FROM tb_purc_order_det pod
-            INNER JOIN tb_purc_req_det prd ON prd.`id_purc_req_det`=pod.`id_purc_req_det`
-            INNER JOIN tb_purc_req pr ON pr.`id_purc_req`=prd.`id_purc_req`
-            INNER JOIN `tb_item` item ON item.`id_item`=pod.`id_item`
-            INNER JOIN tb_m_uom uom ON uom.`id_uom`=item.`id_uom`
-            INNER JOIN tb_lookup_purc_item_type itt ON itt.id_item_type=item.id_item_type
-            WHERE pod.`id_purc_order`=" + id_purc_order + "
-        "
+        Dim query_item As String = "SELECT pod.`id_purc_order_det`, item.`item_desc`,itt.id_item_type,itt.item_type, SUM(recd.`qty`) AS qty_po, pod.`value` AS val_po, pod.pph_percent, pod.gross_up_value
+FROM tb_purc_rec_det recd 
+INNER JOIN tb_purc_order_det pod ON recd.`id_purc_order_det`=pod.`id_purc_order_det`
+INNER JOIN tb_purc_req_det prd ON prd.`id_purc_req_det`=pod.`id_purc_req_det`
+INNER JOIN tb_purc_req pr ON pr.`id_purc_req`=prd.`id_purc_req`
+INNER JOIN `tb_item` item ON item.`id_item`=pod.`id_item`
+INNER JOIN tb_m_uom uom ON uom.`id_uom`=item.`id_uom`
+INNER JOIN tb_lookup_purc_item_type itt ON itt.id_item_type=item.id_item_type
+WHERE pod.`id_purc_order`=" + id_purc_order + "
+GROUP BY pod.id_purc_order_det"
 
         Dim data_item As DataTable = execute_query(query_item, -1, True, "", "", "", "")
 
@@ -421,11 +421,11 @@ GROUP BY po.id_purc_order,dep.id_main_comp"
                     execute_non_query("CALL gen_number(" + id_acc_trans + ",36)", True, "", "", "", "")
 
                     If SLEPPHAccount.EditValue.ToString = get_opt_acc_field("id_acc_skbp") Then 'skbp
-                        query = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, id_comp, qty, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number, report_mark_type_ref, id_report_ref, report_number_ref,id_coa_tag)
+                        query = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, id_comp, qty, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number, report_mark_type_ref, id_report_ref, report_number_ref,id_coa_tag ,id_vendor)
 SELECT " + id_acc_trans + " AS id_acc_trans, po.`pph_account` AS `id_acc`, dep.id_main_comp, SUM(rd.qty) AS `qty`,
 0 AS `debit`,
 SUM(pod.pph) AS `credit`,
-i.item_desc AS `note`, 148, rd.id_purc_rec, r.purc_rec_number, IF(po.id_expense_type=1,139,202) AS rmt_reff,  po.id_purc_order, po.purc_order_number, po.id_coa_tag
+i.item_desc AS `note`, 148, rd.id_purc_rec, r.purc_rec_number, IF(po.id_expense_type=1,139,202) AS rmt_reff,  po.id_purc_order, po.purc_order_number, po.id_coa_tag, cont.id_comp
 FROM tb_purc_rec_det rd
 INNER JOIN tb_purc_rec r ON r.id_purc_rec = rd.id_purc_rec
 INNER JOIN tb_purc_order po ON po.id_purc_order = r.id_purc_order
@@ -442,7 +442,7 @@ UNION ALL
 SELECT " + id_acc_trans + " AS id_acc_trans, po.`pph_account` AS `id_acc`, dep.id_main_comp, SUM(rd.qty) AS `qty`,
 SUM(pod.pph) AS `debit`,
 0 AS `credit`,
-i.item_desc AS `note`, 148, rd.id_purc_rec, r.purc_rec_number, IF(po.id_expense_type=1,139,202) AS rmt_reff,  po.id_purc_order, po.purc_order_number, po.id_coa_tag
+i.item_desc AS `note`, 148, rd.id_purc_rec, r.purc_rec_number, IF(po.id_expense_type=1,139,202) AS rmt_reff,  po.id_purc_order, po.purc_order_number, po.id_coa_tag, cont.id_comp
 FROM tb_purc_rec_det rd
 INNER JOIN tb_purc_rec r ON r.id_purc_rec = rd.id_purc_rec
 INNER JOIN tb_purc_order po ON po.id_purc_order = r.id_purc_order
@@ -457,12 +457,12 @@ WHERE po.id_purc_order=" & id_purc_order & " AND po.`is_close_rec`=1 AND pod.gro
 GROUP BY po.id_purc_order,dep.id_main_comp"
                         execute_non_query(query, True, "", "", "", "")
                     Else
-                        query = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, id_comp, qty, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number, report_mark_type_ref, id_report_ref, report_number_ref, id_coa_tag)
+                        query = "INSERT INTO tb_a_acc_trans_det(id_acc_trans, id_acc, id_comp, qty, debit, credit, acc_trans_det_note, report_mark_type, id_report, report_number, report_mark_type_ref, id_report_ref, report_number_ref, id_coa_tag, id_vendor)
 -- biaya
 SELECT " + id_acc_trans + " AS id_acc_trans, o.id_coa_out AS `id_acc`, dep.id_main_comp, SUM(rd.qty) AS `qty`,
 SUM(pod.`gross_up_value`) AS `debit`,
 0 AS `credit`,
-i.item_desc AS `note`, 148, rd.id_purc_rec, r.purc_rec_number, IF(po.id_expense_type=1,139,202) AS rmt_reff,  po.id_purc_order, po.purc_order_number, po.id_coa_tag
+i.item_desc AS `note`, 148, rd.id_purc_rec, r.purc_rec_number, IF(po.id_expense_type=1,139,202) AS rmt_reff,  po.id_purc_order, po.purc_order_number, po.id_coa_tag, cont.id_comp
 FROM tb_purc_rec_det rd
 INNER JOIN tb_purc_rec r ON r.id_purc_rec = rd.id_purc_rec
 INNER JOIN tb_purc_order po ON po.id_purc_order = r.id_purc_order
@@ -481,7 +481,7 @@ UNION ALL
 SELECT " + id_acc_trans + " AS id_acc_trans, po.`pph_account` AS `id_acc`, dep.id_main_comp, SUM(rd.qty) AS `qty`,
 0 AS `debit`,
 SUM(pod.`gross_up_value`) AS `credit`,
-i.item_desc AS `note`, 148, rd.id_purc_rec, r.purc_rec_number, IF(po.id_expense_type=1,139,202) AS rmt_reff,  po.id_purc_order, po.purc_order_number, po.id_coa_tag
+i.item_desc AS `note`, 148, rd.id_purc_rec, r.purc_rec_number, IF(po.id_expense_type=1,139,202) AS rmt_reff,  po.id_purc_order, po.purc_order_number, po.id_coa_tag, cont.id_comp
 FROM tb_purc_rec_det rd
 INNER JOIN tb_purc_rec r ON r.id_purc_rec = rd.id_purc_rec
 INNER JOIN tb_purc_order po ON po.id_purc_order = r.id_purc_order
@@ -499,7 +499,7 @@ UNION ALL
 SELECT " + id_acc_trans + " AS id_acc_trans, comp.id_acc_ap AS `id_acc`, dep.id_main_comp, SUM(rd.qty) AS `qty`,
 SUM(pod.pph) AS `debit`,
 0 AS `credit`,
-i.item_desc AS `note`, 148, rd.id_purc_rec, r.purc_rec_number, IF(po.id_expense_type=1,139,202) AS rmt_reff,  po.id_purc_order, po.purc_order_number, po.id_coa_tag
+i.item_desc AS `note`, 148, rd.id_purc_rec, r.purc_rec_number, IF(po.id_expense_type=1,139,202) AS rmt_reff,  po.id_purc_order, po.purc_order_number, po.id_coa_tag, cont.id_comp
 FROM tb_purc_rec_det rd
 INNER JOIN tb_purc_rec r ON r.id_purc_rec = rd.id_purc_rec
 INNER JOIN tb_purc_order po ON po.id_purc_order = r.id_purc_order
@@ -517,7 +517,7 @@ UNION ALL
 SELECT " + id_acc_trans + " AS id_acc_trans, po.`pph_account` AS `id_acc`, dep.id_main_comp, SUM(rd.qty) AS `qty`,
 0 AS `debit`,
 SUM(pod.pph) AS `credit`,
-i.item_desc AS `note`, 148, rd.id_purc_rec, r.purc_rec_number, IF(po.id_expense_type=1,139,202) AS rmt_reff,  po.id_purc_order, po.purc_order_number, po.id_coa_tag
+i.item_desc AS `note`, 148, rd.id_purc_rec, r.purc_rec_number, IF(po.id_expense_type=1,139,202) AS rmt_reff,  po.id_purc_order, po.purc_order_number, po.id_coa_tag, cont.id_comp
 FROM tb_purc_rec_det rd
 INNER JOIN tb_purc_rec r ON r.id_purc_rec = rd.id_purc_rec
 INNER JOIN tb_purc_order po ON po.id_purc_order = r.id_purc_order

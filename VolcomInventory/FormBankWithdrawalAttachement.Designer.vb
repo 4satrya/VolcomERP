@@ -66,6 +66,8 @@ Partial Class FormBankWithdrawalAttachement
         Me.RITEGrossupValue = New DevExpress.XtraEditors.Repository.RepositoryItemTextEdit()
         Me.GridColumn9 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PanelControl3 = New DevExpress.XtraEditors.PanelControl()
+        Me.TEUnit = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
         Me.TEInvNumber = New DevExpress.XtraEditors.TextEdit()
         Me.LabelControl10 = New DevExpress.XtraEditors.LabelControl()
         Me.PanelControl4 = New DevExpress.XtraEditors.PanelControl()
@@ -91,8 +93,6 @@ Partial Class FormBankWithdrawalAttachement
         Me.GridColumn13 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn14 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn15 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.TEUnit = New DevExpress.XtraEditors.TextEdit()
-        Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
         CType(Me.RepositoryItemTextEditPph, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DateEditDueDate.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DateEditDueDate.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -115,6 +115,7 @@ Partial Class FormBankWithdrawalAttachement
         CType(Me.RITEGrossupValue, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl3.SuspendLayout()
+        CType(Me.TEUnit.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEInvNumber.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl4, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl4.SuspendLayout()
@@ -127,7 +128,6 @@ Partial Class FormBankWithdrawalAttachement
         Me.XTPBPLDP.SuspendLayout()
         CType(Me.GCList, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVList, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TEUnit.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'RepositoryItemTextEditPph
@@ -536,7 +536,7 @@ Partial Class FormBankWithdrawalAttachement
         '
         'GridColumn33
         '
-        Me.GridColumn33.Caption = "Qty (PO)"
+        Me.GridColumn33.Caption = "Qty (Receiving)"
         Me.GridColumn33.DisplayFormat.FormatString = "N2"
         Me.GridColumn33.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumn33.FieldName = "qty_po"
@@ -545,6 +545,7 @@ Partial Class FormBankWithdrawalAttachement
         Me.GridColumn33.OptionsColumn.ReadOnly = True
         Me.GridColumn33.Visible = True
         Me.GridColumn33.VisibleIndex = 2
+        Me.GridColumn33.Width = 101
         '
         'GridColumn4
         '
@@ -634,6 +635,22 @@ Partial Class FormBankWithdrawalAttachement
         Me.PanelControl3.Name = "PanelControl3"
         Me.PanelControl3.Size = New System.Drawing.Size(927, 100)
         Me.PanelControl3.TabIndex = 12
+        '
+        'TEUnit
+        '
+        Me.TEUnit.Location = New System.Drawing.Point(287, 38)
+        Me.TEUnit.Name = "TEUnit"
+        Me.TEUnit.Properties.ReadOnly = True
+        Me.TEUnit.Size = New System.Drawing.Size(245, 20)
+        Me.TEUnit.TabIndex = 8909
+        '
+        'LabelControl2
+        '
+        Me.LabelControl2.Location = New System.Drawing.Point(262, 41)
+        Me.LabelControl2.Name = "LabelControl2"
+        Me.LabelControl2.Size = New System.Drawing.Size(19, 13)
+        Me.LabelControl2.TabIndex = 8908
+        Me.LabelControl2.Text = "Unit"
         '
         'TEInvNumber
         '
@@ -879,22 +896,6 @@ Partial Class FormBankWithdrawalAttachement
         Me.GridColumn15.VisibleIndex = 3
         Me.GridColumn15.Width = 453
         '
-        'TEUnit
-        '
-        Me.TEUnit.Location = New System.Drawing.Point(287, 38)
-        Me.TEUnit.Name = "TEUnit"
-        Me.TEUnit.Properties.ReadOnly = True
-        Me.TEUnit.Size = New System.Drawing.Size(245, 20)
-        Me.TEUnit.TabIndex = 8909
-        '
-        'LabelControl2
-        '
-        Me.LabelControl2.Location = New System.Drawing.Point(262, 41)
-        Me.LabelControl2.Name = "LabelControl2"
-        Me.LabelControl2.Size = New System.Drawing.Size(19, 13)
-        Me.LabelControl2.TabIndex = 8908
-        Me.LabelControl2.Text = "Unit"
-        '
         'FormBankWithdrawalAttachement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -932,6 +933,7 @@ Partial Class FormBankWithdrawalAttachement
         CType(Me.PanelControl3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl3.ResumeLayout(False)
         Me.PanelControl3.PerformLayout()
+        CType(Me.TEUnit.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TEInvNumber.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PanelControl4, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl4.ResumeLayout(False)
@@ -944,7 +946,6 @@ Partial Class FormBankWithdrawalAttachement
         Me.XTPBPLDP.ResumeLayout(False)
         CType(Me.GCList, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVList, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TEUnit.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

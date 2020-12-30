@@ -321,35 +321,41 @@
                 ) src ON src.id_sales_pos = main.id_sales_pos
                 SET main.sales_pos_total_qty = src.total, main.sales_pos_total=src.total_amount; "
                 execute_non_query(query_detail_inv, True, "", "", "", "")
+                'get total
+                Dim dst As DataTable = execute_query("SELECT sales_pos_total FROM tb_sales_pos WHERE id_sales_pos='" + id_sales_pos + "' ", -1, True, "", "", "", "")
+                Dim total_inv As Decimal = dst.Rows(0)("sales_pos_total")
                 'submit prepared
                 Dim id_user_prepared_inv As String = get_opt_acc_field("invoice_prepared_by")
                 submit_who_prepared("48", id_sales_pos, id_user_prepared_inv)
                 'nonaktif mark
                 Dim queryrm = String.Format("UPDATE tb_report_mark SET report_mark_lead_time=NULL,report_mark_start_datetime=NULL WHERE report_mark_type='{0}' AND id_report='{1}' AND id_report_status>'1'", "48", id_sales_pos)
                 execute_non_query(queryrm, True, "", "", "", "")
-                'journal draft
-                Dim acc As New ClassAccounting()
-                Try
-                    acc.generateJournalSalesDraftWithMapping(id_sales_pos, "48")
-                Catch ex As Exception
-                    stopCustom("Automatic draft journal failed. Please contact administrator. " + System.Environment.NewLine + ex.ToString)
-                End Try
-                'journal
-                Dim gl As New ClassSalesInv()
-                Try
-                    gl.postingJournal(id_sales_pos, "48")
-                Catch ex As Exception
-                    stopCustom("Automatic journal failed. Please contact administrator. " + System.Environment.NewLine + ex.ToString)
-                End Try
-                'shipping invoice
-                If id_so_status = "14" Then
-                    Try
-                        Dim shp As New ClassShipInvoice()
-                        shp.id_invoice_ship = "-1"
-                        shp.create(id_report_par)
-                    Catch ex As Exception
 
+                If total_inv > 0 Then
+                    'journal draft
+                    Dim acc As New ClassAccounting()
+                    Try
+                        acc.generateJournalSalesDraftWithMapping(id_sales_pos, "48")
+                    Catch ex As Exception
+                        stopCustom("Automatic draft journal failed. Please contact administrator. " + System.Environment.NewLine + ex.ToString)
                     End Try
+                    'journal
+                    Dim gl As New ClassSalesInv()
+                    Try
+                        gl.postingJournal(id_sales_pos, "48")
+                    Catch ex As Exception
+                        stopCustom("Automatic journal failed. Please contact administrator. " + System.Environment.NewLine + ex.ToString)
+                    End Try
+                    'shipping invoice
+                    If id_so_status = "14" Then
+                        Try
+                            Dim shp As New ClassShipInvoice()
+                            shp.id_invoice_ship = "-1"
+                            shp.create(id_report_par)
+                        Catch ex As Exception
+
+                        End Try
+                    End If
                 End If
             End If
 
@@ -404,8 +410,10 @@
             AND d.is_old_design=2 AND t.is_use_unique_code_wh=1 "
             execute_non_query_long(quniq, True, "", "", "", "")
         End If
+
         Dim query As String = String.Format("UPDATE tb_pl_sales_order_del SET id_report_status='{0}', last_update=NOW(), last_update_by=" + id_user + " WHERE id_pl_sales_order_del ='{1}'", id_status_reportx_par, id_report_par)
         execute_non_query(query, True, "", "", "", "")
+
     End Sub
 
     Public Sub changeStatusHead(ByVal id_report_par As String, ByVal id_status_reportx_par As String)

@@ -562,6 +562,9 @@ WHERE rate.id_sub_district='" + SLESubDistrict.EditValue.ToString + "' AND rate.
 
                 id_awb = execute_query(query, 0, True, "", "", "", "")
 
+                query = "CALL awbill_log('" & id_awb & "','" & id_user & "')"
+                execute_non_query(query, True, "", "", "", "")
+
                 execute_non_query("CALL upd_track_no('" & id_awb & "')", True, "", "", "", "")
                 'detail do
                 If GVDO.RowCount > 0 Then
@@ -569,14 +572,17 @@ WHERE rate.id_sub_district='" + SLESubDistrict.EditValue.ToString + "' AND rate.
                     For i As Integer = 0 To GVDO.RowCount - 1
                         Dim id_pl_sales_order_del As String = "NULL"
                         Dim id_ol_store_cust_ret As String = "NULL"
+
                         Try
                             id_pl_sales_order_del = GVDO.GetRowCellValue(i, "id_pl_sales_order_del").ToString
                         Catch ex As Exception
                         End Try
+
                         Try
                             id_ol_store_cust_ret = GVDO.GetRowCellValue(i, "id_ol_store_cust_ret").ToString
                         Catch ex As Exception
                         End Try
+
                         If id_pl_sales_order_del = "" Then
                             id_pl_sales_order_del = "NULL"
                         End If
@@ -618,6 +624,9 @@ WHERE rate.id_sub_district='" + SLESubDistrict.EditValue.ToString + "' AND rate.
                 Close()
             Else 'edit
                 query = "UPDATE tb_wh_awbill SET is_paid_by_store='" + is_paid_by_store + "',id_sub_district='" + id_sub_district + "',id_store='" + id_comp + "',id_cargo='" + SLECargo.EditValue.ToString + "',cargo_rate='" + decimalSQL(TEChargeRate.EditValue.ToString) + "',cargo_lead_time='" + decimalSQL(TECargoLeadTime.EditValue.ToString) + "',cargo_min_weight='" + decimalSQL(TECargoMinWeight.EditValue.ToString) + "',weight='" + decimalSQL(TEWeight.EditValue.ToString) + "',`length`='" + decimalSQL(TELength.EditValue.ToString) + "',width='" + decimalSQL(TEWidth.EditValue.ToString) + "',height='" + decimalSQL(TEHeight.EditValue.ToString) + "',weight_calc='" + decimalSQL(TEBeratTerpakai.EditValue.ToString) + "',c_weight='" + decimalSQL(TEVolumeVolc.EditValue.ToString) + "',c_tot_price='" + decimalSQL(TEPriceVolcom.EditValue.ToString) + "',a_weight='" + decimalSQL(vol_airport.ToString) + "',a_tot_price='" + decimalSQL(TEPriceAirport.EditValue.ToString) + "',awbill_no='" + addSlashes(TEAwbNo.Text.ToString) + "',awbill_inv_no='" + addSlashes(TEInvNo.Text.ToString) + "',pick_up_date=" + date_pickup + ",rec_by_store_date=" + date_store + ",rec_by_store_person='" + rec_store_by + "',awbill_note='" + addSlashes(MENote.Text) + "',id_cargo_best='" + decimalSQL(GVCargoRate.GetRowCellValue(0, "id_cargo").ToString) + "',cargo_rate_best='" + decimalSQL(GVCargoRate.GetRowCellValue(0, "cargo_rate").ToString) + "',cargo_lead_time_best='" + decimalSQL(GVCargoRate.GetRowCellValue(0, "cargo_lead_time").ToString) + "',cargo_min_weight_best='" + decimalSQL(GVCargoRate.GetRowCellValue(0, "cargo_min_weight").ToString) + "',mark_different='" & mark_diff & "' WHERE id_awbill='" + id_awb + "'"
+                execute_non_query(query, True, "", "", "", "")
+
+                query = "CALL awbill_log('" & id_awb & "','" & id_user & "')"
                 execute_non_query(query, True, "", "", "", "")
 
                 'detail

@@ -28,6 +28,7 @@ Partial Class FormReturnNote
         Me.GCAwb = New DevExpress.XtraGrid.GridControl()
         Me.GVAwb = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -37,7 +38,7 @@ Partial Class FormReturnNote
         Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn9 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn10 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.DEUntil.Properties.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -129,7 +130,7 @@ Partial Class FormReturnNote
         '
         'GVAwb
         '
-        Me.GVAwb.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn8, Me.GridColumn2, Me.GridColumn6, Me.GridColumn3, Me.GridColumn11, Me.GridColumn7, Me.GridColumn5, Me.GridColumn9, Me.GridColumn4})
+        Me.GVAwb.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn8, Me.GridColumn2, Me.GridColumn6, Me.GridColumn3, Me.GridColumn11, Me.GridColumn7, Me.GridColumn5, Me.GridColumn9, Me.GridColumn4, Me.GridColumn10})
         Me.GVAwb.GridControl = Me.GCAwb
         Me.GVAwb.Name = "GVAwb"
         Me.GVAwb.OptionsBehavior.Editable = False
@@ -142,6 +143,14 @@ Partial Class FormReturnNote
         Me.GridColumn1.Caption = "ID"
         Me.GridColumn1.FieldName = "id_return_note"
         Me.GridColumn1.Name = "GridColumn1"
+        '
+        'GridColumn8
+        '
+        Me.GridColumn8.Caption = "AWB"
+        Me.GridColumn8.FieldName = "awb_number"
+        Me.GridColumn8.Name = "GridColumn8"
+        Me.GridColumn8.Visible = True
+        Me.GridColumn8.VisibleIndex = 1
         '
         'GridColumn2
         '
@@ -224,13 +233,17 @@ Partial Class FormReturnNote
         Me.GridColumn4.VisibleIndex = 8
         Me.GridColumn4.Width = 247
         '
-        'GridColumn8
+        'GridColumn10
         '
-        Me.GridColumn8.Caption = "AWB"
-        Me.GridColumn8.FieldName = "awb_number"
-        Me.GridColumn8.Name = "GridColumn8"
-        Me.GridColumn8.Visible = True
-        Me.GridColumn8.VisibleIndex = 1
+        Me.GridColumn10.AppearanceCell.Options.UseTextOptions = True
+        Me.GridColumn10.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumn10.AppearanceHeader.Options.UseTextOptions = True
+        Me.GridColumn10.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
+        Me.GridColumn10.Caption = "Void"
+        Me.GridColumn10.FieldName = "sts_void"
+        Me.GridColumn10.Name = "GridColumn10"
+        Me.GridColumn10.Visible = True
+        Me.GridColumn10.VisibleIndex = 9
         '
         'FormReturnNote
         '
@@ -278,4 +291,5 @@ Partial Class FormReturnNote
     Friend WithEvents GridColumn5 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn4 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn8 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn10 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

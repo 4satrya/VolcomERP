@@ -47,6 +47,7 @@ Partial Class FormScanReturnDet
         Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.BResetScan = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.TEReturnNote.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -153,6 +154,7 @@ Partial Class FormScanReturnDet
         '
         'PCButton
         '
+        Me.PCButton.Controls.Add(Me.BResetScan)
         Me.PCButton.Controls.Add(Me.BClose)
         Me.PCButton.Controls.Add(Me.BSave)
         Me.PCButton.Dock = System.Windows.Forms.DockStyle.Bottom
@@ -310,6 +312,16 @@ Partial Class FormScanReturnDet
         Me.GridColumn6.VisibleIndex = 3
         Me.GridColumn6.Width = 256
         '
+        'BResetScan
+        '
+        Me.BResetScan.Dock = System.Windows.Forms.DockStyle.Left
+        Me.BResetScan.Image = CType(resources.GetObject("BResetScan.Image"), System.Drawing.Image)
+        Me.BResetScan.Location = New System.Drawing.Point(2, 2)
+        Me.BResetScan.Name = "BResetScan"
+        Me.BResetScan.Size = New System.Drawing.Size(115, 41)
+        Me.BResetScan.TabIndex = 6
+        Me.BResetScan.Text = "Reset Scan"
+        '
         'FormScanReturnDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -371,4 +383,5 @@ Partial Class FormScanReturnDet
     Friend WithEvents TEReturnNote As DevExpress.XtraEditors.TextEdit
     Friend WithEvents LabelControl5 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents GridColumn7 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents BResetScan As DevExpress.XtraEditors.SimpleButton
 End Class

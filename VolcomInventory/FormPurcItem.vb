@@ -60,8 +60,9 @@
             q_cat = "'" & SLECat.EditValue.ToString & "'"
         End If
 
-        Dim query As String = "SELECT id_item,uom_stock.uom AS uom_stock,CONCAT('1:',item.stock_convertion) AS stock_convertion,item.id_item,item.item_desc,type.expense_type,cat.`item_cat`,uom.uom,empc.`employee_name` AS emp_created,item_type.`item_type`,empu.`employee_name` AS emp_updated,date_created,date_updated,IF(item.`is_active`=1,'yes','no') AS is_active 
+        Dim query As String = "SELECT id_item,uom_stock.uom AS uom_stock,catd.item_cat_detail,CONCAT('1:',item.stock_convertion) AS stock_convertion,item.id_item,item.item_desc,type.expense_type,cat.`item_cat`,uom.uom,empc.`employee_name` AS emp_created,item_type.`item_type`,empu.`employee_name` AS emp_updated,date_created,date_updated,IF(item.`is_active`=1,'yes','no') AS is_active 
                                 FROM tb_item item
+                                INNER JOIN `tb_item_cat_detail` catd ON catd.`id_item_cat_detail`=item.`id_item_cat_detail`
                                 INNER JOIN tb_item_cat cat ON cat.`id_item_cat`=item.`id_item_cat`
                                 INNER JOIN tb_m_uom uom ON uom.`id_uom`=item.`id_uom`
                                 INNER JOIN tb_m_user usrc ON usrc.`id_user`=item.`id_user_created`

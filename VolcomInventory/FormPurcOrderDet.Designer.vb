@@ -163,6 +163,7 @@ Partial Class FormPurcOrderDet
         Me.GridColumn18 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn19 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn20 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn34 = New DevExpress.XtraGrid.Columns.GridColumn()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl2.SuspendLayout()
         CType(Me.PanelControl4, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -863,7 +864,7 @@ Partial Class FormPurcOrderDet
         Me.BSubmit.ImageList = Me.LargeImageCollection
         Me.BSubmit.Location = New System.Drawing.Point(77, 2)
         Me.BSubmit.Name = "BSubmit"
-        Me.BSubmit.Size = New System.Drawing.Size(75, 37)
+        Me.BSubmit.Size = New System.Drawing.Size(91, 37)
         Me.BSubmit.TabIndex = 16
         Me.BSubmit.TabStop = False
         Me.BSubmit.Text = "Submit"
@@ -1297,7 +1298,7 @@ Partial Class FormPurcOrderDet
         '
         'GVPurcReq
         '
-        Me.GVPurcReq.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn8, Me.GridColumn9, Me.GridColumn1, Me.GridColumn21, Me.GridColumn14, Me.GridColumn3, Me.GridColumn22, Me.GridColumn33, Me.GridColumn2, Me.GridColumn10, Me.GridColumn11, Me.GridColumn12, Me.GridColumn13, Me.GridColumn4, Me.GridColumnBudgetStatus, Me.GridColumn5, Me.GridColumn6})
+        Me.GVPurcReq.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn8, Me.GridColumn9, Me.GridColumn1, Me.GridColumn21, Me.GridColumn14, Me.GridColumn34, Me.GridColumn3, Me.GridColumn22, Me.GridColumn33, Me.GridColumn2, Me.GridColumn10, Me.GridColumn11, Me.GridColumn12, Me.GridColumn13, Me.GridColumn4, Me.GridColumnBudgetStatus, Me.GridColumn5, Me.GridColumn6})
         Me.GVPurcReq.GridControl = Me.GCPurcReq
         Me.GVPurcReq.Name = "GVPurcReq"
         Me.GVPurcReq.OptionsBehavior.ReadOnly = True
@@ -1339,7 +1340,7 @@ Partial Class FormPurcOrderDet
         Me.GridColumn21.OptionsColumn.AllowEdit = False
         Me.GridColumn21.OptionsColumn.ReadOnly = True
         Me.GridColumn21.Visible = True
-        Me.GridColumn21.VisibleIndex = 2
+        Me.GridColumn21.VisibleIndex = 3
         Me.GridColumn21.Width = 78
         '
         'GridColumn14
@@ -1350,7 +1351,7 @@ Partial Class FormPurcOrderDet
         Me.GridColumn14.OptionsColumn.AllowEdit = False
         Me.GridColumn14.OptionsColumn.ReadOnly = True
         Me.GridColumn14.Visible = True
-        Me.GridColumn14.VisibleIndex = 3
+        Me.GridColumn14.VisibleIndex = 4
         '
         'GridColumn3
         '
@@ -1370,7 +1371,7 @@ Partial Class FormPurcOrderDet
         Me.GridColumn22.OptionsColumn.AllowEdit = False
         Me.GridColumn22.OptionsColumn.ReadOnly = True
         Me.GridColumn22.Visible = True
-        Me.GridColumn22.VisibleIndex = 5
+        Me.GridColumn22.VisibleIndex = 6
         Me.GridColumn22.Width = 78
         '
         'GridColumn33
@@ -1383,7 +1384,7 @@ Partial Class FormPurcOrderDet
         Me.GridColumn33.OptionsColumn.AllowEdit = False
         Me.GridColumn33.OptionsColumn.ReadOnly = True
         Me.GridColumn33.Visible = True
-        Me.GridColumn33.VisibleIndex = 6
+        Me.GridColumn33.VisibleIndex = 7
         '
         'GridColumn2
         '
@@ -1435,7 +1436,7 @@ Partial Class FormPurcOrderDet
         Me.GridColumn13.OptionsColumn.AllowEdit = False
         Me.GridColumn13.OptionsColumn.ReadOnly = True
         Me.GridColumn13.Visible = True
-        Me.GridColumn13.VisibleIndex = 4
+        Me.GridColumn13.VisibleIndex = 5
         '
         'GridColumn4
         '
@@ -1447,7 +1448,7 @@ Partial Class FormPurcOrderDet
         Me.GridColumn4.OptionsColumn.AllowEdit = False
         Me.GridColumn4.OptionsColumn.ReadOnly = True
         Me.GridColumn4.Visible = True
-        Me.GridColumn4.VisibleIndex = 7
+        Me.GridColumn4.VisibleIndex = 8
         '
         'GridColumnBudgetStatus
         '
@@ -1457,7 +1458,7 @@ Partial Class FormPurcOrderDet
         Me.GridColumnBudgetStatus.OptionsColumn.AllowEdit = False
         Me.GridColumnBudgetStatus.OptionsColumn.ReadOnly = True
         Me.GridColumnBudgetStatus.Visible = True
-        Me.GridColumnBudgetStatus.VisibleIndex = 8
+        Me.GridColumnBudgetStatus.VisibleIndex = 9
         '
         'GridColumn5
         '
@@ -1828,6 +1829,14 @@ Partial Class FormPurcOrderDet
         Me.GridColumn20.Visible = True
         Me.GridColumn20.VisibleIndex = 2
         '
+        'GridColumn34
+        '
+        Me.GridColumn34.Caption = "Category"
+        Me.GridColumn34.FieldName = "item_cat_detail"
+        Me.GridColumn34.Name = "GridColumn34"
+        Me.GridColumn34.Visible = True
+        Me.GridColumn34.VisibleIndex = 2
+        '
         'FormPurcOrderDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2066,4 +2075,5 @@ Partial Class FormPurcOrderDet
     Friend WithEvents GridColumn229 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn230 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn231 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn34 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

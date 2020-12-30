@@ -34,8 +34,6 @@ Partial Class FormSalesProbTransHistory
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
         Me.BtnViewPriceRecon = New DevExpress.XtraEditors.SimpleButton()
         Me.XTPInvoice = New DevExpress.XtraTab.XtraTabPage()
-        Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
-        Me.BtnViewInv = New DevExpress.XtraEditors.SimpleButton()
         Me.GCInv = New DevExpress.XtraGrid.GridControl()
         Me.GVInv = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumnid_sales_pos = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -53,6 +51,10 @@ Partial Class FormSalesProbTransHistory
         Me.GridColumnref_type = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumninv_type = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnreport_mark_type = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
+        Me.BtnViewInv = New DevExpress.XtraEditors.SimpleButton()
+        Me.BtnPrint = New DevExpress.XtraEditors.SimpleButton()
+        Me.BtnPrintInvoice = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.XTCData, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCData.SuspendLayout()
         Me.XTPPriceRecon.SuspendLayout()
@@ -61,10 +63,10 @@ Partial Class FormSalesProbTransHistory
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         Me.XTPInvoice.SuspendLayout()
-        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.PanelControl2.SuspendLayout()
         CType(Me.GCInv, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVInv, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelControl2.SuspendLayout()
         Me.SuspendLayout()
         '
         'XTCData
@@ -160,6 +162,7 @@ Partial Class FormSalesProbTransHistory
         'PanelControl1
         '
         Me.PanelControl1.Controls.Add(Me.BtnViewPriceRecon)
+        Me.PanelControl1.Controls.Add(Me.BtnPrint)
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelControl1.Location = New System.Drawing.Point(0, 0)
         Me.PanelControl1.Name = "PanelControl1"
@@ -170,7 +173,7 @@ Partial Class FormSalesProbTransHistory
         '
         Me.BtnViewPriceRecon.Dock = System.Windows.Forms.DockStyle.Right
         Me.BtnViewPriceRecon.Image = CType(resources.GetObject("BtnViewPriceRecon.Image"), System.Drawing.Image)
-        Me.BtnViewPriceRecon.Location = New System.Drawing.Point(567, 2)
+        Me.BtnViewPriceRecon.Location = New System.Drawing.Point(485, 2)
         Me.BtnViewPriceRecon.Name = "BtnViewPriceRecon"
         Me.BtnViewPriceRecon.Size = New System.Drawing.Size(82, 39)
         Me.BtnViewPriceRecon.TabIndex = 0
@@ -183,25 +186,6 @@ Partial Class FormSalesProbTransHistory
         Me.XTPInvoice.Name = "XTPInvoice"
         Me.XTPInvoice.Size = New System.Drawing.Size(651, 320)
         Me.XTPInvoice.Text = "Sales Invoice"
-        '
-        'PanelControl2
-        '
-        Me.PanelControl2.Controls.Add(Me.BtnViewInv)
-        Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Top
-        Me.PanelControl2.Location = New System.Drawing.Point(0, 0)
-        Me.PanelControl2.Name = "PanelControl2"
-        Me.PanelControl2.Size = New System.Drawing.Size(651, 43)
-        Me.PanelControl2.TabIndex = 1
-        '
-        'BtnViewInv
-        '
-        Me.BtnViewInv.Dock = System.Windows.Forms.DockStyle.Right
-        Me.BtnViewInv.Image = CType(resources.GetObject("BtnViewInv.Image"), System.Drawing.Image)
-        Me.BtnViewInv.Location = New System.Drawing.Point(567, 2)
-        Me.BtnViewInv.Name = "BtnViewInv"
-        Me.BtnViewInv.Size = New System.Drawing.Size(82, 39)
-        Me.BtnViewInv.TabIndex = 1
-        Me.BtnViewInv.Text = "View"
         '
         'GCInv
         '
@@ -338,6 +322,46 @@ Partial Class FormSalesProbTransHistory
         Me.GridColumnreport_mark_type.FieldName = "report_mark_type"
         Me.GridColumnreport_mark_type.Name = "GridColumnreport_mark_type"
         '
+        'PanelControl2
+        '
+        Me.PanelControl2.Controls.Add(Me.BtnViewInv)
+        Me.PanelControl2.Controls.Add(Me.BtnPrintInvoice)
+        Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Top
+        Me.PanelControl2.Location = New System.Drawing.Point(0, 0)
+        Me.PanelControl2.Name = "PanelControl2"
+        Me.PanelControl2.Size = New System.Drawing.Size(651, 43)
+        Me.PanelControl2.TabIndex = 1
+        '
+        'BtnViewInv
+        '
+        Me.BtnViewInv.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnViewInv.Image = CType(resources.GetObject("BtnViewInv.Image"), System.Drawing.Image)
+        Me.BtnViewInv.Location = New System.Drawing.Point(485, 2)
+        Me.BtnViewInv.Name = "BtnViewInv"
+        Me.BtnViewInv.Size = New System.Drawing.Size(82, 39)
+        Me.BtnViewInv.TabIndex = 1
+        Me.BtnViewInv.Text = "View"
+        '
+        'BtnPrint
+        '
+        Me.BtnPrint.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnPrint.Image = CType(resources.GetObject("BtnPrint.Image"), System.Drawing.Image)
+        Me.BtnPrint.Location = New System.Drawing.Point(567, 2)
+        Me.BtnPrint.Name = "BtnPrint"
+        Me.BtnPrint.Size = New System.Drawing.Size(82, 39)
+        Me.BtnPrint.TabIndex = 1
+        Me.BtnPrint.Text = "Print"
+        '
+        'BtnPrintInvoice
+        '
+        Me.BtnPrintInvoice.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BtnPrintInvoice.Image = CType(resources.GetObject("BtnPrintInvoice.Image"), System.Drawing.Image)
+        Me.BtnPrintInvoice.Location = New System.Drawing.Point(567, 2)
+        Me.BtnPrintInvoice.Name = "BtnPrintInvoice"
+        Me.BtnPrintInvoice.Size = New System.Drawing.Size(82, 39)
+        Me.BtnPrintInvoice.TabIndex = 2
+        Me.BtnPrintInvoice.Text = "Print"
+        '
         'FormSalesProbTransHistory
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -356,10 +380,10 @@ Partial Class FormSalesProbTransHistory
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl1.ResumeLayout(False)
         Me.XTPInvoice.ResumeLayout(False)
-        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.PanelControl2.ResumeLayout(False)
         CType(Me.GCInv, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVInv, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelControl2.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -397,4 +421,6 @@ Partial Class FormSalesProbTransHistory
     Friend WithEvents GridColumnref_type As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumninv_type As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumnreport_mark_type As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents BtnPrint As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents BtnPrintInvoice As DevExpress.XtraEditors.SimpleButton
 End Class

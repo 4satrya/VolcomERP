@@ -1521,7 +1521,7 @@ WHERE py.`id_pn`='" & id_payment & "'"
             total += GVList.GetRowCellValue(i, "value")
         Next
         '
-        If total = TETotal.EditValue Then
+        If Decimal.Parse(total).ToString("N2") = Decimal.Parse(TETotal.EditValue).ToString("N2") Then
             If id_payment = "-1" Then
                 'cek valas tidak mencantumkan kurs
                 Dim kurs_is_blank As Boolean = False
@@ -1670,7 +1670,7 @@ VALUES('" & report_mark_type & "','" & decimalSQL(Decimal.Parse(TEKurs.EditValue
                 End If
             End If
         Else
-            warningCustom("Please check total first")
+            warningCustom("Please check total first !")
         End If
     End Sub
 

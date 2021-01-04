@@ -18,6 +18,7 @@
             LabelNotice.Visible = True
         End If
         GCProbList.DataSource = data
+        GVProbList.BestFitColumns()
         pre_load_mark_horz_plain_acc(rmt, id_sales_pos, "(                       )", itime, XrTable1)
     End Sub
 

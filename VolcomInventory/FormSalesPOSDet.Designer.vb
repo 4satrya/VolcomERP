@@ -180,6 +180,7 @@ Partial Class FormSalesPOSDet
         Me.GridColumnis_invalid_price = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.GridColumnis_no_stock = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.GridColumnid_product = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumn3 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.GridColumncodeprob = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.GridColumnnameprob = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.GridColumnsizeprob = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
@@ -211,7 +212,6 @@ Partial Class FormSalesPOSDet
         Me.GridColumnIdDesignPriceCode = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnPriceCode = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
-        Me.BandedGridColumn3 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.GridBand1 = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
         Me.gridBand2 = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
         Me.gridBand3 = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
@@ -2070,6 +2070,14 @@ Partial Class FormSalesPOSDet
         Me.GridColumnid_product.FieldName = "id_product"
         Me.GridColumnid_product.Name = "GridColumnid_product"
         '
+        'BandedGridColumn3
+        '
+        Me.BandedGridColumn3.Caption = "No"
+        Me.BandedGridColumn3.FieldName = "no"
+        Me.BandedGridColumn3.Name = "BandedGridColumn3"
+        Me.BandedGridColumn3.Visible = True
+        Me.BandedGridColumn3.Width = 36
+        '
         'GridColumncodeprob
         '
         Me.GridColumncodeprob.Caption = "Code"
@@ -2177,7 +2185,7 @@ Partial Class FormSalesPOSDet
         '
         'BandedGridColumn1
         '
-        Me.BandedGridColumn1.Caption = "Store"
+        Me.BandedGridColumn1.Caption = "Store Amount"
         Me.BandedGridColumn1.DisplayFormat.FormatString = "N0"
         Me.BandedGridColumn1.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.BandedGridColumn1.FieldName = "BandedGridColumn1"
@@ -2189,7 +2197,7 @@ Partial Class FormSalesPOSDet
         '
         'BandedGridColumn2
         '
-        Me.BandedGridColumn2.Caption = "ERP"
+        Me.BandedGridColumn2.Caption = "ERP Amount"
         Me.BandedGridColumn2.DisplayFormat.FormatString = "N0"
         Me.BandedGridColumn2.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.BandedGridColumn2.FieldName = "BandedGridColumn2"
@@ -2332,14 +2340,6 @@ Partial Class FormSalesPOSDet
         Me.GridColumnPriceCode.Name = "GridColumnPriceCode"
         Me.GridColumnPriceCode.OptionsColumn.AllowEdit = False
         '
-        'BandedGridColumn3
-        '
-        Me.BandedGridColumn3.Caption = "No"
-        Me.BandedGridColumn3.FieldName = "no"
-        Me.BandedGridColumn3.Name = "BandedGridColumn3"
-        Me.BandedGridColumn3.Visible = True
-        Me.BandedGridColumn3.Width = 36
-        '
         'GridBand1
         '
         Me.GridBand1.Columns.Add(Me.GridColumnid_sales_pos_prob)
@@ -2381,18 +2381,19 @@ Partial Class FormSalesPOSDet
         '
         Me.gridBand5.Caption = "No Stock"
         Me.gridBand5.Columns.Add(Me.GridColumnno_stock_qty)
+        Me.gridBand5.Columns.Add(Me.BandedGridColumn1)
+        Me.gridBand5.Columns.Add(Me.BandedGridColumn2)
         Me.gridBand5.Name = "gridBand5"
         Me.gridBand5.VisibleIndex = 3
-        Me.gridBand5.Width = 75
+        Me.gridBand5.Width = 225
         '
         'gridBand4
         '
         Me.gridBand4.Caption = "Amount"
-        Me.gridBand4.Columns.Add(Me.BandedGridColumn1)
-        Me.gridBand4.Columns.Add(Me.BandedGridColumn2)
         Me.gridBand4.Name = "gridBand4"
-        Me.gridBand4.VisibleIndex = 4
-        Me.gridBand4.Width = 150
+        Me.gridBand4.Visible = False
+        Me.gridBand4.VisibleIndex = -1
+        Me.gridBand4.Width = 75
         '
         'FormSalesPOSDet
         '
@@ -2693,8 +2694,8 @@ Partial Class FormSalesPOSDet
     Friend WithEvents SBPrintPL As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents BandedGridColumn1 As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
     Friend WithEvents BandedGridColumn2 As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
-    Friend WithEvents GridBand1 As DevExpress.XtraGrid.Views.BandedGrid.GridBand
     Friend WithEvents BandedGridColumn3 As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents GridBand1 As DevExpress.XtraGrid.Views.BandedGrid.GridBand
     Friend WithEvents gridBand2 As DevExpress.XtraGrid.Views.BandedGrid.GridBand
     Friend WithEvents gridBand3 As DevExpress.XtraGrid.Views.BandedGrid.GridBand
     Friend WithEvents gridBand5 As DevExpress.XtraGrid.Views.BandedGrid.GridBand

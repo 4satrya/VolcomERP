@@ -27,6 +27,7 @@ Partial Public Class ReportSalesInvoiceProblemList
         Me.GridColumnis_invalid_price = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.GridColumnis_no_stock = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.GridColumnid_product = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumn3 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.GridColumncodeprob = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.GridColumnnameprob = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.GridColumnsizeprob = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
@@ -86,7 +87,6 @@ Partial Public Class ReportSalesInvoiceProblemList
         Me.XrTableRow1 = New DevExpress.XtraReports.UI.XRTableRow()
         Me.XrTableCell1 = New DevExpress.XtraReports.UI.XRTableCell()
         Me.LabelNotice = New DevExpress.XtraReports.UI.XRLabel()
-        Me.BandedGridColumn3 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.GridBand1 = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
         Me.gridBand2 = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
         Me.gridBand3 = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
@@ -183,6 +183,14 @@ Partial Public Class ReportSalesInvoiceProblemList
         Me.GridColumnid_product.Caption = "id_product"
         Me.GridColumnid_product.FieldName = "id_product"
         Me.GridColumnid_product.Name = "GridColumnid_product"
+        '
+        'BandedGridColumn3
+        '
+        Me.BandedGridColumn3.Caption = "No"
+        Me.BandedGridColumn3.FieldName = "no"
+        Me.BandedGridColumn3.Name = "BandedGridColumn3"
+        Me.BandedGridColumn3.Visible = True
+        Me.BandedGridColumn3.Width = 34
         '
         'GridColumncodeprob
         '
@@ -284,18 +292,18 @@ Partial Public Class ReportSalesInvoiceProblemList
         '
         'GridColumnno_stock_qty
         '
-        Me.GridColumnno_stock_qty.Caption = "No Stock Qty"
+        Me.GridColumnno_stock_qty.Caption = "Qty"
         Me.GridColumnno_stock_qty.DisplayFormat.FormatString = "N0"
         Me.GridColumnno_stock_qty.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumnno_stock_qty.FieldName = "no_stock_qty"
         Me.GridColumnno_stock_qty.Name = "GridColumnno_stock_qty"
         Me.GridColumnno_stock_qty.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "no_stock_qty", "{0:N0}")})
         Me.GridColumnno_stock_qty.Visible = True
-        Me.GridColumnno_stock_qty.Width = 84
+        Me.GridColumnno_stock_qty.Width = 55
         '
         'BandedGridColumn1
         '
-        Me.BandedGridColumn1.Caption = "Store"
+        Me.BandedGridColumn1.Caption = "Store Amo."
         Me.BandedGridColumn1.DisplayFormat.FormatString = "N0"
         Me.BandedGridColumn1.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.BandedGridColumn1.FieldName = "BandedGridColumn1"
@@ -304,10 +312,11 @@ Partial Public Class ReportSalesInvoiceProblemList
         Me.BandedGridColumn1.UnboundExpression = "[no_stock_qty] * [design_price_store]"
         Me.BandedGridColumn1.UnboundType = DevExpress.Data.UnboundColumnType.[Integer]
         Me.BandedGridColumn1.Visible = True
+        Me.BandedGridColumn1.Width = 82
         '
         'BandedGridColumn2
         '
-        Me.BandedGridColumn2.Caption = "ERP"
+        Me.BandedGridColumn2.Caption = "ERP Amo."
         Me.BandedGridColumn2.DisplayFormat.FormatString = "N0"
         Me.BandedGridColumn2.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.BandedGridColumn2.FieldName = "BandedGridColumn2"
@@ -316,6 +325,7 @@ Partial Public Class ReportSalesInvoiceProblemList
         Me.BandedGridColumn2.UnboundExpression = "[no_stock_qty] * [design_price_retail]"
         Me.BandedGridColumn2.UnboundType = DevExpress.Data.UnboundColumnType.[Integer]
         Me.BandedGridColumn2.Visible = True
+        Me.BandedGridColumn2.Width = 83
         '
         'TopMargin
         '
@@ -821,14 +831,6 @@ Partial Public Class ReportSalesInvoiceProblemList
         Me.LabelNotice.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
         Me.LabelNotice.Visible = False
         '
-        'BandedGridColumn3
-        '
-        Me.BandedGridColumn3.Caption = "No"
-        Me.BandedGridColumn3.FieldName = "no"
-        Me.BandedGridColumn3.Name = "BandedGridColumn3"
-        Me.BandedGridColumn3.Visible = True
-        Me.BandedGridColumn3.Width = 34
-        '
         'GridBand1
         '
         Me.GridBand1.Columns.Add(Me.GridColumnid_sales_pos_prob)
@@ -870,18 +872,19 @@ Partial Public Class ReportSalesInvoiceProblemList
         '
         Me.gridBand5.Caption = "No Stock"
         Me.gridBand5.Columns.Add(Me.GridColumnno_stock_qty)
+        Me.gridBand5.Columns.Add(Me.BandedGridColumn1)
+        Me.gridBand5.Columns.Add(Me.BandedGridColumn2)
         Me.gridBand5.Name = "gridBand5"
         Me.gridBand5.VisibleIndex = 3
-        Me.gridBand5.Width = 84
+        Me.gridBand5.Width = 220
         '
         'gridBand4
         '
         Me.gridBand4.Caption = "Amount"
-        Me.gridBand4.Columns.Add(Me.BandedGridColumn1)
-        Me.gridBand4.Columns.Add(Me.BandedGridColumn2)
         Me.gridBand4.Name = "gridBand4"
-        Me.gridBand4.VisibleIndex = 4
-        Me.gridBand4.Width = 150
+        Me.gridBand4.Visible = False
+        Me.gridBand4.VisibleIndex = -1
+        Me.gridBand4.Width = 75
         '
         'ReportSalesInvoiceProblemList
         '
@@ -962,8 +965,8 @@ Partial Public Class ReportSalesInvoiceProblemList
     Friend WithEvents GridColumnno_stock_qty As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
     Friend WithEvents BandedGridColumn1 As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
     Friend WithEvents BandedGridColumn2 As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
-    Friend WithEvents GridBand1 As DevExpress.XtraGrid.Views.BandedGrid.GridBand
     Friend WithEvents BandedGridColumn3 As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents GridBand1 As DevExpress.XtraGrid.Views.BandedGrid.GridBand
     Friend WithEvents gridBand2 As DevExpress.XtraGrid.Views.BandedGrid.GridBand
     Friend WithEvents gridBand3 As DevExpress.XtraGrid.Views.BandedGrid.GridBand
     Friend WithEvents gridBand5 As DevExpress.XtraGrid.Views.BandedGrid.GridBand

@@ -49,7 +49,8 @@ Partial Class FormProductionKP
         Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
         Me.ImageCollection = New DevExpress.Utils.ImageCollection(Me.components)
-        Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
+        Me.PCControl = New DevExpress.XtraEditors.PanelControl()
+        Me.BAttachment = New DevExpress.XtraEditors.SimpleButton()
         Me.BPrintKP = New DevExpress.XtraEditors.SimpleButton()
         Me.BUpdate = New DevExpress.XtraEditors.SimpleButton()
         Me.BLock = New DevExpress.XtraEditors.SimpleButton()
@@ -90,7 +91,6 @@ Partial Class FormProductionKP
         Me.GridColumnProto2Sample = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RIDESampleProto2 = New DevExpress.XtraEditors.Repository.RepositoryItemDateEdit()
         Me.RIPictureEdit = New DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit()
-        Me.BAttachment = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.PanelControl4, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -110,8 +110,8 @@ Partial Class FormProductionKP
         CType(Me.SLERevision.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.PanelControl2.SuspendLayout()
+        CType(Me.PCControl, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PCControl.SuspendLayout()
         CType(Me.PCDel, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PCDel.SuspendLayout()
         CType(Me.GCProd, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -415,17 +415,28 @@ Partial Class FormProductionKP
         Me.ImageCollection.InsertGalleryImage("locknavigation_32x32.png", "images/dashboards/locknavigation_32x32.png", DevExpress.Images.ImageResourceCache.Default.GetImage("images/dashboards/locknavigation_32x32.png"), 17)
         Me.ImageCollection.Images.SetKeyName(17, "locknavigation_32x32.png")
         '
-        'PanelControl2
+        'PCControl
         '
-        Me.PanelControl2.Controls.Add(Me.BAttachment)
-        Me.PanelControl2.Controls.Add(Me.BPrintKP)
-        Me.PanelControl2.Controls.Add(Me.BUpdate)
-        Me.PanelControl2.Controls.Add(Me.BLock)
-        Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControl2.Location = New System.Drawing.Point(0, 514)
-        Me.PanelControl2.Name = "PanelControl2"
-        Me.PanelControl2.Size = New System.Drawing.Size(875, 41)
-        Me.PanelControl2.TabIndex = 2
+        Me.PCControl.Controls.Add(Me.BAttachment)
+        Me.PCControl.Controls.Add(Me.BPrintKP)
+        Me.PCControl.Controls.Add(Me.BUpdate)
+        Me.PCControl.Controls.Add(Me.BLock)
+        Me.PCControl.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.PCControl.Location = New System.Drawing.Point(0, 514)
+        Me.PCControl.Name = "PCControl"
+        Me.PCControl.Size = New System.Drawing.Size(875, 41)
+        Me.PCControl.TabIndex = 2
+        '
+        'BAttachment
+        '
+        Me.BAttachment.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BAttachment.ImageIndex = 16
+        Me.BAttachment.ImageList = Me.ImageCollection
+        Me.BAttachment.Location = New System.Drawing.Point(475, 2)
+        Me.BAttachment.Name = "BAttachment"
+        Me.BAttachment.Size = New System.Drawing.Size(96, 37)
+        Me.BAttachment.TabIndex = 8913
+        Me.BAttachment.Text = "Attachment"
         '
         'BPrintKP
         '
@@ -824,17 +835,6 @@ Partial Class FormProductionKP
         Me.RIPictureEdit.Name = "RIPictureEdit"
         Me.RIPictureEdit.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Stretch
         '
-        'BAttachment
-        '
-        Me.BAttachment.Dock = System.Windows.Forms.DockStyle.Right
-        Me.BAttachment.ImageIndex = 16
-        Me.BAttachment.ImageList = Me.ImageCollection
-        Me.BAttachment.Location = New System.Drawing.Point(475, 2)
-        Me.BAttachment.Name = "BAttachment"
-        Me.BAttachment.Size = New System.Drawing.Size(96, 37)
-        Me.BAttachment.TabIndex = 8913
-        Me.BAttachment.Text = "Attachment"
-        '
         'FormProductionKP
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -842,7 +842,7 @@ Partial Class FormProductionKP
         Me.ClientSize = New System.Drawing.Size(875, 555)
         Me.Controls.Add(Me.GCProd)
         Me.Controls.Add(Me.PCDel)
-        Me.Controls.Add(Me.PanelControl2)
+        Me.Controls.Add(Me.PCControl)
         Me.Controls.Add(Me.PanelControl1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MinimizeBox = False
@@ -871,8 +871,8 @@ Partial Class FormProductionKP
         CType(Me.SLERevision.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ImageCollection, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.PanelControl2.ResumeLayout(False)
+        CType(Me.PCControl, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PCControl.ResumeLayout(False)
         CType(Me.PCDel, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PCDel.ResumeLayout(False)
         CType(Me.GCProd, System.ComponentModel.ISupportInitialize).EndInit()
@@ -912,7 +912,7 @@ Partial Class FormProductionKP
     Friend WithEvents GridColumn8 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents LabelControl4 As DevExpress.XtraEditors.LabelControl
     Public WithEvents ImageCollection As DevExpress.Utils.ImageCollection
-    Friend WithEvents PanelControl2 As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents PCControl As DevExpress.XtraEditors.PanelControl
     Friend WithEvents BPrintKP As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents BUpdate As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents BLock As DevExpress.XtraEditors.SimpleButton

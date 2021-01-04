@@ -56,9 +56,10 @@ Partial Class FormProductionKO
         Me.GridColumn19 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn8 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.LabelControl4 = New DevExpress.XtraEditors.LabelControl()
-        Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
-        Me.BPrintKO = New DevExpress.XtraEditors.SimpleButton()
+        Me.PCControl = New DevExpress.XtraEditors.PanelControl()
+        Me.BAttachment = New DevExpress.XtraEditors.SimpleButton()
         Me.ImageCollection = New DevExpress.Utils.ImageCollection(Me.components)
+        Me.BPrintKO = New DevExpress.XtraEditors.SimpleButton()
         Me.BUpdate = New DevExpress.XtraEditors.SimpleButton()
         Me.BLock = New DevExpress.XtraEditors.SimpleButton()
         Me.GCProd = New DevExpress.XtraGrid.GridControl()
@@ -107,7 +108,6 @@ Partial Class FormProductionKO
         Me.LabelControl19 = New DevExpress.XtraEditors.LabelControl()
         Me.PCDel = New DevExpress.XtraEditors.PanelControl()
         Me.Bdel = New DevExpress.XtraEditors.SimpleButton()
-        Me.BAttachment = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.PanelControl4, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -128,8 +128,8 @@ Partial Class FormProductionKO
         CType(Me.DEDateCreated.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SLERevision.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.PanelControl2.SuspendLayout()
+        CType(Me.PCControl, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PCControl.SuspendLayout()
         CType(Me.ImageCollection, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GCProd, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVProd, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -497,28 +497,28 @@ Partial Class FormProductionKO
         Me.LabelControl4.TabIndex = 3
         Me.LabelControl4.Text = "Revision"
         '
-        'PanelControl2
+        'PCControl
         '
-        Me.PanelControl2.Controls.Add(Me.BAttachment)
-        Me.PanelControl2.Controls.Add(Me.BPrintKO)
-        Me.PanelControl2.Controls.Add(Me.BUpdate)
-        Me.PanelControl2.Controls.Add(Me.BLock)
-        Me.PanelControl2.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControl2.Location = New System.Drawing.Point(0, 514)
-        Me.PanelControl2.Name = "PanelControl2"
-        Me.PanelControl2.Size = New System.Drawing.Size(875, 41)
-        Me.PanelControl2.TabIndex = 1
+        Me.PCControl.Controls.Add(Me.BAttachment)
+        Me.PCControl.Controls.Add(Me.BPrintKO)
+        Me.PCControl.Controls.Add(Me.BUpdate)
+        Me.PCControl.Controls.Add(Me.BLock)
+        Me.PCControl.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.PCControl.Location = New System.Drawing.Point(0, 514)
+        Me.PCControl.Name = "PCControl"
+        Me.PCControl.Size = New System.Drawing.Size(875, 41)
+        Me.PCControl.TabIndex = 1
         '
-        'BPrintKO
+        'BAttachment
         '
-        Me.BPrintKO.Dock = System.Windows.Forms.DockStyle.Right
-        Me.BPrintKO.ImageIndex = 6
-        Me.BPrintKO.ImageList = Me.ImageCollection
-        Me.BPrintKO.Location = New System.Drawing.Point(571, 2)
-        Me.BPrintKO.Name = "BPrintKO"
-        Me.BPrintKO.Size = New System.Drawing.Size(96, 37)
-        Me.BPrintKO.TabIndex = 8910
-        Me.BPrintKO.Text = "Print"
+        Me.BAttachment.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BAttachment.ImageIndex = 16
+        Me.BAttachment.ImageList = Me.ImageCollection
+        Me.BAttachment.Location = New System.Drawing.Point(475, 2)
+        Me.BAttachment.Name = "BAttachment"
+        Me.BAttachment.Size = New System.Drawing.Size(96, 37)
+        Me.BAttachment.TabIndex = 8912
+        Me.BAttachment.Text = "Attachment"
         '
         'ImageCollection
         '
@@ -542,6 +542,17 @@ Partial Class FormProductionKO
         Me.ImageCollection.Images.SetKeyName(15, "attachment-icon.png")
         Me.ImageCollection.InsertGalleryImage("locknavigation_32x32.png", "images/dashboards/locknavigation_32x32.png", DevExpress.Images.ImageResourceCache.Default.GetImage("images/dashboards/locknavigation_32x32.png"), 17)
         Me.ImageCollection.Images.SetKeyName(17, "locknavigation_32x32.png")
+        '
+        'BPrintKO
+        '
+        Me.BPrintKO.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BPrintKO.ImageIndex = 6
+        Me.BPrintKO.ImageList = Me.ImageCollection
+        Me.BPrintKO.Location = New System.Drawing.Point(571, 2)
+        Me.BPrintKO.Name = "BPrintKO"
+        Me.BPrintKO.Size = New System.Drawing.Size(96, 37)
+        Me.BPrintKO.TabIndex = 8910
+        Me.BPrintKO.Text = "Print"
         '
         'BUpdate
         '
@@ -1043,17 +1054,6 @@ Partial Class FormProductionKO
         Me.Bdel.TabIndex = 17
         Me.Bdel.Text = "Delete"
         '
-        'BAttachment
-        '
-        Me.BAttachment.Dock = System.Windows.Forms.DockStyle.Right
-        Me.BAttachment.ImageIndex = 16
-        Me.BAttachment.ImageList = Me.ImageCollection
-        Me.BAttachment.Location = New System.Drawing.Point(475, 2)
-        Me.BAttachment.Name = "BAttachment"
-        Me.BAttachment.Size = New System.Drawing.Size(96, 37)
-        Me.BAttachment.TabIndex = 8912
-        Me.BAttachment.Text = "Attachment"
-        '
         'FormProductionKO
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1062,7 +1062,7 @@ Partial Class FormProductionKO
         Me.Controls.Add(Me.GCProd)
         Me.Controls.Add(Me.PCDel)
         Me.Controls.Add(Me.PanelControl5)
-        Me.Controls.Add(Me.PanelControl2)
+        Me.Controls.Add(Me.PCControl)
         Me.Controls.Add(Me.PanelControl1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MinimizeBox = False
@@ -1092,8 +1092,8 @@ Partial Class FormProductionKO
         CType(Me.DEDateCreated.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SLERevision.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.PanelControl2.ResumeLayout(False)
+        CType(Me.PCControl, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PCControl.ResumeLayout(False)
         CType(Me.ImageCollection, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GCProd, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVProd, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1116,7 +1116,7 @@ Partial Class FormProductionKO
 
     End Sub
     Friend WithEvents PanelControl1 As DevExpress.XtraEditors.PanelControl
-    Friend WithEvents PanelControl2 As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents PCControl As DevExpress.XtraEditors.PanelControl
     Public WithEvents ImageCollection As DevExpress.Utils.ImageCollection
     Friend WithEvents BLock As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents LabelControl1 As DevExpress.XtraEditors.LabelControl

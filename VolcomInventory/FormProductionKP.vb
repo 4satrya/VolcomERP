@@ -2,6 +2,7 @@
     Public id_kp As String = "-1"
     Public is_locked As String = "2"
     Public is_purc_mat As String = "2"
+    Dim is_void As String = "2"
 
     Private Sub FormProductionkp_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
         Dispose()
@@ -24,7 +25,7 @@
 
     Sub load_head()
         'view yang revisi terakhir
-        Dim query As String = "SELECT kp.is_locked,kp.is_purc_mat,c.phone,c.fax,kp.number,cc.`contact_person`,c.`comp_number`,c.`comp_name`,c.`address_primary`,kp.`date_created`,LPAD(kp.`revision`,2,'0') AS revision
+        Dim query As String = "SELECT kp.is_locked,kp.is_void,kp.is_purc_mat,c.phone,c.fax,kp.number,cc.`contact_person`,c.`comp_number`,c.`comp_name`,c.`address_primary`,kp.`date_created`,LPAD(kp.`revision`,2,'0') AS revision
 FROM tb_prod_order_kp kp
 INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact=kp.id_comp_contact
 INNER JOIN tb_m_comp c ON c.id_comp=cc.id_comp
@@ -33,8 +34,9 @@ WHERE id_prod_order_kp='" & id_kp & "'"
 
         If data.Rows.Count > 0 Then
             is_purc_mat = data.Rows(0)("is_purc_mat").ToString
+            is_void = data.Rows(0)("is_void").ToString
             '
-            TEkpNumber.Text = data.Rows(0)("number").ToString
+            TEKPNumber.Text = data.Rows(0)("number").ToString
             TECompCode.Text = data.Rows(0)("comp_number").ToString
             TECompName.Text = data.Rows(0)("comp_name").ToString
             MECompAddress.Text = data.Rows(0)("address_primary").ToString
@@ -64,6 +66,12 @@ WHERE id_prod_order_kp='" & id_kp & "'"
             BRevise.Visible = False
             Bdel.Enabled = True
             PCDel.Visible = True
+        End If
+
+        'void
+        If is_void = "1" Then
+            PCDel.Visible = False
+            PCControl.Visible = False
         End If
 
         'prevent edit lead time

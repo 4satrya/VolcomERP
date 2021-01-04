@@ -1,6 +1,7 @@
 ﻿Public Class FormProductionKO
     Public id_ko As String = "-1"
     Public is_locked As String = "2"
+    Dim is_void As String = "2"
     Public is_purc_mat As String = "2"
 
     Private Sub FormProductionKO_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
@@ -22,7 +23,7 @@
 
     Sub load_head()
         'view yang revisi terakhir
-        Dim query As String = "SELECT ko.is_locked,ko.is_purc_mat,c.phone,c.fax,ko.number,ko.vat,ko.id_ko_template,too.term_production,cc.`contact_person`,c.`comp_number`,c.`comp_name`,c.`address_primary`,ko.`date_created`,LPAD(ko.`revision`,2,'0') AS revision
+        Dim query As String = "SELECT ko.is_locked,ko.is_purc_mat,c.phone,c.fax,ko.number,ko.vat,ko.id_ko_template,too.term_production,cc.`contact_person`,c.`comp_number`,c.`comp_name`,c.`address_primary`,ko.`date_created`,LPAD(ko.`revision`,2,'0') AS revision,ko.is_void
 FROM tb_prod_order_ko ko
 INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact=ko.id_comp_contact
 INNER JOIN tb_m_comp c ON c.id_comp=cc.id_comp
@@ -32,6 +33,7 @@ WHERE id_prod_order_ko='" & id_ko & "'"
 
         If data.Rows.Count > 0 Then
             is_purc_mat = data.Rows(0)("is_purc_mat").ToString
+            is_void = data.Rows(0)("is_void").ToString
             '
             TEKONumber.Text = data.Rows(0)("number").ToString
             TECompCode.Text = data.Rows(0)("comp_number").ToString
@@ -65,6 +67,13 @@ WHERE id_prod_order_ko='" & id_ko & "'"
             BRevise.Visible = False
             PCDel.Visible = True
         End If
+
+        'void
+        If is_void = "1" Then
+            PCDel.Visible = False
+            PCControl.Visible = False
+        End If
+
         'prevent edit lead time
         If SLERevision.Text = "00" Or is_locked = "1" Then
             GridColumnLeadTime.OptionsColumn.ReadOnly = True

@@ -232,6 +232,7 @@ WHERE bo.`year`=YEAR(NOW()) AND bo.is_active='1'"
 
     Sub viewDetail()
         Cursor = Cursors.WaitCursor
+        Dim q_year As String = ""
         Dim query As String = "SELECT ed.id_currency,cur.currency,ed.amount_before,ed.kurs,ed.id_item_expense_det,ed.cc,c.comp_number AS cc_desc, ed.id_item_expense,ed.id_expense_type,ed.id_b_expense,bex.item_cat_main,typ.expense_type,
         ed.id_acc,pphacc.acc_description AS coa_desc_pph,a.id_acc_cat, a.acc_description AS `coa_desc`, ed.description,a.acc_name,ed.id_acc_pph,ed.pph_percent,ed.pph, "
 
@@ -241,7 +242,12 @@ WHERE bo.`year`=YEAR(NOW()) AND bo.is_active='1'"
             query += "ed.tax_percent,ed.amount "
         End If
 
+        If action = "ins" Then
+            q_year = " WHERE bo.`year`=YEAR(NOW()) AND bo.is_active='1' "
+        End If
+
         query += "FROM tb_item_expense_det ed
+        INNER JOIN tb_item_expense e ON e.id_item_expense=ed.id_item_expense
         LEFT JOIN tb_a_acc pphacc ON pphacc.id_acc = ed.id_acc_pph
         INNER JOIN tb_a_acc a ON a.id_acc = ed.id_acc
         INNER JOIN tb_lookup_expense_type typ ON typ.id_expense_type=ed.id_expense_type
@@ -249,17 +255,17 @@ WHERE bo.`year`=YEAR(NOW()) AND bo.is_active='1'"
         INNER JOIN tb_lookup_currency cur ON cur.id_currency=ed.id_currency
         INNER JOIN 
         (
-	        SELECT bo.`id_b_expense_opex` AS id_b_expense,icm.`id_item_cat_main`,icm.`item_cat_main`,icm.`id_expense_type`
+	        SELECT bo.`year`,bo.`id_b_expense_opex` AS id_b_expense,icm.`id_item_cat_main`,icm.`item_cat_main`,icm.`id_expense_type`
 	        FROM tb_b_expense_opex bo
 	        INNER JOIN tb_item_cat_main icm ON icm.`id_item_cat_main`=bo.`id_item_cat_main`
-	        WHERE bo.`year`=YEAR(NOW()) AND bo.is_active='1'
+	        " & q_year & "
 	        UNION ALL
-	        SELECT bo.`id_b_expense` AS id_b_expense,icm.`id_item_cat_main`,CONCAT('[',dep.departement,']',icm.`item_cat_main`) AS item_cat_main,icm.`id_expense_type`
+	        SELECT bo.`year`,bo.`id_b_expense` AS id_b_expense,icm.`id_item_cat_main`,CONCAT('[',dep.departement,']',icm.`item_cat_main`) AS item_cat_main,icm.`id_expense_type`
 	        FROM tb_b_expense bo
 	        INNER JOIN tb_item_cat_main icm ON icm.`id_item_cat_main`=bo.`id_item_cat_main`
 	        INNER JOIN tb_m_departement dep ON dep.id_departement=bo.id_departement
-	        WHERE bo.`year`=YEAR(NOW()) AND bo.is_active='1'
-        ) bex ON bex.id_b_expense=ed.id_b_expense AND ed.id_expense_type=bex.id_expense_type
+	        " & q_year & "
+        ) bex ON bex.id_b_expense=ed.id_b_expense AND ed.id_expense_type=bex.id_expense_type AND bex.year=YEAR(e.date_reff)
         WHERE ed.id_item_expense=" + id + " "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCData.DataSource = data

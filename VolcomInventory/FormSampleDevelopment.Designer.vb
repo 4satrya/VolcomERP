@@ -35,6 +35,7 @@ Partial Class FormSampleDevelopment
         Me.GCDesign = New DevExpress.XtraGrid.GridControl()
         Me.ViewMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ViewDetailToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EntryProductionComponentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EntryECOPToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GVDesign = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridView()
         Me.GBDesign = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
@@ -190,7 +191,6 @@ Partial Class FormSampleDevelopment
         Me.GridColumn20 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
         Me.BViewEstECOPPPS = New DevExpress.XtraEditors.SimpleButton()
-        Me.EntryProductionComponentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.PanelControlNavLineList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControlNavLineList.SuspendLayout()
         CType(Me.PCNavLineList, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -382,13 +382,19 @@ Partial Class FormSampleDevelopment
         '
         Me.ViewMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ViewDetailToolStripMenuItem, Me.EntryProductionComponentToolStripMenuItem, Me.EntryECOPToolStripMenuItem})
         Me.ViewMenu.Name = "ContextMenuStripYM"
-        Me.ViewMenu.Size = New System.Drawing.Size(231, 92)
+        Me.ViewMenu.Size = New System.Drawing.Size(231, 70)
         '
         'ViewDetailToolStripMenuItem
         '
         Me.ViewDetailToolStripMenuItem.Name = "ViewDetailToolStripMenuItem"
         Me.ViewDetailToolStripMenuItem.Size = New System.Drawing.Size(230, 22)
         Me.ViewDetailToolStripMenuItem.Text = "View Development History"
+        '
+        'EntryProductionComponentToolStripMenuItem
+        '
+        Me.EntryProductionComponentToolStripMenuItem.Name = "EntryProductionComponentToolStripMenuItem"
+        Me.EntryProductionComponentToolStripMenuItem.Size = New System.Drawing.Size(230, 22)
+        Me.EntryProductionComponentToolStripMenuItem.Text = "Entry Production Component"
         '
         'EntryECOPToolStripMenuItem
         '
@@ -1754,6 +1760,7 @@ Partial Class FormSampleDevelopment
         'GridColumn28
         '
         Me.GridColumn28.Caption = "Design Code"
+        Me.GridColumn28.FieldName = "design_code"
         Me.GridColumn28.Name = "GridColumn28"
         Me.GridColumn28.Visible = True
         Me.GridColumn28.VisibleIndex = 1
@@ -1771,7 +1778,7 @@ Partial Class FormSampleDevelopment
         Me.GridColumn25.Caption = "Created Date"
         Me.GridColumn25.DisplayFormat.FormatString = "dd MMMM yyyy"
         Me.GridColumn25.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.GridColumn25.FieldName = "date_created"
+        Me.GridColumn25.FieldName = "created_date"
         Me.GridColumn25.Name = "GridColumn25"
         Me.GridColumn25.Visible = True
         Me.GridColumn25.VisibleIndex = 3
@@ -1887,12 +1894,6 @@ Partial Class FormSampleDevelopment
         Me.BViewEstECOPPPS.Size = New System.Drawing.Size(80, 36)
         Me.BViewEstECOPPPS.TabIndex = 94
         Me.BViewEstECOPPPS.Text = "View"
-        '
-        'EntryProductionComponentToolStripMenuItem
-        '
-        Me.EntryProductionComponentToolStripMenuItem.Name = "EntryProductionComponentToolStripMenuItem"
-        Me.EntryProductionComponentToolStripMenuItem.Size = New System.Drawing.Size(230, 22)
-        Me.EntryProductionComponentToolStripMenuItem.Text = "Entry Production Component"
         '
         'FormSampleDevelopment
         '

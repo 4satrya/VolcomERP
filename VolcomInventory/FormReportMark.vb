@@ -8921,7 +8921,6 @@ WHERE ecop.id_design_ecop_pps='" & id_report & "';"
                     'check if lower than target cost then continue
                     'target cost
                     Dim target_cost As Decimal = 0.00
-                    Dim target_cost_sample As Decimal = 0.00
                     Dim ecop As Decimal = dtq.Rows(0)("cop")
                     Dim id_c As String = ""
 
@@ -8932,15 +8931,8 @@ INNER JOIN tb_fg_line_plan fg_lp ON fg_lp.`id_fg_line_plan`=dsg.`id_fg_line_plan
 WHERE dsg.id_design='" & dtq.Rows(0)("id_design").ToString & "'"
                     Dim plan_dt As DataTable = execute_query(query_target, -1, True, "", "", "", "")
                     target_cost = plan_dt.Rows(0)("target_cost")
-
-                    'Sample
-                    query_target = "SELECT SUM(IF(id_currency=1,before_kurs,before_kurs*kurs)) AS cop,SUM(additional) AS additional_cop
-FROM tb_m_design_cop
-WHERE is_production_dept=2 AND is_active=1 AND id_design='1'"
-                    plan_dt = execute_query(query_target, -1, True, "", "", "", "")
-                    target_cost_sample = plan_dt.Rows(0)("cop")
                     '
-                    If ecop > target_cost Or ecop > target_cost_sample Then
+                    If ecop > target_cost Then
                         'need verify
                         qu = String.Format("UPDATE tb_design_ecop_pps SET need_verify='1' WHERE id_design_ecop_pps='{0}'", id_report)
                         execute_non_query(qu, True, "", "", "", "")
@@ -8963,14 +8955,37 @@ WHERE is_production_dept=2 AND is_active=1 AND id_design='1'"
                             execute_query("INSERT INTO tb_error_mail(date,description) VALUES(NOW(),'Failed send COP PD id_design = " & dtq.Rows(0)("id_design").ToString & "')", -1, True, "", "", "", "")
                         End Try
                     End If
-                Else
-                    Dim qu As String = "UPDATE tb_m_design_cop SET is_active=2 WHERE id_design='" & dtq.Rows(0)("id_design").ToString & "' AND is_production_dept='" & dtq.Rows(0)("is_production_dept").ToString & "';
+                Else 'sample propose need verify if larger than target cost MD
+                    Dim target_cost As Decimal = 0.00
+                    Dim ecop As Decimal = dtq.Rows(0)("cop")
+                    Dim qu As String = ""
+
+                    'MD
+                    Dim query_target As String = "SELECT dsg.id_fg_line_plan,(fg_lp.`target_price`/fg_lp.`mark_up`) AS target_cost
+FROM tb_m_design dsg
+INNER JOIN tb_fg_line_plan fg_lp ON fg_lp.`id_fg_line_plan`=dsg.`id_fg_line_plan` 
+WHERE dsg.id_design='" & dtq.Rows(0)("id_design").ToString & "'"
+                    Dim plan_dt As DataTable = execute_query(query_target, -1, True, "", "", "", "")
+                    target_cost = plan_dt.Rows(0)("target_cost")
+
+                    If ecop > target_cost Then
+                        'need verify
+                        qu = String.Format("UPDATE tb_design_ecop_pps SET need_verify='1' WHERE id_design_ecop_pps='{0}'", id_report)
+                        execute_non_query(qu, True, "", "", "", "")
+                        'email
+                        Dim mail As ClassSendEmail = New ClassSendEmail()
+                        mail.id_report = id_report
+                        mail.report_mark_type = report_mark_type & "S"
+                        mail.send_email()
+                    Else
+                        query = "UPDATE tb_m_design_cop SET is_active=2 WHERE id_design='" & dtq.Rows(0)("id_design").ToString & "' AND is_production_dept='" & dtq.Rows(0)("is_production_dept").ToString & "';
 INSERT INTO `tb_m_design_cop`(description,id_design,date_created,id_currency,kurs,before_kurs,additional,is_active,is_production_dept)
 SELECT ecopd.description,ecop.id_design,NOW(),ecopd.id_currency,ecopd.kurs,ecopd.before_kurs,ecopd.additional,1 AS is_active,ecop.is_production_dept
 FROM `tb_design_ecop_pps_det` ecopd
 INNER JOIN tb_design_ecop_pps ecop ON ecop.id_design_ecop_pps=ecopd.id_design_ecop_pps
 WHERE ecop.id_design_ecop_pps='" & id_report & "';"
-                    execute_non_query(qu, True, "", "", "", "")
+                        execute_non_query(qu, True, "", "", "", "")
+                    End If
                 End If
             End If
 

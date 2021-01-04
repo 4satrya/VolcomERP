@@ -33,8 +33,6 @@ Partial Class FormVerifyECOP
         Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.GridColumn6 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RepositoryItemProgressBar1 = New DevExpress.XtraEditors.Repository.RepositoryItemProgressBar()
         Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
@@ -109,7 +107,7 @@ Partial Class FormVerifyECOP
         '
         'GVEcopPPS
         '
-        Me.GVEcopPPS.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn21, Me.GridColumn4, Me.GridColumn22, Me.GridColumn26, Me.GridColumn28, Me.GridColumn1, Me.GridColumn2, Me.GridColumn5, Me.GridColumn3, Me.GridColumn6, Me.GridColumn7})
+        Me.GVEcopPPS.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn21, Me.GridColumn4, Me.GridColumn22, Me.GridColumn26, Me.GridColumn28, Me.GridColumn1, Me.GridColumn2, Me.GridColumn5, Me.GridColumn7})
         Me.GVEcopPPS.GridControl = Me.GCEcopPPS
         Me.GVEcopPPS.Name = "GVEcopPPS"
         Me.GVEcopPPS.OptionsFind.AlwaysVisible = True
@@ -134,7 +132,7 @@ Partial Class FormVerifyECOP
         Me.GridColumn4.Name = "GridColumn4"
         Me.GridColumn4.Visible = True
         Me.GridColumn4.VisibleIndex = 0
-        Me.GridColumn4.Width = 55
+        Me.GridColumn4.Width = 61
         '
         'RICESelectPPS
         '
@@ -164,7 +162,7 @@ Partial Class FormVerifyECOP
         Me.GridColumn26.OptionsColumn.ReadOnly = True
         Me.GridColumn26.Visible = True
         Me.GridColumn26.VisibleIndex = 3
-        Me.GridColumn26.Width = 122
+        Me.GridColumn26.Width = 135
         '
         'RepositoryItemMemoEdit6
         '
@@ -204,10 +202,10 @@ Partial Class FormVerifyECOP
         Me.GridColumn2.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.GridColumn2.AppearanceHeader.Options.UseTextOptions = True
         Me.GridColumn2.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.GridColumn2.Caption = "ECOP (Sample)"
+        Me.GridColumn2.Caption = "ECOP"
         Me.GridColumn2.DisplayFormat.FormatString = "N2"
         Me.GridColumn2.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.GridColumn2.FieldName = "total_sample"
+        Me.GridColumn2.FieldName = "total"
         Me.GridColumn2.Name = "GridColumn2"
         Me.GridColumn2.OptionsColumn.AllowEdit = False
         Me.GridColumn2.OptionsColumn.ReadOnly = True
@@ -221,46 +219,14 @@ Partial Class FormVerifyECOP
         Me.GridColumn5.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.GridColumn5.AppearanceHeader.Options.UseTextOptions = True
         Me.GridColumn5.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.GridColumn5.Caption = "Additional ECOP (Sample)"
+        Me.GridColumn5.Caption = "Additional ECOP "
         Me.GridColumn5.DisplayFormat.FormatString = "N2"
         Me.GridColumn5.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.GridColumn5.FieldName = "total_additional_sample"
+        Me.GridColumn5.FieldName = "total_additional"
         Me.GridColumn5.Name = "GridColumn5"
         Me.GridColumn5.Visible = True
         Me.GridColumn5.VisibleIndex = 6
         Me.GridColumn5.Width = 150
-        '
-        'GridColumn3
-        '
-        Me.GridColumn3.AppearanceCell.Options.UseTextOptions = True
-        Me.GridColumn3.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.GridColumn3.AppearanceHeader.Options.UseTextOptions = True
-        Me.GridColumn3.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.GridColumn3.Caption = "ECOP (Purchasing)"
-        Me.GridColumn3.DisplayFormat.FormatString = "N2"
-        Me.GridColumn3.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.GridColumn3.FieldName = "total_ecop_purc"
-        Me.GridColumn3.Name = "GridColumn3"
-        Me.GridColumn3.OptionsColumn.AllowEdit = False
-        Me.GridColumn3.OptionsColumn.ReadOnly = True
-        Me.GridColumn3.Visible = True
-        Me.GridColumn3.VisibleIndex = 7
-        Me.GridColumn3.Width = 68
-        '
-        'GridColumn6
-        '
-        Me.GridColumn6.AppearanceCell.Options.UseTextOptions = True
-        Me.GridColumn6.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.GridColumn6.AppearanceHeader.Options.UseTextOptions = True
-        Me.GridColumn6.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
-        Me.GridColumn6.Caption = "Additional ECOP (Purchasing)"
-        Me.GridColumn6.DisplayFormat.FormatString = "N2"
-        Me.GridColumn6.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.GridColumn6.FieldName = "total_additional_purc"
-        Me.GridColumn6.Name = "GridColumn6"
-        Me.GridColumn6.Visible = True
-        Me.GridColumn6.VisibleIndex = 8
-        Me.GridColumn6.Width = 37
         '
         'GridColumn7
         '
@@ -272,7 +238,7 @@ Partial Class FormVerifyECOP
         Me.GridColumn7.FieldName = "jml_recal"
         Me.GridColumn7.Name = "GridColumn7"
         Me.GridColumn7.Visible = True
-        Me.GridColumn7.VisibleIndex = 9
+        Me.GridColumn7.VisibleIndex = 7
         '
         'RepositoryItemProgressBar1
         '
@@ -361,6 +327,7 @@ Partial Class FormVerifyECOP
         'XTPHistory
         '
         Me.XTPHistory.Name = "XTPHistory"
+        Me.XTPHistory.PageVisible = False
         Me.XTPHistory.Size = New System.Drawing.Size(1007, 501)
         Me.XTPHistory.Text = "History"
         '
@@ -503,13 +470,11 @@ Partial Class FormVerifyECOP
     Friend WithEvents RepositoryItemProgressBar1 As DevExpress.XtraEditors.Repository.RepositoryItemProgressBar
     Friend WithEvents GridColumn1 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn2 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn3 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents PCSelAll As DevExpress.XtraEditors.PanelControl
     Friend WithEvents CheckEditSelAll As DevExpress.XtraEditors.CheckEdit
     Friend WithEvents GridColumn4 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents RICESelectPPS As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
     Friend WithEvents GridColumn5 As DevExpress.XtraGrid.Columns.GridColumn
-    Friend WithEvents GridColumn6 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents PanelControl2 As DevExpress.XtraEditors.PanelControl
     Friend WithEvents TEComment As DevExpress.XtraEditors.TextEdit
     Friend WithEvents LabelControl1 As DevExpress.XtraEditors.LabelControl

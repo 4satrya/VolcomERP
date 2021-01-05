@@ -16,7 +16,7 @@
             q_where = " AND pps.id_design='" & SLEDesign.EditValue.ToString & "'"
         End If
 
-        Dim query As String = "SELECT 'no' AS is_check,pps.id_design,pps.id_design_ecop_pps,pps.number,dsg.design_code,dsg.design_display_name,SUM(IF(id_currency=1,ppsd.`before_kurs`,ppsd.`before_kurs`*ppsd.`kurs`)) AS total_ecop_purc,SUM(ppsd.`additional`) AS total_additional_purc
+        Dim query As String = "SELECT 'no' AS is_check,pps.is_production_dept,pps.id_design,pps.id_design_ecop_pps,pps.number,dsg.design_code,dsg.design_display_name,SUM(IF(id_currency=1,ppsd.`before_kurs`,ppsd.`before_kurs`*ppsd.`kurs`)) AS total_ecop,SUM(ppsd.`additional`) AS total_additional
 ,(fg_lp.`target_price`/fg_lp.`mark_up`) AS target_cost
 ,cop_sample.total_sample,cop_sample.total_additional_sample
 ,IFNULL(jml_cal.jml,0) AS jml_recal
@@ -140,25 +140,44 @@ Failed to update this propose because already hit reclaculation limit : " & vbNe
 
                 For i As Integer = 0 To GVEcopPPS.RowCount - 1
                     FormMain.SplashScreenManager1.SetWaitFormDescription("Processing ECOP : " + (i + 1).ToString + " of " + GVEcopPPS.RowCount.ToString)
-                    'insert to m_design
-                    Dim q As String = "SELECT pps.is_cool_storage,pps.is_production_dept,ppsd.kurs,pps.id_design,SUM(IF(ppsd.id_currency=1,ppsd.before_kurs,ppsd.before_kurs*ppsd.kurs)) AS cop,SUM(ppsd.additional) AS additional_cop,pps.id_comp_contact
+                    Dim qu As String = ""
+
+                    If GVEcopPPS.GetRowCellValue(i, "is_production_dept").ToString = "1" Then
+                        'insert to m_design
+                        Dim q As String = "SELECT pps.is_cool_storage,pps.is_production_dept,ppsd.kurs,pps.id_design,SUM(IF(ppsd.id_currency=1,ppsd.before_kurs,ppsd.before_kurs*ppsd.kurs)) AS cop,SUM(ppsd.additional) AS additional_cop,pps.id_comp_contact
 FROM tb_design_ecop_pps_det ppsd
 INNER JOIN tb_design_ecop_pps pps ON pps.id_design_ecop_pps=ppsd.id_design_ecop_pps AND pps.id_design_ecop_pps='" & GVEcopPPS.GetRowCellValue(i, "id_design_ecop_pps").ToString & "'
 GROUP BY pps.id_design"
-                    Dim dtq As DataTable = execute_query(q, -1, True, "", "", "", "")
-                    '
-                    Dim qu As String = ""
-                    qu = String.Format("UPDATE tb_m_design SET prod_order_cop_pd='{1}',prod_order_cop_pd_addcost='{5}',prod_order_cop_kurs_pd='{2}',prod_order_cop_pd_vendor={3},prod_order_cop_pd_curr='{4}',is_cold_storage='{6}' WHERE id_design='{0}'", dtq.Rows(0)("id_design").ToString, decimalSQL((dtq.Rows(0)("cop") + dtq.Rows(0)("additional_cop")).ToString), decimalSQL(dtq.Rows(0)("kurs").ToString), dtq.Rows(0)("id_comp_contact").ToString, "1", decimalSQL(dtq.Rows(0)("additional_cop").ToString), dtq.Rows(0)("is_cool_storage").ToString)
-                    execute_non_query(qu, True, "", "", "", "")
-                    'email ECOP
-                    Try
-                        Dim nm As New ClassSendEmail
-                        nm.par1 = dtq.Rows(0)("id_design").ToString
-                        nm.report_mark_type = "267"
-                        nm.send_email()
-                    Catch ex As Exception
-                        execute_query("INSERT INTO tb_error_mail(date,description) VALUES(NOW(),'Failed send COP PD id_design = " & dtq.Rows(0)("id_design").ToString & "')", -1, True, "", "", "", "")
-                    End Try
+                        Dim dtq As DataTable = execute_query(q, -1, True, "", "", "", "")
+                        '
+                        qu = String.Format("UPDATE tb_m_design SET prod_order_cop_pd='{1}',prod_order_cop_pd_addcost='{5}',prod_order_cop_kurs_pd='{2}',prod_order_cop_pd_vendor={3},prod_order_cop_pd_curr='{4}',is_cold_storage='{6}' WHERE id_design='{0}'", dtq.Rows(0)("id_design").ToString, decimalSQL((dtq.Rows(0)("cop") + dtq.Rows(0)("additional_cop")).ToString), decimalSQL(dtq.Rows(0)("kurs").ToString), dtq.Rows(0)("id_comp_contact").ToString, "1", decimalSQL(dtq.Rows(0)("additional_cop").ToString), dtq.Rows(0)("is_cool_storage").ToString)
+                        execute_non_query(qu, True, "", "", "", "")
+
+                        'email ECOP
+                        Try
+                            infoCustom("Sending mail")
+                            'Dim nm As New ClassSendEmail
+                            'nm.par1 = dtq.Rows(0)("id_design").ToString
+                            'nm.report_mark_type = "267"
+                            'nm.send_email()
+                        Catch ex As Exception
+                            execute_query("INSERT INTO tb_error_mail(date,description) VALUES(NOW(),'Failed send COP PD id_design = " & dtq.Rows(0)("id_design").ToString & "')", -1, True, "", "", "", "")
+                        End Try
+                    Else
+                        Dim q As String = "SELECT pps.is_cool_storage,pps.is_production_dept,ppsd.kurs,pps.id_design,SUM(IF(ppsd.id_currency=1,ppsd.before_kurs,ppsd.before_kurs*ppsd.kurs)) AS cop,SUM(ppsd.additional) AS additional_cop,pps.id_comp_contact
+FROM tb_design_ecop_pps_det ppsd
+INNER JOIN tb_design_ecop_pps pps ON pps.id_design_ecop_pps=ppsd.id_design_ecop_pps AND pps.id_design_ecop_pps='" & GVEcopPPS.GetRowCellValue(i, "id_design_ecop_pps").ToString & "'
+GROUP BY pps.id_design"
+                        Dim dtq As DataTable = execute_query(q, -1, True, "", "", "", "")
+
+                        qu = "UPDATE tb_m_design_cop SET is_active=2 WHERE id_design='" & dtq.Rows(0)("id_design").ToString & "' AND is_production_dept='" & dtq.Rows(0)("is_production_dept").ToString & "';
+INSERT INTO `tb_m_design_cop`(description,id_design,date_created,id_currency,kurs,before_kurs,additional,is_active,is_production_dept)
+SELECT ecopd.description,ecop.id_design,NOW(),ecopd.id_currency,ecopd.kurs,ecopd.before_kurs,ecopd.additional,1 AS is_active,ecop.is_production_dept
+FROM `tb_design_ecop_pps_det` ecopd
+INNER JOIN tb_design_ecop_pps ecop ON ecop.id_design_ecop_pps=ecopd.id_design_ecop_pps
+WHERE ecop.id_design_ecop_pps='" & GVEcopPPS.GetRowCellValue(i, "id_design_ecop_pps").ToString & "';"
+                        execute_non_query(qu, True, "", "", "", "")
+                    End If
 
                     'update continue
                     qu = String.Format("UPDATE tb_design_ecop_pps SET verify_status='1',verify_by='{1}',verify_date=NOW(),verify_comment='{2}' WHERE id_design_ecop_pps='{0}'", GVEcopPPS.GetRowCellValue(i, "id_design_ecop_pps").ToString, id_user, addSlashes(TEComment.Text))

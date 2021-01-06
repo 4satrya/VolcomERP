@@ -429,6 +429,7 @@ GROUP BY pl.`id_mat_purc_list`"
                             End If
                         End If
                     Next
+
                     FormMatPurchase.view_mat_purc()
                     FormMatPurchase.GVMatPurchase.ExpandAllGroups()
                     FormMatPurchase.GVMatPurchase.FocusedRowHandle = find_row(FormMatPurchase.GVMatPurchase, "id_mat_purc", id_purc)
@@ -693,6 +694,17 @@ GROUP BY pl.`id_mat_purc_list`"
     End Sub
 
     Private Sub BMark_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BMark.Click
+        'check if no PD reff
+        Dim qc As String = "SELECT * FROM tb_doc
+WHERE report_mark_type='13' AND id_report='" & id_purc & "'"
+        Dim dtc As DataTable = execute_query(qc, -1, True, "", "", "", "")
+        '
+        If GVListMatPD.RowCount = 0 And dtc.Rows.Count = 0 Then
+            warningCustom("Please attach supporting document if not refference PO.")
+        Else
+
+        End If
+        '
         FormReportMark.id_report = id_purc
         FormReportMark.report_mark_type = "13"
         FormReportMark.ShowDialog()
@@ -728,6 +740,12 @@ GROUP BY pl.`id_mat_purc_list`"
             BPrint.Enabled = True
         Else
             BPrint.Enabled = False
+        End If
+        '
+        If get_opt_prod_field("is_lock_po_mat") = "1" Then
+            PCButton.Visible = False
+        Else
+            PCButton.Visible = True
         End If
         '
         If GVListMatPD.RowCount > 0 Then

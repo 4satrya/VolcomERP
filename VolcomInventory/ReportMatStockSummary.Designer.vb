@@ -21,29 +21,7 @@ Partial Public Class ReportMatStockSummary
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ReportMatStockSummary))
         Me.Detail = New DevExpress.XtraReports.UI.DetailBand()
-        Me.TopMargin = New DevExpress.XtraReports.UI.TopMarginBand()
-        Me.BottomMargin = New DevExpress.XtraReports.UI.BottomMarginBand()
-        Me.ReportHeader = New DevExpress.XtraReports.UI.ReportHeaderBand()
-        Me.XLNumber = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel1 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrPictureBox1 = New DevExpress.XtraReports.UI.XRPictureBox()
-        Me.XrLine1 = New DevExpress.XtraReports.UI.XRLine()
-        Me.XrLabel3 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel6 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel5 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel9 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel14 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel13 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XLCreatedDate = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XLStartPeriod = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XLCreatedBy = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XLEndPeriod = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel4 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel2 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.ReportFooter = New DevExpress.XtraReports.UI.ReportFooterBand()
-        Me.XrTable1 = New DevExpress.XtraReports.UI.XRTable()
-        Me.XrTableRow1 = New DevExpress.XtraReports.UI.XRTableRow()
-        Me.XrTableCell1 = New DevExpress.XtraReports.UI.XRTableCell()
+        Me.WinControlContainer1 = New DevExpress.XtraReports.UI.WinControlContainer()
         Me.GridControlSummary = New DevExpress.XtraGrid.GridControl()
         Me.BandedGridViewSummary = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridView()
         Me.GridBand1 = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
@@ -68,10 +46,32 @@ Partial Public Class ReportMatStockSummary
         Me.gridBand9 = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
         Me.BandedGridColumn11 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumn12 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
-        Me.WinControlContainer1 = New DevExpress.XtraReports.UI.WinControlContainer()
-        CType(Me.XrTable1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TopMargin = New DevExpress.XtraReports.UI.TopMarginBand()
+        Me.BottomMargin = New DevExpress.XtraReports.UI.BottomMarginBand()
+        Me.ReportHeader = New DevExpress.XtraReports.UI.ReportHeaderBand()
+        Me.XLNumber = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel1 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrPictureBox1 = New DevExpress.XtraReports.UI.XRPictureBox()
+        Me.XrLine1 = New DevExpress.XtraReports.UI.XRLine()
+        Me.XrLabel3 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel6 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel5 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel9 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel14 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel13 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XLCreatedDate = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XLStartPeriod = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XLCreatedBy = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XLEndPeriod = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel4 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel2 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.ReportFooter = New DevExpress.XtraReports.UI.ReportFooterBand()
+        Me.XrTable1 = New DevExpress.XtraReports.UI.XRTable()
+        Me.XrTableRow1 = New DevExpress.XtraReports.UI.XRTableRow()
+        Me.XrTableCell1 = New DevExpress.XtraReports.UI.XRTableCell()
         CType(Me.GridControlSummary, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BandedGridViewSummary, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.XrTable1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
         '
         'Detail
@@ -81,6 +81,286 @@ Partial Public Class ReportMatStockSummary
         Me.Detail.Name = "Detail"
         Me.Detail.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100.0!)
         Me.Detail.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
+        '
+        'WinControlContainer1
+        '
+        Me.WinControlContainer1.LocationFloat = New DevExpress.Utils.PointFloat(0!, 0!)
+        Me.WinControlContainer1.Name = "WinControlContainer1"
+        Me.WinControlContainer1.SizeF = New System.Drawing.SizeF(1075.0!, 104.0!)
+        Me.WinControlContainer1.WinControl = Me.GridControlSummary
+        '
+        'GridControlSummary
+        '
+        Me.GridControlSummary.Location = New System.Drawing.Point(0, 96)
+        Me.GridControlSummary.MainView = Me.BandedGridViewSummary
+        Me.GridControlSummary.Name = "GridControlSummary"
+        Me.GridControlSummary.Size = New System.Drawing.Size(1032, 100)
+        Me.GridControlSummary.TabIndex = 6
+        Me.GridControlSummary.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.BandedGridViewSummary})
+        '
+        'BandedGridViewSummary
+        '
+        Me.BandedGridViewSummary.AppearancePrint.BandPanel.BackColor = System.Drawing.Color.White
+        Me.BandedGridViewSummary.AppearancePrint.BandPanel.BorderColor = System.Drawing.Color.Black
+        Me.BandedGridViewSummary.AppearancePrint.BandPanel.Font = New System.Drawing.Font("Tahoma", 7.25!, System.Drawing.FontStyle.Bold)
+        Me.BandedGridViewSummary.AppearancePrint.BandPanel.Options.UseBackColor = True
+        Me.BandedGridViewSummary.AppearancePrint.BandPanel.Options.UseBorderColor = True
+        Me.BandedGridViewSummary.AppearancePrint.BandPanel.Options.UseFont = True
+        Me.BandedGridViewSummary.AppearancePrint.FooterPanel.BackColor = System.Drawing.Color.White
+        Me.BandedGridViewSummary.AppearancePrint.FooterPanel.BorderColor = System.Drawing.Color.Black
+        Me.BandedGridViewSummary.AppearancePrint.FooterPanel.Font = New System.Drawing.Font("Tahoma", 7.25!)
+        Me.BandedGridViewSummary.AppearancePrint.FooterPanel.Options.UseBackColor = True
+        Me.BandedGridViewSummary.AppearancePrint.FooterPanel.Options.UseBorderColor = True
+        Me.BandedGridViewSummary.AppearancePrint.FooterPanel.Options.UseFont = True
+        Me.BandedGridViewSummary.AppearancePrint.GroupFooter.BackColor = System.Drawing.Color.White
+        Me.BandedGridViewSummary.AppearancePrint.GroupFooter.BorderColor = System.Drawing.Color.Black
+        Me.BandedGridViewSummary.AppearancePrint.GroupFooter.Font = New System.Drawing.Font("Tahoma", 7.25!)
+        Me.BandedGridViewSummary.AppearancePrint.GroupFooter.Options.UseBackColor = True
+        Me.BandedGridViewSummary.AppearancePrint.GroupFooter.Options.UseBorderColor = True
+        Me.BandedGridViewSummary.AppearancePrint.GroupFooter.Options.UseFont = True
+        Me.BandedGridViewSummary.AppearancePrint.GroupRow.BackColor = System.Drawing.Color.White
+        Me.BandedGridViewSummary.AppearancePrint.GroupRow.BorderColor = System.Drawing.Color.Black
+        Me.BandedGridViewSummary.AppearancePrint.GroupRow.Font = New System.Drawing.Font("Tahoma", 7.25!)
+        Me.BandedGridViewSummary.AppearancePrint.GroupRow.Options.UseBackColor = True
+        Me.BandedGridViewSummary.AppearancePrint.GroupRow.Options.UseBorderColor = True
+        Me.BandedGridViewSummary.AppearancePrint.GroupRow.Options.UseFont = True
+        Me.BandedGridViewSummary.AppearancePrint.HeaderPanel.BackColor = System.Drawing.Color.White
+        Me.BandedGridViewSummary.AppearancePrint.HeaderPanel.BorderColor = System.Drawing.Color.Black
+        Me.BandedGridViewSummary.AppearancePrint.HeaderPanel.Font = New System.Drawing.Font("Tahoma", 7.25!, System.Drawing.FontStyle.Bold)
+        Me.BandedGridViewSummary.AppearancePrint.HeaderPanel.Options.UseBackColor = True
+        Me.BandedGridViewSummary.AppearancePrint.HeaderPanel.Options.UseBorderColor = True
+        Me.BandedGridViewSummary.AppearancePrint.HeaderPanel.Options.UseFont = True
+        Me.BandedGridViewSummary.AppearancePrint.Lines.BackColor = System.Drawing.Color.Black
+        Me.BandedGridViewSummary.AppearancePrint.Lines.Options.UseBackColor = True
+        Me.BandedGridViewSummary.AppearancePrint.Row.BackColor = System.Drawing.Color.White
+        Me.BandedGridViewSummary.AppearancePrint.Row.BorderColor = System.Drawing.Color.Black
+        Me.BandedGridViewSummary.AppearancePrint.Row.Font = New System.Drawing.Font("Tahoma", 7.25!)
+        Me.BandedGridViewSummary.AppearancePrint.Row.Options.UseBackColor = True
+        Me.BandedGridViewSummary.AppearancePrint.Row.Options.UseBorderColor = True
+        Me.BandedGridViewSummary.AppearancePrint.Row.Options.UseFont = True
+        Me.BandedGridViewSummary.Bands.AddRange(New DevExpress.XtraGrid.Views.BandedGrid.GridBand() {Me.GridBand1, Me.gridBand4, Me.gridBand5, Me.gridBand6, Me.gridBand7, Me.gridBand8, Me.gridBand9})
+        Me.BandedGridViewSummary.Columns.AddRange(New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn() {Me.GridColumn1, Me.GridColumn2, Me.GridColumn3, Me.BandedGridColumn1, Me.BandedGridColumn2, Me.BandedGridColumn3, Me.BandedGridColumn4, Me.BandedGridColumn5, Me.BandedGridColumn6, Me.BandedGridColumn7, Me.BandedGridColumn8, Me.BandedGridColumn9, Me.BandedGridColumn10, Me.BandedGridColumn11, Me.BandedGridColumn12})
+        Me.BandedGridViewSummary.GridControl = Me.GridControlSummary
+        Me.BandedGridViewSummary.Name = "BandedGridViewSummary"
+        Me.BandedGridViewSummary.OptionsBehavior.ReadOnly = True
+        Me.BandedGridViewSummary.OptionsView.ShowFooter = True
+        Me.BandedGridViewSummary.OptionsView.ShowGroupPanel = False
+        '
+        'GridBand1
+        '
+        Me.GridBand1.Columns.Add(Me.GridColumn1)
+        Me.GridBand1.Columns.Add(Me.GridColumn2)
+        Me.GridBand1.Columns.Add(Me.GridColumn3)
+        Me.GridBand1.Name = "GridBand1"
+        Me.GridBand1.VisibleIndex = 0
+        Me.GridBand1.Width = 87
+        '
+        'GridColumn1
+        '
+        Me.GridColumn1.Caption = "No"
+        Me.GridColumn1.FieldName = "no"
+        Me.GridColumn1.Name = "GridColumn1"
+        Me.GridColumn1.Visible = True
+        Me.GridColumn1.Width = 20
+        '
+        'GridColumn2
+        '
+        Me.GridColumn2.Caption = "GridColumn2"
+        Me.GridColumn2.FieldName = "id_mat_cat"
+        Me.GridColumn2.Name = "GridColumn2"
+        '
+        'GridColumn3
+        '
+        Me.GridColumn3.Caption = "Category"
+        Me.GridColumn3.FieldName = "mat_cat"
+        Me.GridColumn3.Name = "GridColumn3"
+        Me.GridColumn3.Visible = True
+        Me.GridColumn3.Width = 67
+        '
+        'gridBand4
+        '
+        Me.gridBand4.Caption = "BEGINNING"
+        Me.gridBand4.Columns.Add(Me.BandedGridColumn1)
+        Me.gridBand4.Columns.Add(Me.BandedGridColumn2)
+        Me.gridBand4.Name = "gridBand4"
+        Me.gridBand4.VisibleIndex = 1
+        Me.gridBand4.Width = 141
+        '
+        'BandedGridColumn1
+        '
+        Me.BandedGridColumn1.Caption = "QTY"
+        Me.BandedGridColumn1.DisplayFormat.FormatString = "N2"
+        Me.BandedGridColumn1.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.BandedGridColumn1.FieldName = "qty_beg"
+        Me.BandedGridColumn1.Name = "BandedGridColumn1"
+        Me.BandedGridColumn1.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_beg", "{0:N2}")})
+        Me.BandedGridColumn1.Visible = True
+        Me.BandedGridColumn1.Width = 70
+        '
+        'BandedGridColumn2
+        '
+        Me.BandedGridColumn2.Caption = "AMOUNT"
+        Me.BandedGridColumn2.DisplayFormat.FormatString = "N2"
+        Me.BandedGridColumn2.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.BandedGridColumn2.FieldName = "amount_beg"
+        Me.BandedGridColumn2.Name = "BandedGridColumn2"
+        Me.BandedGridColumn2.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount_beg", "{0:N2}")})
+        Me.BandedGridColumn2.Visible = True
+        Me.BandedGridColumn2.Width = 71
+        '
+        'gridBand5
+        '
+        Me.gridBand5.Caption = "RECEIVING"
+        Me.gridBand5.Columns.Add(Me.BandedGridColumn3)
+        Me.gridBand5.Columns.Add(Me.BandedGridColumn4)
+        Me.gridBand5.Name = "gridBand5"
+        Me.gridBand5.VisibleIndex = 2
+        Me.gridBand5.Width = 197
+        '
+        'BandedGridColumn3
+        '
+        Me.BandedGridColumn3.Caption = "QTY"
+        Me.BandedGridColumn3.DisplayFormat.FormatString = "N2"
+        Me.BandedGridColumn3.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.BandedGridColumn3.FieldName = "qty_receive"
+        Me.BandedGridColumn3.Name = "BandedGridColumn3"
+        Me.BandedGridColumn3.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_receive", "{0:N2}")})
+        Me.BandedGridColumn3.Visible = True
+        Me.BandedGridColumn3.Width = 97
+        '
+        'BandedGridColumn4
+        '
+        Me.BandedGridColumn4.Caption = "AMOUNT"
+        Me.BandedGridColumn4.DisplayFormat.FormatString = "N2"
+        Me.BandedGridColumn4.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.BandedGridColumn4.FieldName = "amount_receive"
+        Me.BandedGridColumn4.Name = "BandedGridColumn4"
+        Me.BandedGridColumn4.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount_receive", "{0:N2}")})
+        Me.BandedGridColumn4.Visible = True
+        Me.BandedGridColumn4.Width = 100
+        '
+        'gridBand6
+        '
+        Me.gridBand6.Caption = "MIS"
+        Me.gridBand6.Columns.Add(Me.BandedGridColumn5)
+        Me.gridBand6.Columns.Add(Me.BandedGridColumn6)
+        Me.gridBand6.Name = "gridBand6"
+        Me.gridBand6.VisibleIndex = 3
+        Me.gridBand6.Width = 141
+        '
+        'BandedGridColumn5
+        '
+        Me.BandedGridColumn5.Caption = "QTY"
+        Me.BandedGridColumn5.DisplayFormat.FormatString = "N2"
+        Me.BandedGridColumn5.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.BandedGridColumn5.FieldName = "qty_mrs"
+        Me.BandedGridColumn5.Name = "BandedGridColumn5"
+        Me.BandedGridColumn5.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_mrs", "{0:N2}")})
+        Me.BandedGridColumn5.Visible = True
+        Me.BandedGridColumn5.Width = 70
+        '
+        'BandedGridColumn6
+        '
+        Me.BandedGridColumn6.Caption = "AMOUNT"
+        Me.BandedGridColumn6.DisplayFormat.FormatString = "N2"
+        Me.BandedGridColumn6.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.BandedGridColumn6.FieldName = "amount_mrs"
+        Me.BandedGridColumn6.Name = "BandedGridColumn6"
+        Me.BandedGridColumn6.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount_mrs", "{0:N2}")})
+        Me.BandedGridColumn6.Visible = True
+        Me.BandedGridColumn6.Width = 71
+        '
+        'gridBand7
+        '
+        Me.gridBand7.Caption = "RETURN"
+        Me.gridBand7.Columns.Add(Me.BandedGridColumn7)
+        Me.gridBand7.Columns.Add(Me.BandedGridColumn8)
+        Me.gridBand7.Name = "gridBand7"
+        Me.gridBand7.VisibleIndex = 4
+        Me.gridBand7.Width = 141
+        '
+        'BandedGridColumn7
+        '
+        Me.BandedGridColumn7.Caption = "QTY"
+        Me.BandedGridColumn7.DisplayFormat.FormatString = "N2"
+        Me.BandedGridColumn7.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.BandedGridColumn7.FieldName = "qty_retur"
+        Me.BandedGridColumn7.Name = "BandedGridColumn7"
+        Me.BandedGridColumn7.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_retur", "{0:N2}")})
+        Me.BandedGridColumn7.Visible = True
+        Me.BandedGridColumn7.Width = 70
+        '
+        'BandedGridColumn8
+        '
+        Me.BandedGridColumn8.Caption = "AMOUNT"
+        Me.BandedGridColumn8.DisplayFormat.FormatString = "N2"
+        Me.BandedGridColumn8.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.BandedGridColumn8.FieldName = "amount_retur"
+        Me.BandedGridColumn8.Name = "BandedGridColumn8"
+        Me.BandedGridColumn8.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount_retur", "{0:N2}")})
+        Me.BandedGridColumn8.Visible = True
+        Me.BandedGridColumn8.Width = 71
+        '
+        'gridBand8
+        '
+        Me.gridBand8.Caption = "ADJUST"
+        Me.gridBand8.Columns.Add(Me.BandedGridColumn9)
+        Me.gridBand8.Columns.Add(Me.BandedGridColumn10)
+        Me.gridBand8.Name = "gridBand8"
+        Me.gridBand8.VisibleIndex = 5
+        Me.gridBand8.Width = 141
+        '
+        'BandedGridColumn9
+        '
+        Me.BandedGridColumn9.Caption = "QTY"
+        Me.BandedGridColumn9.DisplayFormat.FormatString = "N2"
+        Me.BandedGridColumn9.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.BandedGridColumn9.FieldName = "qty_adj"
+        Me.BandedGridColumn9.Name = "BandedGridColumn9"
+        Me.BandedGridColumn9.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_adj", "{0:N2}")})
+        Me.BandedGridColumn9.Visible = True
+        Me.BandedGridColumn9.Width = 70
+        '
+        'BandedGridColumn10
+        '
+        Me.BandedGridColumn10.Caption = "AMOUNT"
+        Me.BandedGridColumn10.DisplayFormat.FormatString = "N2"
+        Me.BandedGridColumn10.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.BandedGridColumn10.FieldName = "amount_adj"
+        Me.BandedGridColumn10.Name = "BandedGridColumn10"
+        Me.BandedGridColumn10.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount_adj", "{0:N2}")})
+        Me.BandedGridColumn10.Visible = True
+        Me.BandedGridColumn10.Width = 71
+        '
+        'gridBand9
+        '
+        Me.gridBand9.Caption = "ENDING"
+        Me.gridBand9.Columns.Add(Me.BandedGridColumn11)
+        Me.gridBand9.Columns.Add(Me.BandedGridColumn12)
+        Me.gridBand9.Name = "gridBand9"
+        Me.gridBand9.VisibleIndex = 6
+        Me.gridBand9.Width = 149
+        '
+        'BandedGridColumn11
+        '
+        Me.BandedGridColumn11.Caption = "QTY"
+        Me.BandedGridColumn11.DisplayFormat.FormatString = "N2"
+        Me.BandedGridColumn11.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.BandedGridColumn11.FieldName = "qty_ending"
+        Me.BandedGridColumn11.Name = "BandedGridColumn11"
+        Me.BandedGridColumn11.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_ending", "{0:N2}")})
+        Me.BandedGridColumn11.Visible = True
+        Me.BandedGridColumn11.Width = 74
+        '
+        'BandedGridColumn12
+        '
+        Me.BandedGridColumn12.Caption = "AMOUNT"
+        Me.BandedGridColumn12.DisplayFormat.FormatString = "N2"
+        Me.BandedGridColumn12.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.BandedGridColumn12.FieldName = "amount_ending"
+        Me.BandedGridColumn12.Name = "BandedGridColumn12"
+        Me.BandedGridColumn12.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount_ending", "{0:N2}")})
+        Me.BandedGridColumn12.Visible = True
         '
         'TopMargin
         '
@@ -292,275 +572,6 @@ Partial Public Class ReportMatStockSummary
         Me.XrTableCell1.Visible = False
         Me.XrTableCell1.Weight = 2.99999986405489R
         '
-        'GridControlSummary
-        '
-        Me.GridControlSummary.Location = New System.Drawing.Point(0, 96)
-        Me.GridControlSummary.MainView = Me.BandedGridViewSummary
-        Me.GridControlSummary.Name = "GridControlSummary"
-        Me.GridControlSummary.Size = New System.Drawing.Size(1032, 100)
-        Me.GridControlSummary.TabIndex = 6
-        Me.GridControlSummary.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.BandedGridViewSummary})
-        '
-        'BandedGridViewSummary
-        '
-        Me.BandedGridViewSummary.AppearancePrint.BandPanel.BackColor = System.Drawing.Color.White
-        Me.BandedGridViewSummary.AppearancePrint.BandPanel.BorderColor = System.Drawing.Color.Black
-        Me.BandedGridViewSummary.AppearancePrint.BandPanel.Font = New System.Drawing.Font("Tahoma", 7.25!, System.Drawing.FontStyle.Bold)
-        Me.BandedGridViewSummary.AppearancePrint.BandPanel.Options.UseBackColor = True
-        Me.BandedGridViewSummary.AppearancePrint.BandPanel.Options.UseBorderColor = True
-        Me.BandedGridViewSummary.AppearancePrint.BandPanel.Options.UseFont = True
-        Me.BandedGridViewSummary.AppearancePrint.FooterPanel.BackColor = System.Drawing.Color.White
-        Me.BandedGridViewSummary.AppearancePrint.FooterPanel.BorderColor = System.Drawing.Color.Black
-        Me.BandedGridViewSummary.AppearancePrint.FooterPanel.Font = New System.Drawing.Font("Tahoma", 7.25!)
-        Me.BandedGridViewSummary.AppearancePrint.FooterPanel.Options.UseBackColor = True
-        Me.BandedGridViewSummary.AppearancePrint.FooterPanel.Options.UseBorderColor = True
-        Me.BandedGridViewSummary.AppearancePrint.FooterPanel.Options.UseFont = True
-        Me.BandedGridViewSummary.AppearancePrint.GroupFooter.BackColor = System.Drawing.Color.White
-        Me.BandedGridViewSummary.AppearancePrint.GroupFooter.BorderColor = System.Drawing.Color.Black
-        Me.BandedGridViewSummary.AppearancePrint.GroupFooter.Font = New System.Drawing.Font("Tahoma", 7.25!)
-        Me.BandedGridViewSummary.AppearancePrint.GroupFooter.Options.UseBackColor = True
-        Me.BandedGridViewSummary.AppearancePrint.GroupFooter.Options.UseBorderColor = True
-        Me.BandedGridViewSummary.AppearancePrint.GroupFooter.Options.UseFont = True
-        Me.BandedGridViewSummary.AppearancePrint.GroupRow.BackColor = System.Drawing.Color.White
-        Me.BandedGridViewSummary.AppearancePrint.GroupRow.BorderColor = System.Drawing.Color.Black
-        Me.BandedGridViewSummary.AppearancePrint.GroupRow.Font = New System.Drawing.Font("Tahoma", 7.25!)
-        Me.BandedGridViewSummary.AppearancePrint.GroupRow.Options.UseBackColor = True
-        Me.BandedGridViewSummary.AppearancePrint.GroupRow.Options.UseBorderColor = True
-        Me.BandedGridViewSummary.AppearancePrint.GroupRow.Options.UseFont = True
-        Me.BandedGridViewSummary.AppearancePrint.HeaderPanel.BackColor = System.Drawing.Color.White
-        Me.BandedGridViewSummary.AppearancePrint.HeaderPanel.BorderColor = System.Drawing.Color.Black
-        Me.BandedGridViewSummary.AppearancePrint.HeaderPanel.Font = New System.Drawing.Font("Tahoma", 7.25!, System.Drawing.FontStyle.Bold)
-        Me.BandedGridViewSummary.AppearancePrint.HeaderPanel.Options.UseBackColor = True
-        Me.BandedGridViewSummary.AppearancePrint.HeaderPanel.Options.UseBorderColor = True
-        Me.BandedGridViewSummary.AppearancePrint.HeaderPanel.Options.UseFont = True
-        Me.BandedGridViewSummary.AppearancePrint.Lines.BackColor = System.Drawing.Color.Black
-        Me.BandedGridViewSummary.AppearancePrint.Lines.Options.UseBackColor = True
-        Me.BandedGridViewSummary.AppearancePrint.Row.BackColor = System.Drawing.Color.White
-        Me.BandedGridViewSummary.AppearancePrint.Row.BorderColor = System.Drawing.Color.Black
-        Me.BandedGridViewSummary.AppearancePrint.Row.Font = New System.Drawing.Font("Tahoma", 7.25!)
-        Me.BandedGridViewSummary.AppearancePrint.Row.Options.UseBackColor = True
-        Me.BandedGridViewSummary.AppearancePrint.Row.Options.UseBorderColor = True
-        Me.BandedGridViewSummary.AppearancePrint.Row.Options.UseFont = True
-        Me.BandedGridViewSummary.Bands.AddRange(New DevExpress.XtraGrid.Views.BandedGrid.GridBand() {Me.GridBand1, Me.gridBand4, Me.gridBand5, Me.gridBand6, Me.gridBand7, Me.gridBand8, Me.gridBand9})
-        Me.BandedGridViewSummary.Columns.AddRange(New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn() {Me.GridColumn1, Me.GridColumn2, Me.GridColumn3, Me.BandedGridColumn1, Me.BandedGridColumn2, Me.BandedGridColumn3, Me.BandedGridColumn4, Me.BandedGridColumn5, Me.BandedGridColumn6, Me.BandedGridColumn7, Me.BandedGridColumn8, Me.BandedGridColumn9, Me.BandedGridColumn10, Me.BandedGridColumn11, Me.BandedGridColumn12})
-        Me.BandedGridViewSummary.GridControl = Me.GridControlSummary
-        Me.BandedGridViewSummary.Name = "BandedGridViewSummary"
-        Me.BandedGridViewSummary.OptionsBehavior.ReadOnly = True
-        Me.BandedGridViewSummary.OptionsView.ShowFooter = True
-        Me.BandedGridViewSummary.OptionsView.ShowGroupPanel = False
-        '
-        'GridBand1
-        '
-        Me.GridBand1.Columns.Add(Me.GridColumn1)
-        Me.GridBand1.Columns.Add(Me.GridColumn2)
-        Me.GridBand1.Columns.Add(Me.GridColumn3)
-        Me.GridBand1.Name = "GridBand1"
-        Me.GridBand1.VisibleIndex = 0
-        Me.GridBand1.Width = 150
-        '
-        'GridColumn1
-        '
-        Me.GridColumn1.Caption = "No"
-        Me.GridColumn1.FieldName = "no"
-        Me.GridColumn1.Name = "GridColumn1"
-        Me.GridColumn1.Visible = True
-        '
-        'GridColumn2
-        '
-        Me.GridColumn2.Caption = "GridColumn2"
-        Me.GridColumn2.FieldName = "id_mat_cat"
-        Me.GridColumn2.Name = "GridColumn2"
-        '
-        'GridColumn3
-        '
-        Me.GridColumn3.Caption = "Category"
-        Me.GridColumn3.FieldName = "mat_cat"
-        Me.GridColumn3.Name = "GridColumn3"
-        Me.GridColumn3.Visible = True
-        '
-        'gridBand4
-        '
-        Me.gridBand4.Caption = "BEGINNING"
-        Me.gridBand4.Columns.Add(Me.BandedGridColumn1)
-        Me.gridBand4.Columns.Add(Me.BandedGridColumn2)
-        Me.gridBand4.Name = "gridBand4"
-        Me.gridBand4.VisibleIndex = 1
-        Me.gridBand4.Width = 150
-        '
-        'BandedGridColumn1
-        '
-        Me.BandedGridColumn1.Caption = "QTY"
-        Me.BandedGridColumn1.DisplayFormat.FormatString = "N2"
-        Me.BandedGridColumn1.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.BandedGridColumn1.FieldName = "qty_beg"
-        Me.BandedGridColumn1.Name = "BandedGridColumn1"
-        Me.BandedGridColumn1.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_beg", "{0:N2}")})
-        Me.BandedGridColumn1.Visible = True
-        '
-        'BandedGridColumn2
-        '
-        Me.BandedGridColumn2.Caption = "AMOUNT"
-        Me.BandedGridColumn2.DisplayFormat.FormatString = "N2"
-        Me.BandedGridColumn2.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.BandedGridColumn2.FieldName = "amount_beg"
-        Me.BandedGridColumn2.Name = "BandedGridColumn2"
-        Me.BandedGridColumn2.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount_beg", "{0:N2}")})
-        Me.BandedGridColumn2.Visible = True
-        '
-        'gridBand5
-        '
-        Me.gridBand5.Caption = "RECEIVING"
-        Me.gridBand5.Columns.Add(Me.BandedGridColumn3)
-        Me.gridBand5.Columns.Add(Me.BandedGridColumn4)
-        Me.gridBand5.Name = "gridBand5"
-        Me.gridBand5.VisibleIndex = 2
-        Me.gridBand5.Width = 209
-        '
-        'BandedGridColumn3
-        '
-        Me.BandedGridColumn3.Caption = "QTY"
-        Me.BandedGridColumn3.DisplayFormat.FormatString = "N2"
-        Me.BandedGridColumn3.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.BandedGridColumn3.FieldName = "qty_receive"
-        Me.BandedGridColumn3.Name = "BandedGridColumn3"
-        Me.BandedGridColumn3.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_receive", "{0:N2}")})
-        Me.BandedGridColumn3.Visible = True
-        Me.BandedGridColumn3.Width = 104
-        '
-        'BandedGridColumn4
-        '
-        Me.BandedGridColumn4.Caption = "AMOUNT"
-        Me.BandedGridColumn4.DisplayFormat.FormatString = "N2"
-        Me.BandedGridColumn4.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.BandedGridColumn4.FieldName = "amount_receive"
-        Me.BandedGridColumn4.Name = "BandedGridColumn4"
-        Me.BandedGridColumn4.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount_receive", "{0:N2}")})
-        Me.BandedGridColumn4.Visible = True
-        Me.BandedGridColumn4.Width = 105
-        '
-        'gridBand6
-        '
-        Me.gridBand6.Caption = "MIS"
-        Me.gridBand6.Columns.Add(Me.BandedGridColumn5)
-        Me.gridBand6.Columns.Add(Me.BandedGridColumn6)
-        Me.gridBand6.Name = "gridBand6"
-        Me.gridBand6.VisibleIndex = 3
-        Me.gridBand6.Width = 150
-        '
-        'BandedGridColumn5
-        '
-        Me.BandedGridColumn5.Caption = "QTY"
-        Me.BandedGridColumn5.DisplayFormat.FormatString = "N2"
-        Me.BandedGridColumn5.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.BandedGridColumn5.FieldName = "qty_mrs"
-        Me.BandedGridColumn5.Name = "BandedGridColumn5"
-        Me.BandedGridColumn5.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_mrs", "{0:N2}")})
-        Me.BandedGridColumn5.Visible = True
-        '
-        'BandedGridColumn6
-        '
-        Me.BandedGridColumn6.Caption = "AMOUNT"
-        Me.BandedGridColumn6.DisplayFormat.FormatString = "N2"
-        Me.BandedGridColumn6.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.BandedGridColumn6.FieldName = "amount_mrs"
-        Me.BandedGridColumn6.Name = "BandedGridColumn6"
-        Me.BandedGridColumn6.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount_mrs", "{0:N2}")})
-        Me.BandedGridColumn6.Visible = True
-        '
-        'gridBand7
-        '
-        Me.gridBand7.Caption = "RETURN"
-        Me.gridBand7.Columns.Add(Me.BandedGridColumn7)
-        Me.gridBand7.Columns.Add(Me.BandedGridColumn8)
-        Me.gridBand7.Name = "gridBand7"
-        Me.gridBand7.VisibleIndex = 4
-        Me.gridBand7.Width = 150
-        '
-        'BandedGridColumn7
-        '
-        Me.BandedGridColumn7.Caption = "QTY"
-        Me.BandedGridColumn7.DisplayFormat.FormatString = "N2"
-        Me.BandedGridColumn7.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.BandedGridColumn7.FieldName = "qty_retur"
-        Me.BandedGridColumn7.Name = "BandedGridColumn7"
-        Me.BandedGridColumn7.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_retur", "{0:N2}")})
-        Me.BandedGridColumn7.Visible = True
-        '
-        'BandedGridColumn8
-        '
-        Me.BandedGridColumn8.Caption = "AMOUNT"
-        Me.BandedGridColumn8.DisplayFormat.FormatString = "N2"
-        Me.BandedGridColumn8.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.BandedGridColumn8.FieldName = "amount_retur"
-        Me.BandedGridColumn8.Name = "BandedGridColumn8"
-        Me.BandedGridColumn8.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount_retur", "{0:N2}")})
-        Me.BandedGridColumn8.Visible = True
-        '
-        'gridBand8
-        '
-        Me.gridBand8.Caption = "ADJUST"
-        Me.gridBand8.Columns.Add(Me.BandedGridColumn9)
-        Me.gridBand8.Columns.Add(Me.BandedGridColumn10)
-        Me.gridBand8.Name = "gridBand8"
-        Me.gridBand8.VisibleIndex = 5
-        Me.gridBand8.Width = 150
-        '
-        'BandedGridColumn9
-        '
-        Me.BandedGridColumn9.Caption = "QTY"
-        Me.BandedGridColumn9.DisplayFormat.FormatString = "N2"
-        Me.BandedGridColumn9.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.BandedGridColumn9.FieldName = "qty_adj"
-        Me.BandedGridColumn9.Name = "BandedGridColumn9"
-        Me.BandedGridColumn9.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_adj", "{0:N2}")})
-        Me.BandedGridColumn9.Visible = True
-        '
-        'BandedGridColumn10
-        '
-        Me.BandedGridColumn10.Caption = "AMOUNT"
-        Me.BandedGridColumn10.DisplayFormat.FormatString = "N2"
-        Me.BandedGridColumn10.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.BandedGridColumn10.FieldName = "amount_adj"
-        Me.BandedGridColumn10.Name = "BandedGridColumn10"
-        Me.BandedGridColumn10.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount_adj", "{0:N2}")})
-        Me.BandedGridColumn10.Visible = True
-        '
-        'gridBand9
-        '
-        Me.gridBand9.Caption = "ENDING"
-        Me.gridBand9.Columns.Add(Me.BandedGridColumn11)
-        Me.gridBand9.Columns.Add(Me.BandedGridColumn12)
-        Me.gridBand9.Name = "gridBand9"
-        Me.gridBand9.VisibleIndex = 6
-        Me.gridBand9.Width = 150
-        '
-        'BandedGridColumn11
-        '
-        Me.BandedGridColumn11.Caption = "QTY"
-        Me.BandedGridColumn11.DisplayFormat.FormatString = "N2"
-        Me.BandedGridColumn11.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.BandedGridColumn11.FieldName = "qty_ending"
-        Me.BandedGridColumn11.Name = "BandedGridColumn11"
-        Me.BandedGridColumn11.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty_ending", "{0:N2}")})
-        Me.BandedGridColumn11.Visible = True
-        '
-        'BandedGridColumn12
-        '
-        Me.BandedGridColumn12.Caption = "AMOUNT"
-        Me.BandedGridColumn12.DisplayFormat.FormatString = "N2"
-        Me.BandedGridColumn12.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
-        Me.BandedGridColumn12.FieldName = "amount_ending"
-        Me.BandedGridColumn12.Name = "BandedGridColumn12"
-        Me.BandedGridColumn12.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount_ending", "{0:N2}")})
-        Me.BandedGridColumn12.Visible = True
-        '
-        'WinControlContainer1
-        '
-        Me.WinControlContainer1.LocationFloat = New DevExpress.Utils.PointFloat(0!, 0!)
-        Me.WinControlContainer1.Name = "WinControlContainer1"
-        Me.WinControlContainer1.SizeF = New System.Drawing.SizeF(1075.0!, 104.0!)
-        Me.WinControlContainer1.WinControl = Me.GridControlSummary
-        '
         'ReportMatStockSummary
         '
         Me.Bands.AddRange(New DevExpress.XtraReports.UI.Band() {Me.Detail, Me.TopMargin, Me.BottomMargin, Me.ReportHeader, Me.ReportFooter})
@@ -571,9 +582,9 @@ Partial Public Class ReportMatStockSummary
         Me.PaperKind = System.Drawing.Printing.PaperKind.A4
         Me.ScriptLanguage = DevExpress.XtraReports.ScriptLanguage.VisualBasic
         Me.Version = "15.1"
-        CType(Me.XrTable1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridControlSummary, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.BandedGridViewSummary, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.XrTable1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me, System.ComponentModel.ISupportInitialize).EndInit()
 
     End Sub

@@ -19,6 +19,18 @@
     End Function
 
     Private Sub BtnOther_Click(sender As Object, e As EventArgs) Handles BtnOther.Click
+        'gen stiker
+        '        Dim q As String = "SELECT so.sales_order_ol_shop_number 
+        'FROM tb_sales_order so 
+        'INNER JOIN tb_m_comp_contact cc ON cc.id_comp_contact = so.id_store_contact_to
+        'INNER JOIN tb_m_comp c ON c.id_comp = cc.id_comp
+        'WHERE c.id_comp_group=76 AND so.sales_order_date='2021-01-04'
+        'GROUP BY so.id_sales_order_ol_shop
+        'ORDER BY so.id_sales_order_ol_shop ASC"
+        '        Dim dt As DataTable = execute_query(q, -1, True, "", "", "", "")
+        '        For i As Integer = 0 To dt.Rows.Count - 1
+        '            execute_non_query_long("CALL create_ol_gwp_order(76,'" + dt.Rows(i)("sales_order_ol_shop_number").ToString + "');", True, "", "", "", "")
+        '        Next
         '        Dim q As String = "SELECT pos.`id_sales_pos`,pos.`report_mark_type`,pos.`sales_pos_total`,a.id_acc_trans FROM `tb_a_acc_trans` a
         'LEFT JOIN tb_a_acc_trans_det ad ON ad.`id_acc_trans`=a.`id_acc_trans`
         'INNER JOIN tb_sales_pos pos ON pos.`sales_pos_number`=a.`report_number`

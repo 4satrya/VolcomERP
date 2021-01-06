@@ -19,7 +19,6 @@ Partial Class FormProposeEmpSalaryDet
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormProposeEmpSalaryDet))
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
         Me.TECreatedBy = New DevExpress.XtraEditors.TextEdit()
@@ -38,7 +37,7 @@ Partial Class FormProposeEmpSalaryDet
         Me.SBSave = New DevExpress.XtraEditors.SimpleButton()
         Me.SBSubmit = New DevExpress.XtraEditors.SimpleButton()
         Me.GCEmployee = New DevExpress.XtraGrid.GridControl()
-        Me.CMSGCEmployee = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.CMSGCEmployee = New System.Windows.Forms.ContextMenuStrip()
         Me.RemoveEmployeeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GVEmployee = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridView()
         Me.GBEmployee = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
@@ -102,6 +101,7 @@ Partial Class FormProposeEmpSalaryDet
         Me.PanelControl4 = New DevExpress.XtraEditors.PanelControl()
         Me.MENote = New DevExpress.XtraEditors.MemoEdit()
         Me.Label5 = New System.Windows.Forms.Label()
+        Me.SBPrintDetail = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.TECreatedBy.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -237,6 +237,7 @@ Partial Class FormProposeEmpSalaryDet
         'PanelControl3
         '
         Me.PanelControl3.Controls.Add(Me.SBAttachment)
+        Me.PanelControl3.Controls.Add(Me.SBPrintDetail)
         Me.PanelControl3.Controls.Add(Me.SBPrint)
         Me.PanelControl3.Controls.Add(Me.SBClose)
         Me.PanelControl3.Controls.Add(Me.SBMark)
@@ -253,7 +254,7 @@ Partial Class FormProposeEmpSalaryDet
         Me.SBAttachment.Dock = System.Windows.Forms.DockStyle.Right
         Me.SBAttachment.Image = CType(resources.GetObject("SBAttachment.Image"), System.Drawing.Image)
         Me.SBAttachment.ImageIndex = 10
-        Me.SBAttachment.Location = New System.Drawing.Point(514, 2)
+        Me.SBAttachment.Location = New System.Drawing.Point(397, 2)
         Me.SBAttachment.Name = "SBAttachment"
         Me.SBAttachment.Size = New System.Drawing.Size(112, 44)
         Me.SBAttachment.TabIndex = 115
@@ -977,6 +978,16 @@ Partial Class FormProposeEmpSalaryDet
         Me.Label5.TabIndex = 5
         Me.Label5.Text = "Note"
         '
+        'SBPrintDetail
+        '
+        Me.SBPrintDetail.Dock = System.Windows.Forms.DockStyle.Right
+        Me.SBPrintDetail.Image = CType(resources.GetObject("SBPrintDetail.Image"), System.Drawing.Image)
+        Me.SBPrintDetail.Location = New System.Drawing.Point(509, 2)
+        Me.SBPrintDetail.Name = "SBPrintDetail"
+        Me.SBPrintDetail.Size = New System.Drawing.Size(117, 44)
+        Me.SBPrintDetail.TabIndex = 116
+        Me.SBPrintDetail.Text = "Print Detail"
+        '
         'FormProposeEmpSalaryDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1105,4 +1116,5 @@ Partial Class FormProposeEmpSalaryDet
     Friend WithEvents GBIncrease As DevExpress.XtraGrid.Views.BandedGrid.GridBand
     Friend WithEvents GBContract As DevExpress.XtraGrid.Views.BandedGrid.GridBand
     Friend WithEvents GBNote As DevExpress.XtraGrid.Views.BandedGrid.GridBand
+    Friend WithEvents SBPrintDetail As DevExpress.XtraEditors.SimpleButton
 End Class

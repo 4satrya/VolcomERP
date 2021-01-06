@@ -3628,6 +3628,11 @@ INNER JOIN tb_m_city ct ON ct.`id_city`=sd.`id_city`"
             GVData.BestFitColumns()
             GVData.Columns("sales_order_det_qty").SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum
             GVData.Columns("sales_order_det_qty").SummaryItem.DisplayFormat = "{0:n2}"
+        ElseIf id_pop_up = "55" Then
+            GCData.DataSource = Nothing
+            GCData.DataSource = data_temp
+            GCData.RefreshDataSource()
+            GVData.PopulateColumns()
         End If
         data_temp.Dispose()
         oledbconn.Close()
@@ -6208,6 +6213,104 @@ INNER JOIN tb_m_city ct ON ct.`id_city`=sd.`id_city`"
                         stopCustom("There is no data for import process, please make sure your input !")
                         makeSafeGV(GVData)
                     End If
+                End If
+            ElseIf id_pop_up = "55" Then
+                'payout zalora
+                makeSafeGV(GVData)
+                If GVData.RowCount > 0 Then
+                    Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("This process will be replace data that was previously imported. Are you sure you want to continue this process?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
+                    If confirm = Windows.Forms.DialogResult.Yes Then
+                        PBC.Properties.Minimum = 0
+                        PBC.Properties.Maximum = GVData.RowCount - 1
+                        PBC.Properties.Step = 1
+                        PBC.Properties.PercentView = True
+
+                        'main
+                        If Not FormMain.SplashScreenManager1.IsSplashFormVisible Then
+                            FormMain.SplashScreenManager1.ShowWaitForm()
+                        End If
+                        Dim id_payout_zalora As String = FormPayoutZaloraDet.id
+                        Dim query_del As String = "DELETE FROM tb_payout_zalora_det WHERE  id_payout_zalora='" + id_payout_zalora + "'; "
+                        execute_non_query(query_del, True, "", "", "", "")
+                        Dim allow_packet As String = get_setup_field("allow_packet")
+                        Dim query As String = ""
+                        Dim p As Integer = 0
+                        Dim lim As Integer = 1000
+                        For i As Integer = 0 To GVData.RowCount - 1
+                            FormMain.SplashScreenManager1.SetWaitFormDescription("Build query " + (i + 1).ToString + "/" + GVData.RowCount.ToString)
+                            Dim transaction_date As String = DateTime.Parse(GVData.GetRowCellValue(i, "Transaction Date").ToString).ToString("yyyy-MM-dd")
+                            Dim transaction_type As String = addSlashes(GVData.GetRowCellValue(i, "Transaction Type").ToString)
+                            Dim transaction_number As String = addSlashes(GVData.GetRowCellValue(i, "Transaction Number").ToString)
+                            Dim amount As String = decimalSQL(GVData.GetRowCellValue(i, "Amount").ToString)
+                            Dim vat_in_amount As String = decimalSQL(GVData.GetRowCellValue(i, "VAT in Amount").ToString)
+                            Dim wht_amount As String = decimalSQL(GVData.GetRowCellValue(i, "WHT Amount").ToString)
+                            Dim order_number As String = GVData.GetRowCellValue(i, "Order No#").ToString
+                            Dim item_id As String = GVData.GetRowCellValue(i, "Order Item No#").ToString
+                            Dim ol_store_id As String = GVData.GetRowCellValue(i, "Zalora Item No#").ToString
+                            Dim order_status As String = addSlashes(GVData.GetRowCellValue(i, "Order Item Status").ToString)
+                            Dim reference As String = addSlashes(GVData.GetRowCellValue(i, "Reference").ToString)
+                            Dim comment As String = addSlashes(GVData.GetRowCellValue(i, "Comment").ToString)
+                            Dim zalora_sku As String = addSlashes(GVData.GetRowCellValue(i, "Seller SKU").ToString)
+                            Dim zalora_product_name As String = addSlashes(GVData.GetRowCellValue(i, "Details").ToString)
+
+                            If p <= 0 Then
+                                query = "INSERT INTO tb_payout_zalora_det(
+                                id_payout_zalora, 
+                                transaction_date, 
+                                transaction_type, 
+                                transaction_number, 
+                                amount, 
+                                vat_in_amount, 
+                                wht_amount, 
+                                order_number, 
+                                item_id, 
+                                ol_store_id, 
+                                order_status,
+                                reference,
+                                comment,
+                                zalora_sku,
+                                zalora_product_name
+                                ) VALUES "
+                            Else
+                                query += ", "
+                            End If
+
+                            query += "(
+                            '" + id_payout_zalora + "',
+                            '" + transaction_date + "',
+                            '" + transaction_type + "',
+                            '" + transaction_number + "',
+                            '" + amount + "',
+                            '" + vat_in_amount + "', 
+                            '" + wht_amount + "',
+                            '" + order_number + "',
+                            '" + item_id + "',
+                            '" + ol_store_id + "',
+                            '" + order_status + "',
+                            '" + reference + "',
+                            '" + comment + "',
+                            '" + zalora_sku + "',
+                            '" + zalora_product_name + "'
+                            ) "
+
+                            PBC.PerformStep()
+                            PBC.Update()
+
+                            If p = lim Or i = (GVData.RowCount - 1) Then
+                                FormMain.SplashScreenManager1.SetWaitFormDescription("Importing data")
+                                execute_non_query_long(query, True, "", "", "", "")
+                                p = 0
+                            Else
+                                p += 1
+                            End If
+                        Next
+                        FormMain.SplashScreenManager1.CloseWaitForm()
+                        FormPayoutZaloraDet.validate_payout(True)
+                        Close()
+                    End If
+                Else
+                    stopCustom("There is no data for import process, please make sure your input !")
+                    makeSafeGV(GVData)
                 End If
             End If
         End If

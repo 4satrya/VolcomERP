@@ -295,6 +295,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ClassPayoutVer.vb" />
+    <Compile Include="ClassPayoutZalora.vb" />
     <Compile Include="ClassProdDemand.vb" />
     <Compile Include="ClassProdOverMemo.vb" />
     <Compile Include="ClassProductionAssembly.vb" />
@@ -3289,6 +3290,48 @@
       <DependentUpon>FormPayoutVerDet.vb</DependentUpon>
     </Compile>
     <Compile Include="FormPayoutVerDet.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPayoutZalora.Designer.vb">
+      <DependentUpon>FormPayoutZalora.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormPayoutZalora.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPayoutZaloraAddCoa.Designer.vb">
+      <DependentUpon>FormPayoutZaloraAddCoa.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormPayoutZaloraAddCoa.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPayoutZaloraAdj.Designer.vb">
+      <DependentUpon>FormPayoutZaloraAdj.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormPayoutZaloraAdj.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPayoutZaloraComm.Designer.vb">
+      <DependentUpon>FormPayoutZaloraComm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormPayoutZaloraComm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPayoutZaloraDet.Designer.vb">
+      <DependentUpon>FormPayoutZaloraDet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormPayoutZaloraDet.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPayoutZaloraManualRecon.Designer.vb">
+      <DependentUpon>FormPayoutZaloraManualRecon.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormPayoutZaloraManualRecon.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPayoutZaloraManualReconSingle.Designer.vb">
+      <DependentUpon>FormPayoutZaloraManualReconSingle.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormPayoutZaloraManualReconSingle.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormPopUpDept.Designer.vb">
@@ -8382,6 +8425,12 @@
     <Compile Include="ReportPayout.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ReportPayoutZalora.Designer.vb">
+      <DependentUpon>ReportPayoutZalora.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReportPayoutZalora.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ReportPayrollAll.Designer.vb">
       <DependentUpon>ReportPayrollAll.vb</DependentUpon>
     </Compile>
@@ -8602,6 +8651,12 @@
       <DependentUpon>ReportProposeEmpSalary.vb</DependentUpon>
     </Compile>
     <Compile Include="ReportProposeEmpSalary.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportProposeEmpSalaryCompare.Designer.vb">
+      <DependentUpon>ReportProposeEmpSalaryCompare.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReportProposeEmpSalaryCompare.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="ReportPurcOrder.Designer.vb">
@@ -10632,6 +10687,27 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormPayoutVerDet.resx">
       <DependentUpon>FormPayoutVerDet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPayoutZalora.resx">
+      <DependentUpon>FormPayoutZalora.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPayoutZaloraAddCoa.resx">
+      <DependentUpon>FormPayoutZaloraAddCoa.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPayoutZaloraAdj.resx">
+      <DependentUpon>FormPayoutZaloraAdj.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPayoutZaloraComm.resx">
+      <DependentUpon>FormPayoutZaloraComm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPayoutZaloraDet.resx">
+      <DependentUpon>FormPayoutZaloraDet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPayoutZaloraManualRecon.resx">
+      <DependentUpon>FormPayoutZaloraManualRecon.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPayoutZaloraManualReconSingle.resx">
+      <DependentUpon>FormPayoutZaloraManualReconSingle.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormPopUpDept.resx">
       <DependentUpon>FormPopUpDept.vb</DependentUpon>
@@ -13631,6 +13707,9 @@
     <EmbeddedResource Include="ReportPayout.resx">
       <DependentUpon>ReportPayout.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReportPayoutZalora.resx">
+      <DependentUpon>ReportPayoutZalora.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ReportPayrollAll.resx">
       <DependentUpon>ReportPayrollAll.vb</DependentUpon>
     </EmbeddedResource>
@@ -13757,6 +13836,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ReportProposeEmpSalary.resx">
       <DependentUpon>ReportProposeEmpSalary.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportProposeEmpSalaryCompare.resx">
+      <DependentUpon>ReportProposeEmpSalaryCompare.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportPurcOrder.resx">
       <DependentUpon>ReportPurcOrder.vb</DependentUpon>

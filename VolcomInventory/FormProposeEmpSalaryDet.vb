@@ -527,6 +527,8 @@
             GBContract.Visible = True
 
             GBNote.Visible = False
+
+            SBPrintDetail.Visible = False
         ElseIf LUECategory.EditValue.ToString = "2" Then
             GBSalary.Caption = "Salary Propose"
 
@@ -536,6 +538,8 @@
             GBContract.Visible = False
 
             GBNote.Visible = True
+
+            SBPrintDetail.Visible = True
         End If
 
         GVEmployee.BestFitColumns()
@@ -606,5 +610,24 @@
                     End Try
             End Select
         End If
+    End Sub
+
+    Private Sub SBPrintDetail_Click(sender As Object, e As EventArgs) Handles SBPrintDetail.Click
+        Dim id_report_status As String = execute_query("SELECT id_report_status FROM tb_employee_sal_pps WHERE id_employee_sal_pps = " + id_employee_sal_pps + "", 0, True, "", "", "", "")
+
+        Dim report As ReportProposeEmpSalaryCompare = New ReportProposeEmpSalaryCompare
+
+        report.id_employee_sal_pps = id_employee_sal_pps
+        report.data = GCEmployee.DataSource
+        report.is_pre = If(id_report_status = "6", "-1", "1")
+        report.category = LUECategory.EditValue.ToString
+
+        report.XLNumber.Text = TENumber.Text
+        report.XLEffectiveDate.Text = DEEffectiveDate.Text
+        report.XLType.Text = LUEType.Text
+
+        Dim Tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(report)
+
+        Tool.ShowPreviewDialog()
     End Sub
 End Class

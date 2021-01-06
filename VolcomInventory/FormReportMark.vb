@@ -633,6 +633,9 @@
         ElseIf report_mark_type = "281" Then
             'price recon
             query = String.Format("SELECT id_report_status, number as report_number FROM tb_sales_pos_recon WHERE id_sales_pos_recon = '{0}'", id_report)
+        ElseIf report_mark_type = "282" Then
+            'payout zalora
+            query = String.Format("SELECT id_report_status, statement_number as report_number FROM tb_payout_zalora WHERE id_payout_zalora = '{0}'", id_report)
         End If
 
         data = execute_query(query, -1, True, "", "", "", "")
@@ -6160,7 +6163,7 @@ WHERE copd.id_design_cop_propose='" & id_report & "';"
                     JOIN tb_opt_purchasing o
                     WHERE e.id_item_expense=" + id_report + " AND e.vat_total>0
                     UNION ALL
-                    SELECT " + id_acc_trans + ", c.id_acc_ap, e.id_comp  AS id_vendor, 0 AS `debit`, e.`total` AS `credit`, e.note AS description, 157, e.id_item_expense, e.`number`,1
+                    SELECT " + id_acc_trans + ",  IF(e.id_coa_tag=1,c.id_acc_ap,c.id_acc_cabang_ap) AS `id_acc`, e.id_comp  AS id_vendor, 0 AS `debit`, e.`total` AS `credit`, e.note AS description, 157, e.id_item_expense, e.`number`,1
                     ,e.inv_number,e.id_coa_tag
                     FROM tb_item_expense e
                     INNER JOIN tb_m_comp c ON c.id_comp = e.id_comp
@@ -9203,6 +9206,15 @@ WHERE id_additional_cost_pps='" & id_report & "'"
 
             'update status
             query = String.Format("UPDATE tb_sales_pos_recon SET id_report_status='{0}' WHERE id_sales_pos_recon ='{1}'", id_status_reportx, id_report)
+            execute_non_query(query, True, "", "", "", "")
+        ElseIf report_mark_type = "282" Then
+            'payout zalora
+            If id_status_reportx = "3" Then
+                id_status_reportx = "6"
+            End If
+
+            'update status
+            query = String.Format("UPDATE tb_payout_zalora SET id_report_status='{0}' WHERE id_payout_zalora ='{1}'", id_status_reportx, id_report)
             execute_non_query(query, True, "", "", "", "")
         End If
 

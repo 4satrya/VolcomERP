@@ -940,7 +940,7 @@ WHERE bo.`year`=YEAR(NOW()) AND bo.is_active='1'"
             jum_row += 1
             Dim qh As String = "SELECT acc.acc_name,acc.acc_description
 FROM tb_m_comp c 
-INNER JOIN tb_a_acc acc ON acc.id_acc=id_acc_ap
+INNER JOIN tb_a_acc acc ON acc.id_acc=" & If(id_coa_tag = "1", "c.id_acc_ap", "c.id_acc_cabang_ap") & "
 WHERE c.id_comp='" + id_comp + "' "
             Dim dh As DataTable = execute_query(qh, -1, True, "", "", "", "")
             If dh.Rows.Count > 0 Then

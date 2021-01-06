@@ -404,6 +404,9 @@
         ElseIf report_mark_type = "281" Then
             'inv price recon
             FormSalesPosPriceRecon.Close()
+        ElseIf report_mark_type = "282" Then
+            'payout zalora
+            FormPayoutZaloraDet.Close()
         End If
     End Sub
     Sub show()
@@ -1359,6 +1362,11 @@ GROUP BY rec.`id_prod_order`"
             FormSalesPosPriceRecon.action = "upd"
             FormSalesPosPriceRecon.is_view = "1"
             FormSalesPosPriceRecon.ShowDialog()
+        ElseIf report_mark_type = "282" Then
+            'payout zalora
+            FormPayoutZaloraDet.id = id_report
+            FormPayoutZaloraDet.is_view = "1"
+            FormPayoutZaloraDet.ShowDialog()
         Else
             'MsgBox(id_report)
             stopCustom("Document Not Found")
@@ -2424,6 +2432,12 @@ GROUP BY rec.`id_prod_order`"
             field_id = "id_adjustment"
             field_number = "number"
             field_date = "created_at"
+        ElseIf report_mark_type = "282" Then
+            'payout zalora
+            table_name = "tb_payout_zalora"
+            field_id = "id_payout_zalora"
+            field_number = "statement_number"
+            field_date = "sync_date"
         Else
             query = "Select '-' AS report_number, NOW() as report_date"
         End If

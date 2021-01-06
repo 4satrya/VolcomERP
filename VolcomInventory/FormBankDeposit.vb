@@ -63,6 +63,9 @@
         viewCoaTag()
         'viewCoaTagAll()
         load_status_sales()
+
+        'zalora
+        view_zalora_payout()
     End Sub
 
     Sub load_status_payment()
@@ -548,5 +551,59 @@ WHERE 1=1 " & where_string & " ORDER BY rec_py.id_rec_payment DESC"
 
     Private Sub SimpleButton2_Click(sender As Object, e As EventArgs) Handles BtnViewSales.Click
         load_sales()
+    End Sub
+
+    Private Sub BtnZaloraPayoutList_Click(sender As Object, e As EventArgs) Handles BtnZaloraPayoutList.Click
+        Cursor = Cursors.WaitCursor
+        FormPayoutZalora.ShowDialog()
+        Cursor = Cursors.Default
+    End Sub
+
+    Sub view_zalora_payout()
+        Cursor = Cursors.WaitCursor
+        Dim query As String = "SELECT m.id_payout_zalora, m.statement_number, m.zalora_created_at, m.sync_date, IFNULL(d.amo,0.00) AS `amount`
+        FROM tb_payout_zalora m
+        LEFT JOIN tb_rec_payment b ON b.id_payout_zalora = m.id_payout_zalora AND b.id_report_status!=5
+        LEFT JOIN (
+	        SELECT a.id_payout_zalora, SUM(amo) AS `amo`
+	        FROM (
+		        SELECT d.id_payout_zalora, SUM(d.erp_amount) AS `amo` 
+		        FROM tb_payout_zalora_det d
+		        INNER JOIN tb_payout_zalora m ON m.id_payout_zalora = d.id_payout_zalora
+		        WHERE m.id_report_status=6
+		        UNION ALL
+		        SELECT d.id_payout_zalora, SUM(d.adj_value) AS `amo` 
+		        FROM tb_payout_zalora_det_adj d
+		        INNER JOIN tb_payout_zalora m ON m.id_payout_zalora = d.id_payout_zalora
+		        WHERE m.id_report_status=6
+	        ) a 
+	        GROUP BY a.id_payout_zalora
+        ) d ON d.id_payout_zalora = m.id_payout_zalora
+        WHERE m.id_report_status=6 AND ISNULL(b.id_payout_zalora)
+        GROUP BY m.id_payout_zalora "
+        Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
+        GCZalora.DataSource = data
+        GVZalora.BestFitColumns()
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub BtnCreateBBMZalora_Click(sender As Object, e As EventArgs) Handles BtnCreateBBMZalora.Click
+        If GVZalora.RowCount > 0 And GVZalora.FocusedRowHandle >= 0 Then
+            Cursor = Cursors.WaitCursor
+            FormBankDepositDet.id_payout_zalora = GVZalora.GetFocusedRowCellValue("id_payout_zalora").ToString
+            FormBankDepositDet.ShowDialog()
+            Cursor = Cursors.Default
+        End If
+    End Sub
+
+    Private Sub GVZalora_DoubleClick(sender As Object, e As EventArgs) Handles GVZalora.DoubleClick
+        If GVZalora.RowCount > 0 And GVZalora.FocusedRowHandle >= 0 Then
+            Cursor = Cursors.WaitCursor
+            Dim m As New ClassShowPopUp()
+            m.id_report = GVZalora.GetFocusedRowCellValue("id_payout_zalora").ToString
+            m.report_mark_type = "282"
+            m.show()
+            Cursor = Cursors.Default
+        End If
     End Sub
 End Class

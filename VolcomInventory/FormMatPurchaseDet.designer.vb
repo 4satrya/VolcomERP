@@ -240,7 +240,7 @@ Partial Class FormMatPurchaseDet
         Me.BMark.Image = CType(resources.GetObject("BMark.Image"), System.Drawing.Image)
         Me.BMark.Location = New System.Drawing.Point(20, 2)
         Me.BMark.Name = "BMark"
-        Me.BMark.Size = New System.Drawing.Size(93, 37)
+        Me.BMark.Size = New System.Drawing.Size(102, 37)
         Me.BMark.TabIndex = 4
         Me.BMark.Text = "Approval"
         '

@@ -2131,7 +2131,7 @@ Partial Class FormMain
         '
         'NBBatchUpload
         '
-        Me.NBBatchUpload.Caption = "Batch Upload Online Store"
+        Me.NBBatchUpload.Caption = "Batch Upload"
         Me.NBBatchUpload.Name = "NBBatchUpload"
         Me.NBBatchUpload.SmallImage = CType(resources.GetObject("NBBatchUpload.SmallImage"), System.Drawing.Image)
         '

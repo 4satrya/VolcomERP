@@ -336,13 +336,13 @@ LEFT JOIN
 LEFT JOIN
 (
 	SELECT pyd.id_report, SUM(pyd.`value`) AS `value` FROM `tb_pn_det` pyd
-	INNER JOIN tb_pn py ON py.id_pn=pyd.id_pn AND py.id_report_status!=5 AND (pyd.report_mark_type='139' OR pyd.report_mark_type='202')
+	INNER JOIN tb_pn py ON py.id_pn=pyd.id_pn AND py.id_report_status!=5 AND (pyd.report_mark_type='139' OR pyd.report_mark_type='202') AND py.is_tolakan=2
 	GROUP BY pyd.id_report
 )payment ON payment.id_report=po.id_purc_order
 LEFT JOIN
 (
 	SELECT pyd.id_report, SUM(pyd.`value`) AS `value` FROM `tb_pn_det` pyd
-	INNER JOIN tb_pn py ON py.id_pn=pyd.id_pn AND py.id_report_status!=5 AND (pyd.report_mark_type='139' OR pyd.report_mark_type='202') AND py.id_pay_type=1
+	INNER JOIN tb_pn py ON py.id_pn=pyd.id_pn AND py.id_report_status!=5 AND (pyd.report_mark_type='139' OR pyd.report_mark_type='202') AND py.id_pay_type=1 AND py.is_tolakan=2
 	GROUP BY pyd.id_report
 )payment_dp ON payment_dp.id_report=po.id_purc_order
 LEFT JOIN
@@ -457,12 +457,16 @@ WHERE cc.id_comp_contact='" & SLEVendor.EditValue & "'"
     End Sub
 
     Private Sub BtnViewExpense_Click(sender As Object, e As EventArgs) Handles BtnViewExpense.Click
-        Dim query_check As String = "SELECT IFNULL(id_acc_dp,0) AS id_acc_dp,IFNULL(id_acc_ap,0) AS id_acc_ap FROM tb_m_comp c
+        Dim query_check As String = "SELECT IFNULL(id_acc_dp,0) AS id_acc_dp,IFNULL(id_acc_ap,0) AS id_acc_ap,IFNULL(id_acc_cabang_dp,0) AS id_acc_cabang_dp,IFNULL(id_acc_cabang_ap,0) AS id_acc_cabang_ap FROM tb_m_comp c
 WHERE c.id_comp='" & SLEVendorExpense.EditValue & "'"
         Dim data_check As DataTable = execute_query(query_check, -1, True, "", "", "", "")
-        If data_check.Rows(0)("id_acc_dp").ToString = "0" And SLEPayTypeExpense.EditValue.ToString = "1" Then
+        If SLEUnitExpense.EditValue.ToString = "1" And data_check.Rows(0)("id_acc_dp").ToString = "0" And SLEPayTypeExpense.EditValue.ToString = "1" Then
             warningCustom("This vendor DP account is not set.")
-        ElseIf data_check.Rows(0)("id_acc_ap").ToString = "0" And SLEPayTypeExpense.EditValue.ToString = "2" Then
+        ElseIf SLEUnitExpense.EditValue.ToString = "1" And data_check.Rows(0)("id_acc_ap").ToString = "0" And SLEPayTypeExpense.EditValue.ToString = "2" Then
+            warningCustom("This vendor AP account is not set.")
+        ElseIf Not SLEUnitExpense.EditValue.ToString = "1" And data_check.Rows(0)("id_acc_cabang_dp").ToString = "0" And SLEPayTypeExpense.EditValue.ToString = "1" Then
+            warningCustom("This vendor DP account is not set.")
+        ElseIf Not SLEUnitExpense.EditValue.ToString = "1" And data_check.Rows(0)("id_acc_cabang_ap").ToString = "0" And SLEPayTypeExpense.EditValue.ToString = "2" Then
             warningCustom("This vendor AP account is not set.")
         Else
             load_expense()
@@ -889,7 +893,7 @@ WHERE c.id_comp='" & SLEVendorExpense.EditValue & "'"
             Dim total As String = execute_query("
                 SELECT COUNT(*) AS total
                 FROM tb_pn_det AS pn_det
-                LEFT JOIN tb_pn AS pn ON pn_det.id_pn = pn.id_pn
+                LEFT JOIN tb_pn AS pn ON pn_det.id_pn = pn.id_pn AND pn.is_tolakan=2
                 WHERE pn.id_report_status <> 5 AND pn_det.report_mark_type = 223 AND pn_det.id_report IN (" + id_pay_bpjs_kesehatan + ")
             ", 0, True, "", "", "", "")
 
@@ -1010,7 +1014,7 @@ LEFT JOIN
 LEFT JOIN
 (
 	SELECT pyd.id_report, SUM(pyd.`value`) AS `value` FROM `tb_pn_det` pyd
-	INNER JOIN tb_pn py ON py.id_pn=pyd.id_pn AND py.id_report_status!=5 AND py.report_mark_type='118'
+	INNER JOIN tb_pn py ON py.id_pn=pyd.id_pn AND py.id_report_status!=5 AND py.report_mark_type='118' AND py.is_tolakan=2
 	GROUP BY pyd.id_report,pyd.`report_mark_type`
 )payment ON payment.id_report=pos.`id_sales_pos` 
 WHERE pos.`is_close_rec_payment`='2' " & where_string & "
@@ -1287,7 +1291,7 @@ GROUP BY sr.`id_sales_return`"
 	        LEFT JOIN
 	        (
 		        SELECT pyd.id_report, SUM(pyd.`value`) AS `value` FROM `tb_pn_det` pyd
-		        INNER JOIN tb_pn py ON py.id_pn=pyd.id_pn AND py.id_report_status!=5 AND pyd.report_mark_type='189'
+		        INNER JOIN tb_pn py ON py.id_pn=pyd.id_pn AND py.id_report_status!=5 AND pyd.report_mark_type='189' AND py.is_tolakan=2
 		        GROUP BY pyd.id_report
 	        )payment ON payment.id_report=pn.id_pn_fgpo
 	        INNER JOIN tb_lookup_report_status sts ON sts.id_report_status=pn.id_report_status
@@ -1445,7 +1449,7 @@ GROUP BY pns.`id_pn_summary`"
 	          SELECT rd.id_report, rd.vendor , SUM(rd.value) AS `total_pay`, 
 	          COUNT(IF(r.id_report_status<5,1,NULL)) AS `on_process`
 	          FROM tb_pn_det rd
-	          INNER JOIN tb_pn r ON r.id_pn = rd.id_pn
+	          INNER JOIN tb_pn r ON r.id_pn = rd.id_pn AND r.is_tolakan=2
 	          WHERE r.id_report_status!=5 AND rd.report_mark_type=254 
 	          GROUP BY rd.id_report, rd.vendor
 	        ) pyd ON pyd.id_report = b.id_sales_branch AND pyd.vendor = c.comp_number
@@ -1472,7 +1476,7 @@ GROUP BY pns.`id_pn_summary`"
 	          COUNT(IF(r.id_report_status<5,1,NULL)) AS `on_process`
 	          FROM tb_pn_det rd
 	          INNER JOIN tb_pn r ON r.id_pn = rd.id_pn
-	          WHERE r.id_report_status!=5 AND rd.report_mark_type=254 
+	          WHERE r.id_report_status!=5 AND rd.report_mark_type=254 AND r.is_tolakan=2
 	          GROUP BY rd.id_report, rd.vendor
 	        ) pyd ON pyd.id_report = b.id_sales_branch AND pyd.vendor = c.comp_number
 	        LEFT JOIN (

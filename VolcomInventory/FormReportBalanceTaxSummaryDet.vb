@@ -44,7 +44,7 @@
             FROM tb_lookup_report_status
         "
 
-        viewSearchLookupQuery(SLUEReportStatus, query, "id_report_status", "", "")
+        viewSearchLookupQuery(SLUEReportStatus, query, "id_report_status", "report_status", "id_report_status")
     End Sub
 
     Private Sub SBMark_Click(sender As Object, e As EventArgs) Handles SBMark.Click
@@ -169,6 +169,18 @@
     End Sub
 
     Private Sub SBPrint_Click(sender As Object, e As EventArgs) Handles SBPrint.Click
+        Dim report As New ReportBalanceTaxSummary()
 
+        report.id_summary = id_summary
+        report.data = GCSummary.DataSource
+        report.id_pre = If(SLUEReportStatus.EditValue.ToString = "6", "-1", "1")
+
+        report.XLNumber.Text = TENumber.Text
+        report.XLPeriod.Text = report.XLPeriod.Text.Replace("[period_from]", DEDateFrom.Text)
+        report.XLPeriod.Text = report.XLPeriod.Text.Replace("[period_to]", DEDateTo.Text)
+
+        Dim tool As DevExpress.XtraReports.UI.ReportPrintTool = New DevExpress.XtraReports.UI.ReportPrintTool(report)
+
+        tool.ShowPreviewDialog()
     End Sub
 End Class

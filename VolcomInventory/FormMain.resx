@@ -6411,10 +6411,10 @@
   </data>
   <data name="NBPolis.SmallImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAACxAAAAsQAa0jvXUAAAAPdEVYdFRpdGxlAEJvb2s7UmVhZMvDJr0AAABmSURBVDhP
-        pZJBDoAwCAT7J97ha30gKpGDdTbppoehyQLDpSMzt8DQoUpEpOB4od69+hU870wPY48E50QPU44CBxTQ
-        JZWjwAEFdEnlKHBAAV1SOQocfgJi+Scqeph6tVtlBwzXyXEBZEew1onRfJ8AAAAASUVORK5CYII=
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        EAAACxABrSO9dQAAAA90RVh0VGl0bGUAQm9vaztSZWFky8MmvQAAAGZJREFUOE+lkkEOgDAIBPsn3uFr
+        fSAqkYN1Nummh6HJAsOlIzO3wNChSkSk4Hih3r36FTzvTA9jjwTnRA9TjgIHFNAllaPAAQV0SeUocEAB
+        XVI5Chx+AmL5Jyp6mHq1W2UHDNfJcQFkR7DWidF8nwAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="NBABGRoyaltyZone.SmallImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -8904,6 +8904,6 @@
     <value>1150, 17</value>
   </metadata>
   <metadata name="AdornerUIManager1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 56</value>
+    <value>1260, 17</value>
   </metadata>
 </root>

@@ -58,7 +58,7 @@
                     "
                 ElseIf id_template = "2" Then
                     query = "
-                        SELECT ProductNameOptional, NamaVariasiOpsional, SKURefNoOptional, HargaAwalOpsional, HargadiskonOpsional, ProductNameOptional_erp, NamaVariasiOpsional_erp, SKURefNoOptional_erp, HargaAwalOpsional_erp, HargadiskonOpsional_erp
+                        SELECT ProductNameOptional, NamaVariasiOpsional, SKURefNoOptional, HargaAwalOpsional, Hargadiskon, ProductNameOptional_erp, NamaVariasiOpsional_erp, SKURefNoOptional_erp, HargaAwalOpsional_erp, Hargadiskon_erp
                         FROM tb_verification_master_shopee_update
                         WHERE id_verification_master = '" + id_verification_master + "'
                     "
@@ -1509,7 +1509,7 @@
                     column_check.Add("NamaVariasiOpsional")
                     column_check.Add("SKURefNoOptional")
                     column_check.Add("HargaAwalOpsional")
-                    column_check.Add("HargadiskonOpsional")
+                    column_check.Add("Hargadiskon")
                 End If
 
                 'column
@@ -1670,7 +1670,7 @@
                     "
                 ElseIf SLUETemplate.EditValue.ToString = "2" Then
                     q = "
-                        SELECT CONCAT('VOLCOM - ', de.design_display_name) AS ProductNameOptional, cd_det.display_name AS NamaVariasiOpsional, pro.product_full_code AS SKURefNoOptional, FLOOR(de_pn.design_price) AS HargaAwalOpsional, FLOOR(de_pc.design_price) AS HargadiskonOpsional
+                        SELECT CONCAT('VOLCOM - ', de.design_display_name) AS ProductNameOptional, cd_det.display_name AS NamaVariasiOpsional, pro.product_full_code AS SKURefNoOptional, FLOOR(de_pn.design_price) AS HargaAwalOpsional, FLOOR(de_pc.design_price) AS Hargadiskon
                         " + column_is_valid + "
                         FROM tb_m_product AS pro
                         LEFT JOIN tb_m_design AS de ON pro.id_design = de.id_design
@@ -1860,20 +1860,20 @@
                             query += "('" + id_verification_master + "', '" + NamaProduk + "', '" + SKUInduk + "', '" + KodeIntegrasiVariasi + "', '" + VarianuntukVariasi1 + "', '" + Harga + "', '" + KodeVariasi + "', '" + NamaProduk_erp + "', '" + SKUInduk_erp + "', '" + KodeIntegrasiVariasi_erp + "', '" + VarianuntukVariasi1_erp + "', '" + Harga_erp + "', '" + KodeVariasi_erp + "'), "
                         Next
                     ElseIf SLUETemplate.EditValue.ToString = "2" Then
-                        query = "INSERT INTO tb_verification_master_shopee_update (id_verification_master, ProductNameOptional, NamaVariasiOpsional, SKURefNoOptional, HargaAwalOpsional, HargadiskonOpsional, ProductNameOptional_erp, NamaVariasiOpsional_erp, SKURefNoOptional_erp, HargaAwalOpsional_erp, HargadiskonOpsional_erp) VALUES "
+                        query = "INSERT INTO tb_verification_master_shopee_update (id_verification_master, ProductNameOptional, NamaVariasiOpsional, SKURefNoOptional, HargaAwalOpsional, Hargadiskon, ProductNameOptional_erp, NamaVariasiOpsional_erp, SKURefNoOptional_erp, HargaAwalOpsional_erp, Hargadiskon_erp) VALUES "
 
                         For i = 0 To data_excel.Rows.Count - 1
                             Dim ProductNameOptional As String = data_excel.Rows(i)("ProductNameOptional").ToString
                             Dim NamaVariasiOpsional As String = data_excel.Rows(i)("NamaVariasiOpsional").ToString
                             Dim SKURefNoOptional As String = data_excel.Rows(i)("SKURefNoOptional").ToString
                             Dim HargaAwalOpsional As String = data_excel.Rows(i)("HargaAwalOpsional").ToString
-                            Dim HargadiskonOpsional As String = data_excel.Rows(i)("HargadiskonOpsional").ToString
+                            Dim Hargadiskon As String = data_excel.Rows(i)("Hargadiskon").ToString
 
                             Dim ProductNameOptional_erp As String = ""
                             Dim NamaVariasiOpsional_erp As String = ""
                             Dim SKURefNoOptional_erp As String = ""
                             Dim HargaAwalOpsional_erp As String = ""
-                            Dim HargadiskonOpsional_erp As String = ""
+                            Dim Hargadiskon_erp As String = ""
 
                             Try
                                 ProductNameOptional_erp = data_erp.Rows(i)("ProductNameOptional").ToString
@@ -1896,11 +1896,11 @@
                             End Try
 
                             Try
-                                HargadiskonOpsional_erp = data_erp.Rows(i)("HargadiskonOpsional").ToString
+                                Hargadiskon_erp = data_erp.Rows(i)("Hargadiskon").ToString
                             Catch ex As Exception
                             End Try
 
-                            query += "('" + id_verification_master + "', '" + ProductNameOptional + "', '" + NamaVariasiOpsional + "', '" + SKURefNoOptional + "', '" + HargaAwalOpsional + "', '" + HargadiskonOpsional + "', '" + ProductNameOptional_erp + "', '" + NamaVariasiOpsional_erp + "', '" + SKURefNoOptional_erp + "', '" + HargaAwalOpsional_erp + "', '" + HargadiskonOpsional_erp + "'), "
+                            query += "('" + id_verification_master + "', '" + ProductNameOptional + "', '" + NamaVariasiOpsional + "', '" + SKURefNoOptional + "', '" + HargaAwalOpsional + "', '" + Hargadiskon + "', '" + ProductNameOptional_erp + "', '" + NamaVariasiOpsional_erp + "', '" + SKURefNoOptional_erp + "', '" + HargaAwalOpsional_erp + "', '" + Hargadiskon_erp + "'), "
                         Next
                     End If
 

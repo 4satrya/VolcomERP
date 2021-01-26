@@ -46,6 +46,11 @@ Partial Class FormMasterDesignCOPProposeDet
         Me.BDelete = New DevExpress.XtraEditors.SimpleButton()
         Me.BAdd = New DevExpress.XtraEditors.SimpleButton()
         Me.PanelControl4 = New DevExpress.XtraEditors.PanelControl()
+        Me.LStorage = New DevExpress.XtraEditors.LabelControl()
+        Me.SLECoolStorage = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.GridView3 = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn22 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn23 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.LabelControl5 = New DevExpress.XtraEditors.LabelControl()
         Me.TEVendorName = New DevExpress.XtraEditors.TextEdit()
@@ -69,11 +74,11 @@ Partial Class FormMasterDesignCOPProposeDet
         Me.GridColumnKursBefore = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.GridColumnECOPBefore = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.GridColumnAddCostBefore = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
+        Me.BandedGridColumn2 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.gridBand3 = New DevExpress.XtraGrid.Views.BandedGrid.GridBand()
         Me.BandedGridColumnIdCurrencyBefore = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumnIdCompContactBefore = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumnIDStatusOrder = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
-        Me.BandedGridColumn2 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.BandedGridColumn3 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.RepositoryItemSpinEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit()
         Me.RISLEItem = New DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit()
@@ -112,6 +117,8 @@ Partial Class FormMasterDesignCOPProposeDet
         CType(Me.TETodayKurs.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl4, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl4.SuspendLayout()
+        CType(Me.SLECoolStorage.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GridView3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEVendorName.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEAdditionalCost.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TEVendor.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -155,7 +162,7 @@ Partial Class FormMasterDesignCOPProposeDet
         Me.PanelControl1.Controls.Add(Me.BtnCancel)
         Me.PanelControl1.Controls.Add(Me.BtnSave)
         Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelControl1.Location = New System.Drawing.Point(0, 427)
+        Me.PanelControl1.Location = New System.Drawing.Point(0, 442)
         Me.PanelControl1.Name = "PanelControl1"
         Me.PanelControl1.Size = New System.Drawing.Size(1076, 39)
         Me.PanelControl1.TabIndex = 0
@@ -190,17 +197,17 @@ Partial Class FormMasterDesignCOPProposeDet
         Me.PCComponent.Dock = System.Windows.Forms.DockStyle.Right
         Me.PCComponent.Location = New System.Drawing.Point(631, 0)
         Me.PCComponent.Name = "PCComponent"
-        Me.PCComponent.Size = New System.Drawing.Size(445, 427)
+        Me.PCComponent.Size = New System.Drawing.Size(445, 442)
         Me.PCComponent.TabIndex = 1
         '
         'GCCOPComponent
         '
         Me.GCCOPComponent.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GCCOPComponent.Location = New System.Drawing.Point(2, 139)
+        Me.GCCOPComponent.Location = New System.Drawing.Point(2, 165)
         Me.GCCOPComponent.MainView = Me.GVCOPComponent
         Me.GCCOPComponent.Name = "GCCOPComponent"
         Me.GCCOPComponent.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RISLEComp})
-        Me.GCCOPComponent.Size = New System.Drawing.Size(441, 286)
+        Me.GCCOPComponent.Size = New System.Drawing.Size(441, 275)
         Me.GCCOPComponent.TabIndex = 8924
         Me.GCCOPComponent.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVCOPComponent})
         '
@@ -363,7 +370,7 @@ Partial Class FormMasterDesignCOPProposeDet
         Me.PanelControl5.Controls.Add(Me.BDelete)
         Me.PanelControl5.Controls.Add(Me.BAdd)
         Me.PanelControl5.Dock = System.Windows.Forms.DockStyle.Top
-        Me.PanelControl5.Location = New System.Drawing.Point(2, 99)
+        Me.PanelControl5.Location = New System.Drawing.Point(2, 125)
         Me.PanelControl5.Name = "PanelControl5"
         Me.PanelControl5.Size = New System.Drawing.Size(441, 40)
         Me.PanelControl5.TabIndex = 8925
@@ -415,6 +422,8 @@ Partial Class FormMasterDesignCOPProposeDet
         'PanelControl4
         '
         Me.PanelControl4.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
+        Me.PanelControl4.Controls.Add(Me.LStorage)
+        Me.PanelControl4.Controls.Add(Me.SLECoolStorage)
         Me.PanelControl4.Controls.Add(Me.LabelControl1)
         Me.PanelControl4.Controls.Add(Me.LabelControl5)
         Me.PanelControl4.Controls.Add(Me.TEVendorName)
@@ -426,8 +435,48 @@ Partial Class FormMasterDesignCOPProposeDet
         Me.PanelControl4.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelControl4.Location = New System.Drawing.Point(2, 2)
         Me.PanelControl4.Name = "PanelControl4"
-        Me.PanelControl4.Size = New System.Drawing.Size(441, 97)
+        Me.PanelControl4.Size = New System.Drawing.Size(441, 123)
         Me.PanelControl4.TabIndex = 8923
+        '
+        'LStorage
+        '
+        Me.LStorage.Location = New System.Drawing.Point(13, 94)
+        Me.LStorage.Name = "LStorage"
+        Me.LStorage.Size = New System.Drawing.Size(65, 13)
+        Me.LStorage.TabIndex = 8924
+        Me.LStorage.Text = "Storage Type"
+        Me.LStorage.Visible = False
+        '
+        'SLECoolStorage
+        '
+        Me.SLECoolStorage.Location = New System.Drawing.Point(139, 91)
+        Me.SLECoolStorage.Name = "SLECoolStorage"
+        Me.SLECoolStorage.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLECoolStorage.Properties.View = Me.GridView3
+        Me.SLECoolStorage.Size = New System.Drawing.Size(288, 20)
+        Me.SLECoolStorage.TabIndex = 8923
+        '
+        'GridView3
+        '
+        Me.GridView3.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn22, Me.GridColumn23})
+        Me.GridView3.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.GridView3.Name = "GridView3"
+        Me.GridView3.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.GridView3.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn22
+        '
+        Me.GridColumn22.Caption = "ID Cool Storage"
+        Me.GridColumn22.FieldName = "id_cool_storage"
+        Me.GridColumn22.Name = "GridColumn22"
+        '
+        'GridColumn23
+        '
+        Me.GridColumn23.Caption = "Storage"
+        Me.GridColumn23.FieldName = "cool_storage"
+        Me.GridColumn23.Name = "GridColumn23"
+        Me.GridColumn23.Visible = True
+        Me.GridColumn23.VisibleIndex = 0
         '
         'LabelControl1
         '
@@ -538,7 +587,7 @@ Partial Class FormMasterDesignCOPProposeDet
         Me.GCItemList.MainView = Me.BGVItemList
         Me.GCItemList.Name = "GCItemList"
         Me.GCItemList.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemSpinEdit1, Me.RISLEItem})
-        Me.GCItemList.Size = New System.Drawing.Size(631, 367)
+        Me.GCItemList.Size = New System.Drawing.Size(631, 382)
         Me.GCItemList.TabIndex = 7
         Me.GCItemList.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.BGVItemList})
         '
@@ -622,9 +671,10 @@ Partial Class FormMasterDesignCOPProposeDet
         Me.gridBand2.Columns.Add(Me.GridColumnKursBefore)
         Me.gridBand2.Columns.Add(Me.GridColumnECOPBefore)
         Me.gridBand2.Columns.Add(Me.GridColumnAddCostBefore)
+        Me.gridBand2.Columns.Add(Me.BandedGridColumn2)
         Me.gridBand2.Name = "gridBand2"
         Me.gridBand2.VisibleIndex = 1
-        Me.gridBand2.Width = 469
+        Me.gridBand2.Width = 544
         '
         'GridColumnVendorCodeBefore
         '
@@ -692,6 +742,13 @@ Partial Class FormMasterDesignCOPProposeDet
         Me.GridColumnAddCostBefore.Visible = True
         Me.GridColumnAddCostBefore.Width = 79
         '
+        'BandedGridColumn2
+        '
+        Me.BandedGridColumn2.Caption = "Cold Storage"
+        Me.BandedGridColumn2.FieldName = "is_cold_storage_view"
+        Me.BandedGridColumn2.Name = "BandedGridColumn2"
+        Me.BandedGridColumn2.Visible = True
+        '
         'gridBand3
         '
         Me.gridBand3.Caption = "After"
@@ -717,13 +774,6 @@ Partial Class FormMasterDesignCOPProposeDet
         Me.BandedGridColumnIDStatusOrder.Caption = "ID Status Order"
         Me.BandedGridColumnIDStatusOrder.FieldName = "id_lookup_status_order"
         Me.BandedGridColumnIDStatusOrder.Name = "BandedGridColumnIDStatusOrder"
-        '
-        'BandedGridColumn2
-        '
-        Me.BandedGridColumn2.Caption = "Cold Storage"
-        Me.BandedGridColumn2.FieldName = "is_cold_storage_view"
-        Me.BandedGridColumn2.Name = "BandedGridColumn2"
-        Me.BandedGridColumn2.Visible = True
         '
         'BandedGridColumn3
         '
@@ -929,7 +979,7 @@ Partial Class FormMasterDesignCOPProposeDet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1076, 466)
+        Me.ClientSize = New System.Drawing.Size(1076, 481)
         Me.Controls.Add(Me.GCItemList)
         Me.Controls.Add(Me.PCSeason)
         Me.Controls.Add(Me.PCComponent)
@@ -956,6 +1006,8 @@ Partial Class FormMasterDesignCOPProposeDet
         CType(Me.PanelControl4, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl4.ResumeLayout(False)
         Me.PanelControl4.PerformLayout()
+        CType(Me.SLECoolStorage.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridView3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TEVendorName.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TEAdditionalCost.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TEVendor.Properties, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1053,4 +1105,9 @@ Partial Class FormMasterDesignCOPProposeDet
     Friend WithEvents BAdd As DevExpress.XtraEditors.SimpleButton
     Friend WithEvents BandedGridColumn2 As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
     Friend WithEvents BandedGridColumn3 As DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+    Friend WithEvents LStorage As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents SLECoolStorage As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents GridView3 As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn22 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn23 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

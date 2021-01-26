@@ -21,6 +21,7 @@ Partial Class FormBatchUploadOnlineStore
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormBatchUploadOnlineStore))
         Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
+        Me.SBClear = New DevExpress.XtraEditors.SimpleButton()
         Me.SLUETemplate = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.GridView4 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn11 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -50,7 +51,6 @@ Partial Class FormBatchUploadOnlineStore
         Me.GCBatchUpload = New DevExpress.XtraGrid.GridControl()
         Me.GVBatchUpload = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.RepositoryItemMemoEdit = New DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit()
-        Me.SBClear = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelControl1.SuspendLayout()
         CType(Me.SLUETemplate.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -88,6 +88,15 @@ Partial Class FormBatchUploadOnlineStore
         Me.PanelControl1.Name = "PanelControl1"
         Me.PanelControl1.Size = New System.Drawing.Size(784, 124)
         Me.PanelControl1.TabIndex = 0
+        '
+        'SBClear
+        '
+        Me.SBClear.Image = CType(resources.GetObject("SBClear.Image"), System.Drawing.Image)
+        Me.SBClear.Location = New System.Drawing.Point(410, 91)
+        Me.SBClear.Name = "SBClear"
+        Me.SBClear.Size = New System.Drawing.Size(75, 23)
+        Me.SBClear.TabIndex = 16
+        Me.SBClear.Text = "Clear"
         '
         'SLUETemplate
         '
@@ -264,9 +273,9 @@ Partial Class FormBatchUploadOnlineStore
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(14, 18)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(66, 13)
+        Me.Label1.Size = New System.Drawing.Size(33, 13)
         Me.Label1.TabIndex = 1
-        Me.Label1.Text = "Online Store"
+        Me.Label1.Text = "Store"
         '
         'SLUEOnlineStore
         '
@@ -327,15 +336,6 @@ Partial Class FormBatchUploadOnlineStore
         '
         Me.RepositoryItemMemoEdit.Name = "RepositoryItemMemoEdit"
         '
-        'SBClear
-        '
-        Me.SBClear.Image = CType(resources.GetObject("SBClear.Image"), System.Drawing.Image)
-        Me.SBClear.Location = New System.Drawing.Point(410, 91)
-        Me.SBClear.Name = "SBClear"
-        Me.SBClear.Size = New System.Drawing.Size(75, 23)
-        Me.SBClear.TabIndex = 16
-        Me.SBClear.Text = "Clear"
-        '
         'FormBatchUploadOnlineStore
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -344,7 +344,7 @@ Partial Class FormBatchUploadOnlineStore
         Me.Controls.Add(Me.GCBatchUpload)
         Me.Controls.Add(Me.PanelControl1)
         Me.Name = "FormBatchUploadOnlineStore"
-        Me.Text = "Batch Upload Online Store"
+        Me.Text = "Batch Upload"
         CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelControl1.ResumeLayout(False)
         Me.PanelControl1.PerformLayout()

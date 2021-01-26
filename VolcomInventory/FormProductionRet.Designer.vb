@@ -35,6 +35,14 @@ Partial Class FormProductionRet
         Me.GridColumn7 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn9 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn10 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn14 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.PanelControl1 = New DevExpress.XtraEditors.PanelControl()
+        Me.BView = New DevExpress.XtraEditors.SimpleButton()
+        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
+        Me.SLEType = New DevExpress.XtraEditors.SearchLookUpEdit()
+        Me.SearchLookUpEdit1View = New DevExpress.XtraGrid.Views.Grid.GridView()
+        Me.GridColumn15 = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumn16 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.XTPRetIn = New DevExpress.XtraTab.XtraTabPage()
         Me.GCRetIn = New DevExpress.XtraGrid.GridControl()
         Me.GVRetIn = New DevExpress.XtraGrid.Views.Grid.GridView()
@@ -54,6 +62,10 @@ Partial Class FormProductionRet
         Me.XTPRetOut.SuspendLayout()
         CType(Me.GCRetOut, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVRetOut, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelControl1.SuspendLayout()
+        CType(Me.SLEType.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTPRetIn.SuspendLayout()
         CType(Me.GCRetIn, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVRetIn, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -76,6 +88,7 @@ Partial Class FormProductionRet
         'XTPRetOut
         '
         Me.XTPRetOut.Controls.Add(Me.GCRetOut)
+        Me.XTPRetOut.Controls.Add(Me.PanelControl1)
         Me.XTPRetOut.Name = "XTPRetOut"
         Me.XTPRetOut.Size = New System.Drawing.Size(732, 419)
         Me.XTPRetOut.Text = "Return Out"
@@ -83,16 +96,16 @@ Partial Class FormProductionRet
         'GCRetOut
         '
         Me.GCRetOut.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GCRetOut.Location = New System.Drawing.Point(0, 0)
+        Me.GCRetOut.Location = New System.Drawing.Point(0, 44)
         Me.GCRetOut.MainView = Me.GVRetOut
         Me.GCRetOut.Name = "GCRetOut"
-        Me.GCRetOut.Size = New System.Drawing.Size(732, 419)
+        Me.GCRetOut.Size = New System.Drawing.Size(732, 375)
         Me.GCRetOut.TabIndex = 3
         Me.GCRetOut.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVRetOut})
         '
         'GVRetOut
         '
-        Me.GVRetOut.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ColIdSampleRetOut, Me.ColSeason, Me.ColRetOutNumber, Me.ColShipFrom, Me.ColShipTo, Me.ColRecDate, Me.ColDueDate, Me.ColPSONumber, Me.GridColumnStatusOut, Me.GridColumn7, Me.GridColumn9, Me.GridColumn10})
+        Me.GVRetOut.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.ColIdSampleRetOut, Me.ColSeason, Me.ColRetOutNumber, Me.ColShipFrom, Me.ColShipTo, Me.ColRecDate, Me.ColDueDate, Me.ColPSONumber, Me.GridColumnStatusOut, Me.GridColumn7, Me.GridColumn9, Me.GridColumn10, Me.GridColumn14})
         Me.GVRetOut.GridControl = Me.GCRetOut
         Me.GVRetOut.GroupCount = 1
         Me.GVRetOut.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "qty", Me.GridColumn10, "{0:n0}")})
@@ -151,7 +164,7 @@ Partial Class FormProductionRet
         Me.ColRecDate.FieldName = "prod_order_ret_out_date"
         Me.ColRecDate.Name = "ColRecDate"
         Me.ColRecDate.Visible = True
-        Me.ColRecDate.VisibleIndex = 7
+        Me.ColRecDate.VisibleIndex = 8
         Me.ColRecDate.Width = 136
         '
         'ColDueDate
@@ -162,7 +175,7 @@ Partial Class FormProductionRet
         Me.ColDueDate.FieldName = "prod_order_ret_out_due_date"
         Me.ColDueDate.Name = "ColDueDate"
         Me.ColDueDate.Visible = True
-        Me.ColDueDate.VisibleIndex = 8
+        Me.ColDueDate.VisibleIndex = 9
         Me.ColDueDate.Width = 148
         '
         'ColPSONumber
@@ -180,7 +193,7 @@ Partial Class FormProductionRet
         Me.GridColumnStatusOut.FieldName = "report_status"
         Me.GridColumnStatusOut.Name = "GridColumnStatusOut"
         Me.GridColumnStatusOut.Visible = True
-        Me.GridColumnStatusOut.VisibleIndex = 9
+        Me.GridColumnStatusOut.VisibleIndex = 10
         Me.GridColumnStatusOut.Width = 89
         '
         'GridColumn7
@@ -212,6 +225,73 @@ Partial Class FormProductionRet
         Me.GridColumn10.Visible = True
         Me.GridColumn10.VisibleIndex = 6
         Me.GridColumn10.Width = 50
+        '
+        'GridColumn14
+        '
+        Me.GridColumn14.Caption = "Qty Return In"
+        Me.GridColumn14.DisplayFormat.FormatString = "N0"
+        Me.GridColumn14.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumn14.FieldName = "qty_retin"
+        Me.GridColumn14.Name = "GridColumn14"
+        Me.GridColumn14.Visible = True
+        Me.GridColumn14.VisibleIndex = 7
+        '
+        'PanelControl1
+        '
+        Me.PanelControl1.Controls.Add(Me.BView)
+        Me.PanelControl1.Controls.Add(Me.LabelControl1)
+        Me.PanelControl1.Controls.Add(Me.SLEType)
+        Me.PanelControl1.Dock = System.Windows.Forms.DockStyle.Top
+        Me.PanelControl1.Location = New System.Drawing.Point(0, 0)
+        Me.PanelControl1.Name = "PanelControl1"
+        Me.PanelControl1.Size = New System.Drawing.Size(732, 44)
+        Me.PanelControl1.TabIndex = 4
+        '
+        'BView
+        '
+        Me.BView.Location = New System.Drawing.Point(239, 9)
+        Me.BView.Name = "BView"
+        Me.BView.Size = New System.Drawing.Size(71, 23)
+        Me.BView.TabIndex = 2
+        Me.BView.Text = "view"
+        '
+        'LabelControl1
+        '
+        Me.LabelControl1.Location = New System.Drawing.Point(11, 14)
+        Me.LabelControl1.Name = "LabelControl1"
+        Me.LabelControl1.Size = New System.Drawing.Size(24, 13)
+        Me.LabelControl1.TabIndex = 1
+        Me.LabelControl1.Text = "Type"
+        '
+        'SLEType
+        '
+        Me.SLEType.Location = New System.Drawing.Point(41, 11)
+        Me.SLEType.Name = "SLEType"
+        Me.SLEType.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.SLEType.Properties.View = Me.SearchLookUpEdit1View
+        Me.SLEType.Size = New System.Drawing.Size(192, 20)
+        Me.SLEType.TabIndex = 0
+        '
+        'SearchLookUpEdit1View
+        '
+        Me.SearchLookUpEdit1View.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn15, Me.GridColumn16})
+        Me.SearchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus
+        Me.SearchLookUpEdit1View.Name = "SearchLookUpEdit1View"
+        Me.SearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = False
+        Me.SearchLookUpEdit1View.OptionsView.ShowGroupPanel = False
+        '
+        'GridColumn15
+        '
+        Me.GridColumn15.Caption = "ID"
+        Me.GridColumn15.Name = "GridColumn15"
+        '
+        'GridColumn16
+        '
+        Me.GridColumn16.Caption = "Type"
+        Me.GridColumn16.FieldName = "type"
+        Me.GridColumn16.Name = "GridColumn16"
+        Me.GridColumn16.Visible = True
+        Me.GridColumn16.VisibleIndex = 0
         '
         'XTPRetIn
         '
@@ -360,6 +440,11 @@ Partial Class FormProductionRet
         Me.XTPRetOut.ResumeLayout(False)
         CType(Me.GCRetOut, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVRetOut, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PanelControl1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelControl1.ResumeLayout(False)
+        Me.PanelControl1.PerformLayout()
+        CType(Me.SLEType.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SearchLookUpEdit1View, System.ComponentModel.ISupportInitialize).EndInit()
         Me.XTPRetIn.ResumeLayout(False)
         CType(Me.GCRetIn, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GVRetIn, System.ComponentModel.ISupportInitialize).EndInit()
@@ -396,4 +481,12 @@ Partial Class FormProductionRet
     Friend WithEvents GridColumn11 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn12 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn13 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn14 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents PanelControl1 As DevExpress.XtraEditors.PanelControl
+    Friend WithEvents BView As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents LabelControl1 As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents SLEType As DevExpress.XtraEditors.SearchLookUpEdit
+    Friend WithEvents SearchLookUpEdit1View As DevExpress.XtraGrid.Views.Grid.GridView
+    Friend WithEvents GridColumn15 As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumn16 As DevExpress.XtraGrid.Columns.GridColumn
 End Class

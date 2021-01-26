@@ -247,9 +247,11 @@ Partial Class FormReportBalanceTaxSummaryDet
         Me.GVSummary.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn2, Me.GridColumn5, Me.GridColumn3, Me.GridColumn4})
         Me.GVSummary.GridControl = Me.GCSummary
         Me.GVSummary.GroupCount = 1
+        Me.GVSummary.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "balance", Me.GridColumn4, "{0:N2}")})
         Me.GVSummary.Name = "GVSummary"
         Me.GVSummary.OptionsBehavior.AutoExpandAllGroups = True
         Me.GVSummary.OptionsBehavior.ReadOnly = True
+        Me.GVSummary.OptionsView.ShowFooter = True
         Me.GVSummary.OptionsView.ShowGroupPanel = False
         Me.GVSummary.SortInfo.AddRange(New DevExpress.XtraGrid.Columns.GridColumnSortInfo() {New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.GridColumn2, DevExpress.Data.ColumnSortOrder.Ascending)})
         '
@@ -289,6 +291,7 @@ Partial Class FormReportBalanceTaxSummaryDet
         Me.GridColumn4.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumn4.FieldName = "balance"
         Me.GridColumn4.Name = "GridColumn4"
+        Me.GridColumn4.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "balance", "{0:N2}")})
         Me.GridColumn4.Visible = True
         Me.GridColumn4.VisibleIndex = 2
         '

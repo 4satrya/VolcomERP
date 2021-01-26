@@ -274,6 +274,7 @@ Partial Class FormBankWithdrawal
         Me.GridColumn221 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.BCreatePaymentFGPO = New DevExpress.XtraEditors.SimpleButton()
         Me.PanelControl6 = New DevExpress.XtraEditors.PanelControl()
+        Me.BMutasiValasBPL = New DevExpress.XtraEditors.SimpleButton()
         Me.SLEAkunValas = New DevExpress.XtraEditors.SearchLookUpEdit()
         Me.GridView18 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn209 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -500,7 +501,6 @@ Partial Class FormBankWithdrawal
         Me.BloadWaiting = New DevExpress.XtraEditors.SimpleButton()
         Me.ViewBPL = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.VDItemList = New System.Windows.Forms.ToolStripMenuItem()
-        Me.BMutasiValasBPL = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.XTCPO, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.XTCPO.SuspendLayout()
         Me.XTPPayment.SuspendLayout()
@@ -1123,6 +1123,8 @@ Partial Class FormBankWithdrawal
         Me.GVBBKSummary.GridControl = Me.GCBBKSummary
         Me.GVBBKSummary.Name = "GVBBKSummary"
         Me.GVBBKSummary.OptionsBehavior.AutoExpandAllGroups = True
+        Me.GVBBKSummary.OptionsBehavior.Editable = False
+        Me.GVBBKSummary.OptionsBehavior.ReadOnly = True
         Me.GVBBKSummary.OptionsView.ColumnAutoWidth = False
         Me.GVBBKSummary.OptionsView.ShowGroupPanel = False
         '
@@ -1148,7 +1150,9 @@ Partial Class FormBankWithdrawal
         Me.GridColumn202.FieldName = "number"
         Me.GridColumn202.Name = "GridColumn202"
         Me.GridColumn202.OptionsColumn.AllowEdit = False
-        Me.GridColumn202.Width = 117
+        Me.GridColumn202.Visible = True
+        Me.GridColumn202.VisibleIndex = 1
+        Me.GridColumn202.Width = 135
         '
         'GridColumn203
         '
@@ -1159,7 +1163,7 @@ Partial Class FormBankWithdrawal
         Me.GridColumn203.Name = "GridColumn203"
         Me.GridColumn203.OptionsColumn.AllowEdit = False
         Me.GridColumn203.Visible = True
-        Me.GridColumn203.VisibleIndex = 2
+        Me.GridColumn203.VisibleIndex = 3
         Me.GridColumn203.Width = 107
         '
         'GridColumn204
@@ -1169,7 +1173,7 @@ Partial Class FormBankWithdrawal
         Me.GridColumn204.Name = "GridColumn204"
         Me.GridColumn204.OptionsColumn.AllowEdit = False
         Me.GridColumn204.Visible = True
-        Me.GridColumn204.VisibleIndex = 3
+        Me.GridColumn204.VisibleIndex = 4
         Me.GridColumn204.Width = 109
         '
         'GridColumn208
@@ -1182,7 +1186,7 @@ Partial Class FormBankWithdrawal
         Me.GridColumn208.FieldName = "currency"
         Me.GridColumn208.Name = "GridColumn208"
         Me.GridColumn208.Visible = True
-        Me.GridColumn208.VisibleIndex = 5
+        Me.GridColumn208.VisibleIndex = 6
         '
         'GridColumn205
         '
@@ -1197,7 +1201,7 @@ Partial Class FormBankWithdrawal
         Me.GridColumn205.Name = "GridColumn205"
         Me.GridColumn205.OptionsColumn.AllowEdit = False
         Me.GridColumn205.Visible = True
-        Me.GridColumn205.VisibleIndex = 4
+        Me.GridColumn205.VisibleIndex = 5
         '
         'GridColumn206
         '
@@ -1206,7 +1210,7 @@ Partial Class FormBankWithdrawal
         Me.GridColumn206.Name = "GridColumn206"
         Me.GridColumn206.OptionsColumn.AllowEdit = False
         Me.GridColumn206.Visible = True
-        Me.GridColumn206.VisibleIndex = 7
+        Me.GridColumn206.VisibleIndex = 8
         Me.GridColumn206.Width = 87
         '
         'GridColumn207
@@ -1216,7 +1220,7 @@ Partial Class FormBankWithdrawal
         Me.GridColumn207.Name = "GridColumn207"
         Me.GridColumn207.OptionsColumn.AllowEdit = False
         Me.GridColumn207.Visible = True
-        Me.GridColumn207.VisibleIndex = 6
+        Me.GridColumn207.VisibleIndex = 7
         '
         'GridColumn211
         '
@@ -1227,7 +1231,7 @@ Partial Class FormBankWithdrawal
         Me.GridColumn211.Name = "GridColumn211"
         Me.GridColumn211.OptionsColumn.AllowEdit = False
         Me.GridColumn211.Visible = True
-        Me.GridColumn211.VisibleIndex = 1
+        Me.GridColumn211.VisibleIndex = 2
         Me.GridColumn211.Width = 78
         '
         'RepositoryItemCheckEdit12
@@ -3186,6 +3190,14 @@ Partial Class FormBankWithdrawal
         Me.PanelControl6.Name = "PanelControl6"
         Me.PanelControl6.Size = New System.Drawing.Size(1352, 44)
         Me.PanelControl6.TabIndex = 15
+        '
+        'BMutasiValasBPL
+        '
+        Me.BMutasiValasBPL.Location = New System.Drawing.Point(739, 9)
+        Me.BMutasiValasBPL.Name = "BMutasiValasBPL"
+        Me.BMutasiValasBPL.Size = New System.Drawing.Size(75, 23)
+        Me.BMutasiValasBPL.TabIndex = 8923
+        Me.BMutasiValasBPL.Text = "Mutasi Valas"
         '
         'SLEAkunValas
         '
@@ -5433,14 +5445,6 @@ Partial Class FormBankWithdrawal
         Me.VDItemList.Name = "VDItemList"
         Me.VDItemList.Size = New System.Drawing.Size(112, 22)
         Me.VDItemList.Text = "History"
-        '
-        'BMutasiValasBPL
-        '
-        Me.BMutasiValasBPL.Location = New System.Drawing.Point(739, 9)
-        Me.BMutasiValasBPL.Name = "BMutasiValasBPL"
-        Me.BMutasiValasBPL.Size = New System.Drawing.Size(75, 23)
-        Me.BMutasiValasBPL.TabIndex = 8923
-        Me.BMutasiValasBPL.Text = "Mutasi Valas"
         '
         'FormBankWithdrawal
         '

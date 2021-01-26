@@ -1276,6 +1276,10 @@ GROUP BY pnd.kurs"
                 SLEAutoDebet.Properties.ReadOnly = True
                 SLEPayFrom.EditValue = data.Rows(0)("id_acc_payfrom").ToString
                 MENote.EditValue = data.Rows(0)("note").ToString
+                '
+                If data.Rows(0)("is_tolakan").ToString = "1" Then
+                    BViewJurnalBUM.Visible = True
+                End If
             End If
             '
             load_det()
@@ -1387,7 +1391,7 @@ GROUP BY pnd.kurs"
 
         form_load()
         '
-        If is_print Then
+        If is_print = "1" Then
             print(True)
         End If
     End Sub
@@ -1842,6 +1846,7 @@ VALUES('" & report_mark_type & "','" & decimalSQL(Decimal.Parse(TEKurs.EditValue
         Dim id_acc_trans As String = ""
         Try
             id_acc_trans = execute_query("SELECT ad.id_acc_trans FROM tb_a_acc_trans_det ad
+            INNER JOIN tb_a_acc_trans a ON a.id_acc_trans=ad.id_acc_trans AND a.id_bill_type='22'
             WHERE ad.report_mark_type=159 AND ad.id_report=" + id_payment + "
             GROUP BY ad.id_acc_trans ", 0, True, "", "", "", "")
         Catch ex As Exception
@@ -2004,5 +2009,30 @@ ORDER BY id_stock_valas DESC LIMIT 1"
     Private Sub BMutasiValas_Click(sender As Object, e As EventArgs) Handles BMutasiValas.Click
         FormStockValas.id_valas_bank = SLEAkunValas.EditValue.ToString
         FormStockValas.ShowDialog()
+    End Sub
+
+    Private Sub BViewJurnalBUM_Click(sender As Object, e As EventArgs) Handles BViewJurnalBUM.Click
+        Cursor = Cursors.WaitCursor
+        Dim id_acc_trans As String = ""
+        Try
+            id_acc_trans = execute_query("SELECT ad.id_acc_trans FROM tb_a_acc_trans_det ad
+            INNER JOIN tb_a_acc_trans a ON a.id_acc_trans=ad.id_acc_trans AND a.id_bill_type='25'
+            WHERE ad.report_mark_type=159 AND ad.id_report=" + id_payment + "
+            GROUP BY ad.id_acc_trans ", 0, True, "", "", "", "")
+        Catch ex As Exception
+            id_acc_trans = ""
+        End Try
+
+        If id_acc_trans <> "" Then
+            Dim s As New ClassShowPopUp()
+            FormViewJournal.is_enable_view_doc = False
+            FormViewJournal.BMark.Visible = False
+            s.id_report = id_acc_trans
+            s.report_mark_type = "36"
+            s.show()
+        Else
+            warningCustom("Auto journal not found.")
+        End If
+        Cursor = Cursors.Default
     End Sub
 End Class

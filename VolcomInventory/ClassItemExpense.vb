@@ -58,7 +58,7 @@
         LEFT JOIN (
             SELECT pd.id_report, SUM(pd.`value`) AS total 
             FROM tb_pn p
-            INNER JOIN tb_pn_det pd ON pd.id_pn = p.id_pn
+            INNER JOIN tb_pn_det pd ON pd.id_pn = p.id_pn  AND p.is_tolakan=2
             WHERE p.report_mark_type=157 AND p.id_report_status!=5
             GROUP BY pd.id_report
         ) er ON er.id_report = e.id_item_expense AND e.is_pay_later=1

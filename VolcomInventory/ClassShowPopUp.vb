@@ -361,7 +361,7 @@
             FormShipInvoiceDet.Close()
         ElseIf report_mark_type = "250" Then
             FormPromoCollectionDet.Close()
-        ElseIf report_mark_type = "251" Then
+        ElseIf report_mark_type = "251" Or report_mark_type = "285" Then
             FormBankWithdrawalSum.Close()
         ElseIf report_mark_type = "254" Or report_mark_type = "256" Then
             FormSalesBranchDet.Close()
@@ -1299,7 +1299,7 @@ GROUP BY rec.`id_prod_order`"
             FormPromoCollectionDet.id = id_report
             FormPromoCollectionDet.is_view = "1"
             FormPromoCollectionDet.ShowDialog()
-        ElseIf report_mark_type = "251" Then
+        ElseIf report_mark_type = "251" Or report_mark_type = "285" Then
             FormBankWithdrawalSum.id_sum = id_report
             FormBankWithdrawalSum.is_view = "1"
             FormBankWithdrawalSum.ShowDialog()
@@ -2364,7 +2364,7 @@ GROUP BY rec.`id_prod_order`"
             field_id = "id_ol_store_ret_req"
             field_number = "number"
             field_date = "created_date"
-        ElseIf report_mark_type = "251" Then
+        ElseIf report_mark_type = "251" Or report_mark_type = "285" Then
             'bbk sumamry
             table_name = "tb_pn_summary"
             field_id = "id_pn_summary"

@@ -19,15 +19,9 @@ Partial Public Class ReportBalanceTaxSummary
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ReportBalanceTaxSummary))
         Me.Detail = New DevExpress.XtraReports.UI.DetailBand()
-        Me.TopMargin = New DevExpress.XtraReports.UI.TopMarginBand()
-        Me.BottomMargin = New DevExpress.XtraReports.UI.BottomMarginBand()
-        Me.ReportHeader = New DevExpress.XtraReports.UI.ReportHeaderBand()
-        Me.ReportFooter = New DevExpress.XtraReports.UI.ReportFooterBand()
-        Me.XLTitle = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLine1 = New DevExpress.XtraReports.UI.XRLine()
-        Me.XrLabel1 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel2 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.WinControlContainer1 = New DevExpress.XtraReports.UI.WinControlContainer()
         Me.GCSummary = New DevExpress.XtraGrid.GridControl()
         Me.GVSummary = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
@@ -35,7 +29,15 @@ Partial Public Class ReportBalanceTaxSummary
         Me.GridColumn5 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn3 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumn4 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.WinControlContainer1 = New DevExpress.XtraReports.UI.WinControlContainer()
+        Me.TopMargin = New DevExpress.XtraReports.UI.TopMarginBand()
+        Me.BottomMargin = New DevExpress.XtraReports.UI.BottomMarginBand()
+        Me.ReportHeader = New DevExpress.XtraReports.UI.ReportHeaderBand()
+        Me.XLNumber = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrPictureBox1 = New DevExpress.XtraReports.UI.XRPictureBox()
+        Me.XLPeriod = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLine1 = New DevExpress.XtraReports.UI.XRLine()
+        Me.XLTitle = New DevExpress.XtraReports.UI.XRLabel()
+        Me.ReportFooter = New DevExpress.XtraReports.UI.ReportFooterBand()
         Me.XrTable1 = New DevExpress.XtraReports.UI.XRTable()
         Me.XrTableRow1 = New DevExpress.XtraReports.UI.XRTableRow()
         Me.XrTableCell13 = New DevExpress.XtraReports.UI.XRTableCell()
@@ -52,76 +54,12 @@ Partial Public Class ReportBalanceTaxSummary
         Me.Detail.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100.0!)
         Me.Detail.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
         '
-        'TopMargin
+        'WinControlContainer1
         '
-        Me.TopMargin.HeightF = 50.0!
-        Me.TopMargin.Name = "TopMargin"
-        Me.TopMargin.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100.0!)
-        Me.TopMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
-        '
-        'BottomMargin
-        '
-        Me.BottomMargin.HeightF = 50.0!
-        Me.BottomMargin.Name = "BottomMargin"
-        Me.BottomMargin.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100.0!)
-        Me.BottomMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
-        '
-        'ReportHeader
-        '
-        Me.ReportHeader.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLabel2, Me.XrLabel1, Me.XrLine1, Me.XLTitle})
-        Me.ReportHeader.HeightF = 88.99996!
-        Me.ReportHeader.Name = "ReportHeader"
-        '
-        'ReportFooter
-        '
-        Me.ReportFooter.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrTable1})
-        Me.ReportFooter.HeightF = 35.00001!
-        Me.ReportFooter.Name = "ReportFooter"
-        '
-        'XLTitle
-        '
-        Me.XLTitle.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Bold)
-        Me.XLTitle.LocationFloat = New DevExpress.Utils.PointFloat(0!, 22.99999!)
-        Me.XLTitle.Multiline = True
-        Me.XLTitle.Name = "XLTitle"
-        Me.XLTitle.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XLTitle.SizeF = New System.Drawing.SizeF(756.0!, 23.0!)
-        Me.XLTitle.StylePriority.UseFont = False
-        Me.XLTitle.StylePriority.UseTextAlignment = False
-        Me.XLTitle.Text = "REKAP PPH: FINAL, PASAL 23/26, PASAL 21 PROFESI, PPH DEVIDEN,  PPN LUAR NEGERI"
-        Me.XLTitle.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
-        '
-        'XrLine1
-        '
-        Me.XrLine1.LocationFloat = New DevExpress.Utils.PointFloat(0!, 68.99995!)
-        Me.XrLine1.Name = "XrLine1"
-        Me.XrLine1.SizeF = New System.Drawing.SizeF(756.0!, 20.00001!)
-        '
-        'XrLabel1
-        '
-        Me.XrLabel1.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Bold)
-        Me.XrLabel1.LocationFloat = New DevExpress.Utils.PointFloat(0!, 45.99997!)
-        Me.XrLabel1.Multiline = True
-        Me.XrLabel1.Name = "XrLabel1"
-        Me.XrLabel1.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel1.SizeF = New System.Drawing.SizeF(756.0!, 23.0!)
-        Me.XrLabel1.StylePriority.UseFont = False
-        Me.XrLabel1.StylePriority.UseTextAlignment = False
-        Me.XrLabel1.Text = "PERIODE [period_from] - [period_to]"
-        Me.XrLabel1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
-        '
-        'XrLabel2
-        '
-        Me.XrLabel2.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Bold)
-        Me.XrLabel2.LocationFloat = New DevExpress.Utils.PointFloat(0!, 0!)
-        Me.XrLabel2.Multiline = True
-        Me.XrLabel2.Name = "XrLabel2"
-        Me.XrLabel2.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel2.SizeF = New System.Drawing.SizeF(756.0!, 23.0!)
-        Me.XrLabel2.StylePriority.UseFont = False
-        Me.XrLabel2.StylePriority.UseTextAlignment = False
-        Me.XrLabel2.Text = "PT. VOLCOM INDONESIA"
-        Me.XrLabel2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
+        Me.WinControlContainer1.LocationFloat = New DevExpress.Utils.PointFloat(0!, 10.00001!)
+        Me.WinControlContainer1.Name = "WinControlContainer1"
+        Me.WinControlContainer1.SizeF = New System.Drawing.SizeF(756.0!, 104.0!)
+        Me.WinControlContainer1.WinControl = Me.GCSummary
         '
         'GCSummary
         '
@@ -136,12 +74,16 @@ Partial Public Class ReportBalanceTaxSummary
         '
         Me.GVSummary.AppearancePrint.FooterPanel.BackColor = System.Drawing.Color.White
         Me.GVSummary.AppearancePrint.FooterPanel.BorderColor = System.Drawing.Color.Black
+        Me.GVSummary.AppearancePrint.FooterPanel.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold)
         Me.GVSummary.AppearancePrint.FooterPanel.Options.UseBackColor = True
         Me.GVSummary.AppearancePrint.FooterPanel.Options.UseBorderColor = True
+        Me.GVSummary.AppearancePrint.FooterPanel.Options.UseFont = True
         Me.GVSummary.AppearancePrint.GroupFooter.BackColor = System.Drawing.Color.White
         Me.GVSummary.AppearancePrint.GroupFooter.BorderColor = System.Drawing.Color.Black
+        Me.GVSummary.AppearancePrint.GroupFooter.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold)
         Me.GVSummary.AppearancePrint.GroupFooter.Options.UseBackColor = True
         Me.GVSummary.AppearancePrint.GroupFooter.Options.UseBorderColor = True
+        Me.GVSummary.AppearancePrint.GroupFooter.Options.UseFont = True
         Me.GVSummary.AppearancePrint.GroupRow.BackColor = System.Drawing.Color.White
         Me.GVSummary.AppearancePrint.GroupRow.BorderColor = System.Drawing.Color.Black
         Me.GVSummary.AppearancePrint.GroupRow.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold)
@@ -163,9 +105,12 @@ Partial Public Class ReportBalanceTaxSummary
         Me.GVSummary.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumn1, Me.GridColumn2, Me.GridColumn5, Me.GridColumn3, Me.GridColumn4})
         Me.GVSummary.GridControl = Me.GCSummary
         Me.GVSummary.GroupCount = 1
+        Me.GVSummary.GroupSummary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "balance", Me.GridColumn4, "{0:N2}")})
+        Me.GVSummary.LevelIndent = 0
         Me.GVSummary.Name = "GVSummary"
         Me.GVSummary.OptionsBehavior.AutoExpandAllGroups = True
         Me.GVSummary.OptionsBehavior.ReadOnly = True
+        Me.GVSummary.OptionsView.ShowFooter = True
         Me.GVSummary.OptionsView.ShowGroupPanel = False
         Me.GVSummary.SortInfo.AddRange(New DevExpress.XtraGrid.Columns.GridColumnSortInfo() {New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.GridColumn2, DevExpress.Data.ColumnSortOrder.Ascending)})
         '
@@ -205,15 +150,88 @@ Partial Public Class ReportBalanceTaxSummary
         Me.GridColumn4.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
         Me.GridColumn4.FieldName = "balance"
         Me.GridColumn4.Name = "GridColumn4"
+        Me.GridColumn4.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "balance", "{0:N2}")})
         Me.GridColumn4.Visible = True
         Me.GridColumn4.VisibleIndex = 2
         '
-        'WinControlContainer1
+        'TopMargin
         '
-        Me.WinControlContainer1.LocationFloat = New DevExpress.Utils.PointFloat(0!, 10.00001!)
-        Me.WinControlContainer1.Name = "WinControlContainer1"
-        Me.WinControlContainer1.SizeF = New System.Drawing.SizeF(756.0!, 104.0!)
-        Me.WinControlContainer1.WinControl = Me.GCSummary
+        Me.TopMargin.HeightF = 50.0!
+        Me.TopMargin.Name = "TopMargin"
+        Me.TopMargin.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100.0!)
+        Me.TopMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
+        '
+        'BottomMargin
+        '
+        Me.BottomMargin.HeightF = 50.0!
+        Me.BottomMargin.Name = "BottomMargin"
+        Me.BottomMargin.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100.0!)
+        Me.BottomMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
+        '
+        'ReportHeader
+        '
+        Me.ReportHeader.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XLNumber, Me.XrPictureBox1, Me.XLPeriod, Me.XrLine1, Me.XLTitle})
+        Me.ReportHeader.HeightF = 156.2083!
+        Me.ReportHeader.Name = "ReportHeader"
+        '
+        'XLNumber
+        '
+        Me.XLNumber.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Bold)
+        Me.XLNumber.LocationFloat = New DevExpress.Utils.PointFloat(605.9999!, 0!)
+        Me.XLNumber.Multiline = True
+        Me.XLNumber.Name = "XLNumber"
+        Me.XLNumber.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XLNumber.SizeF = New System.Drawing.SizeF(150.0!, 23.0!)
+        Me.XLNumber.StylePriority.UseFont = False
+        Me.XLNumber.StylePriority.UseTextAlignment = False
+        Me.XLNumber.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
+        '
+        'XrPictureBox1
+        '
+        Me.XrPictureBox1.AnchorHorizontal = DevExpress.XtraReports.UI.HorizontalAnchorStyles.Left
+        Me.XrPictureBox1.Image = CType(resources.GetObject("XrPictureBox1.Image"), System.Drawing.Image)
+        Me.XrPictureBox1.LocationFloat = New DevExpress.Utils.PointFloat(0!, 0!)
+        Me.XrPictureBox1.Name = "XrPictureBox1"
+        Me.XrPictureBox1.SizeF = New System.Drawing.SizeF(250.0!, 45.0!)
+        Me.XrPictureBox1.Sizing = DevExpress.XtraPrinting.ImageSizeMode.StretchImage
+        '
+        'XLPeriod
+        '
+        Me.XLPeriod.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Bold)
+        Me.XLPeriod.LocationFloat = New DevExpress.Utils.PointFloat(0!, 98.20833!)
+        Me.XLPeriod.Multiline = True
+        Me.XLPeriod.Name = "XLPeriod"
+        Me.XLPeriod.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XLPeriod.SizeF = New System.Drawing.SizeF(756.0!, 23.0!)
+        Me.XLPeriod.StylePriority.UseFont = False
+        Me.XLPeriod.StylePriority.UseTextAlignment = False
+        Me.XLPeriod.Text = "PERIODE: [period_from] - [period_to]"
+        Me.XLPeriod.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
+        '
+        'XrLine1
+        '
+        Me.XrLine1.LocationFloat = New DevExpress.Utils.PointFloat(0!, 136.2083!)
+        Me.XrLine1.Name = "XrLine1"
+        Me.XrLine1.SizeF = New System.Drawing.SizeF(756.0!, 20.00001!)
+        '
+        'XLTitle
+        '
+        Me.XLTitle.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Bold)
+        Me.XLTitle.LocationFloat = New DevExpress.Utils.PointFloat(0!, 75.20831!)
+        Me.XLTitle.Multiline = True
+        Me.XLTitle.Name = "XLTitle"
+        Me.XLTitle.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.XLTitle.SizeF = New System.Drawing.SizeF(756.0!, 23.0!)
+        Me.XLTitle.StylePriority.UseFont = False
+        Me.XLTitle.StylePriority.UseTextAlignment = False
+        Me.XLTitle.Text = "REKAP PPH: FINAL, PASAL 23/26, PASAL 21 PROFESI, PPH DEVIDEN,  PPN LUAR NEGERI"
+        Me.XLTitle.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
+        '
+        'ReportFooter
+        '
+        Me.ReportFooter.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrTable1})
+        Me.ReportFooter.HeightF = 35.00001!
+        Me.ReportFooter.Name = "ReportFooter"
         '
         'XrTable1
         '
@@ -233,6 +251,7 @@ Partial Public Class ReportBalanceTaxSummary
         'XrTableCell13
         '
         Me.XrTableCell13.Font = New System.Drawing.Font("Tahoma", 9.75!)
+        Me.XrTableCell13.KeepTogether = True
         Me.XrTableCell13.Name = "XrTableCell13"
         Me.XrTableCell13.StylePriority.UseFont = False
         Me.XrTableCell13.Text = "Here Table Mark Goes, Please Ignore This"
@@ -258,8 +277,7 @@ Partial Public Class ReportBalanceTaxSummary
     Friend WithEvents ReportFooter As DevExpress.XtraReports.UI.ReportFooterBand
     Friend WithEvents XLTitle As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLine1 As DevExpress.XtraReports.UI.XRLine
-    Friend WithEvents XrLabel1 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel2 As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents XLPeriod As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents WinControlContainer1 As DevExpress.XtraReports.UI.WinControlContainer
     Friend WithEvents GCSummary As DevExpress.XtraGrid.GridControl
     Friend WithEvents GVSummary As DevExpress.XtraGrid.Views.Grid.GridView
@@ -271,4 +289,6 @@ Partial Public Class ReportBalanceTaxSummary
     Friend WithEvents XrTable1 As DevExpress.XtraReports.UI.XRTable
     Friend WithEvents XrTableRow1 As DevExpress.XtraReports.UI.XRTableRow
     Friend WithEvents XrTableCell13 As DevExpress.XtraReports.UI.XRTableCell
+    Friend WithEvents XLNumber As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents XrPictureBox1 As DevExpress.XtraReports.UI.XRPictureBox
 End Class

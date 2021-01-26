@@ -2,6 +2,8 @@
     Public id_propose As String = "-1"
     Public is_view As String = "-1"
 
+    Public is_insert_cool_storage As String = get_opt_prod_field("is_insert_cool_storage_ecop")
+
     Private Sub FormMasterDesignCOPPropose_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
         Dispose()
     End Sub
@@ -9,6 +11,14 @@
     Sub load_head()
         viewReportStatus()
         viewCOPType()
+
+        If is_insert_cool_storage Then
+            BGCStorageAfter.Visible = True
+            BGCStorageBefore.Visible = True
+        Else
+            BGCStorageAfter.Visible = False
+            BGCStorageBefore.Visible = False
+        End If
 
         If id_propose = "-1" Then
             'new

@@ -3,6 +3,7 @@
     Public id_comp As String = "-1"
     Public id_design As String = "-1"
     '
+    Public is_insert_cool_storage As String = get_opt_prod_field("is_insert_cool_storage_ecop")
     '
     Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles BtnCancel.Click
         Close()
@@ -12,8 +13,22 @@
         Dispose()
     End Sub
 
+    Sub load_cool_storage()
+        Dim q As String = "SELECT id_cool_storage,cool_storage FROM tb_lookup_cool_storage"
+        viewSearchLookupQuery(SLECoolStorage, q, "id_cool_storage", "cool_storage", "id_cool_storage")
+    End Sub
+
     Private Sub FormMasterDesignCOPPD_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         view_currency_grid()
+        load_cool_storage()
+
+        If is_insert_cool_storage = "1" Then
+            LStorage.Visible = True
+            SLECoolStorage.Visible = True
+        Else
+            LStorage.Visible = False
+            SLECoolStorage.Visible = False
+        End If
 
         Dim id_season As Integer = FormMasterDesignCOP.BGVDesign.GetFocusedRowCellValue("id_season")
 
@@ -31,7 +46,8 @@
         TEKurs.EditValue = FormMasterDesignCOP.BGVDesign.GetFocusedRowCellValue("prod_order_cop_kurs_pd")
         TEEcop.EditValue = FormMasterDesignCOP.BGVDesign.GetFocusedRowCellValue("prod_order_cop_pd") - FormMasterDesignCOP.BGVDesign.GetFocusedRowCellValue("prod_order_cop_pd_addcost")
         TEAdditionalCost.EditValue = FormMasterDesignCOP.BGVDesign.GetFocusedRowCellValue("prod_order_cop_pd_addcost")
-
+        '
+        SLECoolStorage.EditValue = FormMasterDesignCOP.BGVDesign.GetFocusedRowCellValue("is_cold_storage").ToString
         '
         LECurrency.EditValue = Nothing
         LECurrency.ItemIndex = LECurrency.Properties.GetDataSourceRowIndex("id_currency", FormMasterDesignCOP.BGVDesign.GetFocusedRowCellValue("prod_order_cop_pd_curr").ToString)
@@ -210,6 +226,12 @@ WHERE pd.`id_report_status` != '5' AND pdd.`id_design`='" & id_design & "' AND p
                 End If
                 query = String.Format("UPDATE tb_m_design SET prod_order_cop_pd='{1}',prod_order_cop_pd_addcost='{5}',prod_order_cop_kurs_pd='{2}',prod_order_cop_pd_vendor={3},prod_order_cop_pd_curr='{4}' WHERE id_design='{0}'", id_design, decimalSQL((TEEcop.EditValue + TEAdditionalCost.EditValue).ToString), decimalSQL(TEKurs.EditValue.ToString), id_c, LECurrency.EditValue.ToString, decimalSQL(TEAdditionalCost.EditValue.ToString))
                 execute_non_query(query, True, "", "", "", "")
+
+                If is_insert_cool_storage = "1" Then
+                    query = "UPDATE tb_m_design SET is_cold_storage='" & SLECoolStorage.EditValue.ToString & "' WHERE id_design='" & SLECoolStorage.EditValue.ToString & "'"
+                    execute_non_query(query, True, "", "", "", "")
+                End If
+
                 infoCustom("ECOP entry success.")
 
                 'send email
@@ -396,6 +418,11 @@ WHERE pd.`id_report_status` != '5' AND pdd.`id_design`='" & id_design & "' AND p
                 'header
                 query += String.Format(";UPDATE tb_m_design SET prod_order_cop_pd='{1}',prod_order_cop_pd_addcost='{5}',prod_order_cop_kurs_pd='{2}',prod_order_cop_pd_vendor={3},prod_order_cop_pd_curr='{4}' WHERE id_design='{0}'", id_design, decimalSQL((cop_non_additional + additional).ToString), decimalSQL(TETodayKurs.EditValue.ToString), id_c, curr, decimalSQL(additional.ToString))
                 execute_non_query(query, True, "", "", "", "")
+
+                If is_insert_cool_storage = "1" Then
+                    query = "UPDATE tb_m_design SET is_cold_storage='" & SLECoolStorage.EditValue.ToString & "' WHERE id_design='" & SLECoolStorage.EditValue.ToString & "'"
+                    execute_non_query(query, True, "", "", "", "")
+                End If
 
                 Dim confirm As DialogResult = DevExpress.XtraEditors.XtraMessageBox.Show("ECOP updated. You want to send notification mail ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)
                 If confirm = Windows.Forms.DialogResult.Yes Then

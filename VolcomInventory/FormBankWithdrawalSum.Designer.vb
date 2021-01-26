@@ -47,6 +47,7 @@ Partial Class FormBankWithdrawalSum
         Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.MENote = New DevExpress.XtraEditors.MemoEdit()
         Me.PanelControl7 = New DevExpress.XtraEditors.PanelControl()
+        Me.BAttachmentMutasi = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnAttachment = New DevExpress.XtraEditors.SimpleButton()
         Me.BRelease = New DevExpress.XtraEditors.SimpleButton()
         Me.BtnViewJournal = New DevExpress.XtraEditors.SimpleButton()
@@ -57,6 +58,7 @@ Partial Class FormBankWithdrawalSum
         Me.GCList = New DevExpress.XtraGrid.GridControl()
         Me.ViewMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.CMChangeDate = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TolakToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GVList = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GCCheck = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.RICECheck = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
@@ -379,6 +381,7 @@ Partial Class FormBankWithdrawalSum
         '
         'PanelControl7
         '
+        Me.PanelControl7.Controls.Add(Me.BAttachmentMutasi)
         Me.PanelControl7.Controls.Add(Me.BtnAttachment)
         Me.PanelControl7.Controls.Add(Me.BRelease)
         Me.PanelControl7.Controls.Add(Me.BtnViewJournal)
@@ -391,6 +394,18 @@ Partial Class FormBankWithdrawalSum
         Me.PanelControl7.Name = "PanelControl7"
         Me.PanelControl7.Size = New System.Drawing.Size(936, 48)
         Me.PanelControl7.TabIndex = 4
+        '
+        'BAttachmentMutasi
+        '
+        Me.BAttachmentMutasi.Dock = System.Windows.Forms.DockStyle.Right
+        Me.BAttachmentMutasi.Image = CType(resources.GetObject("BAttachmentMutasi.Image"), System.Drawing.Image)
+        Me.BAttachmentMutasi.ImageIndex = 16
+        Me.BAttachmentMutasi.Location = New System.Drawing.Point(298, 2)
+        Me.BAttachmentMutasi.Name = "BAttachmentMutasi"
+        Me.BAttachmentMutasi.Size = New System.Drawing.Size(142, 44)
+        Me.BAttachmentMutasi.TabIndex = 23
+        Me.BAttachmentMutasi.TabStop = False
+        Me.BAttachmentMutasi.Text = "Attachment Mutasi"
         '
         'BtnAttachment
         '
@@ -411,10 +426,10 @@ Partial Class FormBankWithdrawalSum
         Me.BRelease.ImageIndex = 4
         Me.BRelease.Location = New System.Drawing.Point(127, 2)
         Me.BRelease.Name = "BRelease"
-        Me.BRelease.Size = New System.Drawing.Size(125, 44)
+        Me.BRelease.Size = New System.Drawing.Size(145, 44)
         Me.BRelease.TabIndex = 21
         Me.BRelease.TabStop = False
-        Me.BRelease.Text = "Release"
+        Me.BRelease.Text = "Complete Summary"
         Me.BRelease.Visible = False
         '
         'BtnViewJournal
@@ -491,9 +506,9 @@ Partial Class FormBankWithdrawalSum
         '
         'ViewMenu
         '
-        Me.ViewMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CMChangeDate})
+        Me.ViewMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CMChangeDate, Me.TolakToolStripMenuItem})
         Me.ViewMenu.Name = "ContextMenuStripYM"
-        Me.ViewMenu.Size = New System.Drawing.Size(143, 26)
+        Me.ViewMenu.Size = New System.Drawing.Size(143, 48)
         '
         'CMChangeDate
         '
@@ -501,12 +516,19 @@ Partial Class FormBankWithdrawalSum
         Me.CMChangeDate.Size = New System.Drawing.Size(142, 22)
         Me.CMChangeDate.Text = "Change Date"
         '
+        'TolakToolStripMenuItem
+        '
+        Me.TolakToolStripMenuItem.Name = "TolakToolStripMenuItem"
+        Me.TolakToolStripMenuItem.Size = New System.Drawing.Size(142, 22)
+        Me.TolakToolStripMenuItem.Text = "Tolakan"
+        '
         'GVList
         '
         Me.GVList.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GCCheck, Me.GridColumn8, Me.GridColumn9, Me.GridColumn20, Me.GridColumn18, Me.GridColumn21, Me.GridColumn7, Me.GridColumn10, Me.GridColumn4, Me.GridColumn100, Me.GridColumn5, Me.GridColumn6})
         Me.GVList.GridControl = Me.GCList
         Me.GVList.Name = "GVList"
         Me.GVList.OptionsBehavior.AutoExpandAllGroups = True
+        Me.GVList.OptionsSelection.EnableAppearanceFocusedRow = False
         Me.GVList.OptionsView.ColumnAutoWidth = False
         Me.GVList.OptionsView.ShowFooter = True
         Me.GVList.OptionsView.ShowGroupPanel = False
@@ -605,6 +627,8 @@ Partial Class FormBankWithdrawalSum
         Me.GridColumn4.Caption = "Status"
         Me.GridColumn4.FieldName = "report_status"
         Me.GridColumn4.Name = "GridColumn4"
+        Me.GridColumn4.OptionsColumn.AllowEdit = False
+        Me.GridColumn4.OptionsColumn.ReadOnly = True
         Me.GridColumn4.Visible = True
         Me.GridColumn4.VisibleIndex = 7
         '
@@ -816,4 +840,6 @@ Partial Class FormBankWithdrawalSum
     Friend WithEvents GridColumn12 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents XTCBBKSummary As DevExpress.XtraTab.XtraTabControl
     Friend WithEvents XTPSummary As DevExpress.XtraTab.XtraTabPage
+    Friend WithEvents BAttachmentMutasi As DevExpress.XtraEditors.SimpleButton
+    Friend WithEvents TolakToolStripMenuItem As ToolStripMenuItem
 End Class

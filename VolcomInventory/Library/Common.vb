@@ -5867,10 +5867,14 @@ SELECT id_bill_type,bill_type FROM tb_lookup_bill_type WHERE is_active='1'"
     Sub pushNotifFromDb(ByVal id_report As String, ByVal rmt As String)
         Dim q As String = ""
 
-        If rmt = "222" Then
+        If rmt = "222" Then 'debit note
             q = "SELECT 'Need Debit Note, QC Report Completed' AS title,'FormDebitNote' AS form_name,CONCAT('Need Debit Note, QC Report ',fcs.`number`,' Completed') AS description, nu.id_user , fcs.`number` AS report_number
 FROM tb_notif_user nu
 INNER JOIN tb_prod_fc_sum fcs ON fcs.`id_prod_fc_sum`='" & id_report & "' AND nu.`report_mark_type`='222'"
+        ElseIf rmt = "201" Then 'PR Fixed Asset
+            q = "SELECT 'Need PR Fixed Asset to Verify by IC' AS title,'FormPurcReqList' AS form_name,CONCAT('Need PR Fixed Asset (',fcs.`purc_req_number`,') to Verify by IC ') AS description, nu.id_user , fcs.`purc_req_number` AS report_number
+FROM tb_notif_user nu
+INNER JOIN tb_purc_req fcs ON fcs.`id_purc_req`='" & id_report & "' AND nu.`report_mark_type`='201'"
         End If
 
         Dim dt As DataTable = execute_query(q, -1, True, "", "", "", "")
@@ -7143,6 +7147,16 @@ INNER JOIN tb_prod_fc_sum fcs ON fcs.`id_prod_fc_sum`='" & id_report & "' AND nu
                 FormDebitNote.Show()
                 FormDebitNote.WindowState = FormWindowState.Maximized
                 FormDebitNote.Focus()
+            Catch ex As Exception
+                errorProcess()
+            End Try
+        ElseIf form_par = "FormPurcReqList" Then
+            'Purc Request fix Asset
+            Try
+                FormPurcReqList.MdiParent = FormMain
+                FormPurcReqList.Show()
+                FormPurcReqList.WindowState = FormWindowState.Maximized
+                FormPurcReqList.Focus()
             Catch ex As Exception
                 errorProcess()
             End Try

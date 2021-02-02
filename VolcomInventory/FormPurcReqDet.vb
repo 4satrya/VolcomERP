@@ -542,6 +542,9 @@ SELECT id_comp,comp_number,comp_name,address_primary FROM `tb_m_comp` WHERE is_a
                 Dim query_upd As String = "UPDATE tb_purc_req SET is_submit='1' WHERE id_purc_req='" & id_req & "'"
                 execute_non_query(query_upd, True, "", "", "", "")
                 submit_who_prepared_pr("201", id_req, id_user_created, id_departement)
+                'notifikasi to IC
+                pushNotifFromDb(id_req, "201")
+                '
                 infoCustom("Form Submitted")
                 load_form()
                 'If is_ic_ia = "1" Then

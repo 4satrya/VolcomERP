@@ -72,11 +72,12 @@ Partial Public Class ReportPurcReq
         Me.XrLabel10 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel8 = New DevExpress.XtraReports.UI.XRLabel()
         Me.ReportFooter = New DevExpress.XtraReports.UI.ReportFooterBand()
+        Me.XrPanel1 = New DevExpress.XtraReports.UI.XRPanel()
         Me.LNote = New DevExpress.XtraReports.UI.XRLabel()
+        Me.XrLabel14 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrTable1 = New DevExpress.XtraReports.UI.XRTable()
         Me.XrTableRow1 = New DevExpress.XtraReports.UI.XRTableRow()
         Me.XrTableCell1 = New DevExpress.XtraReports.UI.XRTableCell()
-        Me.XrLabel14 = New DevExpress.XtraReports.UI.XRLabel()
         Me.PageFooter = New DevExpress.XtraReports.UI.PageFooterBand()
         CType(Me.GCItemList, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVItemList, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -337,7 +338,7 @@ Partial Public Class ReportPurcReq
         'TopMargin
         '
         Me.TopMargin.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLine1, Me.XrLabel7, Me.XrPictureBox1})
-        Me.TopMargin.HeightF = 65.45837!
+        Me.TopMargin.HeightF = 65.45836!
         Me.TopMargin.Name = "TopMargin"
         Me.TopMargin.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100.0!)
         Me.TopMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
@@ -613,19 +614,29 @@ Partial Public Class ReportPurcReq
         '
         'ReportFooter
         '
-        Me.ReportFooter.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.LNote, Me.XrTable1, Me.XrLabel14})
-        Me.ReportFooter.HeightF = 106.6667!
+        Me.ReportFooter.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrPanel1, Me.XrTable1})
+        Me.ReportFooter.HeightF = 90.38461!
         Me.ReportFooter.Name = "ReportFooter"
+        '
+        'XrPanel1
+        '
+        Me.XrPanel1.Borders = CType((((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Top) _
+            Or DevExpress.XtraPrinting.BorderSide.Right) _
+            Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
+        Me.XrPanel1.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.LNote, Me.XrLabel14})
+        Me.XrPanel1.LocationFloat = New DevExpress.Utils.PointFloat(0!, 0!)
+        Me.XrPanel1.Name = "XrPanel1"
+        Me.XrPanel1.SizeF = New System.Drawing.SizeF(736.9995!, 65.38461!)
+        Me.XrPanel1.StylePriority.UseBorders = False
         '
         'LNote
         '
-        Me.LNote.Borders = CType(((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Top) _
-            Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
+        Me.LNote.Borders = DevExpress.XtraPrinting.BorderSide.None
         Me.LNote.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LNote.LocationFloat = New DevExpress.Utils.PointFloat(0.00006357829!, 0!)
+        Me.LNote.LocationFloat = New DevExpress.Utils.PointFloat(3.000021!, 2.999994!)
         Me.LNote.Name = "LNote"
-        Me.LNote.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 2, 2, 100.0!)
-        Me.LNote.SizeF = New System.Drawing.SizeF(108.3331!, 81.66673!)
+        Me.LNote.Padding = New DevExpress.XtraPrinting.PaddingInfo(5, 5, 5, 5, 100.0!)
+        Me.LNote.SizeF = New System.Drawing.SizeF(74.08308!, 57.83338!)
         Me.LNote.StylePriority.UseBorders = False
         Me.LNote.StylePriority.UseFont = False
         Me.LNote.StylePriority.UsePadding = False
@@ -633,10 +644,26 @@ Partial Public Class ReportPurcReq
         Me.LNote.Text = "Special Instruction :"
         Me.LNote.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
         '
+        'XrLabel14
+        '
+        Me.XrLabel14.Borders = DevExpress.XtraPrinting.BorderSide.None
+        Me.XrLabel14.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.XrLabel14.LocationFloat = New DevExpress.Utils.PointFloat(77.08308!, 2.999994!)
+        Me.XrLabel14.Multiline = True
+        Me.XrLabel14.Name = "XrLabel14"
+        Me.XrLabel14.Padding = New DevExpress.XtraPrinting.PaddingInfo(5, 5, 5, 5, 100.0!)
+        Me.XrLabel14.SizeF = New System.Drawing.SizeF(649.9164!, 57.83337!)
+        Me.XrLabel14.StylePriority.UseBorders = False
+        Me.XrLabel14.StylePriority.UseFont = False
+        Me.XrLabel14.StylePriority.UsePadding = False
+        Me.XrLabel14.StylePriority.UseTextAlignment = False
+        Me.XrLabel14.Text = "[note]"
+        Me.XrLabel14.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
+        '
         'XrTable1
         '
         Me.XrTable1.Font = New System.Drawing.Font("Consolas", 8.0!)
-        Me.XrTable1.LocationFloat = New DevExpress.Utils.PointFloat(0.00006357829!, 81.66669!)
+        Me.XrTable1.LocationFloat = New DevExpress.Utils.PointFloat(0.0004890637!, 65.38461!)
         Me.XrTable1.Name = "XrTable1"
         Me.XrTable1.Rows.AddRange(New DevExpress.XtraReports.UI.XRTableRow() {Me.XrTableRow1})
         Me.XrTable1.SizeF = New System.Drawing.SizeF(736.9995!, 25.0!)
@@ -657,23 +684,6 @@ Partial Public Class ReportPurcReq
         Me.XrTableCell1.Visible = False
         Me.XrTableCell1.Weight = 2.99999986405489R
         '
-        'XrLabel14
-        '
-        Me.XrLabel14.Borders = CType(((DevExpress.XtraPrinting.BorderSide.Top Or DevExpress.XtraPrinting.BorderSide.Right) _
-            Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
-        Me.XrLabel14.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.XrLabel14.LocationFloat = New DevExpress.Utils.PointFloat(108.3331!, 0!)
-        Me.XrLabel14.Multiline = True
-        Me.XrLabel14.Name = "XrLabel14"
-        Me.XrLabel14.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 2, 2, 100.0!)
-        Me.XrLabel14.SizeF = New System.Drawing.SizeF(628.6664!, 81.66672!)
-        Me.XrLabel14.StylePriority.UseBorders = False
-        Me.XrLabel14.StylePriority.UseFont = False
-        Me.XrLabel14.StylePriority.UsePadding = False
-        Me.XrLabel14.StylePriority.UseTextAlignment = False
-        Me.XrLabel14.Text = "[note]"
-        Me.XrLabel14.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
-        '
         'PageFooter
         '
         Me.PageFooter.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrPageInfo1})
@@ -683,7 +693,7 @@ Partial Public Class ReportPurcReq
         'ReportPurcReq
         '
         Me.Bands.AddRange(New DevExpress.XtraReports.UI.Band() {Me.Detail, Me.TopMargin, Me.BottomMargin, Me.ReportHeader, Me.ReportFooter, Me.PageFooter})
-        Me.Margins = New System.Drawing.Printing.Margins(25, 65, 65, 20)
+        Me.Margins = New System.Drawing.Printing.Margins(25, 64, 65, 20)
         Me.PageHeight = 1169
         Me.PageWidth = 827
         Me.PaperKind = System.Drawing.Printing.PaperKind.A4
@@ -759,4 +769,5 @@ Partial Public Class ReportPurcReq
     Friend WithEvents GridColumn6 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumn7 As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents PageFooter As DevExpress.XtraReports.UI.PageFooterBand
+    Friend WithEvents XrPanel1 As DevExpress.XtraReports.UI.XRPanel
 End Class

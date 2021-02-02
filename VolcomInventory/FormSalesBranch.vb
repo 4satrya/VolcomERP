@@ -125,23 +125,24 @@
         'minimum date
         Dim query_closing As String = "SELECT DATE_FORMAT(l.date_until,'%Y-%m-%d') AS `closing_date` FROM tb_closing_log l WHERE l.note='Closing End' ORDER BY l.id DESC LIMIT 1 "
         Dim closing_date As String = execute_query(query_closing, 0, True, "", "", "", "")
-        Dim query As String = "SELECT m.id_sales_branch, m.number, m.transaction_date
-        FROM (
-	        SELECT d.id_sales_branch_det, d.value-IFNULL(cn.amount_cn,0.00) AS `amount_limit`, m.id_sales_branch, m.number, m.transaction_date, m.id_coa_tag
-	        FROM tb_sales_branch_det d
-	        INNER JOIN tb_sales_branch m ON m.id_sales_branch = d.id_sales_branch
-	        LEFT JOIN (
-		        SELECT d.id_sales_branch_ref_det, SUM(d.value) AS `amount_cn`
-		        FROM tb_sales_branch_det d
-		        INNER JOIN tb_sales_branch m ON m.id_sales_branch = d.id_sales_branch
-		        WHERE m.id_report_status!=5 
-		        GROUP BY d.id_sales_branch_ref_det
-	        ) cn ON cn.id_sales_branch_ref_det = d.id_sales_branch_det
-	        WHERE m.id_report_status=6 AND m.report_mark_type=254 AND d.is_close=2 
-	        HAVING amount_limit>0
-        ) m
-        WHERE m.transaction_date>'" + closing_date + "' AND m.id_coa_tag='" + SLEUnit.EditValue.ToString + "'
-        GROUP BY m.id_sales_branch "
+        Dim query As String = "SELECT 'No' AS `is_select`,d.id_sales_branch_det, d.id_acc, coa.acc_name AS `coa_account`, coa.acc_description AS `coa_description`,
+        (d.value-IFNULL(cn.amount_cn,0.00)) AS `amount_limit`, (SELECT amount_limit) AS `value`,
+        m.id_sales_branch, m.number, m.transaction_date, m.id_coa_tag
+        FROM tb_sales_branch_det d
+        INNER JOIN tb_sales_branch m ON m.id_sales_branch = d.id_sales_branch
+        LEFT JOIN (
+          SELECT d.id_sales_branch_ref_det, SUM(d.value) AS `amount_cn`
+          FROM tb_sales_branch_det d
+          INNER JOIN tb_sales_branch m ON m.id_sales_branch = d.id_sales_branch
+          WHERE m.id_report_status!=5 
+          GROUP BY d.id_sales_branch_ref_det
+        ) cn ON cn.id_sales_branch_ref_det = d.id_sales_branch_det
+        INNER JOIN tb_sales_branch_coa_exclude_bbm ex ON ex.id_acc = d.id_acc
+        INNER JOIN tb_a_acc coa ON coa.id_acc = d.id_acc
+        INNER JOIN tb_lookup_dc dc ON dc.id_dc = d.id_dc
+        LEFT JOIN tb_m_comp c ON c.id_comp = d.id_comp
+        WHERE m.id_report_status=6 AND m.report_mark_type=254 AND ex.is_show_cancel_sales=1 AND d.is_close=2  AND m.id_coa_tag='" + SLEUnit.EditValue.ToString + "'
+        HAVING amount_limit>0 "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCSales.DataSource = data
         GVSales.BestFitColumns()
@@ -153,19 +154,33 @@
 
     Private Sub BCreateCN_Click(sender As Object, e As EventArgs) Handles BCreateCN.Click
         Cursor = Cursors.WaitCursor
+        GVSales.ActiveFilterString = "[is_select]='Yes' "
 
-        'cek pending
-        Dim id_ref As String = GVSales.GetFocusedRowCellValue("id_sales_branch").ToString
-        Dim qcek As String = "SELECT * FROM tb_sales_branch b WHERE b.id_sales_branch_ref='" + id_ref + "' AND b.id_report_status<5 "
-        Dim dcek As DataTable = execute_query(qcek, -1, True, "", "", "", "")
-        If dcek.Rows.Count > 0 Then
-            warningCustom("Please complete all pending document for : " + GVSales.GetFocusedRowCellValue("number").ToString)
+        If GVSales.RowCount > 0 Then
+            'cek pending
+            Dim id_ref_in As String = ""
+            For s As Integer = 0 To GVSales.RowCount - 1
+                If s > 0 Then
+                    id_ref_in += ","
+                End If
+                id_ref_in += GVSales.GetRowCellValue(s, "id_sales_branch_det").ToString
+            Next
+            Dim qcek As String = "SELECT * FROM tb_sales_branch b 
+            INNER JOIN tb_sales_branch_det d ON d.id_sales_branch = b.id_sales_branch
+            WHERE d.id_sales_branch_ref_det IN(" + id_ref_in + ") AND b.id_report_status<5 "
+            Dim dcek As DataTable = execute_query(qcek, -1, True, "", "", "", "")
+            If dcek.Rows.Count > 0 Then
+                warningCustom("Please complete all pending document for related items ")
+            Else
+                'FormSalesBranchDet.id_sales_branch_ref = "-1"
+                FormSalesBranchDet.rmt = "256"
+                FormSalesBranchDet.action = "ins"
+                FormSalesBranchDet.ShowDialog()
+            End If
         Else
-            FormSalesBranchDet.id_sales_branch_ref = id_ref
-            FormSalesBranchDet.rmt = "256"
-            FormSalesBranchDet.action = "ins"
-            FormSalesBranchDet.ShowDialog()
+            stopCustom("No item selected")
         End If
+        GVSales.ActiveFilterString = ""
         Cursor = Cursors.Default
     End Sub
 End Class

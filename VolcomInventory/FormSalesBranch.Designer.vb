@@ -31,6 +31,7 @@ Partial Class FormSalesBranch
         Me.GridColumnnote = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnvalue = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumnnumber = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumndue_date = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.PanelControl2 = New DevExpress.XtraEditors.PanelControl()
         Me.DEUntilList = New DevExpress.XtraEditors.DateEdit()
         Me.DEFromList = New DevExpress.XtraEditors.DateEdit()
@@ -58,7 +59,13 @@ Partial Class FormSalesBranch
         Me.GridColumn2 = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.GridColumncoa_tag = New DevExpress.XtraGrid.Columns.GridColumn()
         Me.LabelControl2 = New DevExpress.XtraEditors.LabelControl()
-        Me.GridColumndue_date = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnid_sales_branch_det = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnid_acc = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumncoa_account = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumncoa_description = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnamount_limit = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.GridColumnis_select = New DevExpress.XtraGrid.Columns.GridColumn()
+        Me.RepositoryItemCheckEdit1 = New DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit()
         CType(Me.GCData, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GVData, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PanelControl2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -79,6 +86,7 @@ Partial Class FormSalesBranch
         Me.PanelControl1.SuspendLayout()
         CType(Me.SLEUnit.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GCData
@@ -183,6 +191,16 @@ Partial Class FormSalesBranch
         Me.GridColumnnumber.Name = "GridColumnnumber"
         Me.GridColumnnumber.Visible = True
         Me.GridColumnnumber.VisibleIndex = 0
+        '
+        'GridColumndue_date
+        '
+        Me.GridColumndue_date.Caption = "Due Date"
+        Me.GridColumndue_date.DisplayFormat.FormatString = "dd MMMM yyyy"
+        Me.GridColumndue_date.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
+        Me.GridColumndue_date.FieldName = "due_date"
+        Me.GridColumndue_date.Name = "GridColumndue_date"
+        Me.GridColumndue_date.Visible = True
+        Me.GridColumndue_date.VisibleIndex = 4
         '
         'PanelControl2
         '
@@ -325,35 +343,42 @@ Partial Class FormSalesBranch
         Me.GCSales.Location = New System.Drawing.Point(0, 48)
         Me.GCSales.MainView = Me.GVSales
         Me.GCSales.Name = "GCSales"
+        Me.GCSales.RepositoryItems.AddRange(New DevExpress.XtraEditors.Repository.RepositoryItem() {Me.RepositoryItemCheckEdit1})
         Me.GCSales.Size = New System.Drawing.Size(782, 388)
         Me.GCSales.TabIndex = 20
         Me.GCSales.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GVSales})
         '
         'GVSales
         '
-        Me.GVSales.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnid_sales_branch_cn, Me.GridColumnnumber_cn, Me.GridColumntransaction_date_cn})
+        Me.GVSales.Columns.AddRange(New DevExpress.XtraGrid.Columns.GridColumn() {Me.GridColumnid_sales_branch_cn, Me.GridColumnnumber_cn, Me.GridColumntransaction_date_cn, Me.GridColumnid_sales_branch_det, Me.GridColumnid_acc, Me.GridColumncoa_account, Me.GridColumncoa_description, Me.GridColumnamount_limit, Me.GridColumnis_select})
         Me.GVSales.GridControl = Me.GCSales
+        Me.GVSales.GroupCount = 1
         Me.GVSales.Name = "GVSales"
         Me.GVSales.OptionsBehavior.AutoExpandAllGroups = True
-        Me.GVSales.OptionsBehavior.Editable = False
         Me.GVSales.OptionsFind.AlwaysVisible = True
         Me.GVSales.OptionsView.ColumnAutoWidth = False
         Me.GVSales.OptionsView.ShowFooter = True
+        Me.GVSales.OptionsView.ShowGroupedColumns = True
         Me.GVSales.OptionsView.ShowGroupPanel = False
+        Me.GVSales.SortInfo.AddRange(New DevExpress.XtraGrid.Columns.GridColumnSortInfo() {New DevExpress.XtraGrid.Columns.GridColumnSortInfo(Me.GridColumnnumber_cn, DevExpress.Data.ColumnSortOrder.Ascending)})
         '
         'GridColumnid_sales_branch_cn
         '
         Me.GridColumnid_sales_branch_cn.Caption = "id_sales_branch"
         Me.GridColumnid_sales_branch_cn.FieldName = "id_sales_branch"
         Me.GridColumnid_sales_branch_cn.Name = "GridColumnid_sales_branch_cn"
+        Me.GridColumnid_sales_branch_cn.OptionsColumn.AllowEdit = False
+        Me.GridColumnid_sales_branch_cn.OptionsColumn.AllowFocus = False
         '
         'GridColumnnumber_cn
         '
         Me.GridColumnnumber_cn.Caption = "Number"
         Me.GridColumnnumber_cn.FieldName = "number"
         Me.GridColumnnumber_cn.Name = "GridColumnnumber_cn"
+        Me.GridColumnnumber_cn.OptionsColumn.AllowEdit = False
+        Me.GridColumnnumber_cn.OptionsColumn.AllowFocus = False
         Me.GridColumnnumber_cn.Visible = True
-        Me.GridColumnnumber_cn.VisibleIndex = 0
+        Me.GridColumnnumber_cn.VisibleIndex = 1
         '
         'GridColumntransaction_date_cn
         '
@@ -362,8 +387,10 @@ Partial Class FormSalesBranch
         Me.GridColumntransaction_date_cn.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
         Me.GridColumntransaction_date_cn.FieldName = "transaction_date"
         Me.GridColumntransaction_date_cn.Name = "GridColumntransaction_date_cn"
+        Me.GridColumntransaction_date_cn.OptionsColumn.AllowEdit = False
+        Me.GridColumntransaction_date_cn.OptionsColumn.AllowFocus = False
         Me.GridColumntransaction_date_cn.Visible = True
-        Me.GridColumntransaction_date_cn.VisibleIndex = 1
+        Me.GridColumntransaction_date_cn.VisibleIndex = 2
         Me.GridColumntransaction_date_cn.Width = 172
         '
         'BCreateCN
@@ -444,15 +471,67 @@ Partial Class FormSalesBranch
         Me.LabelControl2.TabIndex = 8915
         Me.LabelControl2.Text = "Unit"
         '
-        'GridColumndue_date
+        'GridColumnid_sales_branch_det
         '
-        Me.GridColumndue_date.Caption = "Due Date"
-        Me.GridColumndue_date.DisplayFormat.FormatString = "dd MMMM yyyy"
-        Me.GridColumndue_date.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime
-        Me.GridColumndue_date.FieldName = "due_date"
-        Me.GridColumndue_date.Name = "GridColumndue_date"
-        Me.GridColumndue_date.Visible = True
-        Me.GridColumndue_date.VisibleIndex = 4
+        Me.GridColumnid_sales_branch_det.Caption = "id_sales_branch_det"
+        Me.GridColumnid_sales_branch_det.FieldName = "id_sales_branch_det"
+        Me.GridColumnid_sales_branch_det.Name = "GridColumnid_sales_branch_det"
+        Me.GridColumnid_sales_branch_det.OptionsColumn.AllowFocus = False
+        '
+        'GridColumnid_acc
+        '
+        Me.GridColumnid_acc.Caption = "id_acc"
+        Me.GridColumnid_acc.FieldName = "id_acc"
+        Me.GridColumnid_acc.Name = "GridColumnid_acc"
+        Me.GridColumnid_acc.OptionsColumn.AllowFocus = False
+        '
+        'GridColumncoa_account
+        '
+        Me.GridColumncoa_account.Caption = "Account"
+        Me.GridColumncoa_account.FieldName = "coa_account"
+        Me.GridColumncoa_account.Name = "GridColumncoa_account"
+        Me.GridColumncoa_account.OptionsColumn.AllowFocus = False
+        Me.GridColumncoa_account.Visible = True
+        Me.GridColumncoa_account.VisibleIndex = 3
+        '
+        'GridColumncoa_description
+        '
+        Me.GridColumncoa_description.Caption = "Acc. Description"
+        Me.GridColumncoa_description.FieldName = "coa_description"
+        Me.GridColumncoa_description.Name = "GridColumncoa_description"
+        Me.GridColumncoa_description.OptionsColumn.AllowFocus = False
+        Me.GridColumncoa_description.Visible = True
+        Me.GridColumncoa_description.VisibleIndex = 4
+        Me.GridColumncoa_description.Width = 116
+        '
+        'GridColumnamount_limit
+        '
+        Me.GridColumnamount_limit.Caption = "Remaining Amount"
+        Me.GridColumnamount_limit.DisplayFormat.FormatString = "N2"
+        Me.GridColumnamount_limit.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric
+        Me.GridColumnamount_limit.FieldName = "amount_limit"
+        Me.GridColumnamount_limit.Name = "GridColumnamount_limit"
+        Me.GridColumnamount_limit.OptionsColumn.AllowFocus = False
+        Me.GridColumnamount_limit.Summary.AddRange(New DevExpress.XtraGrid.GridSummaryItem() {New DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "amount_limit", "{0:N2}")})
+        Me.GridColumnamount_limit.Visible = True
+        Me.GridColumnamount_limit.VisibleIndex = 5
+        Me.GridColumnamount_limit.Width = 184
+        '
+        'GridColumnis_select
+        '
+        Me.GridColumnis_select.Caption = "Select"
+        Me.GridColumnis_select.ColumnEdit = Me.RepositoryItemCheckEdit1
+        Me.GridColumnis_select.FieldName = "is_select"
+        Me.GridColumnis_select.Name = "GridColumnis_select"
+        Me.GridColumnis_select.Visible = True
+        Me.GridColumnis_select.VisibleIndex = 0
+        '
+        'RepositoryItemCheckEdit1
+        '
+        Me.RepositoryItemCheckEdit1.AutoHeight = False
+        Me.RepositoryItemCheckEdit1.Name = "RepositoryItemCheckEdit1"
+        Me.RepositoryItemCheckEdit1.ValueChecked = "Yes"
+        Me.RepositoryItemCheckEdit1.ValueUnchecked = "No"
         '
         'FormSalesBranch
         '
@@ -486,6 +565,7 @@ Partial Class FormSalesBranch
         Me.PanelControl1.PerformLayout()
         CType(Me.SLEUnit.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GridView2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RepositoryItemCheckEdit1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -530,4 +610,11 @@ Partial Class FormSalesBranch
     Friend WithEvents GridColumnnumber_cn As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumntransaction_date_cn As DevExpress.XtraGrid.Columns.GridColumn
     Friend WithEvents GridColumndue_date As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnid_sales_branch_det As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnid_acc As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumncoa_account As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumncoa_description As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnamount_limit As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents GridColumnis_select As DevExpress.XtraGrid.Columns.GridColumn
+    Friend WithEvents RepositoryItemCheckEdit1 As DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
 End Class

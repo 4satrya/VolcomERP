@@ -7,7 +7,7 @@ Public Class FormSalesBranchDet
     Public id_report_status As String = "1"
     Public is_view As String = "-1"
     Public id_memo_type As String = "1"
-    Public id_sales_branch_ref As String = "-1"
+    ' Public id_sales_branch_ref As String = "-1"
 
     Private Sub FormSalesBranchDet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'general
@@ -142,7 +142,8 @@ Public Class FormSalesBranchDet
                 id_memo_type = "2"
                 SLEUnit.EditValue = FormSalesBranch.SLEUnit.EditValue.ToString
                 SLEUnit.Enabled = False
-                TxtNumberRef.Text = FormSalesBranch.GVSales.GetFocusedRowCellValue("number").ToString
+                'TxtNumberRef.Text = FormSalesBranch.GVSales.GetFocusedRowCellValue("number").ToString
+                TxtNumberRef.Text = ""
                 BtnAdd.Visible = False
                 GridColumnvalue.OptionsColumn.ReadOnly = False
                 viewDetailCN()
@@ -198,7 +199,7 @@ Public Class FormSalesBranchDet
 
             rmt = data.Rows(0)("report_mark_type").ToString
             id_memo_type = data.Rows(0)("id_memo_type").ToString
-            id_sales_branch_ref = data.Rows(0)("id_sales_branch_ref").ToString
+            'id_sales_branch_ref = data.Rows(0)("id_sales_branch_ref").ToString
 
 
             'detail
@@ -253,6 +254,15 @@ Public Class FormSalesBranchDet
 
     Sub viewDetailCN()
         Cursor = Cursors.WaitCursor
+        Dim id_ref_in As String = ""
+        For s As Integer = 0 To FormSalesBranch.GVSales.RowCount - 1
+            If s > 0 Then
+                id_ref_in += ","
+            End If
+            id_ref_in += FormSalesBranch.GVSales.GetRowCellValue(s, "id_sales_branch_det").ToString
+        Next
+        'AND m.id_sales_branch_ref=" + id_sales_branch_ref + "
+        'AND d.id_report=" + id_sales_branch_ref + "
         Dim query As String = "SELECT 0 AS `id_sales_branch_det`, d.id_sales_branch_det AS `id_sales_branch_ref_det`, 0 AS `id_sales_branch`,
         d.id_acc, coa.acc_name AS `coa_account`, coa.acc_description AS `coa_description`,
         IF(d.id_dc=1,2,IF(d.id_dc=2,1,0)) AS `id_dc`, IF(d.id_dc=1,'K',IF(d.id_dc=2,'D','-')) AS `dc_code`,
@@ -265,19 +275,19 @@ Public Class FormSalesBranchDet
            SELECT d.id_sales_branch_ref_det, SUM(d.value) AS `amount_cn`
            FROM tb_sales_branch_det d
            INNER JOIN tb_sales_branch m ON m.id_sales_branch = d.id_sales_branch
-           WHERE m.id_report_status!=5 AND m.id_sales_branch_ref=" + id_sales_branch_ref + "
+           WHERE m.id_report_status!=5 
            GROUP BY d.id_sales_branch_ref_det
         ) cn ON cn.id_sales_branch_ref_det = d.id_sales_branch_det
         LEFT JOIN (
 	        SELECT d.id_report_det, SUM(d.value) AS `value`
 	        FROM tb_rec_payment_det d
 	        INNER JOIN tb_rec_payment h ON h.id_rec_payment = d.id_rec_payment
-	        WHERE h.id_report_status!=5 AND d.report_mark_type=254 AND d.id_report=" + id_sales_branch_ref + "
+	        WHERE h.id_report_status!=5 AND d.report_mark_type=254 
 	        GROUP BY d.id_report_det
         ) rec ON rec.id_report_det = d.id_sales_branch_det
         INNER JOIN tb_a_acc coa ON coa.id_acc = d.id_acc
         INNER JOIN tb_m_comp c ON c.id_comp = d.id_comp
-        WHERE d.id_sales_branch=" + id_sales_branch_ref + " AND d.is_close=2 "
+        WHERE d.id_sales_branch IN(" + id_ref_in + ") "
         Dim data As DataTable = execute_query(query, -1, True, "", "", "", "")
         GCData.DataSource = data
         GVData.BestFitColumns()
@@ -701,23 +711,32 @@ Public Class FormSalesBranchDet
         ElseIf rmt = "256" Then
             'cn cek limit qty
             Cursor = Cursors.WaitCursor
+            'AND m.id_sales_branch_ref=" + id_sales_branch_ref + "
+            'AND d.id_report=" + id_sales_branch_ref + "
+            Dim id_ref_in As String = ""
+            For s As Integer = 0 To FormSalesBranch.GVSales.RowCount - 1
+                If s > 0 Then
+                    id_ref_in += ","
+                End If
+                id_ref_in += FormSalesBranch.GVSales.GetRowCellValue(s, "id_sales_branch_det").ToString
+            Next
             Dim ql As String = "SELECT d.id_sales_branch_det, d.value-IFNULL(cn.amount_cn,0.00)-IFNULL(rec.value,0.00) AS `amount_limit`
             FROM tb_sales_branch_det d
             LEFT JOIN (
 	            SELECT d.id_sales_branch_ref_det, SUM(d.value) AS `amount_cn`
 	            FROM tb_sales_branch_det d
 	            INNER JOIN tb_sales_branch m ON m.id_sales_branch = d.id_sales_branch
-	            WHERE m.id_report_status!=5 AND m.id_sales_branch_ref=" + id_sales_branch_ref + "
+	            WHERE m.id_report_status!=5 
 	            GROUP BY d.id_sales_branch_ref_det
             ) cn ON cn.id_sales_branch_ref_det = d.id_sales_branch_det
             LEFT JOIN (
 	            SELECT d.id_report_det, SUM(d.value) AS `value`
 	            FROM tb_rec_payment_det d
 	            INNER JOIN tb_rec_payment h ON h.id_rec_payment = d.id_rec_payment
-	            WHERE h.id_report_status!=5 AND d.report_mark_type=254 AND d.id_report=" + id_sales_branch_ref + "
+	            WHERE h.id_report_status!=5 AND d.report_mark_type=254 
 	            GROUP BY d.id_report_det
             ) rec ON rec.id_report_det = d.id_sales_branch_det
-            WHERE d.id_sales_branch=" + id_sales_branch_ref + " AND d.is_close=2 "
+            WHERE d.id_sales_branch IN(" + id_ref_in + ") "
             Dim dl As DataTable = execute_query(ql, -1, True, "", "", "", "")
             For d As Integer = 0 To GVData.RowCount - 1
                 Dim id_detail As String = GVData.GetRowCellValue(d, "id_sales_branch_ref_det").ToString
@@ -784,9 +803,9 @@ Public Class FormSalesBranchDet
                 Dim comp_rev_sale As String = decimalSQL(TxtAPSale.EditValue.ToString)
                 Dim comp_rev_sale_acc As String = SLEAccAPSale.EditValue.ToString
                 Dim comp_rev_sale_note As String = addSlashes(TxtAPNoteSale.Text)
-                If id_sales_branch_ref = "-1" Then
-                    id_sales_branch_ref = "NULL"
-                End If
+                'If id_sales_branch_ref = "-1" Then
+                Dim id_sales_branch_ref As String = "NULL"
+                'End If
                 Dim query As String = "INSERT INTO tb_sales_branch(`id_coa_tag`,
                 `created_date`,
                 `transaction_date`,
